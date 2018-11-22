@@ -14,19 +14,6 @@ import buri.aoc.y2017.Day02.Strategy;
  */
 public class Day02Test {
 
-	@Test
-	public void testGetSpreadsheetFromFile() {
-		List<List<Integer>> rows = Day02.getSpreadsheetFromFile("data/2017-02.txt");
-		assertEquals(16, rows.size());
-		assertEquals(16, rows.get(0).size());
-		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetSpreadsheetFromFileFailure() {
-		Day02.getSpreadsheetFromFile("unknown");
-	}
-
 	/**
 	 * Example Data
 	 * 
@@ -84,6 +71,19 @@ public class Day02Test {
 		spreadsheet.add(row1);
 		spreadsheet.add(row2);
 		return (spreadsheet);
+	}
+	
+	@Test
+	public void testGetSpreadsheetFromFile() {
+		List<List<Integer>> rows = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		assertEquals(16, rows.size());
+		assertEquals(16, rows.get(0).size());
+		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetSpreadsheetFromFileFailure() {
+		Day02.getSpreadsheetFromFile("unknown");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
