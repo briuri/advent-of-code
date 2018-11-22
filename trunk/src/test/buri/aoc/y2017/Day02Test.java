@@ -2,19 +2,30 @@ package buri.aoc.y2017;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.util.FileUtil;
 import buri.aoc.y2017.Day02.Strategy;
 
 /**
  * @author Brian Uri!
  */
 public class Day02Test {
+
+	@Test
+	public void testGetSpreadsheetFromFile() {
+		List<List<Integer>> rows = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		assertEquals(16, rows.size());
+		assertEquals(16, rows.get(0).size());
+		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetSpreadsheetFromFileFailure() {
+		Day02.getSpreadsheetFromFile("unknown");
+	}
 
 	/**
 	 * Example Data
@@ -75,16 +86,21 @@ public class Day02Test {
 		return (spreadsheet);
 	}
 
-	@Test
-	public void testConstructorNullInput() throws IOException {
-		Day02 runner = new Day02(null, Strategy.MIN_MAX);
-		assertEquals(0, runner.getSpreadsheet().size());
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetChecksumNullSpreadsheet() {
+		Day02.getChecksum(Strategy.MIN_MAX, null);
 	}
 
-	@Test
-	public void testConstructorValidInput() throws IOException {
-		Day02 runner = new Day02(getPart1ExampleSpreadsheet(), Strategy.MIN_MAX);
-		assertEquals(3, runner.getSpreadsheet().size());
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetChecksumEmptySpreadsheet() {
+		Day02.getChecksum(Strategy.MIN_MAX, new ArrayList<List<Integer>>());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetChecksumEmptyRow() {
+		List<List<Integer>> spreadsheet = new ArrayList<>();
+		spreadsheet.add(new ArrayList<Integer>());
+		Day02.getChecksum(Strategy.MIN_MAX, spreadsheet);
 	}
 
 	/**
@@ -93,55 +109,41 @@ public class Day02Test {
 	 * The third row's difference is 6.
 	 * 
 	 * In this example, the spreadsheet's checksum would be 8 + 4 + 6 = 18.
-	 * 
-	 * @throws IOException
 	 */
 	@Test
-	public void testPart1Example() throws IOException {
+	public void testPart1Example() {
 		List<List<Integer>> spreadsheet = getPart1ExampleSpreadsheet();
-		Day02 runner = new Day02(spreadsheet, Strategy.MIN_MAX);
-		assertEquals(8, Day02.getRowDifference(spreadsheet.get(0)));
-		assertEquals(4, Day02.getRowDifference(spreadsheet.get(1)));
-		assertEquals(6, Day02.getRowDifference(spreadsheet.get(2)));
-		assertEquals(18, runner.getChecksum());
+		assertEquals(18, Day02.getChecksum(Strategy.MIN_MAX, spreadsheet));
 	}
-	
+
 	/**
 	 * Solves the Day 2 Part 1 puzzle against the real input file.
 	 */
 	@Test
-	public void testPart1RealInput() throws IOException {
-		List<List<Integer>> rows = FileUtil.getDay2Spreadsheet("data/2017-02.txt");
-		Day02 runner = new Day02(rows, Strategy.MIN_MAX);
-		System.out.println("Day 2 Part 1 checksum=" + runner.getChecksum());
+	public void testPart1RealInput() {
+		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		System.out.println("Day 2 Part 1 checksum=" + Day02.getChecksum(Strategy.MIN_MAX, spreadsheet));
 	}
-	
+
 	/**
 	 * In the first row, the only two numbers that evenly divide are 8 and 2; the result of this division is 4.
 	 * In the second row, the two numbers are 9 and 3; the result is 3.
 	 * In the third row, the result is 2.
 	 * 
 	 * In this example, the sum of the results would be 4 + 3 + 2 = 9.
-	 * 
-	 * @throws IOException
 	 */
 	@Test
-	public void testPart2Example() throws IOException {
+	public void testPart2Example() {
 		List<List<Integer>> spreadsheet = getPart2ExampleSpreadsheet();
-		Day02 runner = new Day02(spreadsheet, Strategy.EVEN_DIVISION);
-		assertEquals(4, Day02.getRowQuotient(spreadsheet.get(0)));
-		assertEquals(3, Day02.getRowQuotient(spreadsheet.get(1)));
-		assertEquals(2, Day02.getRowQuotient(spreadsheet.get(2)));
-		assertEquals(9, runner.getChecksum());
+		assertEquals(9, Day02.getChecksum(Strategy.EVEN_DIVISION, spreadsheet));
 	}
-	
+
 	/**
 	 * Solves the Day 2 Part 2 puzzle against the real input file.
 	 */
 	@Test
-	public void testPart2RealInput() throws IOException {
-		List<List<Integer>> rows = FileUtil.getDay2Spreadsheet("data/2017-02.txt");
-		Day02 runner = new Day02(rows, Strategy.EVEN_DIVISION);
-		System.out.println("Day 2 Part 2 checksum=" + runner.getChecksum());
+	public void testPart2RealInput() {
+		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		System.out.println("Day 2 Part 2 checksum=" + Day02.getChecksum(Strategy.EVEN_DIVISION, spreadsheet));
 	}
 }

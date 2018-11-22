@@ -2,12 +2,8 @@ package buri.aoc.y2017;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-import java.io.IOException;
-
 import org.junit.Test;
 
-import buri.aoc.util.FileUtil;
 import buri.aoc.y2017.Day01.Strategy;
 
 /**
@@ -15,72 +11,57 @@ import buri.aoc.y2017.Day01.Strategy;
  */
 public class Day01Test {
 
-	@Test(expected = IOException.class)
-	public void testConstructorInvalidInput() throws IOException {
-		new Day01("NaN", Strategy.MATCH_NEXT);
-	}
-
-	@Test(expected = IOException.class)
-	public void testConstructorNullInput() throws IOException {
-		new Day01(null, Strategy.MATCH_NEXT);
-	}
-
 	@Test
-	public void testConstructorValidInput() throws IOException {
-		Day01 runner = new Day01("1", Strategy.MATCH_NEXT);
-		assertEquals("1", runner.getInput());
+	public void getCaptchasFromFile() {
+		String content = Day01.getCaptchasFromFile("data/2017-01.txt");
+		assertEquals(2074, content.length());
 	}
 
-	@Test(expected = IOException.class)
-	public void testConstructorUnevenInput() throws IOException {
-		new Day01("123", Strategy.MATCH_HALFWAY);
+	@Test(expected = IllegalArgumentException.class)
+	public void getCaptchasFromFileFailure() {
+		Day01.getCaptchasFromFile("unknown");
 	}
 
-	@Test
-	public void testConstructorEvenInput() throws IOException {
-		Day01 runner = new Day01("12", Strategy.MATCH_NEXT);
-		assertEquals("12", runner.getInput());
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetSumInvalidInput() {
+		Day01.getSum(Strategy.MATCH_NEXT, "NaN");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetSumNullInput() {
+		Day01.getSum(Strategy.MATCH_NEXT, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetSumUnevenInput() {
+		Day01.getSum(Strategy.MATCH_HALFWAY, "123");
 	}
 
 	/**
 	 * 1122 produces a sum of 3 (1 + 2) because the first digit (1) matches the
 	 * second digit and the third digit (2) matches the fourth digit.
 	 * 
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testPart1Example1() throws IOException {
-		Day01 runner = new Day01("1122", Strategy.MATCH_NEXT);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(2, matchingDigits.size());
-		assertEquals(Integer.valueOf(1), matchingDigits.get(0));
-		assertEquals(Integer.valueOf(2), matchingDigits.get(1));
-		assertEquals(3, runner.getSum());
+	public void testPart1Example1() {
+		assertEquals(3, Day01.getSum(Strategy.MATCH_NEXT, "1122"));
 	}
 
 	/**
 	 * 1111 produces 4 because each digit (all 1) matches the next.
 	 */
 	@Test
-	public void testPart1Example2() throws IOException {
-		Day01 runner = new Day01("1111", Strategy.MATCH_NEXT);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(4, matchingDigits.size());
-		for (int i = 0; i < matchingDigits.size(); i++) {
-			assertEquals(Integer.valueOf(1), matchingDigits.get(i));
-		}
-		assertEquals(4, runner.getSum());
+	public void testPart1Example2() {
+		assertEquals(4, Day01.getSum(Strategy.MATCH_NEXT, "1111"));
 	}
 
 	/**
 	 * 1234 produces 0 because no digit matches the next.
 	 */
 	@Test
-	public void testPart1Example3() throws IOException {
-		Day01 runner = new Day01("1234", Strategy.MATCH_NEXT);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(0, matchingDigits.size());
-		assertEquals(0, runner.getSum());
+	public void testPart1Example3() {
+		assertEquals(0, Day01.getSum(Strategy.MATCH_NEXT, "1234"));
 	}
 
 	/**
@@ -88,51 +69,36 @@ public class Day01Test {
 	 * the last digit, 9.
 	 */
 	@Test
-	public void testPart1Example4() throws IOException {
-		Day01 runner = new Day01("91212129", Strategy.MATCH_NEXT);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(1, matchingDigits.size());
-		assertEquals(Integer.valueOf(9), matchingDigits.get(0));
-		assertEquals(9, runner.getSum());
+	public void testPart1Example4() {
+		assertEquals(9, Day01.getSum(Strategy.MATCH_NEXT, "91212129"));
 	}
 
 	/**
 	 * Solves the Day 1 Part 1 puzzle against the real input file.
 	 */
 	@Test
-	public void testPart1RealInput() throws IOException {
-		String input = FileUtil.getDay1NumberString("data/2017-01.txt");
-		Day01 runner = new Day01(input, Strategy.MATCH_NEXT);
-		System.out.println("Day 1 Part 1 sum=" + runner.getSum());
+	public void testPart1RealInput() {
+		String input = Day01.getCaptchasFromFile("data/2017-01.txt");
+		System.out.println("Day 1 Part 1 sum=" + Day01.getSum(Strategy.MATCH_NEXT, input));
 	}
 
 	/**
 	 * 1212 produces 6: the list contains 4 items, and all four digits match the
 	 * digit 2 items ahead.
 	 * 
-	 * @throws IOException
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testPart2Example1() throws IOException {
-		Day01 runner = new Day01("1212", Strategy.MATCH_HALFWAY);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(4, matchingDigits.size());
-		assertEquals(Integer.valueOf(1), matchingDigits.get(0));
-		assertEquals(Integer.valueOf(2), matchingDigits.get(1));
-		assertEquals(Integer.valueOf(1), matchingDigits.get(2));
-		assertEquals(Integer.valueOf(2), matchingDigits.get(3));
-		assertEquals(6, runner.getSum());
+	public void testPart2Example1() {
+		assertEquals(6, Day01.getSum(Strategy.MATCH_HALFWAY, "1212"));
 	}
 
 	/**
 	 * 1221 produces 0, because every comparison is between a 1 and a 2.
 	 */
 	@Test
-	public void testPart2Example2() throws IOException {
-		Day01 runner = new Day01("1221", Strategy.MATCH_HALFWAY);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(0, matchingDigits.size());
-		assertEquals(0, runner.getSum());
+	public void testPart2Example2() {
+		assertEquals(0, Day01.getSum(Strategy.MATCH_HALFWAY, "1221"));
 	}
 
 	/**
@@ -140,54 +106,32 @@ public class Day01Test {
 	 * has a match.
 	 */
 	@Test
-	public void testPart2Example3() throws IOException {
-		Day01 runner = new Day01("123425", Strategy.MATCH_HALFWAY);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(2, matchingDigits.size());
-		for (int i = 0; i < matchingDigits.size(); i++) {
-			assertEquals(Integer.valueOf(2), matchingDigits.get(i));
-		}
-		assertEquals(4, runner.getSum());
+	public void testPart2Example3() {
+		assertEquals(4, Day01.getSum(Strategy.MATCH_HALFWAY, "123425"));
 	}
 
 	/**
 	 * 123123 produces 12.
 	 */
 	@Test
-	public void testPart2Example4() throws IOException {
-		Day01 runner = new Day01("123123", Strategy.MATCH_HALFWAY);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(6, matchingDigits.size());
-		assertEquals(Integer.valueOf(1), matchingDigits.get(0));
-		assertEquals(Integer.valueOf(2), matchingDigits.get(1));
-		assertEquals(Integer.valueOf(3), matchingDigits.get(2));
-		assertEquals(Integer.valueOf(1), matchingDigits.get(3));
-		assertEquals(Integer.valueOf(2), matchingDigits.get(4));
-		assertEquals(Integer.valueOf(3), matchingDigits.get(5));
-		assertEquals(12, runner.getSum());
+	public void testPart2Example4() {
+		assertEquals(12, Day01.getSum(Strategy.MATCH_HALFWAY, "123123"));
 	}
 
 	/**
 	 * 12131415 produces 4.
 	 */
 	@Test
-	public void testPart2Example5() throws IOException {
-		Day01 runner = new Day01("12131415", Strategy.MATCH_HALFWAY);
-		List<Integer> matchingDigits = runner.getMatchingDigits();
-		assertEquals(4, matchingDigits.size());
-		for (int i = 0; i < matchingDigits.size(); i++) {
-			assertEquals(Integer.valueOf(1), matchingDigits.get(i));
-		}
-		assertEquals(4, runner.getSum());
+	public void testPart2Example5() {
+		assertEquals(4, Day01.getSum(Strategy.MATCH_HALFWAY, "12131415"));
 	}
 
 	/**
 	 * Solves the Day 1 Part 1 puzzle against the real input file.
 	 */
 	@Test
-	public void testPart2RealInput() throws IOException {
-		String input = FileUtil.getDay1NumberString("data/2017-01.txt");
-		Day01 runner = new Day01(input, Strategy.MATCH_HALFWAY);
-		System.out.println("Day 1 Part 2 sum=" + runner.getSum());
+	public void testPart2RealInput() {
+		String input = Day01.getCaptchasFromFile("data/2017-01.txt");
+		System.out.println("Day 1 Part 2 sum=" + Day01.getSum(Strategy.MATCH_HALFWAY, input));
 	}
 }

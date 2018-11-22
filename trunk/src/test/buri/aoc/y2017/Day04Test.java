@@ -2,20 +2,30 @@ package buri.aoc.y2017;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.util.FileUtil;
 import buri.aoc.y2017.Day04.Strategy;
 
 /**
  * @author Brian Uri!
  */
 public class Day04Test {
+	
+	@Test
+	public void testGetPassphrasesFromFile() {
+		List<List<String>> rows = Day04.getPassphrasesFromFile("data/2017-04.txt");
+		assertEquals(512, rows.size());
+		assertEquals(10, rows.get(0).size());
+		assertEquals("pphsv", rows.get(0).get(0));
+	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetPassphrasesFromFileFailure() {
+		Day04.getPassphrasesFromFile("unknown");
+	}
 	/**
 	 * aa bb cc dd ee is valid.
 	 */
@@ -29,7 +39,7 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("ee");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.countValidPassphrases(passphrases, Strategy.NO_DUPLICATES));
+		assertEquals(1, Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
 	}
 
 	/**
@@ -45,7 +55,7 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("aa");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.countValidPassphrases(passphrases, Strategy.NO_DUPLICATES));
+		assertEquals(0, Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
 	}
     
 	/**
@@ -61,16 +71,16 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("aaa");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.countValidPassphrases(passphrases, Strategy.NO_DUPLICATES));
+		assertEquals(1, Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
 	}
 	
 	/**
 	 * Solves the Day 4 Part 1 puzzle against the real input.
 	 */
 	@Test
-	public void testPart1RealInput() throws IOException {
-		List<List<String>> passphrases = FileUtil.getDay4Passphrases("data/2017-04.txt");
-		System.out.println("Day 4 Part 1 count=" + Day04.countValidPassphrases(passphrases, Strategy.NO_DUPLICATES));
+	public void testPart1RealInput() {
+		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017-04.txt");
+		System.out.println("Day 4 Part 1 count=" + Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
 	}
 	
 	/**
@@ -83,7 +93,7 @@ public class Day04Test {
 		passphrase.add("abcde");
 		passphrase.add("fghij");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.countValidPassphrases(passphrases, Strategy.NO_ANAGRAMS));
+		assertEquals(1, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 	
 	/**
@@ -97,7 +107,7 @@ public class Day04Test {
 		passphrase.add("xyz");
 		passphrase.add("ecdab");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.countValidPassphrases(passphrases, Strategy.NO_ANAGRAMS));
+		assertEquals(0, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 	
 	/**
@@ -114,7 +124,7 @@ public class Day04Test {
 		passphrase.add("abf");
 		passphrase.add("abj");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.countValidPassphrases(passphrases, Strategy.NO_ANAGRAMS));
+		assertEquals(1, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 	
 	/**
@@ -130,7 +140,7 @@ public class Day04Test {
 		passphrase.add("oooi");
 		passphrase.add("oooo");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.countValidPassphrases(passphrases, Strategy.NO_ANAGRAMS));
+		assertEquals(1, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 	
 	/**
@@ -145,15 +155,15 @@ public class Day04Test {
 		passphrase.add("iioi");
 		passphrase.add("iiio");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.countValidPassphrases(passphrases, Strategy.NO_ANAGRAMS));
+		assertEquals(0, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 
 	/**
 	 * Solves the Day 4 Part 2 puzzle against the real input.
 	 */
 	@Test
-	public void testPart2RealInput() throws IOException {
-		List<List<String>> passphrases = FileUtil.getDay4Passphrases("data/2017-04.txt");
-		System.out.println("Day 4 Part 2 count=" + Day04.countValidPassphrases(passphrases, Strategy.NO_ANAGRAMS));
+	public void testPart2RealInput() {
+		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017-04.txt");
+		System.out.println("Day 4 Part 2 count=" + Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 }
