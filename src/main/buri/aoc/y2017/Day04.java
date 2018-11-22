@@ -1,5 +1,9 @@
 package buri.aoc.y2017;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -15,38 +19,64 @@ import java.util.Set;
 public class Day04 {
 
 	public enum Strategy {
-		/* No duplicate words */
+		/* Part 1: No duplicate words */
 		NO_DUPLICATES,
-		/* No anagrams */
+		/* Part 2: No anagrams */
 		NO_ANAGRAMS
 	}
-	
+
+	/**
+	 * Loads the file at the provided path and returns its contents as a List of Strings.
+	 * 
+	 * @throws IllegalArgumentException on file I/O issues
+	 */
+	public static List<List<String>> getPassphrasesFromFile(String filePath) {
+		List<List<String>> rows = new ArrayList<>();
+		try {
+			for (String rawRow : Files.readAllLines(Paths.get(filePath))) {
+				List<String> tokens = new ArrayList<>();
+				for (String token : Arrays.asList(rawRow.split(" "))) {
+					tokens.add(token);
+				}
+				rows.add(tokens);
+			}
+			return (rows);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file", e);
+		}
+	}
+
 	/**
 	 * Private to avoid instantiation.
 	 */
 	private Day04() {}
-	
+
 	/**
 	 * Counts the number of passphrases that are valid.
 	 * 
-	 * @param passphrases a list of passphrases, each represented as a list of Strings
 	 * @param strategy the strategy for determining valid passphrases
-	 * @return number of passphrases
+	 * @param passphrases a list of passphrases, each represented as a list of Strings
+	 * @return number of passphrases that are valid
 	 */
-	public static int countValidPassphrases(List<List<String>> passphrases, Strategy strategy) {
+	public static int getValidCount(Strategy strategy, List<List<String>> passphrases) {
 		int validCount = 0;
 		for (List<String> passphrase : passphrases) {
-			if (isValid(passphrase, strategy)) {
+			if (isValid(strategy, passphrase)) {
 				validCount++;
 			}
 		}
 		return (validCount);
 	}
-	
+
 	/**
 	 * Checks for valid passphrases based on the strategy.
+	 * 
+	 * @param strategy the strategy for determining valid passphrases
+	 * @param passphrase a single passphrase
+	 * @return true if valid, false otherwise
 	 */
-	protected static boolean isValid(List<String> passphrase, Strategy strategy) {
+	private static boolean isValid(Strategy strategy, List<String> passphrase) {
 		Set<String> uniqueSet = new HashSet<>();
 		for (String word : passphrase) {
 			if (strategy == Strategy.NO_ANAGRAMS) {
@@ -54,8 +84,7 @@ public class Day04 {
 				Arrays.sort(sortedWord);
 				word = new String(sortedWord);
 			}
-			// Default to NO_DUPLICATES
-			
+
 			if (!uniqueSet.contains(word)) {
 				uniqueSet.add(word);
 			}

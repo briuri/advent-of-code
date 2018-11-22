@@ -126,7 +126,7 @@ public class Day03 {
 	 * 
 	 * @param value the value in grid memory
 	 */
-	protected static void assertValidValue(int value) {
+	private static void assertValidValue(int value) {
 		if (value < 1 || value > MAX_VALUE) {
 			throw new IllegalArgumentException("Value must be between 0 and " + MAX_VALUE);
 		}
@@ -136,7 +136,7 @@ public class Day03 {
 	 * @param x the x ring value
 	 * @return (x+2)^2
 	 */
-	protected static int getHighestValueForX(int x) {
+	private static int getHighestValueForX(int x) {
 		return ((int) Math.pow(x + 2, 2.0));
 	}
 	
@@ -146,7 +146,7 @@ public class Day03 {
 	 * 
 	 * @param value the value in grid memory
 	 */
-	protected static int getXForValue(int value) {
+	private static int getXForValue(int value) {
 		assertValidValue(value);
 		for (int possibleX = 1; possibleX < MAX_X_VALUE; possibleX = possibleX + 2) {
 			if (value <= getHighestValueForX(possibleX)) {
