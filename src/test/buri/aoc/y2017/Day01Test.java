@@ -13,7 +13,7 @@ public class Day01Test {
 
 	@Test
 	public void getCaptchasFromFile() {
-		String content = Day01.getCaptchasFromFile("data/2017-01.txt");
+		String content = Day01.getCaptchasFromFile("data/2017/01.txt");
 		assertEquals(2074, content.length());
 	}
 
@@ -78,7 +78,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1RealInput() {
-		String input = Day01.getCaptchasFromFile("data/2017-01.txt");
+		String input = Day01.getCaptchasFromFile("data/2017/01.txt");
 		System.out.println("Day 1 Part 1 sum=" + Day01.getSum(Strategy.MATCH_NEXT, input));
 	}
 
@@ -131,7 +131,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2RealInput() {
-		String input = Day01.getCaptchasFromFile("data/2017-01.txt");
+		String input = Day01.getCaptchasFromFile("data/2017/01.txt");
 		System.out.println("Day 1 Part 2 sum=" + Day01.getSum(Strategy.MATCH_HALFWAY, input));
 	}
 }

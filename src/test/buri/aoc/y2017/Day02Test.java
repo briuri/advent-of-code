@@ -75,7 +75,7 @@ public class Day02Test {
 	
 	@Test
 	public void testGetSpreadsheetFromFile() {
-		List<List<Integer>> rows = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		List<List<Integer>> rows = Day02.getSpreadsheetFromFile("data/2017/02.txt");
 		assertEquals(16, rows.size());
 		assertEquals(16, rows.get(0).size());
 		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
@@ -121,7 +121,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1RealInput() {
-		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017/02.txt");
 		System.out.println("Day 2 Part 1 checksum=" + Day02.getChecksum(Strategy.MIN_MAX, spreadsheet));
 	}
 
@@ -143,7 +143,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2RealInput() {
-		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017-02.txt");
+		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017/02.txt");
 		System.out.println("Day 2 Part 2 checksum=" + Day02.getChecksum(Strategy.EVEN_DIVISION, spreadsheet));
 	}
 }

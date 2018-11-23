@@ -16,7 +16,7 @@ public class Day05Test {
 
 	@Test
 	public void testGetJumpsFromFile() {
-		List<Integer> jumps = Day05.getJumpsFromFile("data/2017-05.txt");
+		List<Integer> jumps = Day05.getJumpsFromFile("data/2017/05.txt");
 		assertEquals(1033, jumps.size());
 		assertEquals(Integer.valueOf(0), jumps.get(0));
 	}
@@ -68,7 +68,7 @@ public class Day05Test {
 	 */
 	@Test
 	public void testPart1RealInput() {
-		List<Integer> jumps = Day05.getJumpsFromFile("data/2017-05.txt");
+		List<Integer> jumps = Day05.getJumpsFromFile("data/2017/05.txt");
 		System.out.println("Day 5 Part 1 steps=" + Day05.getSteps(Strategy.ALWAYS_INCREMENT, jumps));
 	}
 	
@@ -92,7 +92,7 @@ public class Day05Test {
 	 */
 	@Test
 	public void testPart2RealInput() {
-		List<Integer> jumps = Day05.getJumpsFromFile("data/2017-05.txt");
+		List<Integer> jumps = Day05.getJumpsFromFile("data/2017/05.txt");
 		System.out.println("Day 5 Part 2 steps=" + Day05.getSteps(Strategy.CONDITIONAL_INCREMENT, jumps));
 	}
 }
