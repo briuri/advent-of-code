@@ -7,16 +7,16 @@ import org.junit.Test;
 /**
  * @author Brian Uri!
  */
-public class Day03Test {
+public class Day03Part1Test {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetManhattanDistanceValueTooLow() {
-		Day03.getManhattanDistance(0);
+		Day03Part1.getManhattanDistance(0);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetManhattanDistanceValueTooHigh() {
-		Day03.getManhattanDistance(Day03.MAX_VALUE + 1);
+		Day03Part1.getManhattanDistance(Day03Part1.MAX_VALUE + 1);
 	}
 	
 	/**
@@ -24,7 +24,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Example1() {
-		assertEquals(0, Day03.getManhattanDistance(1));
+		assertEquals(0, Day03Part1.getManhattanDistance(1));
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Example2() {
-		assertEquals(3, Day03.getManhattanDistance(12));
+		assertEquals(3, Day03Part1.getManhattanDistance(12));
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Example3() {
-		assertEquals(2, Day03.getManhattanDistance(23));
+		assertEquals(2, Day03Part1.getManhattanDistance(23));
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Example4() {
-		assertEquals(31, Day03.getManhattanDistance(1024));
+		assertEquals(31, Day03Part1.getManhattanDistance(1024));
 	}
 
 	/**
@@ -56,6 +56,6 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1RealInput() {
-		System.out.println("Day 3 Part 1 md=" + Day03.getManhattanDistance(312051));
+		System.out.println("Day 3 Part 1 md=" + Day03Part1.getManhattanDistance(312051));
 	}
 }

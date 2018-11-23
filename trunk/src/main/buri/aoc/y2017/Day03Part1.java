@@ -18,7 +18,7 @@ package buri.aoc.y2017;
  * 
  * @author Brian Uri!
  */
-public class Day03 {
+public class Day03Part1 {
 
 	/**
 	 * Scratch paper observations:
@@ -72,7 +72,7 @@ public class Day03 {
 	/**
 	 * Private to avoid instantiation.
 	 */
-	private Day03() {}
+	private Day03Part1() {}
 	
 	/**
 	 * Calculates the Manhattan Distance for a particular value, using the algorithm described above.
