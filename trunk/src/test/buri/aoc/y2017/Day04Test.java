@@ -16,7 +16,7 @@ public class Day04Test {
 	
 	@Test
 	public void testGetPassphrasesFromFile() {
-		List<List<String>> rows = Day04.getPassphrasesFromFile("data/2017-04.txt");
+		List<List<String>> rows = Day04.getPassphrasesFromFile("data/2017/04.txt");
 		assertEquals(512, rows.size());
 		assertEquals(10, rows.get(0).size());
 		assertEquals("pphsv", rows.get(0).get(0));
@@ -79,7 +79,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart1RealInput() {
-		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017-04.txt");
+		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017/04.txt");
 		System.out.println("Day 4 Part 1 count=" + Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
 	}
 	
@@ -163,7 +163,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart2RealInput() {
-		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017-04.txt");
+		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017/04.txt");
 		System.out.println("Day 4 Part 2 count=" + Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
 	}
 }
