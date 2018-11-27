@@ -7,7 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y2017.Day02.Strategy;
+import buri.aoc.model.Part;
+import buri.aoc.y2017.util.FileUtil;
 
 /**
  * @author Brian Uri!
@@ -21,7 +22,7 @@ public class Day02Test {
 	 * 7 5 3
 	 * 2 4 6 8
 	 */
-	private static List<List<Integer>> getPart1ExampleSpreadsheet() {
+	private static List<List<Integer>> getPart1ExampleInput() {
 		List<Integer> row0 = new ArrayList<>();
 		row0.add(5);
 		row0.add(1);
@@ -50,7 +51,7 @@ public class Day02Test {
 	 * 9 4 7 3
 	 * 3 8 6 5
 	 */
-	private static List<List<Integer>> getPart2ExampleSpreadsheet() {
+	private static List<List<Integer>> getPart2ExampleInput() {
 		List<Integer> row0 = new ArrayList<>();
 		row0.add(5);
 		row0.add(9);
@@ -72,35 +73,22 @@ public class Day02Test {
 		spreadsheet.add(row2);
 		return (spreadsheet);
 	}
-	
-	@Test
-	public void testGetSpreadsheetFromFile() {
-		List<List<Integer>> rows = Day02.getSpreadsheetFromFile("data/2017/02.txt");
-		assertEquals(16, rows.size());
-		assertEquals(16, rows.get(0).size());
-		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetChecksumNullInput() {
+		Day02.getChecksum(Part.ONE, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetSpreadsheetFromFileFailure() {
-		Day02.getSpreadsheetFromFile("unknown");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetChecksumNullSpreadsheet() {
-		Day02.getChecksum(Strategy.MIN_MAX, null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetChecksumEmptySpreadsheet() {
-		Day02.getChecksum(Strategy.MIN_MAX, new ArrayList<List<Integer>>());
+	public void testGetChecksumEmptyInput() {
+		Day02.getChecksum(Part.ONE, new ArrayList<List<Integer>>());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetChecksumEmptyRow() {
 		List<List<Integer>> spreadsheet = new ArrayList<>();
 		spreadsheet.add(new ArrayList<Integer>());
-		Day02.getChecksum(Strategy.MIN_MAX, spreadsheet);
+		Day02.getChecksum(Part.ONE, spreadsheet);
 	}
 
 	/**
@@ -112,17 +100,18 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Example() {
-		List<List<Integer>> spreadsheet = getPart1ExampleSpreadsheet();
-		assertEquals(18, Day02.getChecksum(Strategy.MIN_MAX, spreadsheet));
+		List<List<Integer>> spreadsheet = getPart1ExampleInput();
+		assertEquals(18, Day02.getChecksum(Part.ONE, spreadsheet));
 	}
 
 	/**
-	 * Solves the Day 2 Part 1 puzzle against the real input file.
+	 * Solves the Part 1 puzzle.
 	 */
 	@Test
-	public void testPart1RealInput() {
-		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017/02.txt");
-		System.out.println("Day 2 Part 1 checksum=" + Day02.getChecksum(Strategy.MIN_MAX, spreadsheet));
+	public void testPart1Puzzle() {
+		int result = Day02.getChecksum(Part.ONE, FileUtil.getDay02());
+		System.out.println("Day 2 Part 1\n\t" + result);
+		assertEquals(47136, result);
 	}
 
 	/**
@@ -134,16 +123,17 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Example() {
-		List<List<Integer>> spreadsheet = getPart2ExampleSpreadsheet();
-		assertEquals(9, Day02.getChecksum(Strategy.EVEN_DIVISION, spreadsheet));
+		List<List<Integer>> spreadsheet = getPart2ExampleInput();
+		assertEquals(9, Day02.getChecksum(Part.TWO, spreadsheet));
 	}
 
 	/**
-	 * Solves the Day 2 Part 2 puzzle against the real input file.
+	 * Solves the Part 2 puzzle.
 	 */
 	@Test
-	public void testPart2RealInput() {
-		List<List<Integer>> spreadsheet = Day02.getSpreadsheetFromFile("data/2017/02.txt");
-		System.out.println("Day 2 Part 2 checksum=" + Day02.getChecksum(Strategy.EVEN_DIVISION, spreadsheet));
+	public void testPart2Puzzle() {
+		int result = Day02.getChecksum(Part.TWO, FileUtil.getDay02());
+		System.out.println("Day 2 Part 2\n\t" + result);
+		assertEquals(250, result);
 	}
 }

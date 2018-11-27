@@ -7,25 +7,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y2017.Day04.Strategy;
+import buri.aoc.model.Part;
+import buri.aoc.y2017.util.FileUtil;
 
 /**
  * @author Brian Uri!
  */
 public class Day04Test {
-	
-	@Test
-	public void testGetPassphrasesFromFile() {
-		List<List<String>> rows = Day04.getPassphrasesFromFile("data/2017/04.txt");
-		assertEquals(512, rows.size());
-		assertEquals(10, rows.get(0).size());
-		assertEquals("pphsv", rows.get(0).get(0));
-	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetPassphrasesFromFileFailure() {
-		Day04.getPassphrasesFromFile("unknown");
-	}
 	/**
 	 * aa bb cc dd ee is valid.
 	 */
@@ -39,7 +28,7 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("ee");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
+		assertEquals(1, Day04.getValidCount(Part.ONE, passphrases));
 	}
 
 	/**
@@ -55,9 +44,9 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("aa");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
+		assertEquals(0, Day04.getValidCount(Part.ONE, passphrases));
 	}
-    
+
 	/**
 	 * aa bb cc dd aaa is valid - aa and aaa count as different words.
 	 */
@@ -71,18 +60,19 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("aaa");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
+		assertEquals(1, Day04.getValidCount(Part.ONE, passphrases));
 	}
-	
+
 	/**
-	 * Solves the Day 4 Part 1 puzzle against the real input.
+	 * Solves the Part 1 puzzle against the real input.
 	 */
 	@Test
-	public void testPart1RealInput() {
-		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017/04.txt");
-		System.out.println("Day 4 Part 1 count=" + Day04.getValidCount(Strategy.NO_DUPLICATES, passphrases));
+	public void testPart1Puzzle() {
+		int result = Day04.getValidCount(Part.ONE, FileUtil.getDay04());
+		System.out.println("Day 4 Part 1\n\t" + result);
+		assertEquals(466, result);
 	}
-	
+
 	/**
 	 * abcde fghij is a valid passphrase.
 	 */
@@ -93,9 +83,9 @@ public class Day04Test {
 		passphrase.add("abcde");
 		passphrase.add("fghij");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
+		assertEquals(1, Day04.getValidCount(Part.TWO, passphrases));
 	}
-	
+
 	/**
 	 * abcde xyz ecdab is not valid - the letters from the third word can be rearranged to form the first word.
 	 */
@@ -107,9 +97,9 @@ public class Day04Test {
 		passphrase.add("xyz");
 		passphrase.add("ecdab");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
+		assertEquals(0, Day04.getValidCount(Part.TWO, passphrases));
 	}
-	
+
 	/**
 	 * a ab abc abd abf abj is a valid passphrase, because all letters need to be used when forming another word.
 	 */
@@ -124,9 +114,9 @@ public class Day04Test {
 		passphrase.add("abf");
 		passphrase.add("abj");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
+		assertEquals(1, Day04.getValidCount(Part.TWO, passphrases));
 	}
-	
+
 	/**
 	 * iiii oiii ooii oooi oooo is valid.
 	 */
@@ -140,9 +130,9 @@ public class Day04Test {
 		passphrase.add("oooi");
 		passphrase.add("oooo");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
+		assertEquals(1, Day04.getValidCount(Part.TWO, passphrases));
 	}
-	
+
 	/**
 	 * oiii ioii iioi iiio is not valid - any of these words can be rearranged to form any other word.
 	 */
@@ -155,15 +145,16 @@ public class Day04Test {
 		passphrase.add("iioi");
 		passphrase.add("iiio");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
+		assertEquals(0, Day04.getValidCount(Part.TWO, passphrases));
 	}
 
 	/**
-	 * Solves the Day 4 Part 2 puzzle against the real input.
+	 * Solves the Part 2 puzzle against the real input.
 	 */
 	@Test
-	public void testPart2RealInput() {
-		List<List<String>> passphrases = Day04.getPassphrasesFromFile("data/2017/04.txt");
-		System.out.println("Day 4 Part 2 count=" + Day04.getValidCount(Strategy.NO_ANAGRAMS, passphrases));
+	public void testPart2Puzzle() {
+		int result = Day04.getValidCount(Part.TWO, FileUtil.getDay04());
+		System.out.println("Day 4 Part 2\n\t" + result);
+		assertEquals(251, result);
 	}
 }
