@@ -67,6 +67,9 @@ public class Day07Test {
 		programs.put("ugml", new Program("ugml", 68, ugmlChildren));
 		programs.put("gyxo", new Program("gyxo", 61, Collections.EMPTY_LIST));
 		programs.put("cntj", new Program("cntj", 57, Collections.EMPTY_LIST));
+		for (Program program : programs.values()) {
+			program.loadChildren(programs);
+		}
 		return (programs);
 	}
 
@@ -89,5 +92,40 @@ public class Day07Test {
 		String result = Day07.getBottomName(FileUtil.getDay07());
 		System.out.println("Day 7 Part 1\n\t" + result);
 		assertEquals("svugo", result);
+	}
+
+	/**
+	 * In the example above, this means that for ugml's disc to be balanced, gyxo, ebii, and jptl must all have the same
+	 * weight, and they do: 61.
+	 * 
+	 * However, for tknk to be balanced, each of the programs standing on its disc and all programs above it must each
+	 * match. This means that the following sums must all be the same:
+	 * 
+	 * ugml + (gyxo + ebii + jptl) = 68 + (61 + 61 + 61) = 251
+	 * padx + (pbga + havc + qoyq) = 45 + (66 + 66 + 66) = 243
+	 * fwft + (ktlj + cntj + xhth) = 72 + (57 + 57 + 57) = 243
+	 * 
+	 * As you can see, tknk's disc is unbalanced: ugml's stack is heavier than the other two. Even though the nodes
+	 * above ugml are balanced, ugml itself is too heavy: it needs to be 8 units lighter for its stack to weigh 243 and
+	 * keep the towers balanced. If this change were made, its weight would be 60.
+	 */
+	@Test
+	public void testPart2Example() {
+		Map<String, Program> programs = getExampleInput();
+		assertEquals(68, programs.get("ugml").getWeight());
+		assertEquals(61, programs.get("gyxo").getWeight());
+		assertEquals(61, programs.get("ebii").getWeight());
+		assertEquals(61, programs.get("jptl").getWeight());
+		assertEquals(251, programs.get("ugml").getTotalWeight());
+	}
+
+	/**
+	 * Solves the Part 2 puzzle.
+	 */
+	@Test
+	public void testPart2Puzzle() {
+		int result = Day07.getWeightDiff(FileUtil.getDay07());
+		System.out.println("Day 7 Part 2\n\t" + result);
+		assertEquals(1152, result);
 	}
 }
