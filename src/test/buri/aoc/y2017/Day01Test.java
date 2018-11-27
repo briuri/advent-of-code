@@ -4,48 +4,36 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import buri.aoc.y2017.Day01.Strategy;
+import buri.aoc.model.Part;
+import buri.aoc.y2017.util.FileUtil;
 
 /**
  * @author Brian Uri!
  */
 public class Day01Test {
 
-	@Test
-	public void getCaptchasFromFile() {
-		String content = Day01.getCaptchasFromFile("data/2017/01.txt");
-		assertEquals(2074, content.length());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void getCaptchasFromFileFailure() {
-		Day01.getCaptchasFromFile("unknown");
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetSumInvalidInput() {
-		Day01.getSum(Strategy.MATCH_NEXT, "NaN");
+		Day01.getSum(Part.ONE, "NaN");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetSumNullInput() {
-		Day01.getSum(Strategy.MATCH_NEXT, null);
+		Day01.getSum(Part.ONE, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetSumUnevenInput() {
-		Day01.getSum(Strategy.MATCH_HALFWAY, "123");
+		Day01.getSum(Part.TWO, "123");
 	}
 
 	/**
 	 * 1122 produces a sum of 3 (1 + 2) because the first digit (1) matches the
 	 * second digit and the third digit (2) matches the fourth digit.
-	 * 
-	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testPart1Example1() {
-		assertEquals(3, Day01.getSum(Strategy.MATCH_NEXT, "1122"));
+		assertEquals(3, Day01.getSum(Part.ONE, "1122"));
 	}
 
 	/**
@@ -53,7 +41,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example2() {
-		assertEquals(4, Day01.getSum(Strategy.MATCH_NEXT, "1111"));
+		assertEquals(4, Day01.getSum(Part.ONE, "1111"));
 	}
 
 	/**
@@ -61,7 +49,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example3() {
-		assertEquals(0, Day01.getSum(Strategy.MATCH_NEXT, "1234"));
+		assertEquals(0, Day01.getSum(Part.ONE, "1234"));
 	}
 
 	/**
@@ -70,27 +58,26 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example4() {
-		assertEquals(9, Day01.getSum(Strategy.MATCH_NEXT, "91212129"));
+		assertEquals(9, Day01.getSum(Part.ONE, "91212129"));
 	}
 
 	/**
-	 * Solves the Day 1 Part 1 puzzle against the real input file.
+	 * Solves the Part 1 puzzle.
 	 */
 	@Test
-	public void testPart1RealInput() {
-		String input = Day01.getCaptchasFromFile("data/2017/01.txt");
-		System.out.println("Day 1 Part 1 sum=" + Day01.getSum(Strategy.MATCH_NEXT, input));
+	public void testPart1Puzzle() {
+		int result = Day01.getSum(Part.ONE, FileUtil.getDay01());
+		System.out.println("Day 1 Part 1\n\t" + result);
+		assertEquals(1171, result);
 	}
 
 	/**
 	 * 1212 produces 6: the list contains 4 items, and all four digits match the
 	 * digit 2 items ahead.
-	 * 
-	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testPart2Example1() {
-		assertEquals(6, Day01.getSum(Strategy.MATCH_HALFWAY, "1212"));
+		assertEquals(6, Day01.getSum(Part.TWO, "1212"));
 	}
 
 	/**
@@ -98,7 +85,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example2() {
-		assertEquals(0, Day01.getSum(Strategy.MATCH_HALFWAY, "1221"));
+		assertEquals(0, Day01.getSum(Part.TWO, "1221"));
 	}
 
 	/**
@@ -107,7 +94,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example3() {
-		assertEquals(4, Day01.getSum(Strategy.MATCH_HALFWAY, "123425"));
+		assertEquals(4, Day01.getSum(Part.TWO, "123425"));
 	}
 
 	/**
@@ -115,7 +102,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example4() {
-		assertEquals(12, Day01.getSum(Strategy.MATCH_HALFWAY, "123123"));
+		assertEquals(12, Day01.getSum(Part.TWO, "123123"));
 	}
 
 	/**
@@ -123,15 +110,16 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example5() {
-		assertEquals(4, Day01.getSum(Strategy.MATCH_HALFWAY, "12131415"));
+		assertEquals(4, Day01.getSum(Part.TWO, "12131415"));
 	}
 
 	/**
-	 * Solves the Day 1 Part 1 puzzle against the real input file.
+	 * Solves the Part 2 puzzle.
 	 */
 	@Test
-	public void testPart2RealInput() {
-		String input = Day01.getCaptchasFromFile("data/2017/01.txt");
-		System.out.println("Day 1 Part 2 sum=" + Day01.getSum(Strategy.MATCH_HALFWAY, input));
+	public void testPart2Puzzle() {
+		int result = Day01.getSum(Part.TWO, FileUtil.getDay01());
+		System.out.println("Day 1 Part 2\n\t" + result);
+		assertEquals(1024, result);
 	}
 }
