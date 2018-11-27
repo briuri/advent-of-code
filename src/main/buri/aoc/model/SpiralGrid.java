@@ -1,5 +1,12 @@
 package buri.aoc.model;
 
+/**
+ * Day03
+ * 
+ * Data class for the spiral memory grid.
+ * 
+ * @author Brian Uri!
+ */
 public class SpiralGrid {
 
 	private int[][] _grid;

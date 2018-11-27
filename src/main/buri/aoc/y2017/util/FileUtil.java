@@ -7,7 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import buri.aoc.model.Program;
 
 /**
  * Shared utility methods for extracting input from files.
@@ -82,6 +86,42 @@ public class FileUtil {
 	}
 
 	/**
+	 * Input: name (weight) -> comma/space-delimited child names
+	 * Output: map of unique names to programs
+	 */
+	public static Map<String, Program> getDay07() {
+		try {
+			final String relation = " -> ";
+			final String weightSeparator = " ";
+			final String childSeparator = ", ";
+			
+			Map<String, Program> programs = new HashMap<>();
+			for (String line : Files.readAllLines(getPath("07"))) {
+				String[] relationship = line.split(relation);
+				String[] nameWeight = relationship[0].split(weightSeparator);
+				String name = nameWeight[0];
+				int weight = Integer.valueOf(nameWeight[1].replace("(", "").replace(")", ""));
+				List<String> childNames = new ArrayList<>();
+				if (relationship.length > 1) {
+					for (String child : relationship[1].split(childSeparator)) {
+						childNames.add(child);
+					}
+				}
+				Program program = new Program(name, weight, childNames);
+				programs.put(name, program);
+			}
+			// Load all the children based on their names
+			for (Program program : programs.values()) {
+				program.loadChildren(programs);
+			}
+			return (programs);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file", e);
+		}
+	}
+	
+	/**
 	 * Adds project-relative "data" folder to path.
 	 */
 	private static Path getPath(String day) {
@@ -107,12 +147,7 @@ public class FileUtil {
 	private static List<Integer> toIntegers(List<String> rawIntegers) {
 		List<Integer> integers = new ArrayList<>();
 		for (String rawInteger : rawIntegers) {
-			try {
-				integers.add(Integer.valueOf(rawInteger));
-			}
-			catch (NumberFormatException e) {
-				throw new IllegalArgumentException(e.getMessage(), e);
-			}
+			integers.add(Integer.valueOf(rawInteger));
 		}
 		return (integers);
 	}

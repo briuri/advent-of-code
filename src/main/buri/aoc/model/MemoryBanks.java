@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Day06
+ * 
  * In this area, there are sixteen memory banks; each memory bank can hold any number of blocks.
  * 
  * @author Brian Uri!

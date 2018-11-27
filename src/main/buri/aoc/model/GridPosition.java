@@ -1,6 +1,8 @@
 package buri.aoc.model;
 
 /**
+ * Day03
+ * 
  * Mutable Integer-based ordered pair class, with commands to alter it by moving up, down, left, and right.
  * 
  * Based on Java's array indexing:
