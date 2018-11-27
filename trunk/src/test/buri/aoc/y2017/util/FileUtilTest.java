@@ -3,8 +3,11 @@ package buri.aoc.y2017.util;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
+
+import buri.aoc.model.Program;
 
 /**
  * @author Brian Uri!
@@ -45,5 +48,15 @@ public class FileUtilTest {
 		List<Integer> banks = FileUtil.getDay06();
 		assertEquals(16, banks.size());
 		assertEquals(Integer.valueOf(4), banks.get(0));
+	}
+
+	@Test
+	public void testGetDay07() {
+		Map<String, Program> programs = FileUtil.getDay07();
+		assertEquals(1288, programs.size());
+		assertTrue(programs.keySet().contains("mmqyju"));
+		assertTrue(programs.get("mmqyju").getChildNames().contains("rjzvwv"));
+		assertTrue(programs.get("mmqyju").getChildNames().contains("noybkx"));
+		assertEquals(2, programs.get("mmqyju").getChildNames().size());
 	}
 }
