@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.model.Program;
+import buri.aoc.model.RegisterInstruction;
 
 /**
  * Shared utility methods for extracting input from files.
@@ -115,6 +116,24 @@ public class FileUtil {
 				program.loadChildren(programs);
 			}
 			return (programs);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file", e);
+		}
+	}
+	
+	/**
+	 * Input: One string of tokens per line.
+	 * Output: List of instructions.
+	 */
+	public static List<RegisterInstruction> getDay08() {
+		List<RegisterInstruction> instructions = new ArrayList<>();
+		try {
+			List<String> rawInstructions = Files.readAllLines(getPath("08"));
+			for (String instruction : rawInstructions) {
+				instructions.add(new RegisterInstruction(instruction));
+			}
+			return (instructions);
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file", e);

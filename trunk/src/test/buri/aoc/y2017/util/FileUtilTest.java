@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import buri.aoc.model.Program;
+import buri.aoc.model.RegisterInstruction;
 
 /**
  * @author Brian Uri!
@@ -58,5 +59,11 @@ public class FileUtilTest {
 		assertTrue(programs.get("mmqyju").getChildNames().contains("rjzvwv"));
 		assertTrue(programs.get("mmqyju").getChildNames().contains("noybkx"));
 		assertEquals(2, programs.get("mmqyju").getChildNames().size());
+	}
+	
+	@Test
+	public void testGetDay08() {
+		List<RegisterInstruction> instructions = FileUtil.getDay08();
+		assertEquals(1000, instructions.size());
 	}
 }
