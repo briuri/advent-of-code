@@ -40,7 +40,7 @@ public class Day06 extends Puzzle {
 	/**
 	 * Find out how many redistribute actions occur before an infinite loop.
 	 */
-	public static int getIterations(Part part, List<Integer> banks) {
+	public static int getResult(Part part, List<Integer> banks) {
 		boolean hitLoop = false;
 		int attempts = 0;
 		Set<String> snapshots = new HashSet<>();

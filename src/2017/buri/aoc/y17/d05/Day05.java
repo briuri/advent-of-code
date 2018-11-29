@@ -34,7 +34,7 @@ public class Day05 extends Puzzle {
 	/**
 	 * Executes the jump instructions in order (input data is mutable).
 	 */
-	public static int getSteps(Part part, List<Integer> jumps) {
+	public static int getResult(Part part, List<Integer> jumps) {
 		assertValidJumps(jumps);
 		final int listSize = jumps.size();
 		int numSteps = 0;

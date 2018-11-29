@@ -33,7 +33,7 @@ public class Day04 extends Puzzle {
 	/**
 	 * Counts the number of passphrases that are valid.
 	 */
-	public static int getValidCount(Part part, List<List<String>> passphrases) {
+	public static int getResult(Part part, List<List<String>> passphrases) {
 		int validCount = 0;
 		for (List<String> passphrase : passphrases) {
 			if (isValid(part, passphrase)) {

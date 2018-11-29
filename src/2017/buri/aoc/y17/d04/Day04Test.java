@@ -35,7 +35,7 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("ee");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Part.ONE, passphrases));
+		assertEquals(1, Day04.getResult(Part.ONE, passphrases));
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("aa");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.getValidCount(Part.ONE, passphrases));
+		assertEquals(0, Day04.getResult(Part.ONE, passphrases));
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class Day04Test {
 		passphrase.add("dd");
 		passphrase.add("aaa");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Part.ONE, passphrases));
+		assertEquals(1, Day04.getResult(Part.ONE, passphrases));
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day04.getValidCount(Part.ONE, Day04.getInput(0));
+		int result = Day04.getResult(Part.ONE, Day04.getInput(0));
 		System.out.println("Day 4 Part 1\n\t" + result);
 		assertEquals(466, result);
 	}
@@ -90,7 +90,7 @@ public class Day04Test {
 		passphrase.add("abcde");
 		passphrase.add("fghij");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Part.TWO, passphrases));
+		assertEquals(1, Day04.getResult(Part.TWO, passphrases));
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Day04Test {
 		passphrase.add("xyz");
 		passphrase.add("ecdab");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.getValidCount(Part.TWO, passphrases));
+		assertEquals(0, Day04.getResult(Part.TWO, passphrases));
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class Day04Test {
 		passphrase.add("abf");
 		passphrase.add("abj");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Part.TWO, passphrases));
+		assertEquals(1, Day04.getResult(Part.TWO, passphrases));
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class Day04Test {
 		passphrase.add("oooi");
 		passphrase.add("oooo");
 		passphrases.add(passphrase);
-		assertEquals(1, Day04.getValidCount(Part.TWO, passphrases));
+		assertEquals(1, Day04.getResult(Part.TWO, passphrases));
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class Day04Test {
 		passphrase.add("iioi");
 		passphrase.add("iiio");
 		passphrases.add(passphrase);
-		assertEquals(0, Day04.getValidCount(Part.TWO, passphrases));
+		assertEquals(0, Day04.getResult(Part.TWO, passphrases));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day04.getValidCount(Part.TWO, Day04.getInput(0));
+		int result = Day04.getResult(Part.TWO, Day04.getInput(0));
 		System.out.println("Day 4 Part 2\n\t" + result);
 		assertEquals(251, result);
 	}

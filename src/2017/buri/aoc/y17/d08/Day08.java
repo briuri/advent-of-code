@@ -37,7 +37,7 @@ public class Day08 extends Puzzle {
 	/**
 	 * Executes the register instructions.
 	 */
-	public static int getLargestValue(Part part, List<RegisterInstruction> instructions) {
+	public static int getResult(Part part, List<RegisterInstruction> instructions) {
 		Registers registers = new Registers();
 		registers.process(instructions);
 		return (registers.getLargestValue(part));

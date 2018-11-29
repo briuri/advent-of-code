@@ -26,7 +26,7 @@ public class Day01 extends Puzzle {
 	/**
 	 * Find the sum of all digits that satisfy Part-specific rules.
 	 */
-	public static int getSum(Part part, String input) {
+	public static int getResult(Part part, String input) {
 		assertValidInput(part, input);
 		int sum = 0;
 		for (Integer digit : getMatchingDigits(part, input)) {

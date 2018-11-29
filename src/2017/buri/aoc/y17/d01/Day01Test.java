@@ -12,24 +12,24 @@ import buri.aoc.Part;
 public class Day01Test {
 
 	@Test
-	public void getInput() {
+	public void testGetInput() {
 		String content = Day01.getInput(0);
 		assertEquals(2074, content.length());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetSumInvalidInput() {
-		Day01.getSum(Part.ONE, "NaN");
+	public void testGetResultInvalidInput() {
+		Day01.getResult(Part.ONE, "NaN");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetSumNullInput() {
-		Day01.getSum(Part.ONE, null);
+	public void testGetResultNullInput() {
+		Day01.getResult(Part.ONE, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetSumUnevenInput() {
-		Day01.getSum(Part.TWO, "123");
+	public void testGetResultUnevenInput() {
+		Day01.getResult(Part.TWO, "123");
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example1() {
-		assertEquals(3, Day01.getSum(Part.ONE, "1122"));
+		assertEquals(3, Day01.getResult(Part.ONE, "1122"));
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example2() {
-		assertEquals(4, Day01.getSum(Part.ONE, "1111"));
+		assertEquals(4, Day01.getResult(Part.ONE, "1111"));
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example3() {
-		assertEquals(0, Day01.getSum(Part.ONE, "1234"));
+		assertEquals(0, Day01.getResult(Part.ONE, "1234"));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Example4() {
-		assertEquals(9, Day01.getSum(Part.ONE, "91212129"));
+		assertEquals(9, Day01.getResult(Part.ONE, "91212129"));
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day01.getSum(Part.ONE, Day01.getInput(0));
+		int result = Day01.getResult(Part.ONE, Day01.getInput(0));
 		System.out.println("Day 1 Part 1\n\t" + result);
 		assertEquals(1171, result);
 	}
@@ -82,7 +82,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example1() {
-		assertEquals(6, Day01.getSum(Part.TWO, "1212"));
+		assertEquals(6, Day01.getResult(Part.TWO, "1212"));
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example2() {
-		assertEquals(0, Day01.getSum(Part.TWO, "1221"));
+		assertEquals(0, Day01.getResult(Part.TWO, "1221"));
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example3() {
-		assertEquals(4, Day01.getSum(Part.TWO, "123425"));
+		assertEquals(4, Day01.getResult(Part.TWO, "123425"));
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example4() {
-		assertEquals(12, Day01.getSum(Part.TWO, "123123"));
+		assertEquals(12, Day01.getResult(Part.TWO, "123123"));
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Example5() {
-		assertEquals(4, Day01.getSum(Part.TWO, "12131415"));
+		assertEquals(4, Day01.getResult(Part.TWO, "12131415"));
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day01.getSum(Part.TWO, Day01.getInput(0));
+		int result = Day01.getResult(Part.TWO, Day01.getInput(0));
 		System.out.println("Day 1 Part 2\n\t" + result);
 		assertEquals(1024, result);
 	}

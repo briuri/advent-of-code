@@ -22,13 +22,13 @@ public class Day05Test {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetStepsNullJumps() {
-		Day05.getSteps(Part.ONE, null);
+	public void testGetResultNullJumps() {
+		Day05.getResult(Part.ONE, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetStepsEmptyJumps() {
-		Day05.getSteps(Part.ONE, new ArrayList<>());
+	public void testGetResultEmptyJumps() {
+		Day05.getResult(Part.ONE, new ArrayList<>());
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Day05Test {
 		jumps.add(Integer.valueOf(0));
 		jumps.add(Integer.valueOf(1));
 		jumps.add(Integer.valueOf(-3));
-		assertEquals(5, Day05.getSteps(Part.ONE, jumps));
+		assertEquals(5, Day05.getResult(Part.ONE, jumps));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Day05Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day05.getSteps(Part.ONE, Day05.getInput(0));
+		int result = Day05.getResult(Part.ONE, Day05.getInput(0));
 		System.out.println("Day 5 Part 1\n\t" + result);
 		assertEquals(336905, result);
 	}
@@ -80,7 +80,7 @@ public class Day05Test {
 		jumps.add(Integer.valueOf(0));
 		jumps.add(Integer.valueOf(1));
 		jumps.add(Integer.valueOf(-3));
-		assertEquals(10, Day05.getSteps(Part.TWO, jumps));
+		assertEquals(10, Day05.getResult(Part.TWO, jumps));
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class Day05Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day05.getSteps(Part.TWO, Day05.getInput(0));
+		int result = Day05.getResult(Part.TWO, Day05.getInput(0));
 		System.out.println("Day 5 Part 2\n\t" + result);
 		assertEquals(21985262, result);
 	}

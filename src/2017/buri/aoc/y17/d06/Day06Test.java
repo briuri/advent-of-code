@@ -35,7 +35,7 @@ public class Day06Test {
 		banks.add(Integer.valueOf(2));
 		banks.add(Integer.valueOf(7));
 		banks.add(Integer.valueOf(0));
-		assertEquals(5, Day06.getIterations(Part.ONE, banks));
+		assertEquals(5, Day06.getResult(Part.ONE, banks));
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class Day06Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day06.getIterations(Part.ONE, Day06.getInput(0));
+		int result = Day06.getResult(Part.ONE, Day06.getInput(0));
 		System.out.println("Day 6 Part 1\n\t" + result);
 		assertEquals(12841, result);
 	}
@@ -58,7 +58,7 @@ public class Day06Test {
 		banks.add(Integer.valueOf(2));
 		banks.add(Integer.valueOf(7));
 		banks.add(Integer.valueOf(0));
-		assertEquals(4, Day06.getIterations(Part.TWO, banks));
+		assertEquals(4, Day06.getResult(Part.TWO, banks));
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class Day06Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day06.getIterations(Part.TWO, Day06.getInput(0));
+		int result = Day06.getResult(Part.TWO, Day06.getInput(0));
 		System.out.println("Day 6 Part 2\n\t" + result);
 		assertEquals(8038, result);
 	}
