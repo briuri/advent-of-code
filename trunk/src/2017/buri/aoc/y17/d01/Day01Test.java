@@ -4,14 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
  */
 public class Day01Test {
 
+	@Test
+	public void getInput() {
+		String content = Day01.getInput();
+		assertEquals(2074, content.length());
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetSumInvalidInput() {
 		Day01.getSum(Part.ONE, "NaN");
@@ -66,7 +71,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day01.getSum(Part.ONE, FileUtil.getDay01());
+		int result = Day01.getSum(Part.ONE, Day01.getInput());
 		System.out.println("Day 1 Part 1\n\t" + result);
 		assertEquals(1171, result);
 	}
@@ -118,7 +123,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day01.getSum(Part.TWO, FileUtil.getDay01());
+		int result = Day01.getSum(Part.TWO, Day01.getInput());
 		System.out.println("Day 1 Part 2\n\t" + result);
 		assertEquals(1024, result);
 	}

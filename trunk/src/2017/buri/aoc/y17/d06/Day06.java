@@ -1,10 +1,12 @@
 package buri.aoc.y17.d06;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
+import buri.aoc.Puzzle;
 
 /**
  * A debugger program here is having an issue: it is trying to repair a memory reallocation routine, but it keeps
@@ -24,8 +26,17 @@ import buri.aoc.y17.Part;
  * 
  * @author Brian Uri!
  */
-public class Day06 {
-		
+public class Day06 extends Puzzle {
+	
+	/**
+	 * Input: One row of tab-delimited numbers.
+	 * Output: List of numbers.
+	 */
+	public static List<Integer> getInput() {
+		String[] rawIntegers = getFileAsString("2017/06").split("\t");
+		return (getStringsAsIntegers(Arrays.asList(rawIntegers)));
+	}
+	
 	/**
 	 * Find out how many redistribute actions occur before an infinite loop.
 	 */

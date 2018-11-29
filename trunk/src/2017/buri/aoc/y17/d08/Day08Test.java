@@ -7,8 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
@@ -31,7 +30,13 @@ public class Day08Test {
 		instructions.add(new RegisterInstruction("c inc -20 if c == 10"));
 		return (instructions);
 	}
-
+	
+	@Test
+	public void testGetDay08() {
+		List<RegisterInstruction> instructions = Day08.getInput();
+		assertEquals(1000, instructions.size());
+	}
+	
 	/**
 	 * These instructions would be processed as follows:
 	 * 
@@ -51,7 +56,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day08.getLargestValue(Part.ONE, FileUtil.getDay08());
+		int result = Day08.getLargestValue(Part.ONE, Day08.getInput());
 		System.out.println("Day 8 Part 1\n\t" + result);
 		assertEquals(4888, result);
 	}
@@ -70,7 +75,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day08.getLargestValue(Part.TWO, FileUtil.getDay08());
+		int result = Day08.getLargestValue(Part.TWO, Day08.getInput());
 		System.out.println("Day 8 Part 2\n\t" + result);
 		assertEquals(7774, result);
 	}

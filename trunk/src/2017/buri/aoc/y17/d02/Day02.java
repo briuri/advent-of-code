@@ -1,9 +1,14 @@
 package buri.aoc.y17.d02;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
+import buri.aoc.Puzzle;
 
 /**
  * The spreadsheet consists of rows of apparently-random numbers. To make sure the recovery process is on the right
@@ -12,8 +17,25 @@ import buri.aoc.y17.Part;
  * 
  * @author Brian Uri!
  */
-public class Day02 {
+public class Day02 extends Puzzle {
 
+	/**
+	 * Input: Multiple rows of tab-delimited integers.
+	 * Output: Rows of integers.
+	 */
+	public static List<List<Integer>> getInput() {
+		List<List<Integer>> rows = new ArrayList<>();
+		try {
+			for (String rawRow : Files.readAllLines(getInputPath("2017/02"))) {
+				rows.add(getStringsAsIntegers(Arrays.asList(rawRow.split("\t"))));
+			}
+			return (rows);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file", e);
+		}
+	}
+	
 	/**
 	 * Calculates a checksum based on the calculated value of each row.
 	 */

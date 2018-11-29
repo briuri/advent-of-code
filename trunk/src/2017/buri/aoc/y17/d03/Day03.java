@@ -1,5 +1,7 @@
 package buri.aoc.y17.d03;
 
+import buri.aoc.Puzzle;
+
 /**
  * You come across an experimental new kind of memory stored on an infinite two-dimensional grid.
  * 
@@ -40,7 +42,7 @@ package buri.aoc.y17.d03;
  * 
  * @author Brian Uri!
  */
-public class Day03 {
+public class Day03 extends Puzzle {
 
 	/**
 	 * Scratch paper observations:

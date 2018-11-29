@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * Day08

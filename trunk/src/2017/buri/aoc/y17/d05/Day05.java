@@ -1,8 +1,11 @@
 package buri.aoc.y17.d05;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
+import buri.aoc.Puzzle;
 
 /**
  * The message includes a list of the offsets for each jump. Jumps are relative: -1 moves to the previous instruction,
@@ -20,7 +23,21 @@ import buri.aoc.y17.Part;
  * 
  * @author Brian Uri!
  */
-public class Day05 {
+public class Day05 extends Puzzle {
+	
+	/**
+	 * Input: One number per line.
+	 * Output: List of numbers.
+	 */
+	public static List<Integer> getInput() {
+		try {
+			List<String> rawIntegers = Files.readAllLines(getInputPath("2017/05"));
+			return (getStringsAsIntegers(rawIntegers));
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file", e);
+		}
+	}
 	
 	/**
 	 * Executes the jump instructions in order (input data is mutable).

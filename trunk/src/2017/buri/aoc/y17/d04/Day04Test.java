@@ -7,14 +7,21 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
  */
 public class Day04Test {
 
+	@Test
+	public void testGetInput() {
+		List<List<String>> rows = Day04.getInput();
+		assertEquals(512, rows.size());
+		assertEquals(10, rows.get(0).size());
+		assertEquals("pphsv", rows.get(0).get(0));
+	}
+	
 	/**
 	 * aa bb cc dd ee is valid.
 	 */
@@ -68,7 +75,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day04.getValidCount(Part.ONE, FileUtil.getDay04());
+		int result = Day04.getValidCount(Part.ONE, Day04.getInput());
 		System.out.println("Day 4 Part 1\n\t" + result);
 		assertEquals(466, result);
 	}
@@ -153,7 +160,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day04.getValidCount(Part.TWO, FileUtil.getDay04());
+		int result = Day04.getValidCount(Part.TWO, Day04.getInput());
 		System.out.println("Day 4 Part 2\n\t" + result);
 		assertEquals(251, result);
 	}

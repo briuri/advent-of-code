@@ -7,14 +7,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
  */
 public class Day05Test {
-
+	
+	@Test
+	public void testGetInput() {
+		List<Integer> jumps = Day05.getInput();
+		assertEquals(1033, jumps.size());
+		assertEquals(Integer.valueOf(0), jumps.get(0));
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetStepsNullJumps() {
 		Day05.getSteps(Part.ONE, null);
@@ -57,7 +63,7 @@ public class Day05Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day05.getSteps(Part.ONE, FileUtil.getDay05());
+		int result = Day05.getSteps(Part.ONE, Day05.getInput());
 		System.out.println("Day 5 Part 1\n\t" + result);
 		assertEquals(336905, result);
 	}
@@ -82,7 +88,7 @@ public class Day05Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day05.getSteps(Part.TWO, FileUtil.getDay05());
+		int result = Day05.getSteps(Part.TWO, Day05.getInput());
 		System.out.println("Day 5 Part 2\n\t" + result);
 		assertEquals(21985262, result);
 	}
