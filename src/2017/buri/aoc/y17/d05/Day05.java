@@ -1,7 +1,5 @@
 package buri.aoc.y17.d05;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 import buri.aoc.Part;
@@ -30,13 +28,7 @@ public class Day05 extends Puzzle {
 	 * Output: List of numbers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
-		try {
-			List<String> rawIntegers = Files.readAllLines(getInputPath("2017/05", fileIndex));
-			return (getStringsAsIntegers(rawIntegers));
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file", e);
-		}
+		return (convertStringsToInts(readFile("2017/05", fileIndex)));
 	}
 	
 	/**

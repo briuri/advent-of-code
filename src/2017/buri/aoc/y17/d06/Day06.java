@@ -33,8 +33,8 @@ public class Day06 extends Puzzle {
 	 * Output: List of numbers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
-		String[] rawIntegers = getFileAsString("2017/06", fileIndex).split("\t");
-		return (getStringsAsIntegers(Arrays.asList(rawIntegers)));
+		String[] rawIntegers = readFile("2017/06", fileIndex).get(0).split("\t");
+		return (convertStringsToInts(Arrays.asList(rawIntegers)));
 	}
 	
 	/**

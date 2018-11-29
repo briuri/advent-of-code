@@ -1,7 +1,5 @@
 package buri.aoc.y17.d04;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -26,15 +24,10 @@ public class Day04 extends Puzzle {
 	 */
 	public static List<List<String>> getInput(int fileIndex) {
 		List<List<String>> rows = new ArrayList<>();
-		try {
-			for (String rawRow : Files.readAllLines(getInputPath("2017/04", fileIndex))) {
-				rows.add(Arrays.asList(rawRow.split(" ")));
-			}
-			return (rows);
+		for (String rawRow : readFile("2017/04", fileIndex)) {
+			rows.add(Arrays.asList(rawRow.split(" ")));
 		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file", e);
-		}
+		return (rows);
 	}
 	
 	/**
