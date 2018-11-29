@@ -32,8 +32,8 @@ public class Day06 extends Puzzle {
 	 * Input: One row of tab-delimited numbers.
 	 * Output: List of numbers.
 	 */
-	public static List<Integer> getInput() {
-		String[] rawIntegers = getFileAsString("2017/06").split("\t");
+	public static List<Integer> getInput(int fileIndex) {
+		String[] rawIntegers = getFileAsString("2017/06", fileIndex).split("\t");
 		return (getStringsAsIntegers(Arrays.asList(rawIntegers)));
 	}
 	

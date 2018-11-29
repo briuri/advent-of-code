@@ -19,8 +19,8 @@ public class Day01 extends Puzzle {
 	 * Input: String of digits on one line
 	 * Output: 1 String of digits, with last linebreak trimmed.
 	 */
-	public static String getInput() {
-		return (getFileAsString("2017/01"));
+	public static String getInput(int fileIndex) {
+		return (getFileAsString("2017/01", fileIndex));
 	}	
 	
 	/**

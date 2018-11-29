@@ -14,68 +14,9 @@ import buri.aoc.Part;
  */
 public class Day02Test {
 
-	/**
-	 * Example Data
-	 * 
-	 * 5 1 9 5
-	 * 7 5 3
-	 * 2 4 6 8
-	 */
-	private static List<List<Integer>> getPart1ExampleInput() {
-		List<Integer> row0 = new ArrayList<>();
-		row0.add(5);
-		row0.add(1);
-		row0.add(9);
-		row0.add(5);
-		List<Integer> row1 = new ArrayList<>();
-		row1.add(7);
-		row1.add(5);
-		row1.add(3);
-		List<Integer> row2 = new ArrayList<>();
-		row2.add(2);
-		row2.add(4);
-		row2.add(6);
-		row2.add(8);
-		List<List<Integer>> spreadsheet = new ArrayList<>();
-		spreadsheet.add(row0);
-		spreadsheet.add(row1);
-		spreadsheet.add(row2);
-		return (spreadsheet);
-	}
-
-	/**
-	 * Example Data
-	 * 
-	 * 5 9 2 8
-	 * 9 4 7 3
-	 * 3 8 6 5
-	 */
-	private static List<List<Integer>> getPart2ExampleInput() {
-		List<Integer> row0 = new ArrayList<>();
-		row0.add(5);
-		row0.add(9);
-		row0.add(2);
-		row0.add(8);
-		List<Integer> row1 = new ArrayList<>();
-		row1.add(9);
-		row1.add(4);
-		row1.add(7);
-		row1.add(3);
-		List<Integer> row2 = new ArrayList<>();
-		row2.add(3);
-		row2.add(8);
-		row2.add(6);
-		row2.add(5);
-		List<List<Integer>> spreadsheet = new ArrayList<>();
-		spreadsheet.add(row0);
-		spreadsheet.add(row1);
-		spreadsheet.add(row2);
-		return (spreadsheet);
-	}
-
 	@Test
 	public void testGetInput() {
-		List<List<Integer>> rows = Day02.getInput();
+		List<List<Integer>> rows = Day02.getInput(0);
 		assertEquals(16, rows.size());
 		assertEquals(16, rows.get(0).size());
 		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
@@ -107,7 +48,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Example() {
-		List<List<Integer>> spreadsheet = getPart1ExampleInput();
+		List<List<Integer>> spreadsheet = Day02.getInput(1);
 		assertEquals(18, Day02.getChecksum(Part.ONE, spreadsheet));
 	}
 
@@ -116,7 +57,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day02.getChecksum(Part.ONE, Day02.getInput());
+		int result = Day02.getChecksum(Part.ONE, Day02.getInput(0));
 		System.out.println("Day 2 Part 1\n\t" + result);
 		assertEquals(47136, result);
 	}
@@ -130,7 +71,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Example() {
-		List<List<Integer>> spreadsheet = getPart2ExampleInput();
+		List<List<Integer>> spreadsheet = Day02.getInput(2);
 		assertEquals(9, Day02.getChecksum(Part.TWO, spreadsheet));
 	}
 
@@ -139,7 +80,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day02.getChecksum(Part.TWO, Day02.getInput());
+		int result = Day02.getChecksum(Part.TWO, Day02.getInput(0));
 		System.out.println("Day 2 Part 2\n\t" + result);
 		assertEquals(250, result);
 	}

@@ -13,7 +13,7 @@ public class Day01Test {
 
 	@Test
 	public void getInput() {
-		String content = Day01.getInput();
+		String content = Day01.getInput(0);
 		assertEquals(2074, content.length());
 	}
 	
@@ -71,7 +71,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day01.getSum(Part.ONE, Day01.getInput());
+		int result = Day01.getSum(Part.ONE, Day01.getInput(0));
 		System.out.println("Day 1 Part 1\n\t" + result);
 		assertEquals(1171, result);
 	}
@@ -123,7 +123,7 @@ public class Day01Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day01.getSum(Part.TWO, Day01.getInput());
+		int result = Day01.getSum(Part.TWO, Day01.getInput(0));
 		System.out.println("Day 1 Part 2\n\t" + result);
 		assertEquals(1024, result);
 	}

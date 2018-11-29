@@ -16,7 +16,7 @@ public class Day04Test {
 
 	@Test
 	public void testGetInput() {
-		List<List<String>> rows = Day04.getInput();
+		List<List<String>> rows = Day04.getInput(0);
 		assertEquals(512, rows.size());
 		assertEquals(10, rows.get(0).size());
 		assertEquals("pphsv", rows.get(0).get(0));
@@ -75,7 +75,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day04.getValidCount(Part.ONE, Day04.getInput());
+		int result = Day04.getValidCount(Part.ONE, Day04.getInput(0));
 		System.out.println("Day 4 Part 1\n\t" + result);
 		assertEquals(466, result);
 	}
@@ -160,7 +160,7 @@ public class Day04Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day04.getValidCount(Part.TWO, Day04.getInput());
+		int result = Day04.getValidCount(Part.TWO, Day04.getInput(0));
 		System.out.println("Day 4 Part 2\n\t" + result);
 		assertEquals(251, result);
 	}

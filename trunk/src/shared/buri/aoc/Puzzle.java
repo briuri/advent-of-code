@@ -18,16 +18,16 @@ public abstract class Puzzle {
 	/**
 	 * Adds project-relative "data" folder to path.
 	 */
-	protected static Path getInputPath(String inputId) {
-		return Paths.get("data/" + inputId + ".txt");
+	protected static Path getInputPath(String puzzleId, int fileIndex) {
+		return Paths.get("data/" + puzzleId + "-" + fileIndex + ".txt");
 	}
 
 	/**
 	 * Load all the bytes from an input file as a string.
 	 */
-	protected static String getFileAsString(String inputId) {
+	protected static String getFileAsString(String puzzleId, int fileIndex) {
 		try {
-			byte[] rawOutput = Files.readAllBytes(getInputPath(inputId));
+			byte[] rawOutput = Files.readAllBytes(getInputPath(puzzleId, fileIndex));
 			return (new String(rawOutput, StandardCharsets.UTF_8.name()).trim());
 		}
 		catch (IOException e) {

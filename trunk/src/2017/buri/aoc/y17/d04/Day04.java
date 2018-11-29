@@ -24,10 +24,10 @@ public class Day04 extends Puzzle {
 	 * Input: Multiple rows of space-delimited strings.
 	 * Output: Rows of strings.
 	 */
-	public static List<List<String>> getInput() {
+	public static List<List<String>> getInput(int fileIndex) {
 		List<List<String>> rows = new ArrayList<>();
 		try {
-			for (String rawRow : Files.readAllLines(getInputPath("2017/04"))) {
+			for (String rawRow : Files.readAllLines(getInputPath("2017/04", fileIndex))) {
 				rows.add(Arrays.asList(rawRow.split(" ")));
 			}
 			return (rows);

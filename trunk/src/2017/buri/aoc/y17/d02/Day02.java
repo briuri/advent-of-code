@@ -23,10 +23,10 @@ public class Day02 extends Puzzle {
 	 * Input: Multiple rows of tab-delimited integers.
 	 * Output: Rows of integers.
 	 */
-	public static List<List<Integer>> getInput() {
+	public static List<List<Integer>> getInput(int fileIndex) {
 		List<List<Integer>> rows = new ArrayList<>();
 		try {
-			for (String rawRow : Files.readAllLines(getInputPath("2017/02"))) {
+			for (String rawRow : Files.readAllLines(getInputPath("2017/02", fileIndex))) {
 				rows.add(getStringsAsIntegers(Arrays.asList(rawRow.split("\t"))));
 			}
 			return (rows);

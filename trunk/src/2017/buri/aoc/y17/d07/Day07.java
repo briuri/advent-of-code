@@ -30,14 +30,14 @@ public class Day07 extends Puzzle {
 	 * Input: name (weight) -> comma/space-delimited child names
 	 * Output: map of unique names to programs
 	 */
-	public static Map<String, Program> getInput() {
+	public static Map<String, Program> getInput(int fileIndex) {
 		try {
 			final String relation = " -> ";
 			final String weightSeparator = " ";
 			final String childSeparator = ", ";
 			
 			Map<String, Program> programs = new HashMap<>();
-			for (String line : Files.readAllLines(getInputPath("2017/07"))) {
+			for (String line : Files.readAllLines(getInputPath("2017/07", fileIndex))) {
 				String[] relationship = line.split(relation);
 				String[] nameWeight = relationship[0].split(weightSeparator);
 				String name = nameWeight[0];
