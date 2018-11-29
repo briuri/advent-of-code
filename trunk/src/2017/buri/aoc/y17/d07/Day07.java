@@ -1,8 +1,5 @@
 package buri.aoc.y17.d07;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,35 +28,16 @@ public class Day07 extends Puzzle {
 	 * Output: map of unique names to programs
 	 */
 	public static Map<String, Program> getInput(int fileIndex) {
-		try {
-			final String relation = " -> ";
-			final String weightSeparator = " ";
-			final String childSeparator = ", ";
-			
-			Map<String, Program> programs = new HashMap<>();
-			for (String line : Files.readAllLines(getInputPath("2017/07", fileIndex))) {
-				String[] relationship = line.split(relation);
-				String[] nameWeight = relationship[0].split(weightSeparator);
-				String name = nameWeight[0];
-				int weight = Integer.valueOf(nameWeight[1].replace("(", "").replace(")", ""));
-				List<String> childNames = new ArrayList<>();
-				if (relationship.length > 1) {
-					for (String child : relationship[1].split(childSeparator)) {
-						childNames.add(child);
-					}
-				}
-				Program program = new Program(name, weight, childNames);
-				programs.put(name, program);
-			}
-			// Load all the children based on their names
-			for (Program program : programs.values()) {
-				program.loadChildren(programs);
-			}
-			return (programs);
+		Map<String, Program> programs = new HashMap<>();
+		for (String line : readFile("2017/07", fileIndex)) {
+			Program program = new Program(line);
+			programs.put(program.getName(), program);
 		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file", e);
+		// Load all the children based on their names
+		for (Program program : programs.values()) {
+			program.loadChildren(programs);
 		}
+		return (programs);
 	}
 	
 	/**

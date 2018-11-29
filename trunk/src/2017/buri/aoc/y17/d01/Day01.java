@@ -20,7 +20,7 @@ public class Day01 extends Puzzle {
 	 * Output: 1 String of digits, with last linebreak trimmed.
 	 */
 	public static String getInput(int fileIndex) {
-		return (getFileAsString("2017/01", fileIndex));
+		return (readFile("2017/01", fileIndex).get(0));
 	}	
 	
 	/**

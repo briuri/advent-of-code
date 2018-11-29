@@ -1,5 +1,6 @@
 package buri.aoc.y17.d08;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,11 +47,7 @@ public class Registers {
 	 */
 	public Integer getLargestValue(Part part) {
 		if (part == Part.ONE) {
-			Integer value = 0;
-			for (Integer testValue : getRegisters().values()) {
-				value = Math.max(value, testValue);
-			}
-			return (value);
+			return (Collections.max(getRegisters().values()));
 		}
 		return (getLargestValue());
 	}
@@ -107,7 +104,7 @@ public class Registers {
 	/**
 	 * Accessor for the largest value ever held.
 	 */
-	public Integer getLargestValue() {
+	private Integer getLargestValue() {
 		return _largestValue;
 	}
 }

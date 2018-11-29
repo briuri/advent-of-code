@@ -1,7 +1,6 @@
 package buri.aoc;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,31 +13,24 @@ import java.util.List;
  * @author Brian Uri!
  */
 public abstract class Puzzle {
-
+		
 	/**
-	 * Adds project-relative "data" folder to path.
+	 * Loads a file as a list of string lines.
 	 */
-	protected static Path getInputPath(String puzzleId, int fileIndex) {
-		return Paths.get("data/" + puzzleId + "-" + fileIndex + ".txt");
-	}
-
-	/**
-	 * Load all the bytes from an input file as a string.
-	 */
-	protected static String getFileAsString(String puzzleId, int fileIndex) {
+	protected static List<String> readFile(String puzzleId, int fileIndex) {
+		Path path = Paths.get("data/" + puzzleId + "-" + fileIndex + ".txt");
 		try {
-			byte[] rawOutput = Files.readAllBytes(getInputPath(puzzleId, fileIndex));
-			return (new String(rawOutput, StandardCharsets.UTF_8.name()).trim());
+			return (Files.readAllLines(path));
 		}
 		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file", e);
+			throw new IllegalArgumentException("Invalid file: " + path.toAbsolutePath(), e);
 		}
 	}
 
 	/**
 	 * Converts strings into integers.
 	 */
-	protected static List<Integer> getStringsAsIntegers(List<String> rawIntegers) {
+	protected static List<Integer> convertStringsToInts(List<String> rawIntegers) {
 		List<Integer> integers = new ArrayList<>();
 		for (String rawInteger : rawIntegers) {
 			integers.add(Integer.valueOf(rawInteger));

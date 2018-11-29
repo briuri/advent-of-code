@@ -19,10 +19,25 @@ public class Program {
 	private List<String> _childNames;
 	private List<Program> _children;
 	
+	private static final String RELATION = " -> ";
+	private static 	final String WEIGHT_SEPARATOR = " ";
+	private static final String CHILD_SEPARATOR = ", ";
+	
 	/**
 	 * Constructor
 	 */
-	public Program(String name, int weight, List<String> childNames) {
+	public Program(String info) {
+		String[] relationship = info.split(RELATION);
+		String[] nameWeight = relationship[0].split(WEIGHT_SEPARATOR);
+		String name = nameWeight[0];
+		int weight = Integer.valueOf(nameWeight[1].replace("(", "").replace(")", ""));
+		List<String> childNames = new ArrayList<>();
+		if (relationship.length > 1) {
+			for (String child : relationship[1].split(CHILD_SEPARATOR)) {
+				childNames.add(child);
+			}
+		}
+		
 		_name = name;
 		_weight = weight;
 		_childNames = childNames;
