@@ -14,7 +14,7 @@ import buri.aoc.Part;
 public class Day08Test {
 	
 	@Test
-	public void testGetDay08() {
+	public void testGetInput() {
 		List<RegisterInstruction> instructions = Day08.getInput(0);
 		assertEquals(1000, instructions.size());
 	}
@@ -30,7 +30,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart1Example() {
-		assertEquals(1, Day08.getLargestValue(Part.ONE, Day08.getInput(1)));
+		assertEquals(1, Day08.getResult(Part.ONE, Day08.getInput(1)));
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day08.getLargestValue(Part.ONE, Day08.getInput(0));
+		int result = Day08.getResult(Part.ONE, Day08.getInput(0));
 		System.out.println("Day 8 Part 1\n\t" + result);
 		assertEquals(4888, result);
 	}
@@ -49,7 +49,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart2Example() {
-		assertEquals(10, Day08.getLargestValue(Part.TWO, Day08.getInput(1)));
+		assertEquals(10, Day08.getResult(Part.TWO, Day08.getInput(1)));
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day08.getLargestValue(Part.TWO, Day08.getInput(0));
+		int result = Day08.getResult(Part.TWO, Day08.getInput(0));
 		System.out.println("Day 8 Part 2\n\t" + result);
 		assertEquals(7774, result);
 	}

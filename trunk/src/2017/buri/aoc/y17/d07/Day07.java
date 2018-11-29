@@ -43,7 +43,7 @@ public class Day07 extends Puzzle {
 	/**
 	 * Find out name of bottom program (the one that does not appear in any child lists)
 	 */
-	public static String getBottomName(Map<String, Program> programs) {
+	public static String getPart1Result(Map<String, Program> programs) {
 		Set<String> uniqueChildren = new HashSet<>();
 		for (Program program : programs.values()) {
 			for (String child : program.getChildNames()) {
@@ -66,8 +66,8 @@ public class Day07 extends Puzzle {
 	 * program to the incorrect node involved a program with 1-2 children, it would not be trivially easy to identify
 	 * the imbalanced child.
 	 */
-	public static int getWeightDiff(Map<String, Program> programs) {
-		String bottomName = getBottomName(programs);
+	public static int getPart2Result(Map<String, Program> programs) {
+		String bottomName = getPart1Result(programs);
 		Program imbalancedProgram = programs.get(bottomName);
 		List<Program> siblings = null;
 

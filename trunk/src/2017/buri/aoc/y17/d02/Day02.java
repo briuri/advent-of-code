@@ -32,7 +32,7 @@ public class Day02 extends Puzzle {
 	/**
 	 * Calculates a checksum based on the calculated value of each row.
 	 */
-	public static int getChecksum(Part part, List<List<Integer>> spreadsheet) {
+	public static int getResult(Part part, List<List<Integer>> spreadsheet) {
 		assertValidSpreadsheet(spreadsheet);
 		for (List<Integer> row : spreadsheet) {
 			Collections.sort(row);

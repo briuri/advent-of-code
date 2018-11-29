@@ -29,7 +29,7 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart1Example() {
-		assertEquals("tknk", Day07.getBottomName(Day07.getInput(1)));
+		assertEquals("tknk", Day07.getPart1Result(Day07.getInput(1)));
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day07.getBottomName(Day07.getInput(0));
+		String result = Day07.getPart1Result(Day07.getInput(0));
 		System.out.println("Day 7 Part 1\n\t" + result);
 		assertEquals("svugo", result);
 	}
@@ -72,7 +72,7 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day07.getWeightDiff(Day07.getInput(0));
+		int result = Day07.getPart2Result(Day07.getInput(0));
 		System.out.println("Day 7 Part 2\n\t" + result);
 		assertEquals(1152, result);
 	}

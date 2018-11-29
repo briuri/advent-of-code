@@ -23,20 +23,20 @@ public class Day02Test {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetChecksumNullInput() {
-		Day02.getChecksum(Part.ONE, null);
+	public void testGetResultNullInput() {
+		Day02.getResult(Part.ONE, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetChecksumEmptyInput() {
-		Day02.getChecksum(Part.ONE, new ArrayList<List<Integer>>());
+	public void testGetResultEmptyInput() {
+		Day02.getResult(Part.ONE, new ArrayList<List<Integer>>());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetChecksumEmptyRow() {
+	public void testGetResultEmptyRow() {
 		List<List<Integer>> spreadsheet = new ArrayList<>();
 		spreadsheet.add(new ArrayList<Integer>());
-		Day02.getChecksum(Part.ONE, spreadsheet);
+		Day02.getResult(Part.ONE, spreadsheet);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class Day02Test {
 	@Test
 	public void testPart1Example() {
 		List<List<Integer>> spreadsheet = Day02.getInput(1);
-		assertEquals(18, Day02.getChecksum(Part.ONE, spreadsheet));
+		assertEquals(18, Day02.getResult(Part.ONE, spreadsheet));
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day02.getChecksum(Part.ONE, Day02.getInput(0));
+		int result = Day02.getResult(Part.ONE, Day02.getInput(0));
 		System.out.println("Day 2 Part 1\n\t" + result);
 		assertEquals(47136, result);
 	}
@@ -72,7 +72,7 @@ public class Day02Test {
 	@Test
 	public void testPart2Example() {
 		List<List<Integer>> spreadsheet = Day02.getInput(2);
-		assertEquals(9, Day02.getChecksum(Part.TWO, spreadsheet));
+		assertEquals(9, Day02.getResult(Part.TWO, spreadsheet));
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day02.getChecksum(Part.TWO, Day02.getInput(0));
+		int result = Day02.getResult(Part.TWO, Day02.getInput(0));
 		System.out.println("Day 2 Part 2\n\t" + result);
 		assertEquals(250, result);
 	}

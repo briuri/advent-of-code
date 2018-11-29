@@ -56,11 +56,6 @@ public class GridPosition {
 		_x = _x - 1;
 	}
 
-	@Override
-	public String toString() {
-		return ("(" + getX() + "," + getY() + ")");
-	}
-
 	/**
 	 * Accessor for X
 	 */

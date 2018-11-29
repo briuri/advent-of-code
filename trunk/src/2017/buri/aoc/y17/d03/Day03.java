@@ -1,5 +1,6 @@
 package buri.aoc.y17.d03;
 
+import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
@@ -96,9 +97,19 @@ public class Day03 extends Puzzle {
 	public static final int CENTER_GRID_COORD = MAX_GRID_LENGTH / 2;
 	
 	/**
+	 * Gets the result, based on which part of the puzzle we're on.
+	 */
+	public static int getResult(Part part, int value) {
+		if (part == Part.ONE) {
+			return (getManhattanDistance(value));
+		}
+		return (populateGrid(value));
+	}
+	
+	/**
 	 * Calculates the Manhattan Distance for a particular value, using the algorithm described above.
 	 */
-	public static int getManhattanDistance(int value) {
+	private static int getManhattanDistance(int value) {
 		if (value == 1) {
 			return (0);
 		}
@@ -148,7 +159,7 @@ public class Day03 extends Puzzle {
 	 * ring = 5: U 5, L   6, D   6, R   7
 	 * ring = a: U a, L a+1, D a+1, R a+2
 	 */
-	public static int populateGrid(int value) {
+	private static int populateGrid(int value) {
 		SpiralGrid grid = new SpiralGrid(MAX_GRID_LENGTH);
 
 		// Start filling grid from center.
