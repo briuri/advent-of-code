@@ -1,4 +1,4 @@
-package buri.aoc.y17;
+package buri.aoc;
 
 /**
  * Enumeration for multi-part puzzles.

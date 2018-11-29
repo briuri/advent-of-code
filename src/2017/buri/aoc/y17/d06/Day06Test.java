@@ -7,13 +7,19 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
  */
 public class Day06Test {
+	
+	@Test
+	public void testGetInput() {
+		List<Integer> banks = Day06.getInput();
+		assertEquals(16, banks.size());
+		assertEquals(Integer.valueOf(4), banks.get(0));
+	}
 	
 	/**
 	 * For example, imagine a scenario with only four memory banks:
@@ -37,7 +43,7 @@ public class Day06Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day06.getIterations(Part.ONE, FileUtil.getDay06());
+		int result = Day06.getIterations(Part.ONE, Day06.getInput());
 		System.out.println("Day 6 Part 1\n\t" + result);
 		assertEquals(12841, result);
 	}
@@ -60,7 +66,7 @@ public class Day06Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day06.getIterations(Part.TWO, FileUtil.getDay06());
+		int result = Day06.getIterations(Part.TWO, Day06.getInput());
 		System.out.println("Day 6 Part 2\n\t" + result);
 		assertEquals(8038, result);
 	}

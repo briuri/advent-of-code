@@ -7,8 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
@@ -74,6 +73,14 @@ public class Day02Test {
 		return (spreadsheet);
 	}
 
+	@Test
+	public void testGetInput() {
+		List<List<Integer>> rows = Day02.getInput();
+		assertEquals(16, rows.size());
+		assertEquals(16, rows.get(0).size());
+		assertEquals(Integer.valueOf(4347), rows.get(0).get(0));
+	}
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetChecksumNullInput() {
 		Day02.getChecksum(Part.ONE, null);
@@ -109,7 +116,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day02.getChecksum(Part.ONE, FileUtil.getDay02());
+		int result = Day02.getChecksum(Part.ONE, Day02.getInput());
 		System.out.println("Day 2 Part 1\n\t" + result);
 		assertEquals(47136, result);
 	}
@@ -132,7 +139,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day02.getChecksum(Part.TWO, FileUtil.getDay02());
+		int result = Day02.getChecksum(Part.TWO, Day02.getInput());
 		System.out.println("Day 2 Part 2\n\t" + result);
 		assertEquals(250, result);
 	}

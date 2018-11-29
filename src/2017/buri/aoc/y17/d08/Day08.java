@@ -1,8 +1,12 @@
 package buri.aoc.y17.d08;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
+import buri.aoc.Puzzle;
 
 /**
  * You receive a signal directly from the CPU. Because of your recent assistance with jump instructions, it would like
@@ -18,7 +22,25 @@ import buri.aoc.y17.Part;
  * 
  * @author Brian Uri!
  */
-public class Day08 {
+public class Day08 extends Puzzle {
+	
+	/**
+	 * Input: One string of tokens per line.
+	 * Output: List of instructions.
+	 */
+	public static List<RegisterInstruction> getInput() {
+		List<RegisterInstruction> instructions = new ArrayList<>();
+		try {
+			List<String> rawInstructions = Files.readAllLines(getInputPath("2017/08"));
+			for (String instruction : rawInstructions) {
+				instructions.add(new RegisterInstruction(instruction));
+			}
+			return (instructions);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file", e);
+		}
+	}
 	
 	/**
 	 * Executes the register instructions.

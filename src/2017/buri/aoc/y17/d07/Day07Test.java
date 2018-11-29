@@ -10,8 +10,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import buri.aoc.y17.FileUtil;
-
 /**
  * @author Brian Uri!
  */
@@ -72,6 +70,16 @@ public class Day07Test {
 		return (programs);
 	}
 
+	@Test
+	public void testGetInput() {
+		Map<String, Program> programs = Day07.getInput();
+		assertEquals(1288, programs.size());
+		assertTrue(programs.keySet().contains("mmqyju"));
+		assertTrue(programs.get("mmqyju").getChildNames().contains("rjzvwv"));
+		assertTrue(programs.get("mmqyju").getChildNames().contains("noybkx"));
+		assertEquals(2, programs.get("mmqyju").getChildNames().size());
+	}
+	
 	/**
 	 * In this example, tknk is at the bottom of the tower (the bottom program), and is holding up ugml, padx, and fwft.
 	 * Those programs are, in turn, holding up other programs; in this example, none of those programs are holding up
@@ -88,7 +96,7 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day07.getBottomName(FileUtil.getDay07());
+		String result = Day07.getBottomName(Day07.getInput());
 		System.out.println("Day 7 Part 1\n\t" + result);
 		assertEquals("svugo", result);
 	}
@@ -123,7 +131,7 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day07.getWeightDiff(FileUtil.getDay07());
+		int result = Day07.getWeightDiff(Day07.getInput());
 		System.out.println("Day 7 Part 2\n\t" + result);
 		assertEquals(1152, result);
 	}

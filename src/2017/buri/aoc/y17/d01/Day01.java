@@ -3,7 +3,8 @@ package buri.aoc.y17.d01;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.y17.Part;
+import buri.aoc.Part;
+import buri.aoc.Puzzle;
 
 /**
  * The captcha requires you to review a sequence of digits (your puzzle input) and find the sum of all digits identified
@@ -12,8 +13,16 @@ import buri.aoc.y17.Part;
  * 
  * @author Brian Uri!
  */
-public class Day01 {
-
+public class Day01 extends Puzzle {
+	
+	/**
+	 * Input: String of digits on one line
+	 * Output: 1 String of digits, with last linebreak trimmed.
+	 */
+	public static String getInput() {
+		return (getFileAsString("2017/01"));
+	}	
+	
 	/**
 	 * Find the sum of all digits that satisfy Part-specific rules.
 	 */
