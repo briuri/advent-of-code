@@ -29,9 +29,9 @@ public class Day05 extends Puzzle {
 	 * Input: One number per line.
 	 * Output: List of numbers.
 	 */
-	public static List<Integer> getInput() {
+	public static List<Integer> getInput(int fileIndex) {
 		try {
-			List<String> rawIntegers = Files.readAllLines(getInputPath("2017/05"));
+			List<String> rawIntegers = Files.readAllLines(getInputPath("2017/05", fileIndex));
 			return (getStringsAsIntegers(rawIntegers));
 		}
 		catch (IOException e) {

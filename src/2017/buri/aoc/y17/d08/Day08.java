@@ -28,10 +28,10 @@ public class Day08 extends Puzzle {
 	 * Input: One string of tokens per line.
 	 * Output: List of instructions.
 	 */
-	public static List<RegisterInstruction> getInput() {
+	public static List<RegisterInstruction> getInput(int fileIndex) {
 		List<RegisterInstruction> instructions = new ArrayList<>();
 		try {
-			List<String> rawInstructions = Files.readAllLines(getInputPath("2017/08"));
+			List<String> rawInstructions = Files.readAllLines(getInputPath("2017/08", fileIndex));
 			for (String instruction : rawInstructions) {
 				instructions.add(new RegisterInstruction(instruction));
 			}

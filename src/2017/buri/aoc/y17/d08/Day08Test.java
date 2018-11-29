@@ -2,7 +2,6 @@ package buri.aoc.y17.d08;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,27 +12,10 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Day08Test {
-
-	/**
-	 * Example Data
-	 * 
-	 * b inc 5 if a > 1
-	 * a inc 1 if b < 5
-	 * c dec -10 if a >= 1
-	 * c inc -20 if c == 10
-	 */
-	private List<RegisterInstruction> getExampleInput() {
-		List<RegisterInstruction> instructions = new ArrayList<>();
-		instructions.add(new RegisterInstruction("b inc 5 if a > 1"));
-		instructions.add(new RegisterInstruction("a inc 1 if b < 5"));
-		instructions.add(new RegisterInstruction("c dec -10 if a >= 1"));
-		instructions.add(new RegisterInstruction("c inc -20 if c == 10"));
-		return (instructions);
-	}
 	
 	@Test
 	public void testGetDay08() {
-		List<RegisterInstruction> instructions = Day08.getInput();
+		List<RegisterInstruction> instructions = Day08.getInput(0);
 		assertEquals(1000, instructions.size());
 	}
 	
@@ -48,7 +30,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart1Example() {
-		assertEquals(1, Day08.getLargestValue(Part.ONE, getExampleInput()));
+		assertEquals(1, Day08.getLargestValue(Part.ONE, Day08.getInput(1)));
 	}
 
 	/**
@@ -56,7 +38,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day08.getLargestValue(Part.ONE, Day08.getInput());
+		int result = Day08.getLargestValue(Part.ONE, Day08.getInput(0));
 		System.out.println("Day 8 Part 1\n\t" + result);
 		assertEquals(4888, result);
 	}
@@ -67,7 +49,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart2Example() {
-		assertEquals(10, Day08.getLargestValue(Part.TWO, getExampleInput()));
+		assertEquals(10, Day08.getLargestValue(Part.TWO, Day08.getInput(1)));
 	}
 
 	/**
@@ -75,7 +57,7 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day08.getLargestValue(Part.TWO, Day08.getInput());
+		int result = Day08.getLargestValue(Part.TWO, Day08.getInput(0));
 		System.out.println("Day 8 Part 2\n\t" + result);
 		assertEquals(7774, result);
 	}
