@@ -1,4 +1,4 @@
-package buri.aoc.y18.d00;
+package buri.aoc.template;
 
 import static org.junit.Assert.*;
 
