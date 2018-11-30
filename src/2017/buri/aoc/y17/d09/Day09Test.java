@@ -27,8 +27,14 @@ public class Day09Test {
 	 * <{o"i!a,<{i<a>, which ends at the first >.
 	 */
 	@Test
-	public void testPart1StripGarbageExamples() {
-		// TODO
+	public void testPart1DestroyGarbageExamples() {
+		assertEquals("", Day09.destroyGarbage("<>"));
+		assertEquals("", Day09.destroyGarbage("<random characters>"));
+		assertEquals("", Day09.destroyGarbage("<<<<>"));
+		assertEquals("", Day09.destroyGarbage("<{!>}>"));
+		assertEquals("", Day09.destroyGarbage("<!!>"));
+		assertEquals("", Day09.destroyGarbage("<!!!>>"));
+		assertEquals("", Day09.destroyGarbage("<{o\"i!a,<{i<a>"));
 	}
 
 	/**
@@ -43,7 +49,14 @@ public class Day09Test {
 	 */
 	@Test
 	public void testPart1CountGroupsExamples() {
-		// TODO
+		assertEquals(1, Day09.countGroups("{}"));
+		assertEquals(3, Day09.countGroups("{{{}}}"));
+		assertEquals(3, Day09.countGroups("{{},{}}"));
+		assertEquals(6, Day09.countGroups("{{{},{},{{}}}}"));
+		assertEquals(1, Day09.countGroups("{<{},{},{{}}>}"));
+		assertEquals(1, Day09.countGroups("{<a>,<a>,<a>,<a>}"));
+		assertEquals(5, Day09.countGroups("{{<a>},{<a>},{<a>},{<a>}}"));
+		assertEquals(2, Day09.countGroups("{{<!>},{<!>},{<!>},{<a>}}"));
 	}
 
 	/**
@@ -58,7 +71,14 @@ public class Day09Test {
 	 */
 	@Test
 	public void testPart1GetResultExamples() {
-		// TODO
+		assertEquals(1, Day09.getResult(Part.ONE, "{}"));
+		assertEquals(6, Day09.getResult(Part.ONE, "{{{}}}"));
+		assertEquals(5, Day09.getResult(Part.ONE, "{{},{}}"));
+		assertEquals(16, Day09.getResult(Part.ONE, "{{{},{},{{}}}}"));
+		assertEquals(1, Day09.getResult(Part.ONE, "{<a>,<a>,<a>,<a>}"));
+		assertEquals(9, Day09.getResult(Part.ONE, "{{<ab>},{<ab>},{<ab>},{<ab>}}"));
+		assertEquals(9, Day09.getResult(Part.ONE, "{{<!!>},{<!!>},{<!!>},{<!!>}}"));
+		assertEquals(3, Day09.getResult(Part.ONE, "{{<a!>},{<a!>},{<a!>},{<ab>}}"));
 	}
 
 	/**
@@ -68,15 +88,30 @@ public class Day09Test {
 	public void testPart1Puzzle() {
 		int result = Day09.getResult(Part.ONE, Day09.getInput(0));
 		System.out.println("Day 0 Part 1\n\t" + result);
-		assertEquals(1, result);
+		assertEquals(12396, result);
 	}
 
 	/**
+	 * To prove you've removed it, you need to count all of the characters within the garbage. The leading and trailing
+	 * < and > don't count, nor do any canceled characters or the ! doing the canceling.
 	 * 
+	 * <>, 0 characters.
+	 * <random characters>, 17 characters.
+	 * <<<<>, 3 characters.
+	 * <{!>}>, 2 characters.
+	 * <!!>, 0 characters.
+	 * <!!!>>, 0 characters.
+	 * <{o"i!a,<{i<a>, 10 characters.
 	 */
 	@Test
-	public void testPart2Example1() {
-		// assertEquals(1, Day00.getResult(Part.TWO, "x"));
+	public void testPart2GetResultExamples() {
+		assertEquals(0, Day09.getResult(Part.TWO, "<>"));
+		assertEquals(17, Day09.getResult(Part.TWO, "<random characters>"));
+		assertEquals(3, Day09.getResult(Part.TWO, "<<<<>"));
+		assertEquals(2, Day09.getResult(Part.TWO, "<{!>}>"));
+		assertEquals(0, Day09.getResult(Part.TWO, "<!!>"));
+		assertEquals(0, Day09.getResult(Part.TWO, "<!!!>>"));
+		assertEquals(10, Day09.getResult(Part.TWO, "<{o\"i!a,<{i<a>"));
 	}
 
 	/**
@@ -85,7 +120,7 @@ public class Day09Test {
 	@Test
 	public void testPart2Puzzle() {
 		int result = Day09.getResult(Part.TWO, Day09.getInput(0));
-		System.out.println("Day 0 Part 2\n\t" + result);
-		assertEquals(1, result);
+		System.out.println("Day 9 Part 2\n\t" + result);
+		assertEquals(6346, result);
 	}
 }
