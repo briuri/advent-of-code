@@ -35,24 +35,20 @@ public class Day01 extends Puzzle {
 	 * the middle of processing the list. What is the first frequency your device reaches twice?
 	 */
 	public static int getResult(Part part, List<Integer> input) {
-		int sum = 0;
-		if (part == Part.ONE) {
-			for (Integer value : input) {
-				sum += value;
-			}
-			return (sum);
-		}
-		
-		// Part TWO
-		// Assumes a repeat is eventually found.
 		Set<Integer> repeats = new HashSet<>();
+		int sum = 0;
 		while (true) {
 			for (Integer value : input) {
-				if (repeats.contains(sum)) {
+				// Part 2: Stop as soon as a repeat occurs.
+				if (part == Part.TWO && repeats.contains(sum)) {
 					return (sum);
 				}
 				repeats.add(sum);
 				sum += value;
+			}
+			// Part 1: Stop after one complete iteration.
+			if (part == Part.ONE) {
+				return (sum);
 			}
 		}
 	}
