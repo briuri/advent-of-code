@@ -30,7 +30,7 @@ public abstract class Puzzle {
 	/**
 	 * Converts strings into integers.
 	 */
-	protected static List<Integer> convertStringsToInts(List<String> rawIntegers) {
+	public static List<Integer> convertStringsToInts(List<String> rawIntegers) {
 		List<Integer> integers = new ArrayList<>();
 		for (String rawInteger : rawIntegers) {
 			integers.add(Integer.valueOf(rawInteger));
