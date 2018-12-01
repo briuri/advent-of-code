@@ -1,4 +1,4 @@
-package buri.aoc.template;
+package buri.aoc.y18.d02;
 
 import static org.junit.Assert.*;
 
@@ -11,11 +11,11 @@ import buri.aoc.Part;
 /**
  * @author Brian Uri!
  */
-public class Day00Test {
+public class Day02Test {
 
 	@Test
 	public void testGetInput() {
-		List<String> content = Day00.getInput(0);
+		List<String> content = Day02.getInput(0);
 		assertEquals(2074, content.size());
 	}
 
@@ -24,7 +24,7 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart1Examples() {
-		assertEquals(1, Day00.getResult(Part.ONE, Day00.getInput(1)));
+		assertEquals(1, Day02.getResult(Part.ONE, Day02.getInput(1)));
 	}
 
 	/**
@@ -32,8 +32,8 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day00.getResult(Part.ONE, Day00.getInput(0));
-		System.out.println("Day 0 Part 1\n\t" + result);
+		int result = Day02.getResult(Part.ONE, Day02.getInput(0));
+		System.out.println("Day 2 Part 1\n\t" + result);
 		assertEquals(1, result);
 	}
 
@@ -42,7 +42,7 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart2Examples() {
-		assertEquals(1, Day00.getResult(Part.TWO, Day00.getInput(2)));
+		assertEquals(1, Day02.getResult(Part.TWO, Day02.getInput(2)));
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day00.getResult(Part.TWO, Day00.getInput(0));
-		System.out.println("Day 0 Part 2\n\t" + result);
+		int result = Day02.getResult(Part.TWO, Day02.getInput(0));
+		System.out.println("Day 2 Part 2\n\t" + result);
 		assertEquals(1, result);
 	}
 }
