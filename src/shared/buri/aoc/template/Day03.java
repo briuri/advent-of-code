@@ -8,7 +8,7 @@ import buri.aoc.Puzzle;
 /**
  * @author Brian Uri!
  */
-public class Day00 extends Puzzle {
+public class Day03 extends Puzzle {
 
 	/**
 	 * Input: 
