@@ -36,10 +36,10 @@ public class Day02 extends Puzzle {
 			int twos = 0;
 			int threes = 0;
 			for (String id : input) {
-				if (hasExactOccurrences(id, 2)) {
+				if (hasCharRepeats(id, 2)) {
 					twos++;
 				}
-				if (hasExactOccurrences(id, 3)) {
+				if (hasCharRepeats(id, 3)) {
 					threes++;
 				}
 			}
@@ -60,17 +60,17 @@ public class Day02 extends Puzzle {
 	/**
 	 * Returns true if a string contains a character that repeats exactly num times.
 	 */
-	private static boolean hasExactOccurrences(String id, int num) {
-		Map<Character, Integer> occurrences = new HashMap<>();
+	private static boolean hasCharRepeats(String id, int num) {
+		Map<Character, Integer> charCounts = new HashMap<>();
 		for (int i = 0; i < id.length(); i++) {
 			char letter = id.charAt(i);
-			if (occurrences.get(letter) == null) {
-				occurrences.put(letter, 0);
+			if (charCounts.get(letter) == null) {
+				charCounts.put(letter, 0);
 			}
-			occurrences.put(letter, occurrences.get(letter) + 1);
+			charCounts.put(letter, charCounts.get(letter) + 1);
 		}
 		Set<Integer> uniques = new HashSet<>();
-		for (Integer value : occurrences.values()) {
+		for (Integer value : charCounts.values()) {
 			uniques.add(value);
 		}
 		return (uniques.contains(num));
