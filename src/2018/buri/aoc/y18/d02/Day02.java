@@ -69,10 +69,7 @@ public class Day02 extends Puzzle {
 			}
 			charCounts.put(letter, charCounts.get(letter) + 1);
 		}
-		Set<Integer> uniques = new HashSet<>();
-		for (Integer value : charCounts.values()) {
-			uniques.add(value);
-		}
+		Set<Integer> uniques = new HashSet<>(charCounts.values());
 		return (uniques.contains(num));
 	}
 	
