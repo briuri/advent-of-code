@@ -24,7 +24,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Examples() {
-		assertEquals(1, Day03.getResult(Part.ONE, Day03.getInput(1)));
+		assertEquals("", Day03.getResult(Part.ONE, Day03.getInput(1)));
 	}
 
 	/**
@@ -32,9 +32,9 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day03.getResult(Part.ONE, Day03.getInput(0));
+		String result = Day03.getResult(Part.ONE, Day03.getInput(0));
 		System.out.println("Day 3 Part 1\n\t" + result);
-		assertEquals(1, result);
+		assertEquals("", result);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart2Examples() {
-		assertEquals(1, Day03.getResult(Part.TWO, Day03.getInput(2)));
+		assertEquals("", Day03.getResult(Part.TWO, Day03.getInput(2)));
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day03.getResult(Part.TWO, Day03.getInput(0));
+		String result = Day03.getResult(Part.TWO, Day03.getInput(0));
 		System.out.println("Day 3 Part 2\n\t" + result);
-		assertEquals(1, result);
+		assertEquals("", result);
 	}
 }
