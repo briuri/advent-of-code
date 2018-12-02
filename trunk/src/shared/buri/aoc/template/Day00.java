@@ -21,10 +21,10 @@ public class Day00 extends Puzzle {
 	/**
 	 * 
 	 */
-	public static int getResult(Part part, List<String> input) {
+	public static String getResult(Part part, List<String> input) {
 		if (part == Part.ONE) {
-			return (0);
+			return ("");
 		}
-		return (0);
+		return ("");
 	}
 }
