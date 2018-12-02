@@ -15,7 +15,7 @@ public class Day00Test {
 
 	@Test
 	public void testGetInput() {
-		List<String> content = Day03.getInput(0);
+		List<String> content = Day00.getInput(0);
 		assertEquals(2074, content.size());
 	}
 
@@ -24,7 +24,7 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart1Examples() {
-		assertEquals(1, Day03.getResult(Part.ONE, Day03.getInput(1)));
+		assertEquals(1, Day00.getResult(Part.ONE, Day00.getInput(1)));
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day03.getResult(Part.ONE, Day03.getInput(0));
+		int result = Day00.getResult(Part.ONE, Day00.getInput(0));
 		System.out.println("Day 0 Part 1\n\t" + result);
 		assertEquals(1, result);
 	}
@@ -42,7 +42,7 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart2Examples() {
-		assertEquals(1, Day03.getResult(Part.TWO, Day03.getInput(2)));
+		assertEquals(1, Day00.getResult(Part.TWO, Day00.getInput(2)));
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class Day00Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day03.getResult(Part.TWO, Day03.getInput(0));
+		int result = Day00.getResult(Part.TWO, Day00.getInput(0));
 		System.out.println("Day 0 Part 2\n\t" + result);
 		assertEquals(1, result);
 	}
