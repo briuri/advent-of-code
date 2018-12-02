@@ -2,10 +2,11 @@ package buri.aoc.y18.d02;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
@@ -34,15 +35,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Examples() {
-		List<String> input = new ArrayList<>();
-		input.add("abcdef");
-		input.add("bababc");
-		input.add("abbcde");
-		input.add("abcccd");
-		input.add("aabcdd");
-		input.add("abcdee");
-		input.add("ababab");
-		assertEquals(12, Day02.getPart1Result(input));
+		assertEquals("12", Day02.getResult(Part.ONE, Day02.getInput(1)));
 	}
 
 	/**
@@ -50,13 +43,13 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day02.getPart1Result(Day02.getInput(0));
+		String result = Day02.getResult(Part.ONE, Day02.getInput(0));
 		System.out.println("Day 2 Part 1\n\t" + result);
-		assertEquals(5750, result);
+		assertEquals("5750", result);
 	}
 
 	/**
-	 * he boxes will have IDs which differ by exactly one character at the same position in both strings. For example,
+	 * The boxes will have IDs which differ by exactly one character at the same position in both strings. For example,
 	 * given the following box IDs:
 	 * 
 	 * abcde
@@ -74,15 +67,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Examples() {
-		List<String> input = new ArrayList<>();
-		input.add("abcde");
-		input.add("fghij");
-		input.add("klmno");
-		input.add("pqrst");
-		input.add("fguij");
-		input.add("axcye");
-		input.add("wvxyz");
-		assertEquals("fgij", Day02.getPart2Result(input));
+		assertEquals("fgij", Day02.getResult(Part.TWO, Day02.getInput(2)));
 	}
 
 	/**
@@ -90,7 +75,7 @@ public class Day02Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day02.getPart2Result(Day02.getInput(0));
+		String result = Day02.getResult(Part.TWO, Day02.getInput(0));
 		System.out.println("Day 2 Part 2\n\t" + result);
 		assertEquals("tzyvunogzariwkpcbdewmjhxi", result);
 	}

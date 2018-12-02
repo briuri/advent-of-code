@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
@@ -26,26 +27,25 @@ public class Day02 extends Puzzle {
 	 * To make sure you didn't miss any, you scan the likely candidate boxes again, counting the number that have an ID
 	 * containing exactly two of any letter and then separately counting those with exactly three of any letter. You can
 	 * multiply those two counts together to get a rudimentary checksum and compare it to what your device predicts.
-	 */
-	public static int getPart1Result(List<String> input) {
-		int twos = 0;
-		int threes = 0;
-		for (String id : input) {
-			if (hasExactOccurrences(id, 2)) {
-				twos++;
-			}
-			if (hasExactOccurrences(id, 3)) {
-				threes++;
-			}
-		}
-		return (twos * threes);
-	}
-
-	/**
+	 * 
 	 * Part 2:
 	 * The boxes will have IDs which differ by exactly one character at the same position in both strings.
 	 */
-	public static String getPart2Result(List<String> input) {
+	public static String getResult(Part part, List<String> input) {
+		if (part == Part.ONE) {
+			int twos = 0;
+			int threes = 0;
+			for (String id : input) {
+				if (hasExactOccurrences(id, 2)) {
+					twos++;
+				}
+				if (hasExactOccurrences(id, 3)) {
+					threes++;
+				}
+			}
+			return (String.valueOf(twos * threes));
+		}
+		// Part TWO
 		for (String id1 : input) {
 			for (String id2 : input) {
 				String common = getCommonLetters(id1, id2);
