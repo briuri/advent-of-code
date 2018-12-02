@@ -1,4 +1,4 @@
-package buri.aoc.template;
+package buri.aoc.y18.d03;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import buri.aoc.Part;
 /**
  * @author Brian Uri!
  */
-public class Day00Test {
+public class Day03Test {
 
 	@Test
 	public void testGetInput() {
@@ -33,7 +33,7 @@ public class Day00Test {
 	@Test
 	public void testPart1Puzzle() {
 		int result = Day03.getResult(Part.ONE, Day03.getInput(0));
-		System.out.println("Day 0 Part 1\n\t" + result);
+		System.out.println("Day 3 Part 1\n\t" + result);
 		assertEquals(1, result);
 	}
 
@@ -51,7 +51,7 @@ public class Day00Test {
 	@Test
 	public void testPart2Puzzle() {
 		int result = Day03.getResult(Part.TWO, Day03.getInput(0));
-		System.out.println("Day 0 Part 2\n\t" + result);
+		System.out.println("Day 3 Part 2\n\t" + result);
 		assertEquals(1, result);
 	}
 }
