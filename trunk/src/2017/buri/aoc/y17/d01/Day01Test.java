@@ -13,8 +13,8 @@ public class Day01Test {
 
 	@Test
 	public void testGetInput() {
-		String content = Day01.getInput(0);
-		assertEquals(2074, content.length());
+		String input = Day01.getInput(0);
+		assertEquals(2074, input.length());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

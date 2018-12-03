@@ -13,8 +13,8 @@ public class Day09Test {
 
 	@Test
 	public void testGetInput() {
-		String content = Day09.getInput(0);
-		assertEquals(19135, content.length());
+		String input = Day09.getInput(0);
+		assertEquals(19135, input.length());
 	}
 
 	/**

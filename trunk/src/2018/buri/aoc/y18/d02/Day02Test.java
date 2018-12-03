@@ -15,8 +15,8 @@ public class Day02Test {
 
 	@Test
 	public void testGetInput() {
-		List<String> content = Day02.getInput(0);
-		assertEquals(250, content.size());
+		List<String> input = Day02.getInput(0);
+		assertEquals(250, input.size());
 	}
 
 	/**

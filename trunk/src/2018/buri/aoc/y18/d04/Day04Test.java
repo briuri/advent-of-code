@@ -15,8 +15,8 @@ public class Day04Test {
 
 	@Test
 	public void testGetInput() {
-		List<String> content = Day04.getInput(0);
-		assertEquals(2074, content.size());
+		List<Data> input = Day04.getInput(0);
+		assertEquals(0, input.size());
 	}
 
 	/**
