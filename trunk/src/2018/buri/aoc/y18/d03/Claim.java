@@ -15,6 +15,8 @@ public class Claim {
 
 	/**
 	 * Constructor
+	 * 
+	 * #19 @ 679,465: 20x29
 	 */
 	public Claim(String claim) {
 		String[] tokens = claim.split(" ");
