@@ -1,7 +1,7 @@
 package buri.aoc.y18.d03;
 
 /**
- * Day03
+ * Fabric grid
  * 
  * Based on Java's array indexing:
  * (0,0) is the upper left corner of a grid.
@@ -66,7 +66,7 @@ public class Grid {
 			buffer.append("\t");
 			for (int j = 0; j < getGrid()[i].length; j++) {
 				String value = String.valueOf(getGrid()[i][j]);
-				buffer.append(String.format("%1$-1s", value));
+				buffer.append(value);
 			}
 			buffer.append("\n");
 		}
