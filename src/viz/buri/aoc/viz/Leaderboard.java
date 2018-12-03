@@ -2,8 +2,12 @@ package buri.aoc.viz;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +25,13 @@ public class Leaderboard {
 	@Test
 	public void visualizeLeaderboard() {
 		Map<String, Object> members = null;
+		String lastModified = null;
 		// Read JSON
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			JsonNode json = mapper.readTree(new File("data/viz/105906.json"));
+			File file = new File("data/viz/105906.json");
+			lastModified = Date.from(Instant.ofEpochMilli(file.lastModified())).toString();
+			JsonNode json = mapper.readTree(file);
 			members = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
 		}
 		catch (IOException e) {
@@ -52,17 +59,30 @@ public class Leaderboard {
 		}
 
 		// Show the top finishes on each day.
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<html><head><title>Novetta Advent of Code - Top Completion Times</title></head>");
+		buffer.append("<body><p>Leaderboard JSON downloaded at <b>").append(lastModified).append("</b></p>\n");
 		for (int day = 0; day < TOTAL_PUZZLES; day++) {
 			List<Record> places = puzzleRecords.get(day);
 			if (!places.isEmpty()) {
 				Collections.sort(places);
-				System.out.println(String.format("Day %d", day));
+				buffer.append("<h3>Day ").append(day).append("</h3><ol>");
 				for (int place = 0; place < TOP_PLACES; place++) {
 					Record record = places.get(place);
-					System.out.print(String.format("\t%1$-2s\t", place + 1));
-					System.out.println(String.format("%s\t%s", record.getPrettyTime(), record.getName()));
+					buffer.append("<li>").append(record.getPrettyTime()).append(" - ");
+					buffer.append(record.getName()).append("</li>");
 				}
+				buffer.append("</ol>\n");
 			}
+		}
+		buffer.append("</body></html>");
+		
+		// Save to file.
+		try {
+			Files.write(Paths.get("output/index.html"), buffer.toString().getBytes());
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid output file", e);
 		}
 	}
 }
