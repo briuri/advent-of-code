@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Leaderboard {
 
 	private static final int TOTAL_PUZZLES = 25;
-	private static final int TOP_PLACES = 10;
 
 	@Test
 	public void visualizeLeaderboard() {
@@ -59,15 +58,25 @@ public class Leaderboard {
 		}
 
 		// Show the top finishes on each day.
+		String title = "Novetta Advent of Code 2018 - Top 10 Solve Times";
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<html><head><title>Novetta Advent of Code - Top Completion Times</title></head>");
-		buffer.append("<body><p>Leaderboard JSON downloaded at <b>").append(lastModified).append("</b></p>\n");
+		buffer.append("<html>\n<head><title>").append(title).append("</title>\n");
+		buffer.append("<style>\n");
+		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 12pt; }\n");
+		buffer.append("\t.tiny { font-size: 10pt; }\n");
+		buffer.append("\ta { color: #009900; }\n");
+		buffer.append("\ta:hover { color: #99ff99; }\n");
+		buffer.append("</style>\n</head>\n\n<body>\n");
+		buffer.append("<h2>").append(title).append("</h2>\n\n");
+		buffer.append("<p class=\"tiny\">");
+		buffer.append("<a href=\"https://adventofcode.com/2018/leaderboard/private/view/105906\">Novetta Leaderboard</a>");
+		buffer.append(" JSON downloaded on <b>").append(lastModified).append("</b></p>\n");
 		for (int day = 0; day < TOTAL_PUZZLES; day++) {
 			List<Record> places = puzzleRecords.get(day);
 			if (!places.isEmpty()) {
 				Collections.sort(places);
 				buffer.append("<h3>Day ").append(day).append("</h3><ol>");
-				for (int place = 0; place < TOP_PLACES; place++) {
+				for (int place = 0; place < 10; place++) {
 					Record record = places.get(place);
 					buffer.append("<li>").append(record.getPrettyTime()).append(" - ");
 					buffer.append(record.getName()).append("</li>");
@@ -75,7 +84,7 @@ public class Leaderboard {
 				buffer.append("</ol>\n");
 			}
 		}
-		buffer.append("</body></html>");
+		buffer.append("</body>\n</html>");
 		
 		// Save to file.
 		try {
