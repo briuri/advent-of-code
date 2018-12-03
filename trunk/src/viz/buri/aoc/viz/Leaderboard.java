@@ -50,7 +50,7 @@ public class Leaderboard {
 			}
 		}
 		
-		// Now show the top 3 finishes on each day.
+		// Now show the top finishes on each day.
 		for (int i = 0; i < dailyRecords.size(); i++) {
 			List<Record> day = dailyRecords.get(i);
 			if (!day.isEmpty()) {
