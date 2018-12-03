@@ -50,13 +50,14 @@ public class Leaderboard {
 			}
 		}
 		
-		// Now show the top finishes on each day.
+		// Show the top finishes on each day.
+		final int places = 10;
 		for (int i = 0; i < dailyRecords.size(); i++) {
 			List<Record> day = dailyRecords.get(i);
 			if (!day.isEmpty()) {
 				Collections.sort(day);
 				System.out.println(String.format("Day %d", i));
-				for (int j = 0; j < 10; j++) {
+				for (int j = 0; j < places; j++) {
 					System.out.print(String.format("\t%1$-2s\t", j + 1));
 					System.out.println(String.format("%s\t%s", day.get(j).getPrettyTime(), day.get(j).getName()));
 				}
