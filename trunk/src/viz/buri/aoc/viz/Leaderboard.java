@@ -54,11 +54,11 @@ public class Leaderboard {
 		for (int i = 0; i < dailyRecords.size(); i++) {
 			List<Record> day = dailyRecords.get(i);
 			if (!day.isEmpty()) {
-				System.out.println("Day " + i);
 				Collections.sort(day);
+				System.out.println(String.format("Day %d", i));
 				for (int j = 0; j < 10; j++) {
-					System.out.print("\t" + (j + 1) + ": ");
-					System.out.println(day.get(j).getPrettyTime() + "\t" + day.get(j).getName());
+					System.out.print(String.format("\t%1$-2s\t", j + 1));
+					System.out.println(String.format("%s\t%s", day.get(j).getPrettyTime(), day.get(j).getName()));
 				}
 			}
 		}
