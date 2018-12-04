@@ -75,11 +75,11 @@ public class Leaderboard {
 			List<Record> places = puzzleRecords.get(day);
 			if (!places.isEmpty()) {
 				Collections.sort(places);
-				buffer.append("<h3>Day ").append(day).append("</h3><ol>");
+				buffer.append("\n<h3>Day ").append(day).append("</h3>\n<ol>\n");
 				for (int place = 0; place < 10; place++) {
 					Record record = places.get(place);
-					buffer.append("<li>").append(record.getPrettyTime()).append(" - ");
-					buffer.append(record.getName()).append("</li>");
+					buffer.append("\t<li>").append(record.getPrettyTime()).append(" - ");
+					buffer.append(record.getName()).append("</li>\n");
 				}
 				buffer.append("</ol>\n");
 			}
