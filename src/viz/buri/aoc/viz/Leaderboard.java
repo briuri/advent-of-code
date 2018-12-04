@@ -62,8 +62,8 @@ public class Leaderboard {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<html>\n<head><title>").append(title).append("</title>\n");
 		buffer.append("<style>\n");
-		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 12pt; }\n");
-		buffer.append("\t.tiny { font-size: 10pt; }\n");
+		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 11pt; }\n");
+		buffer.append("\t.tiny { font-size: 9pt; }\n");
 		buffer.append("\ta { color: #009900; }\n");
 		buffer.append("\ta:hover { color: #99ff99; }\n");
 		buffer.append("</style>\n</head>\n\n<body>\n");
