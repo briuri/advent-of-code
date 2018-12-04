@@ -71,7 +71,7 @@ public class Leaderboard {
 		buffer.append("<p class=\"tiny\">");
 		buffer.append("<a href=\"https://adventofcode.com/2018/leaderboard/private/view/105906\">Novetta Leaderboard</a>");
 		buffer.append(" JSON downloaded on <b>").append(lastModified).append("</b></p>\n");
-		for (int day = 0; day < TOTAL_PUZZLES; day++) {
+		for (int day = TOTAL_PUZZLES - 1; day >= 0; day--) {
 			List<Record> places = puzzleRecords.get(day);
 			if (!places.isEmpty()) {
 				Collections.sort(places);
