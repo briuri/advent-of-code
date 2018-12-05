@@ -42,15 +42,15 @@ public class Day05 extends Puzzle {
 		}
 		// Part TWO: Start with reduced polymer to improve performance.
 		// Record all unique units.
-		Set<String> uniques = new HashSet<>();
+		Set<Character> uniques = new HashSet<>();
 		for (Character c : newPolymer.toLowerCase().toCharArray()) {
-			uniques.add(String.valueOf(c));
+			uniques.add(c);
 		}
 
 		// Try removing each unit and reacting the polymer.
 		Integer minSize = Integer.MAX_VALUE;
-		for (String polymer : uniques) {
-			String regexp = String.format("[%s%s]", polymer, polymer.toUpperCase());
+		for (Character polymer : uniques) {
+			String regexp = String.format("[%c%c]", polymer, Character.toUpperCase(polymer));
 			int size = reactPolymer(newPolymer.replaceAll(regexp, "")).length();
 			minSize = Math.min(minSize, size);
 		}
