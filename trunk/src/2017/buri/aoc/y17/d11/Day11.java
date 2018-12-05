@@ -51,20 +51,12 @@ public class Day11 extends Puzzle {
 				neCount--;
 			}
 		}
-		boolean isNW = (nwCount >= 0);
-		boolean isN = (nCount >= 0);
-		boolean isNE = (neCount >= 0);
-		nwCount = Math.abs(nwCount);
-		nCount = Math.abs(nCount);
-		neCount = Math.abs(neCount);
-
 		System.out.print("Reduced directions: ");
-		System.out.print(nCount + " " + (isN ? "N" : "S") + ", ");
-		System.out.print(nwCount + " " + (isNW ? "NW" : "SE") + ", ");
-		System.out.print(neCount + " " + (isNE ? "NE" : "SW"));
+		System.out.print(nCount + " N, ");
+		System.out.print(nwCount + " NW, ");
+		System.out.print(neCount + " NE");
 
-		// TODO: Calculate distance.
-		
+		// TODO: Map hex grid to x,y coordinate system then find steps for reduced directions.
 		if (part == Part.ONE) {
 			return ("");
 		}
