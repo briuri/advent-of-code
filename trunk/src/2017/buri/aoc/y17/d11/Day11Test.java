@@ -19,15 +19,12 @@ public class Day11Test {
 		assertEquals(8223, input.size());
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart1Examples() {
-		assertEquals("3", Day11.getResult(Part.ONE, Day11.getInput(1)));
-		assertEquals("0", Day11.getResult(Part.ONE, Day11.getInput(2)));
-		assertEquals("2", Day11.getResult(Part.ONE, Day11.getInput(3)));
-		assertEquals("3", Day11.getResult(Part.ONE, Day11.getInput(4)));
+		assertEquals(3, Day11.getResult(Part.ONE, Day11.getInput(1)));
+		assertEquals(0, Day11.getResult(Part.ONE, Day11.getInput(2)));
+		assertEquals(2, Day11.getResult(Part.ONE, Day11.getInput(3)));
+		assertEquals(3, Day11.getResult(Part.ONE, Day11.getInput(4)));
 	}
 
 	/**
@@ -35,17 +32,9 @@ public class Day11Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day11.getResult(Part.ONE, Day11.getInput(0));
+		int result = Day11.getResult(Part.ONE, Day11.getInput(0));
 		System.out.println("Day 11 Part 1\n\t" + result);
-		assertEquals("", result);
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void testPart2Examples() {
-		//assertEquals("", Day11.getResult(Part.TWO, Day11.getInput(2)));
+		assertEquals(877, result);
 	}
 
 	/**
@@ -53,8 +42,8 @@ public class Day11Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day11.getResult(Part.TWO, Day11.getInput(0));
+		int result = Day11.getResult(Part.TWO, Day11.getInput(0));
 		System.out.println("Day 11 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals(1622, result);
 	}
 }
