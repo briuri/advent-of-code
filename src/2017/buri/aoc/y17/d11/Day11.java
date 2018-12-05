@@ -24,42 +24,51 @@ public class Day11 extends Puzzle {
 	}
 
 	/**
-	 * 
+	 * Using cube coordinates as described at:
+	 * https://www.redblobgames.com/grids/hexagons/
 	 */
-	public static String getResult(Part part, List<String> input) {
-		// Three hex directions are orthogonal. Reduce to directions that don't cancel each other out.
-		int nwCount = 0;
-		int nCount = 0;
-		int neCount = 0;
-		for (String direction : input) {
-			if (direction.equals("nw")) {
-				nwCount++;
+	public static int getResult(Part part, List<String> input) {
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		int max = 0;
+		for (String step : input) {
+			if (step.equals("nw")) {
+				x = x - 1;
+				y = y + 1;
 			}
-			if (direction.equals("se")) {
-				nwCount--;
+			else if (step.equals("se")) {
+				x = x + 1;
+				y = y - 1;
 			}
-			if (direction.equals("n")) {
-				nCount++;
+			else if (step.equals("n")) {
+				y = y + 1;
+				z = z - 1;
 			}
-			if (direction.equals("s")) {
-				nCount--;
+			else if (step.equals("s")) {
+				y = y - 1;
+				z = z + 1;
 			}
-			if (direction.equals("ne")) {
-				neCount++;
+			else if (step.equals("ne")) {
+				x = x + 1;
+				z = z - 1;
 			}
-			if (direction.equals("sw")) {
-				neCount--;
+			else if (step.equals("sw")) {
+				x = x - 1;
+				z = z + 1;
 			}
+			max = Math.max(getDistance(x, y, z), max);
 		}
-		System.out.print("Reduced directions: ");
-		System.out.print(nCount + " N, ");
-		System.out.print(nwCount + " NW, ");
-		System.out.print(neCount + " NE");
-
-		// TODO: Map hex grid to x,y coordinate system then find steps for reduced directions.
 		if (part == Part.ONE) {
-			return ("");
+			return (getDistance(x, y, z));
 		}
-		return ("");
+		return (max);
+	}
+	
+	/**
+	 * Calculates the distance from the origin.
+	 */
+	private static int getDistance(int x, int y, int z) {
+		return ((Math.abs(x) + Math.abs(y) + Math.abs(z)) / 2);
 	}
 }
