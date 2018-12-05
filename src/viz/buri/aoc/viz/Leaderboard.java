@@ -25,8 +25,8 @@ public class Leaderboard {
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("105906.json");
-		visualizeEvent("2017.json");
-		visualizeEvent("2016.json");
+//		visualizeEvent("2017.json");
+//		visualizeEvent("2016.json");
 	}
 	
 	private static void visualizeEvent(String filename) {
