@@ -36,7 +36,7 @@ public class Day04 extends Puzzle {
 	 * Of all guards, which guard is most frequently asleep on the same minute? What is the ID of the guard you chose
 	 * multiplied by the minute you chose?
 	 */
-	public static String getResult(Part part, List<LogEntry> input) {
+	public static int getResult(Part part, List<LogEntry> input) {
 		Map<Integer, SleepSchedule> sleepSchedules = buildSleepSchedules(input);
 
 		if (part == Part.ONE) {
@@ -55,7 +55,7 @@ public class Day04 extends Puzzle {
 			}
 			int id = maxEntry.getKey();
 			int minuteMostSpentAsleep = sleepSchedules.get(id).getMaxMinute();
-			return (String.valueOf(id * minuteMostSpentAsleep));
+			return (id * minuteMostSpentAsleep);
 		}
 
 		// Part TWO
@@ -74,7 +74,7 @@ public class Day04 extends Puzzle {
 		// Look up which minute that was by id.
 		for (Integer id : maxSleep.keySet()) {
 			if (maxSleep.get(id) == max) {
-				return (String.valueOf(id * maxMinute.get(id)));
+				return (id * maxMinute.get(id));
 			}
 		}
 		throw new RuntimeException("Could not get the minute based on the max amount of sleep.");
