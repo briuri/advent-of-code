@@ -19,18 +19,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Leaderboard {
 
+	private static final String CURRENT_EVENT = "2018";
 	private static final int TOTAL_PUZZLES = 25;
 
 	@Test
 	public void visualizeLeaderboard() {
+		visualizeEvent("105906.json");
+		visualizeEvent("2017.json");
+		visualizeEvent("2016.json");
+	}
+	
+	private static void visualizeEvent(String filename) {
 		Map<String, Object> members = null;
+		String event = null;
 		String lastModified = null;
 		// Read JSON
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			File file = new File("data/viz/105906.json");
+			File file = new File("data/viz/" + filename);
 			lastModified = Date.from(Instant.ofEpochMilli(file.lastModified())).toString();
 			JsonNode json = mapper.readTree(file);
+			event = json.get("event").asText();
 			members = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
 		}
 		catch (IOException e) {
@@ -52,43 +61,61 @@ public class Leaderboard {
 				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
 				if (part2Data != null) {
 					long timestamp = Long.valueOf((String) part2Data.get("get_star_ts"));
-					puzzleRecords.get(Integer.valueOf(dayKey)).add(new Record(name, timestamp));
+					Record record = new Record(name, timestamp);
+					if (record.occurredInYear(Integer.valueOf(event))) {
+						puzzleRecords.get(Integer.valueOf(dayKey) - 1).add(record);
+					}
 				}
 			}
 		}
 
 		// Show the top finishes on each day.
-		String title = "Novetta Advent of Code 2018 - Top 10 Solve Times";
+		String title = "Novetta Advent of Code - Top 10 Solve Times";
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<html>\n<head><title>").append(title).append("</title>\n");
+		
+		// Head
+		buffer.append("<html>\n<head><title>").append(title).append(" (").append(event).append(")").append("</title>\n");
 		buffer.append("<style>\n");
 		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 11pt; }\n");
 		buffer.append("\t.tiny { font-size: 9pt; }\n");
 		buffer.append("\ta { color: #009900; }\n");
 		buffer.append("\ta:hover { color: #99ff99; }\n");
 		buffer.append("</style>\n</head>\n\n<body>\n");
-		buffer.append("<h2>").append(title).append("</h2>\n\n");
-		buffer.append("<p class=\"tiny\">");
-		buffer.append("<a href=\"https://adventofcode.com/2018/leaderboard/private/view/105906\">Novetta Leaderboard</a>");
-		buffer.append(" JSON downloaded on <b>").append(lastModified).append("</b></p>\n");
-		for (int day = TOTAL_PUZZLES - 1; day >= 0; day--) {
-			List<Record> places = puzzleRecords.get(day);
+		buffer.append("<h2>").append(title).append(" (").append(event).append(")").append("</h2>\n\n");
+		buffer.append("<p class=\"tiny\">JSON downloaded from ");
+		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">Novetta Leaderboard</a>");
+		buffer.append(" on <b>").append(lastModified).append("</b>.</p>\n\n");
+		
+		// Nav Bar
+		buffer.append("<p>");
+		buffer.append(event.equals("2018") ? event : "<a href=\"index.html\">2018</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2017") ? event : "<a href=\"index-2017.html\">2017</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2016") ? event : "<a href=\"index-2016.html\">2016</a>");
+		buffer.append("<p>\n\n");
+		
+		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
+			List<Record> places = puzzleRecords.get(i);
 			if (!places.isEmpty()) {
 				Collections.sort(places);
-				buffer.append("\n<h3>Day ").append(day).append("</h3>\n<ol>\n");
-				for (int place = 0; place < 10; place++) {
+				buffer.append("\n<h3>Day ").append(i + 1).append("</h3>\n<ol>\n");
+				int numPlaces = Math.min(10, places.size());
+				for (int place = 0; place < numPlaces; place++) {
 					Record record = places.get(place);
-					buffer.append("\t<li>").append(record.getPrettyTime()).append(" - ");
+					buffer.append("\t<li>").append(record.getPrettyTime(i + 1)).append(" - ");
 					buffer.append(record.getName()).append("</li>\n");
 				}
 				buffer.append("</ol>\n");
 			}
 		}
+		buffer.append("\n<p><a href=\"#\">Jump to Top</a></p>");
 		buffer.append("</body>\n</html>");
 		
 		// Save to file.
 		try {
-			Files.write(Paths.get("output/index.html"), buffer.toString().getBytes());
+			String outputFilename = (event.equals(CURRENT_EVENT) ? "index.html" : "index-" + event + ".html");
+			Files.write(Paths.get("output/" + outputFilename), buffer.toString().getBytes());
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file", e);

@@ -1,6 +1,7 @@
 package buri.aoc.viz;
 
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -12,6 +13,7 @@ public class Record implements Comparable {
 	
 	private String _name;
 	private long _timestamp;
+	private Date _date;
 	
 	/**
 	 * Constructor
@@ -21,15 +23,37 @@ public class Record implements Comparable {
 	public Record(String name, long timestamp) {
 		_name = name;
 		_timestamp = timestamp;
+		_date = Date.from(Instant.ofEpochSecond(timestamp));
 	}
 
 	/**
-	 * Converts UNIX timestamp into "time after midnight"
+	 * Converts UNIX timestamp into "time after midnight". Adds 24 hours for completion times on the next day.
 	 */
-	public String getPrettyTime() {
-		return (Date.from(Instant.ofEpochSecond(getTimestamp())).toString().substring(11, 19));
+	public String getPrettyTime(int day) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getDate());
+
+		String prettyTime = getDate().toString().substring(11, 19);
+		int overflow = calendar.get(Calendar.DAY_OF_MONTH) - day;
+		if (overflow > 0) {
+			int hours = Integer.valueOf(prettyTime.substring(0, 2)) + (24 * overflow);
+			prettyTime = String.valueOf(hours) + prettyTime.substring(2, prettyTime.length());
+		}
+		if (prettyTime.length() == 8) {
+			prettyTime = "&nbsp;" + prettyTime;
+		}
+		return (prettyTime);
 	}
 	
+	/**
+	 * Returns true if this completion happened during the event. False if in the next year.
+	 */
+	public boolean occurredInYear(int year) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(getDate());
+		return (calendar.get(Calendar.YEAR) == year);
+	}
+		
 	/**
 	 * Acessor for the name of the participant
 	 */
@@ -43,7 +67,14 @@ public class Record implements Comparable {
 	public long getTimestamp() {
 		return _timestamp;
 	}
-
+	
+	/**
+	 * Accessor for the date
+	 */
+	public Date getDate() {
+		return _date;
+	}
+	
 	@Override
 	public int compareTo(Object o) {
 		if (getTimestamp() == ((Record) o).getTimestamp()) {
