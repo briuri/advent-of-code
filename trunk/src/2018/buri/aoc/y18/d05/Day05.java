@@ -36,13 +36,14 @@ public class Day05 extends Puzzle {
 	 * 
 	 */
 	public static int getResult(Part part, String input) {
+		String newPolymer = reactPolymer(input);
 		if (part == Part.ONE) {
-			return (reactPolymer(input).length());
+			return (newPolymer.length());
 		}
-		// Part TWO
+		// Part TWO: Start with reduced polymer to improve performance.
 		// Record all unique units.
 		Set<String> uniques = new HashSet<>();
-		for (Character c : input.toLowerCase().toCharArray()) {
+		for (Character c : newPolymer.toLowerCase().toCharArray()) {
 			uniques.add(String.valueOf(c));
 		}
 
@@ -50,7 +51,7 @@ public class Day05 extends Puzzle {
 		Integer minSize = Integer.MAX_VALUE;
 		for (String polymer : uniques) {
 			String regexp = String.format("[%s%s]", polymer, polymer.toUpperCase());
-			int size = reactPolymer(input.replaceAll(regexp, "")).length();
+			int size = reactPolymer(newPolymer.replaceAll(regexp, "")).length();
 			minSize = Math.min(minSize, size);
 		}
 		return (minSize);
