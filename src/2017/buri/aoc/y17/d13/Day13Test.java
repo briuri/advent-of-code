@@ -53,6 +53,6 @@ public class Day13Test {
 	public void testPart2Puzzle() {
 		int result = Day13.getResult(Part.TWO, Day13.getInput(0));
 		System.out.println("Day 13 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(3876272, result);
 	}
 }
