@@ -1,7 +1,7 @@
 package buri.aoc.y18.d06;
 
 /**
- * Mutable Integer-based ordered pair class.
+ * Immutable Integer-based ordered pair class.
  * 
  * @author Brian Uri!
  */
