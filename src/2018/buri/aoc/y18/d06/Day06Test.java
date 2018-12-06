@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buri.aoc.Part;
-
 /**
  * @author Brian Uri!
  */
@@ -15,16 +13,19 @@ public class Day06Test {
 
 	@Test
 	public void testGetInput() {
-		List<Data> input = Day06.getInput(0);
-		assertEquals(0, input.size());
+		List<Position> input = Day06.getInput(0);
+		assertEquals(50, input.size());
 	}
 
 	/**
-	 * 
+	 * In this example, the areas of coordinates A, B, C, and F are infinite - while not shown here, their areas extend
+	 * forever outside the visible grid. However, the areas of coordinates D and E are finite: D is closest to 9
+	 * locations, and E is closest to 17 (both including the coordinate's location itself). Therefore, in this example,
+	 * the size of the largest area is 17.
 	 */
 	@Test
 	public void testPart1Examples() {
-		assertEquals("", Day06.getResult(Part.ONE, Day06.getInput(1)));
+		assertEquals(17, Day06.getPart1Result(Day06.getInput(1)));
 	}
 
 	/**
@@ -32,17 +33,17 @@ public class Day06Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day06.getResult(Part.ONE, Day06.getInput(0));
+		int result = Day06.getPart1Result(Day06.getInput(0));
 		System.out.println("Day 6 Part 1\n\t" + result);
-		assertEquals("", result);
+		assertEquals(3251, result);
 	}
 
 	/**
-	 * 
+	 * This region, which also includes coordinates D and E, has a total size of 16.
 	 */
 	@Test
 	public void testPart2Examples() {
-		assertEquals("", Day06.getResult(Part.TWO, Day06.getInput(1)));
+		assertEquals(16, Day06.getPart2Result(32, Day06.getInput(1)));
 	}
 
 	/**
@@ -50,8 +51,8 @@ public class Day06Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day06.getResult(Part.TWO, Day06.getInput(0));
+		int result = Day06.getPart2Result(10000, Day06.getInput(0));
 		System.out.println("Day 6 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals(47841, result);
 	}
 }
