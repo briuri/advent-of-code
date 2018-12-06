@@ -1,7 +1,6 @@
 package buri.aoc.y17.d13;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,48 +57,40 @@ public class Day13 extends Puzzle {
 			firewall.put(layer.getDepth(), layer);
 		}
 		if (part == Part.ONE) {
-			return (navigateFirewall(Part.ONE, firewall, 0));
+			return (getSeverity(firewall, 0));
 		}		
 		// Part TWO
-		//int delay = -1;
-		int delay = -2;
+		int delay = -1;
 		while (true) {
-			//delay++;
-			delay = delay + 2;
-			int severity = navigateFirewall(Part.TWO, firewall, delay);
-			boolean wasCaught = false;
-			for (Layer layer : firewall.values()) {
-				wasCaught = wasCaught || layer.getWasCaught();
-			}
-			if (severity == 0 && !wasCaught) {
+			delay++;
+			if (!getCaught(firewall, delay)) {
 				return (delay);
 			}
 		}		
 	}
 	
 	/**
+	 * Sends the packet through the firewall and returns whether it got caught.
+	 */
+	private static boolean getCaught(Map<Integer, Layer> firewall, int delay) {
+		for (Layer layer : firewall.values()) {
+			int timeToArriveHere = delay + layer.getDepth();
+			if (layer.isCaught(timeToArriveHere)) {
+				return (true);
+			}
+		}
+		return (false);	
+	}
+	
+	/**
 	 * Sends the packet through the firewall and returns the total severity.
 	 */
-	private static int navigateFirewall(Part part, Map<Integer, Layer> firewall, int delay) {
-		// Reset the firewall and then allow it to run after the specified time.
-		for (Layer layer : firewall.values()) {
-			layer.reset();
-		}
-		for (int i = 0; i < delay; i++) {
-			for (Layer layer : firewall.values()) {
-				layer.moveScanner();
-			}	
-		}
-				
-		int lastLayer = Collections.max(firewall.keySet());
+	private static int getSeverity(Map<Integer, Layer> firewall, int delay) {
 		int severity = 0;
-		for (int i = 0; i <= lastLayer; i++) {
-			Layer currentLayer = firewall.get(i);
-			if (currentLayer != null) {
-				severity += currentLayer.enterLayer();
-			}
-			for (Layer layer : firewall.values()) {
-				layer.moveScanner();
+		for (Layer layer : firewall.values()) {
+			int timeToArriveHere = delay + layer.getDepth();
+			if (layer.isCaught(timeToArriveHere)) {
+				severity += layer.getSeverity();
 			}
 		}
 		return (severity);	
