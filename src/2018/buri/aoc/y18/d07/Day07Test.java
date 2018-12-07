@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import buri.aoc.Part;
+
 /**
  * @author Brian Uri!
  */
@@ -19,7 +21,7 @@ public class Day07Test {
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals("CABDFE", Day07.getPart1Result(Day07.getInput(1)));
+		assertEquals("CABDFE", Day07.getResult(Part.ONE, Day07.getInput(1), 1, 0));
 	}
 
 	/**
@@ -27,14 +29,14 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day07.getPart1Result(Day07.getInput(0));
+		String result = Day07.getResult(Part.ONE, Day07.getInput(0), 1, 0);
 		System.out.println("Day 7 Part 1\n\t" + result);
 		assertEquals("ABGKCMVWYDEHFOPQUILSTNZRJX", result);
 	}
-
+	
 	@Test
 	public void testPart2Examples() {
-		assertEquals(15, Day07.getPart2Result(Day07.getInput(1), 2, 0));
+		assertEquals("15", Day07.getResult(Part.TWO, Day07.getInput(1), 2, 0));
 	}
 
 	/**
@@ -42,8 +44,8 @@ public class Day07Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day07.getPart2Result(Day07.getInput(0), 5, 60);
+		String result = Day07.getResult(Part.TWO, Day07.getInput(0), 5, 60);
 		System.out.println("Day 7 Part 2\n\t" + result);
-		assertEquals(898, result);
+		assertEquals("898", result);
 	}
 }
