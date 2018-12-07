@@ -25,12 +25,12 @@ public class Leaderboard {
 
 	private static final Map<Integer, String> DESCRIPTIONS = new HashMap<>();
 	static {
-		DESCRIPTIONS.put(1, "calculating frequency adjustments");
-		DESCRIPTIONS.put(2, "comparing box IDs");
-		DESCRIPTIONS.put(3, "cutting fabric squares");
-		DESCRIPTIONS.put(4, "spying on sleeping guards");
+		DESCRIPTIONS.put(1, "frequency adjustments");
+		DESCRIPTIONS.put(2, "box IDs");
+		DESCRIPTIONS.put(3, "fabric squares");
+		DESCRIPTIONS.put(4, "sleeping guards");
 		DESCRIPTIONS.put(5, "reducing polymers");
-		DESCRIPTIONS.put(6, "calculating Manhattan distances");
+		DESCRIPTIONS.put(6, "Manhattan distances");
 		DESCRIPTIONS.put(7, "");
 		DESCRIPTIONS.put(8, "");
 		DESCRIPTIONS.put(9, "");
