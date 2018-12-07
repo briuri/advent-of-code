@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,34 @@ public class Leaderboard {
 	private static final String CURRENT_EVENT = "2018";
 	private static final int TOTAL_PUZZLES = 25;
 
+	private static final Map<Integer, String> DESCRIPTIONS = new HashMap<>();
+	static {
+		DESCRIPTIONS.put(1, "calculating frequency adjustments");
+		DESCRIPTIONS.put(2, "comparing box IDs");
+		DESCRIPTIONS.put(3, "cutting fabric squares");
+		DESCRIPTIONS.put(4, "spying on sleeping guards");
+		DESCRIPTIONS.put(5, "reducing polymers");
+		DESCRIPTIONS.put(6, "calculating Manhattan distances");
+		DESCRIPTIONS.put(7, "");
+		DESCRIPTIONS.put(8, "");
+		DESCRIPTIONS.put(9, "");
+		DESCRIPTIONS.put(10, "");
+		DESCRIPTIONS.put(11, "");
+		DESCRIPTIONS.put(12, "");
+		DESCRIPTIONS.put(13, "");
+		DESCRIPTIONS.put(14, "");
+		DESCRIPTIONS.put(15, "");
+		DESCRIPTIONS.put(16, "");
+		DESCRIPTIONS.put(17, "");
+		DESCRIPTIONS.put(18, "");
+		DESCRIPTIONS.put(19, "");
+		DESCRIPTIONS.put(20, "");
+		DESCRIPTIONS.put(21, "");
+		DESCRIPTIONS.put(22, "");
+		DESCRIPTIONS.put(23, "");
+		DESCRIPTIONS.put(24, "");
+		DESCRIPTIONS.put(25, "");
+	}
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("105906.json");
@@ -99,7 +128,11 @@ public class Leaderboard {
 			List<Record> places = puzzleRecords.get(i);
 			if (!places.isEmpty()) {
 				Collections.sort(places);
-				buffer.append("\n<h3>Day ").append(i + 1).append("</h3>\n<ol>\n");
+				buffer.append("\n<h3>Day ").append(i + 1);
+				if (event.equals("2018") && DESCRIPTIONS.get(i + 1) != "") {
+					buffer.append(" (").append(DESCRIPTIONS.get(i + 1)).append(")");
+				}
+				buffer.append("</h3>\n<ol>\n");
 				int numPlaces = Math.min(10, places.size());
 				for (int place = 0; place < numPlaces; place++) {
 					Record record = places.get(place);
