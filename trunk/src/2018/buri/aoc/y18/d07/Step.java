@@ -1,6 +1,3 @@
-/**
- * 
- */
 package buri.aoc.y18.d07;
 
 import java.util.ArrayList;
