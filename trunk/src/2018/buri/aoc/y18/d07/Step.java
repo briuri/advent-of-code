@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * A graph-based model of a step, with prereqs (previous) and next steps (next).
+ * 
  * @author Brian Uri!
  */
 public class Step implements Comparable<Step> {
@@ -40,7 +42,7 @@ public class Step implements Comparable<Step> {
 	}
 
 	/**
-	 * Calculates the time for this step. Assumes 1 capital letter for a name.
+	 * Calculates the time to complete this step. Assumes 1 capital letter for a name.
 	 */
 	public int getTime() {
 		return (getBaseTime() + ((int) getName().charAt(0)) - 64);
@@ -49,7 +51,7 @@ public class Step implements Comparable<Step> {
 	/**
 	 * Checks if this step finishes at the specific time, based on when it started and the time required.
 	 */
-	public boolean finishesNow(int currentTime) {
+	public boolean finishesAt(int currentTime) {
 		if (getStartedAt() == -1) {
 			return (false);
 		}
@@ -116,7 +118,5 @@ public class Step implements Comparable<Step> {
 	 */
 	public void setStartedAt(int startedAt) {
 		_startedAt = startedAt;
-	}
-	
-	
+	}	
 }

@@ -45,7 +45,7 @@ public class Day03 extends Puzzle {
 	 * What is the ID of the only claim that doesn't overlap?
 	 */
 	public static int getResult(Part part, List<Claim> input) {
-		Grid grid = new Grid(1000);
+		Fabric grid = new Fabric(1000);
 		for (Claim claim : input) {
 			for (int w = 0; w < claim.getWidth(); w++) {
 				for (int h = 0; h < claim.getHeight(); h++) {

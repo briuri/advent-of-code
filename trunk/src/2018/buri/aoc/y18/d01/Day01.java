@@ -8,7 +8,7 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * Below the message, the device shows a sequence of changes in frequency (your puzzle input). A value like +6 means the
+ * The device shows a sequence of changes in frequency (your puzzle input). A value like +6 means the
  * current frequency increases by 6; a value like -3 means the current frequency decreases by 3.
  * 
  * @author Brian Uri!

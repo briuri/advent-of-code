@@ -1,12 +1,9 @@
 package buri.aoc.y18.d07;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import buri.aoc.Puzzle;
 
@@ -28,34 +25,32 @@ public class Day07 extends Puzzle {
 	 * In what order should the steps in your instructions be completed?
 	 */
 	public static String getPart1Result(List<String> input) {
-		Map<String, Step> steps = buildGraph(input, 0);
-
-		List<Step> completedSteps = new ArrayList<>();
-		List<Step> nextSteps = getStarts(steps.values());
+		Steps steps = new Steps(input, 0);
+		List<String> finishedSteps = new ArrayList<>();
+		List<Step> nextSteps = steps.getStarts();
+		
 		while (!nextSteps.isEmpty()) {
 			Step current = null;
 			while (true) {
 				current = nextSteps.remove(0);
-				if (current.getPrevious().isEmpty() || allCompleted(steps, completedSteps, current.getPrevious())) {
+				if (isAssignable(finishedSteps, current.getPrevious())) {
 					break;
 				}
 				else {
+					// If it's not assignable, return it to queue and keep checking.
+					// Assumes there is no dependency deadlock.
 					nextSteps.add(current);
 				}
 			}
-			completedSteps.add(current);
-			for (String stepName : current.getNext()) {
-				Step next = steps.get(stepName);
-				if (!nextSteps.contains(next)) {
-					nextSteps.add(next);
-				}
-			}
-			Collections.sort(nextSteps);
+			
+			// Move the step to the finished list and add its next steps to the queue.
+			finishedSteps.add(current.getName());
+			addNextSteps(steps, nextSteps, current.getNext());
 		}
 
 		StringBuffer buffer = new StringBuffer();
-		for (Step step : completedSteps) {
-			buffer.append(step.getName());
+		for (String stepName : finishedSteps) {
+			buffer.append(stepName);
 		}
 		return (buffer.toString());
 	}
@@ -66,21 +61,25 @@ public class Day07 extends Puzzle {
 	 * steps?
 	 */
 	public static int getPart2Result(List<String> input, int workers, int baseTime) {
-		Map<String, Step> steps = buildGraph(input, baseTime);
-
+		Steps steps = new Steps(input, baseTime);
 		List<Step> runningSteps = new ArrayList<>();
-		List<Step> completedSteps = new ArrayList<>();
-		List<Step> nextSteps = getStarts(steps.values());
+		List<String> finishedSteps = new ArrayList<>();
+		List<Step> nextSteps = steps.getStarts();
+		
 		int time = 0;
 		int availableWorkers = workers;
-		while (!nextSteps.isEmpty()) {
+		while (true) {
 			// Free up any workers whose steps have finished.
 			for (Iterator<Step> iter = runningSteps.iterator(); iter.hasNext(); ) {
 				Step step = iter.next();
-				if (step.finishesNow(time)) {
-					completedSteps.add(step);
+				if (step.finishesAt(time)) {
+					finishedSteps.add(step.getName());
 					iter.remove();
 					availableWorkers++;
+					// Stop when last step has finished.
+					if (runningSteps.size() + nextSteps.size() == 0) {
+						return (time);
+					}
 				}
 			}
 			
@@ -89,23 +88,17 @@ public class Day07 extends Puzzle {
 			while (availableWorkers > 0 && stepsAvailable) {
 				Step current = null;
 				for (Step step : nextSteps) {
-					if (step.getPrevious().isEmpty() || allCompleted(steps, completedSteps, step.getPrevious())) {
+					if (isAssignable(finishedSteps, step.getPrevious())) {
 						current = step;
 						break;
 					}
 				}
 				if (current != null) {
 					nextSteps.remove(current);
-					runningSteps.add(current);
-					current.setStartedAt(time);
 					availableWorkers--;
-					for (String stepName : current.getNext()) {
-						Step next = steps.get(stepName);
-						if (!nextSteps.contains(next)) {
-							nextSteps.add(next);
-						}
-					}
-					Collections.sort(nextSteps);
+					current.setStartedAt(time);
+					runningSteps.add(current);
+					addNextSteps(steps, nextSteps, current.getNext());
 				}
 				else {
 					stepsAvailable = false;
@@ -113,63 +106,29 @@ public class Day07 extends Puzzle {
 			}
 			time++;
 		}
-		// Loop exits when only one step is left running (no more next steps). Add that duration.
-		Step lastStep = runningSteps.get(0);
-		while (!lastStep.finishesNow(time)) {
-			time++;			
-		}
-		return (time);
 	}
-	
+		
 	/**
-	 * Creates the steps.
+	 * Checks if all prerequisites have been finished (allowing a step to be assigned).
 	 */
-	private static Map<String, Step> buildGraph(List<String> input, int baseTime) {
-		Map<String, Step> steps = new HashMap<>();
-		for (String data : input) {
-			String[] tokens = data.split(" ");
-			String prev = tokens[1];
-			String next = tokens[7];
-			
-			Step step = steps.get(next);
-			if (step == null) {
-				step = new Step(next, baseTime);
-				steps.put(next, step);
-			}
-			step.addPrevious(prev);
-			
-			step = steps.get(prev);
-			if (step == null) {
-				step = new Step(prev, baseTime);
-				steps.put(prev, step);
-			}
-			step.addNext(next);
-		}
-		return (steps);
-	}
-	
-	/**
-	 * Finds the steps with no prerequisites.
-	 */
-	private static List<Step> getStarts(Collection<Step> steps) {
-		List<Step> starts = new ArrayList<>();
-		for (Step step : steps) {
-			if (step.getPrevious().isEmpty()) {
-				starts.add(step);
-			}
-		}
-		Collections.sort(starts);
-		return (starts);
-	}
-	
-	/**
-	 * Checks if all prerequisites have been completed.
-	 */
-	private static boolean allCompleted(Map<String, Step> steps, List<Step> completedSteps, List<String> previousNames) {
-		boolean completed = true;
+	private static boolean isAssignable(List<String> finishedSteps, List<String> previousNames) {
+		boolean finished = true;
 		for (String name : previousNames) {
-			completed = completed && completedSteps.contains(steps.get(name));
+			finished = finished && finishedSteps.contains(name);
 		}
-		return (completed);
+		return (finished);
+	}
+
+	/**
+	 * Adds a batch of next steps into the queue and sorts.
+	 */
+	private static void addNextSteps(Steps steps, List<Step> nextSteps, List<String> newNextSteps) {
+		for (String stepName : newNextSteps) {
+			Step next = steps.getStep(stepName);
+			if (!nextSteps.contains(next)) {
+				nextSteps.add(next);
+			}
+		}
+		Collections.sort(nextSteps);
 	}
 }

@@ -1,26 +1,19 @@
 package buri.aoc.y18.d03;
 
+import buri.aoc.data.AbstractGrid;
+
 /**
  * Fabric grid
  * 
- * Based on Java's array indexing:
- * (0,0) is the upper left corner of a grid.
- * (x,0) is lower left corner of a grid.
- * (0,y) is upper right corner of grid.
- * (x,y) is lower right corner of grid.
- * 
- * 
  * @author Brian Uri!
  */
-public class Grid {
-
-	private int[][] _grid;
+public class Fabric extends AbstractGrid {
 
 	/**
 	 * Creates a new square grid with the specified width/length.
 	 */
-	public Grid(int size) {
-		_grid = new int[size][size];
+	public Fabric(int size) {
+		super(size, 1);
 	}
 
 	/**
@@ -57,26 +50,5 @@ public class Grid {
 			}
 		}
 		return (sum == claim.getSize());
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < getGrid().length; i++) {
-			buffer.append("\t");
-			for (int j = 0; j < getGrid()[i].length; j++) {
-				String value = String.valueOf(getGrid()[i][j]);
-				buffer.append(value);
-			}
-			buffer.append("\n");
-		}
-		return (buffer.toString());
-	}
-
-	/**
-	 * Accessor for the raw grid.
-	 */
-	private int[][] getGrid() {
-		return (_grid);
 	}
 }

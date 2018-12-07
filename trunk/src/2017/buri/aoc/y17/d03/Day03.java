@@ -164,7 +164,7 @@ public class Day03 extends Puzzle {
 
 		// Start filling grid from center.
 		int currentRing = 1;
-		GridPosition position = new GridPosition(CENTER_GRID_COORD, CENTER_GRID_COORD);
+		Position position = new Position(CENTER_GRID_COORD, CENTER_GRID_COORD);
 		grid.set(position, 1);
 		position.moveRight();
 		

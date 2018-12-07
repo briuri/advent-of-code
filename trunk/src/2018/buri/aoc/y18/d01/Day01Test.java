@@ -29,12 +29,6 @@ public class Day01Test {
 		assertEquals(965, input.size());
 	}
 
-	/**
-	 * +1 -2 +3 +1 = 3
-	 * +1 +1 +1 = 3
-	 * +1 +1 -2 = 0
-	 * -1 -2 -3 = -6
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals(3, Day01.getResult(Part.ONE, getInput("+1 -2 +3 +1")));
@@ -53,13 +47,6 @@ public class Day01Test {
 		assertEquals(442, result);
 	}
 
-	/**
-	 * +1 -2 +3 +1 reaches 2 twice
-	 * +1 -1 reaches 0 twice
-	 * +3 +3 +4 -2 -4 reaches 10 twice
-	 * -6 +3 +8 +5 -6 reaches 5 twice
-	 * +7 +7 -2 -7 -4 reaches 14 twice
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals(2, Day01.getResult(Part.TWO, getInput("+1 -2 +3 +1")));
