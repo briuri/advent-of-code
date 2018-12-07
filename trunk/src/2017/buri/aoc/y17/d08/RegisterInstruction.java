@@ -1,8 +1,6 @@
 package buri.aoc.y17.d08;
 
 /**
- * Day08
- * 
  * The instructions look like this:
  * 
  * b inc 5 if a > 1

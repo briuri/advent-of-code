@@ -27,11 +27,6 @@ public class CircleList {
 	
 	/**
 	 * Reverse the order of that length of elements in the list, starting with the element at the current position.
-	 * 
-	 * 01234
-	 * l=3, cp=0 012
-	 * l=3, cp=3 340
-	 * 		start=3, interimEnd=4
 	 */
 	public void reverse(int length, int currentPosition) {
 		currentPosition = currentPosition % getSize();

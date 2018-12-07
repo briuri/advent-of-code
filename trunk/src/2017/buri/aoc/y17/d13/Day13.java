@@ -32,7 +32,7 @@ public class Day13 extends Puzzle {
 
 	/**
 	 * Input: A list of layer depths to scanner ranges
-	 * Output:
+	 * Output: A list of Layers
 	 */
 	public static List<Layer> getInput(int fileIndex) {
 		List<Layer> data = new ArrayList<>();

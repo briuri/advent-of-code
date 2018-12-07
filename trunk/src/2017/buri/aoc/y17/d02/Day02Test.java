@@ -39,17 +39,9 @@ public class Day02Test {
 		Day02.getResult(Part.ONE, spreadsheet);
 	}
 
-	/**
-	 * The first row's largest and smallest values are 9 and 1, and their difference is 8.
-	 * The second row's largest and smallest values are 7 and 3, and their difference is 4.
-	 * The third row's difference is 6.
-	 * 
-	 * In this example, the spreadsheet's checksum would be 8 + 4 + 6 = 18.
-	 */
 	@Test
 	public void testPart1Example() {
-		List<List<Integer>> spreadsheet = Day02.getInput(1);
-		assertEquals(18, Day02.getResult(Part.ONE, spreadsheet));
+		assertEquals(18, Day02.getResult(Part.ONE, Day02.getInput(1)));
 	}
 
 	/**
@@ -62,17 +54,9 @@ public class Day02Test {
 		assertEquals(47136, result);
 	}
 
-	/**
-	 * In the first row, the only two numbers that evenly divide are 8 and 2; the result of this division is 4.
-	 * In the second row, the two numbers are 9 and 3; the result is 3.
-	 * In the third row, the result is 2.
-	 * 
-	 * In this example, the sum of the results would be 4 + 3 + 2 = 9.
-	 */
 	@Test
 	public void testPart2Example() {
-		List<List<Integer>> spreadsheet = Day02.getInput(2);
-		assertEquals(9, Day02.getResult(Part.TWO, spreadsheet));
+		assertEquals(9, Day02.getResult(Part.TWO, Day02.getInput(2)));
 	}
 
 	/**

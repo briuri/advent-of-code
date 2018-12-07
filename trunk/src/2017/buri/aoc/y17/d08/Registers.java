@@ -8,8 +8,6 @@ import java.util.Map;
 import buri.aoc.Part;
 
 /**
- * Day08
- * 
  * Representation of the string-named registers containing integer values. Initialized at 0.
  * 
  * @author Brian Uri!
