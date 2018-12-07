@@ -1,25 +1,25 @@
 package buri.aoc.y17.d03;
 
+import buri.aoc.data.AbstractGrid;
+
 /**
  * Mutable data class for the spiral memory grid.
  * 
  * @author Brian Uri!
  */
-public class SpiralGrid {
-
-	private int[][] _grid;
+public class SpiralGrid extends AbstractGrid {
 	
 	/**
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public SpiralGrid(int size) {
-		_grid = new int[size][size];
+		super(size, 5);
 	}
 	
 	/**
 	 * Sets the value at some position.
 	 */
-	public void set(GridPosition position, int value) {
+	public void set(Position position, int value) {
 		getGrid()[position.getX()][position.getY()] = value;
 	}
 	
@@ -27,7 +27,7 @@ public class SpiralGrid {
 	 * Gets the sum of all adjacent and diagonal values from a position. (0,0) is the top left corner and (x, y) is the
 	 * lower right corner.
 	 */
-	public int getSurroundingValues(GridPosition position) {
+	public int getSurroundingValues(Position position) {
 		int sum = 0;
 		if (position.getY() > 0) {
 			// Upper Left
@@ -62,26 +62,5 @@ public class SpiralGrid {
 			}
 		}
 		return (sum);
-	}
-	
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < getGrid().length; i++) {
-			buffer.append("\t");
-			for (int j = 0; j < getGrid()[i].length; j++) {
-				String value = String.valueOf(getGrid()[i][j]);
-				buffer.append(String.format("%1$-5s", value));
-			}
-			buffer.append("\n");
-		}
-		return (buffer.toString());
-	}
-	
-	/**
-	 * Accessor for the raw grid.
-	 */
-	private int[][] getGrid() {
-		return (_grid);
 	}
 }
