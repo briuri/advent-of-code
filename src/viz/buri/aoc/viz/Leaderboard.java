@@ -31,7 +31,7 @@ public class Leaderboard {
 		DESCRIPTIONS.put(4, "sleeping guards");
 		DESCRIPTIONS.put(5, "reducing polymers");
 		DESCRIPTIONS.put(6, "Manhattan distances");
-		DESCRIPTIONS.put(7, "");
+		DESCRIPTIONS.put(7, "step graph");
 		DESCRIPTIONS.put(8, "");
 		DESCRIPTIONS.put(9, "");
 		DESCRIPTIONS.put(10, "");
