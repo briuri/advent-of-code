@@ -15,11 +15,18 @@ public class Step implements Comparable<Step> {
 	private String _name;
 	private List<String> _previous;
 	private List<String> _next;
+	private int _baseTime;
+	private int _startedAt;
 	
-	public Step(String name) {
+	/**
+	 * Constructor
+	 */
+	public Step(String name, int baseTime) {
 		_name = name;
 		_previous = new ArrayList<>();
 		_next = new ArrayList<>();
+		_baseTime = baseTime;
+		_startedAt = -1;
 	}
 	
 	@Override
@@ -31,7 +38,27 @@ public class Step implements Comparable<Step> {
 	public int compareTo(Step o) {
 		return (getName().compareTo(o.getName()));
 	}
+
+	/**
+	 * Calculates the time for this step. Assumes 1 capital letter for a name.
+	 */
+	public int getTime() {
+		return (getBaseTime() + ((int) getName().charAt(0)) - 64);
+	}
 	
+	/**
+	 * Checks if this step finishes at the specific time, based on when it started and the time required.
+	 */
+	public boolean finishesNow(int currentTime) {
+		if (getStartedAt() == -1) {
+			return (false);
+		}
+		return (currentTime - getStartedAt() >= getTime());
+	}
+	
+	/**
+	 * Adds a step to the list of dependencies.
+	 */
 	public void addPrevious(String name) {
 		if (!getPrevious().contains(name)) {
 			getPrevious().add(name);
@@ -39,6 +66,9 @@ public class Step implements Comparable<Step> {
 		}
 	}
 	
+	/**
+	 * Adds a step to the list of downstream steps.
+	 */
 	public void addNext(String name) {
 		if (!getNext().contains(name)) {
 			getNext().add(name);
@@ -66,4 +96,27 @@ public class Step implements Comparable<Step> {
 	public List<String> getNext() {
 		return _next;
 	}
+	
+	/**
+	 * Accessor for the base time (not including the time based on name)
+	 */
+	public int getBaseTime() {
+		return _baseTime;
+	}
+
+	/**
+	 * Accessor for the startedAt
+	 */
+	public int getStartedAt() {
+		return _startedAt;
+	}
+
+	/**
+	 * Accessor for the startedAt
+	 */
+	public void setStartedAt(int startedAt) {
+		_startedAt = startedAt;
+	}
+	
+	
 }
