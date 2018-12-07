@@ -15,13 +15,10 @@ public class Day00Test {
 
 	@Test
 	public void testGetInput() {
-		List<Data> input = Day00.getInput(0);
+		List<String> input = Day00.getInput(0);
 		assertEquals(0, input.size());
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals("", Day00.getResult(Part.ONE, Day00.getInput(1)));
@@ -37,9 +34,6 @@ public class Day00Test {
 		assertEquals("", result);
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals("", Day00.getResult(Part.TWO, Day00.getInput(1)));

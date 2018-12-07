@@ -21,33 +21,21 @@ public class Day03Test {
 		Day03.getResult(Part.ONE, Day03.MAX_VALUE + 1);
 	}
 	
-	/**
-	 * Data from square 1 is carried 0 steps, since it's at the access port.
-	 */
 	@Test
 	public void testPart1Example1() {
 		assertEquals(0, Day03.getResult(Part.ONE, 1));
 	}
 
-	/**
-	 * Data from square 12 is carried 3 steps, such as: down, left, left.
-	 */
 	@Test
 	public void testPart1Example2() {
 		assertEquals(3, Day03.getResult(Part.ONE, 12));
 	}
 
-	/**
-	 * Data from square 23 is carried only 2 steps: up twice.
-	 */
 	@Test
 	public void testPart1Example3() {
 		assertEquals(2, Day03.getResult(Part.ONE, 23));
 	}
 
-	/**
-	 * Data from square 1024 must be carried 31 steps.
-	 */
 	@Test
 	public void testPart1Example4() {
 		assertEquals(31, Day03.getResult(Part.ONE, 1024));
@@ -63,9 +51,6 @@ public class Day03Test {
 		assertEquals(430, result);
 	}
 	
-	/**
-	 * First value over 700 should be 747.
-	 */
 	@Test
 	public void testPart2Example() {
 		assertEquals(747, Day03.getResult(Part.TWO, 700));

@@ -19,9 +19,6 @@ public class Day12Test {
 		assertEquals(2000, input.size());
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals(6, Day12.getResult(Part.ONE, Day12.getInput(1)));
@@ -37,10 +34,6 @@ public class Day12Test {
 		assertEquals(134, result);
 	}
 
-	/**
-	 * In the example above, there were 2 groups: one consisting of programs 0,2,3,4,5,6, and the other consisting
-	 * solely of program 1.
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals(2, Day12.getResult(Part.TWO, Day12.getInput(1)));

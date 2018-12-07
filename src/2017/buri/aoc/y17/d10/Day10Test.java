@@ -19,13 +19,6 @@ public class Day10Test {
 		assertEquals(16, input.size());
 	}
 
-	/**
-	 * Suppose we instead only had a circular list containing five elements, 0, 1, 2, 3, 4, and were given input lengths
-	 * of 3, 4, 1, 5.
-	 * 
-	 * In this example, the first two numbers in the list end up being 3 and 4; to check the process, you can multiply
-	 * them together to produce 12.
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals("12", Day10.getResult(Part.ONE, 5, Day10.getInput(Part.ONE, 1)));
@@ -41,15 +34,11 @@ public class Day10Test {
 		assertEquals("6909", result);
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals("33efeb34ea91902bb2f59c9920caa6cd", Day10.getResult(Part.TWO, 256, Day10.getInput(Part.TWO, 2)));
 		assertEquals("3efbe78a8d82f29979031a4aa0b16a9d", Day10.getResult(Part.TWO, 256, Day10.getInput(Part.TWO, 3)));
 		assertEquals("63960835bcdc130f0b66d7ff4f6a5a8e", Day10.getResult(Part.TWO, 256, Day10.getInput(Part.TWO, 4)));
-
 	}
 
 	/**

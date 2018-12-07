@@ -17,9 +17,6 @@ public class Day07Test {
 		assertEquals(101, input.size());
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals("CABDFE", Day07.getPart1Result(Day07.getInput(1)));
@@ -35,9 +32,6 @@ public class Day07Test {
 		assertEquals("ABGKCMVWYDEHFOPQUILSTNZRJX", result);
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals(15, Day07.getPart2Result(Day07.getInput(1), 2, 0));

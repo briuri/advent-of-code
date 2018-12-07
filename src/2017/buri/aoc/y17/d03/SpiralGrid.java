@@ -1,9 +1,7 @@
 package buri.aoc.y17.d03;
 
 /**
- * Day03
- * 
- * Data class for the spiral memory grid.
+ * Mutable data class for the spiral memory grid.
  * 
  * @author Brian Uri!
  */

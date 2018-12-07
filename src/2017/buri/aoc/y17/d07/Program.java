@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Day07
- * 
  * Representation of a progam.
  * 
  * @author Brian Uri!

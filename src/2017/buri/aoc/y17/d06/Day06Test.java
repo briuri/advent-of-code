@@ -2,7 +2,6 @@ package buri.aoc.y17.d06;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -21,21 +20,9 @@ public class Day06Test {
 		assertEquals(Integer.valueOf(4), banks.get(0));
 	}
 	
-	/**
-	 * For example, imagine a scenario with only four memory banks:
-	 * 
-	 * 0 2 7 0
-	 * 
-	 * The infinite loop is detected after the fifth block redistribution cycle, and so the answer in this example is 5.
-	 */
 	@Test
-	public void testPart1Example1() {
-		List<Integer> banks = new ArrayList<>();
-		banks.add(Integer.valueOf(0));
-		banks.add(Integer.valueOf(2));
-		banks.add(Integer.valueOf(7));
-		banks.add(Integer.valueOf(0));
-		assertEquals(5, Day06.getResult(Part.ONE, banks));
+	public void testPart1Examples() {
+		assertEquals(5, Day06.getResult(Part.ONE, Day06.getInput(1)));
 	}
 
 	/**
@@ -48,17 +35,9 @@ public class Day06Test {
 		assertEquals(12841, result);
 	}
 	
-	/**
-	 * In the example above, 2 4 1 2 is seen again after four cycles, and so the answer in that example would be 4.
-	 */
 	@Test
-	public void testPart2Example1() {
-		List<Integer> banks = new ArrayList<>();
-		banks.add(Integer.valueOf(0));
-		banks.add(Integer.valueOf(2));
-		banks.add(Integer.valueOf(7));
-		banks.add(Integer.valueOf(0));
-		assertEquals(4, Day06.getResult(Part.TWO, banks));
+	public void testPart2Examples() {
+		assertEquals(4, Day06.getResult(Part.TWO, Day06.getInput(1)));
 	}
 	
 	/**

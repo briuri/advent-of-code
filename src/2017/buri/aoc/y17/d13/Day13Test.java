@@ -19,9 +19,6 @@ public class Day13Test {
 		assertEquals(43, input.size());
 	}
 
-	/**
-	 * In the example above, the trip severity is 0*3 + 6*4 = 24.
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals(24, Day13.getResult(Part.ONE, Day13.getInput(1)));
@@ -37,10 +34,6 @@ public class Day13Test {
 		assertEquals(2688, result);
 	}
 
-	/**
-	 * Because all smaller delays would get you caught, the fewest number of picoseconds you would need to delay to get
-	 * through safely is 10.
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals(10, Day13.getResult(Part.TWO, Day13.getInput(1)));

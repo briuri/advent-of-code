@@ -17,12 +17,6 @@ public class Day06Test {
 		assertEquals(50, input.size());
 	}
 
-	/**
-	 * In this example, the areas of coordinates A, B, C, and F are infinite - while not shown here, their areas extend
-	 * forever outside the visible grid. However, the areas of coordinates D and E are finite: D is closest to 9
-	 * locations, and E is closest to 17 (both including the coordinate's location itself). Therefore, in this example,
-	 * the size of the largest area is 17.
-	 */
 	@Test
 	public void testPart1Examples() {
 		assertEquals(17, Day06.getPart1Result(Day06.getInput(1)));
@@ -38,9 +32,6 @@ public class Day06Test {
 		assertEquals(3251, result);
 	}
 
-	/**
-	 * This region, which also includes coordinates D and E, has a total size of 16.
-	 */
 	@Test
 	public void testPart2Examples() {
 		assertEquals(16, Day06.getPart2Result(32, Day06.getInput(1)));
