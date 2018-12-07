@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
@@ -23,98 +24,71 @@ public class Day07 extends Puzzle {
 	/**
 	 * Part 1:
 	 * In what order should the steps in your instructions be completed?
-	 */
-	public static String getPart1Result(List<String> input) {
-		Steps steps = new Steps(input, 0);
-		List<String> finishedSteps = new ArrayList<>();
-		List<Step> nextSteps = steps.getStarts();
-		
-		while (!nextSteps.isEmpty()) {
-			Step current = null;
-			while (true) {
-				current = nextSteps.remove(0);
-				if (isAssignable(finishedSteps, current.getPrevious())) {
-					break;
-				}
-				else {
-					// If it's not assignable, return it to queue and keep checking.
-					// Assumes there is no dependency deadlock.
-					nextSteps.add(current);
-				}
-			}
-			
-			// Move the step to the finished list and add its next steps to the queue.
-			finishedSteps.add(current.getName());
-			addNextSteps(steps, nextSteps, current.getNext());
-		}
-
-		StringBuffer buffer = new StringBuffer();
-		for (String stepName : finishedSteps) {
-			buffer.append(stepName);
-		}
-		return (buffer.toString());
-	}
-
-	/**
+	 * 
+	 * (Note: Part 1 is a simple case of Part 2's algorithm using workers = 1 and any baseTime. I discarded the original
+	 * Part 1 algorithm and refactored to support this).
+	 * 
 	 * Part 2:
 	 * With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the
 	 * steps?
 	 */
-	public static int getPart2Result(List<String> input, int workers, int baseTime) {
+	public static String getResult(Part part, List<String> input, int workers, int baseTime) {
 		Steps steps = new Steps(input, baseTime);
-		List<Step> runningSteps = new ArrayList<>();
-		List<String> finishedSteps = new ArrayList<>();
 		List<Step> nextSteps = steps.getStarts();
+		List<Step> runningSteps = new ArrayList<>();
+		List<String> finishedStepNames = new ArrayList<>();
 		
-		int time = 0;
-		int availableWorkers = workers;
-		while (true) {
-			// Free up any workers whose steps have finished.
+		int time = -1;
+		while (runningSteps.size() + nextSteps.size() != 0) {
+			time++;
+			// First, release any workers whose steps have finished.
 			for (Iterator<Step> iter = runningSteps.iterator(); iter.hasNext(); ) {
 				Step step = iter.next();
 				if (step.finishesAt(time)) {
-					finishedSteps.add(step.getName());
 					iter.remove();
-					availableWorkers++;
-					// Stop when last step has finished.
-					if (runningSteps.size() + nextSteps.size() == 0) {
-						return (time);
-					}
+					finishedStepNames.add(step.getName());
+					workers++;
 				}
 			}
 			
-			// Assign workers to queued steps.
+			// Next, assign available workers to queued, assignable steps.
 			boolean stepsAvailable = true;
-			while (availableWorkers > 0 && stepsAvailable) {
-				Step current = null;
+			while (workers > 0 && stepsAvailable) {
+				Step assignment = null;
 				for (Step step : nextSteps) {
-					if (isAssignable(finishedSteps, step.getPrevious())) {
-						current = step;
+					if (isAssignable(finishedStepNames, step.getPrevious())) {
+						assignment = step;
 						break;
 					}
 				}
-				if (current != null) {
-					nextSteps.remove(current);
-					availableWorkers--;
-					current.setStartedAt(time);
-					runningSteps.add(current);
-					addNextSteps(steps, nextSteps, current.getNext());
-				}
-				else {
+				// No steps currently available (pre-reqs are running).
+				if (assignment == null) {
 					stepsAvailable = false;
 				}
+				else {
+					workers--;
+					nextSteps.remove(assignment);
+					assignment.setStartedAt(time);
+					addNextSteps(steps, nextSteps, assignment.getNext());
+					runningSteps.add(assignment);
+				}
 			}
-			time++;
 		}
+		// Generate the final path through the graph.
+		StringBuffer buffer = new StringBuffer();
+		for (String stepName : finishedStepNames) {
+			buffer.append(stepName);
+		}
+		return (part == Part.ONE ? buffer.toString() : String.valueOf(time));
 	}
 		
 	/**
 	 * Checks if all prerequisites have been finished (allowing a step to be assigned).
 	 */
-	private static boolean isAssignable(List<String> finishedSteps, List<String> previousNames) {
+	private static boolean isAssignable(List<String> finishedStepNames, List<String> previousStepNames) {
 		boolean finished = true;
-		for (String name : previousNames) {
-			finished = finished && finishedSteps.contains(name);
+		for (String name : previousStepNames) {
+			finished = finished && finishedStepNames.contains(name);
 		}
 		return (finished);
 	}
@@ -122,8 +96,8 @@ public class Day07 extends Puzzle {
 	/**
 	 * Adds a batch of next steps into the queue and sorts.
 	 */
-	private static void addNextSteps(Steps steps, List<Step> nextSteps, List<String> newNextSteps) {
-		for (String stepName : newNextSteps) {
+	private static void addNextSteps(Steps steps, List<Step> nextSteps, List<String> newNextStepNames) {
+		for (String stepName : newNextStepNames) {
 			Step next = steps.getStep(stepName);
 			if (!nextSteps.contains(next)) {
 				nextSteps.add(next);
