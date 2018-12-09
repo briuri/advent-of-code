@@ -1,7 +1,6 @@
 package buri.aoc.y18.d09;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
 
 /**
  * The marbles are numbered starting with 0 and increasing by 1 until every marble has a number.
@@ -25,81 +24,63 @@ import java.util.List;
  */
 public class Circle {
 
-	private int _current;
-	List<Integer> _circle;
+	ArrayDeque<Integer> _circle;
 	
 	/**
 	 * Constructor
 	 * 
-	 * Strangely, the ArrayList with a set initial capacity runs Part 2 in 42 minutes, while the LinkedList
-	 * implementation had only processed 5 million turns after 6 hours!
+	 * Part 2 Performance Notes:
+	 * 		- ArrayList with initialized capacity and a pointer to the current position: 42 minutes.
+	 * 		- LinkedList with a pointer to current position: Stopped after 6 hours with 2 million turns to go.
+	 * 		- ArrayDeque with a rotate() method so only first/last elements are modified: 0.6 seconds.
 	 */
 	public Circle(int size) {
-		_circle = new ArrayList<>(size);
+		_circle = new ArrayDeque<>(size);
 		addMarble(0);
 	}
 
+	/**
+	 * Shifts the list by delta using fast operations.
+	 */
+	private void rotate(int delta) {
+		if (delta == 0) {
+			return;
+		}
+		if (delta > 0) {
+			for (int i = 0; i < delta; i++) {
+				Integer last = getCircle().removeLast();
+				getCircle().addFirst(last);
+			}
+		}
+		else {
+			for (int i = 0; i < Math.abs(delta) - 1; i++) {
+				Integer first = getCircle().remove();
+				getCircle().addLast(first);
+			}
+		}
+	}
+	
 	/**
 	 * Adds a marble according to the rules of the game. Returns the score of the move.
 	 */
 	public long addMarble(int value) {
 		if (value < 2) {
 			getCircle().add(value);
-			setCurrent(value);
 			return (0);
 		}
 		if (value % 23 == 0) {
-			int index = getCurrent() - 7;
-			if (index < 0) {
-				index += getCircle().size();
-			}
-			int score = getCircle().remove(index);
-			setCurrent(index);
-			return (score + value);
+			rotate(-7);
+			return (getCircle().pop() + value);
 		}
-		int index = getCurrent() + 2;
-		if (index >= getCircle().size()) {
-			index -= getCircle().size();
-		}
-		getCircle().add(index, value);
-		setCurrent(index);
+		rotate(2);
+		getCircle().addLast(value);
 		return (0);		
-	}
-	
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < getCircle().size(); i++) {
-			int value = getCircle().get(i);
-			if (i == getCurrent()) {
-				buffer.append(String.format("(%1$-1s)", value));
-			}
-			else {
-				buffer.append(value);
-			}
-			buffer.append(" ");
-		}
-		return (buffer.toString());
-	}
-
-	/**
-	 * Accessor for the current
-	 */
-	public int getCurrent() {
-		return _current;
-	}
-
-	/**
-	 * Accessor for the current
-	 */
-	public void setCurrent(int current) {
-		_current = current;
 	}
 
 	/**
 	 * Accessor for the circle
 	 */
-	private List<Integer> getCircle() {
+	private ArrayDeque<Integer> getCircle() {
 		return _circle;
 	}
 }
