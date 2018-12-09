@@ -33,7 +33,7 @@ public class Leaderboard {
 		DESCRIPTIONS.put(6, "Manhattan distances");
 		DESCRIPTIONS.put(7, "step graph");
 		DESCRIPTIONS.put(8, "license tree");
-		DESCRIPTIONS.put(9, "");
+		DESCRIPTIONS.put(9, "marble game");
 		DESCRIPTIONS.put(10, "");
 		DESCRIPTIONS.put(11, "");
 		DESCRIPTIONS.put(12, "");
