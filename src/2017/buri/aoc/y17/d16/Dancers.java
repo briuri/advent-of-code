@@ -1,27 +1,25 @@
 package buri.aoc.y17.d16;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Data class for the positions of the dancers
  * 
  * @author Brian Uri!
  */
 public class Dancers {
-	private List<Character> _positions;
+	private String _positions;
 	
 	/**
 	 * Constructor
 	 */
 	public Dancers(int numDancers) {
-		_positions = new ArrayList<>(numDancers);
+		StringBuffer buffer = new StringBuffer();
 		for (char dancer = 'a'; dancer <= 'z'; dancer++) {
-		    _positions.add(dancer);
-		    if (getPositions().size() == numDancers) {
+			buffer.append(dancer);
+		    if (buffer.length() == numDancers) {
 		    	break;
 		    }
 		}
+		setPositions(buffer.toString());
 	}
 
 	/**
@@ -49,19 +47,22 @@ public class Dancers {
 	 * Make num programs move from end to front, but maintain their order otherwise.
 	 */
 	private void spin(int num) {
-		List<Character> subList = new ArrayList<>(getPositions().subList(getPositions().size() - num,
-			getPositions().size()));
-		getPositions().removeAll(subList);
-		getPositions().addAll(0, subList);
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(getPositions().substring(getPositions().length() - num));
+		buffer.append(getPositions().substring(0, getPositions().length() - num));
+		setPositions(buffer.toString());		
 	}
 	
 	/**
 	 * Makes the programs at these positions swap places.
 	 */
 	private void exchange(int source, int target) {
-		Character character = getPositions().get(source);
-		getPositions().set(source, getPositions().get(target));
-		getPositions().set(target, character);
+		char sourceChar = getPositions().charAt(source);
+		char targetChar = getPositions().charAt(target);
+		StringBuffer buffer = new StringBuffer(getPositions());
+		buffer.setCharAt(source, targetChar);
+		buffer.setCharAt(target, sourceChar);
+		setPositions(buffer.toString());
 	}
 	
 	/**
@@ -73,17 +74,22 @@ public class Dancers {
 	
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < getPositions().size(); i++) {
-			buffer.append(getPositions().get(i));
-		}
-		return (buffer.toString());
+		return (getPositions());
 	}
 	
 	/**
 	 * Accessor for the positions
 	 */
-	private List<Character> getPositions() {
+	private String getPositions() {
 		return _positions;
 	}
+
+	/**
+	 * Accessor for the positions
+	 */
+	private void setPositions(String positions) {
+		_positions = positions;
+	}
+	
+	
 }
