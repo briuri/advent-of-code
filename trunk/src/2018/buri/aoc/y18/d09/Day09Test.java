@@ -2,11 +2,7 @@ package buri.aoc.y18.d09;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
-
-import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
@@ -14,38 +10,32 @@ import buri.aoc.Part;
 public class Day09Test {
 
 	@Test
-	public void testGetInput() {
-		List<String> input = Day09.getInput(0);
-		assertEquals(0, input.size());
-	}
-
-	@Test
 	public void testPart1Examples() {
-		assertEquals("", Day09.getResult(Part.ONE, Day09.getInput(1)));
+		assertEquals(32, Day09.getResult(9, 25));
+		assertEquals(8317, Day09.getResult(10, 1618));
+		assertEquals(146373, Day09.getResult(13, 7999));
+		assertEquals(2764, Day09.getResult(17, 1104));
+		assertEquals(54718, Day09.getResult(21, 6111));
+		assertEquals(37305, Day09.getResult(30, 5807));
 	}
-
+	
 	/**
 	 * Solves the Part 1 puzzle.
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day09.getResult(Part.ONE, Day09.getInput(0));
+		long result = Day09.getResult(411, 72059);
 		System.out.println("Day 9 Part 1\n\t" + result);
-		assertEquals("", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("", Day09.getResult(Part.TWO, Day09.getInput(1)));
+		assertEquals(429943, result);
 	}
 
 	/**
-	 * Solves the Part 2 puzzle.
+	 * Solves the Part 2 puzzle. (takes 40-45 minutes to run)
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day09.getResult(Part.TWO, Day09.getInput(0));
+		long result = Day09.getResult(411, 7205900);
 		System.out.println("Day 9 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals(3615691746L, result);
 	}
 }

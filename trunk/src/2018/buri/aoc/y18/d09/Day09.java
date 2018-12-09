@@ -1,33 +1,43 @@
 package buri.aoc.y18.d09;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * The Elves play this game by taking turns arranging the marbles in a circle according to very particular rules. The
+ * marbles are numbered starting with 0 and increasing by 1 until every marble has a number.
+ * 
  * @author Brian Uri!
  */
 public class Day09 extends Puzzle {
 
 	/**
-	 * Input: 
-	 * Output: 
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/09", fileIndex));
-	}
-	
-	/**
+	 * Part 1: What is the winning Elf's score?
 	 * 
+	 * Part 2: What would the new winning Elf's score be if the number of the last marble were 100 times larger?
 	 */
-	public static String getResult(Part part, List<String> input) {
-		for (String data : input) {
-			
+	public static long getResult(int players, int max) {
+		Circle circle = new Circle(max);
+		List<Long> scores = new ArrayList<>(Collections.nCopies(players, Long.valueOf(0)));
+
+		int currentPlayer = 1;
+		for (int i = 1; i < max + 1; i++) {
+			if (i % 100000 == 0) {
+				System.out.println(new Date() + " " + i);
+			}
+			Long score = circle.addMarble(i);
+			Long currentScore = scores.get(currentPlayer - 1);
+			scores.set(currentPlayer - 1, currentScore + score);
+
+			currentPlayer++;
+			if (currentPlayer > players) {
+				currentPlayer = 1;
+			}
 		}
-		if (part == Part.ONE) {
-			return ("");
-		}
-		return ("");
+		return (Collections.max(scores));
 	}
 }
