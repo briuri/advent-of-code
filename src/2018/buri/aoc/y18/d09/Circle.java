@@ -30,6 +30,9 @@ public class Circle {
 	
 	/**
 	 * Constructor
+	 * 
+	 * Strangely, the ArrayList with a set initial capacity runs Part 2 in 42 minutes, while the LinkedList
+	 * implementation had only processed 5 million turns after 6 hours!
 	 */
 	public Circle(int size) {
 		_circle = new ArrayList<>(size);
