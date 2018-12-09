@@ -23,12 +23,12 @@ public class Day14Test {
 	public void testPart1Puzzle() {
 		int result = Day14.getResult(Part.ONE, "jxqlasbh");
 		System.out.println("Day 14 Part 1\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(8140, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals("", Day14.getResult(Part.TWO, "flqrgnkx"));
+		assertEquals(1242, Day14.getResult(Part.TWO, "flqrgnkx"));
 	}
 
 	/**
@@ -38,6 +38,6 @@ public class Day14Test {
 	public void testPart2Puzzle() {
 		int result = Day14.getResult(Part.TWO, "jxqlasbh");
 		System.out.println("Day 14 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals(1182, result);
 	}
 }
