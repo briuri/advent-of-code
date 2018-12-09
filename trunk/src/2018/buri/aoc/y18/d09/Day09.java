@@ -2,7 +2,6 @@ package buri.aoc.y18.d09;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import buri.aoc.Puzzle;
@@ -26,9 +25,6 @@ public class Day09 extends Puzzle {
 
 		int currentPlayer = 1;
 		for (int i = 1; i < max + 1; i++) {
-			if (i % 100000 == 0) {
-				System.out.println(new Date() + " " + i);
-			}
 			Long score = circle.addMarble(i);
 			Long currentScore = scores.get(currentPlayer - 1);
 			scores.set(currentPlayer - 1, currentScore + score);
