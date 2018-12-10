@@ -21,8 +21,9 @@ public class Day10Test {
 
 	@Test
 	public void testPart1Examples() {
-		// Answer is visual in console output.
-		assertEquals("", Day10.getResult(Part.ONE, Day10.getInput(1)));
+		// HI
+		String result = Day10.getResult(Part.ONE, Day10.getInput(1));
+		assertTrue(result.startsWith("#   #  ###\n"));
 	}
 
 	/**
@@ -30,9 +31,10 @@ public class Day10Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
+		// PLBPGFRR
 		String result = Day10.getResult(Part.ONE, Day10.getInput(0));
-		System.out.println("Day 10 Part 1\n\tAnswer in console.");
-		assertEquals("", result);
+		System.out.println("Day 10 Part 1\n" + result);
+		assertTrue(result.startsWith("#####   #       #####   #####    ####   ######  #####   ##### \n"));
 	}
 
 	/**
