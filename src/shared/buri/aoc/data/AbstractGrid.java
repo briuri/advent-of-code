@@ -11,36 +11,38 @@ package buri.aoc.data;
  * @author Brian Uri!
  */
 public abstract class AbstractGrid {
-
-	private int[][] _grid;
+	private int _size;
 	private int _padding;
+	private int[][] _grid;
+
 	/**
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public AbstractGrid(int size, int padding) {
-		_grid = new int[size][size];
+		_size = size;
 		_padding = padding;
+		_grid = new int[getSize()][getSize()];
 	}
 	
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < getGrid().length; i++) {
+		for (int x = 0; x < getSize(); x++) {
 			buffer.append("\t");
-			for (int j = 0; j < getGrid()[i].length; j++) {
-				String value = String.valueOf(getGrid()[i][j]);
+			for (int y = 0; y < getSize(); y++) {
+				String value = String.valueOf(getGrid()[x][y]);
 				buffer.append(String.format("%1$-" + getPadding() + "s", value));
 			}
 			buffer.append("\n");
 		}
 		return (buffer.toString());
 	}
-	
+
 	/**
-	 * Accessor for the raw grid.
+	 * Accessor for the size
 	 */
-	protected int[][] getGrid() {
-		return (_grid);
+	protected int getSize() {
+		return _size;
 	}
 
 	/**
@@ -48,5 +50,12 @@ public abstract class AbstractGrid {
 	 */
 	private int getPadding() {
 		return _padding;
+	}
+		
+	/**
+	 * Accessor for the raw grid.
+	 */
+	protected int[][] getGrid() {
+		return (_grid);
 	}
 }

@@ -10,6 +10,11 @@ public abstract class AbstractPair {
 	private int _y;
 	
 	/**
+	 * Base constructor
+	 */
+	protected AbstractPair() {}
+	
+	/**
 	 * String-based Constructor
 	 */
 	public AbstractPair(String data) {
