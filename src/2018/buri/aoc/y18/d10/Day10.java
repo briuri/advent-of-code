@@ -58,15 +58,16 @@ public class Day10 extends Puzzle {
 			}
 			// Shift output to origin in console.
 			Position offset = getOffset(input);
+			int maxX = Integer.MIN_VALUE;
 			for (Position position : input) {
 				position.offset(offset);
+				maxX = Math.max(position.getX(), maxX);
 			}
-			Grid grid = new Grid(64);
+			Grid grid = new Grid(maxX + 1);
 			for (Position position : input) {
 				grid.drawPoint(position);
 			}
-			System.out.println(grid);
-			return ("");
+			return (grid.toString());
 		}
 		// Part TWO
 		return (String.valueOf(minTime));
