@@ -22,40 +22,41 @@ public class Leaderboard {
 
 	private static final String CURRENT_EVENT = "2018";
 	private static final int TOTAL_PUZZLES = 25;
-
-	private static final Map<Integer, String> DESCRIPTIONS = new HashMap<>();
+	
+	private static final Map<Integer, Metadata> METADATA = new HashMap<>();
 	static {
-		DESCRIPTIONS.put(1, "frequency adjustments");
-		DESCRIPTIONS.put(2, "box IDs");
-		DESCRIPTIONS.put(3, "fabric squares");
-		DESCRIPTIONS.put(4, "sleeping guards");
-		DESCRIPTIONS.put(5, "reducing polymers");
-		DESCRIPTIONS.put(6, "Manhattan distances");
-		DESCRIPTIONS.put(7, "step graph");
-		DESCRIPTIONS.put(8, "license tree");
-		DESCRIPTIONS.put(9, "marble game");
-		DESCRIPTIONS.put(10, "sky writing");
-		DESCRIPTIONS.put(11, "fuel cell charges");
-		DESCRIPTIONS.put(12, "");
-		DESCRIPTIONS.put(13, "");
-		DESCRIPTIONS.put(14, "");
-		DESCRIPTIONS.put(15, "");
-		DESCRIPTIONS.put(16, "");
-		DESCRIPTIONS.put(17, "");
-		DESCRIPTIONS.put(18, "");
-		DESCRIPTIONS.put(19, "");
-		DESCRIPTIONS.put(20, "");
-		DESCRIPTIONS.put(21, "");
-		DESCRIPTIONS.put(22, "");
-		DESCRIPTIONS.put(23, "");
-		DESCRIPTIONS.put(24, "");
-		DESCRIPTIONS.put(25, "");
+		METADATA.put(1, new Metadata("Chronal Calibration", 1));
+		METADATA.put(2, new Metadata("Inventory Management System", 0));
+		METADATA.put(3, new Metadata("No Matter How You Slice It", 0));
+		METADATA.put(4, new Metadata("Repose Record", 1));
+		METADATA.put(5, new Metadata("Alchemical Reduction", 0));
+		METADATA.put(6, new Metadata("Chronal Coordinates", 1));
+		METADATA.put(7, new Metadata("The Sum of Its Parts", 0));
+		METADATA.put(8, new Metadata("Memory Maneuver", 0));
+		METADATA.put(9, new Metadata("Marble Mania", 1));
+		METADATA.put(10, new Metadata("The Stars Align", 0));
+		METADATA.put(11, new Metadata("Chronal Charge", 1));
+		METADATA.put(12, new Metadata("", 0));
+		METADATA.put(13, new Metadata("", 0));
+		METADATA.put(14, new Metadata("", 0));
+		METADATA.put(15, new Metadata("", 0));
+		METADATA.put(16, new Metadata("", 0));
+		METADATA.put(17, new Metadata("", 0));
+		METADATA.put(18, new Metadata("", 0));
+		METADATA.put(19, new Metadata("", 0));
+		METADATA.put(20, new Metadata("", 0));
+		METADATA.put(21, new Metadata("", 0));
+		METADATA.put(22, new Metadata("", 0));
+		METADATA.put(23, new Metadata("", 0));
+		METADATA.put(24, new Metadata("", 0));
+		METADATA.put(25, new Metadata("", 0));
 	}
+	
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("105906.json");
-//		visualizeEvent("2017.json");
-//		visualizeEvent("2016.json");
+		visualizeEvent("2017.json");
+		visualizeEvent("2016.json");
 	}
 	
 	private static void visualizeEvent(String filename) {
@@ -109,11 +110,16 @@ public class Leaderboard {
 		buffer.append("\t.tiny { font-size: 9pt; }\n");
 		buffer.append("\ta { color: #009900; }\n");
 		buffer.append("\ta:hover { color: #99ff99; }\n");
+		buffer.append("\t.global { color: #ffff00; }\n");
 		buffer.append("</style>\n</head>\n\n<body>\n");
 		buffer.append("<h2>").append(title).append(" (").append(event).append(")").append("</h2>\n\n");
 		buffer.append("<p class=\"tiny\">JSON downloaded from ");
 		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">Novetta Leaderboard</a>");
-		buffer.append(" on <b>").append(lastModified).append("</b>.</p>\n\n");
+		buffer.append(" on <b>").append(lastModified).append("</b>.");
+		if (event.equals("2018")) {
+			buffer.append("<br /><sup class=\"global\">*</sup> denotes a time that made the daily Global Leaderboard.</p>");
+		}
+		buffer.append("</p>\n\n");
 		
 		// Nav Bar
 		buffer.append("<p>");
@@ -127,17 +133,27 @@ public class Leaderboard {
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<Record> places = puzzleRecords.get(i);
 			if (!places.isEmpty()) {
+				int day = i + 1;
 				Collections.sort(places);
-				buffer.append("\n<h3>Day ").append(i + 1);
-				if (event.equals("2018") && DESCRIPTIONS.get(i + 1) != "") {
-					buffer.append(" (").append(DESCRIPTIONS.get(i + 1)).append(")");
-				}
-				buffer.append("</h3>\n<ol>\n");
+				buffer.append("\n<h3><a href=\"https://adventofcode.com/").append(event).append("/day/").append(day);
+				buffer.append("\">Day ").append(day);
+				if (event.equals("2018")) {
+					buffer.append(": ").append(METADATA.get(day).getTitle());
+				}				
+				buffer.append("</a></h3>\n<ol>\n");
 				int numPlaces = Math.min(10, places.size());
 				for (int place = 0; place < numPlaces; place++) {
 					Record record = places.get(place);
-					buffer.append("\t<li>").append(record.getPrettyTime(i + 1)).append(" - ");
-					buffer.append(record.getName()).append("</li>\n");
+					buffer.append("\t<li>").append(record.getPrettyTime(day));
+					if (event.equals("2018")) {
+						if (place + 1 <= METADATA.get(day).getGlobalCount()) {
+							buffer.append("<sup class=\"global\">*</sup>");
+						}
+						else {
+							buffer.append("&nbsp;");
+						}
+					}
+					buffer.append(" - ").append(record.getName()).append("</li>\n");
 				}
 				buffer.append("</ol>\n");
 			}
