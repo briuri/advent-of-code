@@ -13,7 +13,7 @@ public class Fabric extends AbstractGrid {
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public Fabric(int size) {
-		super(size, 1);
+		super(size);
 	}
 
 	/**

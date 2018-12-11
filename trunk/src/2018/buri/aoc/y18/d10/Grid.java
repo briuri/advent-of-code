@@ -13,7 +13,7 @@ public class Grid extends AbstractGrid {
 	 * Constructor
 	 */
 	public Grid(int size) {
-		super(size, 1);
+		super(size);
 	}
 	
 	/**

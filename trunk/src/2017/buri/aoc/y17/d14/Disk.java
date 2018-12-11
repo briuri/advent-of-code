@@ -13,7 +13,7 @@ public class Disk extends AbstractGrid {
 	 * Constructor
 	 */
 	public Disk(List<String> rows) {
-		super(128, 5);
+		super(128);
 		for (int x = 0; x < getGrid().length; x++) {
 			for (int y = 0; y < getGrid()[x].length; y++) {
 				// Convert to 0/1.

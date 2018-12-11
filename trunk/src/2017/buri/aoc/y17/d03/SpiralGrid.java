@@ -13,7 +13,7 @@ public class SpiralGrid extends AbstractGrid {
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public SpiralGrid(int size) {
-		super(size, 5);
+		super(size);
 	}
 	
 	/**
