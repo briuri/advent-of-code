@@ -2,8 +2,6 @@ package buri.aoc.y18.d11;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.Part;
@@ -14,14 +12,9 @@ import buri.aoc.Part;
 public class Day11Test {
 
 	@Test
-	public void testGetInput() {
-		List<String> input = Day11.getInput(0);
-		assertEquals(1, input.size());
-	}
-
-	@Test
 	public void testPart1Examples() {
-		assertEquals("", Day11.getResult(Part.ONE, Day11.getInput(1)));
+		assertEquals("33,45", Day11.getResult(Part.ONE, 18).toString());
+		assertEquals("21,61", Day11.getResult(Part.ONE, 42).toString());
 	}
 
 	/**
@@ -29,14 +22,15 @@ public class Day11Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day11.getResult(Part.ONE, Day11.getInput(0));
+		String result = Day11.getResult(Part.ONE, 7139);
 		System.out.println("Day 11 Part 1\n\t" + result);
-		assertEquals("", result);
+		assertEquals("20,62", result.toString());
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals("", Day11.getResult(Part.TWO, Day11.getInput(1)));
+		assertEquals("90,269,16", Day11.getResult(Part.TWO, 18).toString());
+		assertEquals("232,251,12", Day11.getResult(Part.TWO, 42).toString());
 	}
 
 	/**
@@ -44,8 +38,8 @@ public class Day11Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day11.getResult(Part.TWO, Day11.getInput(0));
+		String result = Day11.getResult(Part.TWO, 7139);
 		System.out.println("Day 11 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals("229,61,16", result);
 	}
 }
