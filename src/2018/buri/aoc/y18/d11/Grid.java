@@ -15,7 +15,7 @@ public class Grid extends AbstractGrid {
 	 * Constructor. Initializes all power levels.
 	 */
 	public Grid(int size, int serial) {
-		super(size, 0);
+		super(size);
 		_serial = serial;
 		for (int x = 0; x < getSize(); x++) {
 			for (int y = 0; y < getSize(); y++) {
@@ -89,7 +89,7 @@ public class Grid extends AbstractGrid {
 		for (int y = 0; y < getSize(); y++) {
 			for (int x = 0; x < getSize(); x++) {
 				int value = getGrid()[x][y];
-				buffer.append("\t" + value);
+				buffer.append(value).append("\t");
 			}
 			buffer.append("\n");
 		}
