@@ -1,7 +1,7 @@
 package buri.aoc.viz;
 
 /**
- * Metadata for each 2018 puzzle.
+ * Metadata for each puzzle.
  * 
  * @author Brian Uri!
  */
