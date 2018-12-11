@@ -5,34 +5,39 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Representation of the string-named registers containing integer values. Initialized at 0.
+ * Abstract base class for registers in each part.
  * 
  * @author Brian Uri!
  */
-public class Registers {
-
+public abstract class AbstractRegisters {
+	private int _current = 0;
 	private Map<String, Long> _registers;
+	private List<String> _instructions;
 
 	/**
 	 * Constructor
 	 */
-	public Registers() {
+	public AbstractRegisters(List<String> instructions) {
 		_registers = new HashMap<String, Long>();
+		_instructions = instructions;
+		for (char name = 'a'; name <= 'z'; name++) {
+			_registers.put(String.valueOf(name), 0L);
+		}
+		setCurrent(0);
 	}
 
 	/**
 	 * Executes a sequence of instructions.
 	 * 
-	 * snd X plays a sound with a frequency equal to the value of X.
+	 * snd X does something different depending on the implementation.
+	 * rcv X does something different depending on the implementation.
 	 * set X Y sets register X to the value of Y.
 	 * add X Y increases register X by the value of Y.
 	 * mul X Y sets register X to the result of multiplying the value contained in register X by the value of Y.
 	 * mod X Y sets register X to the remainder of dividing the value contained in register X by the value of Y (that
-	 * 		is, it sets X to the result of X modulo Y).
-	 * rcv X recovers the frequency of the last sound played, but only when the value of X is not zero. (If it is zero,
-	 * 		the command does nothing.)
+	 * is, it sets X to the result of X modulo Y).
 	 * jgz X Y jumps with an offset of the value of Y, but only if the value of X is greater than zero. (An offset of 2
-	 * 		skips the next instruction, an offset of -1 jumps to the previous instruction, and so on.)
+	 * skips the next instruction, an offset of -1 jumps to the previous instruction, and so on.)
 	 * 
 	 * Many of the instructions can take either a register (a single letter) or a number. The value of a register is the
 	 * integer it contains; the value of a number is that number.
@@ -41,12 +46,20 @@ public class Registers {
 	 * instruction, the program continues with the next instruction. Continuing (or jumping) off either end of the
 	 * program terminates it.
 	 */
-	public void process(List<String> instructions) {
-		int current = 0;
+	public void process() {
 		while (true) {
-			String[] tokens = instructions.get(current).split(" ");
+			if (!isWithinInstructions()) {
+				break;
+			}
+			String[] tokens = getInstructions().get(getCurrent()).split(" ");
 			if (tokens[0].equals("snd")) {
-				getRegisters().put("lastFrequency", getParameter(tokens[1]));
+				snd(tokens);
+			}
+			if (tokens[0].equals("rcv")) {
+				boolean continueProcess = rcv(tokens);
+				if (!continueProcess) {
+					break;
+				}
 			}
 			if (tokens[0].equals("set")) {
 				long value = getParameter(tokens[2]);
@@ -67,63 +80,80 @@ public class Registers {
 				long modValue = getParameter(tokens[2]);
 				getRegisters().put(tokens[1], originalValue % modValue);
 			}
-			if (tokens[0].equals("rcv")) {
-				long value = getParameter(tokens[1]);
-				if (value > 0) {
-					long lastFrequency = getValue("lastFrequency");
-					getRegisters().put("lastReceivedFrequency", lastFrequency);
-					if (getValue("firstReceivedFrequency") == 0) {
-						getRegisters().put("firstReceivedFrequency", lastFrequency);
-						break;
-					}
-				}
-			}
 			if (tokens[0].equals("jgz")) {
 				long value = getParameter(tokens[1]);
 				if (value > 0) {
-					current += getParameter(tokens[2]);
+					setCurrent(getCurrent() + getParameter(tokens[2]).intValue());
 				}
 				else {
-					current++;
+					setCurrent(getCurrent() + 1);
 				}
 			}
 			else {
-				current++;
-			}
-			if (current < 0 || current >= instructions.size()) {
-				break;
+				setCurrent(getCurrent() + 1);
 			}
 		}
 	}
 
-	public Long getFrequencyAfterFirstReceive() {
-		return (getValue("firstReceivedFrequency"));
+	/**
+	 * Returns true if the current marker is within the bounds of the input instructions.
+	 */
+	protected boolean isWithinInstructions() {
+		return (getCurrent() >= 0 && getCurrent() < getInstructions().size());
 	}
-	
+
+	/**
+	 * snd X does something different depending on the implementation.
+	 */
+	protected abstract void snd(String[] tokens);
+
+	/**
+	 * rcv X does something different depending on the implementation.
+	 */
+	protected abstract boolean rcv(String[] tokens);
+
 	/**
 	 * Returns the integer value or (if a string), the value in that register.
 	 */
-	private Long getParameter(String parameter) {
+	protected Long getParameter(String parameter) {
 		if (parameter.matches("[a-z]")) {
 			return (getValue(parameter));
 		}
 		return (Long.valueOf(parameter));
 	}
-	
+
 	/**
-	 * Lazy-loads a value from a register. Initializes at zero if the register does not yet exist.
+	 * Loads a value from a register.
 	 */
-	private Long getValue(String register) {
-		if (getRegisters().get(register) == null) {
-			getRegisters().put(register, 0L);
-		}
+	protected Long getValue(String register) {
 		return (getRegisters().get(register));
+	}
+
+	/**
+	 * Accessor for the instructions
+	 */
+	private List<String> getInstructions() {
+		return _instructions;
 	}
 
 	/**
 	 * Accessor for the registers
 	 */
-	private Map<String, Long> getRegisters() {
+	protected Map<String, Long> getRegisters() {
 		return _registers;
+	}
+
+	/**
+	 * Accessor for the current instruction
+	 */
+	public int getCurrent() {
+		return _current;
+	}
+
+	/**
+	 * Accessor for the current instruction
+	 */
+	public void setCurrent(int current) {
+		_current = current;
 	}
 }
