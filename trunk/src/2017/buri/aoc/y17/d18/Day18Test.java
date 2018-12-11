@@ -36,9 +36,9 @@ public class Day18Test {
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(0, Day18.getResult(Part.TWO, Day18.getInput(1)));
+		assertEquals(3, Day18.getResult(Part.TWO, Day18.getInput(2)));
 	}
-
+	
 	/**
 	 * Solves the Part 2 puzzle.
 	 */
@@ -46,6 +46,6 @@ public class Day18Test {
 	public void testPart2Puzzle() {
 		long result = Day18.getResult(Part.TWO, Day18.getInput(0));
 		System.out.println("Day 18 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(7366, result);
 	}
 }
