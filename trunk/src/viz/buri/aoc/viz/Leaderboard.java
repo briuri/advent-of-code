@@ -35,7 +35,7 @@ public class Leaderboard {
 		DESCRIPTIONS.put(8, "license tree");
 		DESCRIPTIONS.put(9, "marble game");
 		DESCRIPTIONS.put(10, "sky writing");
-		DESCRIPTIONS.put(11, "");
+		DESCRIPTIONS.put(11, "fuel cell charges");
 		DESCRIPTIONS.put(12, "");
 		DESCRIPTIONS.put(13, "");
 		DESCRIPTIONS.put(14, "");
