@@ -30,7 +30,7 @@ public class Day11 extends Puzzle {
 		}
 		
 		// Part TWO
-		List<Integer> maxValues = new ArrayList<>();
+		List<Long> maxValues = new ArrayList<>();
 		Map<Integer, Position> positions = new HashMap<>();
 		// Calculate all possible reductions and record the max value from each.
 		for (int squareSumSize = 2; squareSumSize <= gridSize; squareSumSize++) {
@@ -40,7 +40,7 @@ public class Day11 extends Puzzle {
 		}
 
 		// Find the max of all square sums and then trace back to the squareSumSize for that max.
-		int maxValue = Collections.max(maxValues);
+		Long maxValue = Collections.max(maxValues);
 		for (Integer squareSumSize : positions.keySet()) {
 			Position position = positions.get(squareSumSize);
 			if (position.getValue() == maxValue) {

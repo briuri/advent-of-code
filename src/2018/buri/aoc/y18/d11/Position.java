@@ -11,7 +11,7 @@ import buri.aoc.data.AbstractPair;
  */
 public class Position extends AbstractPair {
 
-	private Integer _value = null;
+	private Long _value = null;
 
 	/**
 	 * Constructor
@@ -30,14 +30,14 @@ public class Position extends AbstractPair {
 	/**
 	 * Accessor for the value
 	 */
-	public Integer getValue() {
+	public Long getValue() {
 		return _value;
 	}
 
 	/**
 	 * Accessor for the value
 	 */
-	public void setValue(Integer value) {
+	public void setValue(Long value) {
 		_value = value;
 	}
 }

@@ -1,4 +1,7 @@
 package buri.aoc.data;
+
+import buri.aoc.y18.d11.Position;
+
 /**
  * Base class for 2D square grid data models.
  * 
@@ -12,30 +15,50 @@ package buri.aoc.data;
  */
 public abstract class AbstractGrid {
 	private int _size;
-	private int[][] _grid;
+	private long[][] _grid;
 
 	/**
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public AbstractGrid(int size) {
 		_size = size;
-		_grid = new int[getSize()][getSize()];
+		_grid = new long[getSize()][getSize()];
 	}
 	
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		for (int x = 0; x < getSize(); x++) {
-			buffer.append("\t");
-			for (int y = 0; y < getSize(); y++) {
-				String value = String.valueOf(getGrid()[x][y]);
-				buffer.append(value).append("\t");
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
+				buffer.append(toOutput(getGrid()[x][y]));
 			}
 			buffer.append("\n");
 		}
+		buffer.append("\n");
 		return (buffer.toString());
 	}
 
+	/**
+	 * Implementation-specific means of outputting the value.
+	 */
+	protected String toOutput(long value) {
+		return (String.valueOf(value) + "\t");
+	}
+	
+	/**
+	 * Returns the value at some position.
+	 */
+	public long get(Position p) {
+		return getGrid()[p.getX()][p.getY()];
+	}
+	
+	/**
+	 * Marks a spot on the grid.
+	 */
+	public void set(AbstractPair p, long value) {
+		getGrid()[p.getX()][p.getY()] = value;
+	}
+	
 	/**
 	 * Accessor for the size
 	 */
@@ -46,7 +69,7 @@ public abstract class AbstractGrid {
 	/**
 	 * Accessor for the raw grid.
 	 */
-	protected int[][] getGrid() {
+	protected long[][] getGrid() {
 		return (_grid);
 	}
 }

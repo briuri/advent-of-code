@@ -27,18 +27,16 @@ public class Day12 extends Puzzle {
 	 */
 	public static long getResult(Part part, List<String> input) {
 		Pots pots = new Pots(input);
+		final int iterations = (part == Part.ONE ? 20 : 125);
+		for (int i = 0; i < iterations; i++) {
+			pots.grow();
+		}		
 		if (part == Part.ONE) {
-			for (int i = 0; i < 20; i++) {
-				pots.grow();
-			}
 			return (pots.getGrowthSum());
 		}
 		
 		// Part TWO		
 		// Visual inspection: After 125 iterations, sums are just 109 greater than the last.
-		for (int i = 0; i < 125; i++) {
-			pots.grow();
-		}
 		long sum = pots.getGrowthSum() + (109 * (50000000000L - pots.getGeneration()));
 		return (sum);
 	}

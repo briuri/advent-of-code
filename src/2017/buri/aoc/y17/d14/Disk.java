@@ -33,8 +33,8 @@ public class Disk extends AbstractGrid {
 		int regions = 0;
 		for (int x = 0; x < getGrid().length; x++) {
 			for (int y = 0; y < getGrid()[x].length; y++) {
-				int value = getGrid()[x][y];
-				if (value == -1) {
+				long value = getGrid()[x][y];
+				if (value == -1L) {
 					regions++;
 					touchAdjacentCells(x, y, regions);
 				}
@@ -50,7 +50,7 @@ public class Disk extends AbstractGrid {
 	 * Fills this cell with a value, then fills any immediately adjacent -1 cells with the value. Expands virally out
 	 * until nothing is left to touch.
 	 */
-	private void touchAdjacentCells(int x, int y, int value) {
+	private void touchAdjacentCells(int x, int y, long value) {
 		// Center
 		fillUnevaluatedCell(x, y, value);
 		boolean changed = false;
@@ -87,8 +87,8 @@ public class Disk extends AbstractGrid {
 	/**
 	 * Fills a cell with some value, but only if it is currently -1. Returns true if a cell changed.
 	 */
-	private boolean fillUnevaluatedCell(int x, int y, int value) {
-		int currentValue = getGrid()[x][y];
+	private boolean fillUnevaluatedCell(int x, int y, long value) {
+		long currentValue = getGrid()[x][y];
 		if (currentValue == -1) {
 			getGrid()[x][y] = value;
 			return (true);
