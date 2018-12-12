@@ -28,7 +28,6 @@ public class Leaderboard {
 		visualizeEvent("2017");
 		visualizeEvent("2016");
 	}
-
 	
 	private static void visualizeEvent(String event) {
 		final String currentEvent = "2018";
