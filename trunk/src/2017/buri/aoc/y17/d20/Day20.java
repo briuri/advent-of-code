@@ -28,11 +28,16 @@ public class Day20 extends Puzzle {
 	/**
 	 * Part 1:
 	 * Which particle will stay closest to position <0,0,0> in the long term?
+	 * 
+	 * Part 2:
+	 * How many particles are left after all collisions are resolved?
 	 */
 	public static int getResult(Part part, List<Particle> input) {
 		if (part == Part.ONE) {
 			return (getSlowestAccelerationIndex(input));
 		}
+		
+		// Part TWO
 		for (int i = 0; i < 100; i++) {
 			moveWithCollisions(input);
 		}

@@ -20,6 +20,14 @@ public class Triple {
 		_z = z;
 	}
 
+	/**
+	 * Adds a triple to this one.
+	 */
+	public void add(Triple triple) {
+		setX(getX() + triple.getX());
+		setY(getY() + triple.getY());
+		setZ(getZ() + triple.getZ());
+	}
 	
 	/**
 	 * Returns the Manhattan distance to 0,0,0.
