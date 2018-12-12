@@ -65,7 +65,7 @@ public class Day10 extends Puzzle {
 			}
 			Grid grid = new Grid(maxX + 1);
 			for (Position position : input) {
-				grid.drawPoint(position);
+				grid.set(position, 1L);
 			}
 			return (grid.toString());
 		}

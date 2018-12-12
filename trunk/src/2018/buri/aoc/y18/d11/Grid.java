@@ -55,11 +55,11 @@ public class Grid extends AbstractGrid {
 	 */
 	public Position getMaxValuePosition() {
 		Position maxPosition = null;
-		int maxValue = Integer.MIN_VALUE;
+		long maxValue = Long.MIN_VALUE;
 		for (int x = 0; x < getSize(); x++) {
 			for (int y = 0; y < getSize(); y++) {
 				Position position = new Position(x, y);
-				int value = get(position);
+				long value = get(position);
 				if (value > maxValue) {
 					maxValue = value;
 					position.setValue(value);
@@ -82,35 +82,7 @@ public class Grid extends AbstractGrid {
 		}
 		return (sum);
 	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
-				int value = getGrid()[x][y];
-				buffer.append(value).append("\t");
-			}
-			buffer.append("\n");
-		}
-		buffer.append("\n");
-		return (buffer.toString());
-	}
 	
-	/**
-	 * Returns the value at some position.
-	 */
-	private int get(Position p) {
-		return getGrid()[p.getX()][p.getY()];
-	}
-
-	/**
-	 * Marks a spot on the grid.
-	 */
-	private void set(Position p, int power) {
-		getGrid()[p.getX()][p.getY()] = power;
-	}
-
 	/**
 	 * Accessor for the serial
 	 */

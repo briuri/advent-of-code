@@ -15,14 +15,7 @@ public class SpiralGrid extends AbstractGrid {
 	public SpiralGrid(int size) {
 		super(size);
 	}
-	
-	/**
-	 * Sets the value at some position.
-	 */
-	public void set(Position position, int value) {
-		getGrid()[position.getX()][position.getY()] = value;
-	}
-	
+		
 	/**
 	 * Gets the sum of all adjacent and diagonal values from a position. (0,0) is the top left corner and (x, y) is the
 	 * lower right corner.
