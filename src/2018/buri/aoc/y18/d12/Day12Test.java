@@ -16,12 +16,12 @@ public class Day12Test {
 	@Test
 	public void testGetInput() {
 		List<String> input = Day12.getInput(0);
-		assertEquals(1, input.size());
+		assertEquals(33, input.size());
 	}
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals("", Day12.getResult(Part.ONE, Day12.getInput(1)));
+		assertEquals(325, Day12.getResult(Part.ONE, Day12.getInput(1)));
 	}
 
 	/**
@@ -29,14 +29,9 @@ public class Day12Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day12.getResult(Part.ONE, Day12.getInput(0));
+		long result = Day12.getResult(Part.ONE, Day12.getInput(0));
 		System.out.println("Day 12 Part 1\n\t" + result);
-		assertEquals("", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("", Day12.getResult(Part.TWO, Day12.getInput(1)));
+		assertEquals(4386L, result);
 	}
 
 	/**
@@ -44,8 +39,8 @@ public class Day12Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day12.getResult(Part.TWO, Day12.getInput(0));
+		long result = Day12.getResult(Part.TWO, Day12.getInput(0));
 		System.out.println("Day 12 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals(5450000001166L, result);
 	}
 }
