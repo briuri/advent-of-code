@@ -1,7 +1,5 @@
 package buri.aoc.data;
 
-import buri.aoc.y18.d11.Position;
-
 /**
  * Base class for 2D square grid data models.
  * 
@@ -48,7 +46,7 @@ public abstract class AbstractGrid {
 	/**
 	 * Returns the value at some position.
 	 */
-	public long get(Position p) {
+	public long get(AbstractPair p) {
 		return getGrid()[p.getX()][p.getY()];
 	}
 	
