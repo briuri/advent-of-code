@@ -58,7 +58,7 @@ public class Day09Test {
 	@Test
 	public void testPart1Puzzle() {
 		int result = Day09.getResult(Part.ONE, Day09.getInput(0));
-		System.out.println("Day 0 Part 1\n\t" + result);
+		System.out.println("Day 9 Part 1\n\t" + result);
 		assertEquals(12396, result);
 	}
 
