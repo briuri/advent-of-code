@@ -1,7 +1,5 @@
 package buri.aoc.y18.d13;
 
-import java.util.List;
-
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
@@ -11,23 +9,29 @@ import buri.aoc.Puzzle;
 public class Day13 extends Puzzle {
 
 	/**
-	 * Input: 
-	 * Output: 
+	 * Input: The track map.
+	 * Output: The track map as an object.
 	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/13", fileIndex));
+	public static Tracks getInput(int fileIndex) {
+		return (new Tracks(readFile("2018/13", fileIndex)));
 	}
 	
 	/**
+	 * Part 1:
+	 * You'd like to know the location of the first crash.
 	 * 
+	 * Part 2:
+	 * What is the location of the last cart at the end of the first tick where it is the only cart left?
 	 */
-	public static String getResult(Part part, List<String> input) {
-		for (String data : input) {
-			
-		}
-		if (part == Part.ONE) {
-			return ("");
-		}
-		return ("");
+	public static String getResult(Part part, Tracks tracks) {
+		while (true) {
+			tracks.move();
+			if (part == Part.ONE && tracks.getFirstCollision() != null) {
+				return (tracks.getFirstCollision());		
+			}
+			if (part == Part.TWO && tracks.getCarts().size() == 1) {
+				return (tracks.getLastCartPosition().toString());
+			}
+		}		
 	}
 }
