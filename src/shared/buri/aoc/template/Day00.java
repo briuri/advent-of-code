@@ -22,9 +22,7 @@ public class Day00 extends Puzzle {
 	 * 
 	 */
 	public static String getResult(Part part, List<String> input) {
-		for (String data : input) {
-			
-		}
+
 		if (part == Part.ONE) {
 			return ("");
 		}
