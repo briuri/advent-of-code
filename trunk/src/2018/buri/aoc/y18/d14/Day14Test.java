@@ -2,8 +2,6 @@ package buri.aoc.y18.d14;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.Part;
@@ -14,14 +12,11 @@ import buri.aoc.Part;
 public class Day14Test {
 
 	@Test
-	public void testGetInput() {
-		List<String> input = Day14.getInput(0);
-		assertEquals(1, input.size());
-	}
-
-	@Test
 	public void testPart1Examples() {
-		assertEquals("", Day14.getResult(Part.ONE, Day14.getInput(1)));
+		assertEquals("0124515891", Day14.getResult(Part.ONE, "5"));
+		assertEquals("5158916779", Day14.getResult(Part.ONE, "9"));
+		assertEquals("9251071085", Day14.getResult(Part.ONE, "18"));
+		assertEquals("5941429882", Day14.getResult(Part.ONE, "2018"));		
 	}
 
 	/**
@@ -29,14 +24,17 @@ public class Day14Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day14.getResult(Part.ONE, Day14.getInput(0));
+		String result = Day14.getResult(Part.ONE, "652601");
 		System.out.println("Day 14 Part 1\n\t" + result);
-		assertEquals("", result);
+		assertEquals("1221283494", result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals("", Day14.getResult(Part.TWO, Day14.getInput(1)));
+		assertEquals("5", Day14.getResult(Part.TWO, "01245"));
+	    assertEquals("9", Day14.getResult(Part.TWO, "51589"));
+	    assertEquals("18", Day14.getResult(Part.TWO, "92510"));
+	    assertEquals("2018", Day14.getResult(Part.TWO, "59414"));	    
 	}
 
 	/**
@@ -44,8 +42,8 @@ public class Day14Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day14.getResult(Part.TWO, Day14.getInput(0));
+		String result = Day14.getResult(Part.TWO, "652601");
 		System.out.println("Day 14 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals("20261485", result);
 	}
 }
