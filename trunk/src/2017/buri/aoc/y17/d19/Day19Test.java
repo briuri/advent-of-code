@@ -44,6 +44,6 @@ public class Day19Test {
 	public void testPart2Puzzle() {
 		String result = Day19.getResult(Part.TWO, Day19.getInput(0));
 		System.out.println("Day 19 Part 2\n\t" + result);
-		assertEquals("", result);
+		assertEquals("17302", result);
 	}
 }
