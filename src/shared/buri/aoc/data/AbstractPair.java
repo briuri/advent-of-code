@@ -5,7 +5,7 @@ package buri.aoc.data;
  *  
  * @author Brian Uri!
  */
-public abstract class AbstractPair {
+public abstract class AbstractPair implements Comparable<AbstractPair> {
 	private int _x;
 	private int _y;
 	
@@ -31,6 +31,38 @@ public abstract class AbstractPair {
 		_y = y;
 	}
 
+	/**
+	 * Pairs are compared by y then x (top-left first).
+	 */
+	@Override
+	public int compareTo(AbstractPair o) {
+		int compare = getY() - o.getY();
+		if (compare == 0) {
+			compare = getX() - o.getX();
+		}
+		return compare;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		AbstractPair p = (AbstractPair) obj;
+		return (getX() == p.getX() && getY() == p.getY());
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = getX();
+		result = 7 * getY();
+		return (result);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(getX()).append(",").append(getY());
+		return (buffer.toString());
+	}
+	
 	/**
 	 * Accessor for X
 	 */

@@ -20,13 +20,6 @@ public class Position extends AbstractPair {
 		super(x, y);
 	}
 
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getX()).append(",").append(getY());
-		return (buffer.toString());
-	}
-
 	/**
 	 * Accessor for the value
 	 */

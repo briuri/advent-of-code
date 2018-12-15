@@ -35,9 +35,4 @@ public class Position extends AbstractPair {
 				break;
 		}
 	}
-
-	@Override
-	public String toString() {
-		return (getX() + "," + getY());
-	}
 }

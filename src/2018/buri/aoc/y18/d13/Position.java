@@ -7,7 +7,7 @@ import buri.aoc.data.AbstractPair;
  * 
  * @author Brian Uri!
  */
-public class Position extends AbstractPair implements Comparable<Position> {
+public class Position extends AbstractPair {
 
 	/**
 	 * Constructor
@@ -34,28 +34,5 @@ public class Position extends AbstractPair implements Comparable<Position> {
 				setX(getX() - 1);
 				break;
 		}
-	}
-	
-	@Override
-	public String toString() {
-		return (getX() + "," + getY());
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		Position position = (Position) obj;
-		return (getX() == position.getX() && getY() == position.getY());
-	}
-	
-	/**
-	 * Carts are compared by their position (top-left first).
-	 */
-	@Override
-	public int compareTo(Position o) {
-		int compare = getY() - o.getY();
-		if (compare == 0) {
-			compare = getX() - o.getX();
-		}
-		return compare;
 	}
 }
