@@ -12,6 +12,9 @@ public class Unit implements Comparable<Unit> {
 	private int _health;
 	private int _attackPower;
 
+	public static final char ELF = 'E';
+	public static final char GOBLIN = 'G';
+	
 	/**
 	 * Constructor
 	 */
@@ -49,7 +52,7 @@ public class Unit implements Comparable<Unit> {
 	 * Convenience method for checking if this is an elf.
 	 */
 	public boolean isElf() {
-		return (getType() == 'E');
+		return (getType() == ELF);
 	}
 
 	/**

@@ -21,6 +21,8 @@ public class Grid {
 	private List<Unit> _elves;
 	private List<Unit> _goblins;
 
+	private static final char OPEN = '.';
+	
 	/**
 	 * Constructor
 	 */
@@ -35,7 +37,7 @@ public class Grid {
 			for (int x = 0; x < line.length(); x++) {
 				char type = line.charAt(x);
 				getGrid()[x][y] = type;
-				if (type == 'E' || type == 'G') {
+				if (type == Unit.ELF || type == Unit.GOBLIN) {
 					Unit unit = new Unit(type, new Position(x, y));
 					if (unit.isElf()) {
 						getElves().add(unit);
@@ -77,7 +79,7 @@ public class Grid {
 		if (!unit.isDead() && getAdjacentEnemies(unit).size() == 0) {
 			List<Path> paths = getShortestPathsFor(unit);
 			if (!paths.isEmpty()) {
-				draw(unit.getPosition(), '.');
+				draw(unit.getPosition(), OPEN);
 				unit.setPosition(paths.get(0).getNextPosition());
 				draw(unit.getPosition(), unit.getType());
 			}
@@ -95,7 +97,7 @@ public class Grid {
 				Unit weakest = getWeakestUnit(adjacent);
 				weakest.setHealth(weakest.getHealth() - unit.getAttackPower());
 				if (weakest.isDead()) {
-					draw(weakest.getPosition(), '.');
+					draw(weakest.getPosition(), OPEN);
 					if (weakest.isElf()) {
 						getElves().remove(weakest);
 						setElfDied(true);
@@ -222,7 +224,7 @@ public class Grid {
 		// Remove any that are already filled up.
 		for (Iterator<Position> iterator = openCells.iterator(); iterator.hasNext();) {
 			Position position = iterator.next();
-			if (getGrid()[position.getX()][position.getY()] != '.') {
+			if (getGrid()[position.getX()][position.getY()] != OPEN) {
 				iterator.remove();
 			}
 		}
