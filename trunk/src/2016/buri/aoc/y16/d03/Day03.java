@@ -19,7 +19,11 @@ public class Day03 extends Puzzle {
 	}
 
 	/**
+	 * Part 1:
 	 * In your puzzle input, how many of the listed triangles are possible?
+	 * 
+	 * Part 2:
+	 * In your puzzle input, and instead reading by columns, how many of the listed triangles are possible
 	 */
 	public static int getResult(Part part, List<String> input) {
 		int possible = 0;
