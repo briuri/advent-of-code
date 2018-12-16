@@ -15,13 +15,16 @@ public class Day16Test {
 
 	@Test
 	public void testGetInput() {
+		// Input split into Part 1 and Part 2 files.
 		List<String> input = Day16.getInput(0);
-		assertEquals(1, input.size());
+		assertEquals(3248, input.size());
+		input = Day16.getInput(2);
+		assertEquals(902, input.size());
 	}
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals("", Day16.getResult(Part.ONE, Day16.getInput(1)));
+		assertEquals(1, Day16.getResult(Part.ONE, Day16.getInput(1)));
 	}
 
 	/**
@@ -29,14 +32,9 @@ public class Day16Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Day16.getResult(Part.ONE, Day16.getInput(0));
-		System.out.println("Day 0 Part 1\n\t" + result);
-		assertEquals("", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("", Day16.getResult(Part.TWO, Day16.getInput(1)));
+		int result = Day16.getResult(Part.ONE, Day16.getInput(0));
+		System.out.println("Day 16 Part 1\n\t" + result);
+		assertEquals(592, result);
 	}
 
 	/**
@@ -44,8 +42,8 @@ public class Day16Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Day16.getResult(Part.TWO, Day16.getInput(0));
-		System.out.println("Day 0 Part 2\n\t" + result);
-		assertEquals("", result);
+		int result = Day16.getResult(Part.TWO, Day16.getInput(2));
+		System.out.println("Day 16 Part 2\n\t" + result);
+		assertEquals(557, result);
 	}
 }
