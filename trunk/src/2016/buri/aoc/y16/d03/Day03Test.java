@@ -36,6 +36,6 @@ public class Day03Test {
 	public void testPart2Puzzle() {
 		int result = Day03.getResult(Part.TWO, Day03.getInput(0));
 		System.out.println("Day 3 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(1836, result);
 	}
 }
