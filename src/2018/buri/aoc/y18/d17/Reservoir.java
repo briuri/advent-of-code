@@ -1,6 +1,8 @@
 package buri.aoc.y18.d17;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import buri.aoc.Part;
 
@@ -13,9 +15,11 @@ public class Reservoir {
 	private char[][] _grid;
 	private int _minBoundsY = Integer.MAX_VALUE;
 	private int _maxBoundsY = Integer.MIN_VALUE;
+	private int _reachableTiles = 0;
+	private int _waterTiles = 0;
 
 	private static final Position SPRING_POS = new Position(500, 0);
-	private static final char OPEN = '.';
+	private static final char SAND = '.';
 	private static final char SPRING = '+';
 	private static final char CLAY = '#';
 	private static final char WATER = '~';
@@ -28,7 +32,7 @@ public class Reservoir {
 		_grid = new char[1860][1860];
 		for (int y = 0; y < getGrid().length; y++) {
 			for (int x = 0; x < getGrid().length; x++) {
-				set(x, y, OPEN);
+				set(x, y, SAND);
 			}
 		}
 		set(SPRING_POS.getX(), SPRING_POS.getY(), SPRING);
@@ -63,6 +67,9 @@ public class Reservoir {
 	/**
 	 * Simulates water flowing from the spring until no additional tiles are reached.
 	 * 
+	 * Optimized by keeping track of spill points in a single iteration so we don't recursively reflow area that was
+	 * already traversed. This cut running time down from 10 minutes to less than 1 second.
+	 * 
 	 * Part 1:
 	 * Returns the total number of tiles that can be reached.
 	 * 
@@ -71,25 +78,33 @@ public class Reservoir {
 	 */
 	public int flow(Part part) {
 		int reachableTiles = 0;
+		Set<Position> visitedSpillPoints = new HashSet<Position>();
 		while (true) {
-			flowDown(SPRING_POS);
-			int newReachableTiles = countReachableTiles(true);
+			flowDown(SPRING_POS, visitedSpillPoints);
+			int newReachableTiles = getReachableTiles() + getWaterTiles();
 			if (reachableTiles == newReachableTiles) {
 				break;
 			}
+			visitedSpillPoints.clear();
 			reachableTiles = newReachableTiles;
 		}
 		if (part == Part.ONE) {
 			return (reachableTiles);
 		}
-		return (countReachableTiles(false));
+		return (getWaterTiles());
 	}
 
 	/**
 	 * Marks all tiles below the top tile as REACHABLE until CLAY is hit. If the bottom position is contained by CLAY,
 	 * it is filled with water. Otherwise, we mark tiles as REACHABLE to left and right until water can flow down again.
 	 */
-	private void flowDown(Position top) {
+	private void flowDown(Position top, Set<Position> visitedSpillpoints) {
+		// Short circuit if we already spilled from this position in this iteration.
+		if (visitedSpillpoints.contains(top)) {
+			return;
+		}
+
+		visitedSpillpoints.add(top);
 		Position bottom = getOpenTileBelow(top);
 		for (int y = top.getY() + 1; y <= bottom.getY(); y++) {
 			set(top.getX(), y, REACHABLE);
@@ -101,11 +116,11 @@ public class Reservoir {
 			else {
 				Position leftSpillPoint = flowAcross(bottom, true);
 				if (leftSpillPoint != null) {
-					flowDown(leftSpillPoint);
+					flowDown(leftSpillPoint, visitedSpillpoints);
 				}
 				Position rightSpillPoint = flowAcross(bottom, false);
 				if (rightSpillPoint != null) {
-					flowDown(rightSpillPoint);
+					flowDown(rightSpillPoint, visitedSpillpoints);
 				}
 			}
 		}
@@ -220,23 +235,6 @@ public class Reservoir {
 		return (hasFloor);
 	}
 
-	/**
-	 * Counts all the tiles that are in the path of the water flow. For Part 1, we want all REACHABLE and WATER tiles.
-	 * For Part 2, we just want WATER tiles.
-	 */
-	private int countReachableTiles(boolean includeReachable) {
-		int sum = 0;
-		for (int y = getMinBoundsY(); y < getMaxBoundsY() + 1; y++) {
-			for (int x = 0; x < getGrid().length; x++) {
-				char value = get(x, y);
-				if (value == WATER || (includeReachable && value == REACHABLE)) {
-					sum++;
-				}
-			}
-		}
-		return (sum);
-	}
-
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
@@ -259,9 +257,26 @@ public class Reservoir {
 
 	/**
 	 * Sets a value on the grid.
+	 * 
+	 * Also maintains a running count of REACHABLE or WATER tiles so we don't have to do a full array traversal every
+	 * iteration.
 	 */
 	private void set(int x, int y, char value) {
+		char oldValue = get(x, y);
 		getGrid()[x][y] = value;
+
+		if (y >= getMinBoundsY() && y < getMaxBoundsY() + 1) {
+			if (oldValue == SAND && value == REACHABLE) {
+				setReachableTiles(getReachableTiles() + 1);
+			}
+			else if (oldValue == REACHABLE && value == WATER) {
+				setReachableTiles(getReachableTiles() - 1);
+				setWaterTiles(getWaterTiles() + 1);
+			}
+			else if (oldValue == SAND && value == WATER) {
+				setWaterTiles(getWaterTiles() + 1);
+			}
+		}
 	}
 
 	/**
@@ -283,5 +298,33 @@ public class Reservoir {
 	 */
 	private int getMaxBoundsY() {
 		return _maxBoundsY;
+	}
+
+	/**
+	 * Accessor for the reachableTiles
+	 */
+	private int getReachableTiles() {
+		return _reachableTiles;
+	}
+
+	/**
+	 * Accessor for the reachableTiles
+	 */
+	private void setReachableTiles(int reachableTiles) {
+		_reachableTiles = reachableTiles;
+	}
+
+	/**
+	 * Accessor for the waterTiles
+	 */
+	private int getWaterTiles() {
+		return _waterTiles;
+	}
+
+	/**
+	 * Accessor for the waterTiles
+	 */
+	private void setWaterTiles(int waterTiles) {
+		_waterTiles = waterTiles;
 	}
 }
