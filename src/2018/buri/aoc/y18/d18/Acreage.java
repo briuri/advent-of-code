@@ -40,7 +40,7 @@ public class Acreage extends AbstractCharGrid {
 			char[][] updatedGrid = new char[getGrid().length][getGrid().length];
 			for (int y = 0; y < updatedGrid.length; y++) {
 				for (int x = 0; x < updatedGrid.length; x++) {
-					update(updatedGrid, x, y, getSurroundingValues(x, y));
+					updatedGrid[x][y] = getNewValue(x, y);
 				}
 			}
 			System.arraycopy(updatedGrid, 0, getGrid(), 0, updatedGrid.length);
@@ -61,14 +61,15 @@ public class Acreage extends AbstractCharGrid {
 	}
 
 	/**
-	 * Updates a square based on its adjacent values (all 8 cells around are adjacent).
+	 * Returns the new value for a square based on its adjacent values (all 8 cells around are adjacent).
 	 * 
 	 * OPEN -> TREES if adjacent squares have >= 3 trees.
 	 * TREES -> YARD if adjacent squares have >= 3+ yards.
 	 * YARD -> OPEN if adjacent squares have (<1 yards or <1 trees).
 	 */
-	private void update(char[][] copy, int x, int y, AdjacentValues adjacentValues) {
+	private char getNewValue(int x, int y) {
 		char value = get(x, y);
+		AdjacentValues adjacentValues = getAdjacentValues(x, y);
 		char newValue;
 		if (value == OPEN) {
 			newValue = (adjacentValues.get(Acreage.TREES) >= 3 ? TREES : OPEN);
@@ -80,13 +81,13 @@ public class Acreage extends AbstractCharGrid {
 		else {
 			newValue = (adjacentValues.get(Acreage.TREES) >= 1 && adjacentValues.get(Acreage.YARD) >= 1 ? YARD : OPEN);
 		}
-		copy[x][y] = newValue;
+		return (newValue);
 	}
 
 	/**
 	 * Counts up the tiles in the 8 surrounding cells.
 	 */
-	private AdjacentValues getSurroundingValues(int x, int y) {
+	private AdjacentValues getAdjacentValues(int x, int y) {
 		AdjacentValues adjacentValues = new AdjacentValues();
 		if (y > 0) {
 			// Upper Left
