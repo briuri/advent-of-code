@@ -4,6 +4,7 @@ import java.util.List;
 
 import buri.aoc.Part;
 import buri.aoc.data.AbstractLongGrid;
+import buri.aoc.data.Pair;
 
 /**
  * Data model for keypad
@@ -12,7 +13,7 @@ import buri.aoc.data.AbstractLongGrid;
  */
 public class Keypad extends AbstractLongGrid {
 	
-	private Position _current;
+	private Pair _current;
 	
 	/**
 	 * Constructor (0 represents edge)
@@ -27,7 +28,7 @@ public class Keypad extends AbstractLongGrid {
 			getGrid()[4] = new long[] { 0, 0, 3, 6, 9, 0, 0 };
 			getGrid()[5] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
 			getGrid()[6] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
-			_current = new Position(3, 3);
+			_current = new Pair(3, 3);
 		}
 		else {
 			getGrid()[0] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
@@ -37,7 +38,7 @@ public class Keypad extends AbstractLongGrid {
 			getGrid()[4] = new long[] { 0, 0, 4, 8, 12, 0, 0 };
 			getGrid()[5] = new long[] { 0, 0, 0, 9, 0, 0, 0 };
 			getGrid()[6] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
-			_current = new Position(1, 3);
+			_current = new Pair(1, 3);
 		}
 	}
 
@@ -81,7 +82,7 @@ public class Keypad extends AbstractLongGrid {
 	/**
 	 * Accessor for the current
 	 */
-	public Position getCurrent() {
+	public Pair getCurrent() {
 		return _current;
 	}	
 }

@@ -1,5 +1,7 @@
 package buri.aoc.y18.d15;
 
+import buri.aoc.data.Pair;
+
 /**
  * Data model for a unit (elf or goblin).
  * 
@@ -8,7 +10,7 @@ package buri.aoc.y18.d15;
 public class Unit implements Comparable<Unit> {
 
 	private char _type;
-	private Position _position;
+	private Pair _position;
 	private int _health;
 	private int _attackPower;
 
@@ -18,7 +20,7 @@ public class Unit implements Comparable<Unit> {
 	/**
 	 * Constructor
 	 */
-	public Unit(char type, Position position) {
+	public Unit(char type, Pair position) {
 		_type = type;
 		_position = position;
 		_health = 200;
@@ -72,14 +74,14 @@ public class Unit implements Comparable<Unit> {
 	/**
 	 * Accessor for the position
 	 */
-	public Position getPosition() {
+	public Pair getPosition() {
 		return _position;
 	}
 	
 	/**
 	 * Accessor for the position
 	 */
-	public void setPosition(Position position) {
+	public void setPosition(Pair position) {
 		_position = position;
 	}
 

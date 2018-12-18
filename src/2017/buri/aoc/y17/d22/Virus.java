@@ -1,18 +1,21 @@
 package buri.aoc.y17.d22;
 
+import buri.aoc.data.Direction;
+import buri.aoc.data.Pair;
+
 /**
  * Data class for the virus carrier.
  * 
  * @author Brian Uri!
  */
 public class Virus {
-	private Position _position;
+	private Pair _position;
 	private Direction _direction;
 
 	/**
 	 * Constructor
 	 */
-	public Virus(Position position) {
+	public Virus(Pair position) {
 		_position = position;
 		setDirection(Direction.UP);
 	}
@@ -36,7 +39,7 @@ public class Virus {
 			// Do nothing.
 		}
 		else if (node == Cluster.FLAGGED) {
-			setDirection(getDirection().reverse());
+			setDirection(getDirection().turnAround());
 		}
 		else if (node == Cluster.INFECTED) {
 			setDirection(getDirection().turnRight());
@@ -58,7 +61,7 @@ public class Virus {
 	/**
 	 * Accessor for the position
 	 */
-	public Position getPosition() {
+	public Pair getPosition() {
 		return _position;
 	}
 

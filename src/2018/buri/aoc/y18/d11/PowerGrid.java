@@ -7,14 +7,14 @@ import buri.aoc.data.AbstractLongGrid;
  * 
  * @author Brian Uri!
  */
-public class Grid extends AbstractLongGrid {
+public class PowerGrid extends AbstractLongGrid {
 
 	private int _serial;
 
 	/**
 	 * Constructor. Initializes all power levels.
 	 */
-	public Grid(int size, int serial) {
+	public PowerGrid(int size, int serial) {
 		super(size);
 		_serial = serial;
 		for (int x = 0; x < getSize(); x++) {
@@ -39,8 +39,8 @@ public class Grid extends AbstractLongGrid {
 	/**
 	 * Generates a reduced grid containing the sums of squares within the larger grid.
 	 */
-	public Grid getReduction(int squareSumSize) {
-		Grid grid = new Grid(getGrid().length - (squareSumSize - 1), 0);
+	public PowerGrid getReduction(int squareSumSize) {
+		PowerGrid grid = new PowerGrid(getGrid().length - (squareSumSize - 1), 0);
 		for (int x = 0; x < grid.getSize(); x++) {
 			for (int y = 0; y < grid.getSize(); y++) {
 				Position upperLeft = new Position(x, y);

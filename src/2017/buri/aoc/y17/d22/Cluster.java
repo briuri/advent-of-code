@@ -4,13 +4,11 @@ import java.util.List;
 
 import buri.aoc.Part;
 import buri.aoc.data.AbstractLongGrid;
+import buri.aoc.data.Pair;
 
 /**
- * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two
- * perpendicular pieces of track; for example, this is a closed loop:
- * 
- * Several carts are also on the tracks. Carts always face either up (^), down (v), left (<), or right (>). (On your
- * initial map, the track under each cart is a straight path matching the direction the cart is facing.)
+ * Clean nodes are shown as .; infected nodes are shown as #. This map only shows the center of the grid; there are many
+ * more nodes beyond those shown, but none of them are currently infected.
  * 
  * @author Brian Uri!
  */
@@ -35,12 +33,12 @@ public class Cluster extends AbstractLongGrid {
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
-				Position position = new Position(x + offset, y + offset);
+				Pair position = new Pair(x + offset, y + offset);
 				char icon = line.charAt(x);
 				set(position, (icon == '#' ? INFECTED : CLEAN));
 			}
 		}
-		_virus = new Virus(new Position(centerCoord, centerCoord));
+		_virus = new Virus(new Pair(centerCoord, centerCoord));
 		setInfections(0);
 	}
 

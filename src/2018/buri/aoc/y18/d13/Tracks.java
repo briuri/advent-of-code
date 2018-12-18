@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import buri.aoc.data.AbstractLongGrid;
+import buri.aoc.data.AbstractCharGrid;
+import buri.aoc.data.Direction;
+import buri.aoc.data.Pair;
 
 /**
  * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two
@@ -15,7 +17,7 @@ import buri.aoc.data.AbstractLongGrid;
  * 
  * @author Brian Uri!
  */
-public class Tracks extends AbstractLongGrid {
+public class Tracks extends AbstractCharGrid {
 	private List<Cart> _carts = new ArrayList<>();
 	private String _firstCollision = null;
 	private int _iteration = 0;
@@ -28,21 +30,20 @@ public class Tracks extends AbstractLongGrid {
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
-				Position position = new Position(x, y);
 				char icon = line.charAt(x);
-				set(position, (long) icon);
+				set(x, y, icon);
 				
 				// Create carts and reveal the tracks underneath them.
 				if (Direction.getDirectionFor(icon) != null) {
-					getCarts().add(new Cart(position, icon));
+					getCarts().add(new Cart(new Pair(x, y), icon));
 					switch (icon) {
 						case '<':
 						case '>':
-							set(position, (long) '-');
+							set(x, y, '-');
 							break;
 						case '^':
 						case 'v':
-							set(position, (long) '|');
+							set(x, y, '|');
 							break;
 					}
 				}
@@ -65,7 +66,7 @@ public class Tracks extends AbstractLongGrid {
 				continue;
 			}
 			cart.move();
-			char trackUnderCart = (char) get(cart.getPosition());
+			char trackUnderCart = get(cart.getPosition());
 			cart.turn(trackUnderCart);
 
 			/**
@@ -88,15 +89,10 @@ public class Tracks extends AbstractLongGrid {
 		setIteration(getIteration() + 1);
 	}
 
-	@Override
-	protected String toOutput(long value) {
-		return (String.valueOf((char) value));
-	}
-
 	/**
 	 * Returns the position of the last cart.
 	 */
-	public Position getLastCartPosition() {
+	public Pair getLastCartPosition() {
 		return (getCarts().get(0).getPosition());
 	}
 	

@@ -1,6 +1,7 @@
 package buri.aoc.y17.d03;
 
 import buri.aoc.data.AbstractLongGrid;
+import buri.aoc.data.Pair;
 
 /**
  * Mutable data class for the spiral memory grid.
@@ -20,34 +21,34 @@ public class SpiralGrid extends AbstractLongGrid {
 	 * Gets the sum of all adjacent and diagonal values from a position. (0,0) is the top left corner and (x, y) is the
 	 * lower right corner.
 	 */
-	public int getSurroundingValues(Position position) {
+	public int getSurroundingValues(Pair position) {
 		int sum = 0;
 		if (position.getY() > 0) {
 			// Upper Left
 			if (position.getX() > 0) {
 				sum += getGrid()[position.getX() - 1][position.getY() - 1];
 			}
-			// Left
+			// Up
 			sum += getGrid()[position.getX()][position.getY() - 1];
-			// Lower Left
+			// Upper Right
 			if (position.getX() < getGrid().length - 1) {
 				sum += getGrid()[position.getX() + 1][position.getY() - 1];
 			}
 		}
 		if (position.getX() > 0) {
-			// Up
+			// Left
 			sum += getGrid()[position.getX() - 1][position.getY()];
 		}
 		if (position.getX() < getGrid().length - 1) {
-			// Down
+			// Right
 			sum += getGrid()[position.getX() + 1][position.getY()];
 		}
 		if (position.getY() < getGrid().length - 1) {
-			// Upper Right
+			// Left Left
 			if (position.getX() > 0) {
 				sum += getGrid()[position.getX() - 1][position.getY() + 1];
 			}
-			// Right
+			// Down
 			sum += getGrid()[position.getX()][position.getY() + 1];
 			// Lower Right
 			if (position.getX() < getGrid().length - 1) {

@@ -1,6 +1,6 @@
 package buri.aoc.y18.d11;
 
-import buri.aoc.data.AbstractPair;
+import buri.aoc.data.Pair;
 
 /**
  * Integer-based ordered pair class representing a position on the grid.
@@ -9,7 +9,7 @@ import buri.aoc.data.AbstractPair;
  * 
  * @author Brian Uri!
  */
-public class Position extends AbstractPair {
+public class Position extends Pair {
 
 	private Long _value = null;
 

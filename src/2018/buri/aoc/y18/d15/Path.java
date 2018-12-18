@@ -5,19 +5,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import buri.aoc.data.Pair;
+
 /**
  * A start-to-end ordered path between two positions, built from a breadth-first search.
  * 
  * @author Brian Uri!
  */
 public class Path implements Comparable<Path> {
-	private List<Position> _path = new ArrayList<>();
+	private List<Pair> _path = new ArrayList<>();
 
 	/**
 	 * Constructor
 	 */
-	public Path(Position start, Position end, Map<Position, Position> cameFrom) {
-		Position current = end;
+	public Path(Pair start, Pair end, Map<Pair, Pair> cameFrom) {
+		Pair current = end;
 		while (current != null) {
 			getPath().add(current);
 			current = cameFrom.get(current);
@@ -29,7 +31,7 @@ public class Path implements Comparable<Path> {
 	 * Returns the next position on the path (assuming the unit is at the 1st one and needs to move). All paths have at
 	 * least 2 nodes.
 	 */
-	public Position getNextPosition() {
+	public Pair getNextPosition() {
 		return (getPath().get(1));
 	}
 
@@ -48,7 +50,7 @@ public class Path implements Comparable<Path> {
 	/**
 	 * Accessor for the raw list of path positions
 	 */
-	private List<Position> getPath() {
+	private List<Pair> getPath() {
 		return _path;
 	}
 }

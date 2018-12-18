@@ -23,9 +23,9 @@ public class Day11 extends Puzzle {
 	 */
 	public static String getResult(Part part, int serial) {
 		final int gridSize = 300;
-		Grid grid = new Grid(gridSize, serial);
+		PowerGrid grid = new PowerGrid(gridSize, serial);
 		if (part == Part.ONE) {
-			Grid reduction = grid.getReduction(3);
+			PowerGrid reduction = grid.getReduction(3);
 			return (reduction.getMaxValuePosition().toString());
 		}
 		

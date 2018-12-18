@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import buri.aoc.data.Pair;
+
 /**
  * @author Brian Uri!
  */
@@ -13,7 +15,7 @@ public class Day06Test {
 
 	@Test
 	public void testGetInput() {
-		List<Position> input = Day06.getInput(0);
+		List<Pair> input = Day06.getInput(0);
 		assertEquals(50, input.size());
 	}
 

@@ -1,13 +1,13 @@
 package buri.aoc.y18.d10;
 
-import buri.aoc.data.AbstractPair;
+import buri.aoc.data.Pair;
 
 /**
  * Integer-based ordered pair class representing a movable position on a grid.
  * 
  * @author Brian Uri!
  */
-public class Position extends AbstractPair {
+public class Position extends Pair {
 	private int _originalX;
 	private int _originalY;
 	private int _velocityX;
