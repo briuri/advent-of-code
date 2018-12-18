@@ -2,6 +2,8 @@ package buri.aoc.y17.d03;
 
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
+import buri.aoc.data.Direction;
+import buri.aoc.data.Pair;
 
 /**
  * You come across an experimental new kind of memory stored on an infinite two-dimensional grid.
@@ -164,9 +166,9 @@ public class Day03 extends Puzzle {
 
 		// Start filling grid from center.
 		int currentRing = 1;
-		Position position = new Position(CENTER_GRID_COORD, CENTER_GRID_COORD);
+		Pair position = new Pair(CENTER_GRID_COORD, CENTER_GRID_COORD);
 		grid.set(position, 1);
-		position.moveRight();
+		position.move(Direction.RIGHT);
 		
 		// Iterate around the spiral, filling in values.
 		while (currentRing <= MAX_RING_VALUE) {
@@ -177,7 +179,7 @@ public class Day03 extends Puzzle {
 					return (sum);
 				}
 				grid.set(position, sum);
-				position.moveUp();
+				position.move(Direction.UP);
 			}
 			// Fill values going left.
 			for (int lefts = 0; lefts < currentRing + 1; lefts++) {
@@ -186,7 +188,7 @@ public class Day03 extends Puzzle {
 					return (sum);
 				}
 				grid.set(position, sum);
-				position.moveLeft();
+				position.move(Direction.LEFT);
 			}
 			// Fill values going down.
 			for (int downs = 0; downs < currentRing + 1; downs++) {
@@ -195,7 +197,7 @@ public class Day03 extends Puzzle {
 					return (sum);
 				}
 				grid.set(position, sum);
-				position.moveDown();
+				position.move(Direction.DOWN);
 			}
 			// Fill values going right.
 			for (int rights = 0; rights < currentRing + 2; rights++) {
@@ -204,7 +206,7 @@ public class Day03 extends Puzzle {
 					return (sum);
 				}
 				grid.set(position, sum);
-				position.moveRight();
+				position.move(Direction.RIGHT);
 			}			
 			currentRing = currentRing + 2;
 		}

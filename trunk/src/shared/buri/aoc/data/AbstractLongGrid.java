@@ -46,14 +46,14 @@ public abstract class AbstractLongGrid {
 	/**
 	 * Returns the value at some position.
 	 */
-	public long get(AbstractPair p) {
+	public long get(Pair p) {
 		return getGrid()[p.getX()][p.getY()];
 	}
 	
 	/**
 	 * Marks a spot on the grid.
 	 */
-	public void set(AbstractPair p, long value) {
+	public void set(Pair p, long value) {
 		getGrid()[p.getX()][p.getY()] = value;
 	}
 	

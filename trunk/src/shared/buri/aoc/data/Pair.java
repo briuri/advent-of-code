@@ -5,19 +5,19 @@ package buri.aoc.data;
  *  
  * @author Brian Uri!
  */
-public abstract class AbstractPair implements Comparable<AbstractPair> {
+public class Pair implements Comparable<Pair> {
 	private int _x;
 	private int _y;
 	
 	/**
 	 * Base constructor
 	 */
-	protected AbstractPair() {}
+	protected Pair() {}
 	
 	/**
-	 * String-based Constructor
+	 * String-based Constructor with format "x, y"
 	 */
-	public AbstractPair(String data) {
+	public Pair(String data) {
 		String tokens[] = data.split(", ");
 		_x = Integer.valueOf(tokens[0]);
 		_y = Integer.valueOf(tokens[1]);
@@ -26,16 +26,36 @@ public abstract class AbstractPair implements Comparable<AbstractPair> {
 	/**
 	 * Integer-based Constructor
 	 */
-	public AbstractPair(int x, int y) {
+	public Pair(int x, int y) {
 		_x = x;
 		_y = y;
 	}
 
 	/**
+	 * Moves the position 1 step in a direction.
+	 */
+	public void move(Direction direction) {
+		switch (direction) {
+			case UP:
+				setY(getY() - 1);
+				break;
+			case RIGHT:
+				setX(getX() + 1);
+				break;
+			case DOWN:
+				setY(getY() + 1);
+				break;
+			case LEFT:
+				setX(getX() - 1);
+				break;
+		}
+	}
+	
+	/**
 	 * Pairs are compared by y then x (top-left first).
 	 */
 	@Override
-	public int compareTo(AbstractPair o) {
+	public int compareTo(Pair o) {
 		int compare = getY() - o.getY();
 		if (compare == 0) {
 			compare = getX() - o.getX();
@@ -45,7 +65,7 @@ public abstract class AbstractPair implements Comparable<AbstractPair> {
 	
 	@Override
 	public boolean equals(Object obj) {
-		AbstractPair p = (AbstractPair) obj;
+		Pair p = (Pair) obj;
 		return (getX() == p.getX() && getY() == p.getY());
 	}
 	

@@ -23,6 +23,7 @@ public class Day10Test {
 	public void testPart1Examples() {
 		// HI
 		String result = Day10.getResult(Part.ONE, Day10.getInput(1));
+		System.out.println(result);
 		assertTrue(result.startsWith("#   #  ###\n"));
 	}
 

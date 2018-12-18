@@ -1,19 +1,22 @@
 package buri.aoc.y18.d13;
 
+import buri.aoc.data.Direction;
+import buri.aoc.data.Pair;
+
 /**
  * Data class for the cart.
  * 
  * @author Brian Uri!
  */
 public class Cart implements Comparable<Cart> {
-	private Position _position;
+	private Pair _position;
 	private Direction _direction;
 	private int _intersectionCount;
 
 	/**
 	 * Constructor
 	 */
-	public Cart(Position position, char icon) {
+	public Cart(Pair position, char icon) {
 		_position = position;
 		setDirection(Direction.getDirectionFor(icon));
 		setIntersectionCount(0);
@@ -91,7 +94,7 @@ public class Cart implements Comparable<Cart> {
 	/**
 	 * Accessor for the position
 	 */
-	public Position getPosition() {
+	public Pair getPosition() {
 		return _position;
 	}
 

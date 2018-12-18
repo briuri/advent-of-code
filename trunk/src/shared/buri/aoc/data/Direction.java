@@ -1,12 +1,17 @@
-package buri.aoc.y18.d13;
+package buri.aoc.data;
 
 /**
- * Representation of the way a cart is facing (up, down, left, right) with commands to rotate.
+ * Representation of the way something is facing.
  * 
  * @author Brian Uri!
  */
 public enum Direction {
 	UP('^') {	
+		@Override
+		public Direction turnAround() {
+			return (DOWN);
+		}
+		
 		@Override
         public Direction turnLeft() {
             return (LEFT);
@@ -17,7 +22,12 @@ public enum Direction {
             return (RIGHT);
         }
 	},
-	DOWN('v') {		
+	DOWN('v') {	
+		@Override
+		public Direction turnAround() {
+			return (UP);
+		}
+		
 		@Override
         public Direction turnLeft() {
             return (RIGHT);
@@ -30,6 +40,11 @@ public enum Direction {
 	},
 	LEFT('<') {
 		@Override
+		public Direction turnAround() {
+			return (RIGHT);
+		}
+		
+		@Override
         public Direction turnLeft() {
             return (DOWN);
         }
@@ -41,6 +56,11 @@ public enum Direction {
 	},
 	RIGHT('>') {
 		@Override
+		public Direction turnAround() {
+			return (LEFT);
+		}
+		
+		@Override
         public Direction turnLeft() {
             return (UP);
         }
@@ -51,6 +71,7 @@ public enum Direction {
         }
 	};
 	
+	public abstract Direction turnAround();
 	public abstract Direction turnLeft();
 	public abstract Direction turnRight();
 	

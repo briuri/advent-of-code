@@ -3,8 +3,9 @@ package buri.aoc.y17.d19;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.data.AbstractLongGrid;
-import buri.aoc.y17.d19.Position.Direction;
+import buri.aoc.data.AbstractCharGrid;
+import buri.aoc.data.Direction;
+import buri.aoc.data.Pair;
 
 /**
  * Data model for the routing diagram.
@@ -19,10 +20,11 @@ import buri.aoc.y17.d19.Position.Direction;
  * 
  * @author Brian Uri!
  */
-public class Diagram extends AbstractLongGrid {
+public class Diagram extends AbstractCharGrid {
 
 	private int _steps = 0;
-	private Position _current = null;
+	private Pair _currentPosition = null;
+	private Direction _currentDirection = null;
 	private List<Character> _breadcrumbs = new ArrayList<>();
 
 	private static final char BLANK = ' ';
@@ -39,10 +41,11 @@ public class Diagram extends AbstractLongGrid {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
 				char value = line.charAt(x);
-				if (value == VERTICAL && getCurrent() == null) {
-					setCurrent(new Position(x, y));
+				if (value == VERTICAL && getCurrentPosition() == null) {
+					setCurrentPosition(new Pair(x, y));
+					setCurrentDirection(Direction.DOWN);
 				}
-				set(new Position(x, y), (long) value);
+				set(x, y, value);
 			}
 		}
 	}
@@ -51,15 +54,15 @@ public class Diagram extends AbstractLongGrid {
 	 * Follows the path to the end and returns the string of letters.
 	 */
 	public String run() {
-		while (isBounded(getCurrent()) && getCurrent().getDirection() != Direction.STOPPED) {
+		while (isBounded(getCurrentPosition()) && getCurrentDirection() != null) {
 			setSteps(getSteps() + 1);
-			getCurrent().move();
-			char value = (char) get(getCurrent());
+			getCurrentPosition().move(getCurrentDirection());
+			char value = (char) get(getCurrentPosition());
 			if (value == HORIZONTAL || value == VERTICAL) {
 				continue;
 			}
 			if (value == CORNER || value == BLANK) {
-				getCurrent().setDirection(getNextDirection());
+				setCurrentDirection(getNextDirection());
 			}
 			else {
 				getBreadcrumbs().add(value);
@@ -76,50 +79,45 @@ public class Diagram extends AbstractLongGrid {
 	 * Determines the next direction at a corner. Assumes 1 true path and always 90 degrees.
 	 */
 	private Direction getNextDirection() {
-		Position up = new Position(getCurrent().getX(), getCurrent().getY() - 1);
-		Position right = new Position(getCurrent().getX() + 1, getCurrent().getY());
-		Position down = new Position(getCurrent().getX(), getCurrent().getY() + 1);
-		Position left = new Position(getCurrent().getX() - 1, getCurrent().getY());
-		Direction next = Direction.STOPPED;
-		switch (getCurrent().getDirection()) {
-			case UP:
-			case DOWN:
-				if (isBounded(left) && get(left) != BLANK) {
-					next = Direction.LEFT;
-				}
-				else if (isBounded(right) && get(right) != BLANK) {
-					next = Direction.RIGHT;
-				}
-				break;
-			case RIGHT:
-			case LEFT:
-				if (isBounded(up) && get(up) != BLANK) {
-					next = Direction.UP;
-				}
-				else if (isBounded(down) && get(down) != BLANK) {
-					next = Direction.DOWN;
-				}
-				break;
-			case STOPPED:
-				// Fall through.
+		Pair up = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() - 1);
+		Pair right = new Pair(getCurrentPosition().getX() + 1, getCurrentPosition().getY());
+		Pair down = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() + 1);
+		Pair left = new Pair(getCurrentPosition().getX() - 1, getCurrentPosition().getY());
+		Direction next = null;
+		if (getCurrentDirection() != null) {
+			switch (getCurrentDirection()) {
+				case UP:
+				case DOWN:
+					if (isBounded(left) && get(left) != BLANK) {
+						next = Direction.LEFT;
+					}
+					else if (isBounded(right) && get(right) != BLANK) {
+						next = Direction.RIGHT;
+					}
+					break;
+				case RIGHT:
+				case LEFT:
+					if (isBounded(up) && get(up) != BLANK) {
+						next = Direction.UP;
+					}
+					else if (isBounded(down) && get(down) != BLANK) {
+						next = Direction.DOWN;
+					}
+					break;
+			}
 		}
 		return (next);
 	}
-	
+
 	/**
 	 * Returns true if position is within the diagram.
 	 */
-	private boolean isBounded(Position position) {
-		boolean xBounded = (position.getX() >= 0 && position.getX() < getSize());
-		boolean yBounded = (position.getY() >= 0 && position.getY() < getSize());
+	private boolean isBounded(Pair position) {
+		boolean xBounded = (position.getX() >= 0 && position.getX() < getGrid().length);
+		boolean yBounded = (position.getY() >= 0 && position.getY() < getGrid().length);
 		return (xBounded && yBounded);
 	}
 	
-	@Override
-	protected String toOutput(long value) {
-		return (String.valueOf((char) value));
-	}
-
 	/**
 	 * Accessor for the steps
 	 */
@@ -135,19 +133,33 @@ public class Diagram extends AbstractLongGrid {
 	}
 	
 	/**
-	 * Accessor for the current
+	 * Accessor for the current position
 	 */
-	private Position getCurrent() {
-		return _current;
+	private Pair getCurrentPosition() {
+		return _currentPosition;
 	}
 
 	/**
-	 * Accessor for the current
+	 * Accessor for the current position
 	 */
-	private void setCurrent(Position current) {
-		_current = current;
+	private void setCurrentPosition(Pair currentPosition) {
+		_currentPosition = currentPosition;
 	}
 
+	/**
+	 * Accessor for the current direction
+	 */
+	private Direction getCurrentDirection() {
+		return _currentDirection;
+	}
+
+	/**
+	 * Accessor for the current direction
+	 */
+	private void setCurrentDirection(Direction currentDirection) {
+		_currentDirection = currentDirection;
+	}
+	
 	/**
 	 * Accessor for the breadcrumbs
 	 */

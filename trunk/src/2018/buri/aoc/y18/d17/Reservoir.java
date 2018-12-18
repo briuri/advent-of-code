@@ -6,6 +6,7 @@ import java.util.Set;
 
 import buri.aoc.Part;
 import buri.aoc.data.AbstractCharGrid;
+import buri.aoc.data.Pair;
 
 /**
  * Model for the reservoir
@@ -18,7 +19,7 @@ public class Reservoir extends AbstractCharGrid {
 	private int _reachableTiles = 0;
 	private int _waterTiles = 0;
 
-	private static final Position SPRING_POS = new Position(500, 0);
+	private static final Pair SPRING_POS = new Pair(500, 0);
 	private static final char SAND = '.';
 	private static final char SPRING = '+';
 	private static final char CLAY = '#';
@@ -78,7 +79,7 @@ public class Reservoir extends AbstractCharGrid {
 	 */
 	public int flow(Part part) {
 		int reachableTiles = 0;
-		Set<Position> visitedSpillPoints = new HashSet<Position>();
+		Set<Pair> visitedSpillPoints = new HashSet<Pair>();
 		while (true) {
 			flowDown(SPRING_POS, visitedSpillPoints);
 			int newReachableTiles = getReachableTiles() + getWaterTiles();
@@ -98,14 +99,14 @@ public class Reservoir extends AbstractCharGrid {
 	 * Marks all tiles below the top tile as REACHABLE until CLAY is hit. If the bottom position is contained by CLAY,
 	 * it is filled with water. Otherwise, we mark tiles as REACHABLE to left and right until water can flow down again.
 	 */
-	private void flowDown(Position top, Set<Position> visitedSpillpoints) {
+	private void flowDown(Pair top, Set<Pair> visitedSpillpoints) {
 		// Short circuit if we already spilled from this position in this iteration.
 		if (visitedSpillpoints.contains(top)) {
 			return;
 		}
 
 		visitedSpillpoints.add(top);
-		Position bottom = getOpenTileBelow(top);
+		Pair bottom = getOpenTileBelow(top);
 		for (int y = top.getY() + 1; y <= bottom.getY(); y++) {
 			set(top.getX(), y, REACHABLE);
 		}
@@ -114,11 +115,11 @@ public class Reservoir extends AbstractCharGrid {
 				fillAcross(bottom);
 			}
 			else {
-				Position leftSpillPoint = flowAcross(bottom, true);
+				Pair leftSpillPoint = flowAcross(bottom, true);
 				if (leftSpillPoint != null) {
 					flowDown(leftSpillPoint, visitedSpillpoints);
 				}
-				Position rightSpillPoint = flowAcross(bottom, false);
+				Pair rightSpillPoint = flowAcross(bottom, false);
 				if (rightSpillPoint != null) {
 					flowDown(rightSpillPoint, visitedSpillpoints);
 				}
@@ -129,7 +130,7 @@ public class Reservoir extends AbstractCharGrid {
 	/**
 	 * Flows water left until it hits CLAY or a hole in the CLAY to flow down from. Returns the spill point.
 	 */
-	private Position flowAcross(Position start, boolean goLeft) {
+	private Pair flowAcross(Pair start, boolean goLeft) {
 		if (goLeft) {
 			for (int x = start.getX(); x >= 0; x--) {
 				if (get(x, start.getY()) == CLAY) {
@@ -138,7 +139,7 @@ public class Reservoir extends AbstractCharGrid {
 				set(x, start.getY(), REACHABLE);
 				char valueBelow = get(x, start.getY() + 1);
 				if (valueBelow != CLAY && valueBelow != WATER) {
-					return (new Position(x, start.getY()));
+					return (new Pair(x, start.getY()));
 				}
 			}
 		}
@@ -150,7 +151,7 @@ public class Reservoir extends AbstractCharGrid {
 				set(x, start.getY(), REACHABLE);
 				char valueBelow = get(x, start.getY() + 1);
 				if (valueBelow != CLAY && valueBelow != WATER) {
-					return (new Position(x, start.getY()));
+					return (new Pair(x, start.getY()));
 				}
 			}
 		}
@@ -160,7 +161,7 @@ public class Reservoir extends AbstractCharGrid {
 	/**
 	 * Fills a contained row with standing water, going left to CLAY, then right to CLAY from the start.
 	 */
-	private void fillAcross(Position start) {
+	private void fillAcross(Pair start) {
 		for (int x = start.getX(); x >= 0; x--) {
 			if (get(x, start.getY()) == CLAY) {
 				break;
@@ -178,7 +179,7 @@ public class Reservoir extends AbstractCharGrid {
 	/**
 	 * Finds the first position below the top one that is not WATER or CLAY.
 	 */
-	private Position getOpenTileBelow(Position top) {
+	private Pair getOpenTileBelow(Pair top) {
 		int y;
 		for (y = top.getY(); y < getGrid().length; y++) {
 			char value = get(top.getX(), y);
@@ -186,13 +187,13 @@ public class Reservoir extends AbstractCharGrid {
 				break;
 			}
 		}
-		return (new Position(top.getX(), y - 1));
+		return (new Pair(top.getX(), y - 1));
 	}
 
 	/**
 	 * Returns true if the position is at the bottom of the usable grid.
 	 */
-	private boolean isOffGrid(Position position) {
+	private boolean isOffGrid(Pair position) {
 		return (position.getY() + 1 == getGrid().length);
 	}
 
@@ -200,7 +201,7 @@ public class Reservoir extends AbstractCharGrid {
 	 * Returns true if the position has CLAY to the left and right, and a continous CLAY or WATER floor underneath it
 	 * (between the left/right bounds).
 	 */
-	private boolean isContained(Position position) {
+	private boolean isContained(Pair position) {
 		int minX = -1;
 		int maxX = -1;
 
@@ -241,7 +242,7 @@ public class Reservoir extends AbstractCharGrid {
 	 * Also maintains a running count of REACHABLE or WATER tiles so we don't have to do a full array traversal every
 	 * iteration.
 	 */
-	protected void set(int x, int y, char value) {
+	public void set(int x, int y, char value) {
 		char oldValue = get(x, y);
 		super.set(x, y, value);
 

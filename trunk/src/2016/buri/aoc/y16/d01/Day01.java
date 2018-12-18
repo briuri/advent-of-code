@@ -7,6 +7,7 @@ import java.util.Set;
 
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
+import buri.aoc.data.Pair;
 
 /**
  * @author Brian Uri!
@@ -33,7 +34,7 @@ public class Day01 extends Puzzle {
 	 * How many blocks away is the first location you visit twice?
 	 */
 	public static int getResult(Part part, List<String> input) {
-		Position position = followInstructions(part, input);
+		Pair position = followInstructions(part, input);
 		return (Math.abs(position.getX()) + Math.abs(position.getY()));
 	}
 	
@@ -44,33 +45,33 @@ public class Day01 extends Puzzle {
 	 * Part 2:
 	 * How many blocks away is the first location you visit twice?
 	 */
-	private static Position followInstructions(Part part, List<String> input) {
-		Position position = new Position(0, 0);
+	private static Pair followInstructions(Part part, List<String> input) {
+		Pair position = new Pair(0, 0);
 		Direction direction = Direction.NORTH;
-		Set<Position> visitedPositions = new HashSet<>();
-		visitedPositions.add(position);
+		Set<Pair> visited = new HashSet<>();
+		visited.add(position);
 		for (String command : input) {
 			direction = turn(direction, command.charAt(0));
 			int distance = Integer.valueOf(command.substring(1));
 			for (int i = 0; i < distance; i++) {
 				switch (direction) {
 					case NORTH:
-						position = new Position(position.getX(), position.getY() + 1);
+						position = new Pair(position.getX(), position.getY() + 1);
 						break;
 					case EAST:
-						position = new Position(position.getX() + 1, position.getY());
+						position = new Pair(position.getX() + 1, position.getY());
 						break;
 					case SOUTH:
-						position = new Position(position.getX(), position.getY() - 1);
+						position = new Pair(position.getX(), position.getY() - 1);
 						break;
 					case WEST:
-						position = new Position(position.getX() - 1, position.getY());
+						position = new Pair(position.getX() - 1, position.getY());
 						break;
 				}
-				if (part == Part.TWO && visitedPositions.contains(position)) {
+				if (part == Part.TWO && visited.contains(position)) {
 					return (position);
 				}
-				visitedPositions.add(position);
+				visited.add(position);
 			}
 		}
 		return (position);

@@ -37,14 +37,28 @@ public abstract class AbstractCharGrid {
 	/**
 	 * Gets a value on the grid.
 	 */
-	protected char get(int x, int y) {
+	public char get(int x, int y) {
 		return (getGrid()[x][y]);
+	}
+	
+	/**
+	 * Gets a value on the grid.
+	 */
+	public char get(Pair position) {
+		return (get(position.getX(), position.getY()));
 	}
 
 	/**
 	 * Sets a value on the grid.
 	 */
-	protected void set(int x, int y, char value) {
+	public void set(Pair position, char value) {
+		set(position.getX(), position.getY(), value);
+	}
+	
+	/**
+	 * Sets a value on the grid.
+	 */
+	public void set(int x, int y, char value) {
 		getGrid()[x][y] = value;
 	}
 

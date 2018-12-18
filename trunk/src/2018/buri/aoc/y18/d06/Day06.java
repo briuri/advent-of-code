@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import buri.aoc.Puzzle;
+import buri.aoc.data.Pair;
 
 /**
  * @author Brian Uri!
@@ -19,10 +20,10 @@ public class Day06 extends Puzzle {
 	 * Input: A coordinate pair on each line
 	 * Output: A list of positions
 	 */
-	public static List<Position> getInput(int fileIndex) {
-		List<Position> data = new ArrayList<>();
+	public static List<Pair> getInput(int fileIndex) {
+		List<Pair> data = new ArrayList<>();
 		for (String rawString : readFile("2018/06", fileIndex)) {
-			data.add(new Position(rawString));
+			data.add(new Pair(rawString));
 		}
 		return (data);
 	}
@@ -33,55 +34,55 @@ public class Day06 extends Puzzle {
 	 * 
 	 * What is the size of the largest area that isn't infinite?
 	 */
-	public static int getPart1Result(List<Position> input) {
+	public static int getPart1Result(List<Pair> input) {
 		int gridLength = getGridLength(input);
-		Set<Position> outerPositions = new HashSet<>();
+		Set<Pair> outerPairs = new HashSet<>();
 
 		// Calculate the total number of spots with a minimum MD to each location in the input.
-		Map<Position, Integer> minimumDistances = new HashMap<>();
+		Map<Pair, Integer> minimumDistances = new HashMap<>();
 		for (int x = 0; x < gridLength; x++) {
 			for (int y = 0; y < gridLength; y++) {
-				Position currentSpot = new Position(x, y);
+				Pair currentSpot = new Pair(x, y);
 
 				// Calculate all MDs between input locations and this current spot.
-				Map<Position, Integer> currentSpotDistances = new HashMap<>();
-				for (Position position : input) {
+				Map<Pair, Integer> currentSpotDistances = new HashMap<>();
+				for (Pair position : input) {
 					currentSpotDistances.put(position, getMDBetween(currentSpot, position));
 				}
 
 				// Get the smallest MD to record in the grid.
-				Map.Entry<Position, Integer> minEntry = null;
-				for (Map.Entry<Position, Integer> entry : currentSpotDistances.entrySet()) {
+				Map.Entry<Pair, Integer> minEntry = null;
+				for (Map.Entry<Pair, Integer> entry : currentSpotDistances.entrySet()) {
 					if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
 						minEntry = entry;
 					}
 				}
 				// Ignore any smallest MDs shared by multiple locations.
 				if (Collections.frequency(currentSpotDistances.values(), minEntry.getValue()) == 1) {
-					Position nearestPosition = minEntry.getKey();
+					Pair nearestPair = minEntry.getKey();
 					// Keep track of locations nearest to the edges of the grid, so they can be ignored later.
 					if (currentSpot.getX() == 0 || currentSpot.getY() == 0 || currentSpot.getX() == gridLength - 1
 						|| currentSpot.getY() == gridLength - 1) {
-						outerPositions.add(nearestPosition);
+						outerPairs.add(nearestPair);
 					}
 
 					// Increment the number of minimumMDs owned by an input location.
-					if (minimumDistances.get(nearestPosition) == null) {
-						minimumDistances.put(nearestPosition, 0);
+					if (minimumDistances.get(nearestPair) == null) {
+						minimumDistances.put(nearestPair, 0);
 					}
-					minimumDistances.put(nearestPosition, minimumDistances.get(nearestPosition) + 1);
+					minimumDistances.put(nearestPair, minimumDistances.get(nearestPair) + 1);
 				}
 			}
 		}
 
 		// Zero out the records for locations along the edges.
-		for (Position position : outerPositions) {
+		for (Pair position : outerPairs) {
 			minimumDistances.put(position, 0);
 		}
 
 		// Finally, return the max number of minimumMDs owned by an input location.
-		Map.Entry<Position, Integer> maxEntry = null;
-		for (Map.Entry<Position, Integer> entry : minimumDistances.entrySet()) {
+		Map.Entry<Pair, Integer> maxEntry = null;
+		for (Map.Entry<Pair, Integer> entry : minimumDistances.entrySet()) {
 			if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
 				maxEntry = entry;
 			}
@@ -97,16 +98,16 @@ public class Day06 extends Puzzle {
 	 * each location, add up the distances to all of the given coordinates; if the total of those distances is less than
 	 * 32, that location is within the desired region.
 	 */
-	public static int getPart2Result(int distanceLimit, List<Position> input) {
+	public static int getPart2Result(int distanceLimit, List<Pair> input) {
 		int gridLength = getGridLength(input);
 
 		int regionSize = 0;
 		for (int x = 0; x < gridLength; x++) {
 			for (int y = 0; y < gridLength; y++) {
-				Position currentSpot = new Position(x, y);
+				Pair currentSpot = new Pair(x, y);
 				// Calculate the sum of all MDs to the current spot.
 				int mdSum = 0;
-				for (Position position : input) {
+				for (Pair position : input) {
 					mdSum += getMDBetween(currentSpot, position);
 				}
 				// Increment region size if the MD sum is within the limit.
@@ -121,16 +122,16 @@ public class Day06 extends Puzzle {
 	/**
 	 * Calculates the Manhattan distance between two positions.
 	 */
-	private static int getMDBetween(Position p1, Position p2) {
+	private static int getMDBetween(Pair p1, Pair p2) {
 		return (Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY()));
 	}
 
 	/**
 	 * Calculates a suitable square grid size, based on largest position coordinate.
 	 */
-	private static int getGridLength(List<Position> input) {
+	private static int getGridLength(List<Pair> input) {
 		int gridLength = 0;
-		for (Position position : input) {
+		for (Pair position : input) {
 			gridLength = Math.max(gridLength, position.getX());
 			gridLength = Math.max(gridLength, position.getY());
 		}

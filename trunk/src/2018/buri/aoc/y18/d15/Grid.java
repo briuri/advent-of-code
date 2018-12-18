@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.data.AbstractCharGrid;
+import buri.aoc.data.Pair;
 
 /**
  * You scan the area, generating a map of the walls (#), open cavern (.), and starting position of every Goblin (G) and
@@ -39,7 +40,7 @@ public class Grid extends AbstractCharGrid {
 				char type = line.charAt(x);
 				getGrid()[x][y] = type;
 				if (type == Unit.ELF || type == Unit.GOBLIN) {
-					Unit unit = new Unit(type, new Position(x, y));
+					Unit unit = new Unit(type, new Pair(x, y));
 					if (unit.isElf()) {
 						getElves().add(unit);
 						unit.setAttackPower(elfAttackPower);
@@ -181,20 +182,20 @@ public class Grid extends AbstractCharGrid {
 	 */
 	private List<Path> getShortestPathsFor(Unit unit) {
 		// Get all open cells adjacent to enemies.
-		List<Position> destinations = new ArrayList<>();
+		List<Pair> destinations = new ArrayList<>();
 		for (Unit enemy : getEnemies(unit)) {
 			destinations.addAll(getOpenAdjacentCells(enemy.getPosition()));
 		}
 
 		// Generate breadth first mapping to find shortest paths to all points.
-		Queue<Position> frontier = new ArrayDeque<>();
+		Queue<Pair> frontier = new ArrayDeque<>();
 		frontier.add(unit.getPosition());
-		Map<Position, Position> cameFrom = new HashMap<>();
+		Map<Pair, Pair> cameFrom = new HashMap<>();
 		cameFrom.put(unit.getPosition(), null);
-		Position current = null;
+		Pair current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
-			for (Position next : getOpenAdjacentCells(current)) {
+			for (Pair next : getOpenAdjacentCells(current)) {
 				if (cameFrom.get(next) == null) {
 					frontier.add(next);
 					cameFrom.put(next, current);
@@ -204,7 +205,7 @@ public class Grid extends AbstractCharGrid {
 
 		// Use mapping to create the paths to all destination cells.
 		List<Path> shortestPaths = new ArrayList<>();
-		for (Position destination : destinations) {
+		for (Pair destination : destinations) {
 			if (cameFrom.get(destination) != null) {
 				shortestPaths.add(new Path(unit.getPosition(), destination, cameFrom));
 			}
@@ -216,15 +217,15 @@ public class Grid extends AbstractCharGrid {
 	/**
 	 * Returns open cells adjacent to some position, in reading order (up, left, right, down).
 	 */
-	private List<Position> getOpenAdjacentCells(Position pos) {
-		List<Position> openCells = new ArrayList<>();
-		openCells.add(new Position(pos.getX(), pos.getY() - 1));
-		openCells.add(new Position(pos.getX() - 1, pos.getY()));
-		openCells.add(new Position(pos.getX() + 1, pos.getY()));
-		openCells.add(new Position(pos.getX(), pos.getY() + 1));
+	private List<Pair> getOpenAdjacentCells(Pair center) {
+		List<Pair> openCells = new ArrayList<>();
+		openCells.add(new Pair(center.getX(), center.getY() - 1));
+		openCells.add(new Pair(center.getX() - 1, center.getY()));
+		openCells.add(new Pair(center.getX() + 1, center.getY()));
+		openCells.add(new Pair(center.getX(), center.getY() + 1));
 		// Remove any that are already filled up.
-		for (Iterator<Position> iterator = openCells.iterator(); iterator.hasNext();) {
-			Position position = iterator.next();
+		for (Iterator<Pair> iterator = openCells.iterator(); iterator.hasNext();) {
+			Pair position = iterator.next();
 			if (getGrid()[position.getX()][position.getY()] != OPEN) {
 				iterator.remove();
 			}
@@ -235,7 +236,7 @@ public class Grid extends AbstractCharGrid {
 	/**
 	 * Marks a character on the grid for debugging.
 	 */
-	private void draw(Position pos, char value) {
+	private void draw(Pair pos, char value) {
 		set(pos.getX(), pos.getY(), value);
 	}
 
