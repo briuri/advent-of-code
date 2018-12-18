@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
+import buri.aoc.data.AbstractCharGrid;
 
 /**
  * Model for the reservoir
  * 
  * @author Brian Uri!
  */
-public class Reservoir {
-	private char[][] _grid;
+public class Reservoir extends AbstractCharGrid {
 	private int _minBoundsY = Integer.MAX_VALUE;
 	private int _maxBoundsY = Integer.MIN_VALUE;
 	private int _reachableTiles = 0;
@@ -29,7 +29,7 @@ public class Reservoir {
 	 * Constructor
 	 */
 	public Reservoir(List<String> input) {
-		_grid = new char[1860][1860];
+		super(1860);
 		for (int y = 0; y < getGrid().length; y++) {
 			for (int x = 0; x < getGrid().length; x++) {
 				set(x, y, SAND);
@@ -235,35 +235,15 @@ public class Reservoir {
 		return (hasFloor);
 	}
 
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int y = 0; y < getGrid().length; y++) {
-			for (int x = 0; x < getGrid().length; x++) {
-				buffer.append(get(x, y));
-			}
-			buffer.append("\n");
-		}
-		buffer.append("\n");
-		return (buffer.toString());
-	}
-
-	/**
-	 * Gets a value on the grid.
-	 */
-	private char get(int x, int y) {
-		return (getGrid()[x][y]);
-	}
-
 	/**
 	 * Sets a value on the grid.
 	 * 
 	 * Also maintains a running count of REACHABLE or WATER tiles so we don't have to do a full array traversal every
 	 * iteration.
 	 */
-	private void set(int x, int y, char value) {
+	protected void set(int x, int y, char value) {
 		char oldValue = get(x, y);
-		getGrid()[x][y] = value;
+		super.set(x, y, value);
 
 		if (y >= getMinBoundsY() && y < getMaxBoundsY() + 1) {
 			if (oldValue == SAND && value == REACHABLE) {
@@ -277,13 +257,6 @@ public class Reservoir {
 				setWaterTiles(getWaterTiles() + 1);
 			}
 		}
-	}
-
-	/**
-	 * Accessor for the raw grid.
-	 */
-	private char[][] getGrid() {
-		return (_grid);
 	}
 
 	/**
