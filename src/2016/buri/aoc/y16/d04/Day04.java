@@ -1,14 +1,10 @@
 package buri.aoc.y16.d04;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
+import buri.aoc.data.CharFrequency;
 
 /**
  * @author Brian Uri!
@@ -40,7 +36,7 @@ public class Day04 extends Puzzle {
 			}
 			return (sum);
 		}
-		
+
 		// Part TWO
 		int sectorId = -1;
 		for (String room : input) {
@@ -63,30 +59,9 @@ public class Day04 extends Puzzle {
 	 */
 	private static boolean isRealRoom(String room) {
 		String name = room.substring(0, room.lastIndexOf('-')).replaceAll("-", "");
-		Map<Character, Integer> frequency = new HashMap<>();
-		for (Character value : name.toCharArray()) {
-			if (frequency.get(value) == null) {
-				frequency.put(value, 0);
-			}
-			frequency.put(value, frequency.get(value) + 1);
-		}
-		List<Map.Entry<Character, Integer>> list = new ArrayList<>(frequency.entrySet());
-		Collections.sort(list, new Comparator<Map.Entry<Character, Integer>>() {
-			@Override
-			public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {
-				int compare = o2.getValue() - o1.getValue();
-				if (compare == 0) {
-					compare = o1.getKey().compareTo(o2.getKey());
-				}
-				return (compare);
-			}
-		});
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < Math.min(5, list.size()); i++) {
-			buffer.append(list.get(i).getKey());
-		}
+		CharFrequency frequency = new CharFrequency(name);
 		String checksum = room.substring(room.indexOf('[') + 1, room.indexOf(']'));
-		return (buffer.toString().equals(checksum));
+		return (frequency.getHighestFrequencyChars(5).equals(checksum));
 	}
 
 	/**
@@ -97,7 +72,7 @@ public class Day04 extends Puzzle {
 		int end = room.indexOf('[');
 		return Integer.valueOf(room.substring(start, end));
 	}
-	
+
 	/**
 	 * Rotates the name by its sector ID.
 	 * 
