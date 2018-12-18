@@ -2,12 +2,12 @@ package buri.aoc.y17.d14;
 
 import java.util.List;
 
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * @author Brian Uri!
  */
-public class Disk extends AbstractGrid {
+public class Disk extends AbstractLongGrid {
 
 	/**
 	 * Constructor

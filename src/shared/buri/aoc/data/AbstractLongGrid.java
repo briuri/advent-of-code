@@ -11,14 +11,14 @@ package buri.aoc.data;
  * 
  * @author Brian Uri!
  */
-public abstract class AbstractGrid {
+public abstract class AbstractLongGrid {
 	private int _size;
 	private long[][] _grid;
 
 	/**
 	 * Creates a new square grid with the specified width/length.
 	 */
-	public AbstractGrid(int size) {
+	public AbstractLongGrid(int size) {
 		_size = size;
 		_grid = new long[getSize()][getSize()];
 	}

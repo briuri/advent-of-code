@@ -1,13 +1,13 @@
 package buri.aoc.y18.d03;
 
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * Fabric grid
  * 
  * @author Brian Uri!
  */
-public class Fabric extends AbstractGrid {
+public class Fabric extends AbstractLongGrid {
 
 	/**
 	 * Creates a new square grid with the specified width/length.

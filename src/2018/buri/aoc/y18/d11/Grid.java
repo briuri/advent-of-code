@@ -1,13 +1,13 @@
 package buri.aoc.y18.d11;
 
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * Simple grid class for calculating fuel cell charges.
  * 
  * @author Brian Uri!
  */
-public class Grid extends AbstractGrid {
+public class Grid extends AbstractLongGrid {
 
 	private int _serial;
 
