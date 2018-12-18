@@ -9,14 +9,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import buri.aoc.data.AbstractCharGrid;
+
 /**
  * You scan the area, generating a map of the walls (#), open cavern (.), and starting position of every Goblin (G) and
  * Elf (E) (your puzzle input).
  * 
  * @author Brian Uri!
  */
-public class Grid {
-	private char[][] _grid;
+public class Grid extends AbstractCharGrid {
 	private boolean _elfDied;
 	private List<Unit> _elves;
 	private List<Unit> _goblins;
@@ -27,7 +28,7 @@ public class Grid {
 	 * Constructor
 	 */
 	public Grid(List<String> input, int elfAttackPower) {
-		_grid = new char[input.size()][input.size()];
+		super(input.size());
 		_elfDied = false;
 		_elves = new ArrayList<>();
 		_goblins = new ArrayList<>();
@@ -231,31 +232,11 @@ public class Grid {
 		return (openCells);
 	}
 
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int y = 0; y < getGrid().length; y++) {
-			for (int x = 0; x < getGrid().length; x++) {
-				buffer.append(getGrid()[x][y]);
-			}
-			buffer.append("\n");
-		}
-		buffer.append("\n");
-		return (buffer.toString());
-	}
-
 	/**
 	 * Marks a character on the grid for debugging.
 	 */
 	private void draw(Position pos, char value) {
-		getGrid()[pos.getX()][pos.getY()] = value;
-	}
-
-	/**
-	 * Accessor for the raw grid.
-	 */
-	private char[][] getGrid() {
-		return (_grid);
+		set(pos.getX(), pos.getY(), value);
 	}
 
 	/**
