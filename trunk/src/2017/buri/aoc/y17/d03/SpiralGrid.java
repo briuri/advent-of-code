@@ -1,13 +1,13 @@
 package buri.aoc.y17.d03;
 
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * Mutable data class for the spiral memory grid.
  * 
  * @author Brian Uri!
  */
-public class SpiralGrid extends AbstractGrid {
+public class SpiralGrid extends AbstractLongGrid {
 	
 	/**
 	 * Creates a new square grid with the specified width/length.

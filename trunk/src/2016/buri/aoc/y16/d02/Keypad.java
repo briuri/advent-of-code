@@ -3,14 +3,14 @@ package buri.aoc.y16.d02;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * Data model for keypad
  * 
  * @author Brian Uri!
  */
-public class Keypad extends AbstractGrid {
+public class Keypad extends AbstractLongGrid {
 	
 	private Position _current;
 	

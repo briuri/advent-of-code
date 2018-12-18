@@ -3,7 +3,7 @@ package buri.aoc.y17.d22;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two
@@ -14,7 +14,7 @@ import buri.aoc.data.AbstractGrid;
  * 
  * @author Brian Uri!
  */
-public class Cluster extends AbstractGrid {
+public class Cluster extends AbstractLongGrid {
 	private Virus _virus;
 	private int _infections;
 

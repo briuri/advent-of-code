@@ -3,7 +3,7 @@ package buri.aoc.y17.d19;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 import buri.aoc.y17.d19.Position.Direction;
 
 /**
@@ -19,7 +19,7 @@ import buri.aoc.y17.d19.Position.Direction;
  * 
  * @author Brian Uri!
  */
-public class Diagram extends AbstractGrid {
+public class Diagram extends AbstractLongGrid {
 
 	private int _steps = 0;
 	private Position _current = null;

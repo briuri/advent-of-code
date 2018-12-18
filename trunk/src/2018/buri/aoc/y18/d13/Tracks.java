@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import buri.aoc.data.AbstractGrid;
+import buri.aoc.data.AbstractLongGrid;
 
 /**
  * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two
@@ -15,7 +15,7 @@ import buri.aoc.data.AbstractGrid;
  * 
  * @author Brian Uri!
  */
-public class Tracks extends AbstractGrid {
+public class Tracks extends AbstractLongGrid {
 	private List<Cart> _carts = new ArrayList<>();
 	private String _firstCollision = null;
 	private int _iteration = 0;
