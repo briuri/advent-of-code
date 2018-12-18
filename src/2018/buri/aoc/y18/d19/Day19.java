@@ -1,4 +1,4 @@
-package buri.aoc.template;
+package buri.aoc.y18.d19;
 
 import java.util.List;
 
@@ -8,14 +8,14 @@ import buri.aoc.Puzzle;
 /**
  * @author Brian Uri!
  */
-public class Day00 extends Puzzle {
+public class Day19 extends Puzzle {
 
 	/**
 	 * Input: 
 	 * Output: 
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/00", fileIndex));
+		return (readFile("2018/19", fileIndex));
 	}
 	
 	/**
