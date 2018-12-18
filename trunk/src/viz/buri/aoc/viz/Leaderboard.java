@@ -105,7 +105,8 @@ public class Leaderboard {
 			if (!places.isEmpty()) {
 				int day = i + 1;
 				Collections.sort(places);
-				buffer.append("\n<h3><a href=\"https://adventofcode.com/").append(event).append("/day/").append(day);
+				buffer.append("\n<a name=\"day").append(day).append("\"></a>");
+				buffer.append("<h3><a href=\"https://adventofcode.com/").append(event).append("/day/").append(day);
 				buffer.append("\">").append(metadata.get(i).getTitle()).append("</a></h3>\n");
 				buffer.append("<ol>\n");
 				int numPlaces = Math.min(10, places.size());
