@@ -9,7 +9,7 @@ import java.util.Map;
  * 
  * @author Brian Uri!
  */
-public class Part1Registers {
+public class Registers {
 	private int _current = 0;
 	private Map<String, Long> _registers;
 	private List<String> _instructions;
@@ -18,7 +18,7 @@ public class Part1Registers {
 	/**
 	 * Constructor
 	 */
-	public Part1Registers(List<String> instructions) {
+	public Registers(List<String> instructions) {
 		_registers = new HashMap<String, Long>();
 		_instructions = instructions;
 		for (char name = 'a'; name <= 'h'; name++) {
@@ -92,7 +92,7 @@ public class Part1Registers {
 	/**
 	 * Loads a value from a register.
 	 */
-	public Long getValue(String register) {
+	private Long getValue(String register) {
 		return (getRegisters().get(register));
 	}
 
@@ -106,7 +106,7 @@ public class Part1Registers {
 	/**
 	 * Accessor for the registers
 	 */
-	protected Map<String, Long> getRegisters() {
+	private Map<String, Long> getRegisters() {
 		return _registers;
 	}
 

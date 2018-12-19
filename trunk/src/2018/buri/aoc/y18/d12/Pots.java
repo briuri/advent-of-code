@@ -10,7 +10,6 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Pots {
-
 	private int _generation;
 	private boolean[] _pots;
 	private List<State> _states;

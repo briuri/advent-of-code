@@ -8,28 +8,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * The navigation system's license file consists of a list of numbers (your puzzle input). The numbers define a data
- * structure which, when processed, produces some kind of tree that can be used to calculate the license number.
- * 
- * The tree is made up of nodes; a single, outermost node forms the tree's root, and it contains all other nodes in the
- * tree (or contains nodes that contain nodes, and so on).
- * 
- * Specifically, a node consists of:
- * A header, which is always exactly two numbers:
- * The quantity of child nodes.
- * The quantity of metadata entries.
- * Zero or more child nodes (as specified in the header).
- * One or more metadata entries (as specified in the header).
- * 
- * Each child node is itself a node that has its own header, child nodes, and metadata.
+ * Day 8: Memory Maneuver
  * 
  * @author Brian Uri!
  */
 public class Day08 extends Puzzle {
 
 	/**
-	 * Input: Line of integers
-	 * Output: List of integers
+	 * Returns input file as a list of integers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
 		String input = readFile("2018/08", fileIndex).get(0);
@@ -63,7 +49,7 @@ public class Day08 extends Puzzle {
 	/**
 	 * Processing the input in sequential order, diving depth-first recursively to generate node tree.
 	 */
-	public static RecursionData addNode(List<Integer> input, List<Node> nodes, int index) {
+	private static RecursionData addNode(List<Integer> input, List<Node> nodes, int index) {
 		// Process Header and move forward
 		int childCount = input.get(index);
 		int metadataCount = input.get(index + 1);

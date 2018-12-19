@@ -12,13 +12,14 @@ import buri.aoc.Puzzle;
 import buri.aoc.data.Pair;
 
 /**
+ * Day 6: Chronal Coordinates
+ * 
  * @author Brian Uri!
  */
 public class Day06 extends Puzzle {
 
 	/**
-	 * Input: A coordinate pair on each line
-	 * Output: A list of positions
+	 * Returns the input file as a list of coordinate pairs.
 	 */
 	public static List<Pair> getInput(int fileIndex) {
 		List<Pair> data = new ArrayList<>();
@@ -29,9 +30,7 @@ public class Day06 extends Puzzle {
 	}
 
 	/**
-	 * Using only the Manhattan distance, determine the area around each coordinate by counting the number of integer
-	 * X,Y locations that are closest to that coordinate (and aren't tied in distance to any other coordinate).
-	 * 
+	 * Part 1:
 	 * What is the size of the largest area that isn't infinite?
 	 */
 	public static int getPart1Result(List<Pair> input) {
@@ -91,19 +90,17 @@ public class Day06 extends Puzzle {
 	}
 
 	/**
-	 * On the other hand, if the coordinates are safe, maybe the best you can do is try to find a region near as many
-	 * coordinates as possible.
-	 * 
-	 * For example, suppose you want the sum of the Manhattan distance to all of the coordinates to be less than 32. For
-	 * each location, add up the distances to all of the given coordinates; if the total of those distances is less than
-	 * 32, that location is within the desired region.
+	 * Part 2:
+	 * What is the size of the region containing all locations which have a total distance to all given coordinates of
+	 * less than 10000?
 	 */
 	public static int getPart2Result(int distanceLimit, List<Pair> input) {
 		int gridLength = getGridLength(input);
 
 		int regionSize = 0;
-		for (int x = 0; x < gridLength; x++) {
-			for (int y = 0; y < gridLength; y++) {
+		for (int y = 0; y < gridLength; y++) {
+			for (int x = 0; x < gridLength; x++) {
+
 				Pair currentSpot = new Pair(x, y);
 				// Calculate the sum of all MDs to the current spot.
 				int mdSum = 0;

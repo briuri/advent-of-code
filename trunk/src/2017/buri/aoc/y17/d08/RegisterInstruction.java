@@ -30,7 +30,6 @@ public class RegisterInstruction {
 	 */
 	public RegisterInstruction(String instruction) {
 		String[] tokens = instruction.split(" ");
-		assertValidInstruction(tokens);
 		_targetRegister = tokens[0];
 		_targetIncrement = Integer.valueOf(tokens[2]);
 		if (tokens[1].equals("dec")) {
@@ -58,22 +57,6 @@ public class RegisterInstruction {
 		}
 		_conditional = operator;
 		_conditionValue = Integer.valueOf(tokens[6]);
-	}
-
-	/**
-	 * Validates that the instruction is reasonably well-formed.
-	 */
-	private static void assertValidInstruction(String[] instruction) {
-		// a inc 1 if b < 5
-		boolean hasCorrectLength = (instruction.length == 7);
-		boolean hasValidIncrement = (instruction[1].equals("inc") || instruction[1].equals("dec"));
-		boolean hasCondition = (instruction[3].equals("if"));
-		boolean hasValidConditional = (instruction[5].equals("<") || instruction[5].equals("<=")
-			|| instruction[5].equals("==") || instruction[5].equals("!=") || instruction[5].equals(">=")
-			|| instruction[5].equals(">"));
-		if (!(hasCorrectLength && hasValidIncrement && hasCondition && hasValidConditional)) {
-			throw new IllegalArgumentException("Malformed instruction.");
-		}
 	}
 
 	@Override

@@ -8,13 +8,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 18: Duet
+ * 
  * @author Brian Uri!
  */
 public class Day18 extends Puzzle {
 
 	/**
-	 * Input: One command per line
-	 * Output: A list of commands
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2017/18", fileIndex));

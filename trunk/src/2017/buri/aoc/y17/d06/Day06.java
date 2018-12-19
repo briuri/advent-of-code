@@ -9,28 +9,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * A debugger program here is having an issue: it is trying to repair a memory reallocation routine, but it keeps
- * getting stuck in an infinite loop.
- * 
- * In this area, there are sixteen memory banks; each memory bank can hold any number of blocks. The goal of the
- * reallocation routine is to balance the blocks between the memory banks.
- * 
- * The reallocation routine operates in cycles. In each cycle, it finds the memory bank with the most blocks (ties won
- * by the lowest-numbered memory bank) and redistributes those blocks among the banks. To do this, it removes all of the
- * blocks from the selected bank, then moves to the next (by index) memory bank and inserts one of the blocks. It
- * continues doing this until it runs out of blocks; if it reaches the last memory bank, it wraps around to the first
- * one.
- * 
- * The debugger would like to know how many redistributions can be done before a blocks-in-banks configuration is
- * produced that has been seen before.
+ * Day 6: Memory Reallocation
  * 
  * @author Brian Uri!
  */
 public class Day06 extends Puzzle {
 	
 	/**
-	 * Input: One row of tab-delimited numbers.
-	 * Output: List of numbers.
+	 * Returns input file as a list of numbers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
 		String[] rawIntegers = readFile("2017/06", fileIndex).get(0).split("\t");
@@ -38,7 +24,11 @@ public class Day06 extends Puzzle {
 	}
 	
 	/**
-	 * Find out how many redistribute actions occur before an infinite loop.
+	 * Part 1:
+	 * How many redistribution cycles must be completed before a configuration is produced that has been seen before?
+	 * 
+	 * Part 2:
+	 * How many cycles are in the infinite loop that arises from the configuration in your puzzle input?
 	 */
 	public static int getResult(Part part, List<Integer> banks) {
 		boolean hitLoop = false;

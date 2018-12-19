@@ -10,18 +10,19 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 4: Repose Record
+ * 
  * @author Brian Uri!
  */
 public class Day04 extends Puzzle {
 
 	/**
-	 * Input: Each line is an entry in a log about guard duty.
-	 * Output: List of entries, sorted chronologically.
+	 * Returns input file as a list of Observations, sorted chronologically.
 	 */
-	public static List<LogEntry> getInput(int fileIndex) {
-		List<LogEntry> data = new ArrayList<>();
+	public static List<Observation> getInput(int fileIndex) {
+		List<Observation> data = new ArrayList<>();
 		for (String rawData : readFile("2018/04", fileIndex)) {
-			data.add(new LogEntry(rawData));
+			data.add(new Observation(rawData));
 		}
 		Collections.sort(data);
 		return (data);
@@ -36,7 +37,7 @@ public class Day04 extends Puzzle {
 	 * Of all guards, which guard is most frequently asleep on the same minute? What is the ID of the guard you chose
 	 * multiplied by the minute you chose?
 	 */
-	public static int getResult(Part part, List<LogEntry> input) {
+	public static int getResult(Part part, List<Observation> input) {
 		Map<Integer, SleepSchedule> sleepSchedules = buildSleepSchedules(input);
 
 		if (part == Part.ONE) {
@@ -81,23 +82,23 @@ public class Day04 extends Puzzle {
 	}
 
 	/**
-	 * Calculates sleep schedules based on the log entries.
+	 * Calculates sleep schedules based on the observations.
 	 */
-	private static Map<Integer, SleepSchedule> buildSleepSchedules(List<LogEntry> input) {
+	private static Map<Integer, SleepSchedule> buildSleepSchedules(List<Observation> input) {
 		Map<Integer, SleepSchedule> schedules = new HashMap<>();
 		int currentGuard = 0;
 		int sleepMinute = -1;
 		int wakeMinute = -1;
-		for (LogEntry logEntry : input) {
-			if (logEntry.isOnDuty()) {
+		for (Observation observation : input) {
+			if (observation.isOnDuty()) {
 				// Guard has changed since previous id observation.
-				currentGuard = logEntry.getId();
+				currentGuard = observation.getId();
 			}
-			else if (logEntry.isSleeping()) {
-				sleepMinute = logEntry.getMinute();
+			else if (observation.isSleeping()) {
+				sleepMinute = observation.getMinute();
 			}
-			else if (logEntry.isWaking()) {
-				wakeMinute = logEntry.getMinute();
+			else if (observation.isWaking()) {
+				wakeMinute = observation.getMinute();
 				// Once we hit a waking line, we can fill the sleep-to-wake duration with sleep.
 				if (schedules.get(currentGuard) == null) {
 					schedules.put(currentGuard, new SleepSchedule());

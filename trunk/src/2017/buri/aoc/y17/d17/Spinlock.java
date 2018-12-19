@@ -24,16 +24,6 @@ public class Spinlock {
 	}
 
 	/**
-	 * Shifts the list by delta using fast operations.
-	 */
-	private void rotate(int delta) {
-		for (int i = 0; i < delta; i++) {
-			Integer first = getSpinlock().removeFirst();
-			getSpinlock().addLast(first);
-		}
-	}
-
-	/**
 	 * Steps forward, inserts a new value after the point where it stopped, and uses the inserted location as the new
 	 * current position.
 	 * 
@@ -59,6 +49,16 @@ public class Spinlock {
 		}
 	}
 
+	/**
+	 * Shifts the list by delta using fast operations.
+	 */
+	private void rotate(int delta) {
+		for (int i = 0; i < delta; i++) {
+			Integer first = getSpinlock().removeFirst();
+			getSpinlock().addLast(first);
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return (getSpinlock().toString());

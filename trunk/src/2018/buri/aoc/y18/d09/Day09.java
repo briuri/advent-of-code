@@ -7,8 +7,7 @@ import java.util.List;
 import buri.aoc.Puzzle;
 
 /**
- * The Elves play this game by taking turns arranging the marbles in a circle according to very particular rules. The
- * marbles are numbered starting with 0 and increasing by 1 until every marble has a number.
+ * Day 9: Marble Mania
  * 
  * @author Brian Uri!
  */

@@ -14,7 +14,7 @@ public class Node {
 	private List<Integer> _metadata;
 
 	/**
-	 * Constructor (objet is not complete until children are added)
+	 * Constructor (object is not complete until children are added)
 	 */
 	public Node(List<Integer> metadata) {
 		_children = new ArrayList<>();

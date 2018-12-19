@@ -13,7 +13,6 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class CharFrequency {
-
 	private Map<Character, Integer> _frequency;
 
 	/**

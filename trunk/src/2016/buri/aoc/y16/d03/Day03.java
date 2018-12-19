@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 3: Squares With Three Sides
+ * 
  * @author Brian Uri!
  */
 public class Day03 extends Puzzle {
 
 	/**
-	 * Input: One possible triangle per line.
-	 * Output: List of Strings
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/03", fileIndex));
@@ -20,10 +21,10 @@ public class Day03 extends Puzzle {
 
 	/**
 	 * Part 1:
-	 * In your puzzle input, how many of the listed triangles are possible?
+	 * How many of the listed triangles are possible?
 	 * 
 	 * Part 2:
-	 * In your puzzle input, and instead reading by columns, how many of the listed triangles are possible
+	 * Reading by columns, how many of the listed triangles are possible?
 	 */
 	public static int getResult(Part part, List<String> input) {
 		int possible = 0;
@@ -53,10 +54,10 @@ public class Day03 extends Puzzle {
 	}
 
 	/**
-	 * Compares 3 side lengths for possible triangles.
+	 * Compares 3 side lengths for possible triangles. In a valid triangle, the sum of any two sides must be larger than
+	 * the remaining side.
 	 */
 	private static boolean isPossibleTriangle(int a, int b, int c) {
 		return ((a + b > c) && (b + c > a) && (c + a > b));
 	}
-
 }

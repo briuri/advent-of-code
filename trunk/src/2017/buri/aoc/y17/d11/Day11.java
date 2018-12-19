@@ -7,13 +7,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 11: Hex Ed
+ * 
  * @author Brian Uri!
  */
 public class Day11 extends Puzzle {
 
 	/**
-	 * Input: One line with comma-separated directions.
-	 * Output: List of string directions.
+	 * Returns input file as a list of directions.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		List<String> data = new ArrayList<>();
@@ -26,6 +27,12 @@ public class Day11 extends Puzzle {
 	/**
 	 * Using cube coordinates as described at:
 	 * https://www.redblobgames.com/grids/hexagons/
+	 * 
+	 * Part 1:
+	 * Starting where he started, you need to determine the fewest number of steps required to reach him.
+	 * 
+	 * Part 2:
+	 * How many steps away is the furthest he ever got from his starting position?
 	 */
 	public static int getResult(Part part, List<String> input) {
 		int x = 0;

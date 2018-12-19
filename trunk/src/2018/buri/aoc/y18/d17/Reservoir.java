@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.data.AbstractCharGrid;
 import buri.aoc.data.Pair;
+import buri.aoc.data.grid.CharGrid;
 
 /**
  * Model for the reservoir
  * 
  * @author Brian Uri!
  */
-public class Reservoir extends AbstractCharGrid {
+public class Reservoir extends CharGrid {
 	private int _minBoundsY = Integer.MAX_VALUE;
 	private int _maxBoundsY = Integer.MIN_VALUE;
 	private int _reachableTiles = 0;
@@ -31,8 +31,8 @@ public class Reservoir extends AbstractCharGrid {
 	 */
 	public Reservoir(List<String> input) {
 		super(1860);
-		for (int y = 0; y < getGrid().length; y++) {
-			for (int x = 0; x < getGrid().length; x++) {
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
 				set(x, y, SAND);
 			}
 		}
@@ -144,7 +144,7 @@ public class Reservoir extends AbstractCharGrid {
 			}
 		}
 		else {
-			for (int x = start.getX(); x < getGrid().length; x++) {
+			for (int x = start.getX(); x < getSize(); x++) {
 				if (get(x, start.getY()) == CLAY) {
 					break;
 				}
@@ -168,7 +168,7 @@ public class Reservoir extends AbstractCharGrid {
 			}
 			set(x, start.getY(), WATER);
 		}
-		for (int x = start.getX(); x < getGrid().length; x++) {
+		for (int x = start.getX(); x < getSize(); x++) {
 			if (get(x, start.getY()) == CLAY) {
 				break;
 			}
@@ -181,7 +181,7 @@ public class Reservoir extends AbstractCharGrid {
 	 */
 	private Pair getOpenTileBelow(Pair top) {
 		int y;
-		for (y = top.getY(); y < getGrid().length; y++) {
+		for (y = top.getY(); y < getSize(); y++) {
 			char value = get(top.getX(), y);
 			if (value == CLAY || value == WATER) {
 				break;
@@ -194,7 +194,7 @@ public class Reservoir extends AbstractCharGrid {
 	 * Returns true if the position is at the bottom of the usable grid.
 	 */
 	private boolean isOffGrid(Pair position) {
-		return (position.getY() + 1 == getGrid().length);
+		return (position.getY() + 1 == getSize());
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class Reservoir extends AbstractCharGrid {
 		}
 
 		// Check for right wall.
-		for (int x = position.getX(); x < getGrid().length; x++) {
+		for (int x = position.getX(); x < getSize(); x++) {
 			if (get(x, position.getY()) == CLAY) {
 				maxX = x;
 				break;
@@ -242,7 +242,7 @@ public class Reservoir extends AbstractCharGrid {
 	 * Also maintains a running count of REACHABLE or WATER tiles so we don't have to do a full array traversal every
 	 * iteration.
 	 */
-	public void set(int x, int y, char value) {
+	private void set(int x, int y, char value) {
 		char oldValue = get(x, y);
 		super.set(x, y, value);
 

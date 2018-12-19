@@ -3,9 +3,9 @@ package buri.aoc.y17.d19;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.data.AbstractCharGrid;
 import buri.aoc.data.Direction;
 import buri.aoc.data.Pair;
+import buri.aoc.data.grid.CharGrid;
 
 /**
  * Data model for the routing diagram.
@@ -20,7 +20,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Diagram extends AbstractCharGrid {
+public class Diagram extends CharGrid {
 
 	private int _steps = 0;
 	private Pair _currentPosition = null;
@@ -113,8 +113,8 @@ public class Diagram extends AbstractCharGrid {
 	 * Returns true if position is within the diagram.
 	 */
 	private boolean isBounded(Pair position) {
-		boolean xBounded = (position.getX() >= 0 && position.getX() < getGrid().length);
-		boolean yBounded = (position.getY() >= 0 && position.getY() < getGrid().length);
+		boolean xBounded = (position.getX() >= 0 && position.getX() < getSize());
+		boolean yBounded = (position.getY() >= 0 && position.getY() < getSize());
 		return (xBounded && yBounded);
 	}
 	

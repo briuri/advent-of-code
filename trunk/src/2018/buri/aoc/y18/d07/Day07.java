@@ -9,13 +9,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 7: The Sum of Its Parts
+ * 
  * @author Brian Uri!
  */
 public class Day07 extends Puzzle {
 
 	/**
-	 * Input: List of prerequisites.
-	 * Output: Prereqs as strings.
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/07", fileIndex));

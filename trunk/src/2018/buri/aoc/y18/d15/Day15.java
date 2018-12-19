@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 15: Beverage Bandits
+ * 
  * @author Brian Uri!
  */
 public class Day15 extends Puzzle {
 
 	/**
-	 * Input: Map as a list of strings
-	 * Output: List of Strings (so the map can be rebuilt for each iteration of Part 2).
+	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/15", fileIndex));

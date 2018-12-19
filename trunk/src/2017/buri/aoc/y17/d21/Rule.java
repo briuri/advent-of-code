@@ -1,5 +1,6 @@
 package buri.aoc.y17.d21;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,8 +22,8 @@ public class Rule {
 	 */
 	public Rule(String rule) {
 		String tokens[] = rule.split(" => ");
-		_result = new Pattern(tokens[1]);
-		Pattern base = new Pattern(tokens[0]);
+		_result = new Pattern(Arrays.asList(tokens[1].split("/")));
+		Pattern base = new Pattern(Arrays.asList(tokens[0].split("/")));
 		Pattern base90 = base.rotate();
 		Pattern base180 = base90.rotate();
 		Pattern base270 = base180.rotate();
@@ -62,7 +63,7 @@ public class Rule {
 	/**
 	 * Accessor for the patterns
 	 */
-	public Set<Pattern> getPatterns() {
+	private Set<Pattern> getPatterns() {
 		return _patterns;
 	}
 

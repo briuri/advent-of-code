@@ -30,7 +30,7 @@ public class Day09Test {
 	}
 
 	/**
-	 * Solves the Part 2 puzzle. (takes 40-45 minutes to run)
+	 * Solves the Part 2 puzzle.
 	 */
 	@Test
 	public void testPart2Puzzle() {

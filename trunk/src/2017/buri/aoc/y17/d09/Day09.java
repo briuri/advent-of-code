@@ -4,25 +4,25 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * Your goal is to find the total score for all groups in your input.
+ * Day 9: Stream Processing
  * 
  * @author Brian Uri!
  */
 public class Day09 extends Puzzle {
 
 	/**
-	 * Input: A long string of groups and garbage.
-	 * Output: The string with last linebreak trimmed.
+	 * Returns the input file unmodified.
 	 */
 	public static String getInput(int fileIndex) {
 		return (readFile("2017/09", fileIndex).get(0));
 	}
 
 	/**
-	 * Calculates the score of the groups.
+	 * Part 1:
+	 * What is the total score for all groups in your input?
 	 * 
-	 * Each group is assigned a score which is one more than the score of the group that immediately contains it. The
-	 * outermost group gets a score of 1.
+	 * Part 2:
+	 * How many non-cancelled characters are within the garbage in your puzzle input?
 	 */
 	public static int getResult(Part part, String input) {
 		if (part == Part.ONE) {
@@ -67,7 +67,7 @@ public class Day09 extends Puzzle {
 	 * Any character that comes after ! should be ignored, including <, >, and even another !.
 	 */
 	public static String destroyGarbage(String input) {
-		// Allow us to use whitespace to represent erased characters.
+		// Convert whitespace to underscores so we can reserve whitespace to represent erased characters.
 		StringBuffer buffer = new StringBuffer(input.replace(" ", "_"));
 		eraseCancellations(buffer);
 		eraseGarbage(buffer);
@@ -79,7 +79,7 @@ public class Day09 extends Puzzle {
 	 * Counts the garbage characters, ignoring !, the char cancelled by that !, and the enclosing <>s.
 	 */
 	public static int countGarbage(String input) {
-		// Allow us to use whitespace to represent erased characters.
+		// Convert whitespace to underscores so we can reserve whitespace to represent erased characters.
 		StringBuffer buffer = new StringBuffer(input.replace(" ",  "_"));
 		eraseCancellations(buffer);
 		String inputWithoutCancellations = buffer.toString().replaceAll(" ", "");
@@ -94,13 +94,6 @@ public class Day09 extends Puzzle {
 		// Count how many spaces were removed, but ignore 2 (<>) for each group of garbage.
 		return (lengthWithoutCancellations - cleanInput.length() - (2 * garbageCloserCount));
 	}
-
-	/**
-	 * Replaces some subset of the buffer with whitespace.
-	 */
-	private static void replaceWhitespace(StringBuffer buffer, int start, int end) {
-		buffer.replace(start, end + 1, String.format("%1$-" + (end + 1 - start) + "s", ""));
-	}
 	
 	/**
 	 * Replaces cancellations with tabs.
@@ -109,7 +102,7 @@ public class Day09 extends Puzzle {
 		for (int i = 0; i < buffer.length(); i++) {
 			if (buffer.charAt(i) == '!') {
 				// Assume input is well-formed, so ! is never at end of buffer.
-				replaceWhitespace(buffer, i, i + 1);
+				replaceWithWhitespace(buffer, i, i + 1);
 			}
 		}
 	}
@@ -121,8 +114,16 @@ public class Day09 extends Puzzle {
 		for (int i = 0; i < buffer.length(); i++) {
 			if (buffer.charAt(i) == '<') {
 				// Assume input is well-formed, so there is always a closing >.
-				replaceWhitespace(buffer, i, buffer.indexOf(">", i));
+				replaceWithWhitespace(buffer, i, buffer.indexOf(">", i));
 			}
 		}
+	}
+	
+	/**
+	 * Replaces some subset of the buffer with whitespace.
+	 */
+	private static void replaceWithWhitespace(StringBuffer buffer, int start, int end) {
+		end = end + 1; // exclusive index
+		buffer.replace(start, end, String.format("%1$-" + (end - start) + "s", ""));
 	}
 }

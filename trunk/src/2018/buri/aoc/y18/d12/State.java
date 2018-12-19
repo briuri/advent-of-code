@@ -1,12 +1,17 @@
 package buri.aoc.y18.d12;
 
 /**
+ * A pattern state that shows the input pattern and its result.
+ * 
  * @author Brian Uri!
  */
 public class State {
 	private String _pattern;
 	private boolean _result;
 	
+	/**
+	 * Constructor
+	 */
 	public State(String input) {
 		String[] tokens = input.split(" => ");
 		_pattern = tokens[0];

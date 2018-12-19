@@ -9,13 +9,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 20: Particle Swarm
+ * 
  * @author Brian Uri!
  */
 public class Day20 extends Puzzle {
 
 	/**
-	 * Input: 9 comma-separated values, 3 position, 3 velocity, 3 acceleration
-	 * Output: List of Particles
+	 * Returns input file as a list of Particles with position, velocity, and acceleration.
 	 */
 	public static List<Particle> getInput(int fileIndex) {
 		List<Particle> list = new ArrayList<>();

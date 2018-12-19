@@ -4,13 +4,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 19: A Series of Tubes
+ * 
  * @author Brian Uri!
  */
 public class Day19 extends Puzzle {
 
 	/**
-	 * Input: Text diagram of path
-	 * Output: Diagram object
+	 * Returns input file as a diagram of the route.
 	 */
 	public static Diagram getInput(int fileIndex) {
 		return (new Diagram(readFile("2017/19", fileIndex)));

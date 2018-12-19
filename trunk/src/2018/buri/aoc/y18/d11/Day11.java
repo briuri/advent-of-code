@@ -10,6 +10,8 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 11: Chronal Charge
+ * 
  * @author Brian Uri!
  */
 public class Day11 extends Puzzle {

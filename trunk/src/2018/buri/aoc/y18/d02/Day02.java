@@ -10,13 +10,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 2: Inventory Management System
+ * 
  * @author Brian Uri!
  */
 public class Day02 extends Puzzle {
 
 	/**
-	 * Input: List of string IDs, one per line
-	 * Output: List of strings.
+	 * Returns input file as a list of string IDs.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/02", fileIndex));
@@ -24,12 +25,10 @@ public class Day02 extends Puzzle {
 	
 	/**
 	 * Part 1:
-	 * To make sure you didn't miss any, you scan the likely candidate boxes again, counting the number that have an ID
-	 * containing exactly two of any letter and then separately counting those with exactly three of any letter. You can
-	 * multiply those two counts together to get a rudimentary checksum and compare it to what your device predicts.
+	 * What is the checksum for your list of box IDs?
 	 * 
 	 * Part 2:
-	 * The boxes will have IDs which differ by exactly one character at the same position in both strings.
+	 * What letters are common between the two correct box IDs?
 	 */
 	public static String getResult(Part part, List<String> input) {
 		if (part == Part.ONE) {
@@ -54,7 +53,7 @@ public class Day02 extends Puzzle {
 				}
 			}
 		}
-		throw new RuntimeException("No ids varied by exactly one character.");
+		throw new RuntimeException("No IDs varied by exactly one character.");
 	}
 	
 	/**

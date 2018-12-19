@@ -8,13 +8,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 16: Permutation Promenade
+ * 
  * @author Brian Uri!
  */
 public class Day16 extends Puzzle {
 
 	/**
-	 * Input: One line of dance commands
-	 * Output: A List of string commands
+	 * Returns input file as a list of commands
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (Arrays.asList(readFile("2017/16", fileIndex).get(0).split(",")));
@@ -23,6 +24,9 @@ public class Day16 extends Puzzle {
 	/**
 	 * Part 1:
 	 * In what order are the programs standing after their dance?
+	 * 
+	 * Part 2:
+	 * In what order are the programs standing after their billion dances?
 	 */
 	public static String getResult(Part part, int numDancers, List<String> input) {
 		Dancers dancers = new Dancers(numDancers);
@@ -33,6 +37,7 @@ public class Day16 extends Puzzle {
 				dancers.perform(move);
 			}
 			String dance = dancers.toString();
+			
 			// Found a repetition, so we can extrapolate to a billion.
 			if (dances.contains(dance)) {
 				break;

@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 17: Reservoir Research
+ * 
  * @author Brian Uri!
  */
 public class Day17 extends Puzzle {
 
 	/**
-	 * Input: A list of ranges denoting CLAY sections in the ground.
-	 * Output: A list of strings, unmodified.
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/17", fileIndex));

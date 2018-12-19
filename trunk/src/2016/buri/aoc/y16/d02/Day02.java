@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 2: Bathroom Security
+ * 
  * @author Brian Uri!
  */
 public class Day02 extends Puzzle {
 
 	/**
-	 * Input: each button's commands on a line
-	 * Output: List of lines.
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/02", fileIndex));
@@ -20,7 +21,10 @@ public class Day02 extends Puzzle {
 	
 	/**
 	 * Part 1:
-	 * Your puzzle input is the instructions from the document you found at the front desk. What is the bathroom code?
+	 * What is the bathroom code? (3x3 grid)
+	 * 
+	 * Part 2:
+	 * What is the bathroom code? (diamond grid)
 	 */
 	public static String getResult(Part part, List<String> input) {
 		Keypad keypad = new Keypad(part);

@@ -1,4 +1,4 @@
-package buri.aoc.y17.d20;
+package buri.aoc.data;
 
 /**
  * Data class for a triple

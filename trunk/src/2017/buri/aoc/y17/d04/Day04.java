@@ -10,17 +10,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * A passphrase consists of a series of words (lowercase letters) separated by spaces.
- * 
- * The rules for a valid passphrase vary by puzzle part.
+ * Day 4: High-Entropy Passphrases
  * 
  * @author Brian Uri!
  */
 public class Day04 extends Puzzle {
 
 	/**
-	 * Input: Multiple rows of space-delimited strings.
-	 * Output: Rows of strings.
+	 * Returns input file as a 2D list of strings.
 	 */
 	public static List<List<String>> getInput(int fileIndex) {
 		List<List<String>> rows = new ArrayList<>();
@@ -31,7 +28,13 @@ public class Day04 extends Puzzle {
 	}
 	
 	/**
-	 * Counts the number of passphrases that are valid.
+	 * A passphrase consists of a series of words (lowercase letters) separated by spaces.
+	 * 
+	 * Part 1:
+	 * A valid passphrase must contain no duplicate words. How many passphrases are valid?
+	 * 
+	 * Part 2:
+	 * A valid passphrase must contain no two words that are anagrams of each other. How many passphrases are valid?
 	 */
 	public static int getResult(Part part, List<List<String>> passphrases) {
 		int validCount = 0;

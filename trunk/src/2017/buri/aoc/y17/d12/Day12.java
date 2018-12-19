@@ -12,18 +12,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * Each program has one or more programs with which it can communicate, and these pipes are bidirectional; if 8 says it
- * can communicate with 11, then 11 will say it can communicate with 8.
- * 
- * You need to figure out how many programs are in the group that contains program ID 0.
+ * Day 12: Digital Plumber
  * 
  * @author Brian Uri!
  */
 public class Day12 extends Puzzle {
 
 	/**
-	 * Input: One report per line.
-	 * Output: List of reports.
+	 * Returns input file as a sorted list of reports.
 	 */
 	public static List<Report> getInput(int fileIndex) {
 		List<Report> data = new ArrayList<>();
@@ -39,9 +35,7 @@ public class Day12 extends Puzzle {
 	 * How many programs are in the group that contains program ID 0?
 	 * 
 	 * Part 2:
-	 * A group is a collection of programs that can all communicate via pipes either directly or indirectly. The
-	 * programs you identified just a moment ago are all part of the same group. Now, they would like you to determine
-	 * the total number of groups. How many groups are there in total?
+	 * How many groups are there in total?
 	 */
 	public static int getResult(Part part, List<Report> input) {
 		Map<Integer, Set<Integer>> connections = new HashMap<>();
@@ -71,9 +65,6 @@ public class Day12 extends Puzzle {
 
 	/**
 	 * Returns all connections to the given id.
-	 * 
-	 * @param id
-	 * @return
 	 */
 	private static Set<Integer> getConnections(Map<Integer, Set<Integer>> connections, int id) {
 		Set<Integer> foundConnections = connections.get(id);
@@ -84,6 +75,7 @@ public class Day12 extends Puzzle {
 				tempConnections.addAll(connections.get(tempId));
 			}
 			foundConnections.addAll(tempConnections);
+			
 			// Quit when nothing new has been added.
 			if (foundConnections.size() == totalConnections) {
 				break;

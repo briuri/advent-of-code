@@ -2,7 +2,6 @@ package buri.aoc.y17.d05;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -19,16 +18,6 @@ public class Day05Test {
 		List<Integer> jumps = Day05.getInput(0);
 		assertEquals(1033, jumps.size());
 		assertEquals(Integer.valueOf(0), jumps.get(0));
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetResultNullJumps() {
-		Day05.getResult(Part.ONE, null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetResultEmptyJumps() {
-		Day05.getResult(Part.ONE, new ArrayList<>());
 	}
 
 	@Test

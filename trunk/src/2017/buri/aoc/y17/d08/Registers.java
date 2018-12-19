@@ -66,10 +66,8 @@ public class Registers {
 				return (value != testValue);
 			case GREATER_OR_EQUAL:
 				return (value >= testValue);
-			case GREATER:
+			default: // GREATER
 				return (value > testValue);
-			default:
-				throw new IllegalArgumentException("Unknown conditional operator.");
 		}
 	}
 

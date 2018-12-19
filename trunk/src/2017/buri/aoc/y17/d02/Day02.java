@@ -9,54 +9,40 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * The spreadsheet consists of rows of apparently-random numbers. To make sure the recovery process is on the right
- * track, they need you to calculate the spreadsheet's checksum. For each row, calculate a value based on
- * Part rules. The checksum is the sum of all of these calculated values.
+ * Day 2: Corruption Checksum
  * 
  * @author Brian Uri!
  */
 public class Day02 extends Puzzle {
 
 	/**
-	 * Input: Multiple rows of tab-delimited integers.
-	 * Output: Rows of integers.
+	 * Returns input file as a 2D list of Integers.
 	 */
 	public static List<List<Integer>> getInput(int fileIndex) {
 		List<List<Integer>> rows = new ArrayList<>();
 		for (String rawRow : readFile("2017/02", fileIndex)) {
-			rows.add(convertStringsToInts(Arrays.asList(rawRow.split("\t"))));
+			List<Integer> row = convertStringsToInts(Arrays.asList(rawRow.split("\t")));
+			Collections.sort(row);
+			rows.add(row);
 		}
 		return (rows);
 	}
 	
 	/**
-	 * Calculates a checksum based on the calculated value of each row.
+	 * The spreadsheet consists of rows of apparently-random numbers.
+	 *  
+	 * Part 1:
+	 * What is the checksum for the spreadsheet, using the difference between highest and lowest value in each row?
+	 * 
+	 * Part 2:
+	 * What is the checksum for the spreadsheet, using the dividend of the only two divisible numbers in each row?
 	 */
 	public static int getResult(Part part, List<List<Integer>> spreadsheet) {
-		assertValidSpreadsheet(spreadsheet);
+		List<Integer> checksums = new ArrayList<>();
 		for (List<Integer> row : spreadsheet) {
-			Collections.sort(row);
+			checksums.add((part == Part.ONE) ? getRowDifference(row) : getRowQuotient(row));
 		}
-
-		int checksum = 0;
-		for (List<Integer> row : spreadsheet) {
-			checksum += (part == Part.ONE) ? getRowDifference(row) : getRowQuotient(row);
-		}
-		return (checksum);
-	}
-
-	/**
-	 * Validates input spreadsheet, which must be non-null and non-empty.
-	 */
-	private static void assertValidSpreadsheet(List<List<Integer>> spreadsheet) {
-		if (spreadsheet == null || spreadsheet.isEmpty()) {
-			throw new IllegalArgumentException("Spreadsheet must be non-null and non-empty.");
-		}
-		for (List<Integer> row : spreadsheet) {
-			if (row.isEmpty()) {
-				throw new IllegalArgumentException("Rows cannot be empty.");
-			}
-		}
+		return (getSum(checksums));
 	}
 
 	/**

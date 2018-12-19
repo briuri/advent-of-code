@@ -10,11 +10,12 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Generator {
-	
 	private long _factor;
 	private long _multiples;
 	private long _previousValue;
 		
+	private static final long DIVISOR = 2147483647;
+	
 	/**
 	 * Factory method to construct generator A or B
 	 */
@@ -39,7 +40,7 @@ public class Generator {
 	public String nextValue(Part part) {
 		long value = 0;
 		while (true) {
-			value = (getPreviousValue() * getFactor()) % 2147483647;
+			value = (getPreviousValue() * getFactor()) % DIVISOR;
 			_previousValue = value;
 			if (part == Part.ONE || (value % getMultiples() == 0)) {
 				break;

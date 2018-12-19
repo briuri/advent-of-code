@@ -16,7 +16,7 @@ public class Day04Test {
 
 	@Test
 	public void testGetInput() {
-		List<LogEntry> input = Day04.getInput(0);
+		List<Observation> input = Day04.getInput(0);
 		assertEquals(905, input.size());
 	}
 

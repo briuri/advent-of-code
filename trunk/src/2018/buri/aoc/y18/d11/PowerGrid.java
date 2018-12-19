@@ -1,13 +1,13 @@
 package buri.aoc.y18.d11;
 
-import buri.aoc.data.AbstractLongGrid;
+import buri.aoc.data.grid.IntGrid;
 
 /**
  * Simple grid class for calculating fuel cell charges.
  * 
  * @author Brian Uri!
  */
-public class PowerGrid extends AbstractLongGrid {
+public class PowerGrid extends IntGrid {
 
 	private int _serial;
 
@@ -17,8 +17,8 @@ public class PowerGrid extends AbstractLongGrid {
 	public PowerGrid(int size, int serial) {
 		super(size);
 		_serial = serial;
-		for (int x = 0; x < getSize(); x++) {
-			for (int y = 0; y < getSize(); y++) {
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
 				int rackId = x + 10;
 				int power = (rackId * y) + getSerial();
 				power = power * rackId;
@@ -28,7 +28,7 @@ public class PowerGrid extends AbstractLongGrid {
 				else {
 					String stringPower = String.valueOf(power);
 					Character hundreds = stringPower.charAt(stringPower.length() - 3);
-					power = Integer.valueOf(String.valueOf(hundreds));
+					power = Character.getNumericValue(hundreds);
 				}
 				power = power - 5;
 				set(new Position(x, y), power);
@@ -40,9 +40,9 @@ public class PowerGrid extends AbstractLongGrid {
 	 * Generates a reduced grid containing the sums of squares within the larger grid.
 	 */
 	public PowerGrid getReduction(int squareSumSize) {
-		PowerGrid grid = new PowerGrid(getGrid().length - (squareSumSize - 1), 0);
-		for (int x = 0; x < grid.getSize(); x++) {
-			for (int y = 0; y < grid.getSize(); y++) {
+		PowerGrid grid = new PowerGrid(getSize() - (squareSumSize - 1), 0);
+		for (int y = 0; y < grid.getSize(); y++) {
+			for (int x = 0; x < grid.getSize(); x++) {
 				Position upperLeft = new Position(x, y);
 				grid.set(upperLeft, getSquareSum(upperLeft, squareSumSize));
 			}
@@ -56,8 +56,8 @@ public class PowerGrid extends AbstractLongGrid {
 	public Position getMaxValuePosition() {
 		Position maxPosition = null;
 		long maxValue = Long.MIN_VALUE;
-		for (int x = 0; x < getSize(); x++) {
-			for (int y = 0; y < getSize(); y++) {
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
 				Position position = new Position(x, y);
 				long value = get(position);
 				if (value > maxValue) {
@@ -77,7 +77,7 @@ public class PowerGrid extends AbstractLongGrid {
 		int sum = 0;
 		for (int dx = 0; dx < squareSumSize; dx++) {
 			for (int dy = 0; dy < squareSumSize; dy++) {
-				sum += getGrid()[ul.getX() + dx][ul.getY() + dy];
+				sum += get(ul.getX() + dx, ul.getY() + dy);
 			}
 		}
 		return (sum);

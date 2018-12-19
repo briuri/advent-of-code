@@ -13,7 +13,7 @@ import java.util.Date;
  * 
  * @author Brian Uri!
  */
-public class LogEntry implements Comparable {
+public class Observation implements Comparable {
 
 	private Date _date;
 	private Integer _minute;
@@ -28,7 +28,7 @@ public class LogEntry implements Comparable {
 	 * [1518-08-29 00:58] wakes up
 	 * [1518-09-26 00:48] falls asleep
 	 */
-	public LogEntry(String input) {
+	public Observation(String input) {
 		String[] tokens = input.split("] ");
 		String rawDate = tokens[0].substring(1, tokens[0].length());
 		try {
@@ -56,7 +56,7 @@ public class LogEntry implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		Date date = ((LogEntry) o).getDate();
+		Date date = ((Observation) o).getDate();
 		return (getDate().compareTo(date));
 	}
 
@@ -84,7 +84,7 @@ public class LogEntry implements Comparable {
 	/**
 	 * Accessor for the date
 	 */
-	public Date getDate() {
+	private Date getDate() {
 		return _date;
 	}
 
@@ -98,7 +98,7 @@ public class LogEntry implements Comparable {
 	/**
 	 * Accessor for the observation
 	 */
-	public String getObservation() {
+	private String getObservation() {
 		return _observation;
 	}
 }

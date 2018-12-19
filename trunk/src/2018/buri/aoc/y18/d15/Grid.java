@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import buri.aoc.data.AbstractCharGrid;
 import buri.aoc.data.Pair;
+import buri.aoc.data.grid.CharGrid;
 
 /**
  * You scan the area, generating a map of the walls (#), open cavern (.), and starting position of every Goblin (G) and
@@ -18,7 +18,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Grid extends AbstractCharGrid {
+public class Grid extends CharGrid {
 	private boolean _elfDied;
 	private List<Unit> _elves;
 	private List<Unit> _goblins;
@@ -37,8 +37,8 @@ public class Grid extends AbstractCharGrid {
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y).trim();
 			for (int x = 0; x < line.length(); x++) {
-				char type = line.charAt(x);
-				getGrid()[x][y] = type;
+				Character type = line.charAt(x);
+				set(x, y, type);
 				if (type == Unit.ELF || type == Unit.GOBLIN) {
 					Unit unit = new Unit(type, new Pair(x, y));
 					if (unit.isElf()) {
@@ -81,9 +81,9 @@ public class Grid extends AbstractCharGrid {
 		if (!unit.isDead() && getAdjacentEnemies(unit).size() == 0) {
 			List<Path> paths = getShortestPathsFor(unit);
 			if (!paths.isEmpty()) {
-				draw(unit.getPosition(), OPEN);
+				set(unit.getPosition(), OPEN);
 				unit.setPosition(paths.get(0).getNextPosition());
-				draw(unit.getPosition(), unit.getType());
+				set(unit.getPosition(), unit.getType());
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class Grid extends AbstractCharGrid {
 				Unit weakest = getWeakestUnit(adjacent);
 				weakest.setHealth(weakest.getHealth() - unit.getAttackPower());
 				if (weakest.isDead()) {
-					draw(weakest.getPosition(), OPEN);
+					set(weakest.getPosition(), OPEN);
 					if (weakest.isElf()) {
 						getElves().remove(weakest);
 						setElfDied(true);
@@ -226,18 +226,11 @@ public class Grid extends AbstractCharGrid {
 		// Remove any that are already filled up.
 		for (Iterator<Pair> iterator = openCells.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();
-			if (getGrid()[position.getX()][position.getY()] != OPEN) {
+			if (get(position) != OPEN) {
 				iterator.remove();
 			}
 		}
 		return (openCells);
-	}
-
-	/**
-	 * Marks a character on the grid for debugging.
-	 */
-	private void draw(Pair pos, char value) {
-		set(pos.getX(), pos.getY(), value);
 	}
 
 	/**

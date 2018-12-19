@@ -27,7 +27,6 @@ public class Day15Test {
 		assertEquals(27755, Day15.getResult(Part.ONE, Day15.getInput(4)));
 		assertEquals(28944, Day15.getResult(Part.ONE, Day15.getInput(5)));
 		assertEquals(18740, Day15.getResult(Part.ONE, Day15.getInput(6)));
-
 	}
 
 	/**

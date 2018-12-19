@@ -8,7 +8,6 @@ import buri.aoc.data.Pair;
  * @author Brian Uri!
  */
 public class Unit implements Comparable<Unit> {
-
 	private char _type;
 	private Pair _position;
 	private int _health;
