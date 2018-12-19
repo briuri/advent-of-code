@@ -7,45 +7,31 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * The captcha requires you to review a sequence of digits (your puzzle input) and find the sum of all digits identified
- * by the rules of the specified Part. The list is circular, so the digit after the last digit is the first digit in the
- * list.
+ * Day 1: Inverse Captcha
  * 
  * @author Brian Uri!
  */
 public class Day01 extends Puzzle {
-	
+
 	/**
-	 * Input: String of digits on one line
-	 * Output: 1 String of digits, with last linebreak trimmed.
+	 * Returns input file unmodified.
 	 */
 	public static String getInput(int fileIndex) {
 		return (readFile("2017/01", fileIndex).get(0));
-	}	
-	
-	/**
-	 * Find the sum of all digits that satisfy Part-specific rules.
-	 */
-	public static int getResult(Part part, String input) {
-		assertValidInput(part, input);
-		int sum = 0;
-		for (Integer digit : getMatchingDigits(part, input)) {
-			sum += digit;
-		}
-		return (sum);
 	}
 
 	/**
-	 * Validates input, which must be non-null and numeric. For Part TWO, the input must also have
-	 * an even length.
+	 * The captcha requires you to review a sequence of digits and find the sum of all digits that match another digit
+	 * in the list.
+	 * 
+	 * Part 1:
+	 * What is the solution when matching to the next digit in the list?
+	 * 
+	 * Part 2:
+	 * What is the solution when matching to the digit halfway around the circular list?
 	 */
-	private static void assertValidInput(Part part, String input) {
-		if (input == null || !input.matches("^[0-9]+$")) {
-			throw new IllegalArgumentException("Input must be numeric.");
-		}
-		if (part == Part.TWO && input.length() % 2 != 0) {
-			throw new IllegalArgumentException("Input must have an even length.");
-		}
+	public static int getResult(Part part, String input) {
+		return (getSum(getMatchingDigits(part, input)));
 	}
 
 	/**

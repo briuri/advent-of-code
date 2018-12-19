@@ -3,6 +3,12 @@ package buri.aoc.data;
 /**
  * Base class for an X-Y coordinate pair.
  *  
+ * Based on Java's array indexing:
+ * (0,0) is the upper left corner of a grid.
+ * (x,0) is lower left corner of a grid.
+ * (0,y) is upper right corner of grid.
+ * (x,y) is lower right corner of grid.
+ * 
  * @author Brian Uri!
  */
 public class Pair implements Comparable<Pair> {
@@ -32,7 +38,7 @@ public class Pair implements Comparable<Pair> {
 	}
 
 	/**
-	 * Moves the position 1 step in a direction.
+	 * Moves the position 1 step in a direction. (0,0 is top-left).
 	 */
 	public void move(Direction direction) {
 		switch (direction) {

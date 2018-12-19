@@ -7,18 +7,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * The polymer is formed by smaller units which, when triggered, react with each other such that two adjacent units of
- * the same type and opposite polarity are destroyed. Units' types are represented by letters; units' polarity is
- * represented by capitalization. For instance, r and R are units with the same type but opposite polarity, whereas r
- * and s are entirely different types and do not react.
+ * Day 5: Alchemical Reduction
  * 
  * @author Brian Uri!
  */
 public class Day05 extends Puzzle {
 
 	/**
-	 * Input: The whole file is a polymer.
-	 * Output: A long string.
+	 * Returns the input file unmodified.
 	 */
 	public static String getInput(int fileIndex) {
 		return readFile("2018/05", fileIndex).get(0);

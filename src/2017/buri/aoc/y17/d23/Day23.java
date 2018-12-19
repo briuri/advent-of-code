@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 23: Coprocessor Conflagration
+ * 
  * @author Brian Uri!
  */
 public class Day23 extends Puzzle {
 
 	/**
-	 * Input: List of instructions as strings
-	 * Output: List of strings
+	 * Returns input file as a list of instructions.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2017/23", fileIndex));
@@ -27,7 +28,7 @@ public class Day23 extends Puzzle {
 	 */
 	public static int getResult(Part part, List<String> input) {
 		if (part == Part.ONE) {
-			Part1Registers registers = new Part1Registers(input);
+			Registers registers = new Registers(input);
 			registers.process();
 			return (registers.getMultiplyCount());
 		}

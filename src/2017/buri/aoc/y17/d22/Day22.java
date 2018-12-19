@@ -4,13 +4,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 22: Sporifica Virus
+ * 
  * @author Brian Uri!
  */
 public class Day22 extends Puzzle {
 
 	/**
-	 * Input: Graph of the computing cluster
-	 * Output: The grid as an object
+	 * Returns input file as Cluster object
 	 */
 	public static Cluster getInput(int fileIndex) {
 		return (new Cluster(readFile("2017/22", fileIndex)));

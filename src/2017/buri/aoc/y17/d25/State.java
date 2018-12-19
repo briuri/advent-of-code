@@ -20,11 +20,11 @@ public class State {
 	 */
 	public State(List<String> definition) {
 		_name = definition.get(0).charAt(9);
-		getWrites().put(0, Integer.valueOf(String.valueOf(definition.get(2).charAt(22))));
+		getWrites().put(0, Character.getNumericValue(definition.get(2).charAt(22)));
 		getMoves().put(0, definition.get(3).indexOf("right") == -1 ? -1 : 1);
 		getNextStates().put(0, definition.get(4).charAt(26));
 		
-		getWrites().put(1, Integer.valueOf(String.valueOf(definition.get(6).charAt(22))));
+		getWrites().put(1, Character.getNumericValue(definition.get(6).charAt(22)));
 		getMoves().put(1, definition.get(7).indexOf("right") == -1 ? -1 : 1);
 		getNextStates().put(1, definition.get(8).charAt(26));
 	}

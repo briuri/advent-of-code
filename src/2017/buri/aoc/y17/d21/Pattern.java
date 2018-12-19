@@ -1,55 +1,40 @@
 package buri.aoc.y17.d21;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import buri.aoc.data.grid.IntGrid;
 
 /**
  * A simple 2x2 or 3x3 pattern used in a rule.
  * 
  * @author Brian Uri!
  */
-public class Pattern {
+public class Pattern extends IntGrid {
 
-	private int[][] _pattern;
-	
 	/**
 	 * Input-based Constructor
 	 */
-	public Pattern(String pattern) {
-		List<String> rows = Arrays.asList(pattern.split("/"));
-		_pattern = new int[rows.size()][rows.size()];
-		for (int y = 0; y < getPattern().length; y++) {
-			for (int x = 0; x < getPattern().length; x++) {
-				getPattern()[x][y] = toInt(rows.get(y).charAt(x));
+	public Pattern(List<String> rows) {
+		super(rows.size());
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
+				set(x, y, (rows.get(y).charAt(x) == '#' ? 1 : 0));
 			}
 		}
 	}
-	
+
 	/**
 	 * Array-based Constructor
 	 */
 	public Pattern(int[][] pattern) {
-		_pattern = pattern;
+		super(pattern.length);
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
+				set(x, y, pattern[x][y]);
+			}
+		}
 	}
 
-	/**
-	 * Returns all 8 flip/rotate permutations of this pattern.
-	 */
-	public Set<Pattern> getPermutations() {
-		Set<Pattern> set = new HashSet<>();
-		set.add(this);
-		return (set);
-	}
-	
-	/**
-	 * Returns the square size.
-	 */
-	public int getSize() {
-		return (getPattern().length);
-	}
-	
 	/**
 	 * Returns this pattern flipped across the vertical axis.
 	 */
@@ -57,12 +42,12 @@ public class Pattern {
 		int[][] pattern = new int[getSize()][getSize()];
 		for (int y = 0; y < getSize(); y++) {
 			for (int x = 0; x < getSize(); x++) {
-				pattern[getSize() - x - 1][y] = getPattern()[x][y];
+				pattern[getSize() - x - 1][y] = get(x, y);
 			}
 		}
 		return (new Pattern(pattern));
 	}
-	
+
 	/**
 	 * Returns this pattern rotated 90 degrees counterclockwise
 	 */
@@ -70,41 +55,21 @@ public class Pattern {
 		int[][] pattern = new int[getSize()][getSize()];
 		for (int y = 0; y < getSize(); y++) {
 			for (int x = 0; x < getSize(); x++) {
-				pattern[x][getSize() - 1 - y] = getPattern()[y][x];
+				pattern[x][getSize() - 1 - y] = get(y, x);
 			}
 		}
 		return new Pattern(pattern);
 	}
-	
-	/**
-	 * Converts rule strings into ints for storage.
-	 */
-	private int toInt(char value) {
-		return (value == '#' ? 1 : 0);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		System.out.println(toString() + " " + obj.toString());
-		return (toString().equals(obj.toString()));
-	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		for (int y = 0; y < getSize(); y++) {
 			for (int x = 0; x < getSize(); x++) {
-				buffer.append(getPattern()[x][y]);
+				buffer.append(get(x, y));
 			}
 			buffer.append("\n");
 		}
 		return (buffer.toString());
 	}
-	
-	/**
-	 * Accessor for the pattern
-	 */
-	public int[][] getPattern() {
-		return _pattern;
-	}	
 }

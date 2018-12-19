@@ -3,47 +3,50 @@ package buri.aoc.y16.d02;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.AbstractLongGrid;
 import buri.aoc.data.Pair;
+import buri.aoc.data.grid.IntGrid;
 
 /**
- * Data model for keypad
+ * Data model for keypad.
  * 
  * @author Brian Uri!
  */
-public class Keypad extends AbstractLongGrid {
-	
+public class Keypad extends IntGrid {
+
 	private Pair _current;
-	
+
 	/**
-	 * Constructor (0 represents edge)
+	 * Constructor
+	 * 
+	 * Models both layouts of keypad in a 7x7 grid (0 represents an edge). Both layouts start at the "5" button.
 	 */
 	public Keypad(Part part) {
 		super(7);
 		if (part == Part.ONE) {
-			getGrid()[0] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
-			getGrid()[1] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
-			getGrid()[2] = new long[] { 0, 0, 1, 4, 7, 0, 0 };
-			getGrid()[3] = new long[] { 0, 0, 2, 5, 8, 0, 0 };
-			getGrid()[4] = new long[] { 0, 0, 3, 6, 9, 0, 0 };
-			getGrid()[5] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
-			getGrid()[6] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
+			getGrid()[0] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
+			getGrid()[1] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
+			getGrid()[2] = new Integer[] { 0, 0, 1, 4, 7, 0, 0 };
+			getGrid()[3] = new Integer[] { 0, 0, 2, 5, 8, 0, 0 };
+			getGrid()[4] = new Integer[] { 0, 0, 3, 6, 9, 0, 0 };
+			getGrid()[5] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
+			getGrid()[6] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
 			_current = new Pair(3, 3);
 		}
 		else {
-			getGrid()[0] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
-			getGrid()[1] = new long[] { 0, 0, 0, 5, 0, 0, 0 };
-			getGrid()[2] = new long[] { 0, 0, 2, 6, 10, 0, 0 };
-			getGrid()[3] = new long[] { 0, 1, 3, 7, 11, 13, 0 };
-			getGrid()[4] = new long[] { 0, 0, 4, 8, 12, 0, 0 };
-			getGrid()[5] = new long[] { 0, 0, 0, 9, 0, 0, 0 };
-			getGrid()[6] = new long[] { 0, 0, 0, 0, 0, 0, 0 };
+			getGrid()[0] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
+			getGrid()[1] = new Integer[] { 0, 0, 0, 5, 0, 0, 0 };
+			getGrid()[2] = new Integer[] { 0, 0, 2, 6, 10, 0, 0 };
+			getGrid()[3] = new Integer[] { 0, 1, 3, 7, 11, 13, 0 };
+			getGrid()[4] = new Integer[] { 0, 0, 4, 8, 12, 0, 0 };
+			getGrid()[5] = new Integer[] { 0, 0, 0, 9, 0, 0, 0 };
+			getGrid()[6] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
 			_current = new Pair(1, 3);
 		}
 	}
 
 	/**
-	 * Follows the instructions to locate buttons.
+	 * From the previous button, follow the instructions to reach the next button. Ignore any move that doesn't lead to
+	 * a button.
 	 */
 	public String getButtons(List<String> input) {
 		StringBuffer buffer = new StringBuffer();
@@ -52,37 +55,37 @@ public class Keypad extends AbstractLongGrid {
 				int x = getCurrent().getX();
 				int y = getCurrent().getY();
 				switch (direction) {
-					case 'L':
-						if (getGrid()[x - 1][y] != 0) {
-							getCurrent().setX(x - 1);
-						}
-						break;
 					case 'U':
-						if (getGrid()[x][y - 1] != 0) {
+						if (get(x, y - 1) != 0) {
 							getCurrent().setY(y - 1);
 						}
 						break;
 					case 'R':
-						if (getGrid()[x + 1][y] != 0) {
+						if (get(x + 1, y) != 0) {
 							getCurrent().setX(x + 1);
 						}
 						break;
 					case 'D':
-						if (getGrid()[x][y + 1] != 0) {
+						if (get(x, y + 1) != 0) {
 							getCurrent().setY(y + 1);
 						}
 						break;
+					default: // 'L'
+						if (get(x - 1, y) != 0) {
+							getCurrent().setX(x - 1);
+						}
 				}
 			}
-			buffer.append(Integer.toHexString((int) get(getCurrent())).toUpperCase());
+			String hexString = Integer.toHexString(get(getCurrent()));
+			buffer.append(hexString.toUpperCase());
 		}
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Accessor for the current
 	 */
-	public Pair getCurrent() {
+	private Pair getCurrent() {
 		return _current;
-	}	
+	}
 }

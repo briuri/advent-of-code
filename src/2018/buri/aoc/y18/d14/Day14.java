@@ -7,6 +7,8 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 14: Chocolate Charts
+ * 
  * @author Brian Uri!
  */
 public class Day14 extends Puzzle {
@@ -41,7 +43,7 @@ public class Day14 extends Puzzle {
 		while (true) {
 			String sum = String.valueOf(list.get(first) + list.get(second));
 			for (int sumChar = 0; sumChar < sum.length(); sumChar++) {
-				list.add(Integer.valueOf(String.valueOf(sum.charAt(sumChar))));
+				list.add(Character.getNumericValue(sum.charAt(sumChar)));
 				if (part == Part.TWO && list.size() > input.length()) {
 					int existingRecipes = list.size() - input.length();
 					String endString = toString(list.subList(existingRecipes, list.size()));

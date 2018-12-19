@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import buri.aoc.data.grid.IntGrid;
+
 /**
  * Data class for the Image
  * 
  * @author Brian Uri!
  */
-public class Image {
-
-	private int[][] _image;
+public class Image extends IntGrid {
 	private Map<Integer, List<Rule>> _rules;
 
 	/**
@@ -25,18 +25,10 @@ public class Image {
 	 * 
 	 */
 	public Image(List<Rule> rules) {
-		_image = new int[3][3];
-		_image[0][0] = 0;
-		_image[0][1] = 0;
-		_image[0][2] = 1;
-		
-		_image[1][0] = 1;
-		_image[1][1] = 0;
-		_image[1][2] = 1;
-		
-		_image[2][0] = 0;
-		_image[2][1] = 1;
-		_image[2][2] = 1;		
+		super(3);
+		getGrid()[0] = new Integer[] { 0, 0, 1 };
+		getGrid()[1] = new Integer[] { 1, 0, 1 };
+		getGrid()[2] = new Integer[] { 0, 1, 1 };
 		
 		_rules = new HashMap<>();
 		getRules().put(2, new ArrayList<>());
@@ -57,7 +49,7 @@ public class Image {
 		int patternSize = (getSize() % 2 == 0) ? 2 : 3;
 		int subdivisions = (getSize() / patternSize);
 		int newImageSize = subdivisions * (patternSize + 1);
-		int[][] newImage = new int[newImageSize][newImageSize];
+		Integer[][] newImage = new Integer[newImageSize][newImageSize];
 		for (int y = 0; y < subdivisions; y++) {
 			for (int x = 0; x < subdivisions; x++) {
 				Pattern current = getSubdivision(patternSize, x, y);
@@ -65,7 +57,7 @@ public class Image {
 				draw(newImage, result, x, y);
 			}
 		}
-		setImage(newImage);
+		setGrid(newImage);
 	}
 	
 	/**
@@ -77,7 +69,7 @@ public class Image {
 		int offsetY = patternSize * subY;
 		for (int y = 0; y < patternSize; y++) {
 			for (int x = 0; x < patternSize; x++) {
-				pattern[x][y] = getImage()[x + offsetX][y + offsetY];
+				pattern[x][y] = get(x + offsetX, y + offsetY);
 			}
 		}
 		return (new Pattern(pattern));
@@ -99,12 +91,12 @@ public class Image {
 	/**
 	 * Draws a pattern onto a grid.
 	 */
-	private void draw(int[][] newImage, Pattern pattern, int subX, int subY) {
+	private void draw(Integer[][] newImage, Pattern pattern, int subX, int subY) {
 		int offsetX = pattern.getSize() * subX;
 		int offsetY = pattern.getSize() * subY;
 		for (int y = 0; y < pattern.getSize(); y++) {
 			for (int x = 0; x < pattern.getSize(); x++) {
-				newImage[x + offsetX][y + offsetY] = pattern.getPattern()[x][y];
+				newImage[x + offsetX][y + offsetY] = pattern.get(x, y);
 			}
 		}
 	}
@@ -114,47 +106,14 @@ public class Image {
 	 */
 	public int getLitPixels() {
 		int sum = 0;
-		for (int y = 0; y < getImage().length; y++) {
-			for (int x = 0; x < getImage().length; x++) {
-				sum += getImage()[x][y];
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
+				sum += get(x, y);
 			}
 		}
 		return (sum);
 	}
-	
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int y = 0; y < getImage().length; y++) {
-			for (int x = 0; x < getImage().length; x++) {
-				buffer.append(getImage()[x][y]);
-			}
-			buffer.append("\n");
-		}
-		return (buffer.toString());
-	}
-	
-	/**
-	 * Accessor for the current image size
-	 */
-	private int getSize() {
-		return (getImage().length);
-	}
-	
-	/**
-	 * Accessor for the image
-	 */
-	private int[][] getImage() {
-		return _image;
-	}
 
-	/**
-	 * Accessor for the image
-	 */
-	private void setImage(int[][] image) {
-		_image = image;
-	}	
-	
 	/**
 	 * Accessor for the rules
 	 */

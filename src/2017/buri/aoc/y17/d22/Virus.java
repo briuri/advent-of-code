@@ -35,9 +35,6 @@ public class Virus {
 		if (node == Cluster.CLEAN) {
 			setDirection(getDirection().turnLeft());
 		}
-		else if (node == Cluster.WEAK) {
-			// Do nothing.
-		}
 		else if (node == Cluster.FLAGGED) {
 			setDirection(getDirection().turnAround());
 		}

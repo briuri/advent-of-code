@@ -7,13 +7,14 @@ import buri.aoc.Puzzle;
 import buri.aoc.data.CharFrequency;
 
 /**
+ * Day 4: Security Through Obscurity
+ * 
  * @author Brian Uri!
  */
 public class Day04 extends Puzzle {
 
 	/**
-	 * Input: A room code on each line
-	 * Output: List of Strings
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/04", fileIndex));
@@ -38,13 +39,9 @@ public class Day04 extends Puzzle {
 		}
 
 		// Part TWO
-		int sectorId = -1;
 		for (String room : input) {
-			if (isRealRoom(room)) {
-				sectorId = getSectorId(room);
-				if (decryptName(room).equals("northpole-object-storage")) {
-					return (sectorId);
-				}
+			if (isRealRoom(room) && decryptName(room).equals("northpole-object-storage")) {
+				return (getSectorId(room));
 			}
 		}
 		throw new RuntimeException("Could not find room.");

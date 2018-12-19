@@ -4,13 +4,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 13: Mine Cart Madness
+ * 
  * @author Brian Uri!
  */
 public class Day13 extends Puzzle {
 
 	/**
-	 * Input: The track map.
-	 * Output: The track map as an object.
+	 * Returns input file as a Tracks object.
 	 */
 	public static Tracks getInput(int fileIndex) {
 		return (new Tracks(readFile("2018/13", fileIndex)));

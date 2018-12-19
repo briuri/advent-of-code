@@ -3,8 +3,8 @@ package buri.aoc.y17.d22;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.AbstractLongGrid;
 import buri.aoc.data.Pair;
+import buri.aoc.data.grid.IntGrid;
 
 /**
  * Clean nodes are shown as .; infected nodes are shown as #. This map only shows the center of the grid; there are many
@@ -12,7 +12,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Cluster extends AbstractLongGrid {
+public class Cluster extends IntGrid {
 	private Virus _virus;
 	private int _infections;
 
@@ -68,7 +68,7 @@ public class Cluster extends AbstractLongGrid {
 	 * Iterate across CLEAN -> WEAK -> INFECTED -> FLAGGED -> CLEAN.
 	 */
 	private void alterNode(Part part) {
-		long node = get(getVirus().getPosition());
+		Integer node = get(getVirus().getPosition());
 		if (part == Part.ONE) {			
 			node = (node == CLEAN ? INFECTED : CLEAN);
 		}
@@ -87,7 +87,7 @@ public class Cluster extends AbstractLongGrid {
 	/**
 	 * Accessor for the virus
 	 */
-	public Virus getVirus() {
+	private Virus getVirus() {
 		return _virus;
 	}
 

@@ -28,6 +28,17 @@ public abstract class Puzzle {
 	}
 
 	/**
+	 * Gets the sum of a list of integers
+	 */
+	protected static Integer getSum(List<Integer> list) {
+		Integer sum = 0;
+		for (Integer num : list) {
+			sum += num;
+		}
+		return (sum);
+	}
+	
+	/**
 	 * Converts strings into integers.
 	 */
 	public static List<Integer> convertStringsToInts(List<String> rawIntegers) {

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import buri.aoc.data.AbstractCharGrid;
 import buri.aoc.data.Direction;
 import buri.aoc.data.Pair;
+import buri.aoc.data.grid.CharGrid;
 
 /**
  * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two
@@ -17,7 +17,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Tracks extends AbstractCharGrid {
+public class Tracks extends CharGrid {
 	private List<Cart> _carts = new ArrayList<>();
 	private String _firstCollision = null;
 	private int _iteration = 0;
@@ -97,16 +97,16 @@ public class Tracks extends AbstractCharGrid {
 	}
 	
 	/**
-	 * Accessor for the firstCollision
+	 * Accessor for the string position when the first collision occurs
 	 */
 	public String getFirstCollision() {
 		return _firstCollision;
 	}
 
 	/**
-	 * Accessor for the firstCollision
+	 * Accessor for the string position when the first collision occurs
 	 */
-	public void setFirstCollision(String firstCollision) {
+	private void setFirstCollision(String firstCollision) {
 		_firstCollision = firstCollision;
 	}
 	

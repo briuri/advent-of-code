@@ -6,6 +6,8 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 16: Chronal Classification
+ * 
  * @author Brian Uri!
  */
 public class Day16 extends Puzzle {
@@ -13,13 +15,7 @@ public class Day16 extends Puzzle {
 	/**
 	 * For ease of processing, I split the raw input file into the data for Part 1 (16-0, 16-1) and Part 2 (16-2).
 	 * 
-	 * Part 1:
-	 * Input: Three lines per condition to test
-	 * Output: List of Strings
-	 * 
-	 * Part 2:
-	 * Input: One instruction per line.
-	 * Output: List of Strings
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/16", fileIndex));

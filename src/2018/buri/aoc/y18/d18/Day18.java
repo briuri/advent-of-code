@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 18: Settlers of the North Pole
+ * 
  * @author Brian Uri!
  */
 public class Day18 extends Puzzle {
 
 	/**
-	 * Input: Visualization of the acreage.
-	 * Output: List of Strings unmodified
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/18", fileIndex));

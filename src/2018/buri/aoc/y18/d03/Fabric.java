@@ -1,13 +1,13 @@
 package buri.aoc.y18.d03;
 
-import buri.aoc.data.AbstractLongGrid;
+import buri.aoc.data.grid.IntGrid;
 
 /**
  * Fabric grid
  * 
  * @author Brian Uri!
  */
-public class Fabric extends AbstractLongGrid {
+public class Fabric extends IntGrid {
 
 	/**
 	 * Creates a new square grid with the specified width/length.
@@ -20,7 +20,7 @@ public class Fabric extends AbstractLongGrid {
 	 * Mark a spot on the grid as claimed by incrementing its value.
 	 */
 	public void claimSquare(int x, int y) {
-		getGrid()[x][y] = getGrid()[x][y] + 1;
+		set(x, y, get(x, y) + 1);
 	}
 
 	/**
@@ -28,9 +28,9 @@ public class Fabric extends AbstractLongGrid {
 	 */
 	public int countOverlaps() {
 		int sum = 0;
-		for (int i = 0; i < getGrid().length; i++) {
-			for (int j = 0; j < getGrid()[i].length; j++) {
-				if (getGrid()[i][j] >= 2) {
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
+				if (get(x, y) >= 2) {
 					sum++;
 				}
 			}
@@ -46,7 +46,7 @@ public class Fabric extends AbstractLongGrid {
 		int sum = 0;
 		for (int w = 0; w < claim.getWidth(); w++) {
 			for (int h = 0; h < claim.getHeight(); h++) {
-				sum += getGrid()[claim.getX() + w][claim.getY() + h];
+				sum += get(claim.getX() + w, claim.getY() + h);
 			}
 		}
 		return (sum == claim.getSize());

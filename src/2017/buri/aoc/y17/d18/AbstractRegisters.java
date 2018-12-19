@@ -146,14 +146,14 @@ public abstract class AbstractRegisters {
 	/**
 	 * Accessor for the current instruction
 	 */
-	public int getCurrent() {
+	private int getCurrent() {
 		return _current;
 	}
 
 	/**
 	 * Accessor for the current instruction
 	 */
-	public void setCurrent(int current) {
+	private void setCurrent(int current) {
 		_current = current;
 	}
 }

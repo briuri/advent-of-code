@@ -6,15 +6,17 @@ import java.util.List;
 
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
+import buri.aoc.data.grid.CharGrid;
 
 /**
+ * Day 10: The Stars Align
+ * 
  * @author Brian Uri!
  */
 public class Day10 extends Puzzle {
 
 	/**
-	 * Input: One position/velocity per line, as: posX,posY,velX,velY.
-	 * Output: A list of positions
+	 * Returns input file as a list of Positions.
 	 */
 	public static List<Position> getInput(int fileIndex) {
 		List<Position> positions = new ArrayList<>();
@@ -63,7 +65,7 @@ public class Day10 extends Puzzle {
 				position.offset(offset);
 				maxX = Math.max(position.getX(), maxX);
 			}
-			Grid grid = new Grid(maxX + 1);
+			CharGrid grid = new CharGrid(maxX + 1);
 			for (Position position : input) {
 				grid.set(position, '#');
 			}

@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 12: Subterranean Sustainability
+ * 
  * @author Brian Uri!
  */
 public class Day12 extends Puzzle {
 
 	/**
-	 * Input: First line is initial state, remaining lines are patterns for growth.
-	 * Output: List of raw strings.
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/12", fileIndex));

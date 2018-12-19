@@ -6,13 +6,14 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 19: Go With the Flow
+ * 
  * @author Brian Uri!
  */
 public class Day19 extends Puzzle {
 
 	/**
-	 * Input: First line is the IP register index, rest are codes to run.
-	 * Output: List of Strings, unmodified.
+	 * Returns input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/19", fileIndex));
@@ -28,7 +29,7 @@ public class Day19 extends Puzzle {
 	 */
 	public static long getResult(Part part, List<String> input) {
 		String ipRegister = input.remove(0);
-		Registers registers = new Registers(part, Integer.valueOf(String.valueOf(ipRegister.charAt(4))), input);
+		Registers registers = new Registers(part, Character.getNumericValue(ipRegister.charAt(4)), input);
 		if (part == Part.ONE) {			
 			registers.run();
 			return (registers.get(Registers.REGISTER, 0));

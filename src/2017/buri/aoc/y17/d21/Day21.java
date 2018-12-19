@@ -6,13 +6,14 @@ import java.util.List;
 import buri.aoc.Puzzle;
 
 /**
+ * Day 21: Fractal Art
+ * 
  * @author Brian Uri!
  */
 public class Day21 extends Puzzle {
 
 	/**
-	 * Input: One rule per line.
-	 * Output: List of Rules
+	 * Returns input file as a list of rules.
 	 */
 	public static List<Rule> getInput(int fileIndex) {
 		List<Rule> rules = new ArrayList<>();

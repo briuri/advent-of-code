@@ -3,14 +3,14 @@ package buri.aoc.y18.d18;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.data.AbstractCharGrid;
+import buri.aoc.data.grid.CharGrid;
 
 /**
  * Model for the acreage.
  * 
  * @author Brian Uri!
  */
-public class Acreage extends AbstractCharGrid {
+public class Acreage extends CharGrid {
 	public static final char OPEN = '.';
 	public static final char TREES = '|';
 	public static final char YARD = '#';
@@ -20,9 +20,9 @@ public class Acreage extends AbstractCharGrid {
 	 */
 	public Acreage(List<String> input) {
 		super(input.size());
-		for (int y = 0; y < getGrid().length; y++) {
+		for (int y = 0; y < getSize(); y++) {
 			String line = input.get(y);
-			for (int x = 0; x < getGrid().length; x++) {
+			for (int x = 0; x < getSize(); x++) {
 				set(x, y, line.charAt(x));
 			}
 		}
@@ -37,13 +37,13 @@ public class Acreage extends AbstractCharGrid {
 		List<Integer> resourceValues = new ArrayList<>();
 		for (int i = 0; i < minutes; i++) {
 			// Make changes in a separate grid and copy back onto this one.
-			char[][] updatedGrid = new char[getGrid().length][getGrid().length];
-			for (int y = 0; y < updatedGrid.length; y++) {
-				for (int x = 0; x < updatedGrid.length; x++) {
+			Character[][] updatedGrid = new Character[getSize()][getSize()];
+			for (int y = 0; y < getSize(); y++) {
+				for (int x = 0; x < getSize(); x++) {
 					updatedGrid[x][y] = getNewValue(x, y);
 				}
 			}
-			System.arraycopy(updatedGrid, 0, getGrid(), 0, updatedGrid.length);
+			System.arraycopy(updatedGrid, 0, getGrid(), 0, getSize());
 
 			// Keep records of old grid changes so we can detect cycles.
 			String output = toString();
@@ -97,7 +97,7 @@ public class Acreage extends AbstractCharGrid {
 			// Up
 			adjacentValues.add(get(x, y - 1));
 			// Upper Right
-			if (x < getGrid().length - 1) {
+			if (x < getSize() - 1) {
 				adjacentValues.add(get(x + 1, y - 1));
 			}
 		}
@@ -105,11 +105,11 @@ public class Acreage extends AbstractCharGrid {
 			// Left
 			adjacentValues.add(get(x - 1, y));
 		}
-		if (x < getGrid().length - 1) {
+		if (x < getSize() - 1) {
 			// Right
 			adjacentValues.add(get(x + 1, y));
 		}
-		if (y < getGrid().length - 1) {
+		if (y < getSize() - 1) {
 			// Lower Left
 			if (x > 0) {
 				adjacentValues.add(get(x - 1, y + 1));
@@ -117,7 +117,7 @@ public class Acreage extends AbstractCharGrid {
 			// Down
 			adjacentValues.add(get(x, y + 1));
 			// Lower Right
-			if (x < getGrid().length - 1) {
+			if (x < getSize() - 1) {
 				adjacentValues.add(get(x + 1, y + 1));
 			}
 		}
@@ -130,9 +130,9 @@ public class Acreage extends AbstractCharGrid {
 	private int getTotalResourceValue() {
 		int trees = 0;
 		int yards = 0;
-		for (int y = 0; y < getGrid().length; y++) {
-			for (int x = 0; x < getGrid().length; x++) {
-				char value = get(x, y);
+		for (int y = 0; y < getSize(); y++) {
+			for (int x = 0; x < getSize(); x++) {
+				Character value = get(x, y);
 				if (value == TREES) {
 					trees++;
 				}

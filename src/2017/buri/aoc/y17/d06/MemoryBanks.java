@@ -25,7 +25,7 @@ public class MemoryBanks {
 	 * It continues doing this until it runs out of blocks; if it reaches the last memory bank, it wraps around to
 	 * the first one.
 	 * 
-	 * @returns a string snapshot of block counts
+	 * Returns a string snapshot of block counts for comparison to earlier states.
 	 */
 	public String redistribute() {
 		// Get the number of blocks in the fullest bank.
@@ -33,6 +33,7 @@ public class MemoryBanks {
 		for (Integer value : getBanks()) {
 			blocks = Math.max(blocks, value);
 		}
+		// Ties won by the lowest numbered bank.
 		int index = getBanks().indexOf(blocks);
 
 		// Remove all blocks from the slot
