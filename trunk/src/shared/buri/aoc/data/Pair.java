@@ -38,6 +38,13 @@ public class Pair implements Comparable<Pair> {
 	}
 
 	/**
+	 * Returns a copy of this pair.
+	 */
+	public Pair copy() {
+		return (new Pair(getX(), getY()));
+	}
+	
+	/**
 	 * Moves the position 1 step in a direction. (0,0 is top-left).
 	 */
 	public void move(Direction direction) {
