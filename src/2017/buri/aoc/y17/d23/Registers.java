@@ -2,14 +2,14 @@ package buri.aoc.y17.d23;
 
 import java.util.List;
 
-import buri.aoc.data.registers.AbstractNamedRegisters;
+import buri.aoc.data.registers.NamedRegisters;
 
 /**
  * Abstract base class for registers in each part.
  * 
  * @author Brian Uri!
  */
-public class Registers extends AbstractNamedRegisters {
+public class Registers extends NamedRegisters {
 	private int _multiplyCount;
 
 	/**
