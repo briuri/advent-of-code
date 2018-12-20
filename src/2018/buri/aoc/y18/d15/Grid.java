@@ -184,7 +184,7 @@ public class Grid extends CharGrid {
 		// Get all open cells adjacent to enemies.
 		List<Pair> destinations = new ArrayList<>();
 		for (Unit enemy : getEnemies(unit)) {
-			destinations.addAll(getOpenAdjacentCells(enemy.getPosition()));
+			destinations.addAll(getTraversableNeighbors(enemy.getPosition()));
 		}
 
 		// Generate breadth first mapping to find shortest paths to all points.
@@ -195,7 +195,7 @@ public class Grid extends CharGrid {
 		Pair current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
-			for (Pair next : getOpenAdjacentCells(current)) {
+			for (Pair next : getTraversableNeighbors(current)) {
 				if (cameFrom.get(next) == null) {
 					frontier.add(next);
 					cameFrom.put(next, current);
@@ -217,20 +217,20 @@ public class Grid extends CharGrid {
 	/**
 	 * Returns open cells adjacent to some position, in reading order (up, left, right, down).
 	 */
-	private List<Pair> getOpenAdjacentCells(Pair center) {
-		List<Pair> openCells = new ArrayList<>();
-		openCells.add(new Pair(center.getX(), center.getY() - 1));
-		openCells.add(new Pair(center.getX() - 1, center.getY()));
-		openCells.add(new Pair(center.getX() + 1, center.getY()));
-		openCells.add(new Pair(center.getX(), center.getY() + 1));
+	private List<Pair> getTraversableNeighbors(Pair center) {
+		List<Pair> neighbors = new ArrayList<>();
+		neighbors.add(new Pair(center.getX(), center.getY() - 1));
+		neighbors.add(new Pair(center.getX() - 1, center.getY()));
+		neighbors.add(new Pair(center.getX() + 1, center.getY()));
+		neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		// Remove any that are already filled up.
-		for (Iterator<Pair> iterator = openCells.iterator(); iterator.hasNext();) {
+		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();
 			if (get(position) != OPEN) {
 				iterator.remove();
 			}
 		}
-		return (openCells);
+		return (neighbors);
 	}
 
 	/**
