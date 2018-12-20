@@ -23,21 +23,32 @@ public class RoomMap extends CharGrid {
 
 	private Pair _start; 
 	
-	public static final char WALL = '#';
-	public static final char ROOM = '.';
-	public static final char DOOR = 'O';
-	public static final char START = 'X';
+	private static final char WALL = '#';
+	private static final char ROOM = '.';
+	private static final char DOOR = 'O';
+	private static final char START = 'X';
+	
+	private static final char REGEXP_END = '$';
+	private static final char GROUP_START = '(';
+	private static final char GROUP_CHOICE = '|';
+	private static final char GROUP_END = ')';
+	private static final char NORTH = 'N';
+	private static final char EAST = 'E';
+	private static final char SOUTH = 'S';
+	private static final char WEST = 'W';
 	
 	/**
 	 * Constructor
 	 */
 	public RoomMap() {
-		super(1000);
+		super(225);
 		for (int y = 0; y < getSize(); y++) {
 			for (int x = 0; x < getSize(); x++) {
 				set(x, y, WALL);
 			}
 		}
+		
+		// Start in the middle of the grid.
 		_start = new Pair(getSize() / 2, getSize() / 2);
 		set(getStart(), START);
 	}
@@ -46,14 +57,13 @@ public class RoomMap extends CharGrid {
 	 * Entry point for exploring the rooms from the starting location.
 	 */
 	public void explore(String input) {
-		Set<String> snapshots = new HashSet<>();
-		explore(0, getStart().copy(), input, snapshots);
+		explore(getStart().copy(), input, new HashSet<>());
 	}
 	
 	/**
 	 * Recursive depth-first exploration of the rooms. Maintains string representations of the start/input to avoid revisiting.
 	 */
-	public void explore(int depth, Pair start, String input, Set<String> snapshots) {
+	public void explore(Pair start, String input, Set<String> snapshots) {
 		String snapshot = start + input;
 		if (snapshots.contains(snapshot)) {
 			return;
@@ -62,15 +72,15 @@ public class RoomMap extends CharGrid {
 		
 		for (int i = 0; i < input.length(); i++) {
 			char value = input.charAt(i);
-			if (value == '$' || value == ')') {
+			if (value == REGEXP_END || value == GROUP_END) {
 				break;
 			}
-			if (value == '(') {
+			if (value == GROUP_START) {
+				// When a group is found, follow it all the way to the end of the input.
 				int groupEndIndex = getGroupEndIndex(input, i) + 1;
-				List<String> options = subdivideGroup(input, i);
-				for (String option : options) {
+				for (String option : subdivideGroup(input, i)) {
 					option = option + input.substring(groupEndIndex);
-					explore(depth + 1, start.copy(), option, snapshots);
+					explore(start.copy(), option, snapshots);
 				}
 				break;
 			}
@@ -84,19 +94,19 @@ public class RoomMap extends CharGrid {
 	 * Explores from a particular position in some direction.
 	 */
 	private void move(Pair position, char direction) {
-		if (direction == 'N') {
+		if (direction == NORTH) {
 			set(position.getX(), position.getY() - 1, DOOR);
 			position.setY(position.getY() - 2);
 		}
-		else if (direction == 'E') {
+		else if (direction == EAST) {
 			set(position.getX() + 1, position.getY(), DOOR);
 			position.setX(position.getX() + 2);
 		}
-		else if (direction == 'S') {
+		else if (direction == SOUTH) {
 			set(position.getX(), position.getY() + 1, DOOR);
 			position.setY(position.getY() + 2);	
 		}
-		else if (direction == 'W') {
+		else if (direction == WEST) {
 			set(position.getX() - 1, position.getY(), DOOR);
 			position.setX(position.getX() - 2);
 		}
@@ -112,20 +122,20 @@ public class RoomMap extends CharGrid {
 		List<String> choices = new ArrayList<>();
 		
 		int currentChoiceIndex = groupStart + 1;
-		Stack<Integer> stack = new Stack<>();
+		Stack<Integer> nestedGroups = new Stack<>();
 		for (int i = groupStart; i < input.length(); i++) {
 			char value = input.charAt(i);
-			if (value == '(') {
-				stack.push(i);
+			if (value == GROUP_START) {
+				nestedGroups.push(i);
 			}
 			// Only parse choices that are at the same depth as the outer group.
-			if (value == '|' && stack.peek() == groupStart) {
+			if (value == GROUP_CHOICE && nestedGroups.peek() == groupStart) {
 				choices.add(input.substring(currentChoiceIndex, i));
 				currentChoiceIndex = i + 1;
 			}
-			if (value == ')') {
-				stack.pop();
-				if (stack.isEmpty()) {
+			if (value == GROUP_END) {
+				nestedGroups.pop();
+				if (nestedGroups.isEmpty()) {
 					choices.add(input.substring(currentChoiceIndex, i));
 					break;
 				}
@@ -135,18 +145,18 @@ public class RoomMap extends CharGrid {
 	}
 	
 	/**
-	 * Locates the end of a group, ignoring subgroups.
+	 * Locates the index of the end of a group, ignoring subgroups.
 	 */
 	private int getGroupEndIndex(String input, int groupStart) {
-		Stack<Integer> stack = new Stack<>();
+		Stack<Integer> nestedGroups = new Stack<>();
 		for (int i = groupStart; i < input.length(); i++) {
 			char value = input.charAt(i);
-			if (value == '(') {
-				stack.push(i);
+			if (value == GROUP_START) {
+				nestedGroups.push(i);
 			}
-			if (value == ')') {
-				stack.pop();
-				if (stack.isEmpty()) {
+			if (value == GROUP_END) {
+				nestedGroups.pop();
+				if (nestedGroups.isEmpty()) {
 					return (i);
 				}
 			}
@@ -170,6 +180,7 @@ public class RoomMap extends CharGrid {
 	public int getRoomsWithDoors(int minDoors) {
 		int count = 0;
 		for (Path path : getPaths()) {
+			// Every other cell on the path is a door.
 			if (path.getLength() / 2 >= minDoors) {
 				count++;
 			}
@@ -190,6 +201,7 @@ public class RoomMap extends CharGrid {
 				}
 			}
 		}
+		
 		// Do a BFS to find nearest room.
 		Queue<Pair> frontier = new ArrayDeque<>();
 		frontier.add(getStart());
@@ -206,6 +218,7 @@ public class RoomMap extends CharGrid {
 			}
 		}
 		
+		// Return all shortest paths in descending order of length.
 		List<Path> shortestPaths = Path.buildPaths(getStart(), destinations, cameFrom);
 		Collections.reverse(shortestPaths);
 		return (shortestPaths);
