@@ -1,35 +1,37 @@
 package buri.aoc.y18.d20;
 
-import java.util.List;
-
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * Day 20: TITLE
+ * Day 20: A Regular Map
  * 
  * @author Brian Uri!
  */
 public class Day20 extends Puzzle {
 
 	/**
-	 * Returns the input file HOW 
+	 * Returns the input file unmodified. 
 	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/20", fileIndex));
+	public static String getInput(int fileIndex) {
+		return (readFile("2018/20", fileIndex).get(0));
 	}
 	
 	/**
 	 * Part 1:
-	 * QUESTION
+	 * What is the largest number of doors you would be required to pass through to reach a room?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * How many rooms have a shortest path from your current location that pass through at least 1000 doors?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	public static int getResult(Part part, String input) {
+		RoomMap map = new RoomMap();
+		map.explore(input);
 		if (part == Part.ONE) {
-			return (0);
+			return (map.getMostDoors());
 		}
-		return (0);
+		
+		// Part TWO
+		return (map.getRoomsWithDoors(1000));
 	}
 }
