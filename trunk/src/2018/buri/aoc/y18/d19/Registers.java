@@ -3,29 +3,25 @@ package buri.aoc.y18.d19;
 import java.util.List;
 
 import buri.aoc.Part;
+import buri.aoc.data.registers.IndexedRegisters;
 
 /**
  * Representation of the 5 registers containing integer values.
  * 
  * @author Brian Uri!
  */
-public class Registers {
+public class Registers extends IndexedRegisters {
 	private int _ip;
 	private int _ipRegister;
-	private int[] _registers;
 	private List<String> _codes;
-
-	// For readability of the opcodes.
-	public static final boolean REGISTER = false;
-	public static final boolean VALUE = true;
 
 	/**
 	 * String-based Constructor
 	 */
 	public Registers(Part part, int ipRegister, List<String> codes) {
+		super(6);
 		_ip = 0;
 		_ipRegister = ipRegister;
-		_registers = new int[6];
 		_codes = codes;
 		for (int i = 0; i < getRegisters().length; i++) {
 			set(i, 0);
@@ -53,84 +49,59 @@ public class Registers {
 	}
 
 	/**
-	 * Executes an actual instruction against the registers.
+	 * Converts string opcodes into the integer values found on Day 16.
 	 */
 	public void runCode(String[] code) {
 		String opcode = code[0];
-		int a = Integer.valueOf(code[1]);
-		int b = Integer.valueOf(code[2]);
-		int c = Integer.valueOf(code[3]);
 		if (opcode.equals("mulr")) {
-			set(c, get(REGISTER, a) * get(REGISTER, b));
+			code[0] = String.valueOf(0);
 		}
 		else if (opcode.equals("eqri")) {
-			set(c, (get(REGISTER, a) == get(VALUE, b) ? 1 : 0));
+			code[0] = String.valueOf(1);
 		}
 		else if (opcode.equals("setr")) {
-			set(c, get(REGISTER, a));
+			code[0] = String.valueOf(2);
 		}
 		else if (opcode.equals("eqrr")) {
-			set(c, (get(REGISTER, a) == get(REGISTER, b) ? 1 : 0));
+			code[0] = String.valueOf(3);
 		}
 		else if (opcode.equals("gtrr")) {
-			set(c, (get(REGISTER, a) > get(REGISTER, b) ? 1 : 0));
+			code[0] = String.valueOf(4);
 		}
 		else if (opcode.equals("muli")) {
-			set(c, get(REGISTER, a) * get(VALUE, b));
+			code[0] = String.valueOf(5);
 		}
 		else if (opcode.equals("borr")) {
-			set(c, get(REGISTER, a) | get(REGISTER, b));
+			code[0] = String.valueOf(6);
 		}
 		else if (opcode.equals("bani")) {
-			set(c, get(REGISTER, a) & get(VALUE, b));
+			code[0] = String.valueOf(7);
 		}
 		else if (opcode.equals("addr")) {
-			set(c, get(REGISTER, a) + get(REGISTER, b));
+			code[0] = String.valueOf(8);
 		}
 		else if (opcode.equals("banr")) {
-			set(c, get(REGISTER, a) & get(REGISTER, b));
+			code[0] = String.valueOf(9);
 		}
 		else if (opcode.equals("eqir")) {
-			set(c, (get(VALUE, a) == get(REGISTER, b) ? 1 : 0));
+			code[0] = String.valueOf(10);
 		}
 		else if (opcode.equals("gtir")) {
-			set(c, (get(VALUE, a) > get(REGISTER, b) ? 1 : 0));
+			code[0] = String.valueOf(11);
 		}
 		else if (opcode.equals("addi")) {
-			set(c, get(REGISTER, a) + get(VALUE, b));
+			code[0] = String.valueOf(12);
 		}
 		else if (opcode.equals("gtri")) {
-			set(c, (get(REGISTER, a) > get(VALUE, b) ? 1 : 0));
+			code[0] = String.valueOf(13);
 		}
 		else if (opcode.equals("seti")) {
-			set(c, get(VALUE, a));
+			code[0] = String.valueOf(14);
 		}
 		else if (opcode.equals("bori")) {
-			set(c, get(REGISTER, a) | get(VALUE, b));
+			code[0] = String.valueOf(15);
 		}
-	}
-
-	/**
-	 * Returns either the value itself (immediate/value) or the value from the register with that index (register).
-	 */
-	public int get(boolean isImmediate, int value) {
-		return (isImmediate ? value : getRegisters()[value]);
-	}
-
-	/**
-	 * Updates the value in a register.
-	 */
-	private void set(int index, int value) {
-		getRegisters()[index] = value;
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int i : getRegisters()) {
-			buffer.append(i).append(" ");
-		}
-		return (buffer.toString().trim());
+		super.runCode(code);
 	}
 
 	/**
@@ -152,13 +123,6 @@ public class Registers {
 	 */
 	private int getIpRegister() {
 		return _ipRegister;
-	}
-
-	/**
-	 * Accessor for the registers
-	 */
-	private int[] getRegisters() {
-		return _registers;
 	}
 
 	/**
