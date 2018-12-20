@@ -31,7 +31,7 @@ public class Part2Registers extends AbstractRegisters {
 	 */
 	@Override
 	protected void snd(String[] tokens) {
-		getOutgoingQueue().add(getParameter(tokens[1]));
+		getOutgoingQueue().add(getRegisterOrValue(tokens[1]));
 		setOutgoingCount(getOutgoingCount() + 1);
 	}
 

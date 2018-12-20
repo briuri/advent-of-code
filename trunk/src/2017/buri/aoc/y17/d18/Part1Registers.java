@@ -23,7 +23,7 @@ public class Part1Registers extends AbstractRegisters {
 	 */
 	@Override
 	protected void snd(String[] tokens) {
-		setLastFrequency(getParameter(tokens[1]));
+		setLastFrequency(getRegisterOrValue(tokens[1]));
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Part1Registers extends AbstractRegisters {
 	 */
 	@Override
 	protected boolean rcv(String[] tokens) {
-		long value = getParameter(tokens[1]);
+		long value = getRegisterOrValue(tokens[1]);
 		// Quit processing the first time we hit a rcv that recovers.
 		return (value <= 0);
 	}

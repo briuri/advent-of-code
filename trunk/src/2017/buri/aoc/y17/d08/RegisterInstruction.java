@@ -20,7 +20,7 @@ public class RegisterInstruction {
 	}
 
 	private String _targetRegister;
-	private Integer _targetIncrement;
+	private Long _targetIncrement;
 	private String _conditionRegister;
 	private Conditional _conditional;
 	private Integer _conditionValue;
@@ -31,7 +31,7 @@ public class RegisterInstruction {
 	public RegisterInstruction(String instruction) {
 		String[] tokens = instruction.split(" ");
 		_targetRegister = tokens[0];
-		_targetIncrement = Integer.valueOf(tokens[2]);
+		_targetIncrement = Long.valueOf(tokens[2]);
 		if (tokens[1].equals("dec")) {
 			_targetIncrement = _targetIncrement * -1;
 		}
@@ -79,7 +79,7 @@ public class RegisterInstruction {
 	/**
 	 * Accessor for the target increment value
 	 */
-	public Integer getTargetIncrement() {
+	public Long getTargetIncrement() {
 		return _targetIncrement;
 	}
 
