@@ -9,7 +9,7 @@ import java.util.Map;
  * 
  * @author Brian Uri!
  */
-public abstract class AbstractNamedRegisters {
+public class NamedRegisters {
 	private Map<String, Long> _registers;
 	private List<String> _instructions;
 	private int _current = 0;
@@ -17,7 +17,7 @@ public abstract class AbstractNamedRegisters {
 	/**
 	 * Constructor
 	 */
-	protected AbstractNamedRegisters(List<String> instructions) {
+	protected NamedRegisters(List<String> instructions) {
 		_instructions = instructions;
 		_registers = new HashMap<String, Long>();
 		setCurrent(0);

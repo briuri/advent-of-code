@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.registers.AbstractNamedRegisters;
+import buri.aoc.data.registers.NamedRegisters;
 
 /**
  * Representation of the string-named registers containing integer values. Initialized at 0.
  * 
  * @author Brian Uri!
  */
-public class Registers extends AbstractNamedRegisters {
+public class Registers extends NamedRegisters {
 	private Long _largestValue = 0L;
 	
 	/**
