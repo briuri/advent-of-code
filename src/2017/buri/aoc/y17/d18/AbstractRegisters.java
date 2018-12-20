@@ -1,29 +1,24 @@
 package buri.aoc.y17.d18;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import buri.aoc.data.registers.AbstractNamedRegisters;
 
 /**
  * Abstract base class for registers in each part.
  * 
  * @author Brian Uri!
  */
-public abstract class AbstractRegisters {
-	private int _current = 0;
-	private Map<String, Long> _registers;
-	private List<String> _instructions;
+public abstract class AbstractRegisters extends AbstractNamedRegisters {
 
 	/**
 	 * Constructor
 	 */
 	public AbstractRegisters(List<String> instructions) {
-		_registers = new HashMap<String, Long>();
-		_instructions = instructions;
+		super(instructions);
 		for (char name = 'a'; name <= 'z'; name++) {
-			_registers.put(String.valueOf(name), 0L);
+			set(String.valueOf(name), 0L);
 		}
-		setCurrent(0);
 	}
 
 	/**
@@ -62,28 +57,28 @@ public abstract class AbstractRegisters {
 				}
 			}
 			if (tokens[0].equals("set")) {
-				long value = getParameter(tokens[2]);
+				long value = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], value);
 			}
 			if (tokens[0].equals("add")) {
-				long originalValue = getValue(tokens[1]);
-				long addValue = getParameter(tokens[2]);
+				long originalValue = get(tokens[1]);
+				long addValue = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], originalValue + addValue);
 			}
 			if (tokens[0].equals("mul")) {
-				long originalValue = getValue(tokens[1]);
-				long multiplyValue = getParameter(tokens[2]);
+				long originalValue = get(tokens[1]);
+				long multiplyValue = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], originalValue * multiplyValue);
 			}
 			if (tokens[0].equals("mod")) {
-				long originalValue = getValue(tokens[1]);
-				long modValue = getParameter(tokens[2]);
+				long originalValue = get(tokens[1]);
+				long modValue = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], originalValue % modValue);
 			}
 			if (tokens[0].equals("jgz")) {
-				long value = getParameter(tokens[1]);
+				long value = getRegisterOrValue(tokens[1]);
 				if (value > 0) {
-					setCurrent(getCurrent() + getParameter(tokens[2]).intValue());
+					setCurrent(getCurrent() + getRegisterOrValue(tokens[2]).intValue());
 				}
 				else {
 					setCurrent(getCurrent() + 1);
@@ -96,13 +91,6 @@ public abstract class AbstractRegisters {
 	}
 
 	/**
-	 * Returns true if the current marker is within the bounds of the input instructions.
-	 */
-	protected boolean isWithinInstructions() {
-		return (getCurrent() >= 0 && getCurrent() < getInstructions().size());
-	}
-
-	/**
 	 * snd X does something different depending on the implementation.
 	 */
 	protected abstract void snd(String[] tokens);
@@ -112,48 +100,4 @@ public abstract class AbstractRegisters {
 	 */
 	protected abstract boolean rcv(String[] tokens);
 
-	/**
-	 * Returns the integer value or (if a string), the value in that register.
-	 */
-	protected Long getParameter(String parameter) {
-		if (parameter.matches("[a-z]")) {
-			return (getValue(parameter));
-		}
-		return (Long.valueOf(parameter));
-	}
-
-	/**
-	 * Loads a value from a register.
-	 */
-	protected Long getValue(String register) {
-		return (getRegisters().get(register));
-	}
-
-	/**
-	 * Accessor for the instructions
-	 */
-	private List<String> getInstructions() {
-		return _instructions;
-	}
-
-	/**
-	 * Accessor for the registers
-	 */
-	protected Map<String, Long> getRegisters() {
-		return _registers;
-	}
-
-	/**
-	 * Accessor for the current instruction
-	 */
-	private int getCurrent() {
-		return _current;
-	}
-
-	/**
-	 * Accessor for the current instruction
-	 */
-	private void setCurrent(int current) {
-		_current = current;
-	}
 }

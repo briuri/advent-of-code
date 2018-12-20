@@ -1,27 +1,24 @@
 package buri.aoc.y17.d08;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import buri.aoc.Part;
+import buri.aoc.data.registers.AbstractNamedRegisters;
 
 /**
  * Representation of the string-named registers containing integer values. Initialized at 0.
  * 
  * @author Brian Uri!
  */
-public class Registers {
-
-	private Map<String, Integer> _registers;
-	private Integer _largestValue = 0;
+public class Registers extends AbstractNamedRegisters {
+	private Long _largestValue = 0L;
 	
 	/**
 	 * Constructor
 	 */
 	public Registers() {
-		_registers = new HashMap<String, Integer>();
+		super(Collections.EMPTY_LIST);
 	}
 
 	/**
@@ -35,7 +32,7 @@ public class Registers {
 		for (RegisterInstruction instruction : instructions) {
 			if (isConditionTrue(instruction.getConditionRegister(), instruction.getConditional(),
 				instruction.getConditionValue())) {
-				incrementRegister(instruction.getTargetRegister(), instruction.getTargetIncrement());
+				add(instruction.getTargetRegister(), instruction.getTargetIncrement());
 			}
 		}
 	}
@@ -43,7 +40,7 @@ public class Registers {
 	/**
 	 * Returns the largest value in the registers.
 	 */
-	public Integer getLargestValue(Part part) {
+	public Long getLargestValue(Part part) {
 		if (part == Part.ONE) {
 			return (Collections.max(getRegisters().values()));
 		}
@@ -54,7 +51,7 @@ public class Registers {
 	 * Checks if a condition is satisfied.
 	 */
 	private boolean isConditionTrue(String register, RegisterInstruction.Conditional operator, int testValue) {
-		Integer value = getValue(register);
+		Long value = get(register);
 		switch (operator) {
 			case LESS:
 				return (value < testValue);
@@ -74,33 +71,22 @@ public class Registers {
 	/**
 	 * Updates the register's value by some amount.
 	 */
-	private void incrementRegister(String register, Integer increment) {
-		Integer newValue = getValue(register) + increment;
-		getRegisters().put(register, newValue);
-		_largestValue = Math.max(getLargestValue(), newValue);
-	}
-
-	/**
-	 * Lazy-loads a value from a register. Initializes at zero if the register does not yet exist.
-	 */
-	private Integer getValue(String register) {
-		if (getRegisters().get(register) == null) {
-			getRegisters().put(register, 0);
-		}
-		return (getRegisters().get(register));
-	}
-
-	/**
-	 * Accessor for the registers
-	 */
-	private Map<String, Integer> getRegisters() {
-		return _registers;
+	protected void add(String register, Long increment) {
+		super.add(register, increment);
+		setLargestValue(Math.max(getLargestValue(), get(register)));
 	}
 
 	/**
 	 * Accessor for the largest value ever held.
 	 */
-	private Integer getLargestValue() {
+	private Long getLargestValue() {
 		return _largestValue;
+	}
+
+	/**
+	 * Accessor for the largestValue
+	 */
+	private void setLargestValue(Long largestValue) {
+		_largestValue = largestValue;
 	}
 }

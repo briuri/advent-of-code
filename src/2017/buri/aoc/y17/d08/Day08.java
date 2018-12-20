@@ -31,7 +31,7 @@ public class Day08 extends Puzzle {
 	 * Part 2:
 	 * What is the largest value held in any register during this process?
 	 */
-	public static int getResult(Part part, List<RegisterInstruction> instructions) {
+	public static Long getResult(Part part, List<RegisterInstruction> instructions) {
 		Registers registers = new Registers();
 		registers.process(instructions);
 		return (registers.getLargestValue(part));

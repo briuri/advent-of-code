@@ -21,7 +21,7 @@ public class Day08Test {
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals(1, Day08.getResult(Part.ONE, Day08.getInput(1)));
+		assertEquals(Long.valueOf(1), Day08.getResult(Part.ONE, Day08.getInput(1)));
 	}
 
 	/**
@@ -29,14 +29,14 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day08.getResult(Part.ONE, Day08.getInput(0));
+		long result = Day08.getResult(Part.ONE, Day08.getInput(0));
 		System.out.println("Day 8 Part 1\n\t" + result);
-		assertEquals(4888, result);
+		assertEquals(4888L, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(10, Day08.getResult(Part.TWO, Day08.getInput(1)));
+		assertEquals(Long.valueOf(10), Day08.getResult(Part.TWO, Day08.getInput(1)));
 	}
 
 	/**
@@ -44,9 +44,9 @@ public class Day08Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day08.getResult(Part.TWO, Day08.getInput(0));
+		long result = Day08.getResult(Part.TWO, Day08.getInput(0));
 		System.out.println("Day 8 Part 2\n\t" + result);
-		assertEquals(7774, result);
+		assertEquals(7774L, result);
 	}
 	
 }

@@ -1,30 +1,25 @@
 package buri.aoc.y17.d23;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import buri.aoc.data.registers.AbstractNamedRegisters;
 
 /**
  * Abstract base class for registers in each part.
  * 
  * @author Brian Uri!
  */
-public class Registers {
-	private int _current = 0;
-	private Map<String, Long> _registers;
-	private List<String> _instructions;
+public class Registers extends AbstractNamedRegisters {
 	private int _multiplyCount;
 
 	/**
 	 * Constructor
 	 */
 	public Registers(List<String> instructions) {
-		_registers = new HashMap<String, Long>();
-		_instructions = instructions;
+		super(instructions);
 		for (char name = 'a'; name <= 'h'; name++) {
-			_registers.put(String.valueOf(name), 0L);
+			set(String.valueOf(name), 0L);
 		}
-		setCurrent(0);
 	}
 
 	/**
@@ -43,24 +38,24 @@ public class Registers {
 			}
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
 			if (tokens[0].equals("set")) {
-				long value = getParameter(tokens[2]);
+				long value = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], value);
 			}
 			if (tokens[0].equals("sub")) {
-				long originalValue = getValue(tokens[1]);
-				long subValue = getParameter(tokens[2]);
+				long originalValue = get(tokens[1]);
+				long subValue = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], originalValue - subValue);
 			}
 			if (tokens[0].equals("mul")) {
-				long originalValue = getValue(tokens[1]);
-				long multiplyValue = getParameter(tokens[2]);
+				long originalValue = get(tokens[1]);
+				long multiplyValue = getRegisterOrValue(tokens[2]);
 				getRegisters().put(tokens[1], originalValue * multiplyValue);
 				setMultiplyCount(getMultiplyCount() + 1);
 			}
 			if (tokens[0].equals("jnz")) {
-				long value = getParameter(tokens[1]);
+				long value = getRegisterOrValue(tokens[1]);
 				if (value != 0) {
-					setCurrent(getCurrent() + getParameter(tokens[2]).intValue());
+					setCurrent(getCurrent() + getRegisterOrValue(tokens[2]).intValue());
 				}
 				else {
 					setCurrent(getCurrent() + 1);
@@ -70,58 +65,6 @@ public class Registers {
 				setCurrent(getCurrent() + 1);
 			}
 		}
-	}
-
-	/**
-	 * Returns true if the current marker is within the bounds of the input instructions.
-	 */
-	private boolean isWithinInstructions() {
-		return (getCurrent() >= 0 && getCurrent() < getInstructions().size());
-	}
-
-	/**
-	 * Returns the integer value or (if a string), the value in that register.
-	 */
-	private Long getParameter(String parameter) {
-		if (parameter.matches("[a-h]")) {
-			return (getValue(parameter));
-		}
-		return (Long.valueOf(parameter));
-	}
-
-	/**
-	 * Loads a value from a register.
-	 */
-	private Long getValue(String register) {
-		return (getRegisters().get(register));
-	}
-
-	/**
-	 * Accessor for the instructions
-	 */
-	private List<String> getInstructions() {
-		return _instructions;
-	}
-
-	/**
-	 * Accessor for the registers
-	 */
-	private Map<String, Long> getRegisters() {
-		return _registers;
-	}
-
-	/**
-	 * Accessor for the current instruction
-	 */
-	private int getCurrent() {
-		return _current;
-	}
-
-	/**
-	 * Accessor for the current instruction
-	 */
-	private void setCurrent(int current) {
-		_current = current;
 	}
 
 	/**
