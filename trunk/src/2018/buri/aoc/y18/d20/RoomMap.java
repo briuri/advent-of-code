@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import buri.aoc.data.Pair;
+import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
 
 /**
@@ -205,15 +206,9 @@ public class RoomMap extends CharGrid {
 			}
 		}
 		
-		// Use mapping to create the paths to all destination cells.
-		List<Path> longestPaths = new ArrayList<>();
-		for (Pair destination : destinations) {
-			if (cameFrom.get(destination) != null) {
-				longestPaths.add(new Path(getStart(), destination, cameFrom));
-			}
-			Collections.sort(longestPaths);
-		}
-		return (longestPaths);
+		List<Path> shortestPaths = Path.buildPaths(getStart(), destinations, cameFrom);
+		Collections.reverse(shortestPaths);
+		return (shortestPaths);
 	}
 	
 	/**

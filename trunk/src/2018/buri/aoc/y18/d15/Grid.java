@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.data.Pair;
+import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
 
 /**
@@ -203,15 +204,7 @@ public class Grid extends CharGrid {
 			}
 		}
 
-		// Use mapping to create the paths to all destination cells.
-		List<Path> shortestPaths = new ArrayList<>();
-		for (Pair destination : destinations) {
-			if (cameFrom.get(destination) != null) {
-				shortestPaths.add(new Path(unit.getPosition(), destination, cameFrom));
-			}
-			Collections.sort(shortestPaths);
-		}
-		return (shortestPaths);
+		return (Path.buildPaths(unit.getPosition(), destinations, cameFrom));
 	}
 
 	/**

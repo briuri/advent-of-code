@@ -1,11 +1,9 @@
-package buri.aoc.y18.d15;
+package buri.aoc.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.data.Pair;
 
 /**
  * A start-to-end ordered path between two positions, built from a breadth-first search.
@@ -15,6 +13,20 @@ import buri.aoc.data.Pair;
 public class Path implements Comparable<Path> {
 	private List<Pair> _path = new ArrayList<>();
 
+	/**
+	 * Factory method to convert the results of a BFS into paths.
+	 */
+	public static List<Path> buildPaths(Pair start, List<Pair> destinations, Map<Pair, Pair> cameFrom) {
+		List<Path> shortestPaths = new ArrayList<>();
+		for (Pair destination : destinations) {
+			if (cameFrom.get(destination) != null) {
+				shortestPaths.add(new Path(start, destination, cameFrom));
+			}
+		}
+		Collections.sort(shortestPaths);
+		return (shortestPaths);
+	}
+	
 	/**
 	 * Constructor
 	 */
@@ -36,7 +48,14 @@ public class Path implements Comparable<Path> {
 	}
 
 	/**
-	 * Sort by length first, then by reading order of the 2nd position on the path.
+	 * Returns the length of the path.
+	 */
+	public int getLength() {
+		return (getPath().size());
+	}
+	
+	/**
+	 * Sort by length ascending first, then by reading order of the 2nd position on the path.
 	 */
 	@Override
 	public int compareTo(Path o) {
