@@ -1,10 +1,22 @@
 package buri.aoc.data.registers;
 
+import java.util.List;
+
 /**
+ * Registers used in:
+ * - y18d16 (just the registers alone with no instructions)
+ * - y18d19 (registers with instructions and string-based codes)
+ * - y18d21 (registers with instructions and string-based codes and infinity potential)
+ * 
  * @author Brian Uri!
  */
 public class IndexedRegisters {
 	private int[] _registers;
+	
+	// Associated instructions
+	private int _ip;
+	private int _ipRegister;
+	private List<String> _codes;
 	
 	// For readability of the opcodes.
 	public static final boolean REGISTER = false;
@@ -15,6 +27,26 @@ public class IndexedRegisters {
 	 */
 	public IndexedRegisters(int size) {
 		_registers = new int[size];
+	}
+	
+	/**
+	 * Constructor with instructions
+	 */
+	public IndexedRegisters(int ipRegister, List<String> codes) {
+		this(6);
+		_ipRegister = ipRegister;
+		_codes = codes;
+		reset();
+	}
+	
+	/**
+	 * Clears all registers and resets pointers.
+	 */
+	public void reset() {
+		setIp(0);
+		for (int i = 0; i < getRegisters().length; i++) {
+			set(i, 0);
+		}
 	}
 	
 	/**
@@ -29,6 +61,28 @@ public class IndexedRegisters {
 	 */
 	protected void set(int index, int value) {
 		getRegisters()[index] = value;
+	}
+	
+	/**
+	 * Day 19 / 21:
+	 * 
+	 * When the instruction pointer is bound to a register:
+	 * - its value is written to that register just before each instruction is executed
+	 * - the value of that register is written back to the instruction pointer immediately after each instruction
+	 * finishes execution.
+	 * - Afterward, move to the next instruction by adding one to the instruction pointer, even if the value in the
+	 * instruction pointer was just updated by an instruction.
+	 * 
+	 * In Day 21, this might run forever with the wrong initialZeroValue value.
+	 */
+	public void run(int initialZeroValue) {
+		set(0, initialZeroValue);
+		while (getIp() >= 0 && getIp() < getCodes().size()) {
+			String code = getCodes().get(getIp());
+			set(getIpRegister(), getIp());
+			runStringCode(code.split(" "));
+			setIp((int) get(REGISTER, getIpRegister()) + 1);
+		}
 	}
 	
 	/**
@@ -167,5 +221,33 @@ public class IndexedRegisters {
 	 */
 	protected int[] getRegisters() {
 		return _registers;
+	}
+	
+	/**
+	 * Accessor for the instruction pointer
+	 */
+	protected int getIp() {
+		return _ip;
+	}
+
+	/**
+	 * Accessor for the instruction pointer
+	 */
+	protected void setIp(int ip) {
+		_ip = ip;
+	}
+
+	/**
+	 * Accessor for the ipRegister
+	 */
+	protected int getIpRegister() {
+		return _ipRegister;
+	}
+
+	/**
+	 * Accessor for the codes
+	 */
+	protected List<String> getCodes() {
+		return _codes;
 	}
 }

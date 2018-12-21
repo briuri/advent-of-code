@@ -4,6 +4,7 @@ import java.util.List;
 
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
+import buri.aoc.data.registers.IndexedRegisters;
 
 /**
  * Day 19: Go With the Flow
@@ -29,10 +30,11 @@ public class Day19 extends Puzzle {
 	 */
 	public static long getResult(Part part, List<String> input) {
 		String ipRegister = input.remove(0);
-		Registers registers = new Registers(part, Character.getNumericValue(ipRegister.charAt(4)), input);
+		IndexedRegisters registers = new IndexedRegisters(Character.getNumericValue(ipRegister.charAt(4)), input);
+		int initialZeroValue = (part == Part.ONE ? 0 : 1);
 		if (part == Part.ONE) {			
-			registers.run();
-			return (registers.get(Registers.REGISTER, 0));
+			registers.run(initialZeroValue);
+			return (registers.get(IndexedRegisters.REGISTER, 0));
 		}
 
 		// Part TWO
