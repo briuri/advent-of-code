@@ -48,7 +48,7 @@ public class Day16 extends Puzzle {
 		// Part TWO
 		Registers registers = new Registers();
 		for (int i = 0; i < input.size(); i++) {
-			registers.runCode(input.get(i).split(" "));
+			registers.runIntCode(input.get(i).split(" "));
 		}
 		return (registers.get(Registers.REGISTER, 0));
 	}

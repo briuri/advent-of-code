@@ -34,7 +34,7 @@ public class IndexedRegisters {
 	/**
 	 * Executes an actual instruction against the registers, based on data explored in Day 16.
 	 */
-	public void runCode(String[] code) {
+	public void runIntCode(String[] code) {
 		int opcode = Integer.valueOf(code[0]);
 		int a = Integer.valueOf(code[1]);
 		int b = Integer.valueOf(code[2]);
@@ -87,6 +87,62 @@ public class IndexedRegisters {
 		else if (opcode == 15) {// bori
 			set(c, get(REGISTER, a) | get(VALUE, b));
 		}
+	}
+	
+	/**
+	 * Converts string opcodes into the integer values found on Day 16.
+	 */
+	public void runStringCode(String[] code) {
+		String opcode = code[0];
+		if (opcode.equals("mulr")) {
+			code[0] = String.valueOf(0);
+		}
+		else if (opcode.equals("eqri")) {
+			code[0] = String.valueOf(1);
+		}
+		else if (opcode.equals("setr")) {
+			code[0] = String.valueOf(2);
+		}
+		else if (opcode.equals("eqrr")) {
+			code[0] = String.valueOf(3);
+		}
+		else if (opcode.equals("gtrr")) {
+			code[0] = String.valueOf(4);
+		}
+		else if (opcode.equals("muli")) {
+			code[0] = String.valueOf(5);
+		}
+		else if (opcode.equals("borr")) {
+			code[0] = String.valueOf(6);
+		}
+		else if (opcode.equals("bani")) {
+			code[0] = String.valueOf(7);
+		}
+		else if (opcode.equals("addr")) {
+			code[0] = String.valueOf(8);
+		}
+		else if (opcode.equals("banr")) {
+			code[0] = String.valueOf(9);
+		}
+		else if (opcode.equals("eqir")) {
+			code[0] = String.valueOf(10);
+		}
+		else if (opcode.equals("gtir")) {
+			code[0] = String.valueOf(11);
+		}
+		else if (opcode.equals("addi")) {
+			code[0] = String.valueOf(12);
+		}
+		else if (opcode.equals("gtri")) {
+			code[0] = String.valueOf(13);
+		}
+		else if (opcode.equals("seti")) {
+			code[0] = String.valueOf(14);
+		}
+		else if (opcode.equals("bori")) {
+			code[0] = String.valueOf(15);
+		}
+		runIntCode(code);
 	}
 	
 	@Override
