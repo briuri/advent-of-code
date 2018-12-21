@@ -54,7 +54,7 @@ public class Registers extends IndexedRegisters {
 		for (int i = 0; i < numCodes; i++) {
 			Registers copy = copy();
 			code[0] = String.valueOf(i);
-			copy.runCode(code);
+			copy.runIntCode(code);
 			if (expected.equals(copy)) {
 				matches++;
 			}
