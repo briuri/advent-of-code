@@ -1,35 +1,25 @@
 package buri.aoc.y18.d22;
 
-import java.util.List;
-
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
+import buri.aoc.data.Pair;
 
 /**
- * Day 22: TITLE
+ * Day 22: Mode Maze
  * 
  * @author Brian Uri!
  */
 public class Day22 extends Puzzle {
 
 	/**
-	 * Returns the input file HOW 
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/22", fileIndex));
-	}
-	
-	/**
 	 * Part 1:
-	 * QUESTION
+	 * What is the total risk level for the smallest rectangle that includes 0,0 and the target's coordinates?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * What is the fewest number of minutes you can take to reach the target?
 	 */
-	public static int getResult(Part part, List<String> input) {
-		if (part == Part.ONE) {
-			return (0);
-		}
-		return (0);
+	public static int getResult(Part part, int depth, Pair target) {
+		Maze maze = new Maze(depth, target);
+		return (part == Part.ONE ? maze.getRiskLevel() : maze.getMinutes());
 	}
 }

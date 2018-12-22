@@ -2,11 +2,10 @@ package buri.aoc.y18.d22;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.Part;
+import buri.aoc.data.Pair;
 
 /**
  * @author Brian Uri!
@@ -14,14 +13,8 @@ import buri.aoc.Part;
 public class Day22Test {
 
 	@Test
-	public void testGetInput() {
-		List<String> input = Day22.getInput(0);
-		assertEquals(1, input.size());
-	}
-
-	@Test
 	public void testPart1Examples() {
-		assertEquals(0, Day22.getResult(Part.ONE, Day22.getInput(1)));
+		assertEquals(114, Day22.getResult(Part.ONE, 510, new Pair(10, 10)));
 	}
 
 	/**
@@ -29,14 +22,14 @@ public class Day22Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day22.getResult(Part.ONE, Day22.getInput(0));
+		int result = Day22.getResult(Part.ONE, 3879, new Pair(8, 713));
 		System.out.println("Day 22 Part 1\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(6323, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(0, Day22.getResult(Part.TWO, Day22.getInput(1)));
+		assertEquals(45, Day22.getResult(Part.TWO, 510, new Pair(10, 10)));
 	}
 
 	/**
@@ -44,8 +37,8 @@ public class Day22Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day22.getResult(Part.TWO, Day22.getInput(0));
+		int result = Day22.getResult(Part.TWO, 3879, new Pair(8, 713));
 		System.out.println("Day 22 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(982, result);
 	}
 }
