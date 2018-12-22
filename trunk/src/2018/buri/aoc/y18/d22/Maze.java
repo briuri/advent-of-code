@@ -23,20 +23,20 @@ public class Maze extends CharGrid {
 	private static final char ROCKY = '.';
 	private static final char WET = '=';
 	private static final char NARROW = '|';
-	
+
 	private static final Pair MOUTH_POSITION = new Pair(0, 0);
-	
+
 	// Use the same character as the terrain where the equipment is forbidden to simplify swap checks.
 	private static final char NONE = ROCKY;
 	private static final char TORCH = WET;
 	private static final char GEAR = NARROW;
 	private static final char[] ALL_EQUIPMENT = new char[] { NONE, TORCH, GEAR };
-	
+
 	/**
 	 * Constructor
 	 */
 	public Maze(int depth, Pair target) {
-		super(1000);
+		super(Math.max(target.getX(), target.getY()) + 10);
 		_depth = depth;
 		_target = target;
 		_erosionLevels = new int[getSize()][getSize()];
@@ -65,9 +65,9 @@ public class Maze extends CharGrid {
 		}
 		return (riskLevel);
 	}
-	
+
 	/**
-	 * Method to determine any region's type based on its erosion level. 
+	 * Method to determine any region's type based on its erosion level.
 	 * 
 	 * The geologic index can be determined using the first rule that applies from the list below:
 	 * 
@@ -87,7 +87,7 @@ public class Maze extends CharGrid {
 	 */
 	private char getRegionType(int x, int y) {
 		int geologicIndex;
-		if ((x == 0 && y == 0) ||  (x == getTarget().getX() && y == getTarget().getY())) {
+		if ((x == 0 && y == 0) || (x == getTarget().getX() && y == getTarget().getY())) {
 			geologicIndex = 0;
 		}
 		else if (y == 0) {
@@ -104,7 +104,7 @@ public class Maze extends CharGrid {
 		if (erosionLevel % 3 == 0) {
 			return (ROCKY);
 		}
-		else if (erosionLevel% 3 == 1) {
+		else if (erosionLevel % 3 == 1) {
 			return (WET);
 		}
 		// (erosionLevel % 3 == 2)
@@ -126,57 +126,51 @@ public class Maze extends CharGrid {
 		Map<String, Integer> fastestTimes = new HashMap<>();
 		while (true) {
 			Node node = frontier.poll();
+			// System.out.println(node);
 			// Successfully found the target while wielding TORCH
 			if (node.getPair().equals(getTarget()) && node.getEquipment() == TORCH) {
 				return (node.getCostSoFar());
 			}
-			
+
 			// Evaluate moving to any allowable cells while keeping our current equipment.
 			for (Pair neighbor : getTraversableNeighbors(node.getPair())) {
 				if (!requiresSwap(node.getEquipment(), neighbor)) {
 					String timeKey = createKey(neighbor, node.getEquipment());
 					Integer fastestTime = fastestTimes.get(timeKey);
-					if (fastestTime == null) {
-						fastestTime = Integer.MAX_VALUE;
-					}
-					
 					int newTime = node.getCostSoFar() + 1;
+
 					// We found a faster way to go than the previous time we visited neighbor with this equipment.
-					if (newTime < fastestTime) {
+					if (fastestTime == null || newTime < fastestTime) {
 						frontier.add(new Node(neighbor, newTime, node.getEquipment()));
 						fastestTimes.put(timeKey, newTime);
 					}
 				}
 			}
-						
+
 			// Evaluate staying here and swapping equipment.
 			for (char equipment : ALL_EQUIPMENT) {
 				if (requiresSwap(equipment, node.getPair()) && equipment != node.getEquipment()) {
 					String timeKey = createKey(node.getPair(), equipment);
 					Integer fastestTime = fastestTimes.get(timeKey);
-					if (fastestTime == null) {
-						fastestTime = Integer.MAX_VALUE;
-					}
-					
 					int newTime = node.getCostSoFar() + 7;
+
 					// We found a faster way to go than the previous time we visited neighbor with this equipment.
-					if (newTime < fastestTime) {
-						int time = node.getCostSoFar() + 7;
-						frontier.add(new Node(node.getPair(), time, equipment));						
-						fastestTimes.put(timeKey, time);
+					if (fastestTime == null || newTime < fastestTime) {
+						frontier.add(new Node(node.getPair(), newTime, equipment));
+						fastestTimes.put(timeKey, newTime);
 					}
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Creates a unique key based on a pair and equipment.
 	 */
 	private String createKey(Pair pair, int equipment) {
 		return (pair.toString() + "-" + equipment);
 	}
-	
+
 	/**
 	 * Returns traversable cells adjacent to some position.
 	 */
@@ -196,7 +190,7 @@ public class Maze extends CharGrid {
 		}
 		return (neighbors);
 	}
-	
+
 	/**
 	 * Returns true if the equipment must be swapped before entering next square. The character representation of each
 	 * piece of equipment matches the character of the terrain it cannot enter.
@@ -208,7 +202,7 @@ public class Maze extends CharGrid {
 	private boolean requiresSwap(char equipment, Pair next) {
 		return (equipment == get(next));
 	}
-	
+
 	/**
 	 * Accessor for the depth
 	 */
