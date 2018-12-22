@@ -122,8 +122,7 @@ public class Maze extends CharGrid {
 	 */
 	public int getMinutes() {
 		// Do a Djikstra search for the path. Sort nodes based on cost/time to reach them so far.
-		// Only revisit unique positions (triple of x, y, and items) when it's a loer cost than the last time we
-		// visited.
+		// Only revisit unique positions (triple of x, y, and items) when it's a lower cost than the last visit.
 		Queue<Node> frontier = new PriorityQueue<>();
 		frontier.add(new Node(MOUTH_POSITION, 0));
 		Map<String, Integer> visitedNodes = new HashMap<>();
