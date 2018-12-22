@@ -1,32 +1,28 @@
 package buri.aoc.y18.d22;
 
-import buri.aoc.data.Pair;
-
 /**
  * Encapsulation of the data needed to calculate the best path through the maze.
  * 
  * @author Brian Uri!
  */
 public class Node implements Comparable<Node> {
-	private Pair _pair;
+	private Position _position;
 	private int _costSoFar;
-	private char _equipment;
-
+	
 	/**
 	 * Constructor
 	 */
-	public Node(Pair pair, int costSoFar, char equipment) {
-		_pair = pair;
+	public Node(Position position, int costSoFar) {
+		_position = position;
 		_costSoFar = costSoFar;
-		_equipment = equipment;
 	}
 
 	/**
-	 * Sorts nodes by cost in ascending order
+	 * Sorts nodes by lowest cost in ascending order.
 	 */
 	@Override
 	public int compareTo(Node o) {
-		return getCostSoFar() - o.getCostSoFar();
+		return (getCostSoFar() - o.getCostSoFar());
 	}
 
 	/**
@@ -34,14 +30,14 @@ public class Node implements Comparable<Node> {
 	 */
 	@Override
 	public String toString() {
-		return ("[" + getPair() + " " + getEquipment() + "] costSoFar=" + getCostSoFar());
+		return ("[" + getPosition() + "] costSoFar=" + getCostSoFar());
 	}
 
 	/**
-	 * Accessor for the pair
+	 * Accessor for the position / item
 	 */
-	public Pair getPair() {
-		return _pair;
+	public Position getPosition() {
+		return _position;
 	}
 
 	/**
@@ -49,12 +45,5 @@ public class Node implements Comparable<Node> {
 	 */
 	public int getCostSoFar() {
 		return _costSoFar;
-	}
-
-	/**
-	 * Accessor for the equipment
-	 */
-	public char getEquipment() {
-		return _equipment;
 	}
 }
