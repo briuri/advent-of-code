@@ -80,7 +80,7 @@ public class Day23 extends Puzzle {
 	 * - Get the bounds of all bot positions.
 	 * - Break volume into chunks and take sample readings of the maxBotsInRange at different positions.
 	 * - For the position with the most bots in range, resize the bounds and try again.
-	 * - Keep trying until the position converges to a maxBots (916) and the returned MD no longer changes.
+	 * - Keep trying until the position converges to a maxBots and the returned MD no longer changes.
 	 */
 	public static long getShortestDistance(List<Bot> bots) {
 		// Get the general area.
@@ -98,7 +98,7 @@ public class Day23 extends Puzzle {
 		// For my input, it took about 25 iterations before dx/dy/dz were all 1 and MD stabilized.
 		int i = 0;
 		long distance = 0;
-		while (i < 30) {
+		while (i < 50) {
 			distance = sampleVolumeForMaxBots(bots, min, max);
 			i++;
 		}
