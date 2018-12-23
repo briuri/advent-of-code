@@ -10,7 +10,7 @@ public class Triple {
 	private long _x;
 	private long _y;
 	private long _z;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -28,14 +28,21 @@ public class Triple {
 		setY(getY() + triple.getY());
 		setZ(getZ() + triple.getZ());
 	}
-	
+
 	/**
 	 * Returns the Manhattan distance to 0,0,0.
 	 */
 	public long getManhattanDistance() {
 		return (Math.abs(getX()) + Math.abs(getY()) + Math.abs(getZ()));
 	}
-	
+
+	/**
+	 * Returns the Manhattan distance to another triple.
+	 */
+	public long getManhattanDistance(Triple triple) {
+		return (Math.abs(getX() - triple.getX()) + Math.abs(getY() - triple.getY()) + Math.abs(getZ() - triple.getZ()));
+	}
+
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
@@ -44,7 +51,21 @@ public class Triple {
 		buffer.append(getZ());
 		return (buffer.toString());
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		Triple t = (Triple) obj;
+		return (getX() == t.getX() && getY() == t.getY() && getZ() == t.getZ());
+	}
+
+	@Override
+	public int hashCode() {
+		long result = getX();
+		result = 7 * getY();
+		result = 7 * getZ();
+		return (Long.valueOf(result).intValue());
+	}
+
 	/**
 	 * Accessor for the x
 	 */
