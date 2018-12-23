@@ -101,7 +101,7 @@ public class Day23 extends Puzzle {
 		// For my input, it took about 25 iterations before dx/dy/dz were all 1 and MD stabilized.
 		int i = 0;
 		long distance = 0;
-		while (i < 50) {
+		while (i < 30) {
 			distance = sampleVolumeForMaxBots(bots, min, max);
 			i++;
 		}
@@ -113,10 +113,11 @@ public class Day23 extends Puzzle {
 	 * resizes min / max around it so this method can be called again. Returns the current smallest MD.
 	 */
 	private static long sampleVolumeForMaxBots(List<Bot> bots, Triple min, Triple max) {
-		long chunk = 4;
-		long dx = Math.max(1, (max.getX() - min.getX()) / chunk);
-		long dy = Math.max(1, (max.getY() - min.getY()) / chunk);
-		long dz = Math.max(1, (max.getZ() - min.getZ()) / chunk);
+		long searchRatio = 4;
+		long resizeRatio = 1;
+		long dx = Math.max(1, (max.getX() - min.getX()) / searchRatio);
+		long dy = Math.max(1, (max.getY() - min.getY()) / searchRatio);
+		long dz = Math.max(1, (max.getZ() - min.getZ()) / searchRatio);
 		Triple positionWithMaxBots = null;
 		int maxBotsInRange = 0;
 		for (long z = min.getZ(); z < max.getZ() + 1; z += dz) {
@@ -147,12 +148,12 @@ public class Day23 extends Puzzle {
 		}
 
 		// Adjust min / max for next iteration.
-		min.setX(positionWithMaxBots.getX() - dx);
-		min.setY(positionWithMaxBots.getY() - dy);
-		min.setZ(positionWithMaxBots.getZ() - dz);
-		max.setX(positionWithMaxBots.getX() + dx);
-		max.setY(positionWithMaxBots.getY() + dy);
-		max.setZ(positionWithMaxBots.getZ() + dz);
+		min.setX(positionWithMaxBots.getX() - (resizeRatio * dx));
+		min.setY(positionWithMaxBots.getY() - (resizeRatio * dy));
+		min.setZ(positionWithMaxBots.getZ() - (resizeRatio * dz));
+		max.setX(positionWithMaxBots.getX() + (resizeRatio * dx));
+		max.setY(positionWithMaxBots.getY() + (resizeRatio * dy));
+		max.setZ(positionWithMaxBots.getZ() + (resizeRatio * dz));
 		return (positionWithMaxBots.getManhattanDistance());
 	}
 }
