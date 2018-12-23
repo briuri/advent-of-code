@@ -8,7 +8,6 @@ import buri.aoc.data.Triple;
  * @author Brian Uri!
  */
 public class Bot {
-
 	private Triple _position;
 	private long _radius;
 
