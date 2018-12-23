@@ -76,6 +76,9 @@ public class Day23 extends Puzzle {
 	 * - Determine the frequency of positions that occurs most.
 	 * - Find all positions that had that frequency and get the one with the smallest MD to origin.
 	 * 
+	 * Also failed:
+	 * - Try to calculate some sort of weighted center-of-mass (using radius to mock the weight) and search around there.
+	 * 
 	 * Final solution:
 	 * - Get the bounds of all bot positions.
 	 * - Break volume into chunks and take sample readings of the maxBotsInRange at different positions.
