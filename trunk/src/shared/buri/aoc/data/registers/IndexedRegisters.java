@@ -86,6 +86,73 @@ public class IndexedRegisters {
 	}
 	
 	/**
+	 * Outputs the instruction data as pseudocode.
+	 */
+	public static void convertInput(List<String> input) {
+		for (int i = 0; i < input.size(); i++) {
+			if (i == 0) {
+				System.out.println("Address Register is reg[" + input.get(0).split(" ")[1] + "]");
+			}
+			else {
+				int address = i - 1;
+				String[] code = input.get(i).split(" ");
+				String opcode = code[0];
+				int a = Integer.valueOf(code[1]);
+				int b = Integer.valueOf(code[2]);
+				int c = Integer.valueOf(code[3]);
+				if (opcode.equals("addr")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] + reg[%d]", address, c, a, b));
+				}
+				else if (opcode.equals("addi")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] + %d", address, c, a, b));
+				}
+				else if (opcode.equals("mulr")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] * reg[%d]", address, c, a, b));
+				}
+				else if (opcode.equals("muli")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] * %d", address, c, a, b));
+				}
+				else if (opcode.equals("banr")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] & reg[%d]", address, c, a, b));
+				}
+				else if (opcode.equals("bani")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] & %d", address, c, a, b));
+				}
+				else if (opcode.equals("borr")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] | reg[%d]", address, c, a, b));
+				}
+				else if (opcode.equals("bori")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d] | %d", address, c, a, b));
+				}
+				else if (opcode.equals("setr")) {
+					System.out.println(String.format("%d\treg[%d] = reg[%d]", address, c, a));
+				}
+				else if (opcode.equals("seti")) {
+					System.out.println(String.format("%d\treg[%d] = %d", address, c, a));
+				}
+				else if (opcode.equals("gtir")) {
+					System.out.println(String.format("%d\treg[%d] = (%d > reg[%d] ? 1 : 0)", address, c, a, b));
+				}
+				else if (opcode.equals("gtri")) {
+					System.out.println(String.format("%d\treg[%d] = (reg[%d] > %d ? 1 : 0)", address, c, a, b));
+				}
+				else if (opcode.equals("gtrr")) {
+					System.out.println(String.format("%d\treg[%d] = (reg[%d] > reg[%d] ? 1 : 0)", address, c, a, b));
+				}
+				else if (opcode.equals("eqir")) {
+					System.out.println(String.format("%d\treg[%d] = (%d == reg[%d] ? 1 : 0)", address, c, a, b));
+				}
+				else if (opcode.equals("eqri")) {
+					System.out.println(String.format("%d\treg[%d] = (reg[%d] == %d ? 1 : 0)", address, c, a, b));
+				}
+				else if (opcode.equals("eqrr")) {
+					System.out.println(String.format("%d\treg[%d] = (reg[%d] == reg[%d] ? 1 : 0)", address, c, a, b));
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Executes an actual instruction against the registers, based on data explored in Day 16.
 	 */
 	public void runIntCode(String[] code) {

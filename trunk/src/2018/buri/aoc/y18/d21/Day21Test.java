@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import buri.aoc.Part;
+import buri.aoc.data.registers.IndexedRegisters;
 
 /**
  * @author Brian Uri!
@@ -19,6 +20,11 @@ public class Day21Test {
 		assertEquals(32, input.size());
 	}
 
+	@Test
+	public void testInputConversion() {
+		IndexedRegisters.convertInput(Day21.getInput(0));
+	}
+	
 	/**
 	 * Solves the Part 1 puzzle.
 	 */

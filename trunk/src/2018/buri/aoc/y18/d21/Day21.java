@@ -21,11 +21,11 @@ public class Day21 extends Puzzle {
  * 3 addr 3 4 4				reg[4] = reg[3] + reg[4]			nextIp = 4 or 5
  * 4 seti 0 0 4				reg[4] = 0							nextIp = 1 (infinite loop)
  * 
- * 5 seti 0 5 3				reg[3] = reg[0]						nextIp = 6 (reg[0] only used here)
+ * 5 seti 0 5 3				reg[3] = 0							nextIp = 6
  * 6 bori 3 65536 2			reg[2] = reg[3] | 65536				nextIp = 7
  * 7 seti 10736359 9 3		reg[3] = 10736359					nextIp = 8
  * 8 bani 2 255 1			reg[1] = reg[2] & 255				nextIp = 9
- * 9 addr 3 1 3				reg[3] = reg[3] + 1					nextIp = 10
+ * 9 addr 3 1 3				reg[3] = reg[3] + reg[1]			nextIp = 10
  * 10 bani 3 16777215 3		reg[3] = reg[3] & 16777215			nextIp = 11
  * 11 muli 3 65899 3		reg[3] = reg[3] * 65899				nextIp = 12
  * 12 bani 3 16777215 3		reg[3] = reg[3] & 16777215			nextIp = 13
@@ -45,7 +45,7 @@ public class Day21 extends Puzzle {
  * 26 setr 1 5 2			reg[2] = reg[1]						nextIp = 27
  * 27 seti 7 7 4			reg[4] = 7							nextIp = 8
  * 
- * 28 eqrr 3 0 1			reg[1] = (reg[3] > reg[0] ? 1 : 0)	nextIp = 29
+ * 28 eqrr 3 0 1			reg[1] = (reg[3] == reg[0] ? 1 : 0)	nextIp = 29
  * 29 addr 1 4 4			reg[4] = reg[4] + reg[1]			nextIp = 30 or 31
  * 30 seti 5 1 4			reg[4] = 5							nextIp = 6
  */
@@ -67,12 +67,12 @@ public class Day21 extends Puzzle {
 	 */
 	public static int getResult(Part part, List<String> input) {
 		String ipRegister = input.remove(0);
-		
+
 		/**
 		 * This solution was exploratory. I converted the input into pseudocode (see above). After wasting too much
-		 * time uselessly messing with the loops, I finally honed in on instruction 5 (the only place reg[0] plays 
-		 * a part) and instruction 28 (the control point to exit the program). I then added output to an trial 
-		 * run (reg[0]=0) of the program to find out what the first value of reg[3] was when instruction 28 was reached.
+		 * time uselessly messing with the loops, I finally honed in on instruction 28 (the control point to exit the
+		 * program). I then added output to an trial run (reg[0]=0) of the program to find out what the first value of
+		 * reg[3] was when instruction 28 was reached.
 		 * 
 		 * For Part 2, I used the same idea but looked for when the reg[3] check started repeating itself and chose
 		 * the number right before the repeat. (This takes a long time, about 8 minutes to find the value and 8 minutes
