@@ -63,12 +63,6 @@ public class Battle {
 				group.setTarget(getBestTargetFor(group));
 			}
 
-			// Used to calculate stalemates.
-			boolean noTargetsExist = true;
-			for (Group group : allGroups) {
-				noTargetsExist = noTargetsExist && (group.getTarget() == null);
-			}
-			
 			// Attack
 			Collections.sort(allGroups, Group.ATTACK_ORDER);
 			int totalKills = 0;
@@ -76,8 +70,8 @@ public class Battle {
 				totalKills += group.attack();
 			}
 			
-			// Part 2: Stalemate occurs when no one has a target or no attacks kill anything.
-			if (noTargetsExist || totalKills == 0) {
+			// Part 2: Stalemate occurs when no attacks kill anything.
+			if (totalKills == 0) {
 				return (Outcome.STALEMATE);
 			}
 
