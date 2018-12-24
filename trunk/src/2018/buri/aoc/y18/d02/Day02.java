@@ -63,10 +63,7 @@ public class Day02 extends Puzzle {
 		Map<Character, Integer> charCounts = new HashMap<>();
 		for (int i = 0; i < id.length(); i++) {
 			char letter = id.charAt(i);
-			if (charCounts.get(letter) == null) {
-				charCounts.put(letter, 0);
-			}
-			charCounts.put(letter, charCounts.get(letter) + 1);
+			charCounts.put(letter, charCounts.getOrDefault(letter, 0) + 1);
 		}
 		Set<Integer> uniques = new HashSet<>(charCounts.values());
 		return (uniques.contains(num));

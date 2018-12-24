@@ -66,10 +66,7 @@ public class Day06 extends Puzzle {
 					}
 
 					// Increment the number of minimumMDs owned by an input location.
-					if (minimumDistances.get(nearestPair) == null) {
-						minimumDistances.put(nearestPair, 0);
-					}
-					minimumDistances.put(nearestPair, minimumDistances.get(nearestPair) + 1);
+					minimumDistances.put(nearestPair, minimumDistances.getOrDefault(nearestPair, 0) + 1);
 				}
 			}
 		}
