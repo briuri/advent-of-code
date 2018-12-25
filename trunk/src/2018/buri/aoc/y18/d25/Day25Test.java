@@ -16,12 +16,16 @@ public class Day25Test {
 	@Test
 	public void testGetInput() {
 		List<String> input = Day25.getInput(0);
-		assertEquals(1, input.size());
+		assertEquals(1305, input.size());
 	}
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals(0, Day25.getResult(Part.ONE, Day25.getInput(1)));
+		assertEquals(2, Day25.getResult(Part.ONE, Day25.getInput(1)));
+		assertEquals(1, Day25.getResult(Part.ONE, Day25.getInput(2)));
+		assertEquals(4, Day25.getResult(Part.ONE, Day25.getInput(3)));
+		assertEquals(3, Day25.getResult(Part.ONE, Day25.getInput(4)));
+		assertEquals(8, Day25.getResult(Part.ONE, Day25.getInput(5)));
 	}
 
 	/**
@@ -31,21 +35,6 @@ public class Day25Test {
 	public void testPart1Puzzle() {
 		int result = Day25.getResult(Part.ONE, Day25.getInput(0));
 		System.out.println("Day 25 Part 1\n\t" + result);
-		assertEquals(0, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(0, Day25.getResult(Part.TWO, Day25.getInput(1)));
-	}
-
-	/**
-	 * Solves the Part 2 puzzle.
-	 */
-	@Test
-	public void testPart2Puzzle() {
-		int result = Day25.getResult(Part.TWO, Day25.getInput(0));
-		System.out.println("Day 25 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(388, result);
 	}
 }
