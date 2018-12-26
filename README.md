@@ -14,3 +14,5 @@ These solutions use a naive solution that takes a long time to run, and could pr
 * **y17d17**
 * **y18d11**
 * **y18d21** 
+
+In addition to the solutions, this project also contains a simple visualization of the leaderboard JSON (under `src/viz`) that can show the data as a Top 10 Fastest Times list for each puzzle.
