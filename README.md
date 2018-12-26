@@ -16,3 +16,5 @@ These solutions use a naive solution that takes a long time to run, and could pr
 * **y18d21** 
 
 In addition to the solutions, this project also contains a simple visualization of the leaderboard JSON (under `src/viz`) that can show the data as a Top 10 Fastest Times list for each puzzle.
+
+While I am making this source code available for public viewing, I am not releasing it under any sort of software license at this time.
