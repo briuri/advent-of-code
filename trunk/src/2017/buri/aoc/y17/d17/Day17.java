@@ -16,6 +16,8 @@ public class Day17 extends Puzzle {
 	 * 
 	 * Part 2:
 	 * What is the value after 0 the moment 50000000 is inserted?
+	 * 
+	 * TODO: Optimize Part 2 so it doesn't take so long (103 seconds for puzzle input)
 	 */
 	public static int getResult(Part part, int input) {
 		final int iterations = (part == Part.ONE ? 2018 : 50000000);
