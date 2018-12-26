@@ -75,8 +75,10 @@ public class Day21 extends Puzzle {
 		 * reg[3] was when instruction 28 was reached.
 		 * 
 		 * For Part 2, I used the same idea but looked for when the reg[3] check started repeating itself and chose
-		 * the number right before the repeat. (This takes a long time, about 8 minutes to find the value and 8 minutes
+		 * the number right before the repeat. (This takes a long time, about 9 minutes to find the value and 8 minutes
 		 * to confirm it!)
+		 * 
+		 * TODO: Optimize part 2 so it doesn't take so long.
 		 */
 		Registers registers = new Registers(Character.getNumericValue(ipRegister.charAt(4)), input);
 		int regThree = registers.trialRun(part);
