@@ -33,7 +33,7 @@ public class Day09Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day09.getResult(Part.ONE, Day09.getInput(0));
+		long result = Day09.getResult(Part.ONE, Day09.getInput(0));
 		System.out.println("Day 9 Part 1\n\t" + result);
 		assertEquals(120765, result);
 	}
@@ -51,8 +51,8 @@ public class Day09Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day09.getResult(Part.TWO, Day09.getInput(0));
+		long result = Day09.getResult(Part.TWO, Day09.getInput(0));
 		System.out.println("Day 9 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(11658395076L, result);
 	}
 }
