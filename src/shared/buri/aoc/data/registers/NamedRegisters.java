@@ -36,7 +36,7 @@ public class NamedRegisters {
 	/**
 	 * Lazy-loads a value from a register. Initializes at zero if the register does not yet exist.
 	 */
-	protected Long get(String value) {
+	public Long get(String value) {
 		if (getRegisters().get(value) == null) {
 			set(value, 0L);
 		}
