@@ -37,6 +37,6 @@ public class Day10Test {
 		int result = Day10.getResult(Part.TWO, Day10.getInput(0));
 		System.out.println("Day 10 Part 2\n\t" + result);
 		// Not zero.
-		assertEquals(0, result);
+		assertEquals(12803, result);
 	}
 }

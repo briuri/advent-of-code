@@ -90,9 +90,6 @@ public class Day10 extends Puzzle {
 		}
 
 		// Part TWO
-		for (int i = 0; i < output.size(); i++) {
-			System.out.println(i + " " + output.get(i));
-		}
 		return (output.get(0) * output.get(1) * output.get(2));
 	}
 
