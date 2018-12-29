@@ -40,6 +40,20 @@ public class Path implements Comparable<Path> {
 	}
 
 	/**
+	 * Returns the start
+	 */
+	public Pair getStart() {
+		return (getPath().get(0));
+	}
+	
+	/**
+	 * Returns the destination
+	 */
+	public Pair getEnd() {
+		return (getPath().get(getLength() - 1));
+	}
+	
+	/**
 	 * Returns the next position on the path (assuming the unit is at the 1st one and needs to move). All paths have at
 	 * least 2 nodes.
 	 */
