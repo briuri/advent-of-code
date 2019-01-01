@@ -12,7 +12,7 @@ import java.util.ArrayDeque;
 public class Spinlock {
 
 	private int _steps;
-	ArrayDeque<Integer> _spinlock;
+	private ArrayDeque<Integer> _spinlock;
 
 	/**
 	 * Constructor
