@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Superclass of all puzzles, for shared helper utilities.
@@ -31,21 +31,13 @@ public abstract class Puzzle {
 	 * Gets the sum of a list of integers
 	 */
 	protected static Integer getSum(List<Integer> list) {
-		Integer sum = 0;
-		for (Integer num : list) {
-			sum += num;
-		}
-		return (sum);
+		return (list.stream().mapToInt(Integer::intValue).sum());
 	}
 	
 	/**
 	 * Converts strings into integers.
 	 */
 	public static List<Integer> convertStringsToInts(List<String> rawIntegers) {
-		List<Integer> integers = new ArrayList<>();
-		for (String rawInteger : rawIntegers) {
-			integers.add(Integer.valueOf(rawInteger));
-		}
-		return (integers);
+		return (rawIntegers.stream().map(Integer::valueOf).collect(Collectors.toList()));
 	}
 }
