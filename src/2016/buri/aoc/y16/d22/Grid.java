@@ -11,6 +11,8 @@ import buri.aoc.data.Pair;
  */
 public class Grid {
 
+	private int _maxX;
+	private int _maxY;
 	private Map<Pair, Node> _nodes;
 	
 	/**
@@ -21,6 +23,8 @@ public class Grid {
 		for (String line : input) {
 			Node node = new Node(line);
 			getNodes().put(node.getId(), node);
+			_maxX = Math.max(_maxX, node.getId().getX());
+			_maxY = Math.max(_maxY, node.getId().getY());
 		}
 	}
 	
@@ -43,6 +47,31 @@ public class Grid {
 		}
 		return (count);		
 	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		for (int y = 0; y <= getMaxY(); y++) {
+			for (int x = 0; x <= getMaxX(); x++) {
+				Pair id = new Pair(x, y);
+				Node node = getNodes().get(id);
+				if (node.getId().getX() == getMaxX() && node.getId().getY() == 0) {
+					buffer.append('G');
+				}
+				else if (node.getUsed() == 0) {
+					buffer.append('_');
+				}				
+				else if (node.getTotal() > 100){
+					buffer.append("#");
+				}
+				else {
+					buffer.append(".");
+				}
+			}
+			buffer.append("\n");
+		}
+		return (buffer.toString());
+	}
 
 	/**
 	 * Accessor for the nodes
@@ -50,4 +79,18 @@ public class Grid {
 	private Map<Pair, Node> getNodes() {
 		return _nodes;
 	}
+
+	/**
+	 * Accessor for the maxX
+	 */
+	private int getMaxX() {
+		return _maxX;
+	}
+	
+	/**
+	 * Accessor for the maxY
+	 */
+	private int getMaxY() {
+		return _maxY;
+	}	
 }
