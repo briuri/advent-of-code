@@ -26,8 +26,7 @@ public class Registers extends NamedRegisters {
 	}
 	
 	/**
-	 * jnz x y jumps to an instruction y away (positive means forward; negative means backward), but only if x is not
-	 * zero.
+	 * Processes all instructions.
 	 */
 	public void process() {
 		while (true) {
