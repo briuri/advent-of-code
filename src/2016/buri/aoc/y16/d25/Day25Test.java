@@ -16,7 +16,7 @@ public class Day25Test {
 	@Test
 	public void testGetInput() {
 		List<String> input = Day25.getInput(0);
-		assertEquals(1, input.size());
+		assertEquals(25, input.size());
 	}
 
 	@Test
@@ -31,6 +31,6 @@ public class Day25Test {
 	public void testPart1Puzzle() {
 		int result = Day25.getResult(Part.ONE, Day25.getInput(0));
 		System.out.println("Day 25 Part 1\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(175, result);
 	}
 }
