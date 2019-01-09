@@ -2,7 +2,9 @@ package buri.aoc.data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Utility class for permutations.
@@ -12,14 +14,25 @@ import java.util.List;
 public class Permutations {
 	
 	/**
-	 * Returns all possible permutations of a list of numbers.
+	 * Returns all possible pair permutations of a list of numbers.
 	 */
-	public static List<int[]> getPermutations(List<Integer> numbers) {
-		int[] array = new int[numbers.size()];
-		for (int i = 0; i < numbers.size(); i++) {
-			array[i] = numbers.get(i);			
+	public static Set<List<Integer>> getPermutations(List<Integer> numbers) {
+		Set<Set<Integer>> uniquePairs = new HashSet<>();
+		for (Integer a : numbers) {
+			for (Integer b : numbers) {
+				if (!a.equals(b)) {
+					Set<Integer> pair = new HashSet<>();
+					pair.add(a);
+					pair.add(b);
+					uniquePairs.add(pair);
+				}
+			}
 		}
-		return (getPermutations(array));
+		Set<List<Integer>> pairs = new HashSet<>();
+		for (Set<Integer> pair : uniquePairs) {
+			pairs.add(new ArrayList(pair));
+		}
+		return (pairs);
 	}
 	
 	/**
