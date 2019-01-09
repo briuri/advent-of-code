@@ -19,6 +19,7 @@ public class Registers extends NamedRegisters {
 		for (char name = 'a'; name <= 'd'; name++) {
 			set(String.valueOf(name), 0L);
 		}
+		set("a", 7L);
 	}
 
 	/**
@@ -62,11 +63,14 @@ public class Registers extends NamedRegisters {
 				break;
 			}
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
-			System.out.println(String.format("%d\t%s", getCurrent(), getInstructions().get(getCurrent())));
+			System.out.println(String.format("%s\t%d\t%s", this, getCurrent(), getInstructions().get(getCurrent())));
 			if (tokens[0].equals("tgl")) {
 				toggle(getRegisterOrValue(tokens[1]).intValue());
 			}
 			if (tokens[0].equals("cpy")) {
+				if (!tokens[2].matches("[a-d]")) {
+					continue;
+				}
 				long value = getRegisterOrValue(tokens[1]);
 				getRegisters().put(tokens[2], value);
 			}
@@ -109,17 +113,22 @@ public class Registers extends NamedRegisters {
 	 */
 	private void toggle(int jump) {
 		int instruction = getCurrent() + jump;
-		if (isWithinInstructions()) {
+		if (instruction >= 0 && instruction < getInstructions().size()) {
 			System.out.print(String.format("\t%d\t%s => ", instruction, getInstructions().get(instruction)));
 			String[] tokens = getInstructions().get(instruction).split(" ");
 			if (tokens.length == 2) {
-				tokens[0] = (tokens[0] == "inc" ? "dec" : "inc");
+				tokens[0] = (tokens[0].equals("inc") ? "dec" : "inc");
 			}
 			if (tokens.length == 3) {
-				tokens[0] = (tokens[0] == "jnz" ? "cpy" : "jnz");
+				tokens[0] = (tokens[0].equals("jnz") ? "cpy" : "jnz");
 			}
 			getInstructions().set(instruction, String.join(" ", tokens));
 			System.out.println(getInstructions().get(instruction));
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return (String.format("[%d, %d, %d, %d]", get("a"), get("b"), get("c"), get("d")));
 	}
 }

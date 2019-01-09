@@ -13,6 +13,7 @@ import buri.aoc.Puzzle;
 public class Day23 extends Puzzle {
 
 	/**
+	 *   reg[a] = 7
 	 * 0 reg[b] = reg[a]
 	 * 1 reg[b] -= 1
 	 * 2 reg[d] = reg[a]
@@ -20,15 +21,15 @@ public class Day23 extends Puzzle {
 	 * 4 reg[c] = reg[b]
 	 * 5 reg[a] += 1
 	 * 6 reg[c] -= 1
-	 * 7 if (reg[c] != 0) then goto (7 + -2)
+	 * 7 if (reg[c] != 0) then goto (5)
 	 * 8 reg[d] -= 1
-	 * 9 if (reg[d] != 0) then goto (9 + -5)
+	 * 9 if (reg[d] != 0) then goto (4)
 	 * 10 reg[b] -= 1
 	 * 11 reg[c] = reg[b]
 	 * 12 reg[d] = reg[c]
 	 * 13 reg[d] -= 1
 	 * 14 reg[c] += 1
-	 * 15 if (reg[d] != 0) then goto (15 + -2)
+	 * 15 if (reg[d] != 0) then goto (13)
 	 * 16 toggle (16 + reg[c])
 	 * 17 reg[c] = -16
 	 * 18 if (1 != 0) then goto (18 + reg[c])
@@ -36,9 +37,9 @@ public class Day23 extends Puzzle {
 	 * 20 if (97 != 0) then goto (20 + reg[d])
 	 * 21 reg[a] += 1
 	 * 22 reg[d] += 1
-	 * 23 if (reg[d] != 0) then goto (23 + -2)
+	 * 23 if (reg[d] != 0) then goto (21)
 	 * 24 reg[c] += 1
-	 * 25 if (reg[c] != 0) then goto (25 + -5)
+	 * 25 if (reg[c] != 0) then goto (20)
 	 */
 	
 	/**
