@@ -12,6 +12,7 @@ These solutions all got the right answer for the puzzles, although I cannot guar
 These solutions use a naive solution that takes a long time to run, and could probably be replaced with a better algorithm. If I ever get bored, I'll go back and re-implement with the algorithms that appear in the Reddit solution megathreads:
 
 * **y16d14**
+* **y16d23**
 * **y17d17**
 * **y18d11**
 * **y18d21** 

@@ -54,14 +54,14 @@ public class Day23 extends Puzzle {
 	 * What value should be sent to the safe?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * Anyway, what value should actually be sent to the safe?
+	 * 
+	 * TODO: Refactor algorithm to reduce run time for part 2 (16 minutes).
 	 */
 	public static long getResult(Part part, List<String> input) {
-		Registers registers = new Registers(input);
+		long start = (part == Part.ONE ? 7L : 12L);
+		Registers registers = new Registers(input, start);
 		registers.process();
-		if (part == Part.ONE) {
-			return (registers.get("a"));
-		}
-		return (0);
+		return (registers.get("a"));
 	}
 }
