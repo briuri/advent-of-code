@@ -21,24 +21,24 @@ public class Day11 extends Puzzle {
 	public static String getInput(int fileIndex) {
 		return (readFile("2016/11", fileIndex).get(0));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * In your situation, what is the minimum number of steps required to bring all of the objects to the fourth floor?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * What is the minimum number of steps required to bring all of the objects, including these four new ones, to the
+	 * fourth floor?
 	 */
 	public static int getResult(Part part, String start) {
 		// Set up the start and final states.
 		final State START_STATE = new State(start);
-		int numPairs = (start.length() - 1) / 3;
 		StringBuffer buffer = new StringBuffer("4");
-		for (int i = 0 ; i < numPairs; i++) {
+		for (int i = 0; i < START_STATE.getPairs(); i++) {
 			buffer.append("|44");
 		}
 		final State FINAL_STATE = new State(buffer.toString());
-		
+
 		// Do a BFS to get to the final state.
 		Queue<State> frontier = new ArrayDeque<>();
 		frontier.add(START_STATE);
@@ -52,11 +52,12 @@ public class Day11 extends Puzzle {
 				while (current != null) {
 					steps++;
 					current = cameFrom.get(current);
-				}		
+				}
+				// Subtract the final start-to-null step.
 				return (steps - 1);
 			}
 			for (State next : current.getNextStates()) {
-				// Don't return to starting point.
+				// Don't revisit the starting point.
 				if (next.equals(START_STATE)) {
 					continue;
 				}

@@ -1,6 +1,7 @@
 package buri.aoc.y16.d11;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.data.Permutations;
@@ -8,12 +9,12 @@ import buri.aoc.data.Permutations;
 /**
  * Data model for a single facility state.
  * 
- * 
  * 1|11|12|12|33|33
  * 
  * Elevator on first floor.
  * Each pair after that shows the floor of a generator, and the floor of its matching chip.
  * Pairs are given an ID based on their position: 0[11], 1[12], 2[12], 3[33], 4[33]
+ * Pairs are sorted to reduce the number of possible unique states.
  * 
  * @author Brian Uri!
  */
@@ -27,8 +28,21 @@ public class State {
 	 * Constructor
 	 */
 	public State(String state) {
-		_state = state;
 		_pairs = (state.length() - 1) / 3;
+		
+		// Sort pairs to reduce the number of unique states reached.
+		List<String> pairs = new ArrayList<>();
+		for (int i = 0; i < getPairs(); i++) {
+			pairs.add(state.substring(toGeneratorIndex(i), toChipIndex(i) + 1));
+		}
+		Collections.sort(pairs);
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(state.charAt(0));
+		for (String pair : pairs) {
+			builder.append('|').append(pair);
+		}
+		_state = builder.toString();
 		_currentFloor = Character.getNumericValue(getState().charAt(0));
 	}
 
@@ -49,53 +63,53 @@ public class State {
 			// Elevator can move matching pair (generator+chip) at any time.
 			for (Integer generatorId : generatorsHere) {
 				if (chipsHere.contains(generatorId)) {
-					StringBuffer buffer = new StringBuffer(getState());
-					buffer.setCharAt(0, nextFloorChar);
-					buffer.setCharAt(toGeneratorIndex(generatorId), nextFloorChar);
-					buffer.setCharAt(toChipIndex(generatorId), nextFloorChar);
-					states.add(new State(buffer.toString()));
+					StringBuilder builder = new StringBuilder(getState());
+					builder.setCharAt(0, nextFloorChar);
+					builder.setCharAt(toGeneratorIndex(generatorId), nextFloorChar);
+					builder.setCharAt(toChipIndex(generatorId), nextFloorChar);
+					states.add(new State(builder.toString()));
 				}
 			}
 
 			// Elevator can move 2 generators if they won't fry things on next floor.
 			for (List<Integer> generatorIds : Permutations.getPermutations(generatorsHere)) {
 				if (areGeneratorsAllowedNear(generatorIds, generatorsNext, chipsNext)) {
-					StringBuffer buffer = new StringBuffer(getState());
-					buffer.setCharAt(0, nextFloorChar);
-					buffer.setCharAt(toGeneratorIndex(generatorIds.get(0)), nextFloorChar);
-					buffer.setCharAt(toGeneratorIndex(generatorIds.get(1)), nextFloorChar);
-					states.add(new State(buffer.toString()));
+					StringBuilder builder = new StringBuilder(getState());
+					builder.setCharAt(0, nextFloorChar);
+					builder.setCharAt(toGeneratorIndex(generatorIds.get(0)), nextFloorChar);
+					builder.setCharAt(toGeneratorIndex(generatorIds.get(1)), nextFloorChar);
+					states.add(new State(builder.toString()));
 				}
 			}
 
 			// Elevator can move 2 chips if they won't fry on next floor.
 			for (List<Integer> chipIds : Permutations.getPermutations(chipsHere)) {
 				if (areChipsAllowedNear(chipIds, generatorsNext, chipsNext)) {
-					StringBuffer buffer = new StringBuffer(getState());
-					buffer.setCharAt(0, nextFloorChar);
-					buffer.setCharAt(toChipIndex(chipIds.get(0)), nextFloorChar);
-					buffer.setCharAt(toChipIndex(chipIds.get(1)), nextFloorChar);
-					states.add(new State(buffer.toString()));
+					StringBuilder builder = new StringBuilder(getState());
+					builder.setCharAt(0, nextFloorChar);
+					builder.setCharAt(toChipIndex(chipIds.get(0)), nextFloorChar);
+					builder.setCharAt(toChipIndex(chipIds.get(1)), nextFloorChar);
+					states.add(new State(builder.toString()));
 				}
 			}
 
 			// Elevator can move 1 generator if it won't fry things on next floor.
 			for (Integer generatorId : generatorsHere) {
 				if (isGeneratorAllowedNear(generatorId, generatorsNext, chipsNext)) {
-					StringBuffer buffer = new StringBuffer(getState());
-					buffer.setCharAt(0, nextFloorChar);
-					buffer.setCharAt(toGeneratorIndex(generatorId), nextFloorChar);
-					states.add(new State(buffer.toString()));
+					StringBuilder builder = new StringBuilder(getState());
+					builder.setCharAt(0, nextFloorChar);
+					builder.setCharAt(toGeneratorIndex(generatorId), nextFloorChar);
+					states.add(new State(builder.toString()));
 				}
 			}
 
 			// Elevator can move 1 chip if it won't fry on next floor.
 			for (Integer chipId : chipsHere) {
 				if (isChipAllowedNear(chipId, generatorsNext, chipsNext)) {
-					StringBuffer buffer = new StringBuffer(getState());
-					buffer.setCharAt(0, nextFloorChar);
-					buffer.setCharAt(toChipIndex(chipId), nextFloorChar);
-					states.add(new State(buffer.toString()));
+					StringBuilder builder = new StringBuilder(getState());
+					builder.setCharAt(0, nextFloorChar);
+					builder.setCharAt(toChipIndex(chipId), nextFloorChar);
+					states.add(new State(builder.toString()));
 				}
 			}
 		}
@@ -230,7 +244,7 @@ public class State {
 	/**
 	 * Accessor for the total number of generator/chip pairs
 	 */
-	private int getPairs() {
+	public int getPairs() {
 		return _pairs;
 	}
 

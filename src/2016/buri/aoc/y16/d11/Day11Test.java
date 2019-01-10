@@ -29,7 +29,7 @@ public class Day11Test {
 	public void testPart1Puzzle() {
 		int result = Day11.getResult(Part.ONE, Day11.getInput(0));
 		System.out.println("Day 11 Part 1\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(31, result);
 	}
 
 	/**
@@ -39,6 +39,6 @@ public class Day11Test {
 	public void testPart2Puzzle() {
 		int result = Day11.getResult(Part.TWO, Day11.getInput(2));
 		System.out.println("Day 11 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(55, result);
 	}
 }

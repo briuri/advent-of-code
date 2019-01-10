@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Permutations {
-	
+
 	/**
 	 * Returns all possible pair permutations of a list of numbers.
 	 */
@@ -34,7 +34,7 @@ public class Permutations {
 		}
 		return (pairs);
 	}
-	
+
 	/**
 	 * Returns all possible permutations of a list of numbers.
 	 */
