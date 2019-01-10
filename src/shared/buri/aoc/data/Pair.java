@@ -24,9 +24,9 @@ public class Pair implements Comparable<Pair> {
 	 * String-based Constructor with format "x, y"
 	 */
 	public Pair(String data) {
-		String tokens[] = data.split(", ");
-		_x = Integer.valueOf(tokens[0]);
-		_y = Integer.valueOf(tokens[1]);
+		String tokens[] = data.split(",");
+		_x = Integer.valueOf(tokens[0].trim());
+		_y = Integer.valueOf(tokens[1].trim());
 	}
 	
 	/**

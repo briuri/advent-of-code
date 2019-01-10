@@ -16,7 +16,7 @@ public class Day00 extends Puzzle {
 	 * Returns the input file HOW 
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2016/00", fileIndex));
+		return (readFile("2015/00", fileIndex));
 	}
 	
 	/**

@@ -28,12 +28,12 @@ public class MD5Hash {
 	 * Computes an MD5 hash of a string.
 	 */
 	public String getHash(String input) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (byte b : getDigest().digest(input.getBytes())) {
-			buffer.append(Character.forDigit((b >> 4) & 0xF, 16));
-			buffer.append(Character.forDigit((b & 0xF), 16));
+			builder.append(Character.forDigit((b >> 4) & 0xF, 16));
+			builder.append(Character.forDigit((b & 0xF), 16));
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**
