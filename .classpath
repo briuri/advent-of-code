@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/shared"/>
+	<classpathentry kind="src" path="src/2015"/>
 	<classpathentry kind="src" path="src/2016"/>
 	<classpathentry kind="src" path="src/2017"/>
 	<classpathentry kind="src" path="src/2018"/>
