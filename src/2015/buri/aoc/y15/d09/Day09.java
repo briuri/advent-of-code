@@ -28,7 +28,7 @@ public class Day09 extends Puzzle {
 	 * What is the distance of the shortest route?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * The next year, just to show off, Santa decides to take the route with the longest distance instead.
 	 */
 	public static int getResult(Part part, List<String> input) {
 		// Load lookup data
