@@ -16,7 +16,7 @@ public class Permutations {
 	/**
 	 * Returns all possible pair permutations of a list of numbers.
 	 */
-	public static Set<List<Integer>> getPermutations(List<Integer> numbers) {
+	public static Set<List<Integer>> getPairPermutations(List<Integer> numbers) {
 		Set<Set<Integer>> uniquePairs = new HashSet<>();
 		for (Integer a : numbers) {
 			for (Integer b : numbers) {

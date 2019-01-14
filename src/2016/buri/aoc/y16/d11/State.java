@@ -72,7 +72,7 @@ public class State {
 			}
 
 			// Elevator can move 2 generators if they won't fry things on next floor.
-			for (List<Integer> generatorIds : Permutations.getPermutations(generatorsHere)) {
+			for (List<Integer> generatorIds : Permutations.getPairPermutations(generatorsHere)) {
 				if (areGeneratorsAllowedNear(generatorIds, generatorsNext, chipsNext)) {
 					StringBuilder builder = new StringBuilder(getState());
 					builder.setCharAt(0, nextFloorChar);
@@ -83,7 +83,7 @@ public class State {
 			}
 
 			// Elevator can move 2 chips if they won't fry on next floor.
-			for (List<Integer> chipIds : Permutations.getPermutations(chipsHere)) {
+			for (List<Integer> chipIds : Permutations.getPairPermutations(chipsHere)) {
 				if (areChipsAllowedNear(chipIds, generatorsNext, chipsNext)) {
 					StringBuilder builder = new StringBuilder(getState());
 					builder.setCharAt(0, nextFloorChar);
