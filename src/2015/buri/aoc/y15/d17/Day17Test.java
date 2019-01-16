@@ -31,7 +31,7 @@ public class Day17Test {
 	public void testPart1Puzzle() {
 		int result = Day17.getResult(Part.ONE, 150, Day17.getInput(0));
 		System.out.println("Day 17 Part 1\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(1638, result);
 	}
 
 	@Test
@@ -46,6 +46,6 @@ public class Day17Test {
 	public void testPart2Puzzle() {
 		int result = Day17.getResult(Part.TWO, 150, Day17.getInput(0));
 		System.out.println("Day 17 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(17, result);
 	}
 }

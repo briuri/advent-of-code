@@ -25,7 +25,7 @@ public class Day14 extends Puzzle {
 	 * Part 2:
 	 * Using 2016 extra MD5 calls of key stretching, what index now produces your 64th one-time pad key?
 	 * 
-	 * TODO: Optimize Part 2 (takes 38 minutes for both example and real inputs).
+	 * TODO: Optimize Part 2 (takes 33 minutes for real input).
 	 */
 	public static int getResult(Part part, String salt) {
 		MD5Hash hasher = new MD5Hash();

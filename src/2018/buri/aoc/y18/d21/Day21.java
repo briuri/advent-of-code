@@ -78,7 +78,7 @@ public class Day21 extends Puzzle {
 		 * the number right before the repeat. (This takes a long time, about 9 minutes to find the value and 8 minutes
 		 * to confirm it!)
 		 * 
-		 * TODO: Optimize part 2 so it doesn't take so long.
+		 * TODO: Optimize part 2 so it doesn't take so long (10 minutes).
 		 */
 		Registers registers = new Registers(Character.getNumericValue(ipRegister.charAt(4)), input);
 		int regThree = registers.trialRun(part);

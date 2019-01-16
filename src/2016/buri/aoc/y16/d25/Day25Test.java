@@ -16,7 +16,7 @@ public class Day25Test {
 	@Test
 	public void testGetInput() {
 		List<String> input = Day25.getInput(0);
-		assertEquals(25, input.size());
+		assertEquals(30, input.size());
 	}
 
 	@Test

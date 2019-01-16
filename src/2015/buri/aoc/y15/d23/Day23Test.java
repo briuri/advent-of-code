@@ -36,6 +36,6 @@ public class Day23Test {
 	public void testPart2Puzzle() {
 		long result = Day23.getResult(Part.TWO, Day23.getInput(0));
 		System.out.println("Day 23 Part 2\n\t" + result);
-		assertEquals(0, result);
+		assertEquals(334, result);
 	}
 }
