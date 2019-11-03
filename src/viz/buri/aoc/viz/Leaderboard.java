@@ -24,6 +24,7 @@ public class Leaderboard {
 	
 	@Test
 	public void visualizeLeaderboard() {
+		visualizeEvent("2019");
 		visualizeEvent("2018");
 		visualizeEvent("2017");
 		visualizeEvent("2016");
@@ -31,7 +32,7 @@ public class Leaderboard {
 	}
 	
 	private static void visualizeEvent(String event) {
-		final String currentEvent = "2018";
+		final String currentEvent = "2019";
 		final String pageTitle = "Novetta Advent of Code - Top 10 Solve Times";
 		final List<Metadata> metadata = readMetadata(event);
 		
@@ -92,7 +93,9 @@ public class Leaderboard {
 		
 		// Nav Bar
 		buffer.append("<p>");
-		buffer.append(event.equals("2018") ? event : "<a href=\"index.html\">2018</a>");
+		buffer.append(event.equals("2019") ? event : "<a href=\"index.html\">2019</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2018") ? event : "<a href=\"index-2018.html\">2018</a>");
 		buffer.append(" | ");
 		buffer.append(event.equals("2017") ? event : "<a href=\"index-2017.html\">2017</a>");
 		buffer.append(" | ");
@@ -101,9 +104,11 @@ public class Leaderboard {
 		buffer.append(event.equals("2015") ? event : "<a href=\"index-2015.html\">2015</a>");
 		buffer.append("<p>\n\n");
 		
+		boolean allEmpty = true;
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<Record> places = puzzleRecords.get(i);
 			if (!places.isEmpty()) {
+				allEmpty = false;
 				int day = i + 1;
 				Collections.sort(places);
 				buffer.append("\n<a name=\"day").append(day).append("\"></a>");
@@ -125,7 +130,12 @@ public class Leaderboard {
 				buffer.append("</ol>\n");
 			}
 		}
-		buffer.append("\n<p><a href=\"#\">Jump to Top</a></p>");
+		if (allEmpty) {
+			buffer.append("<p>No times recorded yet.</p>");
+		}
+		else {
+			buffer.append("\n<p><a href=\"#\">Jump to Top</a></p>");
+		}
 		buffer.append("</body>\n</html>");
 
 		// Save to file.
