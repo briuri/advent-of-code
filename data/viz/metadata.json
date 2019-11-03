@@ -79,5 +79,32 @@
 		{"title":"Day 23: Safe Cracking", "globalCount":2},
 		{"title":"Day 24: Air Duct Spelunking", "globalCount":1},
 		{"title":"Day 25: Clock Signal", "globalCount":3}		
-	]
+	],
+	"2015": [
+		{"title":"Day 1: Not Quite Lisp", "globalCount":0},
+		{"title":"Day 2: I Was Told There Would Be No Math", "globalCount":0},
+		{"title":"Day 3: Perfectly Spherical Houses in a Vacuum", "globalCount":0},
+		{"title":"Day 4: The Ideal Stocking Stuffer", "globalCount":0},
+		{"title":"Day 5: Doesn't He Have Intern-Elves For This?", "globalCount":0},
+		{"title":"Day 6: Probably a Fire Hazard", "globalCount":0},
+		{"title":"Day 7: Some Assembly Required", "globalCount":0},
+		{"title":"Day 8: Matchsticks", "globalCount":0},
+		{"title":"Day 9: All in a Single Night", "globalCount":0},
+		{"title":"Day 10: Elves Look, Elves Say", "globalCount":0},
+		{"title":"Day 11: Corporate Policy", "globalCount":0},
+		{"title":"Day 12: JSAbacusFramework.io", "globalCount":0},
+		{"title":"Day 13: Knights of the Dinner Table", "globalCount":0},
+		{"title":"Day 14: Reindeer Olympics", "globalCount":0},
+		{"title":"Day 15: Science for Hungry People", "globalCount":0},
+		{"title":"Day 16: Aunt Sue", "globalCount":0},
+		{"title":"Day 17: No Such Thing as Too Much", "globalCount":0},
+		{"title":"Day 18: Like a GIF For Your Yard", "globalCount":0},
+		{"title":"Day 19: Medicine for Rudolph", "globalCount":0},
+		{"title":"Day 20: Infinite Elves and Infinite Houses", "globalCount":0},
+		{"title":"Day 21: RPG Simulator 20XX", "globalCount":0},
+		{"title":"Day 22: Wizard Simulator 20XX", "globalCount":0},
+		{"title":"Day 23: Opening the Turing Lock", "globalCount":0},
+		{"title":"Day 24: It Hangs in the Balance", "globalCount":0},
+		{"title":"Day 25: Let It Snow", "globalCount":0}
+	]	
 }

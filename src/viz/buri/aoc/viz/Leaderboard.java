@@ -27,6 +27,7 @@ public class Leaderboard {
 		visualizeEvent("2018");
 		visualizeEvent("2017");
 		visualizeEvent("2016");
+		visualizeEvent("2015");
 	}
 	
 	private static void visualizeEvent(String event) {
@@ -96,6 +97,8 @@ public class Leaderboard {
 		buffer.append(event.equals("2017") ? event : "<a href=\"index-2017.html\">2017</a>");
 		buffer.append(" | ");
 		buffer.append(event.equals("2016") ? event : "<a href=\"index-2016.html\">2016</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2015") ? event : "<a href=\"index-2015.html\">2015</a>");
 		buffer.append("<p>\n\n");
 		
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
