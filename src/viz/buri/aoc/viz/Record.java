@@ -28,10 +28,14 @@ public class Record implements Comparable {
 
 	/**
 	 * Converts UNIX timestamp into "time after midnight". Adds 24 hours for completion times on the next day.
+	 * Returns a message for times in a different year (people who did the puzzles outside of the competition).
 	 */
-	public String getPrettyTime(int day) {
+	public String getPrettyTime(int day, String event) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(getDate());
+		if (Integer.valueOf(event) != calendar.get(Calendar.YEAR)) {
+			return ("<i>(in " + calendar.get(Calendar.YEAR) + ")</i>");
+		}
 
 		String prettyTime = getDate().toString().substring(11, 19);
 		int overflow = calendar.get(Calendar.DAY_OF_MONTH) - day;

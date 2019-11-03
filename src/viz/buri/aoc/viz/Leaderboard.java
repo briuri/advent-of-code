@@ -65,9 +65,7 @@ public class Leaderboard {
 				if (part2Data != null) {
 					long timestamp = Long.valueOf((String) part2Data.get("get_star_ts"));
 					Record record = new Record(name, timestamp);
-					if (record.occurredInYear(Integer.valueOf(event))) {
-						puzzleRecords.get(Integer.valueOf(dayKey) - 1).add(record);
-					}
+					puzzleRecords.get(Integer.valueOf(dayKey) - 1).add(record);
 				}
 			}
 		}
@@ -112,7 +110,7 @@ public class Leaderboard {
 				int numPlaces = Math.min(10, places.size());
 				for (int place = 0; place < numPlaces; place++) {
 					Record record = places.get(place);
-					buffer.append("\t<li>").append(record.getPrettyTime(day));
+					buffer.append("\t<li>").append(record.getPrettyTime(day, event));
 					if (place + 1 <= metadata.get(i).getGlobalCount()) {
 						buffer.append("<sup class=\"global\">*</sup>");
 					}
