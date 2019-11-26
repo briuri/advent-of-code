@@ -1,4 +1,4 @@
-package buri.aoc.template;
+package buri.aoc.y19.d01;
 
 import java.util.List;
 
@@ -6,17 +6,17 @@ import buri.aoc.Part;
 import buri.aoc.Puzzle;
 
 /**
- * Day 00: TITLE
+ * Day 01: TITLE
  * 
  * @author Brian Uri!
  */
-public class Day00 extends Puzzle {
+public class Day01 extends Puzzle {
 
 	/**
 	 * Returns the input file HOW 
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2019/00", fileIndex));
+		return (readFile("2019/01", fileIndex));
 	}
 	
 	/**
