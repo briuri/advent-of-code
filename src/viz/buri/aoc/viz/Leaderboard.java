@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +43,7 @@ public class Leaderboard {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			File file = new File("data/viz/" + event + ".json");
-			lastModified = Date.from(Instant.ofEpochMilli(file.lastModified())).toString();
+			lastModified = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date.from(Instant.ofEpochMilli(file.lastModified())));
 			JsonNode json = mapper.readTree(file);
 			event = json.get("event").asText();
 			members = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
@@ -76,23 +77,24 @@ public class Leaderboard {
 		StringBuffer buffer = new StringBuffer();
 		
 		// Head
-		buffer.append("<html>\n<head><title>").append(pageTitle).append(" (").append(event).append(")").append("</title>\n");
+		buffer.append("<html>\n<head>\n");
+		buffer.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
+		buffer.append("<title>").append(pageTitle).append(" (").append(event).append(")").append("</title>\n");
 		buffer.append("<style>\n");
-		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 11pt; }\n");
-		buffer.append("\t.tiny { font-size: 9pt; }\n");
+		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
+		buffer.append("\th1 { font-size: 12pt; }\n");
+		buffer.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		buffer.append("\ta { color: #009900; }\n");
 		buffer.append("\ta:hover { color: #99ff99; }\n");
+		buffer.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
+		buffer.append("\t.empty { font-size: 11pt; }\n");
+		buffer.append("\t.tiny { font-size: 9pt; }\n");
 		buffer.append("\t.global { color: #ffff00; }\n");
 		buffer.append("</style>\n</head>\n\n<body>\n");
-		buffer.append("<h2>").append(pageTitle).append(" (").append(event).append(")").append("</h2>\n\n");
-		buffer.append("<p class=\"tiny\">JSON downloaded from ");
-		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">");
-		buffer.append("Novetta Leaderboard</a> on <b>").append(lastModified).append("</b>.");
-		buffer.append("<br /><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard</p>");
-		buffer.append("</p>\n\n");
-		
+		buffer.append("<h1>").append(pageTitle).append(" (").append(event).append(")").append("</h1>\n\n");
+
 		// Nav Bar
-		buffer.append("<p>");
+		buffer.append("<div class=\"navBar\">");
 		buffer.append(event.equals("2019") ? event : "<a href=\"index.html\">2019</a>");
 		buffer.append(" | ");
 		buffer.append(event.equals("2018") ? event : "<a href=\"index-2018.html\">2018</a>");
@@ -102,8 +104,13 @@ public class Leaderboard {
 		buffer.append(event.equals("2016") ? event : "<a href=\"index-2016.html\">2016</a>");
 		buffer.append(" | ");
 		buffer.append(event.equals("2015") ? event : "<a href=\"index-2015.html\">2015</a>");
-		buffer.append("<p>\n\n");
-		
+		buffer.append(" | ");
+		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">");
+		buffer.append("Leaderboard &rArr;</a>");
+		buffer.append(" | ");
+		buffer.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack &rArr;</a>");
+		buffer.append("</div>\n\n");
+				
 		boolean allEmpty = true;
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<Record> places = puzzleRecords.get(i);
@@ -131,11 +138,15 @@ public class Leaderboard {
 			}
 		}
 		if (allEmpty) {
-			buffer.append("<p>No times recorded yet.</p>");
+			buffer.append("<p class=\"empty\">No times recorded yet.</p>");
 		}
 		else {
-			buffer.append("\n<p><a href=\"#\">Jump to Top</a></p>");
+			buffer.append("<div class=\"navBar\">");
+			buffer.append("<a href=\"#\">Jump to Top</a>\n");
+			buffer.append("</div>");
 		}
+		buffer.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");			
+		buffer.append("&nbsp;&nbsp;last update on ").append(lastModified).append("</p>\n");
 		buffer.append("</body>\n</html>");
 
 		// Save to file.
