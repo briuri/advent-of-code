@@ -50,12 +50,7 @@ public class Day06 extends Puzzle {
 				}
 
 				// Get the smallest MD to record in the grid.
-				Map.Entry<Pair, Integer> minEntry = null;
-				for (Map.Entry<Pair, Integer> entry : currentSpotDistances.entrySet()) {
-					if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
-						minEntry = entry;
-					}
-				}
+				Map.Entry<Pair, Integer> minEntry = getMin(currentSpotDistances);
 				// Ignore any smallest MDs shared by multiple locations.
 				if (Collections.frequency(currentSpotDistances.values(), minEntry.getValue()) == 1) {
 					Pair nearestPair = minEntry.getKey();
@@ -77,12 +72,7 @@ public class Day06 extends Puzzle {
 		}
 
 		// Finally, return the max number of minimumMDs owned by an input location.
-		Map.Entry<Pair, Integer> maxEntry = null;
-		for (Map.Entry<Pair, Integer> entry : minimumDistances.entrySet()) {
-			if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-				maxEntry = entry;
-			}
-		}
+		Map.Entry<Pair, Integer> maxEntry = getMax(minimumDistances);
 		return (maxEntry.getValue());
 	}
 

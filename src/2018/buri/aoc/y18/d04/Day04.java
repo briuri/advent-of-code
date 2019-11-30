@@ -48,12 +48,7 @@ public class Day04 extends Puzzle {
 			}
 
 			// Work backwards from the max sleep value to the id of the guard who slept that much.
-			Map.Entry<Integer, Integer> maxEntry = null;
-			for (Map.Entry<Integer, Integer> entry : totalSleep.entrySet()) {
-				if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-					maxEntry = entry;
-				}
-			}
+			Map.Entry<Integer, Integer> maxEntry = getMax(totalSleep);
 			int id = maxEntry.getKey();
 			int minuteMostSpentAsleep = sleepSchedules.get(id).getMaxMinute();
 			return (id * minuteMostSpentAsleep);

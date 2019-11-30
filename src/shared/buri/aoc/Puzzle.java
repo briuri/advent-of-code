@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -39,5 +40,31 @@ public abstract class Puzzle {
 	 */
 	public static List<Integer> convertStringsToInts(List<String> rawIntegers) {
 		return (rawIntegers.stream().map(Integer::valueOf).collect(Collectors.toList()));
+	}
+	
+	/**
+	 * Gets the entry with the minimum value from a Map
+	 */
+	protected static <S, T extends Comparable> Map.Entry<S, T> getMin(Map<S, T> map) {
+		Map.Entry<S, T> minEntry = null;
+		for (Map.Entry<S, T> entry : map.entrySet()) {
+			if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
+				minEntry = entry;
+			}
+		}	
+		return (minEntry);
+	}
+	
+	/**
+	 * Gets the entry with the maximum value from a Map
+	 */
+	protected static <S, T extends Comparable> Map.Entry<S, T> getMax(Map<S, T> map) {
+		Map.Entry<S, T> maxEntry = null;
+		for (Map.Entry<S, T> entry : map.entrySet()) {
+			if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+				maxEntry = entry;
+			}
+		}	
+		return (maxEntry);
 	}
 }
