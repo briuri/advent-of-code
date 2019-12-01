@@ -26,10 +26,10 @@ public class Leaderboard {
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("2019");
-		visualizeEvent("2018");
-		visualizeEvent("2017");
-		visualizeEvent("2016");
-		visualizeEvent("2015");
+//		visualizeEvent("2018");
+//		visualizeEvent("2017");
+//		visualizeEvent("2016");
+//		visualizeEvent("2015");
 	}
 	
 	private static void visualizeEvent(String event) {
