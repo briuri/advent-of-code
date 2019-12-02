@@ -5,7 +5,6 @@ import java.util.List;
 
 import buri.aoc.Part;
 import buri.aoc.Puzzle;
-import buri.aoc.y19.d02.Data;
 
 /**
  * Day 00: TITLE
