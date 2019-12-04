@@ -43,6 +43,13 @@ public class CharFrequency {
 	}
 
 	/**
+	 * Returns true if some character appears exactly this number of times.
+	 */
+	public boolean containsFrequency(int frequency) {
+		return (getFrequency().values().contains(frequency));
+	}
+	
+	/**
 	 * Returns the most used letters.
 	 */
 	public String getHighestFrequencyChars(int num) {
