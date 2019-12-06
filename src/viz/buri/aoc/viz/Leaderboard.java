@@ -28,6 +28,7 @@ public class Leaderboard {
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("2019");
+		
 		// NOTE: Accounts were removed in 2019 to avoid the 200-player cap.
 		// Redownloading JSON from older years may result in leaderboards with missing scores.
 //		visualizeEvent("2018");
@@ -57,13 +58,11 @@ public class Leaderboard {
 		}
 
 		// Create lists of daily records for people who completed each day.
-		List<List<Record>> puzzleRecords = new ArrayList<>();
+		List<List<PuzzleRecord>> puzzleRecords = new ArrayList<>();
 		for (int day = 0; day < TOTAL_PUZZLES; day++) {
 			puzzleRecords.add(new ArrayList<>());
 		}
-
-		// Load the Part 2 completion timestamps for each member of the leaderboard.
-		Map<String, List<String>> prettyTimes = new HashMap<>(); 
+		Map<String, List<String>> medianData = new HashMap<>(); 
 		for (String key : members.keySet()) {
 			Map<String, Object> member = (Map) members.get(key);
 			String name = (String) member.get("name");
@@ -72,57 +71,25 @@ public class Leaderboard {
 				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
 				if (part2Data != null) {
 					long timestamp = Long.valueOf((String) part2Data.get("get_star_ts"));
-					Record record = new Record(name, event, Integer.valueOf(dayKey), timestamp);
+					PuzzleRecord record = new PuzzleRecord(name, event, Integer.valueOf(dayKey), timestamp);
 					puzzleRecords.get(Integer.valueOf(dayKey) - 1).add(record);
-					if (prettyTimes.get(name) == null) {
-						prettyTimes.put(name, new ArrayList<>());
+					if (medianData.get(name) == null) {
+						medianData.put(name, new ArrayList<>());
 					}
-					prettyTimes.get(name).add(record.getPrettyTime());
+					medianData.get(name).add(record.getPrettyTime(true));
 				}
 			}
 		}
 
 		// Generate the HTML page.		
 		StringBuffer buffer = new StringBuffer();
+		insertHeader(buffer, pageTitle, event);
+		insertMeanTimes(buffer, medianData);
 		
-		// Head
-		buffer.append("<html>\n<head>\n");
-		buffer.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
-		buffer.append("<title>").append(pageTitle).append(" (").append(event).append(")").append("</title>\n");
-		buffer.append("<style>\n");
-		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
-		buffer.append("\th1 { font-size: 12pt; }\n");
-		buffer.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
-		buffer.append("\ta { color: #009900; }\n");
-		buffer.append("\ta:hover { color: #99ff99; }\n");
-		buffer.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
-		buffer.append("\t.empty { font-size: 11pt; }\n");
-		buffer.append("\t.tiny { font-size: 9pt; }\n");
-		buffer.append("\t.global { color: #ffff00; }\n");
-		buffer.append("</style>\n</head>\n\n<body>\n");
-		buffer.append("<h1>").append(pageTitle).append(" (").append(event).append(")").append("</h1>\n\n");
-
-		// Nav Bar
-		buffer.append("<div class=\"navBar\">");
-		buffer.append(event.equals("2019") ? event : "<a href=\"index.html\">2019</a>");
-		buffer.append(" | ");
-		buffer.append(event.equals("2018") ? event : "<a href=\"index-2018.html\">2018</a>");
-		buffer.append(" | ");
-		buffer.append(event.equals("2017") ? event : "<a href=\"index-2017.html\">2017</a>");
-		buffer.append(" | ");
-		buffer.append(event.equals("2016") ? event : "<a href=\"index-2016.html\">2016</a>");
-		buffer.append(" | ");
-		buffer.append(event.equals("2015") ? event : "<a href=\"index-2015.html\">2015</a>");
-		buffer.append(" | ");
-		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">");
-		buffer.append("Leaderboard &rArr;</a>");
-		buffer.append(" | ");
-		buffer.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack &rArr;</a>");
-		buffer.append("</div>\n\n");
-				
+		// Insert Puzzle Times
 		boolean allEmpty = true;
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
-			List<Record> places = puzzleRecords.get(i);
+			List<PuzzleRecord> places = puzzleRecords.get(i);
 			if (!places.isEmpty()) {
 				allEmpty = false;
 				int day = i + 1;
@@ -133,8 +100,8 @@ public class Leaderboard {
 				buffer.append("<ol>\n");
 				int numPlaces = Math.min(TOP_NUM, places.size());
 				for (int place = 0; place < numPlaces; place++) {
-					Record record = places.get(place);
-					buffer.append("\t<li>").append(record.getPrettyTime());
+					PuzzleRecord record = places.get(place);
+					buffer.append("\t<li>").append(record.getPrettyTime(false));
 					if (place + 1 <= metadata.get(i).getGlobalCount()) {
 						buffer.append("<sup class=\"global\">*</sup>");
 					}
@@ -146,17 +113,7 @@ public class Leaderboard {
 				buffer.append("</ol>\n");
 			}
 		}
-		if (allEmpty) {
-			buffer.append("<p class=\"empty\">No times recorded yet.</p>");
-		}
-		else {
-			buffer.append("<div class=\"navBar\">");
-			buffer.append("<a href=\"#\">Jump to Top</a>\n");
-			buffer.append("</div>");
-		}
-		buffer.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");			
-		buffer.append("&nbsp;&nbsp;last update on ").append(lastModified).append("</p>\n");
-		buffer.append("</body>\n</html>");
+		insertFooter(buffer, allEmpty, lastModified);
 
 		// Save to file.
 		try {
@@ -166,27 +123,8 @@ public class Leaderboard {
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file", e);
 		}
-		
-		// Itemize times of top scorers for mean calculations.
-		int maxTimes = 0;
-		for (String name : prettyTimes.keySet()) {
-			maxTimes = Math.max(maxTimes, prettyTimes.get(name).size());
-		}		
-		buffer.delete(0, buffer.length());
-		for (String name : prettyTimes.keySet()) {
-			if (prettyTimes.get(name).size() == maxTimes) {
-				buffer.append(name);
-				Collections.sort(prettyTimes.get(name));
-				for (String time : prettyTimes.get(name)) {
-					buffer.append("\t").append(time.replaceAll("&nbsp;", ""));
-				}				
-				buffer.append("\n");
-			}
-		}
-		System.out.println(buffer.toString());
 	}
-	
-	
+		
 	/**
 	 * Reads the metadata from the file.
 	 */
@@ -207,5 +145,135 @@ public class Leaderboard {
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid metadata file.", e);
 		}
+	}
+	
+	/**
+	 * Adds the HTML page header
+	 */
+	private static void insertHeader(StringBuffer buffer, String pageTitle, String event) {
+		buffer.append("<html>\n<head>\n");
+		buffer.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
+		buffer.append("<title>").append(pageTitle).append(" (").append(event).append(")").append("</title>\n");
+		buffer.append("<style>\n");
+		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
+		buffer.append("\th1 { font-size: 12pt; }\n");
+		buffer.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
+		buffer.append("\ta { color: #009900; }\n");
+		buffer.append("\ta:hover { color: #99ff99; }\n");
+		buffer.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
+		buffer.append("\t.empty { font-size: 11pt; }\n");
+		buffer.append("\t.tiny { font-size: 9pt; }\n");
+		buffer.append("\t.global { color: #ffff00; }\n");
+		buffer.append("</style>\n</head>\n\n<body>\n");
+		buffer.append("<h1>").append(pageTitle).append(" (").append(event).append(")").append("</h1>\n\n");
+
+		buffer.append("<div class=\"navBar\">");
+		buffer.append(event.equals("2019") ? event : "<a href=\"index.html\">2019</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2018") ? event : "<a href=\"index-2018.html\">2018</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2017") ? event : "<a href=\"index-2017.html\">2017</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2016") ? event : "<a href=\"index-2016.html\">2016</a>");
+		buffer.append(" | ");
+		buffer.append(event.equals("2015") ? event : "<a href=\"index-2015.html\">2015</a>");
+		buffer.append(" | ");
+		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">");
+		buffer.append("Leaderboard &rArr;</a>");
+		buffer.append(" | ");
+		buffer.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack &rArr;</a>");
+		buffer.append("</div>\n\n");
+	}
+	
+	/**
+	 * Generates a Top X list of mean times.
+	 */
+	private static void insertMeanTimes(StringBuffer buffer, Map<String, List<String>> times) {
+		// Only do calculations for people with all puzzles completed so far.
+		int puzzlesCompleted = 0;
+		for (List<String> list : times.values()) {
+			puzzlesCompleted = Math.max(list.size(), puzzlesCompleted);
+		}		
+		List<MedianRecord> records = new ArrayList<>();
+		for (String name : times.keySet()) {
+			if (times.get(name).size() == puzzlesCompleted) {
+				Collections.sort(times.get(name));
+				records.add(new MedianRecord(name, calculateMedianTime(times.get(name))));
+			}
+		}
+		Collections.sort(records);
+		
+		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times</h3>\n");
+		buffer.append("<ol>\n");
+		int numPlaces = Math.min(TOP_NUM, records.size());
+		for (int i = 0; i < numPlaces; i++) {
+			MedianRecord record = records.get(i);
+			buffer.append("\t<li>").append(record.getMedianTime());
+			buffer.append("&nbsp; - ").append(record.getName()).append("</li>\n");
+		}
+		buffer.append("</ol>\n");
+	}
+	
+	/**
+	 * Calculates the median of the given times.
+	 */
+	private static String calculateMedianTime(List<String> times) {
+		if (times.size() % 2 == 1) {
+			return (times.get(times.size() / 2));
+		}
+		int low = toSeconds(times.get(times.size() / 2 - 1));
+		int high = toSeconds(times.get(times.size() / 2));
+		int median = (high + low) / 2;
+		// Round up 0.5 seconds.
+		if ((high + low) % 2 != 0) {
+			median++;
+		}
+		
+		String hours = String.valueOf(median / (60 * 60));
+		if (hours.length() == 1) {
+			hours = "0" + hours;
+		}
+		if (hours.length() == 2) {
+			hours = "&nbsp;" + hours;
+		}
+		
+		median = median % (60 * 60);
+		String minutes = String.valueOf(median / 60);
+		if (minutes.length() == 1) {
+			minutes = "0" + minutes;
+		}
+		median = median % 60;
+		String seconds = String.valueOf(median);
+		if (seconds.length() == 1) {
+			seconds = "0" + seconds;
+		}
+		return (hours + ":" + minutes + ":" + seconds);
+	}
+	
+	/**
+	 * Converts a time in the format HH:MM:SS to seconds.
+	 */
+	private static int toSeconds(String time) {
+		int seconds = Integer.valueOf(time.substring(6));
+		seconds += 60 * Integer.valueOf(time.substring(3, 5));
+		seconds += 60 * 60 * Integer.valueOf(time.substring(0, 2));
+		return (seconds);
+	}
+	
+	/**
+	 * Adds the HTML page footer
+	 */
+	private static void insertFooter(StringBuffer buffer, boolean allEmpty, String lastModified) {
+		if (allEmpty) {
+			buffer.append("<p class=\"empty\">No times recorded yet.</p>");
+		}
+		else {
+			buffer.append("<div class=\"navBar\">");
+			buffer.append("<a href=\"#\">Jump to Top</a>\n");
+			buffer.append("</div>");
+		}
+		buffer.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");			
+		buffer.append("&nbsp;&nbsp;last update on ").append(lastModified).append("</p>\n");
+		buffer.append("</body>\n</html>");
 	}
 }

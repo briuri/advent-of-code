@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * @author Brian Uri!
  */
-public class Record implements Comparable {
+public class PuzzleRecord implements Comparable {
 	
 	private String _name;
 	private String _event;
@@ -20,7 +20,7 @@ public class Record implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public Record(String name, String event, int day, long timestamp) {
+	public PuzzleRecord(String name, String event, int day, long timestamp) {
 		_name = name;
 		_event = event;
 		_day = day;
@@ -32,11 +32,11 @@ public class Record implements Comparable {
 	 * Converts UNIX timestamp into "time after midnight". Adds 24 hours for completion times on the next day.
 	 * Returns a message for times in a different year (people who did the puzzles outside of the competition).
 	 */
-	public String getPrettyTime() {
+	public String getPrettyTime(boolean forMedianCalculation) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(getDate());
 		if (Integer.valueOf(getEvent()) != calendar.get(Calendar.YEAR)) {
-			return ("<i>(in " + calendar.get(Calendar.YEAR) + ")</i>");
+			return (forMedianCalculation ? "" : "<i>(in " + calendar.get(Calendar.YEAR) + ")</i>");
 		}
 
 		String prettyTime = getDate().toString().substring(11, 19);
@@ -45,7 +45,7 @@ public class Record implements Comparable {
 			int hours = Integer.valueOf(prettyTime.substring(0, 2)) + (24 * overflow);
 			prettyTime = String.valueOf(hours) + prettyTime.substring(2, prettyTime.length());
 		}
-		if (prettyTime.length() == 8) {
+		if (prettyTime.length() == 8 && !forMedianCalculation) {
 			prettyTime = "&nbsp;" + prettyTime;
 		}
 		return (prettyTime);
@@ -97,9 +97,9 @@ public class Record implements Comparable {
 	
 	@Override
 	public int compareTo(Object o) {
-		if (getTimestamp() == ((Record) o).getTimestamp()) {
+		if (getTimestamp() == ((PuzzleRecord) o).getTimestamp()) {
 			return (0);
 		}
-		return (getTimestamp() > ((Record) o).getTimestamp() ? 1 : -1);
+		return (getTimestamp() > ((PuzzleRecord) o).getTimestamp() ? 1 : -1);
 	}	
 }
