@@ -26,6 +26,8 @@ public class Leaderboard {
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("2019");
+		// NOTE: Accounts were removed in 2019 to avoid the 200-player cap.
+		// Redownloading JSON from older years may result in leaderboards with missing scores.
 //		visualizeEvent("2018");
 //		visualizeEvent("2017");
 //		visualizeEvent("2016");
