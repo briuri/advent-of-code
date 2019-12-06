@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Leaderboard {
+	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
 	
 	@Test
@@ -36,7 +37,7 @@ public class Leaderboard {
 	
 	private static void visualizeEvent(String event) {
 		final String currentEvent = "2019";
-		final String pageTitle = "Novetta Advent of Code - Top 10 Solve Times";
+		final String pageTitle = "Novetta Advent of Code - Top " + TOP_NUM + " Solve Times";
 		final List<Metadata> metadata = readMetadata(event);
 		
 		// Read leaderboard.
@@ -124,7 +125,7 @@ public class Leaderboard {
 				buffer.append("<h3><a href=\"https://adventofcode.com/").append(event).append("/day/").append(day);
 				buffer.append("\">").append(metadata.get(i).getTitle()).append("</a></h3>\n");
 				buffer.append("<ol>\n");
-				int numPlaces = Math.min(10, places.size());
+				int numPlaces = Math.min(TOP_NUM, places.size());
 				for (int place = 0; place < numPlaces; place++) {
 					Record record = places.get(place);
 					buffer.append("\t<li>").append(record.getPrettyTime(day, event));
