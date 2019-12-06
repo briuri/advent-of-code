@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,7 @@ public class Leaderboard {
 		}
 
 		// Load the Part 2 completion timestamps for each member of the leaderboard.
+		Map<String, List<String>> prettyTimes = new HashMap<>(); 
 		for (String key : members.keySet()) {
 			Map<String, Object> member = (Map) members.get(key);
 			String name = (String) member.get("name");
@@ -70,8 +72,12 @@ public class Leaderboard {
 				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
 				if (part2Data != null) {
 					long timestamp = Long.valueOf((String) part2Data.get("get_star_ts"));
-					Record record = new Record(name, timestamp);
+					Record record = new Record(name, event, Integer.valueOf(dayKey), timestamp);
 					puzzleRecords.get(Integer.valueOf(dayKey) - 1).add(record);
+					if (prettyTimes.get(name) == null) {
+						prettyTimes.put(name, new ArrayList<>());
+					}
+					prettyTimes.get(name).add(record.getPrettyTime());
 				}
 			}
 		}
@@ -128,7 +134,7 @@ public class Leaderboard {
 				int numPlaces = Math.min(TOP_NUM, places.size());
 				for (int place = 0; place < numPlaces; place++) {
 					Record record = places.get(place);
-					buffer.append("\t<li>").append(record.getPrettyTime(day, event));
+					buffer.append("\t<li>").append(record.getPrettyTime());
 					if (place + 1 <= metadata.get(i).getGlobalCount()) {
 						buffer.append("<sup class=\"global\">*</sup>");
 					}
@@ -160,6 +166,24 @@ public class Leaderboard {
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file", e);
 		}
+		
+		// Itemize times of top scorers for mean calculations.
+		int maxTimes = 0;
+		for (String name : prettyTimes.keySet()) {
+			maxTimes = Math.max(maxTimes, prettyTimes.get(name).size());
+		}		
+		buffer.delete(0, buffer.length());
+		for (String name : prettyTimes.keySet()) {
+			if (prettyTimes.get(name).size() == maxTimes) {
+				buffer.append(name);
+				Collections.sort(prettyTimes.get(name));
+				for (String time : prettyTimes.get(name)) {
+					buffer.append("\t").append(time.replaceAll("&nbsp;", ""));
+				}				
+				buffer.append("\n");
+			}
+		}
+		System.out.println(buffer.toString());
 	}
 	
 	

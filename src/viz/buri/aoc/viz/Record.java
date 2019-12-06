@@ -12,16 +12,18 @@ import java.util.Date;
 public class Record implements Comparable {
 	
 	private String _name;
+	private String _event;
+	private int _day;
 	private long _timestamp;
 	private Date _date;
 	
 	/**
 	 * Constructor
-	 * @param name
-	 * @param timestamp
 	 */
-	public Record(String name, long timestamp) {
+	public Record(String name, String event, int day, long timestamp) {
 		_name = name;
+		_event = event;
+		_day = day;
 		_timestamp = timestamp;
 		_date = Date.from(Instant.ofEpochSecond(timestamp));
 	}
@@ -30,15 +32,15 @@ public class Record implements Comparable {
 	 * Converts UNIX timestamp into "time after midnight". Adds 24 hours for completion times on the next day.
 	 * Returns a message for times in a different year (people who did the puzzles outside of the competition).
 	 */
-	public String getPrettyTime(int day, String event) {
+	public String getPrettyTime() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(getDate());
-		if (Integer.valueOf(event) != calendar.get(Calendar.YEAR)) {
+		if (Integer.valueOf(getEvent()) != calendar.get(Calendar.YEAR)) {
 			return ("<i>(in " + calendar.get(Calendar.YEAR) + ")</i>");
 		}
 
 		String prettyTime = getDate().toString().substring(11, 19);
-		int overflow = calendar.get(Calendar.DAY_OF_MONTH) - day;
+		int overflow = calendar.get(Calendar.DAY_OF_MONTH) - getDay();
 		if (overflow > 0) {
 			int hours = Integer.valueOf(prettyTime.substring(0, 2)) + (24 * overflow);
 			prettyTime = String.valueOf(hours) + prettyTime.substring(2, prettyTime.length());
@@ -65,6 +67,20 @@ public class Record implements Comparable {
 		return _name;
 	}
 
+	/**
+	 * Accessor for the year
+	 */
+	public String getEvent() {
+		return _event;
+	}
+	
+	/**
+	 * Accessor for the day of the puzzle
+	 */
+	public int getDay() {
+		return _day;
+	}
+	
 	/**
 	 * Accessor for the solve time as a UNIX timestamp
 	 */
