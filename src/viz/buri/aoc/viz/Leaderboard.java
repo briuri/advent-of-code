@@ -41,6 +41,7 @@ public class Leaderboard {
 		final String currentEvent = "2019";
 		final String pageTitle = "Novetta Advent of Code - Top " + TOP_NUM + " Solve Times";
 		final List<Metadata> metadata = readMetadata(event);
+		final Map<String, Player> players = readPlayers();
 		
 		// Read leaderboard.
 		Map<String, Object> members = null;
@@ -84,7 +85,7 @@ public class Leaderboard {
 		// Generate the HTML page.		
 		StringBuffer buffer = new StringBuffer();
 		insertHeader(buffer, pageTitle, event);
-		insertMeanTimes(buffer, medianData);
+		insertMeanTimes(buffer, players, medianData);
 		
 		// Insert Puzzle Times
 		boolean allEmpty = true;
@@ -108,7 +109,7 @@ public class Leaderboard {
 					else {
 						buffer.append("&nbsp;");
 					}
-					buffer.append(" - ").append(record.getName()).append("</li>\n");
+					buffer.append(" - ").append(getAlternateName(record.getName(), players)).append("</li>\n");
 				}
 				buffer.append("</ol>\n");
 			}
@@ -148,23 +149,24 @@ public class Leaderboard {
 	}
 	
 	/**
-	 * Reads divisions from the file (not included in Git repository).
+	 * Reads ancillary player data from the file (not included in Git repository).
 	 */
-	private static Map<String, String> readDivisions() {
-		Map<String, String> divisions = new HashMap<>();
+	private static Map<String, Player> readPlayers() {
+		Map<String, Player> players = new HashMap<>();
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			File file = new File("data/viz/divisions.json");
+			File file = new File("data/viz/players.json");
 			JsonNode json = mapper.readTree(file);
-			ArrayNode divJson = (ArrayNode) json.get("divisions");
+			ArrayNode divJson = (ArrayNode) json.get("players");
 			for (int i = 0; i < divJson.size(); i++) {
-				ObjectNode participant = (ObjectNode) divJson.get(i);
-				divisions.put(participant.get("name").asText(), participant.get("division").asText());
+				ObjectNode player = (ObjectNode) divJson.get(i);
+				String name = player.get("name").asText();
+				players.put(name, new Player(name, player.get("alt").asText(""), player.get("division").asText(""))); 
 			}
-			return (divisions);
+			return (players);
 		}
 		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid divisions file.", e);
+			throw new IllegalArgumentException("Invalid players file.", e);
 		}
 	}
 	
@@ -209,7 +211,7 @@ public class Leaderboard {
 	/**
 	 * Generates a Top X list of mean times.
 	 */
-	private static void insertMeanTimes(StringBuffer buffer, Map<String, List<String>> times) {
+	private static void insertMeanTimes(StringBuffer buffer, Map<String, Player> players, Map<String, List<String>> times) {
 		// Only do calculations for people with all puzzles completed so far.
 		int puzzlesCompleted = 0;
 		for (List<String> list : times.values()) {
@@ -223,29 +225,46 @@ public class Leaderboard {
 			}
 		}
 		Collections.sort(records);
-		Map<String, String> divisions = readDivisions();
-		
+				
 		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times (players with ");
 		buffer.append(puzzlesCompleted * 2).append("*)</h3>\n");
 		buffer.append("<ol>\n");
 		int numPlaces = Math.min(TOP_NUM, records.size());
 		for (int i = 0; i < numPlaces; i++) {
 			MedianRecord record = records.get(i);
-			buffer.append("\t<li>").append(record.getMedianTime());
-			buffer.append("&nbsp; - ").append(insertDivision(record.getName(), divisions)).append("</li>\n");
+			buffer.append("\t<li>&nbsp;").append(record.getMedianTime());
+			buffer.append("&nbsp; - ").append(getAlternateName(record.getName(), players));
+			buffer.append(getDivision(record.getName(), players)).append("</li>\n");
 		}
 		buffer.append("</ol>\n");
 	}
 	
 	/**
-	 * Looks up the division of the participant, if available.
+	 * Looks up the alternate name of the player, if available.
 	 */
-	private static String insertDivision(String name, Map<String, String> divisions) {
-		String division = divisions.getOrDefault(name, "");
-		if (division.length() > 0) {
-			name = name + " (" + division + ")";
+	private static String getAlternateName(String name, Map<String, Player> players) {
+		Player player = players.get(name);
+		if (player != null) {
+			String alt = player.getAlternateName();
+			if (alt.length() > 0) {
+				return (alt);
+			}
 		}
 		return (name);
+	}
+	
+	/**
+	 * Looks up the division of the player, if available.
+	 */
+	private static String getDivision(String name, Map<String, Player> players) {
+		Player player = players.get(name);
+		if (player != null) {
+			String division = player.getDivision();
+			if (division.length() > 0) {
+				return (" (" + division + ")");
+			}
+		}
+		return ("");
 	}
 	
 	/**
