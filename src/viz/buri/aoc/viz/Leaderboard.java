@@ -148,6 +148,28 @@ public class Leaderboard {
 	}
 	
 	/**
+	 * Reads divisions from the file (not included in Git repository).
+	 */
+	private static Map<String, String> readDivisions() {
+		Map<String, String> divisions = new HashMap<>();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			File file = new File("data/viz/divisions.json");
+			JsonNode json = mapper.readTree(file);
+			ArrayNode divJson = (ArrayNode) json.get("divisions");
+			for (int i = 0; i < divJson.size(); i++) {
+				ObjectNode participant = (ObjectNode) divJson.get(i);
+				divisions.put(participant.get("name").asText(), participant.get("division").asText());
+				System.out.println(participant.get("name").asText() + " " + participant.get("division").asText());
+			}
+		}
+		catch (IOException e) {
+			// Silently return an empty map.
+		}
+		return (divisions);
+	}
+	
+	/**
 	 * Adds the HTML page header
 	 */
 	private static void insertHeader(StringBuffer buffer, String pageTitle, String event) {
@@ -202,16 +224,29 @@ public class Leaderboard {
 			}
 		}
 		Collections.sort(records);
+		Map<String, String> divisions = readDivisions();
 		
-		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times</h3>\n");
+		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times (only participants with ");
+		buffer.append(puzzlesCompleted * 2).append("*)</h3>\n");
 		buffer.append("<ol>\n");
 		int numPlaces = Math.min(TOP_NUM, records.size());
 		for (int i = 0; i < numPlaces; i++) {
 			MedianRecord record = records.get(i);
 			buffer.append("\t<li>").append(record.getMedianTime());
-			buffer.append("&nbsp; - ").append(record.getName()).append("</li>\n");
+			buffer.append("&nbsp; - ").append(insertDivision(record.getName(), divisions)).append("</li>\n");
 		}
 		buffer.append("</ol>\n");
+	}
+	
+	/**
+	 * Looks up the division of the participant, if available.
+	 */
+	private static String insertDivision(String name, Map<String, String> divisions) {
+		String division = divisions.getOrDefault(name, "");
+		if (division.length() > 0) {
+			name = name + " (" + division + ")";
+		}
+		return (name);
 	}
 	
 	/**
