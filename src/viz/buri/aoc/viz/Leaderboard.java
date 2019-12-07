@@ -160,13 +160,12 @@ public class Leaderboard {
 			for (int i = 0; i < divJson.size(); i++) {
 				ObjectNode participant = (ObjectNode) divJson.get(i);
 				divisions.put(participant.get("name").asText(), participant.get("division").asText());
-				System.out.println(participant.get("name").asText() + " " + participant.get("division").asText());
 			}
+			return (divisions);
 		}
 		catch (IOException e) {
-			// Silently return an empty map.
+			throw new IllegalArgumentException("Invalid divisions file.", e);
 		}
-		return (divisions);
 	}
 	
 	/**
@@ -226,7 +225,7 @@ public class Leaderboard {
 		Collections.sort(records);
 		Map<String, String> divisions = readDivisions();
 		
-		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times (only participants with ");
+		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times (players with ");
 		buffer.append(puzzlesCompleted * 2).append("*)</h3>\n");
 		buffer.append("<ol>\n");
 		int numPlaces = Math.min(TOP_NUM, records.size());
