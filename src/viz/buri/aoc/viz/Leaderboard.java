@@ -86,7 +86,9 @@ public class Leaderboard {
 		// Generate the HTML page.		
 		StringBuffer buffer = new StringBuffer();
 		insertHeader(buffer, pageTitle, event);
-		insertMeanTimes(buffer, players, medianData);
+		if (event.equals(currentEvent)) {
+			insertMeanTimes(buffer, players, medianData);
+		}
 		
 		// Insert Puzzle Times
 		boolean allEmpty = true;
