@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class Leaderboard {
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
+	private static final String ANTI_INDEX = "<span class=\"antiIndex\">Advent of Code</span>";
 	
 	@Test
 	public void visualizeLeaderboard() {
@@ -109,7 +110,7 @@ public class Leaderboard {
 					else {
 						buffer.append("&nbsp;");
 					}
-					buffer.append(" - ").append(getAlternateName(record.getName(), players)).append("</li>\n");
+					buffer.append(" - ").append(maskName(record.getName(), players)).append("</li>\n");
 				}
 				buffer.append("</ol>\n");
 			}
@@ -183,8 +184,9 @@ public class Leaderboard {
 		buffer.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		buffer.append("\ta { color: #009900; }\n");
 		buffer.append("\ta:hover { color: #99ff99; }\n");
-		buffer.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
+		buffer.append("\t.antiIndex { display: none; }\n");
 		buffer.append("\t.empty { font-size: 11pt; }\n");
+		buffer.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
 		buffer.append("\t.tiny { font-size: 9pt; }\n");
 		buffer.append("\t.global { color: #ffff00; }\n");
 		buffer.append("</style>\n</head>\n\n<body>\n");
@@ -233,24 +235,27 @@ public class Leaderboard {
 		for (int i = 0; i < numPlaces; i++) {
 			MedianRecord record = records.get(i);
 			buffer.append("\t<li>&nbsp;").append(record.getMedianTime());
-			buffer.append("&nbsp; - ").append(getAlternateName(record.getName(), players));
+			buffer.append("&nbsp; - ").append(maskName(record.getName(), players));
 			buffer.append(getDivision(record.getName(), players)).append("</li>\n");
 		}
 		buffer.append("</ol>\n");
 	}
 	
 	/**
-	 * Looks up the alternate name of the player, if available.
+	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
-	private static String getAlternateName(String name, Map<String, Player> players) {
+	private static String maskName(String name, Map<String, Player> players) {
 		Player player = players.get(name);
 		if (player != null) {
 			String alt = player.getAlternateName();
 			if (alt.length() > 0) {
-				return (alt);
+				name = alt;
 			}
 		}
-		return (name);
+		StringBuffer buffer = new StringBuffer(name);
+		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
+		buffer.insert(1, ANTI_INDEX);
+		return (buffer.toString());
 	}
 	
 	/**
