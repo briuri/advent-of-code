@@ -43,6 +43,13 @@ public class CharFrequency {
 	}
 
 	/**
+	 * Returns the number of times this character appears.
+	 */
+	public int getFrequencyFor(Character character) {
+		return (getFrequency().getOrDefault(character, 0));
+	}
+	
+	/**
 	 * Returns true if some character appears exactly this number of times.
 	 */
 	public boolean containsFrequency(int frequency) {
