@@ -21,9 +21,9 @@ public class Day03Test {
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals(6, Day03.getResult(Part.ONE, Day03.getInput(1)));
-		assertEquals(159, Day03.getResult(Part.ONE, Day03.getInput(2)));
-		assertEquals(135, Day03.getResult(Part.ONE, Day03.getInput(3)));
+		assertEquals(6, Day03.getResult(Part.ONE, Day03.getInput(1), 20));
+		assertEquals(159, Day03.getResult(Part.ONE, Day03.getInput(2), 500));
+		assertEquals(135, Day03.getResult(Part.ONE, Day03.getInput(3), 400));
 	}
 	
 	/**
@@ -31,16 +31,16 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day03.getResult(Part.ONE, Day03.getInput(0));
+		int result = Day03.getResult(Part.ONE, Day03.getInput(0), 16000);
 		System.out.println("Day 3 Part 1\n\t" + result);
 		assertEquals(731, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(30, Day03.getResult(Part.TWO, Day03.getInput(1)));
-		assertEquals(610, Day03.getResult(Part.TWO, Day03.getInput(2)));
-		assertEquals(410, Day03.getResult(Part.TWO, Day03.getInput(3)));
+		assertEquals(30, Day03.getResult(Part.TWO, Day03.getInput(1), 20));
+		assertEquals(610, Day03.getResult(Part.TWO, Day03.getInput(2), 500));
+		assertEquals(410, Day03.getResult(Part.TWO, Day03.getInput(3), 400));
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Day03Test {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day03.getResult(Part.TWO, Day03.getInput(0));
+		int result = Day03.getResult(Part.TWO, Day03.getInput(0), 16000);
 		System.out.println("Day 3 Part 2\n\t" + result);
 		assertEquals(5672, result);
 	}
