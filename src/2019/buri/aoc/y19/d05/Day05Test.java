@@ -29,6 +29,11 @@ public class Day05Test {
 		assertEquals(15259545, result);
 	}
 
+	@Test
+	public void testPart2Examples() {
+		assertEquals(999, Day05.getResult(Part.ONE, Day05.getInput(1)));
+	}
+	
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

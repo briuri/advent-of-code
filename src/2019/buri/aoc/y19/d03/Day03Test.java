@@ -22,6 +22,8 @@ public class Day03Test {
 	@Test
 	public void testPart1Examples() {
 		assertEquals(6, Day03.getResult(Part.ONE, Day03.getInput(1)));
+		assertEquals(159, Day03.getResult(Part.ONE, Day03.getInput(2)));
+		assertEquals(135, Day03.getResult(Part.ONE, Day03.getInput(3)));
 	}
 	
 	/**
@@ -37,6 +39,8 @@ public class Day03Test {
 	@Test
 	public void testPart2Examples() {
 		assertEquals(30, Day03.getResult(Part.TWO, Day03.getInput(1)));
+		assertEquals(610, Day03.getResult(Part.TWO, Day03.getInput(2)));
+		assertEquals(410, Day03.getResult(Part.TWO, Day03.getInput(3)));
 	}
 
 	/**
