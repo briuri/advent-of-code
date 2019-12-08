@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Puzzle;
+import buri.aoc.data.intcode.Computer;
 
 /**
  * Day 02: 1202 Program Alarm
@@ -28,8 +29,9 @@ public class Day02 extends Puzzle {
 	 * What value is left at position 0 after the program halts?
 	 */
 	public static int getPart1Result(List<Integer> input, boolean isExample) {
-		Memory memory = isExample ? new Memory(input) : new Memory(input, 12, 2);
-		return (memory.run());
+		Computer computer = isExample ? new Computer(input, null, null) : new Computer(input, 12, 2);
+		computer.run(null);
+		return (computer.get(0));
 	}
 
 	/**
@@ -39,8 +41,9 @@ public class Day02 extends Puzzle {
 	public static int getPart2Result(List<Integer> input) {
 		for (int noun = 0; noun < 100; noun++) {
 			for (int verb = 0; verb < 100; verb++) {
-				Memory memory = new Memory(input, noun, verb);
-				if (memory.run() == 19690720) {
+				Computer computer = new Computer(input, noun, verb);
+				computer.run(null);
+				if (computer.get(0) == 19690720) {
 					return (100 * noun + verb);
 				}
 			}
