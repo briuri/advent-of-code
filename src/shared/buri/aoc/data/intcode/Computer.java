@@ -20,7 +20,6 @@ public class Computer {
 	private long _relativeBase;
 
 	private static final boolean DEBUG = true;
-	private static final int RAW_WIDTH = 30;
 	private static final String REDUCES_TO = "  -->  ";
 
 	/**
@@ -226,13 +225,17 @@ public class Computer {
 		if (!DEBUG) {
 			return;
 		}
-		// Generate raw instruction.
+		// Generate pointer, relative base, and raw instruction.
 		StringBuffer log = new StringBuffer();
+		log.append(String.format("ip=%d, rB=%d", getPointer(), getRelativeBase()));
+		while (log.length() < 20) {
+			log.append(" ");
+		}
 		log.append(fullOpcode);
 		for (int i = 0; i < params.length; i++) {
 			log.append(",").append(params[i].getValue());
 		}
-		while (log.length() < RAW_WIDTH) {
+		while (log.length() < 50) {
 			log.append(" ");
 		}
 
