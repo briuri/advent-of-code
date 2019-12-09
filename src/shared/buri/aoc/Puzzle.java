@@ -1,5 +1,8 @@
 package buri.aoc;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +31,28 @@ public abstract class Puzzle {
 		}
 	}
 
+	/**
+	 * Copies text to the system clipboard.
+	 */
+	protected static void toClipboard(String value) {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(new StringSelection(value), null);
+	}
+	
+	/**
+	 * Copies text to the system clipboard.
+	 */
+	protected static void toClipboard(int value) {
+		toClipboard(String.valueOf(value));
+	}
+	
+	/**
+	 * Copies text to the system clipboard.
+	 */
+	protected static void toClipboard(long value) {
+		toClipboard(String.valueOf(value));
+	}
+	
 	/**
 	 * Gets the sum of a list of integers
 	 */
