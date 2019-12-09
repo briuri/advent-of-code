@@ -19,7 +19,7 @@ public class Computer {
 	private long _pointer;
 	private long _relativeBase;
 
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private static final int DEBUG_WIDTH = 30;
 	private static final String DEBUG_ARROW = " ---> ";
 
