@@ -43,10 +43,8 @@ public class Day00 extends Puzzle {
 			
 		}		
 		if (part == Part.ONE) {
-			toClipboard(result);
 			return (result);
 		}
-		toClipboard(result);
 		return (result);
 	}
 	
