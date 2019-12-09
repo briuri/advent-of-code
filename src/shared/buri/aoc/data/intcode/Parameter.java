@@ -5,45 +5,45 @@ package buri.aoc.data.intcode;
  * - y19d2
  * - y19d5
  * - y19d7
+ * - y19d9
  * 
  * @author Brian Uri!
  */
 public class Parameter {
-	private int _value;
-	private int _mode;
-
+	private long _value;
+	private Mode _mode;
+	
 	/**
 	 * Constructor
 	 */
-	public Parameter(int value, int mode) {
+	public Parameter(long value, Mode mode) {
 		_value = value;
 		_mode = mode;
 	}
 
 	@Override
 	public String toString() {
-		String output = isPositional() ? String.format("p[%d]", getValue()) : String.valueOf(getValue());
-		return (output);
+		if (getMode() == Mode.POSITIONAL) {
+			return (String.format("p[%d]", getValue()));
+		}
+		else if (getMode() == Mode.IMMEDIATE) {
+			return (String.valueOf(getValue()));
+		}
+		// RELATIVE
+		return (String.format("p[%d + rB]", getValue()));
 	}
 
 	/**
 	 * Accessor for the value
 	 */
-	public int getValue() {
+	public long getValue() {
 		return _value;
 	}
 
 	/**
 	 * Accessor for the mode
 	 */
-	public boolean isPositional() {
-		return (_mode == 0);
-	}
-	
-	/**
-	 * Accessor for the mode
-	 */
-	public boolean isImmediate() {
-		return (!isPositional());
+	public Mode getMode() {
+		return (_mode);
 	}
 }

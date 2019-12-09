@@ -8,19 +8,32 @@ import java.util.List;
  * - y19d2
  * - y19d5
  * - y19d7
+ * - y19d9
  * 
  * @author Brian Uri!
  */
 public class Computer {
-	private List<Integer> _memory;
-	private List<Integer> _inputs;
-	private int _output;
-	private int _pointer;
+	private List<Long> _memory;
+	private List<Long> _inputs;
+	private List<Long> _outputs;
+	private long _pointer;
+	private long _relativeBase;
 
-	private static final boolean DEBUG = false;
-	private static final int DEBUG_WIDTH = 20;
+	private static final boolean DEBUG = true;
+	private static final int DEBUG_WIDTH = 30;
 	private static final String DEBUG_ARROW = " ---> ";
 
+	/**
+	 * Base constructor
+	 */
+	public Computer(List<Long> program) {
+		_memory = new ArrayList<>(program);
+		_inputs = new ArrayList<>();
+		_outputs = new ArrayList<>();
+		setPointer(0);
+		setRelativeBase(0);
+	}
+	
 	/**
 	 * Constructor (y19d2)
 	 * 
@@ -28,34 +41,31 @@ public class Computer {
 	 * @param noun value to store at address 1
 	 * @param verb value to store at address 2
 	 */
-	public Computer(List<Integer> program, Integer noun, Integer verb) {
-		_memory = new ArrayList<>(program);
+	public Computer(List<Long> program, Long noun, Long verb) {
+		this(program);
 		if (noun != null) {
 			_memory.set(1, noun);
 		}
 		if (verb != null) {
 			_memory.set(2, verb);
 		}
-		setPointer(0);
 	}
 	
 	/**
-	 * Constructor (y19d5, y19d7)
+	 * Constructor (y19d5, y19d7, y19d9)
 	 * 
 	 * @param program the intcodes to run (does not modify)
 	 * @param input the value to start the program with
 	 */
-	public Computer(List<Integer> program, int input) {
-		_memory = new ArrayList<>(program);
-		_inputs = new ArrayList<>();
+	public Computer(List<Long> program, Long input) {
+		this(program);
 		getInputs().add(input);
-		setPointer(0);
 	}
 
 	/**
-	 * Runs the intcode program until a HALT opcode is hit, then returns the last output value.
+	 * Runs the intcode program until a HALT opcode is hit.
 	 */
-	public int run(Integer nextInput) {
+	public void run(Long nextInput) {
 		if (nextInput != null) {
 			getInputs().add(nextInput);
 		}
@@ -76,7 +86,8 @@ public class Computer {
 			// Build parameters
 			Parameter[] params = new Parameter[opcode.getNumParameters()];
 			for (int i = 0; i < params.length; i++) {
-				params[i] = new Parameter(get(getPointer() + i + 1), Character.getNumericValue(rawModes.charAt(i)));
+				Mode mode = Mode.getModeFor(Character.getNumericValue(rawModes.charAt(i)));
+				params[i] = new Parameter(get(getPointer() + i + 1), mode);
 			}
 
 			// Show raw instruction and resolution for debugging.
@@ -111,6 +122,9 @@ public class Computer {
 			else if (opcode == Opcode.EQUALS) {
 				equals(params);
 			}
+			else if (opcode == Opcode.RELATIVE_BASE_OFFSET) {
+				relativeBaseOffset(params); 
+			}
 
 			// Update instruction pointer.
 			if (!jumped) {
@@ -119,7 +133,6 @@ public class Computer {
 			fullOpcode = String.valueOf(get(getPointer()));
 			opcode = Opcode.getOpcodeFor(fullOpcode);
 		}
-		return (getOutput());
 	}
 
 	/**
@@ -133,7 +146,7 @@ public class Computer {
 	 * Adds the first two values then stores the result at the last address.
 	 */
 	private void add(Parameter[] params) {
-		int value = applyMode(params[0]) + applyMode(params[1]);
+		long value = applyMode(params[0]) + applyMode(params[1]);
 		set(params[2], value);
 	}
 
@@ -141,7 +154,7 @@ public class Computer {
 	 * Multiplies the first two values then stores the result at the last address.
 	 */
 	private void multiply(Parameter[] params) {
-		int value = applyMode(params[0]) * applyMode(params[1]);
+		long value = applyMode(params[0]) * applyMode(params[1]);
 		set(params[2], value);
 	}
 
@@ -156,7 +169,7 @@ public class Computer {
 	 * Saves an output value.
 	 */
 	private void output(Parameter[] params) {
-		setOutput(applyMode(params[0]));
+		addOutput(applyMode(params[0]));
 	}
 
 	/**
@@ -200,6 +213,13 @@ public class Computer {
 	}
 
 	/**
+	 * Adjusts relative base by some amount.
+	 */
+	private void relativeBaseOffset(Parameter[] params) {
+		setRelativeBase(getRelativeBase() + applyMode(params[0]));
+	}
+	
+	/**
 	 * Displays the raw instructions and their resolutions for debugging.
 	 */
 	private void log(String fullOpcode, Opcode opcode, Parameter[] params) {
@@ -218,19 +238,15 @@ public class Computer {
 
 		// Generate human-readable instructions.
 		if (opcode == Opcode.ADD) {
-			int value = applyMode(params[0]) + applyMode(params[1]);
+			long value = applyMode(params[0]) + applyMode(params[1]);
 			log.append(params[2]).append(" = ").append(params[0]).append(" + ").append(params[1]);
-			if (params[0].isPositional() || params[1].isPositional()) {
-				log.append(DEBUG_ARROW).append(applyMode(params[0])).append(" + ").append(applyMode(params[1]));
-			}
+			log.append(DEBUG_ARROW).append(applyMode(params[0])).append(" + ").append(applyMode(params[1]));
 			log.append(DEBUG_ARROW).append(value);
 		}
 		else if (opcode == Opcode.MULTIPLY) {
-			int value = applyMode(params[0]) * applyMode(params[1]);
+			long value = applyMode(params[0]) * applyMode(params[1]);
 			log.append(params[2]).append(" = ").append(params[0]).append(" x ").append(params[1]);
-			if (params[0].isPositional() || params[1].isPositional()) {
-				log.append(DEBUG_ARROW).append(applyMode(params[0])).append(" x ").append(applyMode(params[1]));
-			}
+			log.append(DEBUG_ARROW).append(applyMode(params[0])).append(" x ").append(applyMode(params[1]));
 			log.append(DEBUG_ARROW).append(value);
 		}
 		else if (opcode == Opcode.SAVE) {
@@ -239,47 +255,41 @@ public class Computer {
 		}
 		else if (opcode == Opcode.OUTPUT) {
 			log.append("output = ").append(params[0]);
-			if (params[0].isPositional()) {
-				log.append(DEBUG_ARROW).append(applyMode(params[0]));
-			}
+			log.append(DEBUG_ARROW).append(applyMode(params[0]));
 		}
 		else if (opcode == Opcode.JUMP_IF_TRUE) {
 			log.append("if (").append(params[0]).append(" != 0) then jump to ").append(params[1]);
-			if (params[0].isPositional() || params[1].isPositional()) {
-				log.append(DEBUG_ARROW).append("if (").append(applyMode(params[0])).append(" != 0) ");
-				log.append("then jump to ").append(applyMode(params[1]));
-			}
+			log.append(DEBUG_ARROW).append("if (").append(applyMode(params[0])).append(" != 0) ");
+			log.append("then jump to ").append(applyMode(params[1]));
 			log.append(DEBUG_ARROW).append(applyMode(params[0]) != 0 ? "jump" : "no jump");
 		}
 		else if (opcode == Opcode.JUMP_IF_FALSE) {
 			log.append("if (").append(params[0]).append(" == 0) then jump to ").append(params[1]);
-			if (params[0].isPositional() || params[1].isPositional()) {
-				log.append(DEBUG_ARROW).append("if (").append(applyMode(params[0])).append(" != 0) ");
-				log.append("then jump to ").append(applyMode(params[1]));
-			}
+			log.append(DEBUG_ARROW).append("if (").append(applyMode(params[0])).append(" != 0) ");
+			log.append("then jump to ").append(applyMode(params[1]));
 			log.append(DEBUG_ARROW).append(applyMode(params[0]) == 0 ? "jump" : "no jump");
 		}
 		else if (opcode == Opcode.LESS_THAN) {
-			int value = (applyMode(params[0]) < applyMode(params[1])) ? 1 : 0;
+			long value = (applyMode(params[0]) < applyMode(params[1])) ? 1 : 0;
 			log.append(params[2]).append(" = (").append(params[0]).append(" < ").append(params[1]);
 			log.append(" ? 1 : 0)");
-			if (params[0].isPositional() || params[1].isPositional()) {
-				log.append(DEBUG_ARROW);
-				log.append("(").append(applyMode(params[0])).append(" < ").append(applyMode(params[1]));
-				log.append(" ? 1 : 0)");
-			}
+			log.append(DEBUG_ARROW);
+			log.append("(").append(applyMode(params[0])).append(" < ").append(applyMode(params[1]));
+			log.append(" ? 1 : 0)");
 			log.append(DEBUG_ARROW).append(value);
 		}
 		else if (opcode == Opcode.EQUALS) {
-			int value = (applyMode(params[0]) == applyMode(params[1])) ? 1 : 0;
+			long value = (applyMode(params[0]) == applyMode(params[1])) ? 1 : 0;
 			log.append(params[2]).append(" = (").append(params[0]).append(" == ").append(params[1]);
 			log.append(" ? 1 : 0)");
-			if (params[0].isPositional() || params[1].isPositional()) {
-				log.append(DEBUG_ARROW);
-				log.append("(").append(applyMode(params[0])).append(" == ").append(applyMode(params[1]));
-				log.append(" ? 1 : 0)");
-			}
+			log.append(DEBUG_ARROW);
+			log.append("(").append(applyMode(params[0])).append(" == ").append(applyMode(params[1]));
+			log.append(" ? 1 : 0)");
 			log.append(DEBUG_ARROW).append(value);
+		}
+		else if (opcode == Opcode.RELATIVE_BASE_OFFSET) {
+			log.append("rB += ").append(params[0]);
+			log.append(DEBUG_ARROW).append(applyMode(params[0]));
 		}
 		else {
 			log.append("No human-readable form assigned yet.");
@@ -288,59 +298,105 @@ public class Computer {
 	}
 
 	/**
-	 * Parses a parameter based on its mode. When mode = 0 (position), return the value at the parameter as an address.
-	 * When mode = 1 (immediate), return the parameter value as is.
+	 * Parses a parameter based on its mode. When mode = POSITIONAL, return the value at the parameter as an address.
+	 * When mode = IMMEDIATE, return the parameter value as is. When mode = RELATIVE, return the value at the parameter
+	 * as an address plus the relative base.
 	 */
-	private int applyMode(Parameter param) {
-		return (param.isPositional() ? get(param.getValue()) : param.getValue());
+	private long applyMode(Parameter param) {
+		if (param.getMode() == Mode.POSITIONAL) {
+			return (get(param.getValue()));
+		}
+		if (param.getMode() == Mode.IMMEDIATE) {
+			return (param.getValue());
+		}
+		// RELATIVE
+		return (get(param.getValue() + getRelativeBase()));
 	}
 
 	/**
-	 * Returns a value at an address
+	 * Returns a value at an address. Assumes mode has already been handled by caller.
 	 */
-	public int get(int address) {
-		return (_memory.get(address));
+	public long get(long address) {
+		expandMemory(address);
+		return (_memory.get((int) address));
 	}
 
 	/**
-	 * Stores a value at an address. The parameter is always handled in position mode.
+	 * Stores a value at an address.
 	 */
-	private void set(Parameter parameter, int value) {
-		_memory.set(parameter.getValue(), value);
+	private void set(Parameter parameter, long value) {
+		if (parameter.getMode() == Mode.IMMEDIATE) {
+			throw new IllegalArgumentException("Cannot set with an IMMEDIATE parameter value.");
+		}
+		long address = parameter.getValue();
+		if (parameter.getMode() == Mode.RELATIVE) {
+			address += getRelativeBase();
+		}
+		expandMemory(address);
+		_memory.set((int) address, value);
 	}
 
+	/**
+	 * Increases memory to accommodate a large address.
+	 */
+	private void expandMemory(long address) {
+		if (address > Integer.MAX_VALUE) {
+			throw new RuntimeException("Huge address on set " + address);
+		}
+		while (_memory.size() <= address) {
+			_memory.add(0L);
+		}
+	}
+	
 	/**
 	 * Accessor for the inputs
 	 */
-	private List<Integer> getInputs() {
+	private List<Long> getInputs() {
 		return _inputs;
 	}
 
 	/**
 	 * Accessor for the output
 	 */
-	public int getOutput() {
-		return _output;
+	public long getLastOutput() {
+		if (_outputs.isEmpty()) {
+			return (0);
+		}
+		return _outputs.get(_outputs.size() - 1);
 	}
 
 	/**
 	 * Accessor for the output
 	 */
-	private void setOutput(int output) {
-		_output = output;
+	private void addOutput(long output) {
+		_outputs.add(output);
 	}
 
 	/**
 	 * Accessor for the instruction pointer
 	 */
-	private int getPointer() {
+	private long getPointer() {
 		return _pointer;
 	}
 
 	/**
 	 * Accessor for the instruction pointer
 	 */
-	private void setPointer(int pointer) {
+	private void setPointer(long pointer) {
 		_pointer = pointer;
+	}
+
+	/**
+	 * Accessor for the relativeBase
+	 */
+	private long getRelativeBase() {
+		return _relativeBase;
+	}
+
+	/**
+	 * Accessor for the relativeBase
+	 */
+	private void setRelativeBase(long relativeBase) {
+		_relativeBase = relativeBase;
 	}
 }

@@ -70,4 +70,40 @@ public class Permutations {
 		}
 		return result;
 	}
+	
+	/**
+	 * Returns all possible permutations of a list of numbers.
+	 */
+	public static List<long[]> getPermutations(long[] numbers) {
+		final ArrayList<long[]> result = new ArrayList<long[]>();
+		final int length = numbers.length;
+		if (length == 0) {
+			return result;
+		}
+		if (length == 1) {
+			result.add(numbers);
+			return result;
+		}
+
+		long[] subClone = Arrays.copyOf(numbers, length - 1);
+		System.arraycopy(numbers, 1, subClone, 0, length - 1);
+
+		for (int i = 0; i < length; ++i) {
+			long e = numbers[i];
+			if (i > 0) {
+				subClone[i - 1] = numbers[0];
+			}
+			final List<long[]> subPermutations = getPermutations(subClone);
+			for (long[] sc : subPermutations) {
+				long[] clone = Arrays.copyOf(numbers, length);
+				clone[0] = e;
+				System.arraycopy(sc, 0, clone, 1, length - 1);
+				result.add(clone);
+			}
+			if (i > 0) {
+				subClone[i - 1] = e;
+			}
+		}
+		return result;
+	}
 }

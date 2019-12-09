@@ -5,6 +5,7 @@ package buri.aoc.data.intcode;
  * - y19d2
  * - y19d5
  * - y19d7
+ * - y19d9
  * 
  * @author Brian Uri!
  */
@@ -17,6 +18,7 @@ public enum Opcode {
 	JUMP_IF_FALSE(6, 2),
 	LESS_THAN(7, 3),
 	EQUALS(8, 3),
+	RELATIVE_BASE_OFFSET(9, 1),
 	HALT(99, 0);	
 	
 	private int _code;

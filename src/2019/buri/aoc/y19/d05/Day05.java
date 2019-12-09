@@ -15,12 +15,12 @@ import buri.aoc.data.intcode.Computer;
 public class Day05 extends Puzzle {
 
 	/**
-	 * Returns the input file as a list of integers
+	 * Returns the input file as a list of longs
 	 */
-	public static List<Integer> getInput(int fileIndex) {
-		List<Integer> list = new ArrayList<>();
+	public static List<Long> getInput(int fileIndex) {
+		List<Long> list = new ArrayList<>();
 		for (String input : readFile("2019/05", fileIndex).get(0).split(",")) {
-			list.add(Integer.valueOf(input));
+			list.add(Long.valueOf(input));
 		}
 		return (list);
 	}
@@ -33,9 +33,10 @@ public class Day05 extends Puzzle {
 	 * Part 2:
 	 * What is the diagnostic code for system ID 5?
 	 */
-	public static int getResult(Part part, List<Integer> program) {
-		int input = (part == Part.ONE ? 1 : 5);
+	public static long getResult(Part part, List<Long> program) {
+		long input = (part == Part.ONE ? 1 : 5);
 		Computer computer = new Computer(program, input);
-		return (computer.run(null));
+		computer.run(null);
+		return (computer.getLastOutput());
 	}
 }
