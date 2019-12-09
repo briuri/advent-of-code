@@ -19,9 +19,9 @@ public class Computer {
 	private long _pointer;
 	private long _relativeBase;
 
-	private static final boolean DEBUG = false;
-	private static final int DEBUG_WIDTH = 30;
-	private static final String DEBUG_ARROW = " ---> ";
+	private static final boolean DEBUG = true;
+	private static final int RAW_WIDTH = 30;
+	private static final String REDUCES_TO = "  -->  ";
 
 	/**
 	 * Base constructor
@@ -232,64 +232,85 @@ public class Computer {
 		for (int i = 0; i < params.length; i++) {
 			log.append(",").append(params[i].getValue());
 		}
-		while (log.length() < DEBUG_WIDTH) {
+		while (log.length() < RAW_WIDTH) {
 			log.append(" ");
 		}
 
 		// Generate human-readable instructions.
 		if (opcode == Opcode.ADD) {
-			long value = applyMode(params[0]) + applyMode(params[1]);
-			log.append(params[2]).append(" = ").append(params[0]).append(" + ").append(params[1]);
-			log.append(DEBUG_ARROW).append(applyMode(params[0])).append(" + ").append(applyMode(params[1]));
-			log.append(DEBUG_ARROW).append(value);
+			String showWork = "%s = %s + %s";
+			String reduction = "%s = %s";
+			log.append(String.format(showWork, params[2], params[0], params[1]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, params[2], applyMode(params[0]), applyMode(params[1])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, params[2], applyMode(params[0]) + applyMode(params[1])));
 		}
 		else if (opcode == Opcode.MULTIPLY) {
-			long value = applyMode(params[0]) * applyMode(params[1]);
-			log.append(params[2]).append(" = ").append(params[0]).append(" x ").append(params[1]);
-			log.append(DEBUG_ARROW).append(applyMode(params[0])).append(" x ").append(applyMode(params[1]));
-			log.append(DEBUG_ARROW).append(value);
+			String showWork = "%s = %s x %s";
+			String reduction = "%s = %s";
+			log.append(String.format(showWork, params[2], params[0], params[1]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, params[2], applyMode(params[0]), applyMode(params[1])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, params[2], applyMode(params[0]) * applyMode(params[1])));
 		}
 		else if (opcode == Opcode.SAVE) {
-			log.append(params[0]).append(" = ");
-			log.append(isWaiting() ? "?" : getInputs().get(0));
+			String reduction = "%s = %s";
+			String value = isWaiting() ? "?" : String.valueOf(getInputs().get(0));
+			log.append(String.format(reduction, params[0], value));
 		}
 		else if (opcode == Opcode.OUTPUT) {
-			log.append("output = ").append(params[0]);
-			log.append(DEBUG_ARROW).append(applyMode(params[0]));
+			String showWork = "out = %s";
+			String reduction = "out = %s";
+			log.append(String.format(showWork, params[0]));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, applyMode(params[0])));
 		}
 		else if (opcode == Opcode.JUMP_IF_TRUE) {
-			log.append("if (").append(params[0]).append(" != 0) then jump to ").append(params[1]);
-			log.append(DEBUG_ARROW).append("if (").append(applyMode(params[0])).append(" != 0) ");
-			log.append("then jump to ").append(applyMode(params[1]));
-			log.append(DEBUG_ARROW).append(applyMode(params[0]) != 0 ? "jump" : "no jump");
+			String showWork = "if (%s != 0) jump to %s";
+			String reduction = "%s";
+			log.append(String.format(showWork, params[0], params[1]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, applyMode(params[0]), applyMode(params[1])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, (applyMode(params[0]) != 0 ? "jump" : "no jump")));
 		}
 		else if (opcode == Opcode.JUMP_IF_FALSE) {
-			log.append("if (").append(params[0]).append(" == 0) then jump to ").append(params[1]);
-			log.append(DEBUG_ARROW).append("if (").append(applyMode(params[0])).append(" != 0) ");
-			log.append("then jump to ").append(applyMode(params[1]));
-			log.append(DEBUG_ARROW).append(applyMode(params[0]) == 0 ? "jump" : "no jump");
+			String showWork = "if (%s == 0) jump to %s";
+			String reduction = "%s";
+			log.append(String.format(showWork, params[0], params[1]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, applyMode(params[0]), applyMode(params[1])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, (applyMode(params[0]) == 0 ? "jump" : "no jump")));
 		}
 		else if (opcode == Opcode.LESS_THAN) {
-			long value = (applyMode(params[0]) < applyMode(params[1])) ? 1 : 0;
-			log.append(params[2]).append(" = (").append(params[0]).append(" < ").append(params[1]);
-			log.append(" ? 1 : 0)");
-			log.append(DEBUG_ARROW);
-			log.append("(").append(applyMode(params[0])).append(" < ").append(applyMode(params[1]));
-			log.append(" ? 1 : 0)");
-			log.append(DEBUG_ARROW).append(value);
+			String showWork = "%s = (%s < %s ? 1 :0)";
+			String reduction = "%s";
+			log.append(String.format(showWork, params[2], params[0], params[1]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, params[2], applyMode(params[0]), applyMode(params[1])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, ((applyMode(params[0]) < applyMode(params[1])) ? 1 : 0)));
 		}
 		else if (opcode == Opcode.EQUALS) {
-			long value = (applyMode(params[0]) == applyMode(params[1])) ? 1 : 0;
-			log.append(params[2]).append(" = (").append(params[0]).append(" == ").append(params[1]);
-			log.append(" ? 1 : 0)");
-			log.append(DEBUG_ARROW);
-			log.append("(").append(applyMode(params[0])).append(" == ").append(applyMode(params[1]));
-			log.append(" ? 1 : 0)");
-			log.append(DEBUG_ARROW).append(value);
+			String showWork = "%s = (%s == %s ? 1 :0)";
+			String reduction = "%s";
+			log.append(String.format(showWork, params[2], params[0], params[1]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, params[2], applyMode(params[0]), applyMode(params[1])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, ((applyMode(params[0]) == applyMode(params[1])) ? 1 : 0)));
 		}
 		else if (opcode == Opcode.RELATIVE_BASE_OFFSET) {
-			log.append("rB += ").append(params[0]);
-			log.append(DEBUG_ARROW).append(applyMode(params[0]));
+			String showWork = "rB = %s + %s";
+			String reduction = "%s";
+			log.append(String.format(showWork, "rB", params[0]));
+			log.append(REDUCES_TO);
+			log.append(String.format(showWork, getRelativeBase(), applyMode(params[0])));
+			log.append(REDUCES_TO);
+			log.append(String.format(reduction, getRelativeBase() + applyMode(params[0])));
 		}
 		else {
 			log.append("No human-readable form assigned yet.");
