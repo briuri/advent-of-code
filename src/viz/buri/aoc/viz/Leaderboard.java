@@ -25,32 +25,34 @@ public class Leaderboard {
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
 	private static final String ANTI_INDEX = "<span class=\"antiIndex\">Advent of Code</span>";
-	
+
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("2019");
-		
+
 		// NOTE: Accounts were removed in 2019 to avoid the 200-player cap.
 		// Redownloading JSON from older years may result in leaderboards with missing scores.
-//		visualizeEvent("2018");
-//		visualizeEvent("2017");
-//		visualizeEvent("2016");
-//		visualizeEvent("2015");
+		
+		// visualizeEvent("2018");
+		// visualizeEvent("2017");
+		// visualizeEvent("2016");
+		// visualizeEvent("2015");
 	}
-	
+
 	private static void visualizeEvent(String event) {
 		final String currentEvent = "2019";
 		final String pageTitle = "Novetta Advent of Code - Top " + TOP_NUM + " Solve Times";
 		final List<Metadata> metadata = readMetadata(event);
 		final Map<String, Player> players = readPlayers();
-		
+
 		// Read leaderboard.
 		Map<String, Object> members = null;
 		String lastModified = null;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			File file = new File("data/viz/" + event + ".json");
-			lastModified = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date.from(Instant.ofEpochMilli(file.lastModified())));
+			lastModified = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date.from(Instant.ofEpochMilli(
+				file.lastModified())));
 			JsonNode json = mapper.readTree(file);
 			event = json.get("event").asText();
 			members = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
@@ -64,7 +66,7 @@ public class Leaderboard {
 		for (int day = 0; day < TOTAL_PUZZLES; day++) {
 			puzzleRecords.add(new ArrayList<>());
 		}
-		Map<String, List<String>> medianData = new HashMap<>(); 
+		Map<String, List<String>> medianData = new HashMap<>();
 		for (String key : members.keySet()) {
 			Map<String, Object> member = (Map) members.get(key);
 			String name = (String) member.get("name");
@@ -83,13 +85,13 @@ public class Leaderboard {
 			}
 		}
 
-		// Generate the HTML page.		
+		// Generate the HTML page.
 		StringBuffer buffer = new StringBuffer();
 		insertHeader(buffer, pageTitle, event);
 		if (event.equals(currentEvent)) {
-			insertMeanTimes(buffer, players, medianData);
+			insertMeanTimes(buffer, players, medianData, lastModified);
 		}
-		
+
 		// Insert Puzzle Times
 		boolean allEmpty = true;
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
@@ -128,7 +130,7 @@ public class Leaderboard {
 			throw new IllegalArgumentException("Invalid output file", e);
 		}
 	}
-		
+
 	/**
 	 * Reads the metadata from the file.
 	 */
@@ -150,7 +152,7 @@ public class Leaderboard {
 			throw new IllegalArgumentException("Invalid metadata file.", e);
 		}
 	}
-	
+
 	/**
 	 * Reads ancillary player data from the file (not included in Git repository).
 	 */
@@ -164,7 +166,7 @@ public class Leaderboard {
 			for (int i = 0; i < divJson.size(); i++) {
 				ObjectNode player = (ObjectNode) divJson.get(i);
 				String name = player.get("name").asText();
-				players.put(name, new Player(name, player.get("alt").asText(""), player.get("division").asText(""))); 
+				players.put(name, new Player(name, player.get("alt").asText(""), player.get("division").asText("")));
 			}
 			return (players);
 		}
@@ -172,7 +174,7 @@ public class Leaderboard {
 			throw new IllegalArgumentException("Invalid players file.", e);
 		}
 	}
-	
+
 	/**
 	 * Adds the HTML page header
 	 */
@@ -181,7 +183,8 @@ public class Leaderboard {
 		buffer.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
 		buffer.append("<title>").append(pageTitle).append(" (").append(event).append(")").append("</title>\n");
 		buffer.append("<style>\n");
-		buffer.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
+		buffer.append(
+			"\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
 		buffer.append("\th1 { font-size: 12pt; }\n");
 		buffer.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		buffer.append("\ta { color: #009900; }\n");
@@ -205,22 +208,24 @@ public class Leaderboard {
 		buffer.append(" | ");
 		buffer.append(event.equals("2015") ? event : "<a href=\"index-2015.html\">2015</a>");
 		buffer.append(" | ");
-		buffer.append("<a href=\"https://adventofcode.com/").append(event).append("/leaderboard/private/view/105906\">");
+		buffer.append("<a href=\"https://adventofcode.com/").append(event);
+		buffer.append("/leaderboard/private/view/105906\">");
 		buffer.append("Leaderboard &rArr;</a>");
 		buffer.append(" | ");
 		buffer.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack &rArr;</a>");
 		buffer.append("</div>\n\n");
 	}
-	
+
 	/**
 	 * Generates a Top X list of mean times.
 	 */
-	private static void insertMeanTimes(StringBuffer buffer, Map<String, Player> players, Map<String, List<String>> times) {
+	private static void insertMeanTimes(StringBuffer buffer, Map<String, Player> players,
+		Map<String, List<String>> times, String lastModified) {
 		// Only do calculations for people with all puzzles completed so far.
 		int puzzlesCompleted = 0;
 		for (List<String> list : times.values()) {
 			puzzlesCompleted = Math.max(list.size(), puzzlesCompleted);
-		}		
+		}
 		List<MedianRecord> records = new ArrayList<>();
 		for (String name : times.keySet()) {
 			if (times.get(name).size() == puzzlesCompleted) {
@@ -229,9 +234,11 @@ public class Leaderboard {
 			}
 		}
 		Collections.sort(records);
-				
-		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times (players with ");
-		buffer.append(puzzlesCompleted * 2).append("*)</h3>\n");
+
+		String shortTimestamp = lastModified.substring(5, 16);
+		buffer.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times</h3>\n");
+		buffer.append("<p class=\"tiny\">(players with ");
+		buffer.append(puzzlesCompleted * 2).append("* as of ").append(shortTimestamp).append(")</p>\n");
 		buffer.append("<ol>\n");
 		int numPlaces = Math.min(TOP_NUM, records.size());
 		for (int i = 0; i < numPlaces; i++) {
@@ -242,7 +249,7 @@ public class Leaderboard {
 		}
 		buffer.append("</ol>\n");
 	}
-	
+
 	/**
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
@@ -259,7 +266,7 @@ public class Leaderboard {
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Looks up the division of the player, if available.
 	 */
@@ -273,7 +280,7 @@ public class Leaderboard {
 		}
 		return ("");
 	}
-	
+
 	/**
 	 * Calculates the median of the given times.
 	 */
@@ -288,7 +295,7 @@ public class Leaderboard {
 		if ((high + low) % 2 != 0) {
 			median++;
 		}
-		
+
 		String hours = String.valueOf(median / (60 * 60));
 		if (hours.length() == 1) {
 			hours = "0" + hours;
@@ -296,7 +303,7 @@ public class Leaderboard {
 		if (hours.length() == 2) {
 			hours = "&nbsp;" + hours;
 		}
-		
+
 		median = median % (60 * 60);
 		String minutes = String.valueOf(median / 60);
 		if (minutes.length() == 1) {
@@ -309,7 +316,7 @@ public class Leaderboard {
 		}
 		return (hours + ":" + minutes + ":" + seconds);
 	}
-	
+
 	/**
 	 * Converts a time in the format HH:MM:SS to seconds.
 	 */
@@ -319,7 +326,7 @@ public class Leaderboard {
 		seconds += 60 * 60 * Integer.valueOf(time.substring(0, 2));
 		return (seconds);
 	}
-	
+
 	/**
 	 * Adds the HTML page footer
 	 */
@@ -332,7 +339,7 @@ public class Leaderboard {
 			buffer.append("<a href=\"#\">Jump to Top</a>\n");
 			buffer.append("</div>");
 		}
-		buffer.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");			
+		buffer.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");
 		buffer.append("&nbsp;&nbsp;last update on ").append(lastModified).append("</p>\n");
 		buffer.append("</body>\n</html>");
 	}
