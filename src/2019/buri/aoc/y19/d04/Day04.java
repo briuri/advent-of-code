@@ -9,7 +9,7 @@ import buri.aoc.Puzzle;
 import buri.aoc.data.CharFrequency;
 
 /**
- * Day 04
+ * Day 04: Secure Container
  * 
  * @author Brian Uri!
  */
