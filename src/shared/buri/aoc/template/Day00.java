@@ -19,10 +19,7 @@ public class Day00 extends Puzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2019/00", fileIndex));
 	}
-	public static List<Integer> getInput2(int fileIndex) {
-		return (convertStringsToInts(readFile("2019/00", fileIndex)));
-	}
-	public static List<Data> getInput3(int fileIndex) {
+	public static List<Data> getInput2(int fileIndex) {
 		List<Data> list = new ArrayList<>();
 		for (String input : readFile("2019/00", fileIndex)) {
 			list.add(new Data(input));
