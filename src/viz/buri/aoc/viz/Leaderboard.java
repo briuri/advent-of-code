@@ -109,7 +109,8 @@ public class Leaderboard {
 					PuzzleRecord record = places.get(place);
 					buffer.append("\t<li>").append(record.getPrettyTime(false));
 					if (place + 1 <= metadata.get(i).getGlobalCount()) {
-						buffer.append("<sup class=\"global\">*</sup>");
+						buffer.append("<a href=\"https://adventofcode.com/").append(event);
+						buffer.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
 					}
 					else {
 						buffer.append("&nbsp;");
