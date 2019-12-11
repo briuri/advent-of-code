@@ -9,6 +9,7 @@ import java.util.List;
  * - y19d5
  * - y19d7
  * - y19d9
+ * - y19d11
  * 
  * @author Brian Uri!
  */
@@ -19,7 +20,7 @@ public class Computer {
 	private long _pointer;
 	private long _relativeBase;
 
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 	private static final String REDUCES_TO = "  -->  ";
 
 	/**
@@ -389,6 +390,13 @@ public class Computer {
 		return _outputs.get(_outputs.size() - 1);
 	}
 
+	/**
+	 * Accessor for the outputs
+	 */
+	public List<Long> getOutputs() {
+		return (_outputs);
+	}
+	
 	/**
 	 * Accessor for the output
 	 */
