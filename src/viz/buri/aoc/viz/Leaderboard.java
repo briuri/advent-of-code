@@ -24,15 +24,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class Leaderboard {
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
+	private static final int MEDAL_OFFSET = 13;
 	private static final String ANTI_INDEX = "<span class=\"antiIndex\">Advent of Code</span>";
-
+	
 	@Test
 	public void visualizeLeaderboard() {
 		visualizeEvent("2019");
 
 		// NOTE: Accounts were removed in 2019 to avoid the 200-player cap.
 		// Redownloading JSON from older years may result in leaderboards with missing scores.
-		
+
 		// visualizeEvent("2018");
 		// visualizeEvent("2017");
 		// visualizeEvent("2016");
@@ -84,12 +85,15 @@ public class Leaderboard {
 				}
 			}
 		}
+		for (int day = 0; day < TOTAL_PUZZLES; day++) {
+			Collections.sort(puzzleRecords.get(day));
+		}
 
 		// Generate the HTML page.
 		StringBuffer buffer = new StringBuffer();
 		insertHeader(buffer, pageTitle, event);
 		if (event.equals(currentEvent)) {
-			insertMeanTimes(buffer, players, medianData, lastModified);
+			insertMeanTimes(buffer, players, medianData, puzzleRecords, lastModified);
 		}
 
 		// Insert Puzzle Times
@@ -99,7 +103,6 @@ public class Leaderboard {
 			if (!places.isEmpty()) {
 				allEmpty = false;
 				int day = i + 1;
-				Collections.sort(places);
 				buffer.append("\n<a name=\"day").append(day).append("\"></a>");
 				buffer.append("<h3><a href=\"https://adventofcode.com/").append(event).append("/day/").append(day);
 				buffer.append("\">").append(metadata.get(i).getTitle()).append("</a></h3>\n");
@@ -115,7 +118,7 @@ public class Leaderboard {
 					else {
 						buffer.append("&nbsp;");
 					}
-					buffer.append(" - ").append(maskName(record.getName(), players)).append("</li>\n");
+					buffer.append(" - ").append(maskName(record.getName(), players, false)).append("</li>\n");
 				}
 				buffer.append("</ol>\n");
 			}
@@ -181,6 +184,7 @@ public class Leaderboard {
 	 */
 	private static void insertHeader(StringBuffer buffer, String pageTitle, String event) {
 		buffer.append("<html>\n<head>\n");
+		buffer.append("<meta charset=\"UTF-8\">");
 		buffer.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
 		buffer.append("<title>").append(pageTitle).append(" (").append(event).append(")").append("</title>\n");
 		buffer.append("<style>\n");
@@ -221,7 +225,7 @@ public class Leaderboard {
 	 * Generates a Top X list of mean times.
 	 */
 	private static void insertMeanTimes(StringBuffer buffer, Map<String, Player> players,
-		Map<String, List<String>> times, String lastModified) {
+		Map<String, List<String>> times, List<List<PuzzleRecord>> puzzleRecords, String lastModified) {
 		// Only do calculations for people with all puzzles completed so far.
 		int puzzlesCompleted = 0;
 		for (List<String> list : times.values()) {
@@ -231,7 +235,9 @@ public class Leaderboard {
 		for (String name : times.keySet()) {
 			if (times.get(name).size() == puzzlesCompleted) {
 				Collections.sort(times.get(name));
-				records.add(new MedianRecord(name, calculateMedianTime(times.get(name))));
+				MedianRecord medianRecord = new MedianRecord(name, calculateMedianTime(times.get(name)));
+				calculateMedals(medianRecord, puzzleRecords);
+				records.add(medianRecord);
 			}
 		}
 		Collections.sort(records);
@@ -245,16 +251,43 @@ public class Leaderboard {
 		for (int i = 0; i < numPlaces; i++) {
 			MedianRecord record = records.get(i);
 			buffer.append("\t<li>&nbsp;").append(record.getMedianTime());
-			buffer.append("&nbsp; - ").append(maskName(record.getName(), players));
-			buffer.append(getDivision(record.getName(), players)).append("</li>\n");
+			buffer.append("&nbsp; - ").append(maskName(record.getName(), players, true));
+			if (record.hasMedals()) {
+				buffer.append("<br />");
+				for (int j = 0; j < MEDAL_OFFSET; j++) {
+					buffer.append("&nbsp;");
+				}
+				buffer.append(record.getFirst()).append("&#x1F947;&nbsp;&nbsp;");
+				buffer.append(record.getSecond()).append("&#x1F948;&nbsp;&nbsp;");
+				buffer.append(record.getThird()).append("&#x1F949;&nbsp;&nbsp;");
+			}
+			buffer.append("</li>\n");
 		}
 		buffer.append("</ol>\n");
 	}
 
 	/**
+	 * Counts how many first, second, and third place finishes the player has (2nd stars of the night only).
+	 */
+	private static void calculateMedals(MedianRecord medianRecord, List<List<PuzzleRecord>> puzzleRecords) {
+		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
+			List<PuzzleRecord> places = puzzleRecords.get(i);
+			if (places.size() >= 1 && places.get(0).getName().equals(medianRecord.getName())) {
+				medianRecord.addFirst();
+			}
+			if (places.size() >= 2 && places.get(1).getName().equals(medianRecord.getName())) {
+				medianRecord.addSecond();
+			}
+			if (places.size() >= 3 && places.get(2).getName().equals(medianRecord.getName())) {
+				medianRecord.addThird();
+			}
+		}
+	}
+
+	/**
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
-	private static String maskName(String name, Map<String, Player> players) {
+	private static String maskName(String name, Map<String, Player> players, boolean includeDivision) {
 		Player player = players.get(name);
 		if (player != null) {
 			String alt = player.getAlternateName();
@@ -263,23 +296,15 @@ public class Leaderboard {
 			}
 		}
 		StringBuffer buffer = new StringBuffer(name);
+		if (includeDivision) {
+			String division = player.getDivision();
+			if (division.length() > 0) {
+				buffer.append(" (").append(division).append(")");
+			}
+		}
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
-	}
-
-	/**
-	 * Looks up the division of the player, if available.
-	 */
-	private static String getDivision(String name, Map<String, Player> players) {
-		Player player = players.get(name);
-		if (player != null) {
-			String division = player.getDivision();
-			if (division.length() > 0) {
-				return (" (" + division + ")");
-			}
-		}
-		return ("");
 	}
 
 	/**
