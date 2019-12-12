@@ -36,7 +36,7 @@ public class Day08Test extends BaseTest {
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(" #\n# ", Day08.getResult(Part.TWO, Day08.getInput(2), 2, 2));
+		assertEquals(" ■\n■ ", Day08.getResult(Part.TWO, Day08.getInput(2), 2, 2));
 	}
 
 	/**
@@ -47,6 +47,6 @@ public class Day08Test extends BaseTest {
 		String result = Day08.getResult(Part.TWO, Day08.getInput(0), 25, 6);
 		System.out.println("Day 8 Part 2\n\t" + result);
 		// YGRYZ
-		assertEquals("#   # ##  ###  #   ##### \n#   ##  # #  # #   #   # \n # # #    #  #  # #   #  \n  #  # ## ###    #   #   \n  #  #  # # #    #  #    \n  #   ### #  #   #  #### ", result);
+		assertEquals("■   ■ ■■  ■■■  ■   ■■■■■ \n■   ■■  ■ ■  ■ ■   ■   ■ \n ■ ■ ■    ■  ■  ■ ■   ■  \n  ■  ■ ■■ ■■■    ■   ■   \n  ■  ■  ■ ■ ■    ■  ■    \n  ■   ■■■ ■  ■   ■  ■■■■ ", result);
 	}
 }

@@ -77,8 +77,8 @@ public class Day08 extends Puzzle {
 		for (int y = 1; y < height; y++) {
 			output.insert(width * y + (y - 1), '\n');
 		}
-		// Use ' ' for black and '#' for white for ease of reading.
-		return (output.toString().replace('0', ' ').replace('1', '#'));
+		// Use ' ' for black and '■' for white for ease of reading.
+		return (output.toString().replace('0', ' ').replace('1', '■'));
 	}
 
 }
