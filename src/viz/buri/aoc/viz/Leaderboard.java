@@ -250,7 +250,7 @@ public class Leaderboard {
 		int numPlaces = Math.min(TOP_NUM, records.size());
 		for (int i = 0; i < numPlaces; i++) {
 			MedianRecord record = records.get(i);
-			buffer.append("\t<li>&nbsp;").append(record.getMedianTime());
+			buffer.append("\t<li>").append(record.getMedianTime());
 			buffer.append("&nbsp; - ").append(maskName(record.getName(), players, true));
 			if (record.hasMedals()) {
 				buffer.append("<br />");
