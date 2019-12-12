@@ -17,6 +17,11 @@ import buri.aoc.data.intcode.Computer;
  */
 public class Day11 extends Puzzle {
 
+	private static final char BLACK = '#';
+	private static final char WHITE = '.';
+	private static final char DEFAULT_BLACK = ' ';
+	private static final char VISUAL_WHITE = '■';
+	
 	/**
 	 * Returns the input file as a list of longs 
 	 */
@@ -37,21 +42,19 @@ public class Day11 extends Puzzle {
 	 */
 	public static int getResult(Part part, List<Long> program) {
 		int size = (part == Part.ONE ? 200 : 90);
-		CharGrid hull = new CharGrid(size);
-		// <blank> = default black, # = black, . = white 
+		CharGrid hull = new CharGrid(size); 
 		for (int y = 0; y < hull.getSize(); y++) {
 			for (int x = 0; x < hull.getSize(); x++) {
-				hull.set(x, y, ' ');
+				hull.set(x, y, DEFAULT_BLACK);
 			}
 		}
 		
 		Direction direction = Direction.UP;
 		Pair position = new Pair(hull.getSize() / 2, hull.getSize() / 2);
-		hull.set(position, part == Part.ONE ? '#' : '.');
+		hull.set(position, part == Part.ONE ? BLACK : WHITE);
 		Computer computer = new Computer(program);
 		while (true) {
-			char color = hull.get(position);
-			long input = (color == '.') ? 1 : 0;
+			long input = (hull.get(position) == WHITE) ? 1 : 0;
 			computer.run(input);
 			List<Long> outputs = computer.getOutputs();
 			if (outputs.isEmpty()) {
@@ -59,7 +62,7 @@ public class Day11 extends Puzzle {
 			}
 			int nextColor = Long.valueOf(outputs.remove(0)).intValue();
 			long nextTurn = outputs.remove(0);
-			hull.set(position, nextColor == 0 ? '#' : '.');
+			hull.set(position, nextColor == 0 ? BLACK : WHITE);
 			direction = (nextTurn == 0 ? direction.turnLeft() : direction.turnRight());
 			position.move(direction);
 		}
@@ -67,12 +70,11 @@ public class Day11 extends Puzzle {
 			int panels = 0;
 			for (int y = 0; y < hull.getSize(); y++) {
 				for (int x = 0; x < hull.getSize(); x++) {
-					if (hull.get(x, y) != ' ') {
+					if (hull.get(x, y) != DEFAULT_BLACK) {
 						panels++;
 					}
 				}
 			}
-			System.out.println(hull);
 			return (panels);
 		}
 		
@@ -80,8 +82,11 @@ public class Day11 extends Puzzle {
 		// Make easier to read.
 		for (int y = 0; y < hull.getSize(); y++) {
 			for (int x = 0; x < hull.getSize(); x++) {
-				if (hull.get(x, y) == '#') {
-					hull.set(x, y, ' ');
+				if (hull.get(x, y) == BLACK) {
+					hull.set(x, y, DEFAULT_BLACK);
+				}
+				if (hull.get(x, y) == WHITE) {
+					hull.set(x, y, VISUAL_WHITE);
 				}
 			}
 		}
