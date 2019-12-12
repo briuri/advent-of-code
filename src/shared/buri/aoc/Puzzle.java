@@ -67,4 +67,22 @@ public abstract class Puzzle {
 		}	
 		return (maxEntry);
 	}
+	
+	
+	/**
+	 * Calculates the least common multiple of two numbers.
+	 */
+	protected static long getLCM(long a, long b) {
+		return (a / getGCD(a, b) * b);
+	}
+	        	
+  	/**
+   	 * Recursively finds the greatest common denominator of two numbers.
+   	 */
+	protected static long getGCD(long a, long b) {
+  		if (a == 0) {
+  			return (b);
+   		}
+   		return (getGCD(b % a, a));
+   	}
 }
