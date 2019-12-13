@@ -10,6 +10,7 @@ import java.util.List;
  * - y19d7
  * - y19d9
  * - y19d11
+ * - y19d13
  * 
  * @author Brian Uri!
  */
@@ -62,6 +63,17 @@ public class Computer {
 		getInputs().add(input);
 	}
 
+	/**
+	 * Constructor (y19d13)
+	 * 
+	 * @param program the intcodes to run (does not modify)
+	 * @param quarters
+	 */
+	public Computer(List<Long> program, int quarters) {
+		this(program);
+		_memory.set(0, Long.valueOf(quarters));
+	}
+	
 	/**
 	 * Runs the intcode program until a HALT opcode is hit.
 	 */
