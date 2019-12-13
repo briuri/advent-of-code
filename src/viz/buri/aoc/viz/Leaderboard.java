@@ -201,7 +201,7 @@ public class Leaderboard {
 			}
 		}
 		StringBuffer buffer = new StringBuffer(name);
-		if (includeDivision) {
+		if (player != null && includeDivision) {
 			String division = player.getDivision();
 			if (division.length() > 0) {
 				buffer.append(" (").append(division).append(")");
