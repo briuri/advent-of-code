@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class MedianTime implements Comparable {
 	private String _name;
+	private int _stars;
 	private String _medianTime;
 	private List<String> _times;
 
@@ -19,8 +20,9 @@ public class MedianTime implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public MedianTime(List<List<PuzzleTime>> puzzleTimes, String name, List<String> times) {
+	public MedianTime(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<String> times) {
 		_name = name;
+		_stars = stars;
 		_medianTime = calculateMedianTime(times);
 		_times = times;
 		for (List<PuzzleTime> places : puzzleTimes) {
@@ -55,9 +57,6 @@ public class MedianTime implements Comparable {
 		if (hours.length() == 1) {
 			hours = "0" + hours;
 		}
-		if (hours.length() == 2) {
-			hours = "&nbsp;" + hours;
-		}
 
 		median = median % (60 * 60);
 		String minutes = String.valueOf(median / 60);
@@ -76,22 +75,25 @@ public class MedianTime implements Comparable {
 	 * Converts a time in the format HH:MM:SS to seconds.
 	 */
 	private static int toSeconds(String time) {
-		int seconds = Integer.valueOf(time.substring(6));
-		seconds += 60 * Integer.valueOf(time.substring(3, 5));
-		seconds += 60 * 60 * Integer.valueOf(time.substring(0, 2));
+		int seconds = Integer.valueOf(time.substring(time.lastIndexOf(":") + 1));
+		seconds += 60 * Integer.valueOf(time.substring(time.indexOf(":") + 1, time.lastIndexOf(":")));
+		seconds += 60 * 60 * Integer.valueOf(time.substring(0, time.indexOf(":")));
 		return (seconds);
 	}
 	
 	/**
-	 * Returns true if this player has at least 1 medal.
+	 * Sort on number of stars, then median time.
 	 */
-	public boolean hasMedals() {
-		return (getFirst() + getSecond() + getThird() > 0);
-	}
-	
 	@Override
-	public int compareTo(Object o) {
-		return (getMedianTime().compareTo(((MedianTime) o).getMedianTime()));
+	public int compareTo(Object obj) {
+		MedianTime time = (MedianTime) obj;
+		if (getStars() > time.getStars()) {
+			return (-1);
+		}
+		if (getStars() < time.getStars()) {
+			return (1);
+		}
+		return (getMedianTime().compareTo(time.getMedianTime()));
 	}
 
 	/**
@@ -99,6 +101,13 @@ public class MedianTime implements Comparable {
 	 */
 	public String getName() {
 		return _name;
+	}
+	
+	/**
+	 * Accessor for the stars
+	 */
+	public int getStars() {
+		return _stars;
 	}
 
 	/**

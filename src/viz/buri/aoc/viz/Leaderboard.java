@@ -60,8 +60,9 @@ public class Leaderboard {
 	private static void visualizeEvent(String event) {
 		final List<Puzzle> puzzles = readPuzzles(event);
 		final Map<String, Player> players = readPlayers();
-		final List<List<PuzzleTime>> puzzleTimes = readLeaderboard(event);
-		final List<MedianTime> medianTimes = getMedianTimes(puzzleTimes);
+		final List<List<PuzzleTime>> puzzleTimes = readPuzzleTimes(event);
+		final Map<String, Integer> stars = readStars(event);
+		final List<MedianTime> medianTimes = getMedianTimes(puzzleTimes, stars);
 
 		StringBuffer page = new StringBuffer();
 		insertHeader(page, event);
@@ -120,7 +121,7 @@ public class Leaderboard {
 	/**
 	 * Reads puzzle completion times from the leaderboard.
 	 */
-	private static List<List<PuzzleTime>> readLeaderboard(String event) {
+	private static List<List<PuzzleTime>> readPuzzleTimes(String event) {
 		Map<String, Object> players = null;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -156,9 +157,32 @@ public class Leaderboard {
 	}
 
 	/**
+	 * Reads number of stars from the leaderboard.
+	 */
+	private static Map<String, Integer> readStars(String event) {
+		Map<String, Object> players = null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			File file = new File(JSON_FOLDER + event + ".json");
+			JsonNode json = mapper.readTree(file);
+			players = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file.", e);
+		}
+
+		Map<String, Integer> stars = new HashMap<>();
+		for (String key : players.keySet()) {
+			Map<String, Object> member = (Map) players.get(key);
+			stars.put((String) member.get("name"), (int) member.get("stars"));
+		}
+		return (stars);
+	}
+	
+	/**
 	 * Groups puzzle completion times by name for median calculations.
 	 */
-	private static List<MedianTime> getMedianTimes(List<List<PuzzleTime>> puzzleTimes) {
+	private static List<MedianTime> getMedianTimes(List<List<PuzzleTime>> puzzleTimes, Map<String, Integer> stars) {
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<String>> rawPuzzleTimes = new HashMap<>();
 		for (List<PuzzleTime> singleDay : puzzleTimes) {
@@ -173,17 +197,9 @@ public class Leaderboard {
 			Collections.sort(rawPuzzleTimes.get(name));
 		}
 
-		// Only do calculations for people with all puzzles completed so far.
-		int puzzlesCompleted = 0;
-		for (List<String> list : rawPuzzleTimes.values()) {
-			puzzlesCompleted = Math.max(list.size(), puzzlesCompleted);
-		}
-
 		List<MedianTime> medianTimes = new ArrayList<>();
 		for (String name : rawPuzzleTimes.keySet()) {
-			if (rawPuzzleTimes.get(name).size() == puzzlesCompleted) {
-				medianTimes.add(new MedianTime(puzzleTimes, name, rawPuzzleTimes.get(name)));
-			}
+			medianTimes.add(new MedianTime(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name)));
 		}
 		Collections.sort(medianTimes);
 		return (medianTimes);
@@ -272,15 +288,16 @@ public class Leaderboard {
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
 		page.append("\tdocument.getElementById('details' + place).style.display = (oldDisplay == 'block' ? 'none' : 'block');\n");
+		page.append("\tdocument.getElementById('median' + place).style.color = (oldDisplay == 'block' ? '#ffffff' : '#000000');\n");
 		page.append("}\n");
 		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times</h3>\n");
-		page.append("<p class=\"tiny\">(players with all *s as of ").append(shortTimestamp).append(")</p>\n");
+		page.append("<p class=\"tiny\">(as of ").append(shortTimestamp).append(")</p>\n");
 
 		page.append("<ol>\n");
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
-			page.append("\t<li>&nbsp;<span class=\"median\">").append(player.getMedianTime());
+			page.append("\t<li>&nbsp;<span id=\"median").append(i).append("\" class=\"median\">").append(player.getMedianTime());
 			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
 			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show Details\">&#x1F50D;</a>\n");
 			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
@@ -301,12 +318,11 @@ public class Leaderboard {
 					page.append(time);
 				}
 				if (j == 0) {
-					if (player.hasMedals()) {
-						page.append("&nbsp;&nbsp;");
-						page.append(player.getFirst()).append("&#x1F947;&nbsp;&nbsp;");
-						page.append(player.getSecond()).append("&#x1F948;&nbsp;&nbsp;");
-						page.append(player.getThird()).append("&#x1F949;&nbsp;&nbsp;\n");
-					}				
+					page.append("&nbsp;&nbsp;");
+					page.append(player.getStars()).append("&#x2B50; ");
+					page.append(player.getFirst()).append("&#x1F947; ");
+					page.append(player.getSecond()).append("&#x1F948; ");
+					page.append(player.getThird()).append("&#x1F949;\n");
 				}
 				page.append("<br />\n");
 			}
