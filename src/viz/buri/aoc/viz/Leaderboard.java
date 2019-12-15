@@ -229,7 +229,9 @@ public class Leaderboard {
 		page.append("\ta:hover { color: #99ff99; }\n");
 		page.append("\ta:link { text-decoration: none; }\n");
 		page.append("\t.antiIndex { display: none; }\n");
+		page.append("\t.details { display: none; margin-bottom: 10px; }\n");
 		page.append("\t.empty { font-size: 11pt; }\n");
+		page.append("\t.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
 		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
 		page.append("\t.tiny { font-size: 9pt; }\n");
 		page.append("\t.global { color: #ffff00; }\n");
@@ -264,14 +266,21 @@ public class Leaderboard {
 			return;
 		}
 		String shortTimestamp = DATE_FORMAT.format(new Date()).substring(5, 16);
+		page.append("<script type=\"text/javascript\">\n");
+		page.append("function expand(place) {\n");
+		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
+		page.append("\tdocument.getElementById('details' + place).style.display = (oldDisplay == 'block' ? 'none' : 'block');\n");
+		page.append("}\n");
+		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times</h3>\n");
 		page.append("<p class=\"tiny\">(players with all *s as of ").append(shortTimestamp).append(")</p>\n");
 
 		page.append("<ol>\n");
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
-			page.append("\t<li>").append(player.getMedianTime());
-			page.append("&nbsp; - ").append(maskName(players, player.getName(), true));
+			page.append("\t<li>&nbsp;<span class=\"median\">").append(player.getMedianTime());
+			page.append("</span>&nbsp; - ").append(maskName(players, player.getName(), true));
+			page.append("<a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Median Times\">&#x23F0</a>");
 			if (player.hasMedals()) {
 				page.append("<br />");
 				for (int j = 0; j < MEDAL_OFFSET; j++) {
@@ -281,6 +290,21 @@ public class Leaderboard {
 				page.append(player.getSecond()).append("&#x1F948;&nbsp;&nbsp;");
 				page.append(player.getThird()).append("&#x1F949;&nbsp;&nbsp;");
 			}
+			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
+			int totalTimes = player.getTimes().size();
+			for (int j = 0; j < totalTimes; j++) {
+				String time = player.getTimes().get(j);
+				page.append("&nbsp;");
+				// Highlight 1 or two numbers to denote median.
+				if (j == totalTimes / 2 || (j == totalTimes / 2 - 1 && totalTimes % 2 == 0)) {
+					page.append("<span class=\"median\">").append(time).append("</span>");
+				}
+				else {
+					page.append(time);
+				}
+				page.append("<br />");
+			}
+			page.append("</div>\n");
 			page.append("</li>\n");
 		}
 		page.append("</ol>\n\n");

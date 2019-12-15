@@ -10,6 +10,7 @@ import java.util.List;
 public class MedianTime implements Comparable {
 	private String _name;
 	private String _medianTime;
+	private List<String> _times;
 
 	private int _first = 0;
 	private int _second = 0;
@@ -21,6 +22,7 @@ public class MedianTime implements Comparable {
 	public MedianTime(List<List<PuzzleTime>> puzzleTimes, String name, List<String> times) {
 		_name = name;
 		_medianTime = calculateMedianTime(times);
+		_times = times;
 		for (List<PuzzleTime> places : puzzleTimes) {
 			if (places.size() >= 1 && places.get(0).getName().equals(name)) {
 				_first += 1;
@@ -104,6 +106,13 @@ public class MedianTime implements Comparable {
 	 */
 	public String getMedianTime() {
 		return _medianTime;
+	}
+
+	/**
+	 * Accessor for the times
+	 */
+	public List<String> getTimes() {
+		return _times;
 	}
 
 	/**
