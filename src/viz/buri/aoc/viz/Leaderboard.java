@@ -31,7 +31,6 @@ public class Leaderboard {
 
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
-	private static final int MEDAL_OFFSET = 11;
 
 	private static final String JSON_FOLDER = "data/viz/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -227,7 +226,7 @@ public class Leaderboard {
 	 */
 	private static String getDivision(Map<String, Player> players, String name) {
 		Player player = players.get(name);
-		return (player == null ? "" : player.getDivision());
+		return (player == null ? "" : " (" + player.getDivision() + ")");
 	}
 	
 	/**
@@ -250,6 +249,8 @@ public class Leaderboard {
 		page.append("\t.details { display: none; margin-bottom: 10px; }\n");
 		page.append("\t.empty { font-size: 11pt; }\n");
 		page.append("\t.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
+		page.append("\t.median a:link { color: #ffffff; }\n");
+		page.append("\t.median a:hover { color: #99ff99; }\n");
 		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
 		page.append("\t.tiny { font-size: 9pt; }\n");
 		page.append("\t.global { color: #ffff00; }\n");
@@ -288,24 +289,30 @@ public class Leaderboard {
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
 		page.append("\tdocument.getElementById('details' + place).style.display = (oldDisplay == 'block' ? 'none' : 'block');\n");
-		page.append("\tdocument.getElementById('median' + place).style.color = (oldDisplay == 'block' ? '#ffffff' : '#000000');\n");
 		page.append("}\n");
 		page.append("</script>\n");
-		page.append("\n<h3>Top ").append(TOP_NUM).append(" Median Times</h3>\n");
-		page.append("<p class=\"tiny\">(as of ").append(shortTimestamp).append(")</p>\n");
+		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall (").append(shortTimestamp).append(")</h3>\n");
+		page.append("<p class=\"tiny\">Click on a median time to show/hide all times.</p>");
 
 		page.append("<ol>\n");
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
-			page.append("\t<li>&nbsp;<span id=\"median").append(i).append("\" class=\"median\">").append(player.getMedianTime());
+			page.append("\t<li>&nbsp;<span class=\"median\">");
+			page.append("<a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Times\">");
+			page.append(player.getMedianTime());
+			page.append("</a>");
 			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
-			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show Details\">&#x1F50D;</a>\n");
-			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
-			for (int j = 0; j < MEDAL_OFFSET; j++) {
+			page.append(getDivision(players, player.getName())).append("<br />\n");
+			for (int j = 0; j < 11; j++) {
 				page.append("&nbsp;");
 			}
-			page.append("(").append(getDivision(players, player.getName())).append(")<br />");
-
+			page.append(player.getStars()).append("&#x2B50; ");
+			if (player.hasMedals()) {
+				page.append(player.getFirst()).append("&#x1F947; ");
+				page.append(player.getSecond()).append("&#x1F948; ");
+				page.append(player.getThird()).append("&#x1F949;\n");
+			}
+			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = player.getTimes().get(j);
@@ -316,13 +323,6 @@ public class Leaderboard {
 				}
 				else {
 					page.append(time);
-				}
-				if (j == 0) {
-					page.append("&nbsp;&nbsp;");
-					page.append(player.getStars()).append("&#x2B50; ");
-					page.append(player.getFirst()).append("&#x1F947; ");
-					page.append(player.getSecond()).append("&#x1F948; ");
-					page.append(player.getThird()).append("&#x1F949;\n");
 				}
 				page.append("<br />\n");
 			}

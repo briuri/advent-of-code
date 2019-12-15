@@ -97,6 +97,13 @@ public class MedianTime implements Comparable {
 	}
 
 	/**
+	 * Returns true if at least 1 medal is found.
+	 */
+	public boolean hasMedals() {
+		return (getFirst() + getSecond() + getThird() > 0);
+	}
+	
+	/**
 	 * Acessor for the name of the player
 	 */
 	public String getName() {
