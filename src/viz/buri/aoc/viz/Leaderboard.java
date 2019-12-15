@@ -282,7 +282,7 @@ public class Leaderboard {
 			MedianTime player = medianTimes.get(i);
 			page.append("\t<li>&nbsp;<span class=\"median\">").append(player.getMedianTime());
 			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
-			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Median Times\">&#x1F50D;</a>\n");
+			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show Details\">&#x1F50D;</a>\n");
 			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
 			for (int j = 0; j < MEDAL_OFFSET; j++) {
 				page.append("&nbsp;");
