@@ -31,7 +31,7 @@ public class Leaderboard {
 
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
-	private static final int MEDAL_OFFSET = 12;
+	private static final int MEDAL_OFFSET = 11;
 
 	private static final String JSON_FOLDER = "data/viz/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -192,7 +192,7 @@ public class Leaderboard {
 	/**
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
-	private static String maskName(Map<String, Player> players, String name, boolean includeDivision) {
+	private static String maskName(Map<String, Player> players, String name) {
 		Player player = players.get(name);
 		if (player != null) {
 			String alt = player.getAlternateName();
@@ -201,17 +201,19 @@ public class Leaderboard {
 			}
 		}
 		StringBuffer buffer = new StringBuffer(name);
-		if (player != null && includeDivision) {
-			String division = player.getDivision();
-			if (division.length() > 0) {
-				buffer.append(", ").append(division);
-			}
-		}
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
 	}
-
+	
+	/**
+	 * Looks up a player's division, if available.
+	 */
+	private static String getDivision(Map<String, Player> players, String name) {
+		Player player = players.get(name);
+		return (player == null ? "" : player.getDivision());
+	}
+	
 	/**
 	 * Adds the HTML page header
 	 */
@@ -279,18 +281,14 @@ public class Leaderboard {
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
 			page.append("\t<li>&nbsp;<span class=\"median\">").append(player.getMedianTime());
-			page.append("</span>&nbsp; ").append(maskName(players, player.getName(), true));
-			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Median Times\">&#x23F0;</a>");
-			if (player.hasMedals()) {
-				page.append("<br />");
-				for (int j = 0; j < MEDAL_OFFSET; j++) {
-					page.append("&nbsp;");
-				}
-				page.append(player.getFirst()).append("&#x1F947;&nbsp;&nbsp;");
-				page.append(player.getSecond()).append("&#x1F948;&nbsp;&nbsp;");
-				page.append(player.getThird()).append("&#x1F949;&nbsp;&nbsp;");
-			}
+			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
+			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Median Times\">&#x1F50D;</a>\n");
 			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
+			for (int j = 0; j < MEDAL_OFFSET; j++) {
+				page.append("&nbsp;");
+			}
+			page.append("(").append(getDivision(players, player.getName())).append(")<br />");
+
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = player.getTimes().get(j);
@@ -302,7 +300,15 @@ public class Leaderboard {
 				else {
 					page.append(time);
 				}
-				page.append("<br />");
+				if (j == 0) {
+					if (player.hasMedals()) {
+						page.append("&nbsp;&nbsp;");
+						page.append(player.getFirst()).append("&#x1F947;&nbsp;&nbsp;");
+						page.append(player.getSecond()).append("&#x1F948;&nbsp;&nbsp;");
+						page.append(player.getThird()).append("&#x1F949;&nbsp;&nbsp;\n");
+					}				
+				}
+				page.append("<br />\n");
 			}
 			page.append("</div>\n");
 			page.append("</li>\n");
@@ -335,7 +341,7 @@ public class Leaderboard {
 					else {
 						page.append("&nbsp;");
 					}
-					page.append(" ").append(maskName(players, record.getName(), false)).append("</li>\n");
+					page.append(" ").append(maskName(players, record.getName())).append("</li>\n");
 				}
 				page.append("</ol>\n");
 			}
