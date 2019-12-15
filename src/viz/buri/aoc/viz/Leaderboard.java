@@ -31,7 +31,7 @@ public class Leaderboard {
 
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
-	private static final int MEDAL_OFFSET = 13;
+	private static final int MEDAL_OFFSET = 12;
 
 	private static final String JSON_FOLDER = "data/viz/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -204,7 +204,7 @@ public class Leaderboard {
 		if (player != null && includeDivision) {
 			String division = player.getDivision();
 			if (division.length() > 0) {
-				buffer.append(" (").append(division).append(")");
+				buffer.append(", ").append(division);
 			}
 		}
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
@@ -279,8 +279,8 @@ public class Leaderboard {
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
 			page.append("\t<li>&nbsp;<span class=\"median\">").append(player.getMedianTime());
-			page.append("</span>&nbsp; - ").append(maskName(players, player.getName(), true));
-			page.append("<a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Median Times\">&#x23F0</a>");
+			page.append("</span>&nbsp; ").append(maskName(players, player.getName(), true));
+			page.append(" <a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Median Times\">&#x23F0;</a>");
 			if (player.hasMedals()) {
 				page.append("<br />");
 				for (int j = 0; j < MEDAL_OFFSET; j++) {
@@ -335,7 +335,7 @@ public class Leaderboard {
 					else {
 						page.append("&nbsp;");
 					}
-					page.append(" - ").append(maskName(players, record.getName(), false)).append("</li>\n");
+					page.append(" ").append(maskName(players, record.getName(), false)).append("</li>\n");
 				}
 				page.append("</ol>\n");
 			}
