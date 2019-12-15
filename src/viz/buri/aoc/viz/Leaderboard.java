@@ -57,17 +57,18 @@ public class Leaderboard {
 	 * Generates the Top X page for a specific event (4-digit year)
 	 */
 	private static void visualizeEvent(String event) {
-		final List<Puzzle> puzzles = readPuzzles(event);
 		final Map<String, Player> players = readPlayers();
-		final List<List<PuzzleTime>> puzzleTimes = readPuzzleTimes(event);
-		final Map<String, Integer> stars = readStars(event);
+		final List<Puzzle> puzzles = readPuzzles(event);
+		final Map<String, Object> leaderboardJson = readLeaderboard(event);
+		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(event, leaderboardJson);
+		final Map<String, Integer> stars = getStars(event, leaderboardJson);
 		final List<MedianTime> medianTimes = getMedianTimes(puzzleTimes, stars);
 
 		StringBuffer page = new StringBuffer();
 		insertHeader(page, event);
 		insertMedianTimes(page, event, players, medianTimes);
 		insertPuzzleTimes(page, event, players, puzzleTimes, puzzles);
-		insertFooter(page);
+		insertFooter(page, event);
 
 		try {
 			String outputFilename = (event.equals(CURRENT_EVENT) ? "index.html" : "index-" + event + ".html");
@@ -118,26 +119,40 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Reads puzzle completion times from the leaderboard.
+	 * Reads the raw leaderboard.
 	 */
-	private static List<List<PuzzleTime>> readPuzzleTimes(String event) {
-		Map<String, Object> players = null;
+	private static Map<String, Object> readLeaderboard(String event) {
+		Map<String, Object> leaderboardJson = null;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			File file = new File(JSON_FOLDER + event + ".json");
 			JsonNode json = mapper.readTree(file);
-			players = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
+			leaderboardJson = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
+			return (leaderboardJson);
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file.", e);
 		}
-
+	}
+	
+	/**
+	 * Reads the last modified date on the leaderboard file.
+	 */
+	private static String readLastModified(String event) {
+		File file = new File(JSON_FOLDER + event + ".json");
+		return DATE_FORMAT.format(new Date(file.lastModified()));
+	}
+	
+	/**
+	 * Reads puzzle completion times from the leaderboard.
+	 */
+	private static List<List<PuzzleTime>> getPuzzleTimes(String event, Map<String, Object> leaderboardJson) {
 		List<List<PuzzleTime>> puzzleTimes = new ArrayList<>();
 		for (int day = 0; day < TOTAL_PUZZLES; day++) {
 			puzzleTimes.add(new ArrayList<>());
 		}
-		for (String key : players.keySet()) {
-			Map<String, Object> member = (Map) players.get(key);
+		for (String key : leaderboardJson.keySet()) {
+			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			String name = (String) member.get("name");
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String dayKey : puzzleData.keySet()) {
@@ -158,21 +173,10 @@ public class Leaderboard {
 	/**
 	 * Reads number of stars from the leaderboard.
 	 */
-	private static Map<String, Integer> readStars(String event) {
-		Map<String, Object> players = null;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			File file = new File(JSON_FOLDER + event + ".json");
-			JsonNode json = mapper.readTree(file);
-			players = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file.", e);
-		}
-
+	private static Map<String, Integer> getStars(String event, Map<String, Object> leaderboardJson) {
 		Map<String, Integer> stars = new HashMap<>();
-		for (String key : players.keySet()) {
-			Map<String, Object> member = (Map) players.get(key);
+		for (String key : leaderboardJson.keySet()) {
+			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			stars.put((String) member.get("name"), (int) member.get("stars"));
 		}
 		return (stars);
@@ -284,7 +288,7 @@ public class Leaderboard {
 		if (!event.equals(CURRENT_EVENT)) {
 			return;
 		}
-		String shortTimestamp = DATE_FORMAT.format(new Date()).substring(5, 16);
+		String shortTimestamp = readLastModified(event).substring(5, 16);
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
@@ -370,10 +374,10 @@ public class Leaderboard {
 	/**
 	 * Adds the HTML page footer
 	 */
-	private static void insertFooter(StringBuffer page) {
+	private static void insertFooter(StringBuffer page, String event) {
 		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
 		page.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");
-		page.append("&nbsp;&nbsp;last update on ").append(DATE_FORMAT.format(new Date())).append("</p>\n");
+		page.append("&nbsp;&nbsp;last update on ").append(readLastModified(event)).append("</p>\n");
 		page.append("</body>\n</html>");
 	}
 }
