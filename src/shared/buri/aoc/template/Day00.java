@@ -35,14 +35,10 @@ public class Day00 extends Puzzle {
 	 * QUESTION
 	 */
 	public static int getResult(Part part, List<String> input) {
-		int result = 0;
-		for (String line : input) {
-			
-		}		
 		if (part == Part.ONE) {
-			return (result);
+			return (-1);
 		}
-		return (result);
+		return (-1);
 	}
 	
 	/**
