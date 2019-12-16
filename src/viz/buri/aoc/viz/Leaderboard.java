@@ -299,7 +299,8 @@ public class Leaderboard {
 		page.append("}\n");
 		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall (").append(shortTimestamp).append(")</h3>\n");
-		page.append("<p class=\"tiny\">Click on a median time to show/hide all times.</p>");
+		page.append("<p class=\"tiny\">Scoring is based on stars earned with median solve time as a tiebreaker.\n");
+		page.append("Click on a median time to show/hide all solve times.</p>");
 
 		page.append("<ol>\n");
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
@@ -310,16 +311,20 @@ public class Leaderboard {
 			page.append("</a>");
 			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
 			page.append(getDivision(players, player.getName())).append("<br />\n");
-			for (int j = 0; j < 11; j++) {
+			for (int j = 0; j < 14; j++) {
 				page.append("&nbsp;");
 			}
-			page.append(player.getStars()).append("<span class=\"emoji\">&#x2B50;</span> ");
+			page.append(player.getStars()).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ");
 			if (player.hasMedals()) {
-				page.append(player.getFirst()).append("<span class=\"emoji\">&#x1F947;</span> ");
-				page.append(player.getSecond()).append("<span class=\"emoji\">&#x1F948;</span> ");
-				page.append(player.getThird()).append("<span class=\"emoji\">&#x1F949;</span>\n");
+				page.append(player.getFirst()).append("<span class=\"emoji\" title=\"1st Place\">&#x1F947;</span> ");
+				page.append(player.getSecond()).append("<span class=\"emoji\" title=\"2nd Place\">&#x1F948;</span> ");
+				page.append(player.getThird()).append("<span class=\"emoji\" title=\"3rd Place\">&#x1F949;</span> ");
 			}
-			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
+			int globalCount = players.get(player.getName()).getGlobalCount();
+			if (globalCount > 0) {
+				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
+			}
+			page.append("\n<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = player.getTimes().get(j);

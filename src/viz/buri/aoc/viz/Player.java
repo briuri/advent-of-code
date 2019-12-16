@@ -11,6 +11,7 @@ public class Player {
 	private String _name;
 	private String _alternateName;
 	private String _division;
+	private int _globalCount;
 
 	/**
 	 * Constructor
@@ -19,6 +20,7 @@ public class Player {
 		_name = player.get("name").asText();
 		_alternateName = player.get("alt").asText("");
 		_division = player.get("division").asText("");
+		_globalCount = player.get("globalCount").asInt(0);
 	}
 
 	/**
@@ -29,16 +31,23 @@ public class Player {
 	}
 
 	/**
-	 * Accessor for the alternate name, if available
+	 * Accessor for the alternate name
 	 */
 	public String getAlternateName() {
 		return _alternateName;
 	}
 
 	/**
-	 * Accessor for the division, if available
+	 * Accessor for the division
 	 */
 	public String getDivision() {
 		return _division;
 	}
+
+	/**
+	 * Accessor for the globalCount
+	 */
+	public int getGlobalCount() {
+		return _globalCount;
+	}	
 }
