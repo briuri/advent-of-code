@@ -57,7 +57,7 @@ public class Leaderboard {
 	 * Generates the Top X page for a specific event (4-digit year)
 	 */
 	private static void visualizeEvent(String event) {
-		final Map<String, Player> players = readPlayers();
+		final Players players = readPlayers();
 		final List<Puzzle> puzzles = readPuzzles(event);
 		final Map<String, Object> leaderboardJson = readLeaderboard(event);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(event, leaderboardJson);
@@ -101,15 +101,14 @@ public class Leaderboard {
 	/**
 	 * Reads ancillary player data from the file (not included in version control).
 	 */
-	private static Map<String, Player> readPlayers() {
-		Map<String, Player> players = new HashMap<>();
+	private static Players readPlayers() {
+		Players players = new Players();
 		try {
 			File file = new File(JSON_FOLDER + "players.json");
 			JsonNode json = new ObjectMapper().readTree(file);
 			ArrayNode playerJson = (ArrayNode) json.get("players");
 			for (int i = 0; i < playerJson.size(); i++) {
-				Player player = new Player((ObjectNode) playerJson.get(i));
-				players.put(player.getName(), player);
+				players.add((ObjectNode) playerJson.get(i));
 			}
 			return (players);
 		}
@@ -212,15 +211,8 @@ public class Leaderboard {
 	/**
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
-	private static String maskName(Map<String, Player> players, String name) {
-		Player player = players.get(name);
-		if (player != null) {
-			String alt = player.getAlternateName();
-			if (alt.length() > 0) {
-				name = alt;
-			}
-		}
-		StringBuffer buffer = new StringBuffer(name);
+	private static String maskName(Players players, String name) {
+		StringBuffer buffer = new StringBuffer(players.getAlternateName(name));
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
@@ -229,9 +221,12 @@ public class Leaderboard {
 	/**
 	 * Looks up a player's division, if available.
 	 */
-	private static String getDivision(Map<String, Player> players, String name) {
-		Player player = players.get(name);
-		return (player == null ? "" : " (" + player.getDivision() + ")");
+	private static String getDivision(Players players, String name) {
+		String division = players.getDivision(name);
+		if (division.length() > 0) {
+			division = " (" + division + ")";
+		}
+		return (division);
 	}
 
 	/**
@@ -285,7 +280,7 @@ public class Leaderboard {
 	/**
 	 * Adds the Top X Median Times during the current event.
 	 */
-	private static void insertMedianTimes(StringBuffer page, String event, Map<String, Player> players,
+	private static void insertMedianTimes(StringBuffer page, String event, Players players,
 		List<MedianTime> medianTimes) {
 		if (!event.equals(CURRENT_EVENT)) {
 			return;
@@ -320,7 +315,7 @@ public class Leaderboard {
 				page.append(player.getSecond()).append("<span class=\"emoji\" title=\"2nd Place\">&#x1F948;</span> ");
 				page.append(player.getThird()).append("<span class=\"emoji\" title=\"3rd Place\">&#x1F949;</span> ");
 			}
-			int globalCount = players.get(player.getName()).getGlobalCount();
+			int globalCount = players.getGlobalCount(player.getName());
 			if (globalCount > 0) {
 				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
 			}
@@ -347,7 +342,7 @@ public class Leaderboard {
 	/**
 	 * Adds the Top X times for each puzzle.
 	 */
-	private static void insertPuzzleTimes(StringBuffer page, String event, Map<String, Player> players,
+	private static void insertPuzzleTimes(StringBuffer page, String event, Players players,
 		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
 		boolean allEmpty = true;
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
