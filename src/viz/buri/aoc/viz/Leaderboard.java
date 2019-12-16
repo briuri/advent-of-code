@@ -127,14 +127,15 @@ public class Leaderboard {
 			ObjectMapper mapper = new ObjectMapper();
 			File file = new File(JSON_FOLDER + event + ".json");
 			JsonNode json = mapper.readTree(file);
-			leaderboardJson = mapper.readValue(json.get("members").toString(), new TypeReference<Map<String, Object>>() {});
+			leaderboardJson = mapper.readValue(json.get("members").toString(),
+				new TypeReference<Map<String, Object>>() {});
 			return (leaderboardJson);
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file.", e);
 		}
 	}
-	
+
 	/**
 	 * Reads the last modified date on the leaderboard file.
 	 */
@@ -142,7 +143,7 @@ public class Leaderboard {
 		File file = new File(JSON_FOLDER + event + ".json");
 		return DATE_FORMAT.format(new Date(file.lastModified()));
 	}
-	
+
 	/**
 	 * Reads puzzle completion times from the leaderboard.
 	 */
@@ -181,7 +182,7 @@ public class Leaderboard {
 		}
 		return (stars);
 	}
-	
+
 	/**
 	 * Groups puzzle completion times by name for median calculations.
 	 */
@@ -224,7 +225,7 @@ public class Leaderboard {
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Looks up a player's division, if available.
 	 */
@@ -232,7 +233,7 @@ public class Leaderboard {
 		Player player = players.get(name);
 		return (player == null ? "" : " (" + player.getDivision() + ")");
 	}
-	
+
 	/**
 	 * Adds the HTML page header
 	 */
@@ -251,6 +252,7 @@ public class Leaderboard {
 		page.append("\ta:link { text-decoration: none; }\n");
 		page.append("\t.antiIndex { display: none; }\n");
 		page.append("\t.details { display: none; margin-bottom: 10px; }\n");
+		page.append("\t.emoji { font-size: 8pt; }\n");
 		page.append("\t.empty { font-size: 11pt; }\n");
 		page.append("\t.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
 		page.append("\t.median a:link { color: #ffffff; }\n");
@@ -292,7 +294,8 @@ public class Leaderboard {
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
-		page.append("\tdocument.getElementById('details' + place).style.display = (oldDisplay == 'block' ? 'none' : 'block');\n");
+		page.append("\tdocument.getElementById('details' + place).style.display =\n");
+		page.append("\t\t(oldDisplay == 'block' ? 'none' : 'block');\n");
 		page.append("}\n");
 		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall (").append(shortTimestamp).append(")</h3>\n");
@@ -310,17 +313,17 @@ public class Leaderboard {
 			for (int j = 0; j < 11; j++) {
 				page.append("&nbsp;");
 			}
-			page.append(player.getStars()).append("&#x2B50; ");
+			page.append(player.getStars()).append("<span class=\"emoji\">&#x2B50;</span> ");
 			if (player.hasMedals()) {
-				page.append(player.getFirst()).append("&#x1F947; ");
-				page.append(player.getSecond()).append("&#x1F948; ");
-				page.append(player.getThird()).append("&#x1F949;\n");
+				page.append(player.getFirst()).append("<span class=\"emoji\">&#x1F947;</span> ");
+				page.append(player.getSecond()).append("<span class=\"emoji\">&#x1F948;</span> ");
+				page.append(player.getThird()).append("<span class=\"emoji\">&#x1F949;</span>\n");
 			}
 			page.append("<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = player.getTimes().get(j);
-				page.append("&nbsp;");
+				page.append("\t&nbsp;");
 				// Highlight 1 or two numbers to denote median.
 				if (j == totalTimes / 2 || (j == totalTimes / 2 - 1 && totalTimes % 2 == 0)) {
 					page.append("<span class=\"median\">").append(time).append("</span>");
