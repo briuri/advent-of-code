@@ -250,8 +250,7 @@ public class Leaderboard {
 		page.append("\t.emoji { font-size: 8pt; }\n");
 		page.append("\t.empty { font-size: 11pt; }\n");
 		page.append("\t.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
-		page.append("\t.median a:link { color: #ffffff; }\n");
-		page.append("\t.median a:hover { color: #99ff99; }\n");
+		page.append("\t.median:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
 		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
 		page.append("\t.tiny { font-size: 9pt; }\n");
 		page.append("\t.global { color: #ffff00; }\n");
@@ -291,19 +290,20 @@ public class Leaderboard {
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
 		page.append("\tdocument.getElementById('details' + place).style.display =\n");
 		page.append("\t\t(oldDisplay == 'block' ? 'none' : 'block');\n");
+		page.append("\tdocument.getElementById('median' + place).style.color =\n");
+		page.append("\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("}\n");
 		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall (").append(shortTimestamp).append(")</h3>\n");
-		page.append("<p class=\"tiny\">Scoring is based on stars earned with median solve time as a tiebreaker.\n");
-		page.append("Click on a median time to show/hide all solve times.</p>");
-
+		page.append("<p class=\"tiny\">");
+		page.append("Click on a median time to show/hide all times. ");
+		page.append("Scoring is based on stars earned with median time as the tiebreaker.</p>\n");
 		page.append("<ol>\n");
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
-			page.append("\t<li>&nbsp;<span class=\"median\">");
-			page.append("<a href=\"javascript:expand(").append(i).append(")\" title=\"Show All Times\">");
+			page.append("\t<li>&nbsp;<span class=\"median\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
+			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(player.getMedianTime());
-			page.append("</a>");
 			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
 			page.append(getDivision(players, player.getName())).append("<br />\n");
 			for (int j = 0; j < 14; j++) {
