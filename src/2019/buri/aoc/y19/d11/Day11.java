@@ -55,7 +55,8 @@ public class Day11 extends Puzzle {
 		Computer computer = new Computer(program);
 		while (true) {
 			long input = (hull.get(position) == WHITE) ? 1 : 0;
-			computer.run(input);
+			computer.getInputs().add(input);
+			computer.run();
 			List<Long> outputs = computer.getOutputs();
 			if (outputs.isEmpty()) {
 				break;

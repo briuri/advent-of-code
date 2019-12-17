@@ -30,7 +30,7 @@ public class Day02 extends Puzzle {
 	 */
 	public static long getPart1Result(List<Long> program, boolean isExample) {
 		Computer computer = isExample ? new Computer(program, null, null) : new Computer(program, 12L, 2L);
-		computer.run(null);
+		computer.run();
 		return (computer.get(0));
 	}
 
@@ -42,7 +42,7 @@ public class Day02 extends Puzzle {
 		for (long noun = 0; noun < 100; noun++) {
 			for (long verb = 0; verb < 100; verb++) {
 				Computer computer = new Computer(program, noun, verb);
-				computer.run(null);
+				computer.run();
 				if (computer.get(0) == 19690720) {
 					return (100 * noun + verb);
 				}

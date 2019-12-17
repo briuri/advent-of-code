@@ -72,10 +72,7 @@ public class Computer {
 	/**
 	 * Runs the intcode program until a HALT opcode is hit.
 	 */
-	public void run(Long nextInput) {
-		if (nextInput != null) {
-			getInputs().add(nextInput);
-		}
+	public void run() {
 		String fullOpcode = String.valueOf(get(getPointer()));
 		Opcode opcode = Opcode.getOpcodeFor(fullOpcode);
 		while (opcode != Opcode.HALT) {
@@ -383,7 +380,7 @@ public class Computer {
 	/**
 	 * Accessor for the inputs
 	 */
-	private List<Long> getInputs() {
+	public List<Long> getInputs() {
 		return _inputs;
 	}
 

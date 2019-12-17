@@ -58,7 +58,6 @@ public class Maze extends CharGrid {
 	 * After the maze is explored, find the shortest path to oxygen.
 	 */
 	public int getFewestCommands() {
-		System.out.println(this);
 		Set<Character> destinationTiles = new HashSet<>();
 		destinationTiles.add(END);
 		List<Path> paths = getPaths(getStart(), destinationTiles);
@@ -98,7 +97,8 @@ public class Maze extends CharGrid {
 			Pair next = start.copy();
 			next.move(direction);
 			if (get(next) == UNEXPLORED) {
-				droid.run(toCommand(direction));
+				droid.getInputs().add(toCommand(direction));
+				droid.run();
 				long status = droid.getOutputs().remove(0);
 				if (status == 0) {
 					set(next, WALL);
@@ -112,7 +112,8 @@ public class Maze extends CharGrid {
 					setEnd(next.copy());
 				}
 				// Move droid back on status 1 or 2
-				droid.run(toReverse(direction));
+				droid.getInputs().add(toReverse(direction));
+				droid.run();
 				droid.getOutputs().remove(0);
 			}
 		}

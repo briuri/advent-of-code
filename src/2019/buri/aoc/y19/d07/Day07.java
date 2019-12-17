@@ -50,7 +50,8 @@ public class Day07 extends Puzzle {
 			long output = 0;
 			while (true) {
 				for (Computer amp : amps) {
-					amp.run(output);
+					amp.getInputs().add(output);
+					amp.run();
 					output = amp.getLastOutput();
 				}
 				if (!amps.get(amps.size() - 1).isWaiting()) {

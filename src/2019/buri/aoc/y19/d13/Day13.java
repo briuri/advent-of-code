@@ -41,7 +41,7 @@ public class Day13 extends Puzzle {
 	public static int getResult(Part part, List<Long> program) {
 		IntGrid grid = new IntGrid(40);
 		Computer computer = new Computer(program);
-		computer.run(null);
+		computer.run();
 		List<Long> outputs = computer.getOutputs();
 		while (!outputs.isEmpty()) {
 			int x = outputs.remove(0).intValue();
@@ -69,7 +69,8 @@ public class Day13 extends Puzzle {
 			else {
 				joystick = -1;
 			}
-			computer.run(joystick);
+			computer.getInputs().add(joystick);
+			computer.run();
 			outputs = computer.getOutputs();
 			// Note: Entire grid does not repaint each time. Subsequent output lengths are shorter.
 			while (!outputs.isEmpty()) {
