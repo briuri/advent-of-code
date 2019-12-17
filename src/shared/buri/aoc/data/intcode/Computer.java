@@ -39,34 +39,19 @@ public class Computer {
 	 */
 	public Computer(List<Long> program, Long noun, Long verb) {
 		this(program);
-		if (noun != null) {
-			_memory.set(1, noun);
-		}
-		if (verb != null) {
-			_memory.set(2, verb);
-		}
+		_memory.set(1, noun);
+		_memory.set(2, verb);
 	}
 	
-	/**
-	 * Constructor (y19d5, y19d7, y19d9)
-	 * 
-	 * @param program the intcodes to run (does not modify)
-	 * @param input the value to start the program with
-	 */
-	public Computer(List<Long> program, Long input) {
-		this(program);
-		getInputs().add(input);
-	}
-
 	/**
 	 * Constructor (y19d13, y10d17)
 	 * 
 	 * @param program the intcodes to run (does not modify)
-	 * @param addressZero
+	 * @param addressZero the value to set at address zero
 	 */
-	public Computer(List<Long> program, int addressZero) {
+	public Computer(List<Long> program, Long addressZero) {
 		this(program);
-		_memory.set(0, Long.valueOf(addressZero));
+		_memory.set(0, addressZero);
 	}
 	
 	/**

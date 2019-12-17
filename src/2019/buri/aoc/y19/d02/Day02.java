@@ -29,7 +29,7 @@ public class Day02 extends Puzzle {
 	 * What value is left at position 0 after the program halts?
 	 */
 	public static long getPart1Result(List<Long> program, boolean isExample) {
-		Computer computer = isExample ? new Computer(program, null, null) : new Computer(program, 12L, 2L);
+		Computer computer = isExample ? new Computer(program) : new Computer(program, 12L, 2L);
 		computer.run();
 		return (computer.get(0));
 	}

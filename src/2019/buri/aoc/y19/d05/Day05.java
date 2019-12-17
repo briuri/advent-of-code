@@ -35,7 +35,8 @@ public class Day05 extends Puzzle {
 	 */
 	public static long getResult(Part part, List<Long> program) {
 		long input = (part == Part.ONE ? 1 : 5);
-		Computer computer = new Computer(program, input);
+		Computer computer = new Computer(program);
+		computer.getInputs().add(input);
 		computer.run();
 		return (computer.getLastOutput());
 	}

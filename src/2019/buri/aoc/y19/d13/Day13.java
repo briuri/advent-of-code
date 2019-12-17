@@ -55,7 +55,7 @@ public class Day13 extends Puzzle {
 
 		// Part TWO
 		int score = 0;		
-		computer = new Computer(program, 2);
+		computer = new Computer(program, 2L);
 		Pair ball = null;
 		Pair paddle = null;
 		while (true) {

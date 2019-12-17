@@ -42,7 +42,9 @@ public class Day07 extends Puzzle {
 			// Initialize all amplifiers with phases.
 			List<Computer> amps = new ArrayList<>();
 			for (int i = 0; i < perm.length; i++) {
-				amps.add(new Computer(program, perm[i]));
+				Computer amp = new Computer(program);
+				amp.getInputs().add(perm[i]);
+				amps.add(amp);
 			}
 
 			// Execute each amplifier until it halts (or waits for input in Part TWO).
