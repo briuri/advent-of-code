@@ -158,7 +158,7 @@ public class Computer {
 	 * Saves an output value.
 	 */
 	private void output(Parameter[] params) {
-		addOutput(applyMode(params[0]));
+		getOutputs().add(applyMode(params[0]));
 	}
 
 	/**
@@ -370,7 +370,7 @@ public class Computer {
 	}
 
 	/**
-	 * Accessor for the output
+	 * Accessor for the output (not destructive)
 	 */
 	public long getLastOutput() {
 		if (_outputs.isEmpty()) {
@@ -386,13 +386,6 @@ public class Computer {
 		return (_outputs);
 	}
 	
-	/**
-	 * Accessor for the output
-	 */
-	private void addOutput(long output) {
-		_outputs.add(output);
-	}
-
 	/**
 	 * Accessor for the instruction pointer
 	 */
