@@ -5,13 +5,7 @@ import java.util.List;
 
 /**
  * Base class used for running Intcode programs.
- * - y19d2
- * - y19d5
- * - y19d7
- * - y19d9
- * - y19d11
- * - y19d13
- * - y19d15
+ * - y19d2, 5, 7, 9, 11, 13, 15, 17
  * 
  * @author Brian Uri!
  */
@@ -21,8 +15,8 @@ public class Computer {
 	private List<Long> _outputs;
 	private long _pointer;
 	private long _relativeBase;
+	private boolean _debug = false;
 
-	private static final boolean DEBUG = false;
 	private static final String REDUCES_TO = "  -->  ";
 
 	/**
@@ -65,14 +59,14 @@ public class Computer {
 	}
 
 	/**
-	 * Constructor (y19d13)
+	 * Constructor (y19d13, y10d17)
 	 * 
 	 * @param program the intcodes to run (does not modify)
-	 * @param quarters
+	 * @param addressZero
 	 */
-	public Computer(List<Long> program, int quarters) {
+	public Computer(List<Long> program, int addressZero) {
 		this(program);
-		_memory.set(0, Long.valueOf(quarters));
+		_memory.set(0, Long.valueOf(addressZero));
 	}
 	
 	/**
@@ -236,7 +230,7 @@ public class Computer {
 	 * Displays the raw instructions and their resolutions for debugging.
 	 */
 	private void log(String fullOpcode, Opcode opcode, Parameter[] params) {
-		if (!DEBUG) {
+		if (!isDebugEnabled()) {
 			return;
 		}
 		// Generate pointer, relative base, and raw instruction.
@@ -443,5 +437,19 @@ public class Computer {
 	 */
 	private void setRelativeBase(long relativeBase) {
 		_relativeBase = relativeBase;
+	}
+
+	/**
+	 * Accessor for the debug flag
+	 */
+	private boolean isDebugEnabled() {
+		return _debug;
+	}
+
+	/**
+	 * Accessor for the debug flag
+	 */
+	public void setDebugEnabled(boolean debug) {
+		_debug = debug;
 	}
 }

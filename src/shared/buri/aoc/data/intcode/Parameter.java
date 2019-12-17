@@ -2,13 +2,7 @@ package buri.aoc.data.intcode;
 
 /**
  * Data model for a parameter.
- * - y19d2
- * - y19d5
- * - y19d7
- * - y19d9
- * - y19d11
- * - y19d13
- * - y19d15
+ * - y19d2, 5, 7, 9, 11, 13, 15, 17
  * 
  * @author Brian Uri!
  */
