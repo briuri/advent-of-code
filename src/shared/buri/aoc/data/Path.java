@@ -60,7 +60,7 @@ public class Path implements Comparable<Path> {
 	public Pair getNextPosition() {
 		return (getPath().get(1));
 	}
-
+	
 	/**
 	 * Returns the length of the path.
 	 */
@@ -83,7 +83,7 @@ public class Path implements Comparable<Path> {
 	/**
 	 * Accessor for the raw list of path positions
 	 */
-	private List<Pair> getPath() {
+	public List<Pair> getPath() {
 		return _path;
 	}
 }
