@@ -47,10 +47,10 @@ public class Leaderboard {
 		 * NOTE: Inactive accounts were purged from Novetta's leaderboard in 2019 to avoid the 200-player cap.
 		 * Redownloading JSON from older years and regenerating their pages will result in missing scores.
 		 */
-		// visualizeEvent("2018");
-		// visualizeEvent("2017");
-		// visualizeEvent("2016");
-		// visualizeEvent("2015");
+		visualizeEvent("2018");
+		visualizeEvent("2017");
+		visualizeEvent("2016");
+		visualizeEvent("2015");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class Leaderboard {
 		final Map<String, Object> leaderboardJson = readLeaderboard(event);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(event, leaderboardJson);
 		final Map<String, Integer> stars = getStars(event, leaderboardJson);
-		final List<MedianTime> medianTimes = getMedianTimes(puzzleTimes, stars);
+		final List<MedianTime> medianTimes = getMedianTimes(event, puzzleTimes, stars);
 
 		StringBuffer page = new StringBuffer();
 		insertHeader(page, event);
@@ -185,7 +185,11 @@ public class Leaderboard {
 	/**
 	 * Groups puzzle completion times by name for median calculations.
 	 */
-	private static List<MedianTime> getMedianTimes(List<List<PuzzleTime>> puzzleTimes, Map<String, Integer> stars) {
+	private static List<MedianTime> getMedianTimes(String event, List<List<PuzzleTime>> puzzleTimes,
+		Map<String, Integer> stars) {
+		if (!event.equals(CURRENT_EVENT)) {
+			return (new ArrayList<>());
+		}
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<String>> rawPuzzleTimes = new HashMap<>();
 		for (List<PuzzleTime> singleDay : puzzleTimes) {
@@ -240,20 +244,21 @@ public class Leaderboard {
 		page.append(" (").append(event).append(")").append("</title>\n");
 		page.append("<style>\n");
 		page.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
-		page.append("\th1 { font-size: 12pt; }\n");
-		page.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		page.append("\ta { color: #009900; }\n");
 		page.append("\ta:hover { color: #99ff99; }\n");
 		page.append("\ta:link { text-decoration: none; }\n");
+		page.append("\th1 { font-size: 12pt; }\n");
+		page.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
+		page.append("\tli.median { margin-bottom: 5px; }\n");
+		page.append("\tspan.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
+		page.append("\tspan.median:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
 		page.append("\t.antiIndex { display: none; }\n");
 		page.append("\t.details { display: none; margin-bottom: 10px; }\n");
 		page.append("\t.emoji { font-size: 8pt; }\n");
 		page.append("\t.empty { font-size: 11pt; }\n");
-		page.append("\t.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
-		page.append("\t.median:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
+		page.append("\t.global { color: #ffff00; }\n");
 		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
 		page.append("\t.tiny { font-size: 9pt; }\n");
-		page.append("\t.global { color: #ffff00; }\n");
 		page.append("</style>\n</head>\n\n<body>\n");
 		page.append("<h1>Novetta Advent of Code - Top ").append(TOP_NUM).append(" Solve Times");
 		page.append(" (").append(event).append(")").append("</h1>\n\n");
@@ -284,7 +289,6 @@ public class Leaderboard {
 		if (!event.equals(CURRENT_EVENT)) {
 			return;
 		}
-		String shortTimestamp = readLastModified(event).substring(5, 16);
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
@@ -294,19 +298,19 @@ public class Leaderboard {
 		page.append("\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("}\n");
 		page.append("</script>\n");
-		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall (").append(shortTimestamp).append(")</h3>\n");
-		page.append("<p class=\"tiny\">");
-		page.append("Click on a median time to show/hide all times. ");
-		page.append("Scoring is based on stars earned with median time as the tiebreaker.</p>\n");
+		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall");
+		page.append(" (").append(readLastModified(event)).append(")</h3>\n");
+		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
-			page.append("\t<li>&nbsp;<span class=\"median\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
+			page.append("\t<li class=\"median\">&nbsp;");
+			page.append("<span class=\"median\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
 			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(player.getMedianTime());
-			page.append("</span>&nbsp; ").append(maskName(players, player.getName()));
+			page.append("</span>&nbsp;&nbsp;").append(maskName(players, player.getName()));
 			page.append(getDivision(players, player.getName())).append("<br />\n");
-			for (int j = 0; j < 14; j++) {
+			for (int j = 0; j < 12; j++) {
 				page.append("&nbsp;");
 			}
 			page.append(player.getStars()).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ");
@@ -323,7 +327,10 @@ public class Leaderboard {
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = player.getTimes().get(j);
-				page.append("\t&nbsp;");
+				page.append("\t");
+				if (time.length() == 8) {
+					page.append("&nbsp;");
+				}
 				// Highlight 1 or two numbers to denote median.
 				if (j == totalTimes / 2 || (j == totalTimes / 2 - 1 && totalTimes % 2 == 0)) {
 					page.append("<span class=\"median\">").append(time).append("</span>");
@@ -336,7 +343,7 @@ public class Leaderboard {
 			page.append("</div>\n");
 			page.append("</li>\n");
 		}
-		page.append("</ol>\n\n");
+		page.append("</ol>\n");
 	}
 
 	/**
@@ -356,15 +363,17 @@ public class Leaderboard {
 				page.append("<ol>\n");
 				for (int place = 0; place < Math.min(TOP_NUM, places.size()); place++) {
 					PuzzleTime record = places.get(place);
-					page.append("\t<li>").append(record.getPrettyTime(false));
+					String time = record.getPrettyTime(false);
+					page.append("\t<li>");					
 					if (place + 1 <= puzzles.get(i).getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(event);
 						page.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
 					}
-					else {
+					else if (time.length() == 8) {
 						page.append("&nbsp;");
 					}
-					page.append(" ").append(maskName(players, record.getName())).append("</li>\n");
+					page.append(time);
+					page.append("&nbsp;&nbsp;").append(maskName(players, record.getName())).append("</li>\n");
 				}
 				page.append("</ol>\n");
 			}

@@ -46,9 +46,6 @@ public class PuzzleTime implements Comparable {
 			int hours = Integer.valueOf(buffer.substring(0, 2)) + (24 * overflow);
 			buffer.replace(0, 2, String.valueOf(hours));
 		}
-		if (buffer.length() == 8 && !forMedianCalculation) {
-			buffer.insert(0, "&nbsp;");
-		}
 		return (buffer.toString());
 	}
 

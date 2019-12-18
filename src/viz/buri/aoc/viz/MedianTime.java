@@ -1,5 +1,7 @@
 package buri.aoc.viz;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -36,6 +38,17 @@ public class MedianTime implements Comparable {
 				_third += 1;
 			}
 		}
+		Collections.sort(getTimes(), new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				int secs1 = toSeconds(o1);
+				int secs2 = toSeconds(o2);
+				if (secs1 == secs2) {
+					return (0);
+				}
+				return (secs1 < secs2 ? -1 : 1);
+			}			
+		});
 	}
 
 	/**
