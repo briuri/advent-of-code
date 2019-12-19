@@ -49,7 +49,7 @@ public class Day17 extends Puzzle {
 		String functionA = "R,6,L,10,R,10,R,10\n";
 		String functionB = "L,10,L,12,R,10\n";
 		String functionC = "R,6,L,12,L,10\n";
-		String view = "y\n";
+		String view = "n\n";
 		
 		List<Long> inputs = new ArrayList<>();
 		inputs.addAll(toAscii(mainRoutine));
