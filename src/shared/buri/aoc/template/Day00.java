@@ -17,11 +17,11 @@ public class Day00 extends Puzzle {
 	 * Returns the input file HOW 
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2019/00", fileIndex));
+		return (readFile("2019a/00", fileIndex));
 	}
 	public static List<Data> getInput2(int fileIndex) {
 		List<Data> list = new ArrayList<>();
-		for (String input : readFile("2019/00", fileIndex)) {
+		for (String input : readFile("2019a/00", fileIndex)) {
 			list.add(new Data(input));
 		}
 		return (list);
@@ -36,9 +36,9 @@ public class Day00 extends Puzzle {
 	 */
 	public static int getResult(Part part, List<String> input) {
 		if (part == Part.ONE) {
-			return (-1);
+			return (0);
 		}
-		return (-1);
+		return (0);
 	}
 	
 	/**
