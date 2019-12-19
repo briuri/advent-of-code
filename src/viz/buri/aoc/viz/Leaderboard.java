@@ -251,7 +251,7 @@ public class Leaderboard {
 		page.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		page.append("\tli.median { margin-bottom: 5px; }\n");
 		page.append("\tspan.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
-		page.append("\tspan.median:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
+		page.append("\tspan.medianLink:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
 		page.append("\t.antiIndex { display: none; }\n");
 		page.append("\t.details { display: none; margin-bottom: 10px; }\n");
 		page.append("\t.emoji { font-size: 8pt; }\n");
@@ -305,7 +305,7 @@ public class Leaderboard {
 		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
 			MedianTime player = medianTimes.get(i);
 			page.append("\t<li class=\"median\">&nbsp;");
-			page.append("<span class=\"median\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
+			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
 			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(player.getMedianTime());
 			page.append("</span>&nbsp;&nbsp;").append(maskName(players, player.getName()));
