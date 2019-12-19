@@ -331,9 +331,21 @@ public class Leaderboard {
 				if (time.length() == 8) {
 					page.append("&nbsp;");
 				}
-				// Highlight 1 or two numbers to denote median.
-				if (j == totalTimes / 2 || (j == totalTimes / 2 - 1 && totalTimes % 2 == 0)) {
+				
+				// Averaged median
+				if (totalTimes % 2 == 0 && (j == totalTimes / 2 - 1)) {
 					page.append("<span class=\"median\">").append(time).append("</span>");
+					page.append("&nbsp;&nbsp;average is");
+				}
+				// Single median
+				else if (j == totalTimes / 2)  {
+					page.append("<span class=\"median\">").append(time).append("</span>");
+					page.append("&nbsp;&nbsp;current median");
+				}
+				// 13th median (superceded by current median once event is complete).
+				else if (j == 12) {
+					page.append("<span class=\"median\">").append(time).append("</span>");
+					page.append("&nbsp;&nbsp;13th fastest median");
 				}
 				else {
 					page.append(time);
