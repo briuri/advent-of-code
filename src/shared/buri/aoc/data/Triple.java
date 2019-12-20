@@ -5,7 +5,7 @@ package buri.aoc.data;
  * 
  * @author Brian Uri!
  */
-public class Triple {
+public class Triple implements Comparable<Triple> {
 
 	private long _x;
 	private long _y;
@@ -18,6 +18,13 @@ public class Triple {
 		_x = x;
 		_y = y;
 		_z = z;
+	}
+
+	/**
+	 * Returns a copy of this triple.
+	 */
+	public Triple copy() {
+		return (new Triple(getX(), getY(), getZ()));
 	}
 
 	/**
@@ -50,6 +57,21 @@ public class Triple {
 		buffer.append(getY()).append(",");
 		buffer.append(getZ());
 		return (buffer.toString());
+	}
+
+	/**
+	 * Pairs are compared by y then x (top-left first).
+	 */
+	@Override
+	public int compareTo(Triple o) {
+		long compare = getY() - o.getY();
+		if (compare == 0) {
+			compare = getX() - o.getX();
+		}
+		if (compare == 0) {
+			compare = getZ() - o.getZ();
+		}
+		return ((int) compare);
 	}
 
 	@Override
