@@ -61,7 +61,7 @@ public class Maze extends CharGrid {
 		Set<Character> destinationTiles = new HashSet<>();
 		destinationTiles.add(END);
 		List<Path> paths = getPaths(getStart(), destinationTiles);
-		return (paths.get(0).getLength() - 1);
+		return (paths.get(0).getLength());
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Maze extends CharGrid {
 		destinationTiles.add(EXPLORED);
 		destinationTiles.add(START);
 		List<Path> paths = getPaths(getEnd(), destinationTiles);
-		return (paths.get(0).getLength() - 1);
+		return (paths.get(0).getLength());
 	}
 
 	/**

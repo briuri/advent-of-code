@@ -170,7 +170,7 @@ public class RoomMap extends CharGrid {
 	 */
 	public int getMostDoors() {
 		// Every other cell on the path is a door.
-		return (getPaths().get(0).getLength() / 2);
+		return ((getPaths().get(0).getLength() + 1) / 2);
 	}
 	
 	
@@ -181,7 +181,7 @@ public class RoomMap extends CharGrid {
 		int count = 0;
 		for (Path path : getPaths()) {
 			// Every other cell on the path is a door.
-			if (path.getLength() / 2 >= minDoors) {
+			if ((path.getLength() + 1) / 2 >= minDoors) {
 				count++;
 			}
 		}

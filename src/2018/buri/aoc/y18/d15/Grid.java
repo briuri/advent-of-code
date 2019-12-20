@@ -83,7 +83,7 @@ public class Grid extends CharGrid {
 			List<Path> paths = getShortestPathsFor(unit);
 			if (!paths.isEmpty()) {
 				set(unit.getPosition(), OPEN);
-				unit.setPosition(paths.get(0).getNextPosition());
+				unit.setPosition(paths.get(0).getPositions().get(1));
 				set(unit.getPosition(), unit.getType());
 			}
 		}

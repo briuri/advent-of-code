@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Path implements Comparable<Path> {
-	private List<Pair> _path = new ArrayList<>();
+	private List<Pair> _positions = new ArrayList<>();
 
 	/**
 	 * Factory method to convert the results of a BFS into paths.
@@ -30,42 +30,20 @@ public class Path implements Comparable<Path> {
 	/**
 	 * Constructor
 	 */
-	public Path(Pair start, Pair end, Map<Pair, Pair> cameFrom) {
+	private Path(Pair start, Pair end, Map<Pair, Pair> cameFrom) {
 		Pair current = end;
 		while (current != null) {
-			getPath().add(current);
+			getPositions().add(current);
 			current = cameFrom.get(current);
 		}
-		Collections.reverse(getPath());
+		Collections.reverse(getPositions());
 	}
-
-	/**
-	 * Returns the start
-	 */
-	public Pair getStart() {
-		return (getPath().get(0));
-	}
-	
-	/**
-	 * Returns the destination
-	 */
-	public Pair getEnd() {
-		return (getPath().get(getLength() - 1));
-	}
-	
-	/**
-	 * Returns the next position on the path (assuming the unit is at the 1st one and needs to move). All paths have at
-	 * least 2 nodes.
-	 */
-	public Pair getNextPosition() {
-		return (getPath().get(1));
-	}
-	
+		
 	/**
 	 * Returns the length of the path.
 	 */
 	public int getLength() {
-		return (getPath().size());
+		return (getPositions().size() - 1);
 	}
 	
 	/**
@@ -73,9 +51,9 @@ public class Path implements Comparable<Path> {
 	 */
 	@Override
 	public int compareTo(Path o) {
-		int compare = getPath().size() - o.getPath().size();
+		int compare = getPositions().size() - o.getPositions().size();
 		if (compare == 0) {
-			compare = getNextPosition().compareTo(o.getNextPosition());
+			compare = getPositions().get(1).compareTo(o.getPositions().get(1));
 		}
 		return (compare);
 	}
@@ -83,7 +61,7 @@ public class Path implements Comparable<Path> {
 	/**
 	 * Accessor for the raw list of path positions
 	 */
-	public List<Pair> getPath() {
-		return _path;
+	public List<Pair> getPositions() {
+		return _positions;
 	}
 }

@@ -50,7 +50,7 @@ public class Grid extends CharGrid {
 
 		// There will be 1 path returned, since only 1 destination was provided.
 		List<Path> shortestPaths = getShortestPaths(destinations);
-		return (shortestPaths.get(0).getLength() - 1);
+		return (shortestPaths.get(0).getLength());
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Grid extends CharGrid {
 
 		int count = 0;
 		for (Path path : getShortestPaths(destinations)) {
-			if (path.getLength() - 1 <= steps) {
+			if (path.getLength() <= steps) {
 				count++;
 			}
 		}
