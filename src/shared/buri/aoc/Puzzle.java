@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
  */
 public abstract class Puzzle {
 		
+	public static final char LINE_BREAK = 10;
+	
 	/**
 	 * Loads a file as a list of string lines.
 	 */
@@ -85,4 +88,17 @@ public abstract class Puzzle {
    		}
    		return (getGCD(b % a, a));
    	}
+	
+
+	/**
+	 * Converts the program into Intcode inputs. (y19)
+	 */
+	protected static List<Long> toAscii(String routine) {
+		List<Long> list = new ArrayList<>();
+		for (char value : routine.toCharArray()) {
+			list.add(Long.valueOf((int) value));
+		}
+		list.add(Long.valueOf((int) LINE_BREAK));
+		return (list);
+	}
 }

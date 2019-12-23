@@ -45,11 +45,11 @@ public class Day17 extends Puzzle {
 		Computer computer = new Computer(program, 2L);
 		
 		// Function definitions calculated by hand against the Part One grid.
-		String mainRoutine = "A,B,A,B,A,C,A,C,B,C\n";
-		String functionA = "R,6,L,10,R,10,R,10\n";
-		String functionB = "L,10,L,12,R,10\n";
-		String functionC = "R,6,L,12,L,10\n";
-		String view = "n\n";
+		String mainRoutine = "A,B,A,B,A,C,A,C,B,C";
+		String functionA = "R,6,L,10,R,10,R,10";
+		String functionB = "L,10,L,12,R,10";
+		String functionC = "R,6,L,12,L,10";
+		String view = "n";
 		
 		List<Long> inputs = new ArrayList<>();
 		inputs.addAll(toAscii(mainRoutine));
@@ -60,16 +60,5 @@ public class Day17 extends Puzzle {
 		computer.getInputs().addAll(inputs);
 		computer.run();
 		return (computer.getLastOutput());
-	}
-
-	/**
-	 * Converts the program into Intcode inputs.
-	 */
-	private static List<Long> toAscii(String routine) {
-		List<Long> list = new ArrayList<>();
-		for (char value : routine.toCharArray()) {
-			list.add(Long.valueOf((int) value));
-		}		
-		return (list);
 	}
 }
