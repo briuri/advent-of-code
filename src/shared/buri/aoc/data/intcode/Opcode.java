@@ -2,7 +2,7 @@ package buri.aoc.data.intcode;
 
 /**
  * Representation of an opcode
- * - y19d2, 5, 7, 9, 11, 13, 15, 17, 19
+ * - y19d2, 5, 7, 9, 11, 13, 15, 17, 19,21, 23
  * 
  * @author Brian Uri!
  */
