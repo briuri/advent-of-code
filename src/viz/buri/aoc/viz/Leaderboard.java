@@ -289,6 +289,7 @@ public class Leaderboard {
 		if (!event.equals(CURRENT_EVENT)) {
 			return;
 		}
+		int numMedians = Math.min(TOP_NUM, medianTimes.size());
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
@@ -298,11 +299,11 @@ public class Leaderboard {
 		page.append("\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("}\n");
 		page.append("</script>\n");
-		page.append("\n<h3>Top ").append(TOP_NUM).append(" Overall");
+		page.append("\n<h3>Top ").append(numMedians).append(" Overall");
 		page.append(" (").append(readLastModified(event)).append(")</h3>\n");
 		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
-		for (int i = 0; i < Math.min(TOP_NUM, medianTimes.size()); i++) {
+		for (int i = 0; i < numMedians; i++) {
 			MedianTime player = medianTimes.get(i);
 			page.append("\t<li class=\"median\">&nbsp;");
 			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
