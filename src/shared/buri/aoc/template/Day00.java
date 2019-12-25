@@ -1,6 +1,5 @@
 package buri.aoc.template;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
@@ -17,14 +16,12 @@ public class Day00 extends Puzzle {
 	 * Returns the input file HOW 
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2019a/00", fileIndex));
-	}
-	public static List<Data> getInput2(int fileIndex) {
-		List<Data> list = new ArrayList<>();
-		for (String input : readFile("2019a/00", fileIndex)) {
-			list.add(new Data(input));
-		}
-		return (list);
+		return (readFile("2020a/00", fileIndex));
+//		List<Data> list = new ArrayList<>();
+//		for (String input : readFile("2020a/00", fileIndex)) {
+//			list.add(new Data(input));
+//		}
+//		return (list);
 	}
 	
 	/**
