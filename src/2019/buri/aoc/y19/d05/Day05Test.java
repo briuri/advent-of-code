@@ -26,8 +26,7 @@ public class Day05Test extends BaseTest {
 	@Test
 	public void testPart1Puzzle() {
 		long result = Day05.getResult(Part.ONE, Day05.getInput(0));
-		toClipboard(result);
-		System.out.println("Day 5 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals(15259545L, result);
 	}
 
@@ -42,8 +41,7 @@ public class Day05Test extends BaseTest {
 	@Test
 	public void testPart2Puzzle() {
 		long result = Day05.getResult(Part.TWO, Day05.getInput(0));
-		toClipboard(result);
-		System.out.println("Day 5 Part 2\n\t" + result);
+		toConsole(result);
 		assertEquals(7616021L, result);
 	}
 }

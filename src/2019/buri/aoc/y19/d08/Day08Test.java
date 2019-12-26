@@ -29,8 +29,7 @@ public class Day08Test extends BaseTest {
 	@Test
 	public void testPart1Puzzle() {
 		String result = Day08.getResult(Part.ONE, Day08.getInput(0), 25, 6);
-		toClipboard(result);
-		System.out.println("Day 8 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals("2684", result);
 	}
 
@@ -45,7 +44,7 @@ public class Day08Test extends BaseTest {
 	@Test
 	public void testPart2Puzzle() {
 		String result = Day08.getResult(Part.TWO, Day08.getInput(0), 25, 6);
-		System.out.println("Day 8 Part 2\n\t" + result);
+		toConsole(result);
 		// YGRYZ
 		assertEquals("■   ■ ■■  ■■■  ■   ■■■■■ \n■   ■■  ■ ■  ■ ■   ■   ■ \n ■ ■ ■    ■  ■  ■ ■   ■  \n  ■  ■ ■■ ■■■    ■   ■   \n  ■  ■  ■ ■ ■    ■  ■    \n  ■   ■■■ ■  ■   ■  ■■■■ ", result);
 	}

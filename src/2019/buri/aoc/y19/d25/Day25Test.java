@@ -27,8 +27,7 @@ public class Day25Test extends BaseTest {
 	@Test
 	public void testPart1Puzzle() throws IOException {
 		String result = Day25.getResult(Part.ONE, Day25.getInput(0));
-		toClipboard(result);
-		System.out.println("Day 25 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals("134227456", result);
 	}
 }

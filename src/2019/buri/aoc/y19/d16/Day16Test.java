@@ -111,8 +111,7 @@ public class Day16Test extends BaseTest {
 	@Test
 	public void testPart1Puzzle() {
 		String result = Day16.getResult(Part.ONE, Day16.getInput(0), 100);
-		toClipboard(result);
-		System.out.println("Day 16 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals("82435530", result);
 	}
 
@@ -129,8 +128,7 @@ public class Day16Test extends BaseTest {
 	@Test
 	public void testPart2Puzzle() {
 		String result = Day16.getResult(Part.TWO, Day16.getInput(0), 100);
-		toClipboard(result);
-		System.out.println("Day 16 Part 2\n\t" + result);
+		toConsole(result);
 		assertEquals("83036156", result);
 	}
 }
