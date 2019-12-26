@@ -6,10 +6,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import buri.aoc.BaseTest;
+
 /**
  * @author Brian Uri!
  */
-public class Day07Test {
+public class Day07Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
@@ -32,7 +34,7 @@ public class Day07Test {
 	@Test
 	public void testPart1Puzzle() {
 		String result = Day07.getPart1Result(Day07.getInput(0));
-		System.out.println("Day 7 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals("svugo", result);
 	}
 
@@ -52,7 +54,7 @@ public class Day07Test {
 	@Test
 	public void testPart2Puzzle() {
 		int result = Day07.getPart2Result(Day07.getInput(0));
-		System.out.println("Day 7 Part 2\n\t" + result);
+		toConsole(result);
 		assertEquals(1152, result);
 	}
 }

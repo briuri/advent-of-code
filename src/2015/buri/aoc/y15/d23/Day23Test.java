@@ -6,12 +6,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import buri.aoc.BaseTest;
 import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
  */
-public class Day23Test {
+public class Day23Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
@@ -25,7 +26,7 @@ public class Day23Test {
 	@Test
 	public void testPart1Puzzle() {
 		long result = Day23.getResult(Part.ONE, Day23.getInput(0));
-		System.out.println("Day 23 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals(255, result);
 	}
 
@@ -35,7 +36,7 @@ public class Day23Test {
 	@Test
 	public void testPart2Puzzle() {
 		long result = Day23.getResult(Part.TWO, Day23.getInput(0));
-		System.out.println("Day 23 Part 2\n\t" + result);
+		toConsole(result);
 		assertEquals(334, result);
 	}
 }

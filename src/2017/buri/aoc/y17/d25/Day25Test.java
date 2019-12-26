@@ -4,10 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import buri.aoc.BaseTest;
+
 /**
  * @author Brian Uri!
  */
-public class Day25Test {
+public class Day25Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
@@ -26,7 +28,7 @@ public class Day25Test {
 	@Test
 	public void testPart1Puzzle() {
 		int result = Day25.getResult(Day25.getInput(0));
-		System.out.println("Day 25 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals(3578, result);
 	}
 }

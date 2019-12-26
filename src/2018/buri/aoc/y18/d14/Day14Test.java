@@ -4,12 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import buri.aoc.BaseTest;
 import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
  */
-public class Day14Test {
+public class Day14Test extends BaseTest {
 
 	@Test
 	public void testPart1Examples() {
@@ -25,7 +26,7 @@ public class Day14Test {
 	@Test
 	public void testPart1Puzzle() {
 		String result = Day14.getResult(Part.ONE, "652601");
-		System.out.println("Day 14 Part 1\n\t" + result);
+		toConsole(result);
 		assertEquals("1221283494", result);
 	}
 
@@ -43,7 +44,7 @@ public class Day14Test {
 	@Test
 	public void testPart2Puzzle() {
 		String result = Day14.getResult(Part.TWO, "652601");
-		System.out.println("Day 14 Part 2\n\t" + result);
+		toConsole(result);
 		assertEquals("20261485", result);
 	}
 }
