@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Triple;
 
 /**
@@ -16,7 +16,7 @@ import buri.aoc.data.Triple;
  * 
  * @author Brian Uri!
  */
-public class Day24 extends Puzzle {
+public class Day24 extends BasePuzzle {
 
 	private static final char BUG = '#';
 	private static final int SIZE = 5;

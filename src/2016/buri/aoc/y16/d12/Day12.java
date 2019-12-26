@@ -3,14 +3,14 @@ package buri.aoc.y16.d12;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 12: Leonardo's Monorail
  * 
  * @author Brian Uri!
  */
-public class Day12 extends Puzzle {
+public class Day12 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodifed. 

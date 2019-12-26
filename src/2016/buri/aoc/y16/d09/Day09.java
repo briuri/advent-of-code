@@ -1,14 +1,14 @@
 package buri.aoc.y16.d09;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 9: Explosives in Cyberspace
  * 
  * @author Brian Uri!
  */
-public class Day09 extends Puzzle {
+public class Day09 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

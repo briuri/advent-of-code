@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 16: Flawed Frequency Transmission
  * 
  * @author Brian Uri!
  */
-public class Day16 extends Puzzle {
+public class Day16 extends BasePuzzle {
 
 	private static final int[] BASE_PATTERN = new int[] { 0, 1, 0, -1 };
 	private static final Map<String, List<Integer>> CACHED_PATTERNS = new HashMap<>();

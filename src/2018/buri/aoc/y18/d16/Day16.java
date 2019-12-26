@@ -3,14 +3,14 @@ package buri.aoc.y18.d16;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 16: Chronal Classification
  * 
  * @author Brian Uri!
  */
-public class Day16 extends Puzzle {
+public class Day16 extends BasePuzzle {
 
 	/**
 	 * For ease of processing, I split the raw input file into the data for Part 1 (16-0, 16-1) and Part 2 (16-2).

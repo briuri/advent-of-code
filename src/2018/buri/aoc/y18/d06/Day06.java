@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 
 /**
@@ -16,7 +16,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Day06 extends Puzzle {
+public class Day06 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of coordinate pairs.

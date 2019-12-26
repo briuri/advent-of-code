@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Permutations;
 
 /**
@@ -14,7 +14,7 @@ import buri.aoc.data.Permutations;
  * 
  * @author Brian Uri!
  */
-public class Day13 extends Puzzle {
+public class Day13 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

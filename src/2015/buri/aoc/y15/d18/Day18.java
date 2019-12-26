@@ -3,14 +3,14 @@ package buri.aoc.y15.d18;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day Day 18: Like a GIF For Your Yard
  * 
  * @author Brian Uri!
  */
-public class Day18 extends Puzzle {
+public class Day18 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

@@ -9,14 +9,14 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 12: JSAbacusFramework.io
  * 
  * @author Brian Uri!
  */
-public class Day12 extends Puzzle {
+public class Day12 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

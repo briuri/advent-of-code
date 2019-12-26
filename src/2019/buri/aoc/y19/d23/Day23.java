@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 import buri.aoc.data.intcode.Computer;
 
@@ -17,7 +17,7 @@ import buri.aoc.data.intcode.Computer;
  * 
  * @author Brian Uri!
  */
-public class Day23 extends Puzzle {
+public class Day23 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as an Intcode program

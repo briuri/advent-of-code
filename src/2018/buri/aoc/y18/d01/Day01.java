@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 1: Chronal Calibration
  * 
  * @author Brian Uri!
  */
-public class Day01 extends Puzzle {
+public class Day01 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of integers.

@@ -3,14 +3,14 @@ package buri.aoc.y15.d23;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 23: Opening the Turing Lock
  * 
  * @author Brian Uri!
  */
-public class Day23 extends Puzzle {
+public class Day23 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

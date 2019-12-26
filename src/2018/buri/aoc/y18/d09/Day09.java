@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 9: Marble Mania
  * 
  * @author Brian Uri!
  */
-public class Day09 extends Puzzle {
+public class Day09 extends BasePuzzle {
 
 	/**
 	 * Part 1: What is the winning Elf's score?

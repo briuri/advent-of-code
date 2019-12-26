@@ -3,14 +3,14 @@ package buri.aoc.y15.d15;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 15: Science for Hungry People
  * 
  * @author Brian Uri!
  */
-public class Day15 extends Puzzle {
+public class Day15 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

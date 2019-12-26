@@ -3,14 +3,14 @@ package buri.aoc.y19.d01;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 01: The Tyranny of the Rocket Equation
  * 
  * @author Brian Uri!
  */
-public class Day01 extends Puzzle {
+public class Day01 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of integers

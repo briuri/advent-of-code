@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 16: Permutation Promenade
  * 
  * @author Brian Uri!
  */
-public class Day16 extends Puzzle {
+public class Day16 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of commands

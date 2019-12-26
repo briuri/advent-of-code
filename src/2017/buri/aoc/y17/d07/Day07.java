@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 7: Recursive Circus
  * 
  * @author Brian Uri!
  */
-public class Day07 extends Puzzle {
+public class Day07 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a map of unique names to programs.

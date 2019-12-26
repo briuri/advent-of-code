@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 17: No Such Thing as Too Much
  * 
  * @author Brian Uri!
  */
-public class Day17 extends Puzzle {
+public class Day17 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified

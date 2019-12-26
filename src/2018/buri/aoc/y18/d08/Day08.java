@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 8: Memory Maneuver
  * 
  * @author Brian Uri!
  */
-public class Day08 extends Puzzle {
+public class Day08 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of integers.

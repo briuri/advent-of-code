@@ -3,14 +3,14 @@ package buri.aoc.y16.d25;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 25: Clock Signal
  * 
  * @author Brian Uri!
  */
-public class Day25 extends Puzzle {
+public class Day25 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 4: High-Entropy Passphrases
  * 
  * @author Brian Uri!
  */
-public class Day04 extends Puzzle {
+public class Day04 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a 2D list of strings.

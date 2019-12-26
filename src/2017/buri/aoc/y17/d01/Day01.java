@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 1: Inverse Captcha
  * 
  * @author Brian Uri!
  */
-public class Day01 extends Puzzle {
+public class Day01 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

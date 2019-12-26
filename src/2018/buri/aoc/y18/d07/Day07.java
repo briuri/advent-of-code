@@ -6,14 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 7: The Sum of Its Parts
  * 
  * @author Brian Uri!
  */
-public class Day07 extends Puzzle {
+public class Day07 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 4: Repose Record
  * 
  * @author Brian Uri!
  */
-public class Day04 extends Puzzle {
+public class Day04 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of Observations, sorted chronologically.

@@ -3,7 +3,7 @@ package buri.aoc.y19.d02;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.intcode.Computer;
 
 /**
@@ -11,7 +11,7 @@ import buri.aoc.data.intcode.Computer;
  * 
  * @author Brian Uri!
  */
-public class Day02 extends Puzzle {
+public class Day02 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of longs

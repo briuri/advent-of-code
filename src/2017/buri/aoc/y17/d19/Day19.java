@@ -1,14 +1,14 @@
 package buri.aoc.y17.d19;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 19: A Series of Tubes
  * 
  * @author Brian Uri!
  */
-public class Day19 extends Puzzle {
+public class Day19 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a diagram of the route.

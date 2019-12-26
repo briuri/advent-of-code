@@ -1,14 +1,14 @@
 package buri.aoc.y15.d10;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 10: Elves Look, Elves Say
  * 
  * @author Brian Uri!
  */
-public class Day10 extends Puzzle {
+public class Day10 extends BasePuzzle {
 	
 	/**
 	 * Part 1:

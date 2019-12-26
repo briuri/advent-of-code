@@ -3,14 +3,14 @@ package buri.aoc.y18.d21;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 21: Chronal Conversion
  * 
  * @author Brian Uri!
  */
-public class Day21 extends Puzzle {
+public class Day21 extends BasePuzzle {
 
 /**
  * Instructions converted into pseudocode:

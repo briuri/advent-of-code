@@ -6,14 +6,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 11: Corporate Policy
  * 
  * @author Brian Uri!
  */
-public class Day11 extends Puzzle {
+public class Day11 extends BasePuzzle {
 
 	private static final Pattern FORBIDDEN_CHARS = Pattern.compile("[iol]");
 	private static final Pattern STRAIGHT = Pattern.compile(

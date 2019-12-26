@@ -1,7 +1,7 @@
 package buri.aoc.y15.d04;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.MD5Hash;
 
 /**
@@ -9,7 +9,7 @@ import buri.aoc.data.MD5Hash;
  * 
  * @author Brian Uri!
  */
-public class Day04 extends Puzzle {
+public class Day04 extends BasePuzzle {
 
 	/**
 	 * Part 1:

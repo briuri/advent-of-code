@@ -3,14 +3,14 @@ package buri.aoc.y16.d02;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 2: Bathroom Security
  * 
  * @author Brian Uri!
  */
-public class Day02 extends Puzzle {
+public class Day02 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 21: Scrambled Letters and Hash
  * 
  * @author Brian Uri!
  */
-public class Day21 extends Puzzle {
+public class Day21 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

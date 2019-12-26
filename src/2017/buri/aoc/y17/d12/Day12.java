@@ -9,14 +9,14 @@ import java.util.Map;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 12: Digital Plumber
  * 
  * @author Brian Uri!
  */
-public class Day12 extends Puzzle {
+public class Day12 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a sorted list of reports.

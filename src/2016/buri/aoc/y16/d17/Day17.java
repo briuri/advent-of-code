@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 17: Two Steps Forward
  * 
  * @author Brian Uri!
  */
-public class Day17 extends Puzzle {
+public class Day17 extends BasePuzzle {
 
 	/**
 	 * Part 1:

@@ -1,14 +1,14 @@
 package buri.aoc.y15.d01;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 1: Not Quite Lisp
  * 
  * @author Brian Uri!
  */
-public class Day01 extends Puzzle {
+public class Day01 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

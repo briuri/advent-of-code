@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 20: Infinite Elves and Infinite Houses
  * 
  * @author Brian Uri!
  */
-public class Day20 extends Puzzle {
+public class Day20 extends BasePuzzle {
 
 	/**
 	 * Part 1:

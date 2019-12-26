@@ -1,14 +1,14 @@
 package buri.aoc.y16.d16;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 16: Dragon Checksum
  * 
  * @author Brian Uri!
  */
-public class Day16 extends Puzzle {
+public class Day16 extends BasePuzzle {
 
 	/**
 	 * Part 1:

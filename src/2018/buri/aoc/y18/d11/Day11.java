@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 11: Chronal Charge
  * 
  * @author Brian Uri!
  */
-public class Day11 extends Puzzle {
+public class Day11 extends BasePuzzle {
 
 	/**
 	 * Part 1:

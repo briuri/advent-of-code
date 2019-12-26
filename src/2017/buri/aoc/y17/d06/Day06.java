@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 6: Memory Reallocation
  * 
  * @author Brian Uri!
  */
-public class Day06 extends Puzzle {
+public class Day06 extends BasePuzzle {
 	
 	/**
 	 * Returns input file as a list of numbers.

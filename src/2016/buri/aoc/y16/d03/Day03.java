@@ -3,14 +3,14 @@ package buri.aoc.y16.d03;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 3: Squares With Three Sides
  * 
  * @author Brian Uri!
  */
-public class Day03 extends Puzzle {
+public class Day03 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

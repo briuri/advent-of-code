@@ -3,14 +3,14 @@ package buri.aoc.y19.d18;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 18: Many-Worlds Interpretation
  * 
  * @author Brian Uri!
  */
-public class Day18 extends Puzzle {
+public class Day18 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

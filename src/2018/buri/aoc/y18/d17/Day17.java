@@ -3,14 +3,14 @@ package buri.aoc.y18.d17;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 17: Reservoir Research
  * 
  * @author Brian Uri!
  */
-public class Day17 extends Puzzle {
+public class Day17 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

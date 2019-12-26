@@ -3,7 +3,7 @@ package buri.aoc.y15.d06;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 
@@ -12,7 +12,7 @@ import buri.aoc.data.grid.IntGrid;
  * 
  * @author Brian Uri!
  */
-public class Day06 extends Puzzle {
+public class Day06 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified. 

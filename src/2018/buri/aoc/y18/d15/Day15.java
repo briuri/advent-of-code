@@ -3,14 +3,14 @@ package buri.aoc.y18.d15;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 15: Beverage Bandits
  * 
  * @author Brian Uri!
  */
-public class Day15 extends Puzzle {
+public class Day15 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

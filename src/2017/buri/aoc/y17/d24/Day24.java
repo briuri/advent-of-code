@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 24: Electromagnetic Moat
  * 
  * @author Brian Uri!
  */
-public class Day24 extends Puzzle {
+public class Day24 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a PieceBag. Assumes no duplicates -- all port combinations are different.

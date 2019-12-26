@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 3: No Matter How You Slice It
  * 
  * @author Brian Uri!
  */
-public class Day03 extends Puzzle {
+public class Day03 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of Claims

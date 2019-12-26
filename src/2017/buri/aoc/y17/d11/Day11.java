@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 11: Hex Ed
  * 
  * @author Brian Uri!
  */
-public class Day11 extends Puzzle {
+public class Day11 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of directions.

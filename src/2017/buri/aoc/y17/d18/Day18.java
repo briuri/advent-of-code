@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Queue;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 18: Duet
  * 
  * @author Brian Uri!
  */
-public class Day18 extends Puzzle {
+public class Day18 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 5: Doesn't He Have Intern-Elves For This?
  * 
  * @author Brian Uri!
  */
-public class Day05 extends Puzzle {
+public class Day05 extends BasePuzzle {
 
 	private static final Pattern REPEATING_CHAR = Pattern.compile("(\\w)\\1+");
 

@@ -1,14 +1,14 @@
 package buri.aoc.y17.d17;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 17: Spinlock
  * 
  * @author Brian Uri!
  */
-public class Day17 extends Puzzle {
+public class Day17 extends BasePuzzle {
 
 	/**
 	 * Part 1:

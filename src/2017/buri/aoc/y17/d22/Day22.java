@@ -1,14 +1,14 @@
 package buri.aoc.y17.d22;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 22: Sporifica Virus
  * 
  * @author Brian Uri!
  */
-public class Day22 extends Puzzle {
+public class Day22 extends BasePuzzle {
 
 	/**
 	 * Returns input file as Cluster object

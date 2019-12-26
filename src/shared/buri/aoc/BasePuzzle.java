@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * 
  * @author Brian Uri!
  */
-public abstract class Puzzle {
+public abstract class BasePuzzle {
 			
 	/**
 	 * Loads a file as a list of string lines.

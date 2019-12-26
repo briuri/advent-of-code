@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 12: The N-Body Problem
  * 
  * @author Brian Uri!
  */
-public class Day12 extends Puzzle {
+public class Day12 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of strings.

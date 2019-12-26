@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 7: Some Assembly Required
  * 
  * @author Brian Uri!
  */
-public class Day07 extends Puzzle {
+public class Day07 extends BasePuzzle {
 
 	private static final Pattern VARIABLE_NAMES = Pattern.compile("[a-z]");
 

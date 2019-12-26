@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Direction;
 import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
@@ -17,7 +17,7 @@ import buri.aoc.data.grid.CharGrid;
  * 
  * @author Brian Uri!
  */
-public class Day03 extends Puzzle {
+public class Day03 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified, a wire path on each line.

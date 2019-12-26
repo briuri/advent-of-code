@@ -3,14 +3,14 @@ package buri.aoc.y17.d05;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 5: A Maze of Twisty Trampolines, All Alike
  * 
  * @author Brian Uri!
  */
-public class Day05 extends Puzzle {
+public class Day05 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of integer jump instructions.

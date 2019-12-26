@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.intcode.Computer;
 
@@ -13,7 +13,7 @@ import buri.aoc.data.intcode.Computer;
  * 
  * @author Brian Uri!
  */
-public class Day21 extends Puzzle {
+public class Day21 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as an Intcode program

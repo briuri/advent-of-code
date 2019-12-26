@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.CharFrequency;
 
 /**
@@ -13,7 +13,7 @@ import buri.aoc.data.CharFrequency;
  * 
  * @author Brian Uri!
  */
-public class Day04 extends Puzzle {
+public class Day04 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as two integers.

@@ -3,14 +3,14 @@ package buri.aoc.y18.d12;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 12: Subterranean Sustainability
  * 
  * @author Brian Uri!
  */
-public class Day12 extends Puzzle {
+public class Day12 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

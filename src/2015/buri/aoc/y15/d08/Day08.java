@@ -3,14 +3,14 @@ package buri.aoc.y15.d08;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 8: Matchsticks
  * 
  * @author Brian Uri!
  */
-public class Day08 extends Puzzle {
+public class Day08 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

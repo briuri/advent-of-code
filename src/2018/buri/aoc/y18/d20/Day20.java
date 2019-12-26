@@ -1,14 +1,14 @@
 package buri.aoc.y18.d20;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 20: A Regular Map
  * 
  * @author Brian Uri!
  */
-public class Day20 extends Puzzle {
+public class Day20 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified. 

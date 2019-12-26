@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 16: Aunt Sue
  * 
  * @author Brian Uri!
  */
-public class Day16 extends Puzzle {
+public class Day16 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

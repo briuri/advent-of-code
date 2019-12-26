@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 10: Balance Bots
  * 
  * @author Brian Uri!
  */
-public class Day10 extends Puzzle {
+public class Day10 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

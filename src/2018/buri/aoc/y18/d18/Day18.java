@@ -3,14 +3,14 @@ package buri.aoc.y18.d18;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 18: Settlers of the North Pole
  * 
  * @author Brian Uri!
  */
-public class Day18 extends Puzzle {
+public class Day18 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

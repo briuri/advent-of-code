@@ -3,7 +3,7 @@ package buri.aoc.y18.d19;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.registers.IndexedRegisters;
 
 /**
@@ -11,7 +11,7 @@ import buri.aoc.data.registers.IndexedRegisters;
  * 
  * @author Brian Uri!
  */
-public class Day19 extends Puzzle {
+public class Day19 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

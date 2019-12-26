@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 20: Firewall Rules
  * 
  * @author Brian Uri!
  */
-public class Day20 extends Puzzle {
+public class Day20 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of Ranges (may overlap).

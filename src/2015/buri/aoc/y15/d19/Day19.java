@@ -11,14 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 19: Medicine for Rudolph
  * 
  * @author Brian Uri!
  */
-public class Day19 extends Puzzle {
+public class Day19 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

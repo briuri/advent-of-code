@@ -1,14 +1,14 @@
 package buri.aoc.y18.d13;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 13: Mine Cart Madness
  * 
  * @author Brian Uri!
  */
-public class Day13 extends Puzzle {
+public class Day13 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a Tracks object.

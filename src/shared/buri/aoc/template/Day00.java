@@ -3,14 +3,14 @@ package buri.aoc.template;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 00: TITLE
  * 
  * @author Brian Uri!
  */
-public class Day00 extends Puzzle {
+public class Day00 extends BasePuzzle {
 
 	/**
 	 * Returns the input file HOW 

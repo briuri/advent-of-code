@@ -7,14 +7,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 24: It Hangs in the Balance
  * 
  * @author Brian Uri!
  */
-public class Day24 extends Puzzle {
+public class Day24 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodifeid

@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 2: I Was Told There Would Be No Math
  * 
  * @author Brian Uri!
  */
-public class Day02 extends Puzzle {
+public class Day02 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

@@ -3,14 +3,14 @@ package buri.aoc.y19.d22;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 22: Slam Shuffle
  * 
  * @author Brian Uri!
  */
-public class Day22 extends Puzzle {
+public class Day22 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

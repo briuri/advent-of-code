@@ -1,13 +1,13 @@
 package buri.aoc.y17.d25;
 
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 25: The Halting Problem
  * 
  * @author Brian Uri!
  */
-public class Day25 extends Puzzle {
+public class Day25 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a Machine object.

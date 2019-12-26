@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 8: I Heard You Like Registers
  * 
  * @author Brian Uri!
  */
-public class Day08 extends Puzzle {
+public class Day08 extends BasePuzzle {
 	
 	/**
 	 * Returns input file as a list of instructions.

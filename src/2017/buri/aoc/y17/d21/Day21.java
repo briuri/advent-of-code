@@ -3,14 +3,14 @@ package buri.aoc.y17.d21;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 21: Fractal Art
  * 
  * @author Brian Uri!
  */
-public class Day21 extends Puzzle {
+public class Day21 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of rules.

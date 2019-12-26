@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 06: Universal Orbit Map
  * 
  * @author Brian Uri!
  */
-public class Day06 extends Puzzle {
+public class Day06 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of string orbits.

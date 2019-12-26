@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.MD5Hash;
 
 /**
@@ -14,7 +14,7 @@ import buri.aoc.data.MD5Hash;
  * 
  * @author Brian Uri!
  */
-public class Day14 extends Puzzle {
+public class Day14 extends BasePuzzle {
 
 	private static final Pattern THREES = Pattern.compile("([a-f0-9])\\1{2}");
 

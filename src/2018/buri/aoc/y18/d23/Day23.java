@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Triple;
 
 /**
@@ -12,7 +12,7 @@ import buri.aoc.data.Triple;
  * 
  * @author Brian Uri!
  */
-public class Day23 extends Puzzle {
+public class Day23 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a list of nanobots.

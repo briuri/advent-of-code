@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 20: Particle Swarm
  * 
  * @author Brian Uri!
  */
-public class Day20 extends Puzzle {
+public class Day20 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of Particles with position, velocity, and acceleration.

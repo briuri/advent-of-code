@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Permutations;
 import buri.aoc.data.Triple;
 
@@ -14,7 +14,7 @@ import buri.aoc.data.Triple;
  * 
  * @author Brian Uri!
  */
-public class Day21 extends Puzzle {
+public class Day21 extends BasePuzzle {
 
 	// Triple x=gold, y=attack, z=armor
 	private static final List<Triple> WEAPONS = new ArrayList<>();	// 1-1 weapons

@@ -1,7 +1,7 @@
 package buri.aoc.y16.d13;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 
 /**
@@ -9,7 +9,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Day13 extends Puzzle {
+public class Day13 extends BasePuzzle {
 	
 	/**
 	 * Part 1:

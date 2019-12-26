@@ -4,14 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 5: Alchemical Reduction
  * 
  * @author Brian Uri!
  */
-public class Day05 extends Puzzle {
+public class Day05 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

@@ -3,7 +3,7 @@ package buri.aoc.y16.d04;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.CharFrequency;
 
 /**
@@ -11,7 +11,7 @@ import buri.aoc.data.CharFrequency;
  * 
  * @author Brian Uri!
  */
-public class Day04 extends Puzzle {
+public class Day04 extends BasePuzzle {
 
 	/**
 	 * Returns input file unmodified.

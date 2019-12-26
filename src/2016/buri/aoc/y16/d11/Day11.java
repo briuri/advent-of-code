@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 11: Radioisotope Thermoelectric Generators
  * 
  * @author Brian Uri!
  */
-public class Day11 extends Puzzle {
+public class Day11 extends BasePuzzle {
 
 	/**
 	 * Returns the input file as a snapshot of facility state (from line 1).

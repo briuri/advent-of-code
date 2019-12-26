@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 import buri.aoc.data.intcode.Computer;
@@ -14,7 +14,7 @@ import buri.aoc.data.intcode.Computer;
  * 
  * @author Brian Uri!
  */
-public class Day13 extends Puzzle {
+public class Day13 extends BasePuzzle {
 
 	private static final int BLOCK = 2;
 	private static final int PADDLE = 3;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 
 /**
@@ -15,7 +15,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Day10 extends Puzzle {
+public class Day10 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

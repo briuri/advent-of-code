@@ -1,7 +1,7 @@
 package buri.aoc.y16.d05;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.MD5Hash;
 
 /**
@@ -9,7 +9,7 @@ import buri.aoc.data.MD5Hash;
  * 
  * @author Brian Uri!
  */
-public class Day05 extends Puzzle {
+public class Day05 extends BasePuzzle {
 
 	/**
 	 * The eight-character password for the door is generated one character at a time by finding the MD5 hash of some

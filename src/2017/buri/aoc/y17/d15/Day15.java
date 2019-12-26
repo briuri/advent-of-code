@@ -1,14 +1,14 @@
 package buri.aoc.y17.d15;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 15: Dueling Generators
  * 
  * @author Brian Uri!
  */
-public class Day15 extends Puzzle {
+public class Day15 extends BasePuzzle {
 
 	/**
 	 * Part 1:

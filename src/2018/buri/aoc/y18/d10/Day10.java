@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.grid.CharGrid;
 
 /**
@@ -13,7 +13,7 @@ import buri.aoc.data.grid.CharGrid;
  * 
  * @author Brian Uri!
  */
-public class Day10 extends Puzzle {
+public class Day10 extends BasePuzzle {
 
 	/**
 	 * Returns input file as a list of Positions.

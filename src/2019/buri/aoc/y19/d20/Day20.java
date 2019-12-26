@@ -3,14 +3,14 @@ package buri.aoc.y19.d20;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 
 /**
  * Day 20: Donut Maze
  * 
  * @author Brian Uri!
  */
-public class Day20 extends Puzzle {
+public class Day20 extends BasePuzzle {
 
 	/**
 	 * Returns the input file unmodified.

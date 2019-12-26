@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.Puzzle;
+import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
 
 /**
@@ -12,7 +12,7 @@ import buri.aoc.data.Pair;
  * 
  * @author Brian Uri!
  */
-public class Day25 extends Puzzle {
+public class Day25 extends BasePuzzle {
 
 	/**
 	 * Part 1:
