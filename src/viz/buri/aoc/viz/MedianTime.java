@@ -55,6 +55,13 @@ public class MedianTime implements Comparable {
 	 * Calculates the median of the given times.
 	 */
 	private static String calculateMedianTime(List<String> times) {
+		Collections.sort(times, new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return (Integer.valueOf(toSeconds(o1)).compareTo(Integer.valueOf(toSeconds(o2))));
+			}
+			
+		});
 		if (times.size() % 2 == 1) {
 			return (times.get(times.size() / 2));
 		}

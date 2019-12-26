@@ -47,10 +47,10 @@ public class Leaderboard {
 		 * NOTE: Inactive accounts were purged from Novetta's leaderboard in 2019 to avoid the 200-player cap.
 		 * Redownloading JSON from older years and regenerating their pages will result in missing scores.
 		 */
-		visualizeEvent("2018");
-		visualizeEvent("2017");
-		visualizeEvent("2016");
-		visualizeEvent("2015");
+//		visualizeEvent("2018");
+//		visualizeEvent("2017");
+//		visualizeEvent("2016");
+//		visualizeEvent("2015");
 	}
 
 	/**
@@ -200,10 +200,6 @@ public class Leaderboard {
 				rawPuzzleTimes.get(time.getName()).add(time.getPrettyTime(true));
 			}
 		}
-		for (String name : rawPuzzleTimes.keySet()) {
-			Collections.sort(rawPuzzleTimes.get(name));
-		}
-
 		List<MedianTime> medianTimes = new ArrayList<>();
 		for (String name : rawPuzzleTimes.keySet()) {
 			medianTimes.add(new MedianTime(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name)));
