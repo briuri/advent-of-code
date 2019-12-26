@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Base class used for running Intcode programs.
- * - y19d2, 5, 7, 9, 11, 13, 15, 17, 19,21, 23
+ * - y19d2, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25
  * 
  * @author Brian Uri!
  */
@@ -18,7 +18,8 @@ public class Computer {
 	private boolean _debug = false;
 
 	private static final String REDUCES_TO = "  -->  ";
-
+	public static final char LINE_BREAK = 10;
+	
 	/**
 	 * Base constructor
 	 */
@@ -52,6 +53,18 @@ public class Computer {
 	public Computer(List<Long> program, Long addressZero) {
 		this(program);
 		_memory.set(0, addressZero);
+	}
+	
+	/**
+	 * Converts the program into Intcode inputs. (y19)
+	 */
+	public static List<Long> toAscii(String routine) {
+		List<Long> list = new ArrayList<>();
+		for (char value : routine.toCharArray()) {
+			list.add(Long.valueOf((int) value));
+		}
+		list.add(Long.valueOf((int) LINE_BREAK));
+		return (list);
 	}
 	
 	/**

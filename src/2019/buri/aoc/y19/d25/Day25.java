@@ -41,7 +41,7 @@ public class Day25 extends Puzzle {
 			"north", "north", "north", "east"
 		};
 		for (String command : walkthrough) {
-			computer.getInputs().addAll(toAscii(command));
+			computer.getInputs().addAll(Computer.toAscii(command));
 		}
 		computer.run();		
 		StringBuffer buffer = new StringBuffer();

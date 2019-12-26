@@ -65,7 +65,7 @@ public class Day21 extends Puzzle {
 		String[] script = (part == Part.ONE ? springscript1 : springscript2);
 		List<Long> inputs = new ArrayList<>();
 		for (String line : script) {
-			inputs.addAll(toAscii(line));
+			inputs.addAll(Computer.toAscii(line));
 		}
 		
 		Computer computer = new Computer(program);
@@ -78,7 +78,7 @@ public class Day21 extends Puzzle {
 			int y = 0;
 			for (Long value : computer.getOutputs()) {
 				int tile = value.intValue();
-				if (tile == LINE_BREAK) {
+				if (tile == Computer.LINE_BREAK) {
 					y++;
 					x = 0;
 				}

@@ -52,11 +52,11 @@ public class Day17 extends Puzzle {
 		String view = "n";
 		
 		List<Long> inputs = new ArrayList<>();
-		inputs.addAll(toAscii(mainRoutine));
-		inputs.addAll(toAscii(functionA));
-		inputs.addAll(toAscii(functionB));
-		inputs.addAll(toAscii(functionC));
-		inputs.addAll(toAscii(view));
+		inputs.addAll(Computer.toAscii(mainRoutine));
+		inputs.addAll(Computer.toAscii(functionA));
+		inputs.addAll(Computer.toAscii(functionB));
+		inputs.addAll(Computer.toAscii(functionC));
+		inputs.addAll(Computer.toAscii(view));
 		computer.getInputs().addAll(inputs);
 		computer.run();
 		return (computer.getLastOutput());
