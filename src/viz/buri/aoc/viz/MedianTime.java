@@ -1,7 +1,6 @@
 package buri.aoc.viz;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -12,8 +11,8 @@ import java.util.List;
 public class MedianTime implements Comparable {
 	private String _name;
 	private int _stars;
-	private String _medianTime;
-	private List<String> _times;
+	private long _medianTime;
+	private List<Long> _times;
 
 	private int _first = 0;
 	private int _second = 0;
@@ -22,7 +21,7 @@ public class MedianTime implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public MedianTime(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<String> times) {
+	public MedianTime(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<Long> times) {
 		_name = name;
 		_stars = stars;
 		_medianTime = calculateMedianTime(times);
@@ -38,67 +37,24 @@ public class MedianTime implements Comparable {
 				_third += 1;
 			}
 		}
-		Collections.sort(getTimes(), new Comparator<String>() {
-			@Override
-			public int compare(String o1, String o2) {
-				int secs1 = toSeconds(o1);
-				int secs2 = toSeconds(o2);
-				if (secs1 == secs2) {
-					return (0);
-				}
-				return (secs1 < secs2 ? -1 : 1);
-			}			
-		});
 	}
 
 	/**
 	 * Calculates the median of the given times.
 	 */
-	private static String calculateMedianTime(List<String> times) {
-		Collections.sort(times, new Comparator<String>() {
-			@Override
-			public int compare(String o1, String o2) {
-				return (Integer.valueOf(toSeconds(o1)).compareTo(Integer.valueOf(toSeconds(o2))));
-			}
-			
-		});
+	private static long calculateMedianTime(List<Long> times) {
+		Collections.sort(times);
 		if (times.size() % 2 == 1) {
 			return (times.get(times.size() / 2));
 		}
-		int low = toSeconds(times.get(times.size() / 2 - 1));
-		int high = toSeconds(times.get(times.size() / 2));
-		int median = (high + low) / 2;
+		long low = times.get(times.size() / 2 - 1);
+		long high = times.get(times.size() / 2);
+		long median = (high + low) / 2;
 		// Round up 0.5 seconds.
 		if ((high + low) % 2 != 0) {
 			median++;
 		}
-
-		String hours = String.valueOf(median / (60 * 60));
-		if (hours.length() == 1) {
-			hours = "0" + hours;
-		}
-
-		median = median % (60 * 60);
-		String minutes = String.valueOf(median / 60);
-		if (minutes.length() == 1) {
-			minutes = "0" + minutes;
-		}
-		median = median % 60;
-		String seconds = String.valueOf(median);
-		if (seconds.length() == 1) {
-			seconds = "0" + seconds;
-		}
-		return (hours + ":" + minutes + ":" + seconds);
-	}
-	
-	/**
-	 * Converts a time in the format HH:MM:SS to seconds.
-	 */
-	private static int toSeconds(String time) {
-		int seconds = Integer.valueOf(time.substring(time.lastIndexOf(":") + 1));
-		seconds += 60 * Integer.valueOf(time.substring(time.indexOf(":") + 1, time.lastIndexOf(":")));
-		seconds += 60 * 60 * Integer.valueOf(time.substring(0, time.indexOf(":")));
-		return (seconds);
+		return (median);
 	}
 	
 	/**
@@ -138,16 +94,16 @@ public class MedianTime implements Comparable {
 	}
 
 	/**
-	 * Accessor for the median time
+	 * Accessor for the median time in milliseconds
 	 */
-	public String getMedianTime() {
+	public Long getMedianTime() {
 		return _medianTime;
 	}
 
 	/**
 	 * Accessor for the times
 	 */
-	public List<String> getTimes() {
+	public List<Long> getTimes() {
 		return _times;
 	}
 

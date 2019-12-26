@@ -50,7 +50,6 @@ public class Leaderboard {
 //		visualizeYear(2018);
 //		visualizeYear(2017);
 //		visualizeYear(2016);
-//		visualizeYear(2015);
 	}
 
 	/**
@@ -87,7 +86,7 @@ public class Leaderboard {
 		try {
 			File file = new File(JSON_FOLDER + "puzzles.json");
 			JsonNode json = new ObjectMapper().readTree(file);
-			ArrayNode puzzleJson = (ArrayNode) json.get(year);
+			ArrayNode puzzleJson = (ArrayNode) json.get(String.valueOf(year));
 			for (int i = 0; i < puzzleJson.size(); i++) {
 				puzzles.add(new Puzzle((ObjectNode) puzzleJson.get(i)));
 			}
@@ -158,9 +157,11 @@ public class Leaderboard {
 			for (String dayKey : puzzleData.keySet()) {
 				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
 				if (part2Data != null) {
-					long timestamp = Long.valueOf((String) part2Data.get("get_star_ts"));
-					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, timestamp);
-					puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
+					long unixTime = Long.valueOf((String) part2Data.get("get_star_ts"));
+					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+					if (record.completedInYear()) {
+						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
+					}
 				}
 			}
 		}
@@ -191,13 +192,13 @@ public class Leaderboard {
 			return (Collections.EMPTY_LIST);
 		}
 		// Create an interim map of players to all of their puzzle times.
-		Map<String, List<String>> rawPuzzleTimes = new HashMap<>();
+		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
 		for (List<PuzzleTime> singleDay : puzzleTimes) {
 			for (PuzzleTime time : singleDay) {
 				if (rawPuzzleTimes.get(time.getName()) == null) {
 					rawPuzzleTimes.put(time.getName(), new ArrayList<>());
 				}
-				rawPuzzleTimes.get(time.getName()).add(time.getPrettyTime(true));
+				rawPuzzleTimes.get(time.getName()).add(time.getTimeCompleted());
 			}
 		}
 		List<MedianTime> medianTimes = new ArrayList<>();
@@ -268,8 +269,6 @@ public class Leaderboard {
 		page.append(" | ");
 		page.append(year == 2016 ? year : "<a href=\"index-2016.html\">2016</a>");
 		page.append(" | ");
-		page.append(year == 2015 ? year : "<a href=\"index-2015.html\">2015</a>");
-		page.append(" | ");
 		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
 		page.append("Leaderboard &rArr;</a>");
 		page.append(" | ");
@@ -301,13 +300,14 @@ public class Leaderboard {
 		page.append("<ol>\n");
 		for (int i = 0; i < numMedians; i++) {
 			MedianTime player = medianTimes.get(i);
+			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
 			page.append("\t<li class=\"median\">");
-			if (player.getMedianTime().length() == 8) {
+			if (medianTime.length() == 8) {
 				page.append("&nbsp;");
 			}
 			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
 			page.append(" onClick=\"expand(").append(i).append(")\">");
-			page.append(player.getMedianTime());
+			page.append(medianTime);
 			page.append("</span>&nbsp;&nbsp;").append(maskName(players, player.getName()));
 			page.append(getDivision(players, player.getName())).append("<br />\n");
 			for (int j = 0; j < 12; j++) {
@@ -326,7 +326,7 @@ public class Leaderboard {
 			page.append("\n<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
-				String time = player.getTimes().get(j);
+				String time = PuzzleTime.formatTime(player.getTimes().get(j));
 				page.append("\t");
 				if (time.length() == 8) {
 					page.append("&nbsp;");
@@ -375,7 +375,7 @@ public class Leaderboard {
 				page.append("<ol>\n");
 				for (int place = 0; place < Math.min(TOP_NUM, places.size()); place++) {
 					PuzzleTime record = places.get(place);
-					String time = record.getPrettyTime(false);
+					String time = record.getFormattedTime();
 					page.append("\t<li>");					
 					if (place + 1 <= puzzles.get(i).getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);

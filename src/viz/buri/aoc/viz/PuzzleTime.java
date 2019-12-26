@@ -1,71 +1,101 @@
 package buri.aoc.viz;
 
-import java.time.Instant;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Data class for 1 completion record in a daily puzzle.
  * 
  * @author Brian Uri!
  */
-public class PuzzleTime implements Comparable {
+public class PuzzleTime implements Comparable<PuzzleTime> {
 	private int _year;
-	private int _day;
 
 	private String _name;
-	private Date _timestamp;
+	private int _yearCompleted;
+	private long _timeCompleted;	
 
 	/**
 	 * Constructor
 	 */
-	public PuzzleTime(int year, int day, String name, long timestamp) {
+	public PuzzleTime(int year, int day, String name, long unixTime) {
 		_year = year;
-		_day = day;
-
 		_name = name;
-		_timestamp = Date.from(Instant.ofEpochSecond(timestamp));
+		
+		Calendar unixTimeCompleted = Calendar.getInstance();
+		unixTimeCompleted.setTimeInMillis(unixTime * 1000L);
+		_yearCompleted = unixTimeCompleted.get(Calendar.YEAR);
+		
+		Calendar puzzleTime = Calendar.getInstance();
+		puzzleTime.set(Calendar.YEAR, year);
+		puzzleTime.set(Calendar.MONTH, Calendar.DECEMBER);
+		puzzleTime.set(Calendar.DATE, day);
+		puzzleTime.set(Calendar.HOUR_OF_DAY, 0);
+		puzzleTime.set(Calendar.MINUTE, 0);
+		puzzleTime.set(Calendar.SECOND, 0);
+		puzzleTime.set(Calendar.MILLISECOND, 0);
+		_timeCompleted = unixTimeCompleted.getTimeInMillis() - puzzleTime.getTimeInMillis();
 	}
-
+	
+	/**
+	 * Converts milliseconds into a string timestamp.
+	 */
+	public static String formatTime(long time) {
+		StringBuffer buffer = new StringBuffer();
+		
+		time = time / 1000L;
+		String hours = String.valueOf(time / (60 * 60));
+		if (hours.length() == 1) {
+			buffer.append("0");
+		}
+		buffer.append(hours).append(":");
+	
+		time = time % (60 * 60);
+		String minutes = String.valueOf(time / 60);
+		if (minutes.length() == 1) {
+			buffer.append("0");
+		}
+		buffer.append(minutes).append(":");
+		
+		time = time % 60;
+		String seconds = String.valueOf(time);
+		if (seconds.length() == 1) {
+			buffer.append("0");
+		}
+		buffer.append(seconds);
+		
+		return (buffer.toString());
+	}
+	
 	/**
 	 * Converts timestamp into "time after midnight on day of puzzle" (01:35:40).
 	 * Adds 24 hours for completion times on later day (25:35:40).
 	 * Returns text for puzzles completed outside of the competition (in 2019).
 	 * Formats with HTML unless the time will be used for median calculations.
 	 */
-	public String getPrettyTime(boolean forMedianCalculation) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(getTimestamp());
-		if (getYear() != calendar.get(Calendar.YEAR)) {
-			return (forMedianCalculation ? "" : "<i>(in " + calendar.get(Calendar.YEAR) + ")</i>");
+	public String getFormattedTime() {
+		if (getYear() != getYearCompleted()) {
+			return ("<i>(in " + getYearCompleted() + ")</i>");
 		}
-
-		StringBuffer buffer = new StringBuffer(getTimestamp().toString().substring(11, 19));
-		int overflow = calendar.get(Calendar.DAY_OF_MONTH) - getDay();
-		if (overflow > 0) {
-			int hours = Integer.valueOf(buffer.substring(0, 2)) + (24 * overflow);
-			buffer.replace(0, 2, String.valueOf(hours));
-		}
-		return (buffer.toString());
+		return (formatTime(getTimeCompleted()));
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		return (getTimestamp().compareTo(((PuzzleTime) o).getTimestamp()));
+	public int compareTo(PuzzleTime o) {
+		return (Long.valueOf(getTimeCompleted()).compareTo(Long.valueOf(o.getTimeCompleted())));
 	}
 
+	/**
+	 * Returns true if the puzzle was completed in the same year.
+	 */
+	public boolean completedInYear() {
+		return (getYear() == getYearCompleted());
+	}
+	
 	/**
 	 * Accessor for the year of this puzzle
 	 */
 	private int getYear() {
 		return _year;
-	}
-
-	/**
-	 * Accessor for the day of the puzzle (1 - 25)
-	 */
-	private int getDay() {
-		return _day;
 	}
 
 	/**
@@ -76,9 +106,16 @@ public class PuzzleTime implements Comparable {
 	}
 
 	/**
-	 * Accessor for the time the puzzle was completed
+	 * Accessor for the year this puzzle was completed
 	 */
-	private Date getTimestamp() {
-		return _timestamp;
+	private int getYearCompleted() {
+		return _yearCompleted;
+	}
+	
+	/**
+	 * Accessor for the time the puzzle was completed (after its release) in milliseconds
+	 */
+	public long getTimeCompleted() {
+		return _timeCompleted;
 	}
 }
