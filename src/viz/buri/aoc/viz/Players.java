@@ -23,11 +23,11 @@ public class Players {
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
 	}
-	
+
 	/**
 	 * Adds a player record.
 	 */
-	public void add(ObjectNode player) {		
+	public void add(ObjectNode player) {
 		String name = player.get("name").asText();
 		if (player.get("alt") != null) {
 			getAlternateNames().put(name, player.get("alt").asText());
@@ -39,21 +39,21 @@ public class Players {
 			getGlobalCounts().put(name, player.get("globalCount").asInt());
 		}
 	}
-	
+
 	/**
 	 * Looks up an alternate name for a player.
 	 */
 	public String getAlternateName(String name) {
 		return (getAlternateNames().getOrDefault(name, name));
 	}
-	
+
 	/**
 	 * Looks up a division for a player.
 	 */
 	public String getDivision(String name) {
 		return (getDivisions().getOrDefault(name, ""));
 	}
-	
+
 	/**
 	 * Looks up the number of global ranks for a player.
 	 */

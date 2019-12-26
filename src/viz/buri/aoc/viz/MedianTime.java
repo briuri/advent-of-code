@@ -1,6 +1,5 @@
 package buri.aoc.viz;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,7 +42,6 @@ public class MedianTime implements Comparable {
 	 * Calculates the median of the given times.
 	 */
 	private static long calculateMedianTime(List<Long> times) {
-		Collections.sort(times);
 		if (times.size() % 2 == 1) {
 			return (times.get(times.size() / 2));
 		}
@@ -56,7 +54,7 @@ public class MedianTime implements Comparable {
 		}
 		return (median);
 	}
-	
+
 	/**
 	 * Sort on number of stars, then median time.
 	 */
@@ -78,14 +76,14 @@ public class MedianTime implements Comparable {
 	public boolean hasMedals() {
 		return (getFirst() + getSecond() + getThird() > 0);
 	}
-	
+
 	/**
 	 * Acessor for the name of the player
 	 */
 	public String getName() {
 		return _name;
 	}
-	
+
 	/**
 	 * Accessor for the stars
 	 */

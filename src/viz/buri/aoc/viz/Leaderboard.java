@@ -47,9 +47,9 @@ public class Leaderboard {
 		 * NOTE: Inactive accounts were purged from Novetta's leaderboard in 2019 to avoid the 200-player cap.
 		 * Redownloading JSON from older years and regenerating their pages will result in missing scores.
 		 */
-//		visualizeYear(2018);
-//		visualizeYear(2017);
-//		visualizeYear(2016);
+		// visualizeYear(2018);
+		// visualizeYear(2017);
+		// visualizeYear(2016);
 	}
 
 	/**
@@ -201,6 +201,9 @@ public class Leaderboard {
 				rawPuzzleTimes.get(time.getName()).add(time.getTimeCompleted());
 			}
 		}
+		for (List<Long> times : rawPuzzleTimes.values()) {
+			Collections.sort(times);
+		}
 		List<MedianTime> medianTimes = new ArrayList<>();
 		for (String name : rawPuzzleTimes.keySet()) {
 			medianTimes.add(new MedianTime(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name)));
@@ -279,8 +282,7 @@ public class Leaderboard {
 	/**
 	 * Adds the Top X Median Times during the current year.
 	 */
-	private static void insertMedianTimes(StringBuffer page, int year, Players players,
-		List<MedianTime> medianTimes) {
+	private static void insertMedianTimes(StringBuffer page, int year, Players players, List<MedianTime> medianTimes) {
 		if (year != CURRENT_YEAR) {
 			return;
 		}
@@ -305,7 +307,8 @@ public class Leaderboard {
 			if (medianTime.length() == 8) {
 				page.append("&nbsp;");
 			}
-			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
+			page.append("<span class=\"median medianLink\" id=\"median").append(i).append(
+				"\" title=\"Show/Hide All Times\"");
 			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(medianTime);
 			page.append("</span>&nbsp;&nbsp;").append(maskName(players, player.getName()));
@@ -331,14 +334,14 @@ public class Leaderboard {
 				if (time.length() == 8) {
 					page.append("&nbsp;");
 				}
-				
+
 				// Averaged median
 				if (totalTimes % 2 == 0 && (j == totalTimes / 2 - 1)) {
 					page.append("<span class=\"median\">").append(time).append("</span>");
 					page.append("&nbsp;&nbsp;average is");
 				}
 				// Single median
-				else if (j == totalTimes / 2)  {
+				else if (j == totalTimes / 2) {
 					page.append("<span class=\"median\">").append(time).append("</span>");
 					page.append("&nbsp;&nbsp;current median");
 				}
@@ -376,7 +379,7 @@ public class Leaderboard {
 				for (int place = 0; place < Math.min(TOP_NUM, places.size()); place++) {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
-					page.append("\t<li>");					
+					page.append("\t<li>");
 					if (place + 1 <= puzzles.get(i).getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
 						page.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
