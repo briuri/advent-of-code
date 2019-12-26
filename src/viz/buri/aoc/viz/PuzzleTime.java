@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Brian Uri!
  */
 public class PuzzleTime implements Comparable {
-	private String _event;
+	private int _year;
 	private int _day;
 
 	private String _name;
@@ -19,8 +19,8 @@ public class PuzzleTime implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public PuzzleTime(String event, int day, String name, long timestamp) {
-		_event = event;
+	public PuzzleTime(int year, int day, String name, long timestamp) {
+		_year = year;
 		_day = day;
 
 		_name = name;
@@ -36,7 +36,7 @@ public class PuzzleTime implements Comparable {
 	public String getPrettyTime(boolean forMedianCalculation) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(getTimestamp());
-		if (Integer.valueOf(getEvent()) != calendar.get(Calendar.YEAR)) {
+		if (getYear() != calendar.get(Calendar.YEAR)) {
 			return (forMedianCalculation ? "" : "<i>(in " + calendar.get(Calendar.YEAR) + ")</i>");
 		}
 
@@ -55,10 +55,10 @@ public class PuzzleTime implements Comparable {
 	}
 
 	/**
-	 * Accessor for the event containing this puzzle (a 4-digit year)
+	 * Accessor for the year of this puzzle
 	 */
-	private String getEvent() {
-		return _event;
+	private int getYear() {
+		return _year;
 	}
 
 	/**
