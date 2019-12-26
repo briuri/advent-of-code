@@ -55,13 +55,13 @@ public class Day13 extends Puzzle {
 		}
 
 		// Get all possible guest orders.
-		int[] guestOrder = new int[guests.size()];
+		Integer[] guestOrder = new Integer[guests.size()];
 		for (int i = 0; i < guestOrder.length; i++) {
 			guestOrder[i] = i;
 		}
 
 		int bestHappiness = Integer.MIN_VALUE;
-		for (int[] order : Permutations.getPermutations(guestOrder)) {
+		for (Integer[] order : Permutations.getPermutations(guestOrder)) {
 			int currentHappiness = 0;
 			for (int i = 0; i < order.length; i++) {
 				String currentGuest = guests.get(order[i]);

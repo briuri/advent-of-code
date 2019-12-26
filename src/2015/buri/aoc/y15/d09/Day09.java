@@ -47,14 +47,14 @@ public class Day09 extends Puzzle {
 		}
 
 		// Get all possible city orders.
-		int[] cityOrder = new int[cities.size()];
+		Integer[] cityOrder = new Integer[cities.size()];
 		for (int i = 0; i < cityOrder.length; i++) {
 			cityOrder[i] = i;
 		}
 
 		int shortestRoute = Integer.MAX_VALUE;
 		int longestRoute = Integer.MIN_VALUE;
-		for (int[] order : Permutations.getPermutations(cityOrder)) {
+		for (Integer[] order : Permutations.getPermutations(cityOrder)) {
 			int route = 0;
 			for (int i = 0; i < order.length - 1; i++) {
 				String currentCity = cities.get(order[i]);

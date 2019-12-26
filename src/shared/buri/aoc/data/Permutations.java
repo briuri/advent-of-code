@@ -14,94 +14,59 @@ import java.util.Set;
 public class Permutations {
 
 	/**
-	 * Returns all possible pair permutations of a list of numbers.
+	 * Returns all possible pair permutations of a list of objects.
 	 */
-	public static Set<List<Integer>> getPairPermutations(List<Integer> numbers) {
-		Set<Set<Integer>> uniquePairs = new HashSet<>();
-		for (Integer a : numbers) {
-			for (Integer b : numbers) {
+	public static <T> Set<List<T>> getPairPermutations(List<T> objects) {
+		Set<Set<T>> uniquePairs = new HashSet<>();
+		for (T a : objects) {
+			for (T b : objects) {
 				if (!a.equals(b)) {
-					Set<Integer> pair = new HashSet<>();
+					Set<T> pair = new HashSet<>();
 					pair.add(a);
 					pair.add(b);
 					uniquePairs.add(pair);
 				}
 			}
 		}
-		Set<List<Integer>> pairs = new HashSet<>();
-		for (Set<Integer> pair : uniquePairs) {
+		// After uniqueness is confirmed, convert to lists for ease of traversal.
+		Set<List<T>> pairs = new HashSet<>();
+		for (Set<T> pair : uniquePairs) {
 			pairs.add(new ArrayList(pair));
 		}
 		return (pairs);
 	}
 
 	/**
-	 * Returns all possible permutations of a list of numbers.
+	 * Returns all possible permutations of a list of objects.
 	 */
-	public static List<int[]> getPermutations(int[] numbers) {
-		final ArrayList<int[]> result = new ArrayList<int[]>();
-		final int length = numbers.length;
+	public static <T> List<T[]> getPermutations(T[] objects) {
+		final ArrayList<T[]> result = new ArrayList<T[]>();
+		final int length = objects.length;
 		if (length == 0) {
-			return result;
+			return (result);
 		}
 		if (length == 1) {
-			result.add(numbers);
-			return result;
+			result.add(objects);
+			return (result);
 		}
 
-		int[] subClone = Arrays.copyOf(numbers, length - 1);
-		System.arraycopy(numbers, 1, subClone, 0, length - 1);
+		T[] subClone = Arrays.copyOf(objects, length - 1);
+		System.arraycopy(objects, 1, subClone, 0, length - 1);
 
 		for (int i = 0; i < length; ++i) {
-			int e = numbers[i];
+			T current = objects[i];
 			if (i > 0) {
-				subClone[i - 1] = numbers[0];
+				subClone[i - 1] = objects[0];
 			}
-			final List<int[]> subPermutations = getPermutations(subClone);
-			for (int[] sc : subPermutations) {
-				int[] clone = Arrays.copyOf(numbers, length);
-				clone[0] = e;
+			final List<T[]> subPermutations = getPermutations(subClone);
+			for (T[] sc : subPermutations) {
+				T[] clone = Arrays.copyOf(objects, length);
+				clone[0] = current;
 				System.arraycopy(sc, 0, clone, 1, length - 1);
 				result.add(clone);
 			}
 			if (i > 0) {
-				subClone[i - 1] = e;
-			}
-		}
-		return result;
-	}
-	
-	/**
-	 * Returns all possible permutations of a list of numbers.
-	 */
-	public static List<long[]> getPermutations(long[] numbers) {
-		final ArrayList<long[]> result = new ArrayList<long[]>();
-		final int length = numbers.length;
-		if (length == 0) {
-			return result;
-		}
-		if (length == 1) {
-			result.add(numbers);
-			return result;
-		}
-
-		long[] subClone = Arrays.copyOf(numbers, length - 1);
-		System.arraycopy(numbers, 1, subClone, 0, length - 1);
-
-		for (int i = 0; i < length; ++i) {
-			long e = numbers[i];
-			if (i > 0) {
-				subClone[i - 1] = numbers[0];
-			}
-			final List<long[]> subPermutations = getPermutations(subClone);
-			for (long[] sc : subPermutations) {
-				long[] clone = Arrays.copyOf(numbers, length);
-				clone[0] = e;
-				System.arraycopy(sc, 0, clone, 1, length - 1);
-				result.add(clone);
-			}
-			if (i > 0) {
-				subClone[i - 1] = e;
+				subClone[i - 1] = current;
 			}
 		}
 		return result;

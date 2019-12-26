@@ -34,11 +34,11 @@ public class Day07 extends Puzzle {
 	 * What is the highest signal that can be sent to the thrusters?
 	 */
 	public static long getResult(Part part, List<Long> program) {
-		long[] phases = (part == Part.ONE ? new long[] { 0, 1, 2, 3, 4 } : new long[] { 5, 6, 7, 8, 9 });
-		List<long[]> permutations = Permutations.getPermutations(phases);
+		Long[] phases = (part == Part.ONE ? new Long[] { 0L, 1L, 2L, 3L, 4L } : new Long[] { 5L, 6L, 7L, 8L, 9L });
+		List<Long[]> permutations = Permutations.getPermutations(phases);
 		
 		long maxOutput = 0;
-		for (long[] perm : permutations) {
+		for (Long[] perm : permutations) {
 			// Initialize all amplifiers with phases.
 			List<Computer> amps = new ArrayList<>();
 			for (int i = 0; i < perm.length; i++) {

@@ -49,14 +49,15 @@ public class Day21 extends Puzzle {
 	 * What is the least amount of gold you can spend and still win the fight?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * What is the most amount of gold you can spend and still lose the fight?
 	 */
 	public static int getResult(Part part, Unit bossTemplate) {
 		int minGold = Integer.MAX_VALUE;
 		int maxGold = Integer.MIN_VALUE;
+		Set<List<Integer>> ringPermutations = getRingPermutations();
 		for (Triple weapon : WEAPONS) {
 			for (Triple armor : ARMOR) {
-				for (List<Integer> rings : getRingPermutations()) {
+				for (List<Integer> rings : ringPermutations) {
 					Triple ring1 = RINGS.get(rings.get(0));
 					Triple ring2 = RINGS.get(rings.get(1));
 					int cost = (int) (weapon.getX() + armor.getX() + ring1.getX() + ring2.getX());

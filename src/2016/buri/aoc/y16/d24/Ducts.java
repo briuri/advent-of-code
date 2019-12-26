@@ -56,13 +56,13 @@ public class Ducts extends CharGrid {
 		}
 
 		// Get all possible path permutations.
-		int[] order = new int[getDestinations().size()];
+		Integer[] order = new Integer[getDestinations().size()];
 		for (int i = 0; i < order.length; i++) {
 			order[i] = i;
 		}
-		List<int[]> permutations = Permutations.getPermutations(order);
+		List<Integer[]> permutations = Permutations.getPermutations(order);
 		// Remove any that don't start at 0.
-		for (Iterator<int[]> iterator = permutations.iterator(); iterator.hasNext();) {
+		for (Iterator<Integer[]> iterator = permutations.iterator(); iterator.hasNext();) {
 			if (iterator.next()[0] != 0) {
 				iterator.remove();
 			}
@@ -70,7 +70,7 @@ public class Ducts extends CharGrid {
 
 		// Compute path for all permutations that start at 0.
 		int shortestPath = Integer.MAX_VALUE;
-		for (int[] permutation : permutations) {
+		for (Integer[] permutation : permutations) {
 			int path = 0;
 			for (int i = 0; i < permutation.length; i++) {
 				Pair current = getDestinations().get(permutation[i]);
