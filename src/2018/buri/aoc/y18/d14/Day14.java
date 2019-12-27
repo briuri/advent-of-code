@@ -12,7 +12,7 @@ import buri.aoc.BasePuzzle;
  * @author Brian Uri!
  */
 public class Day14 extends BasePuzzle {
-	
+
 	/**
 	 * After all new recipes are added to the scoreboard, each Elf picks a new current recipe. To do this, the Elf steps
 	 * forward through the scoreboard a number of recipes equal to 1 plus the score of their current recipe. So, after
@@ -32,13 +32,13 @@ public class Day14 extends BasePuzzle {
 	public static String getResult(Part part, String input) {
 		final int outputLength = 10;
 		final int part1Iterations = Integer.valueOf(input);
-		
+
 		int first = 0;
 		int second = 1;
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(3);
 		list.add(7);
-		
+
 		int part1Iteration = 0;
 		while (true) {
 			String sum = String.valueOf(list.get(first) + list.get(second));
@@ -57,11 +57,11 @@ public class Day14 extends BasePuzzle {
 
 			part1Iteration++;
 			if (part == Part.ONE && (part1Iteration == part1Iterations + outputLength)) {
-				return (toString(list.subList(part1Iterations, part1Iterations + outputLength)));				
+				return (toString(list.subList(part1Iterations, part1Iterations + outputLength)));
 			}
-		}		
+		}
 	}
-	
+
 	/**
 	 * Converts a list of integers into a string of digits. Assumes single digit integers.
 	 */

@@ -127,13 +127,13 @@ public class Day24 extends BasePuzzle {
 	 */
 	private static boolean becomesBug(Part part, Set<Triple> bugs, Triple tile) {
 		boolean isBug = bugs.contains(tile);
-		
+
 		List<Triple> neighbors = new ArrayList<>();
 		neighbors.add(new Triple(tile.getX(), tile.getY() - 1, tile.getZ()));
 		neighbors.add(new Triple(tile.getX(), tile.getY() + 1, tile.getZ()));
 		neighbors.add(new Triple(tile.getX() - 1, tile.getY(), tile.getZ()));
 		neighbors.add(new Triple(tile.getX() + 1, tile.getY(), tile.getZ()));
-		
+
 		// Handle nested neighbors.
 		if (part == Part.TWO) {
 			List<Triple> newNeighbors = new ArrayList<>();
@@ -141,7 +141,7 @@ public class Day24 extends BasePuzzle {
 				boolean isInner = (neighbor.getX() == 2 && neighbor.getY() == 2);
 				long outerZ = neighbor.getZ() - 1;
 				long innerZ = neighbor.getZ() + 1;
-	                
+
 				// Outer Edges
 				if (neighbor.getY() < 0) {
 					newNeighbors.add(new Triple(2, 1, outerZ));
@@ -191,13 +191,13 @@ public class Day24 extends BasePuzzle {
 			}
 			neighbors = newNeighbors;
 		}
-		
+
 		int adjacentBugs = 0;
 		for (Triple neighbor : neighbors) {
 			if (bugs.contains(neighbor)) {
 				adjacentBugs++;
 			}
-		}		
+		}
 		return (isBug && adjacentBugs == 1) || (!isBug && (adjacentBugs == 1 || adjacentBugs == 2));
 	}
 }

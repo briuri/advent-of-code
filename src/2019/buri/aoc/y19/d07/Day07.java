@@ -36,7 +36,7 @@ public class Day07 extends BasePuzzle {
 	public static long getResult(Part part, List<Long> program) {
 		Long[] phases = (part == Part.ONE ? new Long[] { 0L, 1L, 2L, 3L, 4L } : new Long[] { 5L, 6L, 7L, 8L, 9L });
 		List<Long[]> permutations = Permutations.getPermutations(phases);
-		
+
 		long maxOutput = 0;
 		for (Long[] perm : permutations) {
 			// Initialize all amplifiers with phases.

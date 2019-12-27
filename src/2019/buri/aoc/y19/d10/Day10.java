@@ -53,11 +53,11 @@ public class Day10 extends BasePuzzle {
 				station = asteroid;
 				sightLines = currentSightLines;
 			}
-		}		
+		}
 		if (part == Part.ONE) {
 			return (sightLines.size());
 		}
-		
+
 		// Part TWO
 		// Because we have 230 asteroids in line of sight, we don't need multiple laser revolutions to hit 200.
 		List<SightLine> sortedSightLines = new ArrayList<>(sightLines);
@@ -65,10 +65,10 @@ public class Day10 extends BasePuzzle {
 
 		int target = 200;
 		SightLine sightLine = sortedSightLines.get(target - 1);
-		
+
 		// Trace sight line along slope until an asteroid is found.
 		Pair slope = sightLine.getSlope();
-		Pair asteroid = new Pair(station.getX() +slope.getX(), station.getY() + slope.getY());
+		Pair asteroid = new Pair(station.getX() + slope.getX(), station.getY() + slope.getY());
 		while (!asteroids.contains(asteroid)) {
 			asteroid.setX(asteroid.getX() + slope.getX());
 			asteroid.setY(asteroid.getY() + slope.getY());

@@ -74,7 +74,7 @@ public class Grid extends CharGrid {
 				count++;
 			}
 		}
-		
+
 		// Add one for the path of staying on the start location without moving.
 		return (count + 1);
 	}

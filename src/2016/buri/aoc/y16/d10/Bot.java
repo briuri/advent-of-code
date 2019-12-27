@@ -42,7 +42,7 @@ public class Bot {
 	public boolean isFull() {
 		return (getValues().size() == 2);
 	}
-	
+
 	/**
 	 * Removes and returns the high value.
 	 */
@@ -56,7 +56,7 @@ public class Bot {
 	public Integer getLowValue() {
 		return (getValues().remove(0));
 	}
-	
+
 	/**
 	 * Accessor for a snapshot of the values this bot processes.
 	 */
@@ -70,7 +70,7 @@ public class Bot {
 	public void setValueSnapshot(String valueSnapshot) {
 		_valueSnapshot = valueSnapshot;
 	}
-	
+
 	/**
 	 * Accessor for the values
 	 */

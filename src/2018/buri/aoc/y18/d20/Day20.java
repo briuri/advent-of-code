@@ -11,12 +11,12 @@ import buri.aoc.BasePuzzle;
 public class Day20 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified. 
+	 * Returns the input file unmodified.
 	 */
 	public static String getInput(int fileIndex) {
 		return (readFile("2018/20", fileIndex).get(0));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What is the largest number of doors you would be required to pass through to reach a room?
@@ -30,7 +30,7 @@ public class Day20 extends BasePuzzle {
 		if (part == Part.ONE) {
 			return (map.getMostDoors());
 		}
-		
+
 		// Part TWO
 		return (map.getRoomsWithDoors(1000));
 	}

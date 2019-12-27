@@ -26,7 +26,7 @@ public class Day21 extends BasePuzzle {
 		}
 		return (list);
 	}
-		
+
 	/**
 	 * Part 1:
 	 * What amount of hull damage does it report?
@@ -37,38 +37,34 @@ public class Day21 extends BasePuzzle {
 	public static long getResult(Part part, List<Long> program) {
 		// Jump if a hole is in A, B, or C, but only if D is ground.
 		// J = (!A || !B || !C) && D
-		String[] springscript1 = new String[] {
-			"NOT A J",	// J = !A
-			"NOT B T",	// T = !B
-			"OR T J",	// J = (!A || !B)
-			"NOT C T",	// T = !C
-			"OR T J",	// J = (!A || !B || !C)
-			"AND D J",	// J = (!A || !B || !C) && D
-			"WALK",
-		};
+		String[] springscript1 = new String[] { "NOT A J", // J = !A
+			"NOT B T", // T = !B
+			"OR T J", // J = (!A || !B)
+			"NOT C T", // T = !C
+			"OR T J", // J = (!A || !B || !C)
+			"AND D J", // J = (!A || !B || !C) && D
+			"WALK", };
 
 		// Jump if a hole is in A, B or C, but only if D is ground and you can walk or jump again.
 		// J = (!A || !B || !C) && D && (E || H))
-		String[] springscript2 = new String[] {
-			"NOT A J",	// J = !A
-			"NOT B T",	// T = !B
-			"OR T J",	// J = (!A || !B)
-			"NOT C T",	// T = !C
-			"OR T J",	// J = (!A || !B || !C)
-			"AND D J",	// J = (!A || !B || !C) && D
-			"NOT E T",	// T = !E
-			"NOT T T",	// T = E
-			"OR H T",	// T = (E || H)
-			"AND T J",	// J = (!A || !B || !C) && D && (E || H)
-			"RUN\n",
-		};
+		String[] springscript2 = new String[] { "NOT A J", // J = !A
+			"NOT B T", // T = !B
+			"OR T J", // J = (!A || !B)
+			"NOT C T", // T = !C
+			"OR T J", // J = (!A || !B || !C)
+			"AND D J", // J = (!A || !B || !C) && D
+			"NOT E T", // T = !E
+			"NOT T T", // T = E
+			"OR H T", // T = (E || H)
+			"AND T J", // J = (!A || !B || !C) && D && (E || H)
+			"RUN\n", };
 
 		String[] script = (part == Part.ONE ? springscript1 : springscript2);
 		List<Long> inputs = new ArrayList<>();
 		for (String line : script) {
 			inputs.addAll(Computer.toAscii(line));
 		}
-		
+
 		Computer computer = new Computer(program);
 		computer.getInputs().addAll(inputs);
 		computer.run();
@@ -90,7 +86,7 @@ public class Day21 extends BasePuzzle {
 			}
 			System.out.println(computer.getOutputs().size());
 		}
-		
+
 		return (computer.getLastOutput());
 	}
 }

@@ -7,20 +7,12 @@ package buri.aoc.data.intcode;
  * @author Brian Uri!
  */
 public enum Opcode {
-	ADD(1, 3),
-	MULTIPLY(2, 3),
-	SAVE(3, 1),
-	OUTPUT(4, 1),
-	JUMP_IF_TRUE(5, 2),
-	JUMP_IF_FALSE(6, 2),
-	LESS_THAN(7, 3),
-	EQUALS(8, 3),
-	RELATIVE_BASE_OFFSET(9, 1),
-	HALT(99, 0);	
-	
+	ADD(1, 3), MULTIPLY(2, 3), SAVE(3, 1), OUTPUT(4, 1), JUMP_IF_TRUE(5, 2), JUMP_IF_FALSE(6, 2), LESS_THAN(7,
+		3), EQUALS(8, 3), RELATIVE_BASE_OFFSET(9, 1), HALT(99, 0);
+
 	private int _code;
 	private int _numParameters;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -28,7 +20,7 @@ public enum Opcode {
 		_code = code;
 		_numParameters = numParameters;
 	}
-	
+
 	/**
 	 * Looks up an opcode based on code
 	 */
@@ -43,7 +35,7 @@ public enum Opcode {
 		}
 		throw new RuntimeException("No opcode for " + fullOpcode);
 	}
-	
+
 	@Override
 	public String toString() {
 		return (String.valueOf(getCode()));

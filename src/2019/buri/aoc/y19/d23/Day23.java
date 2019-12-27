@@ -71,7 +71,7 @@ public class Day23 extends BasePuzzle {
 					}
 				}
 			}
-			
+
 			// In Part TWO only, allow the NAT to check network idleness.
 			if (part == Part.TWO) {
 				boolean allIdle = true;

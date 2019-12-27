@@ -46,7 +46,7 @@ public class Disk extends IntGrid {
 		}
 		return (regions);
 	}
-	
+
 	/**
 	 * Fills this cell with a value, then fills any immediately adjacent -1 cells with the value. Expands virally out
 	 * until nothing is left to touch.
@@ -84,7 +84,7 @@ public class Disk extends IntGrid {
 			}
 		}
 	}
-	
+
 	/**
 	 * Fills a cell with some value, but only if it is currently -1. Returns true if a cell changed.
 	 */

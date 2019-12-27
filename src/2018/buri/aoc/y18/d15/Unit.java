@@ -15,7 +15,7 @@ public class Unit implements Comparable<Unit> {
 
 	public static final char ELF = 'E';
 	public static final char GOBLIN = 'G';
-	
+
 	/**
 	 * Constructor
 	 */
@@ -76,7 +76,7 @@ public class Unit implements Comparable<Unit> {
 	public Pair getPosition() {
 		return _position;
 	}
-	
+
 	/**
 	 * Accessor for the position
 	 */

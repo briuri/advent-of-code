@@ -21,9 +21,9 @@ public class Day11 extends BasePuzzle {
 	private static final char WHITE = '.';
 	private static final char DEFAULT_BLACK = ' ';
 	private static final char VISUAL_WHITE = '■';
-	
+
 	/**
-	 * Returns the input file as a list of longs 
+	 * Returns the input file as a list of longs
 	 */
 	public static List<Long> getInput(int fileIndex) {
 		List<Long> list = new ArrayList<>();
@@ -32,23 +32,24 @@ public class Day11 extends BasePuzzle {
 		}
 		return (list);
 	}
-	
+
 	/**
 	 * Part 1:
 	 * How many panels does it paint at least once?
 	 * 
 	 * Part 2:
-	 * After starting the robot on a single white panel instead, what registration identifier does it paint on your hull?
+	 * After starting the robot on a single white panel instead, what registration identifier does it paint on your
+	 * hull?
 	 */
 	public static int getResult(Part part, List<Long> program) {
 		int size = (part == Part.ONE ? 200 : 90);
-		CharGrid hull = new CharGrid(new Pair(size, size)); 
+		CharGrid hull = new CharGrid(new Pair(size, size));
 		for (int y = 0; y < hull.getHeight(); y++) {
 			for (int x = 0; x < hull.getWidth(); x++) {
 				hull.set(x, y, DEFAULT_BLACK);
 			}
 		}
-		
+
 		Direction direction = Direction.UP;
 		Pair position = new Pair(hull.getWidth() / 2, hull.getHeight() / 2);
 		hull.set(position, part == Part.ONE ? BLACK : WHITE);
@@ -78,8 +79,8 @@ public class Day11 extends BasePuzzle {
 			}
 			return (panels);
 		}
-		
-		// Part TWO		
+
+		// Part TWO
 		// Make easier to read.
 		for (int y = 0; y < hull.getHeight(); y++) {
 			for (int x = 0; x < hull.getWidth(); x++) {

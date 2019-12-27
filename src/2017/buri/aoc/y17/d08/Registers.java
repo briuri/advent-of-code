@@ -13,7 +13,7 @@ import buri.aoc.data.registers.NamedRegisters;
  */
 public class Registers extends NamedRegisters {
 	private Long _largestValue = 0L;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -46,7 +46,7 @@ public class Registers extends NamedRegisters {
 		}
 		return (getLargestValue());
 	}
-	
+
 	/**
 	 * Checks if a condition is satisfied.
 	 */

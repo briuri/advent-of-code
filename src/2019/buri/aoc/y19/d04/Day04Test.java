@@ -19,14 +19,14 @@ public class Day04Test extends BaseTest {
 		List<Integer> input = Day04.getInput(0);
 		assertEquals(2, input.size());
 	}
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertTrue(Day04.isValidPassword(Part.ONE, "111111"));
 		assertFalse(Day04.isValidPassword(Part.ONE, "223450"));
 		assertFalse(Day04.isValidPassword(Part.ONE, "123789"));
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */
@@ -36,14 +36,14 @@ public class Day04Test extends BaseTest {
 		toConsole(result);
 		assertEquals(1929, result);
 	}
-	
+
 	@Test
 	public void testPart2Examples() {
 		assertTrue(Day04.isValidPassword(Part.TWO, "112233"));
 		assertFalse(Day04.isValidPassword(Part.TWO, "123444"));
 		assertTrue(Day04.isValidPassword(Part.TWO, "111122"));
 	}
-	
+
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

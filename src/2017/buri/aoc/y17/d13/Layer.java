@@ -2,14 +2,14 @@ package buri.aoc.y17.d13;
 
 /**
  * Mutable data class for a firewall layer.
- *  
+ * 
  * @author Brian Uri!
  */
 public class Layer {
 
 	int _depth;
 	int _range;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -27,14 +27,14 @@ public class Layer {
 	public boolean isCaught(int time) {
 		return (time % (getRange() * 2 - 2) == 0);
 	}
-	
+
 	/**
 	 * Returns the severity of getting caught in this layer.
 	 */
 	public int getSeverity() {
 		return (getDepth() * getRange());
 	}
-	
+
 	/**
 	 * Accessor for the depth
 	 */

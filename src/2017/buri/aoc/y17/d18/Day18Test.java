@@ -39,7 +39,7 @@ public class Day18Test extends BaseTest {
 	public void testPart2Examples() {
 		assertEquals(3, Day18.getResult(Part.TWO, Day18.getInput(2)));
 	}
-	
+
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

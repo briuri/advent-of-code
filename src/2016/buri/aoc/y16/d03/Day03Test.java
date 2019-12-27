@@ -29,7 +29,7 @@ public class Day03Test extends BaseTest {
 		toConsole(result);
 		assertEquals(983, result);
 	}
-	
+
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

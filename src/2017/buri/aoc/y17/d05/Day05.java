@@ -20,7 +20,8 @@ public class Day05 extends BasePuzzle {
 	}
 
 	/**
-	 * Executes the jump instructions in order (input data is mutable). The goal is to follow the jumps until one leads outside the list.
+	 * Executes the jump instructions in order (input data is mutable). The goal is to follow the jumps until one leads
+	 * outside the list.
 	 * 
 	 * Part 1:
 	 * - Start at instruction #0 and get the offset stored there.
@@ -29,7 +30,8 @@ public class Day05 extends BasePuzzle {
 	 * 
 	 * Part 2:
 	 * - Start at instruction #0 and get the offset stored there.
-	 * - Jump forward that many instructions then increment the offset in instruction #0 by 1 (or decrement by 1 if offset >= 3).
+	 * - Jump forward that many instructions then increment the offset in instruction #0 by 1 (or decrement by 1 if
+	 * offset >= 3).
 	 * How many steps does it take to reach the exit?
 	 */
 	public static int getResult(Part part, List<Integer> jumps) {

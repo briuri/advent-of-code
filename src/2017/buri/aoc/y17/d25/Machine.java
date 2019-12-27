@@ -14,10 +14,10 @@ public class Machine {
 	private char _currentState;
 	private int _checksumSteps;
 	private Map<Character, State> _states = new HashMap<>();
-		
+
 	private int[] _tape;
 	private int _cursor;
-	
+
 	/**
 	 * Builds the machine from the input.
 	 */
@@ -25,7 +25,7 @@ public class Machine {
 		setCurrentState(input.get(0).charAt(15));
 		_checksumSteps = Integer.valueOf(input.get(1).split(" ")[5]);
 		input = input.subList(2, input.size());
-		
+
 		final int definitionSize = 9;
 		while (!input.isEmpty()) {
 			List<String> definition = input.subList(0, definitionSize);
@@ -33,12 +33,12 @@ public class Machine {
 			getStates().put(state.getName(), state);
 			input = input.subList(definitionSize, input.size());
 		}
-		
+
 		// Initialize tape and start in the middle.
 		_tape = new int[100000];
 		setCursor(getTape().length / 2);
 	}
-		
+
 	/**
 	 * Starts the machine.
 	 */
@@ -56,8 +56,8 @@ public class Machine {
 		}
 		return (sum);
 	}
-		
-	/**	
+
+	/**
 	 * Accessor for the current state
 	 */
 	private char getCurrentState() {
@@ -85,7 +85,6 @@ public class Machine {
 		return _states;
 	}
 
-
 	/**
 	 * Accessor for the tape
 	 */
@@ -105,5 +104,5 @@ public class Machine {
 	 */
 	private void setCursor(int cursor) {
 		_cursor = cursor;
-	}	
+	}
 }

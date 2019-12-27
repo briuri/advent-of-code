@@ -17,9 +17,9 @@ import buri.aoc.data.Triple;
 public class Day21 extends BasePuzzle {
 
 	// Triple x=gold, y=attack, z=armor
-	private static final List<Triple> WEAPONS = new ArrayList<>();	// 1-1 weapons
-	private static final List<Triple> ARMOR = new ArrayList<>();	// 0-1 armor
-	private static final List<Triple> RINGS = new ArrayList<>();	// 0-2 rings
+	private static final List<Triple> WEAPONS = new ArrayList<>(); // 1-1 weapons
+	private static final List<Triple> ARMOR = new ArrayList<>(); // 0-1 armor
+	private static final List<Triple> RINGS = new ArrayList<>(); // 0-2 rings
 	static {
 		WEAPONS.add(new Triple(8, 4, 0));
 		WEAPONS.add(new Triple(10, 5, 0));

@@ -20,7 +20,7 @@ public class Day09Test extends BaseTest {
 		assertEquals(54718, Day09.getResult(21, 6111));
 		assertEquals(37305, Day09.getResult(30, 5807));
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */

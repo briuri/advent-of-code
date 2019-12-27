@@ -19,7 +19,7 @@ public class Day13 extends BasePuzzle {
 	private static final int BLOCK = 2;
 	private static final int PADDLE = 3;
 	private static final int BALL = 4;
-	
+
 	/**
 	 * Returns the input file as a list of longs.
 	 */
@@ -37,7 +37,7 @@ public class Day13 extends BasePuzzle {
 	 * 
 	 * Part 2:
 	 * What is your score after the last block is broken?
-	 */	
+	 */
 	public static int getResult(Part part, List<Long> program) {
 		IntGrid grid = new IntGrid(new Pair(37, 37));
 		Computer computer = new Computer(program);
@@ -54,7 +54,7 @@ public class Day13 extends BasePuzzle {
 		}
 
 		// Part TWO
-		int score = 0;		
+		int score = 0;
 		computer = new Computer(program, 2L);
 		Pair ball = null;
 		Pair paddle = null;
@@ -96,7 +96,7 @@ public class Day13 extends BasePuzzle {
 		}
 		return (score);
 	}
-		
+
 	/**
 	 * Counts all blocks on the grid.
 	 */

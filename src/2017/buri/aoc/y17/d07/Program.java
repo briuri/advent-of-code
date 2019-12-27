@@ -16,11 +16,11 @@ public class Program {
 	private int _cachedTotalWeight = 0;
 	private List<String> _childNames;
 	private List<Program> _children;
-	
+
 	private static final String RELATION = " -> ";
-	private static 	final String WEIGHT_SEPARATOR = " ";
+	private static final String WEIGHT_SEPARATOR = " ";
 	private static final String CHILD_SEPARATOR = ", ";
-	
+
 	/**
 	 * Constructor
 	 */
@@ -35,7 +35,7 @@ public class Program {
 				childNames.add(child);
 			}
 		}
-		
+
 		_name = name;
 		_weight = weight;
 		_childNames = childNames;
@@ -50,7 +50,7 @@ public class Program {
 			getChildren().add(programs.get(childName));
 		}
 	}
-	
+
 	/**
 	 * Recursively calculates the weight of this program and all children.
 	 */
@@ -62,9 +62,9 @@ public class Program {
 			}
 			_cachedTotalWeight = totalWeight;
 		}
-		return (_cachedTotalWeight); 
+		return (_cachedTotalWeight);
 	}
-	
+
 	/**
 	 * Searches for the 1 child with the wrong weight.
 	 */
@@ -80,7 +80,8 @@ public class Program {
 		if (getChildren().isEmpty() || weightsToChildren.size() == 1) {
 			return (null);
 		}
-		// Get the loner child. Assumption: The tree will have 3 or more children, so weight with only 1 child is the imbalanced one.
+		// Get the loner child. Assumption: The tree will have 3 or more children, so weight with only 1 child is the
+		// imbalanced one.
 		for (List<Program> children : weightsToChildren.values()) {
 			if (children.size() == 1) {
 				return (children.get(0));
@@ -88,7 +89,7 @@ public class Program {
 		}
 		throw new RuntimeException("Could not locate imbalanced child of program " + getName());
 	}
-	
+
 	/**
 	 * Prints the program tower.
 	 */
@@ -103,7 +104,7 @@ public class Program {
 		}
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Accessor for the unique name
 	 */
@@ -133,5 +134,5 @@ public class Program {
 			throw new IllegalArgumentException("Children must be initialized before calling.");
 		}
 		return _children;
-	}	
+	}
 }

@@ -6,84 +6,86 @@ package buri.aoc.data;
  * @author Brian Uri!
  */
 public enum Direction {
-	UP('^') {	
+	UP('^') {
 		@Override
 		public Direction turnAround() {
 			return (DOWN);
 		}
-		
+
 		@Override
-        public Direction turnLeft() {
-            return (LEFT);
-        }
-		
+		public Direction turnLeft() {
+			return (LEFT);
+		}
+
 		@Override
-        public Direction turnRight() {
-            return (RIGHT);
-        }
+		public Direction turnRight() {
+			return (RIGHT);
+		}
 	},
-	DOWN('v') {	
+	DOWN('v') {
 		@Override
 		public Direction turnAround() {
 			return (UP);
 		}
-		
+
 		@Override
-        public Direction turnLeft() {
-            return (RIGHT);
-        }
-		
+		public Direction turnLeft() {
+			return (RIGHT);
+		}
+
 		@Override
-        public Direction turnRight() {
-            return (LEFT);
-        }
+		public Direction turnRight() {
+			return (LEFT);
+		}
 	},
 	LEFT('<') {
 		@Override
 		public Direction turnAround() {
 			return (RIGHT);
 		}
-		
+
 		@Override
-        public Direction turnLeft() {
-            return (DOWN);
-        }
-		
+		public Direction turnLeft() {
+			return (DOWN);
+		}
+
 		@Override
-        public Direction turnRight() {
-            return (UP);
-        }
+		public Direction turnRight() {
+			return (UP);
+		}
 	},
 	RIGHT('>') {
 		@Override
 		public Direction turnAround() {
 			return (LEFT);
 		}
-		
+
 		@Override
-        public Direction turnLeft() {
-            return (UP);
-        }
-		
+		public Direction turnLeft() {
+			return (UP);
+		}
+
 		@Override
-        public Direction turnRight() {
-            return (DOWN);
-        }
+		public Direction turnRight() {
+			return (DOWN);
+		}
 	};
-	
+
 	public abstract Direction turnAround();
+
 	public abstract Direction turnLeft();
+
 	public abstract Direction turnRight();
-	
+
 	private char _icon;
-	
+
 	/**
 	 * Constructor
 	 */
 	private Direction(char icon) {
 		_icon = icon;
 	}
-	
+
 	/**
 	 * Looks up a direction based on the icon.
 	 */
@@ -95,7 +97,7 @@ public enum Direction {
 		}
 		return (null);
 	}
-	
+
 	@Override
 	public String toString() {
 		return (String.valueOf(getIcon()));

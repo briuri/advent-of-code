@@ -19,7 +19,7 @@ public class Day11Test extends BaseTest {
 		List<Long> input = Day11.getInput(0);
 		assertEquals(613, input.size());
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */
@@ -37,7 +37,7 @@ public class Day11Test extends BaseTest {
 	public void testPart2Puzzle() {
 		int result = Day11.getResult(Part.TWO, Day11.getInput(0));
 		toConsole(result);
-		//UERPRFGJ
+		// UERPRFGJ
 		assertEquals(0, result);
 	}
 }

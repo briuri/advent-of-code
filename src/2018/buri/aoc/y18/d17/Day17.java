@@ -18,7 +18,7 @@ public class Day17 extends BasePuzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/17", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * How many tiles can the water reach within the range of y values in your scan?

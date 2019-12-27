@@ -25,14 +25,14 @@ import java.util.ArrayDeque;
 public class Circle {
 
 	ArrayDeque<Integer> _circle;
-	
+
 	/**
 	 * Constructor
 	 * 
 	 * Part 2 Performance Notes:
-	 * 		- ArrayList with initialized capacity and a pointer to the current position: 42 minutes.
-	 * 		- LinkedList with a pointer to current position: Stopped after 6 hours with 2 million turns to go.
-	 * 		- ArrayDeque with a rotate() method so only first/last elements are modified: 0.6 seconds.
+	 * - ArrayList with initialized capacity and a pointer to the current position: 42 minutes.
+	 * - LinkedList with a pointer to current position: Stopped after 6 hours with 2 million turns to go.
+	 * - ArrayDeque with a rotate() method so only first/last elements are modified: 0.6 seconds.
 	 */
 	public Circle(int size) {
 		_circle = new ArrayDeque<>(size);
@@ -59,7 +59,7 @@ public class Circle {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds a marble according to the rules of the game. Returns the score of the move.
 	 */
@@ -74,7 +74,7 @@ public class Circle {
 		}
 		rotate(2);
 		getCircle().addLast(value);
-		return (0);		
+		return (0);
 	}
 
 	/**

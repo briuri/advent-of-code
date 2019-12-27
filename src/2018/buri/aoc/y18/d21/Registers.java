@@ -19,7 +19,7 @@ public class Registers extends IndexedRegisters {
 	public Registers(int ipRegister, List<String> codes) {
 		super(ipRegister, codes);
 	}
-	
+
 	/**
 	 * Runs the instructions just like Day 19. Starts with reg[0] = 0 and quits at the expected value for reg[3].
 	 * 
@@ -32,13 +32,13 @@ public class Registers extends IndexedRegisters {
 			set(getIpRegister(), getIp());
 			runStringCode(code.split(" "));
 			setIp((int) get(Registers.REGISTER, getIpRegister()) + 1);
-			
+
 			if (getIp() == 28) {
 				Integer registerThreeValue = get(Registers.REGISTER, 3);
 				if (part == Part.ONE) {
 					return (registerThreeValue);
 				}
-				
+
 				// Part TWO
 				if (registerThreeValues.contains(registerThreeValue)) {
 					return (registerThreeValues.get(registerThreeValues.size() - 1));

@@ -9,14 +9,14 @@ import buri.aoc.data.grid.IntGrid;
  * @author Brian Uri!
  */
 public class SpiralGrid extends IntGrid {
-	
+
 	/**
 	 * Constructor
 	 */
 	public SpiralGrid(int size) {
 		super(new Pair(size, size));
 	}
-		
+
 	/**
 	 * Gets the sum of all adjacent and diagonal values from a position. (0,0) is the top left corner and (x, y) is the
 	 * lower right corner.

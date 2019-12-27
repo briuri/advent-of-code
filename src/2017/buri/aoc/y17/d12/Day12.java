@@ -75,7 +75,7 @@ public class Day12 extends BasePuzzle {
 				tempConnections.addAll(connections.get(tempId));
 			}
 			foundConnections.addAll(tempConnections);
-			
+
 			// Quit when nothing new has been added.
 			if (foundConnections.size() == totalConnections) {
 				break;

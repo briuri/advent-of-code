@@ -22,7 +22,7 @@ public class Day02 extends BasePuzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/02", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What is the checksum for your list of box IDs?
@@ -55,7 +55,7 @@ public class Day02 extends BasePuzzle {
 		}
 		throw new RuntimeException("No IDs varied by exactly one character.");
 	}
-	
+
 	/**
 	 * Returns true if a string contains a character that repeats exactly num times.
 	 */
@@ -68,7 +68,7 @@ public class Day02 extends BasePuzzle {
 		Set<Integer> uniques = new HashSet<>(charCounts.values());
 		return (uniques.contains(num));
 	}
-	
+
 	/**
 	 * Compares two strings index by index and generates a list of common characters.
 	 * 

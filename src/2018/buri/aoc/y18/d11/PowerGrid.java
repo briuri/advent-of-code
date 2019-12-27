@@ -83,7 +83,7 @@ public class PowerGrid extends IntGrid {
 		}
 		return (sum);
 	}
-	
+
 	/**
 	 * Accessor for the serial
 	 */

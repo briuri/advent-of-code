@@ -9,7 +9,7 @@ import buri.aoc.data.Pair;
  */
 public class IntGrid extends AbstractGrid<Integer> {
 	private Integer[][] _grid;
-	
+
 	/**
 	 * Creates a new grid with the specified width/length.
 	 */
@@ -23,7 +23,7 @@ public class IntGrid extends AbstractGrid<Integer> {
 		Integer value = super.get(x, y);
 		return (value == null ? 0 : value);
 	}
-	
+
 	@Override
 	protected String toOutput(Integer value) {
 		return (String.valueOf(value) + "\t");
@@ -33,7 +33,7 @@ public class IntGrid extends AbstractGrid<Integer> {
 	protected Integer[][] getGrid() {
 		return (_grid);
 	}
-	
+
 	@Override
 	protected void setGrid(Integer[][] grid) {
 		setSize(new Pair(grid.length, grid[0].length));

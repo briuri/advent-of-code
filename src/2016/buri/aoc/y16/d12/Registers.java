@@ -7,7 +7,7 @@ import buri.aoc.data.registers.NamedRegisters;
 
 /**
  * Data class for the assembunny registers.
- *  
+ * 
  * @author Brian Uri!
  */
 public class Registers extends NamedRegisters {
@@ -24,7 +24,7 @@ public class Registers extends NamedRegisters {
 			set("c", 1L);
 		}
 	}
-	
+
 	/**
 	 * Processes all instructions.
 	 */

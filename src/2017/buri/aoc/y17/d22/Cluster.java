@@ -22,7 +22,7 @@ public class Cluster extends IntGrid {
 	public static final int WEAK = 1;
 	public static final int INFECTED = 2;
 	public static final int FLAGGED = 3;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -58,7 +58,7 @@ public class Cluster extends IntGrid {
 		alterNode(part);
 		getVirus().move();
 	}
-	
+
 	/**
 	 * Updates the value of the node where the virus carrier is.
 	 * 
@@ -70,7 +70,7 @@ public class Cluster extends IntGrid {
 	 */
 	private void alterNode(Part part) {
 		Integer node = get(getVirus().getPosition());
-		if (part == Part.ONE) {			
+		if (part == Part.ONE) {
 			node = (node == CLEAN ? INFECTED : CLEAN);
 		}
 		else {
@@ -84,7 +84,7 @@ public class Cluster extends IntGrid {
 			setInfections(getInfections() + 1);
 		}
 	}
-	
+
 	/**
 	 * Accessor for the virus
 	 */

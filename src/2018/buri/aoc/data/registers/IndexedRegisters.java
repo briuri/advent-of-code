@@ -12,23 +12,23 @@ import java.util.List;
  */
 public class IndexedRegisters {
 	private int[] _registers;
-	
+
 	// Associated instructions
 	private int _ip;
 	private int _ipRegister;
 	private List<String> _codes;
-	
+
 	// For readability of the opcodes.
 	public static final boolean REGISTER = false;
 	public static final boolean VALUE = true;
-	
+
 	/**
 	 * Constructor
 	 */
 	public IndexedRegisters(int size) {
 		_registers = new int[size];
 	}
-	
+
 	/**
 	 * Constructor with instructions
 	 */
@@ -38,7 +38,7 @@ public class IndexedRegisters {
 		_codes = codes;
 		reset();
 	}
-	
+
 	/**
 	 * Clears all registers and resets pointers.
 	 */
@@ -48,21 +48,21 @@ public class IndexedRegisters {
 			set(i, 0);
 		}
 	}
-	
+
 	/**
 	 * Returns either the value itself (immediate/value) or the value from the register with that index (register).
 	 */
 	public int get(boolean isImmediate, int value) {
 		return (isImmediate ? value : getRegisters()[value]);
 	}
-	
+
 	/**
 	 * Updates the value in a register.
 	 */
 	protected void set(int index, int value) {
 		getRegisters()[index] = value;
 	}
-	
+
 	/**
 	 * Day 19 / 21:
 	 * 
@@ -84,7 +84,7 @@ public class IndexedRegisters {
 			setIp((int) get(REGISTER, getIpRegister()) + 1);
 		}
 	}
-	
+
 	/**
 	 * Outputs the instruction data as pseudocode.
 	 */
@@ -151,7 +151,7 @@ public class IndexedRegisters {
 			}
 		}
 	}
-	
+
 	/**
 	 * Executes an actual instruction against the registers, based on data explored in Day 16.
 	 */
@@ -209,7 +209,7 @@ public class IndexedRegisters {
 			set(c, get(REGISTER, a) | get(VALUE, b));
 		}
 	}
-	
+
 	/**
 	 * Converts string opcodes into the integer values found on Day 16.
 	 */
@@ -265,7 +265,7 @@ public class IndexedRegisters {
 		}
 		runIntCode(code);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
@@ -282,14 +282,14 @@ public class IndexedRegisters {
 	public boolean equals(Object obj) {
 		return (toString().equals(obj.toString()));
 	}
-	
+
 	/**
 	 * Accessor for the registers
 	 */
 	protected int[] getRegisters() {
 		return _registers;
 	}
-	
+
 	/**
 	 * Accessor for the instruction pointer
 	 */

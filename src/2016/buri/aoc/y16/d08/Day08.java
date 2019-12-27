@@ -13,12 +13,12 @@ import buri.aoc.BasePuzzle;
 public class Day08 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified. 
+	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/08", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * How many pixels should be lit?

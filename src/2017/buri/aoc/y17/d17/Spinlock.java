@@ -58,7 +58,7 @@ public class Spinlock {
 			getSpinlock().addLast(first);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return (getSpinlock().toString());

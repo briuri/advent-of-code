@@ -19,7 +19,7 @@ public class Computer {
 
 	private static final String REDUCES_TO = "  -->  ";
 	public static final char LINE_BREAK = 10;
-	
+
 	/**
 	 * Base constructor
 	 */
@@ -30,7 +30,7 @@ public class Computer {
 		setPointer(0);
 		setRelativeBase(0);
 	}
-	
+
 	/**
 	 * Constructor (y19d2)
 	 * 
@@ -43,7 +43,7 @@ public class Computer {
 		_memory.set(1, noun);
 		_memory.set(2, verb);
 	}
-	
+
 	/**
 	 * Constructor (y19d13, y10d17)
 	 * 
@@ -54,7 +54,7 @@ public class Computer {
 		this(program);
 		_memory.set(0, addressZero);
 	}
-	
+
 	/**
 	 * Converts the program into Intcode inputs. (y19)
 	 */
@@ -66,7 +66,7 @@ public class Computer {
 		list.add(Long.valueOf((int) LINE_BREAK));
 		return (list);
 	}
-	
+
 	/**
 	 * Runs the intcode program until a HALT opcode is hit.
 	 */
@@ -125,7 +125,7 @@ public class Computer {
 				equals(params);
 			}
 			else if (opcode == Opcode.RELATIVE_BASE_OFFSET) {
-				relativeBaseOffset(params); 
+				relativeBaseOffset(params);
 			}
 
 			// Update instruction pointer.
@@ -220,7 +220,7 @@ public class Computer {
 	private void relativeBaseOffset(Parameter[] params) {
 		setRelativeBase(getRelativeBase() + applyMode(params[0]));
 	}
-	
+
 	/**
 	 * Displays the raw instructions and their resolutions for debugging.
 	 */
@@ -374,7 +374,7 @@ public class Computer {
 			_memory.add(0L);
 		}
 	}
-	
+
 	/**
 	 * Accessor for the inputs
 	 */
@@ -398,7 +398,7 @@ public class Computer {
 	public List<Long> getOutputs() {
 		return (_outputs);
 	}
-	
+
 	/**
 	 * Accessor for the instruction pointer
 	 */

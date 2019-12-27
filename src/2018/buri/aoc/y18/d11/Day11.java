@@ -32,7 +32,7 @@ public class Day11 extends BasePuzzle {
 			PowerGrid reduction = grid.getReduction(3);
 			return (reduction.getMaxValuePosition().toString());
 		}
-		
+
 		// Part TWO
 		List<Long> maxValues = new ArrayList<>();
 		Map<Integer, Position> positions = new HashMap<>();

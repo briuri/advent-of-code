@@ -19,7 +19,7 @@ public class Day04 extends BasePuzzle {
 	 * Now find one that starts with six zeroes.
 	 */
 	public static int getResult(Part part, String input) {
-		MD5Hash hasher  = new MD5Hash();
+		MD5Hash hasher = new MD5Hash();
 		int number = 0;
 		String prefix = (part == Part.ONE ? "00000" : "000000");
 		while (true) {
@@ -27,6 +27,6 @@ public class Day04 extends BasePuzzle {
 				return (number);
 			}
 			number++;
-		}		
+		}
 	}
 }

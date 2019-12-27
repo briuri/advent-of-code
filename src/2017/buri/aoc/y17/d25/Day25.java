@@ -15,7 +15,7 @@ public class Day25 extends BasePuzzle {
 	public static Machine getInput(int fileIndex) {
 		return (new Machine(readFile("2017/25", fileIndex)));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What is the diagnostic checksum it produces once it's working again?

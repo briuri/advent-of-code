@@ -85,12 +85,12 @@ public class Cart implements Comparable<Cart> {
 	public int compareTo(Cart o) {
 		return getPosition().compareTo(o.getPosition());
 	}
-	
+
 	@Override
 	public String toString() {
 		return (getPosition() + " " + getDirection());
 	}
-	
+
 	/**
 	 * Accessor for the position
 	 */

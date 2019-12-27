@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author Brian Uri!
  */
 public abstract class BasePuzzle {
-			
+
 	/**
 	 * Loads a file as a list of string lines.
 	 */
@@ -34,14 +34,14 @@ public abstract class BasePuzzle {
 	protected static Integer getSum(List<Integer> list) {
 		return (list.stream().mapToInt(Integer::intValue).sum());
 	}
-	
+
 	/**
 	 * Converts strings into integers.
 	 */
 	public static List<Integer> convertStringsToInts(List<String> rawIntegers) {
 		return (rawIntegers.stream().map(Integer::valueOf).collect(Collectors.toList()));
 	}
-	
+
 	/**
 	 * Gets the entry with the minimum value from a Map
 	 */
@@ -51,10 +51,10 @@ public abstract class BasePuzzle {
 			if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
 				minEntry = entry;
 			}
-		}	
+		}
 		return (minEntry);
 	}
-	
+
 	/**
 	 * Gets the entry with the maximum value from a Map
 	 */
@@ -64,25 +64,24 @@ public abstract class BasePuzzle {
 			if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
 				maxEntry = entry;
 			}
-		}	
+		}
 		return (maxEntry);
 	}
-	
-	
+
 	/**
 	 * Calculates the least common multiple of two numbers.
 	 */
 	protected static long getLCM(long a, long b) {
 		return (a / getGCD(a, b) * b);
 	}
-	        	
-  	/**
-   	 * Recursively finds the greatest common denominator of two numbers.
-   	 */
+
+	/**
+	 * Recursively finds the greatest common denominator of two numbers.
+	 */
 	protected static long getGCD(long a, long b) {
-  		if (a == 0) {
-  			return (b);
-   		}
-   		return (getGCD(b % a, a));
-   	}
+		if (a == 0) {
+			return (b);
+		}
+		return (getGCD(b % a, a));
+	}
 }

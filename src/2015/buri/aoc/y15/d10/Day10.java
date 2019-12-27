@@ -9,13 +9,14 @@ import buri.aoc.BasePuzzle;
  * @author Brian Uri!
  */
 public class Day10 extends BasePuzzle {
-	
+
 	/**
 	 * Part 1:
 	 * Starting with the digits in your puzzle input, apply this process 40 times. What is the length of the result?
 	 * 
 	 * Part 2:
-	 * Now, starting again with the digits in your puzzle input, apply this process 50 times. What is the length of the new result?
+	 * Now, starting again with the digits in your puzzle input, apply this process 50 times. What is the length of the
+	 * new result?
 	 */
 	public static int getResult(Part part, String input) {
 		int times = (part == Part.ONE ? 40 : 50);

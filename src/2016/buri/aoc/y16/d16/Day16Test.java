@@ -19,12 +19,12 @@ public class Day16Test extends BaseTest {
 		assertEquals("11111000000", Day16.generateCurve("11111", 11));
 		assertEquals("1111000010100101011110000", Day16.generateCurve("111100001010", 25));
 	}
-	
+
 	@Test
 	public void testPart1GetChecksum() {
 		assertEquals("100", Day16.getChecksum("110010110100"));
 	}
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertEquals("01100", Day16.getResult(Part.ONE, "10000", 20));

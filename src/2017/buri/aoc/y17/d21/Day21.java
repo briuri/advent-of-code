@@ -22,10 +22,10 @@ public class Day21 extends BasePuzzle {
 		}
 		return (rules);
 	}
-	
+
 	/**
 	 * Part 1:
-	 * How many pixels stay on after 5 iterations? 
+	 * How many pixels stay on after 5 iterations?
 	 * 
 	 * Part 2:
 	 * How many pixels stay on after 18 iterations?

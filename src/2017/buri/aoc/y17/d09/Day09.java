@@ -80,21 +80,21 @@ public class Day09 extends BasePuzzle {
 	 */
 	public static int countGarbage(String input) {
 		// Convert whitespace to underscores so we can reserve whitespace to represent erased characters.
-		StringBuffer buffer = new StringBuffer(input.replace(" ",  "_"));
+		StringBuffer buffer = new StringBuffer(input.replace(" ", "_"));
 		eraseCancellations(buffer);
 		String inputWithoutCancellations = buffer.toString().replaceAll(" ", "");
 		int lengthWithoutCancellations = inputWithoutCancellations.length();
-		
+
 		buffer = new StringBuffer(inputWithoutCancellations);
 		int garbageCloserCount = inputWithoutCancellations.length() - inputWithoutCancellations.replace(">",
 			"").length();
 		eraseGarbage(buffer);
 		String cleanInput = buffer.toString().replaceAll(" ", "");
-		
+
 		// Count how many spaces were removed, but ignore 2 (<>) for each group of garbage.
 		return (lengthWithoutCancellations - cleanInput.length() - (2 * garbageCloserCount));
 	}
-	
+
 	/**
 	 * Replaces cancellations with tabs.
 	 */
@@ -118,7 +118,7 @@ public class Day09 extends BasePuzzle {
 			}
 		}
 	}
-	
+
 	/**
 	 * Replaces some subset of the buffer with whitespace.
 	 */

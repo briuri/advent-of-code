@@ -26,7 +26,7 @@ public class Path<T extends Comparable> implements Comparable<Path<T>> {
 		Collections.sort(shortestPaths);
 		return (shortestPaths);
 	}
-	
+
 	/**
 	 * Constructor
 	 */
@@ -38,14 +38,14 @@ public class Path<T extends Comparable> implements Comparable<Path<T>> {
 		}
 		Collections.reverse(getPositions());
 	}
-		
+
 	/**
 	 * Returns the length of the path.
 	 */
 	public int getLength() {
 		return (getPositions().size() - 1);
 	}
-	
+
 	/**
 	 * Sort by length ascending first, then by reading order of the 2nd position on the path.
 	 */

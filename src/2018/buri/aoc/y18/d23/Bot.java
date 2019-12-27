@@ -24,14 +24,14 @@ public class Bot {
 	public String toString() {
 		return "[" + getPosition().toString() + " r=" + getRadius() + "]";
 	}
-	
+
 	/**
 	 * Returns true if some position is in range of this bot's signal.
 	 */
 	public boolean inRange(Triple position) {
 		return (getPosition().getManhattanDistance(position) <= getRadius());
 	}
-	
+
 	/**
 	 * Accessor for the position
 	 */

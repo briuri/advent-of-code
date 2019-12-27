@@ -21,7 +21,7 @@ public class Day07 extends BasePuzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/07", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * In what order should the steps in your instructions be completed?
@@ -38,12 +38,12 @@ public class Day07 extends BasePuzzle {
 		List<Step> nextSteps = steps.getStarts();
 		List<Step> runningSteps = new ArrayList<>();
 		List<String> finishedStepNames = new ArrayList<>();
-		
+
 		int time = -1;
 		while (runningSteps.size() + nextSteps.size() != 0) {
 			time++;
 			// First, release any workers whose steps have finished.
-			for (Iterator<Step> iter = runningSteps.iterator(); iter.hasNext(); ) {
+			for (Iterator<Step> iter = runningSteps.iterator(); iter.hasNext();) {
 				Step step = iter.next();
 				if (step.finishesAt(time)) {
 					iter.remove();
@@ -51,7 +51,7 @@ public class Day07 extends BasePuzzle {
 					workers++;
 				}
 			}
-			
+
 			// Next, assign available workers to queued, assignable steps.
 			boolean stepsAvailable = true;
 			while (workers > 0 && stepsAvailable) {
@@ -82,7 +82,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (part == Part.ONE ? buffer.toString() : String.valueOf(time));
 	}
-		
+
 	/**
 	 * Checks if all prerequisites have been finished (allowing a step to be assigned).
 	 */

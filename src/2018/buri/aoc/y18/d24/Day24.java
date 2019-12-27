@@ -14,12 +14,12 @@ import buri.aoc.y18.d24.Battle.Outcome;
 public class Day24 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified 
+	 * Returns the input file unmodified
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/24", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * How many units would the winning army have?

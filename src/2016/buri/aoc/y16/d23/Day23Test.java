@@ -24,7 +24,7 @@ public class Day23Test extends BaseTest {
 	public void testInputConversion() {
 		Registers.convertInput(Day23.getInput(0));
 	}
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertEquals(3L, Day23.getResult(Part.ONE, Day23.getInput(1)));

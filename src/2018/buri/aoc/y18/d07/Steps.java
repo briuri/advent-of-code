@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Steps {
 	private Map<String, Step> _steps;
-	
+
 	/**
 	 * Builds a graph from input strings
 	 */
@@ -23,7 +23,7 @@ public class Steps {
 			String[] tokens = data.split(" ");
 			String prev = tokens[1];
 			String next = tokens[7];
-			
+
 			// Load this step as a pre-req for its next steps.
 			Step step = getStep(next);
 			if (step == null) {
@@ -31,7 +31,7 @@ public class Steps {
 				_steps.put(next, step);
 			}
 			step.addPrevious(prev);
-			
+
 			// Load this step as a next step for its pre-reqs.
 			step = getStep(prev);
 			if (step == null) {
@@ -55,14 +55,14 @@ public class Steps {
 		Collections.sort(starts);
 		return (starts);
 	}
-	
+
 	/**
 	 * Returns a step by name.
 	 */
 	public Step getStep(String name) {
 		return (getSteps().get(name));
 	}
-	
+
 	/**
 	 * Accessor for the steps
 	 */

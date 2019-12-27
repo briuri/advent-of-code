@@ -12,7 +12,7 @@ public class Report implements Comparable {
 
 	private Integer _id;
 	private Set<Integer> _connections;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -31,7 +31,7 @@ public class Report implements Comparable {
 	public int compareTo(Object o) {
 		return (getId().compareTo(((Report) o).getId()));
 	}
-	
+
 	/**
 	 * Accessor for the id
 	 */
@@ -44,5 +44,5 @@ public class Report implements Comparable {
 	 */
 	public Set<Integer> getConnections() {
 		return _connections;
-	}	
+	}
 }

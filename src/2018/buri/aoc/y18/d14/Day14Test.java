@@ -17,7 +17,7 @@ public class Day14Test extends BaseTest {
 		assertEquals("0124515891", Day14.getResult(Part.ONE, "5"));
 		assertEquals("5158916779", Day14.getResult(Part.ONE, "9"));
 		assertEquals("9251071085", Day14.getResult(Part.ONE, "18"));
-		assertEquals("5941429882", Day14.getResult(Part.ONE, "2018"));		
+		assertEquals("5941429882", Day14.getResult(Part.ONE, "2018"));
 	}
 
 	/**
@@ -33,9 +33,9 @@ public class Day14Test extends BaseTest {
 	@Test
 	public void testPart2Examples() {
 		assertEquals("5", Day14.getResult(Part.TWO, "01245"));
-	    assertEquals("9", Day14.getResult(Part.TWO, "51589"));
-	    assertEquals("18", Day14.getResult(Part.TWO, "92510"));
-	    assertEquals("2018", Day14.getResult(Part.TWO, "59414"));	    
+		assertEquals("9", Day14.getResult(Part.TWO, "51589"));
+		assertEquals("18", Day14.getResult(Part.TWO, "92510"));
+		assertEquals("2018", Day14.getResult(Part.TWO, "59414"));
 	}
 
 	/**

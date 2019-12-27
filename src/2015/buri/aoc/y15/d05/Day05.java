@@ -109,6 +109,5 @@ public class Day05 extends BasePuzzle {
 		}
 		return (false);
 	}
-	 
 
 }

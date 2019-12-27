@@ -37,7 +37,7 @@ public class Day10 extends BasePuzzle {
 		}
 		return (data);
 	}
-	
+
 	/**
 	 * Part 1:
 	 * Begin with a list of numbers from 0 to 255, a current position which begins at 0 (the first element in the list),

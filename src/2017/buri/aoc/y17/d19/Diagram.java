@@ -31,7 +31,7 @@ public class Diagram extends CharGrid {
 	private static final char VERTICAL = '|';
 	private static final char HORIZONTAL = '-';
 	private static final char CORNER = '+';
-	
+
 	/**
 	 * Constructor
 	 */
@@ -49,7 +49,7 @@ public class Diagram extends CharGrid {
 			}
 		}
 	}
-	
+
 	/**
 	 * Follows the path to the end and returns the string of letters.
 	 */
@@ -74,7 +74,7 @@ public class Diagram extends CharGrid {
 		}
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Determines the next direction at a corner. Assumes 1 true path and always 90 degrees.
 	 */
@@ -117,7 +117,7 @@ public class Diagram extends CharGrid {
 		boolean yBounded = (position.getY() >= 0 && position.getY() < getHeight());
 		return (xBounded && yBounded);
 	}
-	
+
 	/**
 	 * Accessor for the steps
 	 */
@@ -131,7 +131,7 @@ public class Diagram extends CharGrid {
 	public void setSteps(int steps) {
 		_steps = steps;
 	}
-	
+
 	/**
 	 * Accessor for the current position
 	 */
@@ -159,7 +159,7 @@ public class Diagram extends CharGrid {
 	private void setCurrentDirection(Direction currentDirection) {
 		_currentDirection = currentDirection;
 	}
-	
+
 	/**
 	 * Accessor for the breadcrumbs
 	 */

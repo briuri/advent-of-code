@@ -13,7 +13,7 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Day08Test extends BaseTest {
-	
+
 	@Test
 	public void testGetInput() {
 		List<RegisterInstruction> instructions = Day08.getInput(0);
@@ -49,5 +49,5 @@ public class Day08Test extends BaseTest {
 		toConsole(result);
 		assertEquals(7774L, result);
 	}
-	
+
 }

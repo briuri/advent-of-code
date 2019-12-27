@@ -32,7 +32,7 @@ public class Particle {
 		getPosition().add(getVelocity());
 		return (getPosition().toString());
 	}
-	
+
 	/**
 	 * Accessor for the position
 	 */

@@ -10,9 +10,10 @@ import java.awt.datatransfer.StringSelection;
  * @author Brian Uri!
  */
 public abstract class BaseTest {
-	
+
 	/**
-	 * Builds an identifier for test output, based on the package name (buri.aoc.yXX.dYY) and test name (testPartXPuzzle).
+	 * Builds an identifier for test output, based on the package name (buri.aoc.yXX.dYY) and test name
+	 * (testPartXPuzzle).
 	 */
 	private String getIdentifier() {
 		String packageName = this.getClass().getPackage().getName();
@@ -21,16 +22,17 @@ public abstract class BaseTest {
 
 		String testName = Thread.currentThread().getStackTrace()[3].getMethodName();
 		String part = testName.substring(testName.indexOf("Part") + 4).substring(0, 1);
-		
-		StringBuffer buffer = new StringBuffer();		
-		buffer.append("### Year ").append(year).append(" Day ").append(day).append(" Part ").append(part).append(" ###");
+
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("### Year ").append(year).append(" Day ").append(day).append(" Part ").append(part).append(
+			" ###");
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Copies a result to the console and the system clipboard.
 	 */
-	protected <T> void toConsole(T result) {		
+	protected <T> void toConsole(T result) {
 		String value = String.valueOf(result);
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(new StringSelection(value), null);

@@ -11,7 +11,7 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Day03Test extends BaseTest {
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertEquals(0, Day03.getResult(Part.ONE, 1));
@@ -29,7 +29,7 @@ public class Day03Test extends BaseTest {
 		toConsole(result);
 		assertEquals(430, result);
 	}
-	
+
 	@Test
 	public void testPart2Examples() {
 		assertEquals(747, Day03.getResult(Part.TWO, 700));

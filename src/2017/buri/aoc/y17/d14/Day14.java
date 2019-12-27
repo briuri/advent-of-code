@@ -13,7 +13,7 @@ import buri.aoc.y17.d10.Day10;
  * @author Brian Uri!
  */
 public class Day14 extends BasePuzzle {
-	
+
 	/**
 	 * Part 1:
 	 * Given your actual key string, how many squares are used?
@@ -38,7 +38,7 @@ public class Day14 extends BasePuzzle {
 		Disk disk = new Disk(diskRows);
 		return (disk.countRegions());
 	}
-	
+
 	/**
 	 * Marshals the raw data into the form needed for a knot hash and returns the knot hash hex string.
 	 */
@@ -49,7 +49,7 @@ public class Day14 extends BasePuzzle {
 		}
 		return (Day10.getResult(Part.TWO, 256, data));
 	}
-	
+
 	/**
 	 * Converts each character of a 32-character hex string into a 4-digit binary representation.
 	 */

@@ -30,7 +30,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (programs);
 	}
-	
+
 	/**
 	 * One program at the bottom supports the entire tower. It's holding a large disc, and on the disc are balanced
 	 * several more sub-towers. At the bottom of these sub-towers, standing on the bottom disc, are other programs, each

@@ -77,7 +77,7 @@ public class Day04 extends BasePuzzle {
 			CharFrequency frequency = new CharFrequency(password);
 			hasTwoAdjacent = frequency.containsFrequency(2);
 		}
-		
+
 		return (isSixDigit && neverDecreases && hasTwoAdjacent);
 	}
 

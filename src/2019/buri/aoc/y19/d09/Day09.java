@@ -15,7 +15,7 @@ import buri.aoc.BasePuzzle;
 public class Day09 extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of longs 
+	 * Returns the input file as a list of longs
 	 */
 	public static List<Long> getInput(int fileIndex) {
 		List<Long> list = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Day09 extends BasePuzzle {
 		}
 		return (list);
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What BOOST keycode does it produce?

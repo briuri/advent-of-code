@@ -37,7 +37,7 @@ public class Day20 extends BasePuzzle {
 		if (part == Part.ONE) {
 			return (getSlowestAccelerationIndex(input));
 		}
-		
+
 		// Part TWO
 		for (int i = 0; i < 100; i++) {
 			moveWithCollisions(input);

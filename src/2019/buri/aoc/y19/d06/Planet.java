@@ -9,7 +9,7 @@ public class Planet {
 	private String _name;
 	private String _parentName;
 	private Planet _parent;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -17,13 +17,13 @@ public class Planet {
 		_name = name;
 		_parentName = parentName;
 	}
-	
+
 	@Override
 	public String toString() {
 		Planet parent = getParent();
 		return (parent == null ? getName() : getParent() + ")" + getName());
 	}
-	
+
 	/**
 	 * Accessor for the name of this planet
 	 */
@@ -37,14 +37,14 @@ public class Planet {
 	public String getParentName() {
 		return _parentName;
 	}
-	
+
 	/**
 	 * Accessor for the planet this planet orbits (its parent).
 	 */
 	public Planet getParent() {
 		return _parent;
 	}
-	
+
 	/**
 	 * Accessor for the planet this planet orbits (its parent).
 	 */

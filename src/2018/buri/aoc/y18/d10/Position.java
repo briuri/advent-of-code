@@ -12,7 +12,7 @@ public class Position extends Pair {
 	private int _originalY;
 	private int _velocityX;
 	private int _velocityY;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -25,14 +25,14 @@ public class Position extends Pair {
 		_velocityX = Integer.valueOf(tokens[2]);
 		_velocityY = Integer.valueOf(tokens[3]);
 	}
-	
+
 	/**
 	 * Int-based constructor
 	 */
 	public Position(int x, int y) {
 		super(x, y);
 	}
-	
+
 	/**
 	 * Returns this point back to the original location.
 	 */
@@ -40,7 +40,7 @@ public class Position extends Pair {
 		setX(getOriginalX());
 		setY(getOriginalY());
 	}
-	
+
 	/**
 	 * Shifts the output back to the origin for ease of reading.
 	 */
@@ -48,7 +48,7 @@ public class Position extends Pair {
 		setX(getX() - position.getX());
 		setY(getY() - position.getY());
 	}
-	
+
 	/**
 	 * Moves this point some number of times.
 	 */
@@ -56,7 +56,7 @@ public class Position extends Pair {
 		setX(getX() + (times * getVelocityX()));
 		setY(getY() + (times * getVelocityY()));
 	}
-		
+
 	/**
 	 * Accessor for the original X coordinate.
 	 */
@@ -83,5 +83,5 @@ public class Position extends Pair {
 	 */
 	private int getVelocityY() {
 		return _velocityY;
-	}	
+	}
 }

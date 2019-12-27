@@ -13,17 +13,17 @@ import buri.aoc.BasePuzzle;
 public class Day00 extends BasePuzzle {
 
 	/**
-	 * Returns the input file HOW 
+	 * Returns the input file HOW
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2020a/00", fileIndex));
-//		List<Data> list = new ArrayList<>();
-//		for (String input : readFile("2020a/00", fileIndex)) {
-//			list.add(new Data(input));
-//		}
-//		return (list);
+		// List<Data> list = new ArrayList<>();
+		// for (String input : readFile("2020a/00", fileIndex)) {
+		// list.add(new Data(input));
+		// }
+		// return (list);
 	}
-	
+
 	/**
 	 * Part 1:
 	 * QUESTION
@@ -37,7 +37,7 @@ public class Day00 extends BasePuzzle {
 		}
 		return (0);
 	}
-	
+
 	/**
 	 *
 	 */

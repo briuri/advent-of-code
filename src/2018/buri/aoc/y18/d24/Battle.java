@@ -17,7 +17,7 @@ public class Battle {
 	public enum Outcome {
 		STALEMATE, IMMUNE_WINS, IMMUNE_LOSES
 	}
-	
+
 	/**
 	 * Constructor
 	 */
@@ -56,7 +56,7 @@ public class Battle {
 			List<Group> allGroups = new ArrayList<>();
 			allGroups.addAll(getImmuneSystem());
 			allGroups.addAll(getInfection());
-			
+
 			// Target Selection
 			Collections.sort(allGroups, Group.SELECTION_ORDER);
 			for (Group group : allGroups) {
@@ -69,7 +69,7 @@ public class Battle {
 			for (Group group : allGroups) {
 				totalKills += group.attack();
 			}
-			
+
 			// Part 2: Stalemate occurs when no attacks kill anything.
 			if (totalKills == 0) {
 				return (Outcome.STALEMATE);
@@ -107,13 +107,13 @@ public class Battle {
 		// Calculate how much damage will be done to each potential defender.
 		List<Group> enemies = new ArrayList<>(group.isImmuneSystem() ? getInfection() : getImmuneSystem());
 		for (Group enemy : enemies) {
-			if (!enemy.isTargeted()) { 
+			if (!enemy.isTargeted()) {
 				int damage = group.getDamageDealt(enemy);
 				maxDamage = Math.max(maxDamage, damage);
 				damageMap.put(enemy, damage);
 			}
 		}
-		
+
 		// Remove any defenders that are already targeted or aren't going to receive max damage.
 		for (Iterator<Group> iterator = enemies.iterator(); iterator.hasNext();) {
 			Group enemy = iterator.next();

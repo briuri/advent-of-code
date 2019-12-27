@@ -46,6 +46,8 @@ public class Day08Test extends BaseTest {
 		String result = Day08.getResult(Part.TWO, Day08.getInput(0), 25, 6);
 		toConsole(result);
 		// YGRYZ
-		assertEquals("■   ■ ■■  ■■■  ■   ■■■■■ \n■   ■■  ■ ■  ■ ■   ■   ■ \n ■ ■ ■    ■  ■  ■ ■   ■  \n  ■  ■ ■■ ■■■    ■   ■   \n  ■  ■  ■ ■ ■    ■  ■    \n  ■   ■■■ ■  ■   ■  ■■■■ ", result);
+		assertEquals(
+			"■   ■ ■■  ■■■  ■   ■■■■■ \n■   ■■  ■ ■  ■ ■   ■   ■ \n ■ ■ ■    ■  ■  ■ ■   ■  \n  ■  ■ ■■ ■■■    ■   ■   \n  ■  ■  ■ ■ ■    ■  ■    \n  ■   ■■■ ■  ■   ■  ■■■■ ",
+			result);
 	}
 }

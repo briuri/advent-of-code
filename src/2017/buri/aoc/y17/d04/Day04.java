@@ -26,7 +26,7 @@ public class Day04 extends BasePuzzle {
 		}
 		return (rows);
 	}
-	
+
 	/**
 	 * A passphrase consists of a series of words (lowercase letters) separated by spaces.
 	 * 

@@ -8,7 +8,7 @@ package buri.aoc.y18.d22;
 public class Node implements Comparable<Node> {
 	private Position _position;
 	private int _costSoFar;
-	
+
 	/**
 	 * Constructor
 	 */

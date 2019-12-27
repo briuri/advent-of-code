@@ -20,7 +20,7 @@ public class Day16 extends BasePuzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (Arrays.asList(readFile("2017/16", fileIndex).get(0).split(",")));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * In what order are the programs standing after their dance?
@@ -37,7 +37,7 @@ public class Day16 extends BasePuzzle {
 				dancers.perform(move);
 			}
 			String dance = dancers.toString();
-			
+
 			// Found a repetition, so we can extrapolate to a billion.
 			if (dances.contains(dance)) {
 				break;

@@ -25,7 +25,7 @@ public class Day21Test extends BaseTest {
 	public void testInputConversion() {
 		IndexedRegisters.convertInput(Day21.getInput(0));
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */

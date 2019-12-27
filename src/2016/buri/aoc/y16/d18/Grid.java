@@ -57,7 +57,7 @@ public class Grid {
 		}
 		return (count);
 	}
-	
+
 	private Character[][] getGrid() {
 		return (_grid);
 	}

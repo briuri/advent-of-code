@@ -26,7 +26,7 @@ public class Day10 extends BasePuzzle {
 		}
 		return (positions);
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What message will eventually appear in the sky?
@@ -48,7 +48,7 @@ public class Day10 extends BasePuzzle {
 			// Points are breaking apart again. Stop evaluating.
 			else if (area.compareTo(minArea) >= 0) {
 				break;
-			}				
+			}
 			for (Position position : input) {
 				position.move(1);
 			}
@@ -75,7 +75,7 @@ public class Day10 extends BasePuzzle {
 		// Part TWO
 		return (String.valueOf(minTime));
 	}
-	
+
 	/**
 	 * Find the area of the rectangular bounds of all positions. The rectangle with the smallest area will be the grid
 	 * with the visible answer.
@@ -95,7 +95,7 @@ public class Day10 extends BasePuzzle {
 		BigInteger yLength = new BigInteger(String.valueOf(maxY - minY));
 		return xLength.multiply(yLength);
 	}
-	
+
 	/**
 	 * Find the offset (dead whitespace) so we can shift the output to the origin.
 	 */

@@ -13,12 +13,12 @@ import buri.aoc.BasePuzzle;
 public class Day24 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified. 
+	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/24", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * Given your actual map, and starting from location 0, what is the fewest number of steps required to visit every

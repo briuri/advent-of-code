@@ -14,12 +14,12 @@ import buri.aoc.BasePuzzle;
 public class Day07 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified. 
+	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/07", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * How many IPs in your puzzle input support TLS?
@@ -36,7 +36,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (count);
 	}
-	
+
 	/**
 	 * Returns true if the rules for TLS are obeyed.
 	 */
@@ -56,7 +56,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (false);
 	}
-	
+
 	/**
 	 * Returns true if the rules for SSL are obeyed.
 	 */
@@ -72,7 +72,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (false);
 	}
-	
+
 	/**
 	 * Breaks an IP down into supernets and hypernets for processing.
 	 */
@@ -80,14 +80,15 @@ public class Day07 extends BasePuzzle {
 		String[] partialSplit = fullIP.split("\\[");
 		supernets.add(partialSplit[0]);
 		for (int i = 1; i < partialSplit.length; i++) {
-			String [] fullSplit = partialSplit[i].split("\\]");
+			String[] fullSplit = partialSplit[i].split("\\]");
 			hypernets.add(fullSplit[0]);
 			supernets.add(fullSplit[1]);
 		}
 	}
-	
+
 	/**
-	 * Checks if a string has any four-character sequence which consists of a pair of two different characters followed by the reverse of that pair.
+	 * Checks if a string has any four-character sequence which consists of a pair of two different characters followed
+	 * by the reverse of that pair.
 	 */
 	private static boolean hasABBA(String string) {
 		StringBuffer back = new StringBuffer();
@@ -100,7 +101,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (false);
 	}
-	
+
 	/**
 	 * Searches the supernets for all ABA patterns and returns a list of them.
 	 */
@@ -118,7 +119,7 @@ public class Day07 extends BasePuzzle {
 		}
 		return (abas);
 	}
-	
+
 	/**
 	 * Searches for the paired BAB pattern in all the hypernets and returns true if found.
 	 */

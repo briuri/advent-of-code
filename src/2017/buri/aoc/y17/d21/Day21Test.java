@@ -18,7 +18,7 @@ public class Day21Test extends BaseTest {
 		List<Rule> input = Day21.getInput(0);
 		assertEquals(108, input.size());
 	}
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertEquals(12, Day21.getResult(Day21.getInput(1), 2));

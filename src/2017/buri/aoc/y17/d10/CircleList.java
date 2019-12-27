@@ -24,20 +24,20 @@ public class CircleList {
 			_list.add(i);
 		}
 	}
-	
+
 	/**
 	 * Reverse the order of that length of elements in the list, starting with the element at the current position.
 	 */
 	public void reverse(int length, int currentPosition) {
 		currentPosition = currentPosition % getSize();
 		int interimEnd = Math.min(getSize(), currentPosition + length);
-		
+
 		// Create a sublist that contains all elements and reverse it.
 		List<Integer> subList = new ArrayList<>(getList().subList(currentPosition, interimEnd));
 		int remainder = length - (subList.size());
 		subList.addAll(new ArrayList<>(getList().subList(0, remainder)));
 		Collections.reverse(subList);
-		
+
 		// Overwrite real list with reversed elements.
 		int overwritePosition = currentPosition;
 		for (Integer value : subList) {
@@ -48,7 +48,7 @@ public class CircleList {
 			}
 		}
 	}
-	
+
 	/**
 	 * Converts 16 numbers to its XOR.
 	 */
@@ -59,7 +59,7 @@ public class CircleList {
 		}
 		return (xor);
 	}
-	
+
 	/**
 	 * Converts a sparse hash to a dense hash, then to hex.
 	 */
@@ -79,14 +79,14 @@ public class CircleList {
 		}
 		return (hex);
 	}
-	
+
 	/**
 	 * Multiplies the first two values together.
 	 */
 	public int getResult() {
 		return (getList().get(0) * getList().get(1));
 	}
-	
+
 	/**
 	 * Output for debugging
 	 */
@@ -103,24 +103,23 @@ public class CircleList {
 		}
 		return (buffer.toString());
 	}
-	
+
 	@Override
 	public String toString() {
 		return (toString(0));
 	}
 
-	
 	/**
 	 * Returns the size of the list
 	 */
 	private int getSize() {
 		return (getList().size());
 	}
-	
+
 	/**
 	 * Accessor for the internal list
 	 */
 	private List<Integer> getList() {
 		return _list;
-	}	
+	}
 }

@@ -66,7 +66,7 @@ public class Observation implements Comparable {
 	public boolean isOnDuty() {
 		return (getObservation().startsWith("Guard"));
 	}
-	
+
 	/**
 	 * Returns true if the observation is about falling asleep.
 	 */

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class SleepSchedule {
 	private List<Integer> _schedule;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -24,7 +24,7 @@ public class SleepSchedule {
 			getSchedule().add(0);
 		}
 	}
-	
+
 	/**
 	 * Adds 1 to the number of times the guard is asleep at this minute.
 	 */
@@ -42,25 +42,25 @@ public class SleepSchedule {
 		}
 		return (sum);
 	}
-	
+
 	/**
 	 * Gets the minute with the most recorded sleep.
 	 */
 	public Integer getMaxMinute() {
 		return (getSchedule().indexOf(getMaxSleep()));
 	}
-	
+
 	/**
 	 * Gets the value of the minute with the most recorded sleep.
 	 */
 	public Integer getMaxSleep() {
 		return (Collections.max(getSchedule()));
 	}
-	
+
 	/**
 	 * Accessor for the raw schedule
 	 */
 	private List<Integer> getSchedule() {
 		return _schedule;
-	}	
+	}
 }

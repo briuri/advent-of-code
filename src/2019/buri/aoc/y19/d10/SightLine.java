@@ -11,7 +11,7 @@ import buri.aoc.data.Pair;
 public class SightLine implements Comparable<SightLine> {
 	private Pair _slope;
 	private Double _angle;
-	
+
 	/**
 	 * Calculates a sight line between two points.
 	 */
@@ -23,11 +23,11 @@ public class SightLine implements Comparable<SightLine> {
 			gcd = gcd * -1;
 		}
 		_slope = new Pair(dx / gcd, dy / gcd);
-				
+
 		// Subtract PI/2 to start facing up rather than right.
 		_angle = Math.atan2(getSlope().getX(), getSlope().getY()) - Math.PI / 2.0;
 	}
-	
+
 	/**
 	 * Recursively finds the greatest common denominator of two numbers.
 	 */
@@ -45,7 +45,7 @@ public class SightLine implements Comparable<SightLine> {
 	public int compareTo(SightLine o) {
 		return (-1 * getAngle().compareTo(o.getAngle()));
 	}
-	
+
 	/**
 	 * Compares equality based on slope.
 	 */
@@ -53,7 +53,7 @@ public class SightLine implements Comparable<SightLine> {
 	public boolean equals(Object obj) {
 		return (getSlope().equals(((SightLine) obj).getSlope()));
 	}
-	
+
 	/**
 	 * Compares equality based on slope.
 	 */
@@ -61,7 +61,7 @@ public class SightLine implements Comparable<SightLine> {
 	public int hashCode() {
 		return (getSlope().hashCode());
 	}
-	
+
 	/**
 	 * Accessor for the slope
 	 */

@@ -55,7 +55,7 @@ public class Moon {
 		if (posA > posB) {
 			return (-1);
 		}
-		else if (posA < posB)  {
+		else if (posA < posB) {
 			return (1);
 		}
 		return (0);
@@ -78,7 +78,7 @@ public class Moon {
 		long ke = getVelocity().getManhattanDistance();
 		return (pe * ke);
 	}
-	
+
 	/**
 	 * Returns a snapshot of the x-values.
 	 */
@@ -99,12 +99,12 @@ public class Moon {
 	public String getZState() {
 		return (getPosition().getZ() + "|" + getVelocity().getZ());
 	}
-	
+
 	@Override
 	public String toString() {
 		return (getPosition() + "|" + getVelocity());
 	}
-	
+
 	/**
 	 * Accessor for the position
 	 */

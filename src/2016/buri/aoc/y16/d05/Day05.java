@@ -25,7 +25,7 @@ public class Day05 extends BasePuzzle {
 	 */
 	public static String getResult(Part part, String input) {
 		MD5Hash hasher = new MD5Hash();
-		
+
 		int iteration = 0;
 		// Represent password as 8 blanks, completed when all are filled in.
 		StringBuffer password = new StringBuffer("        ");

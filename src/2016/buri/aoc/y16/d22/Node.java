@@ -10,7 +10,7 @@ public class Node {
 	private int _total;
 	private int _used;
 	private int _free;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -29,7 +29,7 @@ public class Node {
 	public Pair getId() {
 		return _id;
 	}
-	
+
 	/**
 	 * Accessor for the total space
 	 */

@@ -32,7 +32,7 @@ public class Day19 extends BasePuzzle {
 		String ipRegister = input.remove(0);
 		IndexedRegisters registers = new IndexedRegisters(Character.getNumericValue(ipRegister.charAt(4)), input);
 		int initialZeroValue = (part == Part.ONE ? 0 : 1);
-		if (part == Part.ONE) {			
+		if (part == Part.ONE) {
 			registers.run(initialZeroValue);
 			return (registers.get(IndexedRegisters.REGISTER, 0));
 		}

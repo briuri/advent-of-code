@@ -9,14 +9,14 @@ import java.util.Set;
  * 
  * ../.# => ##./#../...
  * .#./..#/### => #..#/..../..../#..#
-
+ * 
  * @author Brian Uri!
  */
 public class Rule {
 
 	private Set<Pattern> _patterns = new HashSet<>();
 	private Pattern _result;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -40,7 +40,7 @@ public class Rule {
 		getPatterns().add(flip180);
 		getPatterns().add(flip270);
 	}
-	
+
 	/**
 	 * Returns true if the test pattern matches one of the 8 patterns in this rule.
 	 */
@@ -52,14 +52,14 @@ public class Rule {
 		}
 		return (false);
 	}
-	
+
 	/**
 	 * Returns 2 or 3, depending on what type of grid the patterns match to.
 	 */
 	public int getPatternSize() {
 		return (getResult().getWidth() - 1);
 	}
-	
+
 	/**
 	 * Accessor for the patterns
 	 */

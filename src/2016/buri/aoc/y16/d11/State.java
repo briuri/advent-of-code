@@ -29,14 +29,14 @@ public class State {
 	 */
 	public State(String state) {
 		_pairs = (state.length() - 1) / 3;
-		
+
 		// Sort pairs to reduce the number of unique states reached.
 		List<String> pairs = new ArrayList<>();
 		for (int i = 0; i < getPairs(); i++) {
 			pairs.add(state.substring(toGeneratorIndex(i), toChipIndex(i) + 1));
 		}
 		Collections.sort(pairs);
-		
+
 		StringBuilder builder = new StringBuilder();
 		builder.append(state.charAt(0));
 		for (String pair : pairs) {
@@ -113,7 +113,7 @@ public class State {
 				}
 			}
 		}
-		
+
 		return (states);
 	}
 
@@ -181,7 +181,8 @@ public class State {
 	 * 
 	 * Returns true when each chip has a matching generator to protect it. Returns false otherwise.
 	 */
-	private static boolean areGeneratorsAllowedNear(List<Integer> generatorIds, List<Integer> generatorsNext, List<Integer> chipsNext) {
+	private static boolean areGeneratorsAllowedNear(List<Integer> generatorIds, List<Integer> generatorsNext,
+		List<Integer> chipsNext) {
 		boolean allowed = true;
 		for (Integer chipId : chipsNext) {
 			allowed = allowed && (generatorIds.contains(chipId) || generatorsNext.contains(chipId));
@@ -192,7 +193,8 @@ public class State {
 	/**
 	 * Checks if chips are allowed near generators.
 	 * 
-	 * Returns true when each new chip has a matching generator to protect it, or there are no generators. Returns false otherwise.
+	 * Returns true when each new chip has a matching generator to protect it, or there are no generators. Returns false
+	 * otherwise.
 	 */
 	private static boolean areChipsAllowedNear(List<Integer> chipIds, List<Integer> generatorsNext,
 		List<Integer> chipsNext) {

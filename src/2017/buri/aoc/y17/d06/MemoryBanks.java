@@ -13,7 +13,8 @@ public class MemoryBanks {
 
 	/**
 	 * Constructor
-	 * @param banks the memory banks, with the number of blocks in each slot. 
+	 * 
+	 * @param banks the memory banks, with the number of blocks in each slot.
 	 */
 	public MemoryBanks(List<Integer> banks) {
 		_banks = new ArrayList(banks);

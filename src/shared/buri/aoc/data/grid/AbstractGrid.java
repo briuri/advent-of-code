@@ -80,21 +80,21 @@ public abstract class AbstractGrid<T> {
 	 * Accessor for the raw grid.
 	 */
 	protected abstract void setGrid(T[][] grid);
-	
+
 	/**
 	 * Accessor for the horizontal size
 	 */
 	public int getWidth() {
 		return _size.getX();
 	}
-	
+
 	/**
 	 * Accessor for the vertical size
 	 */
 	public int getHeight() {
 		return _size.getY();
 	}
-	
+
 	/**
 	 * Accessor for the size
 	 */

@@ -28,7 +28,6 @@ public class Day09Test extends BaseTest {
 		assertEquals(18, Day09.getResult(Part.ONE, "X(8x2)(3x3)ABCY"));
 	}
 
-    
 	/**
 	 * Solves the Part 1 puzzle.
 	 */
@@ -46,7 +45,7 @@ public class Day09Test extends BaseTest {
 		assertEquals(241920, Day09.getResult(Part.TWO, "(27x12)(20x12)(13x14)(7x10)(1x12)A"));
 		assertEquals(445, Day09.getResult(Part.TWO, "(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN"));
 	}
-    
+
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

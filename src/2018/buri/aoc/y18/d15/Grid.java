@@ -25,7 +25,7 @@ public class Grid extends CharGrid {
 	private List<Unit> _goblins;
 
 	private static final char OPEN = '.';
-	
+
 	/**
 	 * Constructor
 	 */

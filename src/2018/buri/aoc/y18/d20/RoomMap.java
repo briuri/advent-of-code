@@ -21,13 +21,13 @@ import buri.aoc.data.grid.CharGrid;
  */
 public class RoomMap extends CharGrid {
 
-	private Pair _start; 
-	
+	private Pair _start;
+
 	private static final char WALL = '#';
 	private static final char ROOM = '.';
 	private static final char DOOR = 'O';
 	private static final char START = 'X';
-	
+
 	private static final char REGEXP_END = '$';
 	private static final char GROUP_START = '(';
 	private static final char GROUP_CHOICE = '|';
@@ -36,7 +36,7 @@ public class RoomMap extends CharGrid {
 	private static final char EAST = 'E';
 	private static final char SOUTH = 'S';
 	private static final char WEST = 'W';
-	
+
 	/**
 	 * Constructor
 	 */
@@ -47,7 +47,7 @@ public class RoomMap extends CharGrid {
 				set(x, y, WALL);
 			}
 		}
-		
+
 		// Start in the middle of the grid.
 		_start = new Pair(getWidth() / 2, getHeight() / 2);
 		set(getStart(), START);
@@ -59,9 +59,10 @@ public class RoomMap extends CharGrid {
 	public void explore(String input) {
 		explore(getStart().copy(), input, new HashSet<>());
 	}
-	
+
 	/**
-	 * Recursive depth-first exploration of the rooms. Maintains string representations of the start/input to avoid revisiting.
+	 * Recursive depth-first exploration of the rooms. Maintains string representations of the start/input to avoid
+	 * revisiting.
 	 */
 	public void explore(Pair start, String input, Set<String> snapshots) {
 		String snapshot = start + input;
@@ -69,7 +70,7 @@ public class RoomMap extends CharGrid {
 			return;
 		}
 		snapshots.add(snapshot);
-		
+
 		for (int i = 0; i < input.length(); i++) {
 			char value = input.charAt(i);
 			if (value == REGEXP_END || value == GROUP_END) {
@@ -89,7 +90,7 @@ public class RoomMap extends CharGrid {
 			}
 		}
 	}
-	
+
 	/**
 	 * Explores from a particular position in some direction.
 	 */
@@ -104,7 +105,7 @@ public class RoomMap extends CharGrid {
 		}
 		else if (direction == SOUTH) {
 			set(position.getX(), position.getY() + 1, DOOR);
-			position.setY(position.getY() + 2);	
+			position.setY(position.getY() + 2);
 		}
 		else if (direction == WEST) {
 			set(position.getX() - 1, position.getY(), DOOR);
@@ -114,13 +115,13 @@ public class RoomMap extends CharGrid {
 			set(position, ROOM);
 		}
 	}
-	
+
 	/**
 	 * Splits up a group into potential options for pathing, ignoring inner groups.
 	 */
 	private List<String> subdivideGroup(String input, int groupStart) {
 		List<String> choices = new ArrayList<>();
-		
+
 		int currentChoiceIndex = groupStart + 1;
 		Stack<Integer> nestedGroups = new Stack<>();
 		for (int i = groupStart; i < input.length(); i++) {
@@ -143,7 +144,7 @@ public class RoomMap extends CharGrid {
 		}
 		return (choices);
 	}
-	
+
 	/**
 	 * Locates the index of the end of a group, ignoring subgroups.
 	 */
@@ -163,7 +164,7 @@ public class RoomMap extends CharGrid {
 		}
 		throw new RuntimeException("Imbalanced parentheses.");
 	}
-	
+
 	/**
 	 * Find the room for which the shortest path from your starting location to that room would require passing
 	 * through the most doors; what is the fewest doors you can pass through to reach it?
@@ -172,8 +173,7 @@ public class RoomMap extends CharGrid {
 		// Every other cell on the path is a door.
 		return ((getPaths().get(0).getLength() + 1) / 2);
 	}
-	
-	
+
 	/**
 	 * Returns the number of rooms that have shortest paths and pass through (at minimum) a certain number of doors.
 	 */
@@ -187,7 +187,7 @@ public class RoomMap extends CharGrid {
 		}
 		return (count);
 	}
-	
+
 	/**
 	 * Does a BFS to find nearest rooms, then generates paths to those rooms in descending length order.
 	 */
@@ -201,7 +201,7 @@ public class RoomMap extends CharGrid {
 				}
 			}
 		}
-		
+
 		// Do a BFS to find nearest room.
 		Queue<Pair> frontier = new ArrayDeque<>();
 		frontier.add(getStart());
@@ -217,13 +217,13 @@ public class RoomMap extends CharGrid {
 				}
 			}
 		}
-		
+
 		// Return all shortest paths in descending order of length.
 		List<Path> shortestPaths = Path.buildPaths(getStart(), destinations, cameFrom);
 		Collections.reverse(shortestPaths);
 		return (shortestPaths);
 	}
-	
+
 	/**
 	 * Returns traversable cells adjacent to some position.
 	 */
@@ -242,7 +242,7 @@ public class RoomMap extends CharGrid {
 		}
 		return (neighbors);
 	}
-		
+
 	/**
 	 * Accessor for the start
 	 */

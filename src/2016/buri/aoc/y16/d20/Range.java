@@ -8,12 +8,12 @@ package buri.aoc.y16.d20;
 public class Range implements Comparable<Range> {
 	private Long _min;
 	private Long _max;
-	
+
 	/**
 	 * Base constructor
 	 */
 	protected Range() {}
-	
+
 	/**
 	 * String-based Constructor with format "x-y"
 	 */
@@ -22,7 +22,7 @@ public class Range implements Comparable<Range> {
 		_min = Long.valueOf(tokens[0]);
 		_max = Long.valueOf(tokens[1]);
 	}
-	
+
 	/**
 	 * Merges a range into this one. Returns true if the ranges overlap, false if they do not.
 	 */
@@ -34,7 +34,6 @@ public class Range implements Comparable<Range> {
 		setMax(Math.max(getMax(), range.getMax()));
 		return (true);
 	}
-	
 
 	/**
 	 * Sort by min, then max, ascending order.
@@ -46,42 +45,42 @@ public class Range implements Comparable<Range> {
 			compare = getMax().compareTo(o.getMax());
 		}
 		return (compare);
-	}	
-	
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		Range p = (Range) obj;
 		return (getMin() == p.getMin() && getMax() == p.getMax());
 	}
-	
+
 	@Override
 	public int hashCode() {
 		int result = Long.hashCode(getMin());
 		result = 7 * Long.hashCode(getMax());
 		return (result);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(getMin()).append("-").append(getMax());
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Accessor for min
 	 */
 	public Long getMin() {
 		return _min;
 	}
-	
+
 	/**
 	 * Accessor for min
 	 */
 	private void setMin(Long min) {
 		_min = min;
 	}
-	
+
 	/**
 	 * Accessor for max
 	 */

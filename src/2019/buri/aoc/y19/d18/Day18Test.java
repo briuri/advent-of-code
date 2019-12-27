@@ -44,7 +44,7 @@ public class Day18Test extends BaseTest {
 		assertEquals(8, Day18.getResult(Part.TWO, Day18.getInput(7)));
 		assertEquals(24, Day18.getResult(Part.TWO, Day18.getInput(8)));
 		assertEquals(32, Day18.getResult(Part.TWO, Day18.getInput(9)));
-//		assertEquals(72, Day18.getResult(Part.TWO, Day18.getInput(10)));
+		// assertEquals(72, Day18.getResult(Part.TWO, Day18.getInput(10)));
 	}
 
 	/**

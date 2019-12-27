@@ -25,7 +25,7 @@ public class Day19Test extends BaseTest {
 	public void testInputConversion() {
 		IndexedRegisters.convertInput(Day19.getInput(0));
 	}
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertEquals(6, Day19.getResult(Part.ONE, Day19.getInput(1)));

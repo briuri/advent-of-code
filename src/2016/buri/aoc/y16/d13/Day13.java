@@ -10,7 +10,7 @@ import buri.aoc.data.Pair;
  * @author Brian Uri!
  */
 public class Day13 extends BasePuzzle {
-	
+
 	/**
 	 * Part 1:
 	 * What is the fewest number of steps required for you to reach 31,39?

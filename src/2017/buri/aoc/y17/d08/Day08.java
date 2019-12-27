@@ -12,7 +12,7 @@ import buri.aoc.BasePuzzle;
  * @author Brian Uri!
  */
 public class Day08 extends BasePuzzle {
-	
+
 	/**
 	 * Returns input file as a list of instructions.
 	 */
@@ -23,7 +23,7 @@ public class Day08 extends BasePuzzle {
 		}
 		return (instructions);
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What is the largest value in any register after completing the instructions?

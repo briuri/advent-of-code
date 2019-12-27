@@ -26,7 +26,7 @@ public class Day03Test extends BaseTest {
 		assertEquals(159, Day03.getResult(Part.ONE, Day03.getInput(2), 500));
 		assertEquals(135, Day03.getResult(Part.ONE, Day03.getInput(3), 400));
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */

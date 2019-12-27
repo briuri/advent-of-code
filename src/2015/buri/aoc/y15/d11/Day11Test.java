@@ -11,7 +11,7 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Day11Test extends BaseTest {
-	
+
 	@Test
 	public void testPart1Examples() {
 		assertEquals("abcdffaa", Day11.getResult(Part.ONE, "abcdefgh"));

@@ -18,7 +18,7 @@ public class Day02 extends BasePuzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/02", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What is the bathroom code? (3x3 grid)

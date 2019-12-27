@@ -32,7 +32,7 @@ public class Tracks extends CharGrid {
 			for (int x = 0; x < line.length(); x++) {
 				char icon = line.charAt(x);
 				set(x, y, icon);
-				
+
 				// Create carts and reveal the tracks underneath them.
 				if (Direction.getDirectionFor(icon) != null) {
 					getCarts().add(new Cart(new Pair(x, y), icon));
@@ -84,7 +84,7 @@ public class Tracks extends CharGrid {
 				}
 			}
 		}
-		
+
 		getCarts().removeAll(collisions);
 		setIteration(getIteration() + 1);
 	}
@@ -95,7 +95,7 @@ public class Tracks extends CharGrid {
 	public Pair getLastCartPosition() {
 		return (getCarts().get(0).getPosition());
 	}
-	
+
 	/**
 	 * Accessor for the string position when the first collision occurs
 	 */
@@ -109,7 +109,7 @@ public class Tracks extends CharGrid {
 	private void setFirstCollision(String firstCollision) {
 		_firstCollision = firstCollision;
 	}
-	
+
 	/**
 	 * Accessor for the carts
 	 */

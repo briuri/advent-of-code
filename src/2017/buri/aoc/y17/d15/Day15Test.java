@@ -16,7 +16,7 @@ public class Day15Test extends BaseTest {
 	public void testPart1Examples() {
 		assertEquals(588, Day15.getResult(Part.ONE, 65, 8921));
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */

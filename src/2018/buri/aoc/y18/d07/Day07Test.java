@@ -34,7 +34,7 @@ public class Day07Test extends BaseTest {
 		toConsole(result);
 		assertEquals("ABGKCMVWYDEHFOPQUILSTNZRJX", result);
 	}
-	
+
 	@Test
 	public void testPart2Examples() {
 		assertEquals("15", Day07.getResult(Part.TWO, Day07.getInput(1), 2, 0));

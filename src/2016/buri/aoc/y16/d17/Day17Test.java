@@ -33,7 +33,7 @@ public class Day17Test extends BaseTest {
 	public void testPart2Examples() {
 		assertEquals("370", Day17.getResult(Part.TWO, "ihgpwlah"));
 		assertEquals("492", Day17.getResult(Part.TWO, "kglvqrro"));
-		assertEquals("830", Day17.getResult(Part.TWO, "ulqzkmiv"));		
+		assertEquals("830", Day17.getResult(Part.TWO, "ulqzkmiv"));
 	}
 
 	/**

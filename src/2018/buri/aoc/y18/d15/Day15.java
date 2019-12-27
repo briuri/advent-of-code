@@ -18,7 +18,7 @@ public class Day15 extends BasePuzzle {
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2018/15", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * What is the outcome of the combat described in your puzzle input?
@@ -32,7 +32,7 @@ public class Day15 extends BasePuzzle {
 			Grid grid = new Grid(input, 3);
 			return (grid.run());
 		}
-		
+
 		// Part TWO
 		int elfAttackPower = 4;
 		while (true) {

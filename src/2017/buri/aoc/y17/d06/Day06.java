@@ -14,7 +14,7 @@ import buri.aoc.BasePuzzle;
  * @author Brian Uri!
  */
 public class Day06 extends BasePuzzle {
-	
+
 	/**
 	 * Returns input file as a list of numbers.
 	 */
@@ -22,7 +22,7 @@ public class Day06 extends BasePuzzle {
 		String[] rawIntegers = readFile("2017/06", fileIndex).get(0).split("\t");
 		return (convertStringsToInts(Arrays.asList(rawIntegers)));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * How many redistribution cycles must be completed before a configuration is produced that has been seen before?

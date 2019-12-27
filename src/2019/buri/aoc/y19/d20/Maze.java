@@ -138,7 +138,8 @@ public class Maze extends CharGrid {
 			target = (teleport == '0' ? '1' : '0');
 		}
 		else {
-			target = (Character.isUpperCase(teleport) ? Character.toLowerCase(teleport) : Character.toUpperCase(teleport));
+			target = (Character.isUpperCase(teleport) ? Character.toLowerCase(teleport)
+				: Character.toUpperCase(teleport));
 		}
 		return (target);
 	}

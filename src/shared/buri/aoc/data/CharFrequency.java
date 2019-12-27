@@ -48,14 +48,14 @@ public class CharFrequency {
 	public int getFrequencyFor(Character character) {
 		return (getFrequency().getOrDefault(character, 0));
 	}
-	
+
 	/**
 	 * Returns true if some character appears exactly this number of times.
 	 */
 	public boolean containsFrequency(int frequency) {
 		return (getFrequency().values().contains(frequency));
 	}
-	
+
 	/**
 	 * Returns the most used letters.
 	 */

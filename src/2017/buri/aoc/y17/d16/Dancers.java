@@ -7,7 +7,7 @@ package buri.aoc.y17.d16;
  */
 public class Dancers {
 	private String _positions;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -15,9 +15,9 @@ public class Dancers {
 		StringBuffer buffer = new StringBuffer();
 		for (char dancer = 'a'; dancer <= 'z'; dancer++) {
 			buffer.append(dancer);
-		    if (buffer.length() == numDancers) {
-		    	break;
-		    }
+			if (buffer.length() == numDancers) {
+				break;
+			}
 		}
 		setPositions(buffer.toString());
 	}
@@ -40,9 +40,9 @@ public class Dancers {
 				break;
 			case 'p':
 				partner(tokens[0].charAt(0), tokens[1].charAt(0));
-		}	
+		}
 	}
-	
+
 	/**
 	 * Make num programs move from end to front, but maintain their order otherwise.
 	 */
@@ -50,9 +50,9 @@ public class Dancers {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(getPositions().substring(getPositions().length() - num));
 		buffer.append(getPositions().substring(0, getPositions().length() - num));
-		setPositions(buffer.toString());		
+		setPositions(buffer.toString());
 	}
-	
+
 	/**
 	 * Makes the programs at these positions swap places.
 	 */
@@ -64,19 +64,19 @@ public class Dancers {
 		buffer.setCharAt(target, sourceChar);
 		setPositions(buffer.toString());
 	}
-	
+
 	/**
 	 * Makes the programs with these names swap places.
-	 */	
+	 */
 	private void partner(Character source, Character target) {
 		exchange(getPositions().indexOf(source), getPositions().indexOf(target));
 	}
-	
+
 	@Override
 	public String toString() {
 		return (getPositions());
 	}
-	
+
 	/**
 	 * Accessor for the positions
 	 */
@@ -90,6 +90,5 @@ public class Dancers {
 	private void setPositions(String positions) {
 		_positions = positions;
 	}
-	
-	
+
 }

@@ -22,7 +22,7 @@ public class Day07Test extends BaseTest {
 		assertTrue(programs.get("mmqyju").getChildNames().contains("noybkx"));
 		assertEquals(2, programs.get("mmqyju").getChildNames().size());
 	}
-	
+
 	@Test
 	public void testPart1Example() {
 		assertEquals("tknk", Day07.getPart1Result(Day07.getInput(1)));

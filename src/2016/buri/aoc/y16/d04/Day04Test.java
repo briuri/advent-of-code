@@ -24,7 +24,7 @@ public class Day04Test extends BaseTest {
 	public void testPart1Examples() {
 		assertEquals(1514, Day04.getResult(Part.ONE, Day04.getInput(1)));
 	}
-	
+
 	/**
 	 * Solves the Part 1 puzzle.
 	 */
@@ -34,7 +34,7 @@ public class Day04Test extends BaseTest {
 		toConsole(result);
 		assertEquals(137896, result);
 	}
-	
+
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

@@ -36,23 +36,24 @@ public class Day23 extends BasePuzzle {
 		// Part TWO
 		/**
 		 * Assembly reduction:
-		 * 		int h = 0;
-		 * 		for (long b = 105700; b <= 122700; b += 17) {
-		 * 			boolean f = false;
-		 * 			for (long d = 2; d != b; d++) {
-		 * 				for (long e = 2; e != b; e++) {
-		 * 					if ((d * e) == b) {
-		 * 						f = true;
-		 * 					}
-		 * 				}
-		 * 			}
-		 * 			if (f) {
-		 * 				h += 1;
-		 * 			}
-		 * 		}
-		 * 		return (h);
+		 * int h = 0;
+		 * for (long b = 105700; b <= 122700; b += 17) {
+		 * boolean f = false;
+		 * for (long d = 2; d != b; d++) {
+		 * for (long e = 2; e != b; e++) {
+		 * if ((d * e) == b) {
+		 * f = true;
+		 * }
+		 * }
+		 * }
+		 * if (f) {
+		 * h += 1;
+		 * }
+		 * }
+		 * return (h);
 		 * 
-		 * So it's testing all values in the outer for loop to see if that value can be made by multiply two other numbers.
+		 * So it's testing all values in the outer for loop to see if that value can be made by multiply two other
+		 * numbers.
 		 * A faster way to do this would be to check if the number is a prime number. If it is not, increment h.
 		 */
 		int h = 0;
@@ -63,7 +64,7 @@ public class Day23 extends BasePuzzle {
 		}
 		return (h);
 	}
-	
+
 	/**
 	 * Returns true if the number is prime.
 	 */

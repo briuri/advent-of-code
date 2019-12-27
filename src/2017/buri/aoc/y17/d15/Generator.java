@@ -13,9 +13,9 @@ public class Generator {
 	private long _factor;
 	private long _multiples;
 	private long _previousValue;
-		
+
 	private static final long DIVISOR = 2147483647;
-	
+
 	/**
 	 * Factory method to construct generator A or B
 	 */
@@ -24,7 +24,7 @@ public class Generator {
 		long multiples = (name.equals("A") ? 4 : 8);
 		return (new Generator(factor, multiples, previousValue));
 	}
-	
+
 	/**
 	 * Constructor
 	 */
@@ -33,7 +33,7 @@ public class Generator {
 		_multiples = multiples;
 		_previousValue = previousValue;
 	}
-	
+
 	/**
 	 * Computes the next value and returns the lowest 16 digits of its binary representation.
 	 */

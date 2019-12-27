@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Data model for a state definition 
+ * Data model for a state definition
+ * 
  * @author Brian Uri!
  */
 public class State {
@@ -14,7 +15,7 @@ public class State {
 	private Map<Integer, Integer> _writes = new HashMap<>();
 	private Map<Integer, Integer> _moves = new HashMap<>();
 	private Map<Integer, Character> _nextStates = new HashMap<>();
-	
+
 	/**
 	 * Constructor
 	 */
@@ -23,7 +24,7 @@ public class State {
 		getWrites().put(0, Character.getNumericValue(definition.get(2).charAt(22)));
 		getMoves().put(0, definition.get(3).indexOf("right") == -1 ? -1 : 1);
 		getNextStates().put(0, definition.get(4).charAt(26));
-		
+
 		getWrites().put(1, Character.getNumericValue(definition.get(6).charAt(22)));
 		getMoves().put(1, definition.get(7).indexOf("right") == -1 ? -1 : 1);
 		getNextStates().put(1, definition.get(8).charAt(26));
@@ -41,28 +42,28 @@ public class State {
 		buffer.append("]");
 		return (buffer.toString());
 	}
-	
+
 	/**
 	 * Returns the value to write
 	 */
 	public int getWrite(int value) {
 		return (getWrites().get(value));
 	}
-	
+
 	/**
 	 * Returns the distance to move the cursor
 	 */
 	public int getMove(int value) {
 		return (getMoves().get(value));
 	}
-	
+
 	/**
 	 * Returns the next state
 	 */
 	public char getNextState(int value) {
 		return (getNextStates().get(value));
 	}
-	
+
 	/**
 	 * Accessor for the name
 	 */
@@ -89,5 +90,5 @@ public class State {
 	 */
 	private Map<Integer, Character> getNextStates() {
 		return _nextStates;
-	}	
+	}
 }

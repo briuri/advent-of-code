@@ -96,7 +96,7 @@ public class Registers extends NamedRegisters {
 			}
 		}
 	}
-	
+
 	/**
 	 * Toggles an instruction for future processing.
 	 * 
@@ -123,7 +123,7 @@ public class Registers extends NamedRegisters {
 			getInstructions().set(instruction, String.join(" ", tokens));
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return (String.format("[%d, %d, %d, %d]", get("a"), get("b"), get("c"), get("d")));

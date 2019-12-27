@@ -76,7 +76,7 @@ public class Day14 extends BasePuzzle {
 		}
 		// Start by using any leftover from other reactions.
 		amountNeeded = amountNeeded - leftovers.getOrDefault(name, 0L);
-		
+
 		// Calculate amount based on subreactions.
 		Reaction reaction = reactions.get(name);
 		long amountProduced = (long) Math.ceil(amountNeeded / (reaction.getOutput().getAmount() * 1.0));

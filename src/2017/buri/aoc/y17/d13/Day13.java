@@ -42,7 +42,7 @@ public class Day13 extends BasePuzzle {
 		}
 		if (part == Part.ONE) {
 			return (getSeverity(firewall, 0));
-		}		
+		}
 		// Part TWO
 		int delay = -1;
 		while (true) {
@@ -50,9 +50,9 @@ public class Day13 extends BasePuzzle {
 			if (!getCaught(firewall, delay)) {
 				return (delay);
 			}
-		}		
+		}
 	}
-	
+
 	/**
 	 * Sends the packet through the firewall and returns whether it got caught.
 	 */
@@ -63,9 +63,9 @@ public class Day13 extends BasePuzzle {
 				return (true);
 			}
 		}
-		return (false);	
+		return (false);
 	}
-	
+
 	/**
 	 * Sends the packet through the firewall and returns the total severity.
 	 */
@@ -77,6 +77,6 @@ public class Day13 extends BasePuzzle {
 				severity += layer.getSeverity();
 			}
 		}
-		return (severity);	
+		return (severity);
 	}
 }

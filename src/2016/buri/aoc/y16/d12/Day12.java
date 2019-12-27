@@ -13,12 +13,12 @@ import buri.aoc.BasePuzzle;
 public class Day12 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodifed. 
+	 * Returns the input file unmodifed.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2016/12", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * After executing the assembunny code in your puzzle input, what value is left in register a?
@@ -32,7 +32,7 @@ public class Day12 extends BasePuzzle {
 		if (part == Part.ONE) {
 			return (registers.get("a"));
 		}
-		
+
 		// Part TWO
 		return (registers.get("a"));
 	}

@@ -71,7 +71,7 @@ public class Day11 extends BasePuzzle {
 		}
 		return (max);
 	}
-	
+
 	/**
 	 * Calculates the distance from the origin.
 	 */

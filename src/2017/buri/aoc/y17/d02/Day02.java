@@ -27,10 +27,10 @@ public class Day02 extends BasePuzzle {
 		}
 		return (rows);
 	}
-	
+
 	/**
 	 * The spreadsheet consists of rows of apparently-random numbers.
-	 *  
+	 * 
 	 * Part 1:
 	 * What is the checksum for the spreadsheet, using the difference between highest and lowest value in each row?
 	 * 

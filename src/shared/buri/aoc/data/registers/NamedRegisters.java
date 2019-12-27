@@ -17,7 +17,7 @@ public class NamedRegisters {
 	private Map<String, Long> _registers;
 	private List<String> _instructions;
 	private int _current = 0;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -26,7 +26,7 @@ public class NamedRegisters {
 		_registers = new HashMap<String, Long>();
 		setCurrent(0);
 	}
-		
+
 	/**
 	 * Returns the long value or (if a string), the value in that register.
 	 */
@@ -36,7 +36,7 @@ public class NamedRegisters {
 		}
 		return (Long.valueOf(parameter));
 	}
-	
+
 	/**
 	 * Lazy-loads a value from a register. Initializes at zero if the register does not yet exist.
 	 */
@@ -53,7 +53,7 @@ public class NamedRegisters {
 	protected void set(String register, Long value) {
 		getRegisters().put(register, value);
 	}
-	
+
 	/**
 	 * Updates the register's value by some amount.
 	 */
@@ -68,14 +68,14 @@ public class NamedRegisters {
 	protected boolean isWithinInstructions() {
 		return (getCurrent() >= 0 && getCurrent() < getInstructions().size());
 	}
-	
+
 	/**
 	 * Accessor for the registers
 	 */
 	protected Map<String, Long> getRegisters() {
 		return _registers;
 	}
-	
+
 	/**
 	 * Accessor for the instructions
 	 */

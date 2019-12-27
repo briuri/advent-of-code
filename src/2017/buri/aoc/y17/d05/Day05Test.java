@@ -13,7 +13,7 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Day05Test extends BaseTest {
-	
+
 	@Test
 	public void testGetInput() {
 		List<Integer> jumps = Day05.getInput(0);

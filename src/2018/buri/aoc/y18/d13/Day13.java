@@ -16,7 +16,7 @@ public class Day13 extends BasePuzzle {
 	public static Tracks getInput(int fileIndex) {
 		return (new Tracks(readFile("2018/13", fileIndex)));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * You'd like to know the location of the first crash.
@@ -28,11 +28,11 @@ public class Day13 extends BasePuzzle {
 		while (true) {
 			tracks.move();
 			if (part == Part.ONE && tracks.getFirstCollision() != null) {
-				return (tracks.getFirstCollision());		
+				return (tracks.getFirstCollision());
 			}
 			if (part == Part.TWO && tracks.getCarts().size() == 1) {
 				return (tracks.getLastCartPosition().toString());
 			}
-		}		
+		}
 	}
 }

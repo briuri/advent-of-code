@@ -14,7 +14,7 @@ public class Grid {
 	private int _maxX;
 	private int _maxY;
 	private Map<Pair, Node> _nodes;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -27,7 +27,7 @@ public class Grid {
 			_maxY = Math.max(_maxY, node.getId().getY());
 		}
 	}
-	
+
 	/**
 	 * A viable pair is any two nodes (A,B), regardless of whether they are directly connected, such that:
 	 * Node A is not empty (its Used is not zero).
@@ -45,9 +45,9 @@ public class Grid {
 				}
 			}
 		}
-		return (count);		
+		return (count);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
@@ -60,8 +60,8 @@ public class Grid {
 				}
 				else if (node.getUsed() == 0) {
 					buffer.append('_');
-				}				
-				else if (node.getTotal() > 100){
+				}
+				else if (node.getTotal() > 100) {
 					buffer.append("#");
 				}
 				else {
@@ -86,11 +86,11 @@ public class Grid {
 	private int getMaxX() {
 		return _maxX;
 	}
-	
+
 	/**
 	 * Accessor for the maxY
 	 */
 	private int getMaxY() {
 		return _maxY;
-	}	
+	}
 }

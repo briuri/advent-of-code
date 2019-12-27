@@ -34,7 +34,7 @@ public class Day05Test extends BaseTest {
 	public void testPart2Examples() {
 		assertEquals(999L, Day05.getResult(Part.ONE, Day05.getInput(1)));
 	}
-	
+
 	/**
 	 * Solves the Part 2 puzzle.
 	 */

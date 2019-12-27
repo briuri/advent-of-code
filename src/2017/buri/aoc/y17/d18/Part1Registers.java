@@ -17,7 +17,7 @@ public class Part1Registers extends AbstractRegisters {
 	public Part1Registers(List<String> instructions) {
 		super(instructions);
 	}
-	
+
 	/**
 	 * snd X plays a sound with a frequency equal to the value of X.
 	 */
@@ -28,7 +28,7 @@ public class Part1Registers extends AbstractRegisters {
 
 	/**
 	 * rcv X recovers the frequency of the last sound played, but only when the value of X is not zero. (If it is zero,
-	 * 		the command does nothing.)
+	 * the command does nothing.)
 	 */
 	@Override
 	protected boolean rcv(String[] tokens) {
@@ -36,7 +36,7 @@ public class Part1Registers extends AbstractRegisters {
 		// Quit processing the first time we hit a rcv that recovers.
 		return (value <= 0);
 	}
-	
+
 	/**
 	 * Accessor for the last frequency played
 	 */

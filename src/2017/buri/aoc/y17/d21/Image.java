@@ -30,7 +30,7 @@ public class Image extends IntGrid {
 		getGrid()[0] = new Integer[] { 0, 0, 1 };
 		getGrid()[1] = new Integer[] { 1, 0, 1 };
 		getGrid()[2] = new Integer[] { 0, 1, 1 };
-		
+
 		_rules = new HashMap<>();
 		getRules().put(2, new ArrayList<>());
 		getRules().put(3, new ArrayList<>());
@@ -60,7 +60,7 @@ public class Image extends IntGrid {
 		}
 		setGrid(newImage);
 	}
-	
+
 	/**
 	 * Extracts a subgrid from the image and converts to a pattern.
 	 */
@@ -75,7 +75,7 @@ public class Image extends IntGrid {
 		}
 		return (new Pattern(pattern));
 	}
-	
+
 	/**
 	 * Checks all rules and returns the result from the matching one.
 	 */
@@ -88,7 +88,7 @@ public class Image extends IntGrid {
 		}
 		throw new RuntimeException("Pattern has no matching rule.");
 	}
-	
+
 	/**
 	 * Draws a pattern onto a grid.
 	 */
@@ -101,7 +101,7 @@ public class Image extends IntGrid {
 			}
 		}
 	}
-	
+
 	/**
 	 * Counts the number of lit pixels (denoted by 1)
 	 */

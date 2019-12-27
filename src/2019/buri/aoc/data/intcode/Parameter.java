@@ -9,7 +9,7 @@ package buri.aoc.data.intcode;
 public class Parameter {
 	private long _value;
 	private Mode _mode;
-	
+
 	/**
 	 * Constructor
 	 */

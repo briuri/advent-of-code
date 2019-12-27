@@ -8,7 +8,7 @@ package buri.aoc.y18.d12;
 public class State {
 	private String _pattern;
 	private boolean _result;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -30,5 +30,5 @@ public class State {
 	 */
 	public boolean getResult() {
 		return _result;
-	}	
+	}
 }

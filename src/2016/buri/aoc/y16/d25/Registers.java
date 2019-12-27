@@ -97,7 +97,7 @@ public class Registers extends NamedRegisters {
 			}
 		}
 	}
-		
+
 	@Override
 	public String toString() {
 		return (String.format("[%d, %d, %d, %d]", get("a"), get("b"), get("c"), get("d")));
