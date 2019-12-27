@@ -3,8 +3,8 @@ package buri.aoc.y17.d14;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.y17.d10.Day10;
 
 /**

@@ -1,7 +1,7 @@
 package buri.aoc.y18.d13;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 13: Mine Cart Madness

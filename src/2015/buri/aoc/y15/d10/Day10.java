@@ -1,7 +1,7 @@
 package buri.aoc.y15.d10;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 10: Elves Look, Elves Say

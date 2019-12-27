@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Permutations;
 import buri.aoc.data.Triple;
 

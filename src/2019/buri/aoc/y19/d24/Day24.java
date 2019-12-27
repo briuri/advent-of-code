@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Triple;
 
 /**

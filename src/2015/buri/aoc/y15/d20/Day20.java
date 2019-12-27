@@ -3,8 +3,8 @@ package buri.aoc.y15.d20;
 import java.util.HashMap;
 import java.util.Map;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 20: Infinite Elves and Infinite Houses

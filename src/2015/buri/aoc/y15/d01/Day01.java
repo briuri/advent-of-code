@@ -1,7 +1,7 @@
 package buri.aoc.y15.d01;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 1: Not Quite Lisp

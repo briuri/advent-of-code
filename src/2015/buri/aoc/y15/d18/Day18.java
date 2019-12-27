@@ -2,8 +2,8 @@ package buri.aoc.y15.d18;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day Day 18: Like a GIF For Your Yard

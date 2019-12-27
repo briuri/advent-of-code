@@ -2,8 +2,8 @@ package buri.aoc.y16.d19;
 
 import java.util.ArrayDeque;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 19: An Elephant Named Joseph

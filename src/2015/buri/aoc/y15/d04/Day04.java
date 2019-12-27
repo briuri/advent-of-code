@@ -1,7 +1,7 @@
 package buri.aoc.y15.d04;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.MD5Hash;
 
 /**

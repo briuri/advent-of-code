@@ -1,7 +1,7 @@
 package buri.aoc.y17.d09;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 9: Stream Processing

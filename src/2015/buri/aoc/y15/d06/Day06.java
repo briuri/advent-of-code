@@ -2,8 +2,8 @@ package buri.aoc.y15.d06;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 

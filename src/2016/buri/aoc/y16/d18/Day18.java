@@ -1,7 +1,7 @@
 package buri.aoc.y16.d18;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 18: Like a Rogue

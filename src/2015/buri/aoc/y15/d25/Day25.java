@@ -3,8 +3,8 @@ package buri.aoc.y15.d25;
 import java.util.HashSet;
 import java.util.Set;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Pair;
 
 /**

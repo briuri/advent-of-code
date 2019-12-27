@@ -2,8 +2,8 @@ package buri.aoc.y16.d02;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 2: Bathroom Security

@@ -3,8 +3,8 @@ package buri.aoc.y16.d15;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 15: Timing is Everything

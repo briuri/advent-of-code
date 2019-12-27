@@ -2,8 +2,8 @@ package buri.aoc.y19.d20;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 20: Donut Maze

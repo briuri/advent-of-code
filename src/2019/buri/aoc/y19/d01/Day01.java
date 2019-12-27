@@ -2,8 +2,8 @@ package buri.aoc.y19.d01;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 01: The Tyranny of the Rocket Equation

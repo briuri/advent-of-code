@@ -3,8 +3,8 @@ package buri.aoc.y19.d11;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Direction;
 import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;

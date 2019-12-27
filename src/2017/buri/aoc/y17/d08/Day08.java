@@ -3,8 +3,8 @@ package buri.aoc.y17.d08;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 8: I Heard You Like Registers

@@ -1,7 +1,7 @@
 package buri.aoc.y17.d17;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 17: Spinlock

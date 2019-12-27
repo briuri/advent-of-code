@@ -3,9 +3,9 @@ package buri.aoc.y19.d05;
 import java.util.ArrayList;
 import java.util.List;
 
+import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.intcode.Computer;
-import buri.aoc.BasePuzzle;
 
 /**
  * Day 05: Sunny with a Chance of Asteroids

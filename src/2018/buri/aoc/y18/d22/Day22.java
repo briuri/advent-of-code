@@ -1,7 +1,7 @@
 package buri.aoc.y18.d22;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Pair;
 
 /**

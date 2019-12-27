@@ -2,8 +2,8 @@ package buri.aoc.y18.d18;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 18: Settlers of the North Pole

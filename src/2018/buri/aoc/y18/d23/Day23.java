@@ -3,8 +3,8 @@ package buri.aoc.y18.d23;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 import buri.aoc.data.Triple;
 
 /**

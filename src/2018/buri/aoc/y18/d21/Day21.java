@@ -2,8 +2,8 @@ package buri.aoc.y18.d21;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 21: Chronal Conversion

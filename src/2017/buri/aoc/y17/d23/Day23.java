@@ -2,8 +2,8 @@ package buri.aoc.y17.d23;
 
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 23: Coprocessor Conflagration

@@ -1,7 +1,7 @@
 package buri.aoc.y15.d22;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 22: Wizard Simulator 20XX

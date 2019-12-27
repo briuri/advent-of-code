@@ -3,8 +3,8 @@ package buri.aoc.y18.d05;
 import java.util.HashSet;
 import java.util.Set;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 5: Alchemical Reduction

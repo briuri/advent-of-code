@@ -3,9 +3,9 @@ package buri.aoc.y19.d17;
 import java.util.ArrayList;
 import java.util.List;
 
+import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.intcode.Computer;
-import buri.aoc.BasePuzzle;
 
 /**
  * Day 17: Set and Forget

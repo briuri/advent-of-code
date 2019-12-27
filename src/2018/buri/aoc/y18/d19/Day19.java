@@ -2,9 +2,9 @@ package buri.aoc.y18.d19;
 
 import java.util.List;
 
+import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.registers.IndexedRegisters;
-import buri.aoc.BasePuzzle;
 
 /**
  * Day 19: Go With the Flow

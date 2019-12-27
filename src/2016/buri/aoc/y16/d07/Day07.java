@@ -3,8 +3,8 @@ package buri.aoc.y16.d07;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
 
 /**
  * Day 7: Internet Protocol Version 7
