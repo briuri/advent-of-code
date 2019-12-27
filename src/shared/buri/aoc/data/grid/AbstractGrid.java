@@ -20,7 +20,7 @@ public abstract class AbstractGrid<T> {
 	 * Constructor
 	 */
 	protected AbstractGrid(Pair size) {
-		if (!size.isIntegerBased()) {
+		if (!(size.getX() instanceof Integer)) {
 			throw new IllegalArgumentException("Size must be integer-based.");
 		}
 		_size = size;

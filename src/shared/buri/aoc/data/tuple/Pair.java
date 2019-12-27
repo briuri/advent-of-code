@@ -3,22 +3,11 @@ package buri.aoc.data.tuple;
 import buri.aoc.data.Direction;
 
 /**
- * Base class for an X-Y coordinate pair.
- * 
- * Can support Integers or Longs as X and Y.
- * 
- * Based on Java's array indexing:
- * (0,0) is the upper left corner of a grid.
- * (x,0) is lower left corner of a grid.
- * (0,y) is upper right corner of grid.
- * (x,y) is lower right corner of grid.
+ * Data class for a pair tuple, intended for Integers or Longs.
  * 
  * @author Brian Uri!
  */
-public class Pair<T extends Number> implements Comparable<Pair> {
-	private T _x;
-	private T _y;
-	private boolean _integerBased;
+public class Pair<T extends Number> extends BaseTuple implements Comparable<Pair> {
 
 	/**
 	 * Base constructor
@@ -30,26 +19,28 @@ public class Pair<T extends Number> implements Comparable<Pair> {
 	 */
 	public Pair(String data, Class<T> clazz) {
 		String tokens[] = data.split(",");
-        if (clazz.isAssignableFrom(Integer.class)) {
-			_x = (T) Integer.valueOf(tokens[0].trim());
-			_y = (T) Integer.valueOf(tokens[1].trim());
-			_integerBased = true;
-        } else if (clazz.isAssignableFrom(Long.class)) {
-			_x = (T) Long.valueOf(tokens[0].trim());
-			_y = (T) Long.valueOf(tokens[1].trim());
-			_integerBased = false;
-        } else {
-            throw new IllegalArgumentException("Unsupported type: " + clazz.getSimpleName());
-        }
+		if (clazz.isAssignableFrom(Integer.class)) {
+			getValues().add((T) Integer.valueOf(tokens[0].trim()));
+			getValues().add((T) Integer.valueOf(tokens[1].trim()));
+		}
+		else if (clazz.isAssignableFrom(Long.class)) {
+			getValues().add((T) Long.valueOf(tokens[0].trim()));
+			getValues().add((T) Long.valueOf(tokens[1].trim()));
+		}
+		else {
+			throw new IllegalArgumentException("Unsupported pair type: " + clazz.getSimpleName());
+		}
 	}
 
 	/**
 	 * Number-based Constructor
 	 */
 	public Pair(T x, T y) {
-		_x = x;
-		_y = y;
-		_integerBased = (x instanceof Integer);
+		getValues().add(x);
+		getValues().add(y);
+		if (!(x instanceof Integer) && !(x instanceof Long)) {
+			throw new IllegalArgumentException("Unsupported pair type: " + x.getClass().getSimpleName());
+		}
 	}
 
 	/**
@@ -60,103 +51,86 @@ public class Pair<T extends Number> implements Comparable<Pair> {
 	}
 
 	/**
-	 * Returns the Manhattan distance to another pair.
-	 */
-	public long getManhattanDistance(Pair pair) {
-		long result = 0;
-		result += Math.abs(getX().longValue() - pair.getX().longValue());
-		result += Math.abs(getY().longValue() - pair.getY().longValue());
-		return (result);
-	}
-	
-	/**
-	 * Moves the position 1 step in a direction. (0,0 is top-left).
+	 * Moves the position 1 step in a 2D direction.
+	 * 
+	 * Based on Java's array indexing:
+	 * (0,0) is the upper left corner of a grid.
+	 * (x,0) is lower left corner of a grid.
+	 * (0,y) is upper right corner of grid.
+	 * (x,y) is lower right corner of grid.
 	 */
 	public void move(Direction direction) {
-		if (!isIntegerBased()) {
-			throw new IllegalArgumentException("move() only implemented for Integer-based Pairs.");
+		if (getX() instanceof Integer) {
+			switch (direction) {
+				case UP:
+					setY((T) Integer.valueOf(getY().intValue() - 1));
+					break;
+				case RIGHT:
+					setX((T) Integer.valueOf(getX().intValue() + 1));
+					break;
+				case DOWN:
+					setY((T) Integer.valueOf(getY().intValue() + 1));
+					break;
+				case LEFT:
+					setX((T) Integer.valueOf(getX().intValue() - 1));
+					break;
+			}
 		}
-		switch (direction) {
-			case UP:
-				setY((T) Integer.valueOf(getY().intValue() - 1));
-				break;
-			case RIGHT:
-				setX((T) Integer.valueOf(getX().intValue() + 1));
-				break;
-			case DOWN:
-				setY((T) Integer.valueOf(getY().intValue() + 1));
-				break;
-			case LEFT:
-				setX((T) Integer.valueOf(getX().intValue() - 1));
-				break;
+		else {
+			switch (direction) {
+				case UP:
+					setY((T) Long.valueOf(getY().longValue() - 1L));
+					break;
+				case RIGHT:
+					setX((T) Long.valueOf(getX().longValue() + 1L));
+					break;
+				case DOWN:
+					setY((T) Long.valueOf(getY().longValue() + 1L));
+					break;
+				case LEFT:
+					setX((T) Long.valueOf(getX().longValue() - 1L));
+					break;
+			}
 		}
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getX()).append(",").append(getY());
-		return (buffer.toString());
 	}
 
 	/**
-	 * Pairs are compared by y then x (top-left first).
+	 * Sort order: by Y, then X (top-left first)
 	 */
 	@Override
-	public int compareTo(Pair o) {
-		int compare = Long.valueOf(getY().longValue()).compareTo(Long.valueOf(o.getY().longValue()));
+	public int compareTo(Pair pair) {
+		int compare = compare(getY(), pair.getY());
 		if (compare == 0) {
-			compare = Long.valueOf(getX().longValue()).compareTo(Long.valueOf(o.getX().longValue()));
+			compare = compare(getX(), pair.getX());
 		}
 		return compare;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		Pair pair = (Pair) obj;
-		return (getX().equals(pair.getX())
-			&& getY().equals(pair.getY()));
-	}
-	
-	@Override
-	public int hashCode() {
-		int result = getX().hashCode();
-		result += getY().hashCode();
-		return (result);
-	}
-	
+
 	/**
-	 * Returns true of T is Integer-based.
-	 */
-	public boolean isIntegerBased() {
-		return (_integerBased);
-	}
-	
-	/**
-	 * Accessor for X
+	 * Accessor for the x
 	 */
 	public T getX() {
-		return _x;
+		return ((T) getValues().get(0));
 	}
 
 	/**
-	 * Accessor for X
+	 * Accessor for the x
 	 */
 	public void setX(T x) {
-		_x = x;
+		getValues().set(0, x);
 	}
 
 	/**
-	 * Accessor for Y
+	 * Accessor for the y
 	 */
 	public T getY() {
-		return _y;
+		return ((T) getValues().get(1));
 	}
 
 	/**
-	 * Accessor for Y
+	 * Accessor for the y
 	 */
 	public void setY(T y) {
-		_y = y;
+		getValues().set(1, y);
 	}
 }

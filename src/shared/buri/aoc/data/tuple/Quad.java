@@ -1,24 +1,20 @@
 package buri.aoc.data.tuple;
 
 /**
- * Data class for a quad
+ * Data class for a quad tuple, intended for Integers or Longs.
  * 
  * @author Brian Uri!
  */
-public class Quad<T extends Number> implements Comparable<Quad> {
-	private T _x;
-	private T _y;
-	private T _z;
-	private T _t;
+public class Quad<T extends Number> extends BaseTuple implements Comparable<Quad> {
 
 	/**
 	 * Constructor
 	 */
 	public Quad(T x, T y, T z, T t) {
-		_x = x;
-		_y = y;
-		_z = z;
-		_t = t;
+		getValues().add(x);
+		getValues().add(y);
+		getValues().add(z);
+		getValues().add(t);
 	}
 
 	/**
@@ -27,118 +23,78 @@ public class Quad<T extends Number> implements Comparable<Quad> {
 	public Quad copy() {
 		return (new Quad(getX(), getY(), getZ(), getT()));
 	}
-	
-	/**
-	 * Returns the Manhattan distance to another quad.
-	 */
-	public long getManhattanDistance(Quad quad) {
-		long result = 0;
-		result += Math.abs(getX().longValue() - quad.getX().longValue());
-		result += Math.abs(getY().longValue() - quad.getY().longValue());
-		result += Math.abs(getZ().longValue() - quad.getZ().longValue());
-		result += Math.abs(getT().longValue() - quad.getT().longValue());
-		return (result);
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getX()).append(",");
-		buffer.append(getY()).append(",");
-		buffer.append(getZ()).append(",");
-		buffer.append(getT());
-		return (buffer.toString());
-	}
 
 	/**
 	 * Sort order: by Y, then X, then Z, then T (top-left first)
 	 */
 	@Override
-	public int compareTo(Quad o) {
-		int compare = Long.valueOf(getY().longValue()).compareTo(Long.valueOf(o.getY().longValue()));
+	public int compareTo(Quad quad) {
+		int compare = compare(getY(), quad.getY());
 		if (compare == 0) {
-			compare = Long.valueOf(getX().longValue()).compareTo(Long.valueOf(o.getX().longValue()));
+			compare = compare(getX(), quad.getX());
 		}
 		if (compare == 0) {
-			compare = Long.valueOf(getZ().longValue()).compareTo(Long.valueOf(o.getZ().longValue()));
+			compare = compare(getZ(), quad.getZ());
 		}
 		if (compare == 0) {
-			compare = Long.valueOf(getT().longValue()).compareTo(Long.valueOf(o.getT().longValue()));
+			compare = compare(getT(), quad.getT());
 		}
 		return (compare);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		Quad quad = (Quad) obj;
-		return (getX().equals(quad.getX())
-			&& getY().equals(quad.getY()) 
-			&& getZ().equals(quad.getZ()) 
-			&& getT().equals(quad.getT()));
-	}
-
-	@Override
-	public int hashCode() {
-		int result = getX().hashCode();
-		result += getY().hashCode();
-		result += getZ().hashCode();
-		result += getT().hashCode();
-		return (result);
 	}
 
 	/**
 	 * Accessor for the x
 	 */
 	public T getX() {
-		return _x;
+		return ((T) getValues().get(0));
 	}
 
 	/**
 	 * Accessor for the x
 	 */
 	public void setX(T x) {
-		_x = x;
+		getValues().set(0, x);
 	}
 
 	/**
 	 * Accessor for the y
 	 */
 	public T getY() {
-		return _y;
+		return ((T) getValues().get(1));
 	}
 
 	/**
 	 * Accessor for the y
 	 */
 	public void setY(T y) {
-		_y = y;
+		getValues().set(1, y);
 	}
 
 	/**
 	 * Accessor for the z
 	 */
 	public T getZ() {
-		return _z;
+		return ((T) getValues().get(2));
 	}
 
 	/**
 	 * Accessor for the z
 	 */
 	public void setZ(T z) {
-		_z = z;
+		getValues().set(2, z);
 	}
 
 	/**
 	 * Accessor for the t
 	 */
 	public T getT() {
-		return _t;
+		return ((T) getValues().get(3));
 	}
 
 	/**
 	 * Accessor for the t
 	 */
 	public void setT(T t) {
-		_t = t;
+		getValues().set(4, t);
 	}
 }
