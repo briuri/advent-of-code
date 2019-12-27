@@ -23,36 +23,39 @@ public class SpiralGrid extends IntGrid {
 	 */
 	public int getSurroundingValues(Pair position) {
 		int sum = 0;
-		if (position.getY() > 0) {
+		int x = position.getX().intValue();
+		int y = position.getY().intValue();
+		
+		if (y > 0) {
 			// Upper Left
-			if (position.getX() > 0) {
-				sum += get(position.getX() - 1, position.getY() - 1);
+			if (x > 0) {
+				sum += get(x - 1, y - 1);
 			}
 			// Up
-			sum += get(position.getX(), position.getY() - 1);
+			sum += get(x, y - 1);
 			// Upper Right
-			if (position.getX() < getWidth() - 1) {
-				sum += get(position.getX() + 1, position.getY() - 1);
+			if (x < getWidth() - 1) {
+				sum += get(x + 1, y - 1);
 			}
 		}
-		if (position.getX() > 0) {
+		if (x > 0) {
 			// Left
-			sum += get(position.getX() - 1, position.getY());
+			sum += get(x - 1, y);
 		}
-		if (position.getX() < getWidth() - 1) {
+		if (x < getWidth() - 1) {
 			// Right
-			sum += get(position.getX() + 1, position.getY());
+			sum += get(x + 1, y);
 		}
-		if (position.getY() < getHeight() - 1) {
+		if (y < getHeight() - 1) {
 			// Left Left
-			if (position.getX() > 0) {
-				sum += get(position.getX() - 1, position.getY() + 1);
+			if (x > 0) {
+				sum += get(x - 1, y + 1);
 			}
 			// Down
-			sum += get(position.getX(), position.getY() + 1);
+			sum += get(x, y + 1);
 			// Lower Right
-			if (position.getX() < getWidth() - 1) {
-				sum += get(position.getX() + 1, position.getY() + 1);
+			if (x < getWidth() - 1) {
+				sum += get(x + 1, y + 1);
 			}
 		}
 		return (sum);

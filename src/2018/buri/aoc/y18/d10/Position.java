@@ -20,8 +20,8 @@ public class Position extends Pair {
 		String[] tokens = data.split(",");
 		setX(Integer.valueOf(tokens[0]));
 		setY(Integer.valueOf(tokens[1]));
-		_originalX = getX();
-		_originalY = getY();
+		_originalX = getX().intValue();
+		_originalY = getY().intValue();
 		_velocityX = Integer.valueOf(tokens[2]);
 		_velocityY = Integer.valueOf(tokens[3]);
 	}
@@ -45,16 +45,16 @@ public class Position extends Pair {
 	 * Shifts the output back to the origin for ease of reading.
 	 */
 	public void offset(Position position) {
-		setX(getX() - position.getX());
-		setY(getY() - position.getY());
+		setX(getX().intValue() - position.getX().intValue());
+		setY(getY().intValue() - position.getY().intValue());
 	}
 
 	/**
 	 * Moves this point some number of times.
 	 */
 	public void move(int times) {
-		setX(getX() + (times * getVelocityX()));
-		setY(getY() + (times * getVelocityY()));
+		setX(getX().intValue() + (times * getVelocityX()));
+		setY(getY().intValue() + (times * getVelocityY()));
 	}
 
 	/**

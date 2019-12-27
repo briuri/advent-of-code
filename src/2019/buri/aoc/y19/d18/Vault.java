@@ -203,10 +203,10 @@ public class Vault extends CharGrid {
 	 */
 	private List<Pair> getTraversableNeighbors(Pair start, Pair current) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(current.getX(), current.getY() - 1));
-		neighbors.add(new Pair(current.getX() - 1, current.getY()));
-		neighbors.add(new Pair(current.getX() + 1, current.getY()));
-		neighbors.add(new Pair(current.getX(), current.getY() + 1));
+		neighbors.add(new Pair(current.getX(), current.getY().intValue() - 1));
+		neighbors.add(new Pair(current.getX().intValue() - 1, current.getY()));
+		neighbors.add(new Pair(current.getX().intValue() + 1, current.getY()));
+		neighbors.add(new Pair(current.getX(), current.getY().intValue() + 1));
 		// Remove any that are not traversable.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();

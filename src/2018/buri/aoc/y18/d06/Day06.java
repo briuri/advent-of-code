@@ -24,7 +24,7 @@ public class Day06 extends BasePuzzle {
 	public static List<Pair> getInput(int fileIndex) {
 		List<Pair> data = new ArrayList<>();
 		for (String rawString : readFile(fileIndex)) {
-			data.add(new Pair(rawString));
+			data.add(new Pair(rawString, Integer.class));
 		}
 		return (data);
 	}
@@ -55,8 +55,8 @@ public class Day06 extends BasePuzzle {
 				if (Collections.frequency(currentSpotDistances.values(), minEntry.getValue()) == 1) {
 					Pair nearestPair = minEntry.getKey();
 					// Keep track of locations nearest to the edges of the grid, so they can be ignored later.
-					if (currentSpot.getX() == 0 || currentSpot.getY() == 0 || currentSpot.getX() == gridLength - 1
-						|| currentSpot.getY() == gridLength - 1) {
+					if (currentSpot.getX().intValue() == 0 || currentSpot.getY().intValue() == 0 || currentSpot.getX().intValue() == gridLength - 1
+						|| currentSpot.getY().intValue() == gridLength - 1) {
 						outerPairs.add(nearestPair);
 					}
 
@@ -107,7 +107,7 @@ public class Day06 extends BasePuzzle {
 	 * Calculates the Manhattan distance between two positions.
 	 */
 	private static int getMDBetween(Pair p1, Pair p2) {
-		return (Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY()));
+		return (Math.abs(p1.getX().intValue() - p2.getX().intValue()) + Math.abs(p1.getY().intValue() - p2.getY().intValue()));
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class Day06 extends BasePuzzle {
 	private static int getGridLength(List<Pair> input) {
 		int gridLength = 0;
 		for (Pair position : input) {
-			gridLength = Math.max(gridLength, position.getX());
-			gridLength = Math.max(gridLength, position.getY());
+			gridLength = Math.max(gridLength, position.getX().intValue());
+			gridLength = Math.max(gridLength, position.getY().intValue());
 		}
 		return (gridLength + 1);
 	}

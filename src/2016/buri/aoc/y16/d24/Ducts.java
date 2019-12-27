@@ -132,17 +132,17 @@ public class Ducts extends CharGrid {
 	 */
 	private List<Pair> getTraversableNeighbors(Pair center) {
 		List<Pair> neighbors = new ArrayList<>();
-		if (center.getY() < getHeight() - 1) {
-			neighbors.add(new Pair(center.getX(), center.getY() + 1));
+		if (center.getY().intValue() < getHeight() - 1) {
+			neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
 		}
-		if (center.getY() > 0) {
-			neighbors.add(new Pair(center.getX(), center.getY() - 1));
+		if (center.getY().intValue() > 0) {
+			neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
 		}
-		if (center.getX() > 0) {
-			neighbors.add(new Pair(center.getX() - 1, center.getY()));
+		if (center.getX().intValue() > 0) {
+			neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
 		}
-		if (center.getX() < getWidth() - 1) {
-			neighbors.add(new Pair(center.getX() + 1, center.getY()));
+		if (center.getX().intValue() < getWidth() - 1) {
+			neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
 		}
 
 		// Remove any that are walls.

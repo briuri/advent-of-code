@@ -60,9 +60,9 @@ public class Day21 extends BasePuzzle {
 				for (List<Integer> rings : ringPermutations) {
 					Triple ring1 = RINGS.get(rings.get(0));
 					Triple ring2 = RINGS.get(rings.get(1));
-					int cost = (int) (weapon.getX() + armor.getX() + ring1.getX() + ring2.getX());
-					int bonusAttack = (int) (weapon.getY() + armor.getY() + ring1.getY() + ring2.getY());
-					int bonusArmor = (int) (weapon.getZ() + armor.getZ() + ring1.getZ() + ring2.getZ());
+					int cost = weapon.getX().intValue() + armor.getX().intValue() + ring1.getX().intValue() + ring2.getX().intValue();
+					int bonusAttack = weapon.getY().intValue() + armor.getY().intValue() + ring1.getY().intValue() + ring2.getY().intValue();
+					int bonusArmor = weapon.getZ().intValue() + armor.getZ().intValue() + ring1.getZ().intValue() + ring2.getZ().intValue();
 
 					Unit player = new Unit(100, bonusAttack, bonusArmor, cost);
 					Unit boss = new Unit(bossTemplate.getHealth(), bossTemplate.getDamage(), bossTemplate.getArmor(),

@@ -27,7 +27,7 @@ public class Day16 extends BasePuzzle {
 	 * What is the number of the Sue that got you the gift?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * What is the number of the real Aunt Sue?
 	 */
 	public static int getResult(Part part, List<String> input) {
 		List<Map<String, Integer>> sues = new ArrayList<>();

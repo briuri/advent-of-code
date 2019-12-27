@@ -20,10 +20,7 @@ public class Position extends Pair {
 
 	@Override
 	public int compareTo(Pair o) {
-		int compare = getY() - o.getY();
-		if (compare == 0) {
-			compare = getX() - o.getX();
-		}
+		int compare = super.compareTo(o);
 		if (compare == 0 && o instanceof Position) {
 			compare = getItem() - ((Position) o).getItem();
 		}

@@ -16,8 +16,8 @@ public class SightLine implements Comparable<SightLine> {
 	 * Calculates a sight line between two points.
 	 */
 	public SightLine(Pair station, Pair asteroid) {
-		int dx = asteroid.getX() - station.getX();
-		int dy = asteroid.getY() - station.getY();
+		int dx = asteroid.getX().intValue() - station.getX().intValue();
+		int dy = asteroid.getY().intValue() - station.getY().intValue();
 		int gcd = getGCD(dx, dy);
 		if (gcd < 0) {
 			gcd = gcd * -1;
@@ -25,7 +25,7 @@ public class SightLine implements Comparable<SightLine> {
 		_slope = new Pair(dx / gcd, dy / gcd);
 
 		// Subtract PI/2 to start facing up rather than right.
-		_angle = Math.atan2(getSlope().getX(), getSlope().getY()) - Math.PI / 2.0;
+		_angle = Math.atan2(getSlope().getX().intValue(), getSlope().getY().intValue()) - Math.PI / 2.0;
 	}
 
 	/**

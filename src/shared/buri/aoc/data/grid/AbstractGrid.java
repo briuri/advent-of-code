@@ -20,6 +20,9 @@ public abstract class AbstractGrid<T> {
 	 * Constructor
 	 */
 	protected AbstractGrid(Pair size) {
+		if (!size.isIntegerBased()) {
+			throw new IllegalArgumentException("Size must be integer-based.");
+		}
 		_size = size;
 	}
 
@@ -34,7 +37,7 @@ public abstract class AbstractGrid<T> {
 	 * Sets a value on the grid.
 	 */
 	public void set(Pair position, T value) {
-		set(position.getX(), position.getY(), value);
+		set(position.getX().intValue(), position.getY().intValue(), value);
 	}
 
 	/**
@@ -48,7 +51,7 @@ public abstract class AbstractGrid<T> {
 	 * Gets a value on the grid.
 	 */
 	public T get(Pair position) {
-		return (get(position.getX(), position.getY()));
+		return (get(position.getX().intValue(), position.getY().intValue()));
 	}
 
 	@Override
@@ -85,14 +88,14 @@ public abstract class AbstractGrid<T> {
 	 * Accessor for the horizontal size
 	 */
 	public int getWidth() {
-		return _size.getX();
+		return _size.getX().intValue();
 	}
 
 	/**
 	 * Accessor for the vertical size
 	 */
 	public int getHeight() {
-		return _size.getY();
+		return _size.getY().intValue();
 	}
 
 	/**

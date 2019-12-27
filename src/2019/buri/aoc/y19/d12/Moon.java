@@ -21,7 +21,7 @@ public class Moon {
 		String x = tokens[0].split("=")[1];
 		String y = tokens[1].split("=")[1];
 		String z = tokens[2].split("=")[1].split(">")[0];
-		_position = new Triple(Long.valueOf(x), Long.valueOf(y), Long.valueOf(z));
+		_position = new Triple(Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(z));
 		_velocity = new Triple(0, 0, 0);
 	}
 
@@ -36,12 +36,12 @@ public class Moon {
 	 * of moons.
 	 */
 	public void applyGravity(Moon moon) {
-		int dx = calculateGravity(getPosition().getX(), moon.getPosition().getX());
-		int dy = calculateGravity(getPosition().getY(), moon.getPosition().getY());
-		int dz = calculateGravity(getPosition().getZ(), moon.getPosition().getZ());
-		getVelocity().setX(getVelocity().getX() + dx);
-		getVelocity().setY(getVelocity().getY() + dy);
-		getVelocity().setZ(getVelocity().getZ() + dz);
+		int dx = calculateGravity(getPosition().getX().intValue(), moon.getPosition().getX().intValue());
+		int dy = calculateGravity(getPosition().getY().intValue(), moon.getPosition().getY().intValue());
+		int dz = calculateGravity(getPosition().getZ().intValue(), moon.getPosition().getZ().intValue());
+		getVelocity().setX(getVelocity().getX().intValue() + dx);
+		getVelocity().setY(getVelocity().getY().intValue() + dy);
+		getVelocity().setZ(getVelocity().getZ().intValue() + dz);
 	}
 
 	/**
@@ -65,17 +65,18 @@ public class Moon {
 	 * Adjusts the position based on the current velocity.
 	 */
 	public void move() {
-		getPosition().setX(getPosition().getX() + getVelocity().getX());
-		getPosition().setY(getPosition().getY() + getVelocity().getY());
-		getPosition().setZ(getPosition().getZ() + getVelocity().getZ());
+		getPosition().setX(getPosition().getX().intValue() + getVelocity().getX().intValue());
+		getPosition().setY(getPosition().getY().intValue() + getVelocity().getY().intValue());
+		getPosition().setZ(getPosition().getZ().intValue() + getVelocity().getZ().intValue());
 	}
 
 	/**
 	 * Calculates the total energy of the moon.
 	 */
 	public long getEnergy() {
-		long pe = getPosition().getManhattanDistance();
-		long ke = getVelocity().getManhattanDistance();
+		Triple origin = new Triple(0, 0, 0);
+		long pe = getPosition().getManhattanDistance(origin);
+		long ke = getVelocity().getManhattanDistance(origin);
 		return (pe * ke);
 	}
 

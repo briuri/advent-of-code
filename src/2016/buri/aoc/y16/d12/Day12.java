@@ -24,7 +24,7 @@ public class Day12 extends BasePuzzle {
 	 * After executing the assembunny code in your puzzle input, what value is left in register a?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * If you instead initialize register c to be 1, what value is now left in register a?
 	 */
 	public static long getResult(Part part, List<String> input) {
 		Registers registers = new Registers(part, input);

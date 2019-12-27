@@ -212,10 +212,10 @@ public class Grid extends CharGrid {
 	 */
 	private List<Pair> getTraversableNeighbors(Pair center) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY() + 1));
+		neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
+		neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
+		neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
+		neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
 		// Remove any that are already filled up.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();

@@ -65,7 +65,7 @@ public class Day19 extends BasePuzzle {
 			Pair upperRight = new Pair(x + SIZE - 1, y - SIZE + 1);
 			// Boolean short-circuit avoids unnecessary corner checks.
 			if (run(program, lowerRight) == 1 && run(program, upperLeft) == 1 && run(program, upperRight) == 1) {
-				return (upperLeft.getX() * 10000 + (upperLeft.getY()));
+				return (upperLeft.getX().intValue() * 10000 + (upperLeft.getY().intValue()));
 			}
 			y += 1;
 		}
@@ -76,8 +76,8 @@ public class Day19 extends BasePuzzle {
 	 */
 	private static int run(List<Long> program, Pair position) {
 		Computer computer = new Computer(program);
-		computer.getInputs().add((long) position.getX());
-		computer.getInputs().add((long) position.getY());
+		computer.getInputs().add(position.getX().longValue());
+		computer.getInputs().add(position.getY().longValue());
 		computer.run();
 		int out = computer.getOutputs().remove(0).intValue();
 		return (out);

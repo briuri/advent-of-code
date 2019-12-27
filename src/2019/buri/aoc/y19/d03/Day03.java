@@ -81,7 +81,7 @@ public class Day03 extends BasePuzzle {
 	 * Calculates the Manhattan distance between two positions.
 	 */
 	private static int getMDBetween(Pair p1, Pair p2) {
-		return (Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY()));
+		return (Math.abs(p1.getX().intValue() - p2.getX().intValue()) + Math.abs(p1.getY().intValue() - p2.getY().intValue()));
 	}
 
 	/**

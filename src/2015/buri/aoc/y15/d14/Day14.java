@@ -26,7 +26,8 @@ public class Day14 extends BasePuzzle {
 	 * winning reindeer traveled?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * Again given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, how many points
+	 * does the winning reindeer have?
 	 */
 	public static int getResult(Part part, List<String> input) {
 		int duration = 2503;

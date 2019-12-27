@@ -28,7 +28,7 @@ public class Day13 extends BasePuzzle {
 	 * What is the total change in happiness for the optimal seating arrangement of the actual guest list?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * What is the total change in happiness for the optimal seating arrangement that actually includes yourself?
 	 */
 	public static int getResult(Part part, List<String> input) {
 		List<String> guests = new ArrayList<>();

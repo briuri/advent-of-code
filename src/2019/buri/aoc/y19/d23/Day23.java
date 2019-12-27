@@ -80,10 +80,10 @@ public class Day23 extends BasePuzzle {
 				}
 				if (allIdle && nat != null) {
 					Computer receiver = computers.get(0L);
-					receiver.getInputs().add(Long.valueOf(nat.getX()));
-					receiver.getInputs().add(Long.valueOf(nat.getY()));
+					receiver.getInputs().add(nat.getX().longValue());
+					receiver.getInputs().add(nat.getY().longValue());
 					if (sentPackets.contains(nat)) {
-						return (nat.getY());
+						return (nat.getY().intValue());
 					}
 					sentPackets.add(nat);
 				}

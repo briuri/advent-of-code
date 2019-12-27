@@ -26,16 +26,16 @@ public class Day06 extends BasePuzzle {
 	 * After following the instructions, how many lights are lit?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * What is the total brightness of all lights combined after following Santa's instructions?
 	 */
 	public static int getResult(Part part, List<String> input) {
 		IntGrid grid = new IntGrid(new Pair(1000, 1000));
 		for (String command : input) {
 			String[] tokens = command.split(" ");
-			Pair lowerBound = new Pair(tokens[tokens.length - 3]);
-			Pair upperBound = new Pair(tokens[tokens.length - 1]);
-			for (int y = lowerBound.getY(); y <= upperBound.getY(); y++) {
-				for (int x = lowerBound.getX(); x <= upperBound.getX(); x++) {
+			Pair lowerBound = new Pair(tokens[tokens.length - 3], Integer.class);
+			Pair upperBound = new Pair(tokens[tokens.length - 1], Integer.class);
+			for (int y = lowerBound.getY().intValue(); y <= upperBound.getY().intValue(); y++) {
+				for (int x = lowerBound.getX().intValue(); x <= upperBound.getX().intValue(); x++) {
 					Integer value;
 					if (part == Part.ONE) {
 						if (tokens[1].equals("on")) {

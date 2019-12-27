@@ -13,9 +13,10 @@ import buri.aoc.data.Direction;
  * 
  * @author Brian Uri!
  */
-public class Pair implements Comparable<Pair> {
-	private int _x;
-	private int _y;
+public class Pair<T extends Number> implements Comparable<Pair> {
+	private T _x;
+	private T _y;
+	private boolean _integerBased;
 
 	/**
 	 * Base constructor
@@ -25,18 +26,28 @@ public class Pair implements Comparable<Pair> {
 	/**
 	 * String-based Constructor with format "x, y"
 	 */
-	public Pair(String data) {
+	public Pair(String data, Class<T> clazz) {
 		String tokens[] = data.split(",");
-		_x = Integer.valueOf(tokens[0].trim());
-		_y = Integer.valueOf(tokens[1].trim());
+        if (clazz.isAssignableFrom(Integer.class)) {
+			_x = (T) Integer.valueOf(tokens[0].trim());
+			_y = (T) Integer.valueOf(tokens[1].trim());
+			_integerBased = true;
+        } else if (clazz.isAssignableFrom(Long.class)) {
+			_x = (T) Long.valueOf(tokens[0].trim());
+			_y = (T) Long.valueOf(tokens[1].trim());
+			_integerBased = false;
+        } else {
+            throw new IllegalArgumentException("Unsupported type: " + clazz.getSimpleName());
+        }
 	}
 
 	/**
-	 * Integer-based Constructor
+	 * Number-based Constructor
 	 */
-	public Pair(int x, int y) {
+	public Pair(T x, T y) {
 		_x = x;
 		_y = y;
+		_integerBased = (x instanceof Integer);
 	}
 
 	/**
@@ -50,45 +61,23 @@ public class Pair implements Comparable<Pair> {
 	 * Moves the position 1 step in a direction. (0,0 is top-left).
 	 */
 	public void move(Direction direction) {
+		if (!isIntegerBased()) {
+			throw new IllegalArgumentException("move() only implemented for Integer-based Pairs.");
+		}
 		switch (direction) {
 			case UP:
-				setY(getY() - 1);
+				setY((T) Integer.valueOf(getY().intValue() - 1));
 				break;
 			case RIGHT:
-				setX(getX() + 1);
+				setX((T) Integer.valueOf(getX().intValue() + 1));
 				break;
 			case DOWN:
-				setY(getY() + 1);
+				setY((T) Integer.valueOf(getY().intValue() + 1));
 				break;
 			case LEFT:
-				setX(getX() - 1);
+				setX((T) Integer.valueOf(getX().intValue() - 1));
 				break;
 		}
-	}
-
-	/**
-	 * Pairs are compared by y then x (top-left first).
-	 */
-	@Override
-	public int compareTo(Pair o) {
-		int compare = getY() - o.getY();
-		if (compare == 0) {
-			compare = getX() - o.getX();
-		}
-		return compare;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		Pair p = (Pair) obj;
-		return (getX() == p.getX() && getY() == p.getY());
-	}
-
-	@Override
-	public int hashCode() {
-		int result = getX();
-		result = 7 * getY();
-		return (result);
 	}
 
 	@Override
@@ -99,30 +88,63 @@ public class Pair implements Comparable<Pair> {
 	}
 
 	/**
+	 * Pairs are compared by y then x (top-left first).
+	 */
+	@Override
+	public int compareTo(Pair o) {
+		int compare = Long.valueOf(getY().longValue()).compareTo(Long.valueOf(o.getY().longValue()));
+		if (compare == 0) {
+			compare = Long.valueOf(getX().longValue()).compareTo(Long.valueOf(o.getX().longValue()));
+		}
+		return compare;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Pair pair = (Pair) obj;
+		return (getX().equals(pair.getX())
+			&& getY().equals(pair.getY()));
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = getX().hashCode();
+		result += getY().hashCode();
+		return (result);
+	}
+	
+	/**
+	 * Returns true of T is Integer-based.
+	 */
+	public boolean isIntegerBased() {
+		return (_integerBased);
+	}
+	
+	/**
 	 * Accessor for X
 	 */
-	public int getX() {
+	public T getX() {
 		return _x;
 	}
 
 	/**
 	 * Accessor for X
 	 */
-	public void setX(int x) {
+	public void setX(T x) {
 		_x = x;
 	}
 
 	/**
 	 * Accessor for Y
 	 */
-	public int getY() {
+	public T getY() {
 		return _y;
 	}
 
 	/**
 	 * Accessor for Y
 	 */
-	public void setY(int y) {
+	public void setY(T y) {
 		_y = y;
 	}
 }

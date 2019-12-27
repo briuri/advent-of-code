@@ -29,7 +29,7 @@ public class Day17 extends BasePuzzle {
 	 * eggnog?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * How many different ways can you fill that number of containers and still hold exactly 150 litres?
 	 */
 	public static int getResult(Part part, int end, List<String> input) {
 		List<Integer> containers = new ArrayList<>();

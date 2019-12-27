@@ -33,7 +33,7 @@ public class Day01 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, List<String> input) {
 		Pair position = followInstructions(part, input);
-		return (Math.abs(position.getX()) + Math.abs(position.getY()));
+		return (Math.abs(position.getX().intValue()) + Math.abs(position.getY().intValue()));
 	}
 
 	/**
@@ -52,16 +52,16 @@ public class Day01 extends BasePuzzle {
 			for (int i = 0; i < distance; i++) {
 				switch (direction) {
 					case UP:
-						position = new Pair(position.getX(), position.getY() + 1);
+						position = new Pair(position.getX().intValue(), position.getY().intValue() + 1);
 						break;
 					case RIGHT:
-						position = new Pair(position.getX() + 1, position.getY());
+						position = new Pair(position.getX().intValue() + 1, position.getY().intValue());
 						break;
 					case DOWN:
-						position = new Pair(position.getX(), position.getY() - 1);
+						position = new Pair(position.getX().intValue(), position.getY().intValue() - 1);
 						break;
 					default: // LEFT
-						position = new Pair(position.getX() - 1, position.getY());
+						position = new Pair(position.getX().intValue() - 1, position.getY().intValue());
 				}
 				if (part == Part.TWO && visited.contains(position)) {
 					return (position);

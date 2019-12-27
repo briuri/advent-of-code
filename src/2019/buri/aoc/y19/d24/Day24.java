@@ -98,8 +98,8 @@ public class Day24 extends BasePuzzle {
 		long minLevel = Integer.MAX_VALUE;
 		long maxLevel = Integer.MIN_VALUE;
 		for (Triple bug : bugs) {
-			minLevel = Math.min(minLevel, bug.getZ());
-			maxLevel = Math.max(maxLevel, bug.getZ());
+			minLevel = Math.min(minLevel, bug.getZ().intValue());
+			maxLevel = Math.max(maxLevel, bug.getZ().intValue());
 		}
 
 		Set<Triple> nextBugs = new TreeSet<>();
@@ -129,55 +129,55 @@ public class Day24 extends BasePuzzle {
 		boolean isBug = bugs.contains(tile);
 
 		List<Triple> neighbors = new ArrayList<>();
-		neighbors.add(new Triple(tile.getX(), tile.getY() - 1, tile.getZ()));
-		neighbors.add(new Triple(tile.getX(), tile.getY() + 1, tile.getZ()));
-		neighbors.add(new Triple(tile.getX() - 1, tile.getY(), tile.getZ()));
-		neighbors.add(new Triple(tile.getX() + 1, tile.getY(), tile.getZ()));
+		neighbors.add(new Triple(tile.getX().intValue(), tile.getY().intValue() - 1, tile.getZ().intValue()));
+		neighbors.add(new Triple(tile.getX().intValue(), tile.getY().intValue() + 1, tile.getZ().intValue()));
+		neighbors.add(new Triple(tile.getX().intValue() - 1, tile.getY().intValue(), tile.getZ().intValue()));
+		neighbors.add(new Triple(tile.getX().intValue() + 1, tile.getY().intValue(), tile.getZ().intValue()));
 
 		// Handle nested neighbors.
 		if (part == Part.TWO) {
 			List<Triple> newNeighbors = new ArrayList<>();
 			for (Triple neighbor : neighbors) {
-				boolean isInner = (neighbor.getX() == 2 && neighbor.getY() == 2);
-				long outerZ = neighbor.getZ() - 1;
-				long innerZ = neighbor.getZ() + 1;
+				boolean isInner = (neighbor.getX().intValue() == 2 && neighbor.getY().intValue() == 2);
+				long outerZ = neighbor.getZ().intValue() - 1;
+				long innerZ = neighbor.getZ().intValue() + 1;
 
 				// Outer Edges
-				if (neighbor.getY() < 0) {
+				if (neighbor.getY().intValue() < 0) {
 					newNeighbors.add(new Triple(2, 1, outerZ));
 				}
-				else if (neighbor.getY() == SIZE) {
+				else if (neighbor.getY().intValue() == SIZE) {
 					newNeighbors.add(new Triple(2, 3, outerZ));
 				}
-				else if (neighbor.getX() < 0) {
+				else if (neighbor.getX().intValue() < 0) {
 					newNeighbors.add(new Triple(1, 2, outerZ));
 				}
-				else if (neighbor.getX() == SIZE) {
+				else if (neighbor.getX().intValue() == SIZE) {
 					newNeighbors.add(new Triple(3, 2, outerZ));
 				}
 				// Inner Edges
-				else if (isInner && tile.getX() == 1) {
+				else if (isInner && tile.getX().intValue() == 1) {
 					newNeighbors.add(new Triple(0, 0, innerZ));
 					newNeighbors.add(new Triple(0, 1, innerZ));
 					newNeighbors.add(new Triple(0, 2, innerZ));
 					newNeighbors.add(new Triple(0, 3, innerZ));
 					newNeighbors.add(new Triple(0, 4, innerZ));
 				}
-				else if (isInner && tile.getX() == 3) {
+				else if (isInner && tile.getX().intValue() == 3) {
 					newNeighbors.add(new Triple(4, 0, innerZ));
 					newNeighbors.add(new Triple(4, 1, innerZ));
 					newNeighbors.add(new Triple(4, 2, innerZ));
 					newNeighbors.add(new Triple(4, 3, innerZ));
 					newNeighbors.add(new Triple(4, 4, innerZ));
 				}
-				else if (isInner && tile.getY() == 1) {
+				else if (isInner && tile.getY().intValue() == 1) {
 					newNeighbors.add(new Triple(0, 0, innerZ));
 					newNeighbors.add(new Triple(1, 0, innerZ));
 					newNeighbors.add(new Triple(2, 0, innerZ));
 					newNeighbors.add(new Triple(3, 0, innerZ));
 					newNeighbors.add(new Triple(4, 0, innerZ));
 				}
-				else if (isInner && tile.getY() == 3) {
+				else if (isInner && tile.getY().intValue() == 3) {
 					newNeighbors.add(new Triple(0, 4, innerZ));
 					newNeighbors.add(new Triple(1, 4, innerZ));
 					newNeighbors.add(new Triple(2, 4, innerZ));

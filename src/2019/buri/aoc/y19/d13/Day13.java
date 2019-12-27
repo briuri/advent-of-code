@@ -63,7 +63,7 @@ public class Day13 extends BasePuzzle {
 			if (ball == null || ball.getX() == paddle.getX()) {
 				joystick = 0;
 			}
-			else if (ball.getX() > paddle.getX()) {
+			else if (ball.getX().intValue() > paddle.getX().intValue()) {
 				joystick = 1;
 			}
 			else {

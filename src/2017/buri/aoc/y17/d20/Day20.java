@@ -7,6 +7,7 @@ import java.util.Map;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 20: Particle Swarm
@@ -51,9 +52,10 @@ public class Day20 extends BasePuzzle {
 	private static int getSlowestAccelerationIndex(List<Particle> input) {
 		int index = -1;
 		long minAcceleration = Long.MAX_VALUE;
+		Triple origin = new Triple(0L, 0L, 0L);
 		for (int i = 0; i < input.size(); i++) {
 			Particle particle = input.get(i);
-			long acceleration = particle.getAcceleration().getManhattanDistance();
+			long acceleration = particle.getAcceleration().getManhattanDistance(origin);
 			if (acceleration < minAcceleration) {
 				index = i;
 				minAcceleration = acceleration;

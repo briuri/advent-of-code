@@ -30,18 +30,18 @@ public class Position extends Pair {
 	 */
 	public List<Position> getTraversableNeighbors() {
 		List<Position> neighbors = new ArrayList<>();
-		if (!(getX() == 3 && getY() == 3)) {
+		if (!(getX().intValue() == 3 && getY().intValue() == 3)) {
 			if (canMove(Direction.UP)) {
-				neighbors.add(new Position(getX(), getY() - 1, getPasscodeSoFar() + "U"));
+				neighbors.add(new Position(getX().intValue(), getY().intValue() - 1, getPasscodeSoFar() + "U"));
 			}
 			if (canMove(Direction.LEFT)) {
-				neighbors.add(new Position(getX() - 1, getY(), getPasscodeSoFar() + "L"));
+				neighbors.add(new Position(getX().intValue() - 1, getY().intValue(), getPasscodeSoFar() + "L"));
 			}
 			if (canMove(Direction.RIGHT)) {
-				neighbors.add(new Position(getX() + 1, getY(), getPasscodeSoFar() + "R"));
+				neighbors.add(new Position(getX().intValue() + 1, getY().intValue(), getPasscodeSoFar() + "R"));
 			}
 			if (canMove(Direction.DOWN)) {
-				neighbors.add(new Position(getX(), getY() + 1, getPasscodeSoFar() + "D"));
+				neighbors.add(new Position(getX().intValue(), getY().intValue() + 1, getPasscodeSoFar() + "D"));
 			}
 		}
 		return (neighbors);
@@ -51,8 +51,10 @@ public class Position extends Pair {
 	 * Returns true if the direction is an unlocked door. Returns false for walls or locked doors.
 	 */
 	public boolean canMove(Direction direction) {
-		boolean isWall = ((direction == Direction.LEFT && getX() == 0) || (direction == Direction.UP && getY() == 0)
-			|| (direction == Direction.RIGHT && getX() == 3) || (direction == Direction.DOWN && getY() == 3));
+		boolean isWall = ((direction == Direction.LEFT && getX().intValue() == 0)
+			|| (direction == Direction.UP && getY().intValue() == 0)
+			|| (direction == Direction.RIGHT && getX().intValue() == 3)
+			|| (direction == Direction.DOWN && getY().intValue() == 3));
 
 		int index;
 		switch (direction) {
@@ -83,13 +85,14 @@ public class Position extends Pair {
 	@Override
 	public boolean equals(Object obj) {
 		Position p = (Position) obj;
-		return (getX() == p.getX() && getY() == p.getY() && getPasscodeSoFar().equals(p.getPasscodeSoFar()));
+		return (getX().equals(p.getX())
+			&& getY().equals(p.getY()) && getPasscodeSoFar().equals(p.getPasscodeSoFar()));
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getX();
-		result = 7 * getY();
+		int result = getX().hashCode();
+		result += getY().hashCode();
 		result += getPasscodeSoFar().hashCode();
 		return (result);
 	}

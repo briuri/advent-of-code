@@ -52,8 +52,8 @@ public class Keypad extends IntGrid {
 		StringBuffer buffer = new StringBuffer();
 		for (String line : input) {
 			for (char direction : line.toCharArray()) {
-				int x = getCurrent().getX();
-				int y = getCurrent().getY();
+				int x = getCurrent().getX().intValue();
+				int y = getCurrent().getY().intValue();
 				switch (direction) {
 					case 'U':
 						if (get(x, y - 1) != 0) {

@@ -43,7 +43,7 @@ public class VacuumGrid extends CharGrid {
 			for (int x = 0; x < getWidth(); x++) {
 				Pair pos = new Pair(x, y);
 				if (get(pos) == SCAFFOLD && isIntersection(pos)) {
-					sum += (pos.getX() * pos.getY());
+					sum += (pos.getX().intValue() * pos.getY().intValue());
 				}
 			}
 		}
@@ -54,10 +54,11 @@ public class VacuumGrid extends CharGrid {
 	 * Checks the positions around a scaffold to see if it's an intersection.
 	 */
 	private boolean isIntersection(Pair center) {
-		boolean isIntersection = (center.getY() > 0 && get(center.getX(), center.getY() - 1) == SCAFFOLD)
-			&& (center.getX() > 0 && get(center.getX() - 1, center.getY()) == SCAFFOLD) && (center.getX() < getWidth()
-				- 1 && get(center.getX() + 1, center.getY()) == SCAFFOLD) && (center.getY() < getHeight() - 1 && get(
-					center.getX(), center.getY() + 1) == SCAFFOLD);
+		boolean isIntersection = 
+			(center.getY().intValue() > 0 && get(center.getX().intValue(), center.getY().intValue() - 1) == SCAFFOLD)
+			&& (center.getX().intValue() > 0 && get(center.getX().intValue() - 1, center.getY().intValue()) == SCAFFOLD) 
+			&& (center.getX().intValue() < getWidth() - 1 && get(center.getX().intValue() + 1, center.getY().intValue()) == SCAFFOLD) 
+			&& (center.getY().intValue() < getHeight() - 1 && get(center.getX().intValue(), center.getY().intValue() + 1) == SCAFFOLD);
 		return (isIntersection);
 	}
 }

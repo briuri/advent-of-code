@@ -39,7 +39,7 @@ public class Day17 extends BasePuzzle {
 					cameFrom.put(next, current);
 				}
 				// Part ONE: Quit once we reach the final square the first time.
-				if (part == Part.ONE && next.getX() == 3 && next.getY() == 3) {
+				if (part == Part.ONE && next.getX().intValue() == 3 && next.getY().intValue() == 3) {
 					return (next.getPasscodeSoFar().substring(passcode.length()));
 				}
 			}
@@ -51,7 +51,7 @@ public class Day17 extends BasePuzzle {
 		// Part TWO: Find the longest path of every (3,3) arrival.
 		String longestPasscodeSoFar = "";
 		for (Position destination : cameFrom.keySet()) {
-			if (destination.getX() == 3 && destination.getY() == 3
+			if (destination.getX().intValue() == 3 && destination.getY().intValue() == 3
 				&& destination.getPasscodeSoFar().length() > longestPasscodeSoFar.length()) {
 				longestPasscodeSoFar = destination.getPasscodeSoFar();
 			}

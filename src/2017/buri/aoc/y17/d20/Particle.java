@@ -28,8 +28,12 @@ public class Particle {
 	 * Returns a string representation of the position for comparison.
 	 */
 	public String move() {
-		getVelocity().add(getAcceleration());
-		getPosition().add(getVelocity());
+		getVelocity().setX(getVelocity().getX().longValue() + getAcceleration().getX().longValue());
+		getVelocity().setY(getVelocity().getY().longValue() + getAcceleration().getY().longValue());
+		getVelocity().setZ(getVelocity().getZ().longValue() + getAcceleration().getZ().longValue());
+		getPosition().setX(getPosition().getX().longValue() + getVelocity().getX().longValue());
+		getPosition().setY(getPosition().getY().longValue() + getVelocity().getY().longValue());
+		getPosition().setZ(getPosition().getZ().longValue() + getVelocity().getZ().longValue());
 		return (getPosition().toString());
 	}
 

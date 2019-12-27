@@ -96,20 +96,20 @@ public class RoomMap extends CharGrid {
 	 */
 	private void move(Pair position, char direction) {
 		if (direction == NORTH) {
-			set(position.getX(), position.getY() - 1, DOOR);
-			position.setY(position.getY() - 2);
+			set(position.getX().intValue(), position.getY().intValue() - 1, DOOR);
+			position.setY(position.getY().intValue() - 2);
 		}
 		else if (direction == EAST) {
-			set(position.getX() + 1, position.getY(), DOOR);
-			position.setX(position.getX() + 2);
+			set(position.getX().intValue() + 1, position.getY().intValue(), DOOR);
+			position.setX(position.getX().intValue() + 2);
 		}
 		else if (direction == SOUTH) {
-			set(position.getX(), position.getY() + 1, DOOR);
-			position.setY(position.getY() + 2);
+			set(position.getX().intValue(), position.getY().intValue() + 1, DOOR);
+			position.setY(position.getY().intValue() + 2);
 		}
 		else if (direction == WEST) {
-			set(position.getX() - 1, position.getY(), DOOR);
-			position.setX(position.getX() - 2);
+			set(position.getX().intValue() - 1, position.getY().intValue(), DOOR);
+			position.setX(position.getX().intValue() - 2);
 		}
 		if (get(position) != START) {
 			set(position, ROOM);
@@ -229,10 +229,10 @@ public class RoomMap extends CharGrid {
 	 */
 	private List<Pair> getTraversableNeighbors(Pair center) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY() + 1));
+		neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
+		neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
+		neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
+		neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
 		// Remove any that are not traversable.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();

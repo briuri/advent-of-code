@@ -68,12 +68,12 @@ public class Day10 extends BasePuzzle {
 
 		// Trace sight line along slope until an asteroid is found.
 		Pair slope = sightLine.getSlope();
-		Pair asteroid = new Pair(station.getX() + slope.getX(), station.getY() + slope.getY());
+		Pair asteroid = new Pair(station.getX().intValue() + slope.getX().intValue(), station.getY().intValue() + slope.getY().intValue());
 		while (!asteroids.contains(asteroid)) {
-			asteroid.setX(asteroid.getX() + slope.getX());
-			asteroid.setY(asteroid.getY() + slope.getY());
+			asteroid.setX(asteroid.getX().intValue() + slope.getX().intValue());
+			asteroid.setY(asteroid.getY().intValue() + slope.getY().intValue());
 		}
-		return (asteroid.getX() * 100 + asteroid.getY());
+		return (asteroid.getX().intValue() * 100 + asteroid.getY().intValue());
 	}
 
 	/**

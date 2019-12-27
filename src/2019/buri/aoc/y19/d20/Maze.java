@@ -87,10 +87,10 @@ public class Maze extends CharGrid {
 	 */
 	private List<Triple> getTraversableNeighbors(Part part, Triple start, Triple current) {
 		List<Triple> neighbors = new ArrayList<>();
-		neighbors.add(new Triple(current.getX(), current.getY() - 1, current.getZ()));
-		neighbors.add(new Triple(current.getX() - 1, current.getY(), current.getZ()));
-		neighbors.add(new Triple(current.getX() + 1, current.getY(), current.getZ()));
-		neighbors.add(new Triple(current.getX(), current.getY() + 1, current.getZ()));
+		neighbors.add(new Triple(current.getX().intValue(), current.getY().intValue() - 1, current.getZ().intValue()));
+		neighbors.add(new Triple(current.getX().intValue() - 1, current.getY().intValue(), current.getZ().intValue()));
+		neighbors.add(new Triple(current.getX().intValue() + 1, current.getY().intValue(), current.getZ().intValue()));
+		neighbors.add(new Triple(current.getX().intValue(), current.getY().intValue() + 1, current.getZ().intValue()));
 		for (Iterator<Triple> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Triple position = iterator.next();
 			Character tile = get((int) position.getX(), (int) position.getY());
@@ -100,15 +100,15 @@ public class Maze extends CharGrid {
 			}
 		}
 		// Add a teleport. Don't go too deep, in hopes that the answer is a closer path.
-		if (isTeleport(part, current) && current.getZ() < getWarpPoints().size()) {
+		if (isTeleport(part, current) && current.getZ().intValue() < getWarpPoints().size()) {
 			Character tile = get((int) current.getX(), (int) current.getY());
 			Triple target = getWarpPoints().get(getTarget(tile)).copy();
 			if (part == Part.TWO) {
 				if (Character.isLowerCase(tile) || tile == '0') {
-					target.setZ(current.getZ() + 1);
+					target.setZ(current.getZ().intValue() + 1);
 				}
 				else {
-					target.setZ(current.getZ() - 1);
+					target.setZ(current.getZ().intValue() - 1);
 				}
 			}
 			neighbors.add(target);
@@ -122,7 +122,7 @@ public class Maze extends CharGrid {
 	private boolean isTeleport(Part part, Triple current) {
 		Character tile = get((int) current.getX(), (int) current.getY());
 		boolean isPossibleTP = (Character.isAlphabetic(tile) || Character.isDigit(tile));
-		if (part == Part.ONE || current.getZ() != 0) {
+		if (part == Part.ONE || current.getZ().intValue() != 0) {
 			return (isPossibleTP);
 		}
 		// Only inner TPs work on outermost level.

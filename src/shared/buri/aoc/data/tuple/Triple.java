@@ -5,16 +5,15 @@ package buri.aoc.data.tuple;
  * 
  * @author Brian Uri!
  */
-public class Triple implements Comparable<Triple> {
-
-	private long _x;
-	private long _y;
-	private long _z;
+public class Triple<T extends Number> implements Comparable<Triple> {
+	private T _x;
+	private T _y;
+	private T _z;
 
 	/**
 	 * Constructor
 	 */
-	public Triple(long x, long y, long z) {
+	public Triple(T x, T y, T z) {
 		_x = x;
 		_y = y;
 		_z = z;
@@ -28,26 +27,14 @@ public class Triple implements Comparable<Triple> {
 	}
 
 	/**
-	 * Adds a triple to this one.
-	 */
-	public void add(Triple triple) {
-		setX(getX() + triple.getX());
-		setY(getY() + triple.getY());
-		setZ(getZ() + triple.getZ());
-	}
-
-	/**
-	 * Returns the Manhattan distance to 0,0,0.
-	 */
-	public long getManhattanDistance() {
-		return (Math.abs(getX()) + Math.abs(getY()) + Math.abs(getZ()));
-	}
-
-	/**
 	 * Returns the Manhattan distance to another triple.
 	 */
 	public long getManhattanDistance(Triple triple) {
-		return (Math.abs(getX() - triple.getX()) + Math.abs(getY() - triple.getY()) + Math.abs(getZ() - triple.getZ()));
+		long result = 0;
+		result += Math.abs(getX().longValue() - triple.getX().longValue());
+		result += Math.abs(getY().longValue() - triple.getY().longValue());
+		result += Math.abs(getZ().longValue() - triple.getZ().longValue());
+		return (result);
 	}
 
 	@Override
@@ -60,73 +47,75 @@ public class Triple implements Comparable<Triple> {
 	}
 
 	/**
-	 * Pairs are compared by y then x (top-left first).
+	 * Sort order: by Y, then X, then Z (top-left first)
 	 */
 	@Override
 	public int compareTo(Triple o) {
-		long compare = getY() - o.getY();
+		int compare = Long.valueOf(getY().longValue()).compareTo(Long.valueOf(o.getY().longValue()));
 		if (compare == 0) {
-			compare = getX() - o.getX();
+			compare = Long.valueOf(getX().longValue()).compareTo(Long.valueOf(o.getX().longValue()));
 		}
 		if (compare == 0) {
-			compare = getZ() - o.getZ();
+			compare = Long.valueOf(getZ().longValue()).compareTo(Long.valueOf(o.getZ().longValue()));
 		}
-		return ((int) compare);
+		return (compare);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		Triple t = (Triple) obj;
-		return (getX() == t.getX() && getY() == t.getY() && getZ() == t.getZ());
+		Triple triple = (Triple) obj;
+		return (getX().equals(triple.getX())
+			&& getY().equals(triple.getY())
+			&& getZ().equals(triple.getZ()));
 	}
 
 	@Override
 	public int hashCode() {
-		long result = getX();
-		result = 7 * getY();
-		result = 7 * getZ();
-		return (Long.valueOf(result).intValue());
+		int result = getX().hashCode();
+		result += getY().hashCode();
+		result += getZ().hashCode();
+		return (result);
 	}
 
 	/**
 	 * Accessor for the x
 	 */
-	public long getX() {
+	public T getX() {
 		return _x;
 	}
 
 	/**
 	 * Accessor for the x
 	 */
-	public void setX(long x) {
+	public void setX(T x) {
 		_x = x;
 	}
 
 	/**
 	 * Accessor for the y
 	 */
-	public long getY() {
+	public T getY() {
 		return _y;
 	}
 
 	/**
 	 * Accessor for the y
 	 */
-	public void setY(long y) {
+	public void setY(T y) {
 		_y = y;
 	}
 
 	/**
 	 * Accessor for the z
 	 */
-	public long getZ() {
+	public T getZ() {
 		return _z;
 	}
 
 	/**
 	 * Accessor for the z
 	 */
-	public void setZ(long z) {
+	public void setZ(T z) {
 		_z = z;
 	}
 }

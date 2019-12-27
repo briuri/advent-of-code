@@ -30,10 +30,10 @@ public class Unit implements Comparable<Unit> {
 	 * Checks if some unit is adjacent to this one.
 	 */
 	public boolean isAdjacent(Unit unit) {
-		int x = getPosition().getX();
-		int y = getPosition().getY();
-		int x2 = unit.getPosition().getX();
-		int y2 = unit.getPosition().getY();
+		int x = getPosition().getX().intValue();
+		int y = getPosition().getY().intValue();
+		int x2 = unit.getPosition().getX().intValue();
+		int y2 = unit.getPosition().getY().intValue();
 		boolean isAbove = ((x == x2) && (y + 1 == y2));
 		boolean isLeft = ((x + 1 == x2) && (y == y2));
 		boolean isRight = ((x - 1 == x2) && (y == y2));

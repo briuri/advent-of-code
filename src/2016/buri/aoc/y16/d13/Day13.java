@@ -16,7 +16,8 @@ public class Day13 extends BasePuzzle {
 	 * What is the fewest number of steps required for you to reach 31,39?
 	 * 
 	 * Part 2:
-	 * QUESTION
+	 * How many locations (distinct x,y coordinates, including your starting location) can you reach in at most 50
+	 * steps?
 	 */
 	public static int getResult(Part part, int magicNumber, Pair destination) {
 		Grid grid = new Grid(magicNumber);
