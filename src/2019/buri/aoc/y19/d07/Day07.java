@@ -6,7 +6,7 @@ import java.util.List;
 import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
 import buri.aoc.data.Permutations;
-import buri.aoc.data.intcode.Computer;
+import buri.aoc.y19.intcode.Computer;
 
 /**
  * Day 07: Amplification Circuit

@@ -1,4 +1,4 @@
-package buri.aoc.data.intcode;
+package buri.aoc.y19.intcode;
 
 /**
  * Representation of a parameter mode

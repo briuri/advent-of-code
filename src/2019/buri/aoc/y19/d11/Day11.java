@@ -8,7 +8,7 @@ import buri.aoc.BasePuzzle;
 import buri.aoc.data.Direction;
 import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
-import buri.aoc.data.intcode.Computer;
+import buri.aoc.y19.intcode.Computer;
 
 /**
  * Day 11: Space Police
