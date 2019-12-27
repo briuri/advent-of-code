@@ -1,4 +1,4 @@
-package buri.aoc.y19.intcode;
+package buri.aoc.data.intcode;
 
 /**
  * Data model for a parameter.

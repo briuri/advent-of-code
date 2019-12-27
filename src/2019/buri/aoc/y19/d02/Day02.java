@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.BasePuzzle;
-import buri.aoc.y19.intcode.Computer;
+import buri.aoc.data.intcode.Computer;
 
 /**
  * Day 02: 1202 Program Alarm

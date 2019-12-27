@@ -10,7 +10,7 @@ import java.util.Set;
 import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
 import buri.aoc.data.Pair;
-import buri.aoc.y19.intcode.Computer;
+import buri.aoc.data.intcode.Computer;
 
 /**
  * Day 23: Category Six

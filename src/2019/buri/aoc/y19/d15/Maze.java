@@ -15,7 +15,7 @@ import buri.aoc.data.Direction;
 import buri.aoc.data.Pair;
 import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
-import buri.aoc.y19.intcode.Computer;
+import buri.aoc.data.intcode.Computer;
 
 /**
  * Data model for the oxygen maze.

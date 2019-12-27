@@ -1,4 +1,4 @@
-package buri.aoc.y19.intcode;
+package buri.aoc.data.intcode;
 
 import java.util.ArrayList;
 import java.util.List;
