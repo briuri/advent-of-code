@@ -22,6 +22,13 @@ public class Quad<T extends Number> implements Comparable<Quad> {
 	}
 
 	/**
+	 * Returns a copy of this quad.
+	 */
+	public Quad copy() {
+		return (new Quad(getX(), getY(), getZ(), getT()));
+	}
+	
+	/**
 	 * Returns the Manhattan distance to another quad.
 	 */
 	public long getManhattanDistance(Quad quad) {

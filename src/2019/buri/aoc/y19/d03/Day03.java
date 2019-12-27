@@ -57,11 +57,11 @@ public class Day03 extends BasePuzzle {
 			wireChar++;
 		}
 		if (part == Part.ONE) {
-			Map<Pair, Integer> mds = new HashMap<>();
+			Map<Pair, Long> mds = new HashMap<>();
 			for (Pair intersection : intersections) {
-				mds.put(intersection, getMDBetween(intersection, centralPort));
+				mds.put(intersection, intersection.getManhattanDistance(centralPort));
 			}
-			return (getMin(mds).getValue());
+			return (getMin(mds).getValue().intValue());
 		}
 
 		// Part TWO
@@ -75,13 +75,6 @@ public class Day03 extends BasePuzzle {
 			}
 		}
 		return (minSteps);
-	}
-
-	/**
-	 * Calculates the Manhattan distance between two positions.
-	 */
-	private static int getMDBetween(Pair p1, Pair p2) {
-		return (Math.abs(p1.getX().intValue() - p2.getX().intValue()) + Math.abs(p1.getY().intValue() - p2.getY().intValue()));
 	}
 
 	/**

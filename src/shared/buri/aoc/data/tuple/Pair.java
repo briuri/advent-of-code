@@ -5,6 +5,8 @@ import buri.aoc.data.Direction;
 /**
  * Base class for an X-Y coordinate pair.
  * 
+ * Can support Integers or Longs as X and Y.
+ * 
  * Based on Java's array indexing:
  * (0,0) is the upper left corner of a grid.
  * (x,0) is lower left corner of a grid.
@@ -57,6 +59,16 @@ public class Pair<T extends Number> implements Comparable<Pair> {
 		return (new Pair(getX(), getY()));
 	}
 
+	/**
+	 * Returns the Manhattan distance to another pair.
+	 */
+	public long getManhattanDistance(Pair pair) {
+		long result = 0;
+		result += Math.abs(getX().longValue() - pair.getX().longValue());
+		result += Math.abs(getY().longValue() - pair.getY().longValue());
+		return (result);
+	}
+	
 	/**
 	 * Moves the position 1 step in a direction. (0,0 is top-left).
 	 */
