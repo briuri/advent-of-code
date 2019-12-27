@@ -7,6 +7,10 @@ import java.util.Map;
 /**
  * Base class for a set of named registers containing longs.
  * 
+ * - y15d23
+ * - y16d12, d23, d25
+ * - y17d08, d18, d23
+ * 
  * @author Brian Uri!
  */
 public class NamedRegisters {
