@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.Part;
+import buri.aoc.data.Path;
 import buri.aoc.data.Triple;
 import buri.aoc.data.grid.CharGrid;
 
@@ -76,7 +77,7 @@ public class Maze extends CharGrid {
 			}
 		}
 
-		List<TriplePath> paths = TriplePath.buildPaths(getStart(), ends, cameFrom);
+		List<Path> paths = Path.buildPaths(getStart(), ends, cameFrom);
 		return (paths.get(0).getLength());
 	}
 

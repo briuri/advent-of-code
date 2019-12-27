@@ -10,15 +10,15 @@ import java.util.Map;
  * 
  * @author Brian Uri!
  */
-public class Path implements Comparable<Path> {
-	private List<Pair> _positions = new ArrayList<>();
+public class Path<T extends Comparable> implements Comparable<Path<T>> {
+	private List<T> _positions = new ArrayList<>();
 
 	/**
 	 * Factory method to convert the results of a BFS into paths.
 	 */
-	public static List<Path> buildPaths(Pair start, List<Pair> destinations, Map<Pair, Pair> cameFrom) {
+	public static <T extends Comparable> List<Path> buildPaths(T start, List<T> destinations, Map<T, T> cameFrom) {
 		List<Path> shortestPaths = new ArrayList<>();
-		for (Pair destination : destinations) {
+		for (T destination : destinations) {
 			if (cameFrom.get(destination) != null) {
 				shortestPaths.add(new Path(start, destination, cameFrom));
 			}
@@ -30,8 +30,8 @@ public class Path implements Comparable<Path> {
 	/**
 	 * Constructor
 	 */
-	private Path(Pair start, Pair end, Map<Pair, Pair> cameFrom) {
-		Pair current = end;
+	private Path(T start, T destination, Map<T, T> cameFrom) {
+		T current = destination;
 		while (current != null) {
 			getPositions().add(current);
 			current = cameFrom.get(current);
@@ -50,7 +50,7 @@ public class Path implements Comparable<Path> {
 	 * Sort by length ascending first, then by reading order of the 2nd position on the path.
 	 */
 	@Override
-	public int compareTo(Path o) {
+	public int compareTo(Path<T> o) {
 		int compare = getPositions().size() - o.getPositions().size();
 		if (compare == 0) {
 			compare = getPositions().get(1).compareTo(o.getPositions().get(1));
@@ -61,7 +61,7 @@ public class Path implements Comparable<Path> {
 	/**
 	 * Accessor for the raw list of path positions
 	 */
-	public List<Pair> getPositions() {
+	public List<T> getPositions() {
 		return _positions;
 	}
 }

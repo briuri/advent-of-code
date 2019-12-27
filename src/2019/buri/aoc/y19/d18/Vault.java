@@ -114,7 +114,7 @@ public class Vault extends CharGrid {
 		}
 		Path path = paths.get(0);
 		Route route = new Route(startChar, endChar, path.getLength());
-		for (Pair position : path.getPositions()) {
+		for (Pair position : (List<Pair>) path.getPositions()) {
 			Character tile = get(position);
 			if (isDoor(tile)) {
 				route.getDoors().add(tile);
