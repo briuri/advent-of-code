@@ -29,6 +29,13 @@ public abstract class AbstractGrid<T> {
 	/**
 	 * Gets a value on the grid.
 	 */
+	public T get(Pair position) {
+		return (get(position.getX().intValue(), position.getY().intValue()));
+	}
+	
+	/**
+	 * Gets a value on the grid.
+	 */
 	public T get(int x, int y) {
 		return (getGrid()[x][y]);
 	}
@@ -45,13 +52,6 @@ public abstract class AbstractGrid<T> {
 	 */
 	public void set(int x, int y, T value) {
 		getGrid()[x][y] = value;
-	}
-
-	/**
-	 * Gets a value on the grid.
-	 */
-	public T get(Pair position) {
-		return (get(position.getX().intValue(), position.getY().intValue()));
 	}
 
 	@Override
