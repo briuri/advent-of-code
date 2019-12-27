@@ -15,12 +15,12 @@ import buri.aoc.data.grid.IntGrid;
 public class Day06 extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified. 
+	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile("2015/06", fileIndex));
 	}
-	
+
 	/**
 	 * Part 1:
 	 * After following the instructions, how many lights are lit?
@@ -59,7 +59,7 @@ public class Day06 extends BasePuzzle {
 							value = grid.get(x, y) + 2;
 						}
 					}
-					grid.set(x,  y, value);
+					grid.set(x, y, value);
 				}
 			}
 		}
