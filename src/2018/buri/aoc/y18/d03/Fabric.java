@@ -1,5 +1,6 @@
 package buri.aoc.y18.d03;
 
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 
 /**
@@ -13,7 +14,7 @@ public class Fabric extends IntGrid {
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public Fabric(int size) {
-		super(size);
+		super(new Pair(size, size));
 	}
 
 	/**
@@ -28,8 +29,8 @@ public class Fabric extends IntGrid {
 	 */
 	public int countOverlaps() {
 		int sum = 0;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				if (get(x, y) >= 2) {
 					sum++;
 				}

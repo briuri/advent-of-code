@@ -1,5 +1,7 @@
 package buri.aoc.data.grid;
 
+import buri.aoc.data.Pair;
+
 /**
  * Base class for grids storing characters.
  * 
@@ -9,11 +11,11 @@ public class CharGrid extends AbstractGrid<Character> {
 	private Character[][] _grid;
 
 	/**
-	 * Creates a new square grid with the specified width/length.
+	 * Creates a new grid with the specified width/length.
 	 */
-	public CharGrid(int size) {
+	public CharGrid(Pair size) {
 		super(size);
-		_grid = new Character[getSize()][getSize()];
+		_grid = new Character[getWidth()][getHeight()];
 	}
 
 	@Override
@@ -21,15 +23,15 @@ public class CharGrid extends AbstractGrid<Character> {
 		Character value = super.get(x, y);
 		return (value == null ? ' ' : value);
 	}
-	
+
 	@Override
 	protected Character[][] getGrid() {
 		return (_grid);
 	}
-	
+
 	@Override
 	protected void setGrid(Character[][] grid) {
-		setSize(grid.length);
+		setSize(new Pair(grid.length, grid[0].length));
 		_grid = grid;
 	}
 }

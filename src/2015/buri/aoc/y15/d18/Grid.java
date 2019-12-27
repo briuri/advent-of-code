@@ -3,6 +3,7 @@ package buri.aoc.y15.d18;
 import java.util.List;
 
 import buri.aoc.Part;
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 
 /**
@@ -14,10 +15,10 @@ public class Grid extends IntGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input) {
-		super(input.size());
-		for (int y = 0; y < getSize(); y++) {
+		super(new Pair(input.get(0).length(), input.size()));
+		for (int y = 0; y < getHeight(); y++) {
 			String line = input.get(y);
-			for (int x = 0; x < getSize(); x++) {
+			for (int x = 0; x < getWidth(); x++) {
 				char value = line.charAt(x);
 				set(x, y, (value == '#' ? 1 : 0));
 			}
@@ -34,16 +35,16 @@ public class Grid extends IntGrid {
 		for (int i = 0; i <= steps; i++) {
 			if (part == Part.TWO) {
 				set(0, 0, 1);
-				set(0, getSize() - 1, 1);
-				set(getSize() - 1, 0, 1);
-				set(getSize() - 1, getSize() - 1, 1);
+				set(0, getHeight() - 1, 1);
+				set(getWidth() - 1, 0, 1);
+				set(getWidth() - 1, getHeight() - 1, 1);
 			}
 			if (i == steps) {
 				break;
 			}
-			Integer[][] newGrid = new Integer[getSize()][getSize()];
-			for (int y = 0; y < getSize(); y++) {
-				for (int x = 0; x < getSize(); x++) {
+			Integer[][] newGrid = new Integer[getWidth()][getHeight()];
+			for (int y = 0; y < getHeight(); y++) {
+				for (int x = 0; x < getWidth(); x++) {
 					int litNeighbors = getLitNeighbors(x, y);
 					int value = get(x, y);
 					if (value == 0) {
@@ -64,8 +65,8 @@ public class Grid extends IntGrid {
 	 */
 	public int getLit() {
 		int sum = 0;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				sum += get(x, y);
 			}
 		}
@@ -85,7 +86,7 @@ public class Grid extends IntGrid {
 			// Up
 			sum += get(x, y - 1);
 			// Upper Right
-			if (x < getSize() - 1) {
+			if (x < getWidth() - 1) {
 				sum += get(x + 1, y - 1);
 			}
 		}
@@ -93,11 +94,11 @@ public class Grid extends IntGrid {
 			// Left
 			sum += get(x - 1, y);
 		}
-		if (x < getSize() - 1) {
+		if (x < getWidth() - 1) {
 			// Right
 			sum += get(x + 1, y);
 		}
-		if (y < getSize() - 1) {
+		if (y < getHeight() - 1) {
 			// Lower Left
 			if (x > 0) {
 				sum += get(x - 1, y + 1);
@@ -105,7 +106,7 @@ public class Grid extends IntGrid {
 			// Down
 			sum += get(x, y + 1);
 			// Lower Right
-			if (x < getSize() - 1) {
+			if (x < getWidth() - 1) {
 				sum += get(x + 1, y + 1);
 			}
 		}

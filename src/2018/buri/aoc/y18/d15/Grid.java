@@ -30,7 +30,7 @@ public class Grid extends CharGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input, int elfAttackPower) {
-		super(input.size());
+		super(new Pair(input.get(0).length(), input.size()));
 		_elfDied = false;
 		_elves = new ArrayList<>();
 		_goblins = new ArrayList<>();

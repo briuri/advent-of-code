@@ -37,12 +37,12 @@ public class Maze extends CharGrid {
 	 * Constructor
 	 */
 	public Maze(int depth, Pair target) {
-		super(Math.max(target.getX(), target.getY()) + 10);
+		super(new Pair(Math.max(target.getX(), target.getY() + 10), Math.max(target.getX(), target.getY() + 10)));
 		_depth = depth;
 		_target = new Position(target.getX(), target.getY(), TORCH);
-		_erosionLevels = new int[getSize()][getSize()];
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		_erosionLevels = new int[getWidth()][getHeight()];
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, getRegionType(x, y));
 			}
 		}
@@ -171,10 +171,10 @@ public class Maze extends CharGrid {
 		if (center.getX() >= 1) {
 			neighbors.add(new Position(center.getX() - 1, center.getY(), center.getItem()));
 		}
-		if (center.getX() < getSize() - 1) {
+		if (center.getX() < getWidth() - 1) {
 			neighbors.add(new Position(center.getX() + 1, center.getY(), center.getItem()));
 		}
-		if (center.getY() < getSize() - 1) {
+		if (center.getY() < getHeight() - 1) {
 			neighbors.add(new Position(center.getX(), center.getY() + 1, center.getItem()));
 		}
 

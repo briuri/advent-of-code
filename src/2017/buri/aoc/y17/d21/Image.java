@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 
 /**
@@ -25,7 +26,7 @@ public class Image extends IntGrid {
 	 * 
 	 */
 	public Image(List<Rule> rules) {
-		super(3);
+		super(new Pair(3, 3));
 		getGrid()[0] = new Integer[] { 0, 0, 1 };
 		getGrid()[1] = new Integer[] { 1, 0, 1 };
 		getGrid()[2] = new Integer[] { 0, 1, 1 };
@@ -46,8 +47,8 @@ public class Image extends IntGrid {
 	 * into a 4x4 square by following the corresponding enhancement rule.
 	 */
 	public void fractalize() {
-		int patternSize = (getSize() % 2 == 0) ? 2 : 3;
-		int subdivisions = (getSize() / patternSize);
+		int patternSize = (getWidth() % 2 == 0) ? 2 : 3;
+		int subdivisions = (getWidth() / patternSize);
 		int newImageSize = subdivisions * (patternSize + 1);
 		Integer[][] newImage = new Integer[newImageSize][newImageSize];
 		for (int y = 0; y < subdivisions; y++) {
@@ -79,7 +80,7 @@ public class Image extends IntGrid {
 	 * Checks all rules and returns the result from the matching one.
 	 */
 	private Pattern getResultForMatch(Pattern pattern) {
-		List<Rule> rules = getRules().get(pattern.getSize());
+		List<Rule> rules = getRules().get(pattern.getWidth());
 		for (Rule rule : rules) {
 			if (rule.matches(pattern)) {
 				return (rule.getResult());
@@ -92,10 +93,10 @@ public class Image extends IntGrid {
 	 * Draws a pattern onto a grid.
 	 */
 	private void draw(Integer[][] newImage, Pattern pattern, int subX, int subY) {
-		int offsetX = pattern.getSize() * subX;
-		int offsetY = pattern.getSize() * subY;
-		for (int y = 0; y < pattern.getSize(); y++) {
-			for (int x = 0; x < pattern.getSize(); x++) {
+		int offsetX = pattern.getWidth() * subX;
+		int offsetY = pattern.getHeight() * subY;
+		for (int y = 0; y < pattern.getHeight(); y++) {
+			for (int x = 0; x < pattern.getWidth(); x++) {
 				newImage[x + offsetX][y + offsetY] = pattern.get(x, y);
 			}
 		}
@@ -106,8 +107,8 @@ public class Image extends IntGrid {
 	 */
 	public int getLitPixels() {
 		int sum = 0;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				sum += get(x, y);
 			}
 		}

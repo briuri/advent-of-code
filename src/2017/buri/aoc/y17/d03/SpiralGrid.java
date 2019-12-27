@@ -14,7 +14,7 @@ public class SpiralGrid extends IntGrid {
 	 * Constructor
 	 */
 	public SpiralGrid(int size) {
-		super(size);
+		super(new Pair(size, size));
 	}
 		
 	/**
@@ -31,7 +31,7 @@ public class SpiralGrid extends IntGrid {
 			// Up
 			sum += get(position.getX(), position.getY() - 1);
 			// Upper Right
-			if (position.getX() < getSize() - 1) {
+			if (position.getX() < getWidth() - 1) {
 				sum += get(position.getX() + 1, position.getY() - 1);
 			}
 		}
@@ -39,11 +39,11 @@ public class SpiralGrid extends IntGrid {
 			// Left
 			sum += get(position.getX() - 1, position.getY());
 		}
-		if (position.getX() < getSize() - 1) {
+		if (position.getX() < getWidth() - 1) {
 			// Right
 			sum += get(position.getX() + 1, position.getY());
 		}
-		if (position.getY() < getSize() - 1) {
+		if (position.getY() < getHeight() - 1) {
 			// Left Left
 			if (position.getX() > 0) {
 				sum += get(position.getX() - 1, position.getY() + 1);
@@ -51,7 +51,7 @@ public class SpiralGrid extends IntGrid {
 			// Down
 			sum += get(position.getX(), position.getY() + 1);
 			// Lower Right
-			if (position.getX() < getSize() - 1) {
+			if (position.getX() < getWidth() - 1) {
 				sum += get(position.getX() + 1, position.getY() + 1);
 			}
 		}

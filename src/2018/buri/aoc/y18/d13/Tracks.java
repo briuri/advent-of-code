@@ -26,7 +26,7 @@ public class Tracks extends CharGrid {
 	 * Constructor
 	 */
 	public Tracks(List<String> input) {
-		super(input.get(0).length());
+		super(new Pair(input.get(0).length(), input.size()));
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {

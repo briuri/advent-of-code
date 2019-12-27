@@ -1,5 +1,7 @@
 package buri.aoc.data.grid;
 
+import buri.aoc.data.Pair;
+
 /**
  * Base class for grids storing ints.
  * 
@@ -7,13 +9,13 @@ package buri.aoc.data.grid;
  */
 public class IntGrid extends AbstractGrid<Integer> {
 	private Integer[][] _grid;
-
+	
 	/**
-	 * Creates a new square grid with the specified width/length.
+	 * Creates a new grid with the specified width/length.
 	 */
-	public IntGrid(int size) {
+	public IntGrid(Pair size) {
 		super(size);
-		_grid = new Integer[getSize()][getSize()];
+		_grid = new Integer[getWidth()][getHeight()];
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class IntGrid extends AbstractGrid<Integer> {
 	
 	@Override
 	protected void setGrid(Integer[][] grid) {
-		setSize(grid.length);
+		setSize(new Pair(grid.length, grid[0].length));
 		_grid = grid;
 	}
 }

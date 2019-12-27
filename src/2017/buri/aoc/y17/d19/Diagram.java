@@ -36,7 +36,7 @@ public class Diagram extends CharGrid {
 	 * Constructor
 	 */
 	public Diagram(List<String> input) {
-		super(input.get(0).length());
+		super(new Pair(input.get(0).length(), input.size()));
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
@@ -113,8 +113,8 @@ public class Diagram extends CharGrid {
 	 * Returns true if position is within the diagram.
 	 */
 	private boolean isBounded(Pair position) {
-		boolean xBounded = (position.getX() >= 0 && position.getX() < getSize());
-		boolean yBounded = (position.getY() >= 0 && position.getY() < getSize());
+		boolean xBounded = (position.getX() >= 0 && position.getX() < getWidth());
+		boolean yBounded = (position.getY() >= 0 && position.getY() < getHeight());
 		return (xBounded && yBounded);
 	}
 	

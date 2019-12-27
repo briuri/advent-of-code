@@ -28,9 +28,9 @@ public class Day03 extends BasePuzzle {
 	 * This year, how many houses receive at least one present?
 	 */
 	public static int getResult(Part part, String input) {
-		IntGrid grid = new IntGrid(500);
-		Pair santa = new Pair(grid.getSize() / 2, grid.getSize() / 2);
-		Pair robosanta = new Pair(grid.getSize() / 2, grid.getSize() / 2);
+		IntGrid grid = new IntGrid(new Pair(500, 500));
+		Pair santa = new Pair(grid.getWidth() / 2, grid.getHeight() / 2);
+		Pair robosanta = new Pair(grid.getWidth() / 2, grid.getHeight() / 2);
 		grid.set(santa, grid.get(santa) + 1);
 		grid.set(robosanta, grid.get(santa) + 1);
 
@@ -50,8 +50,8 @@ public class Day03 extends BasePuzzle {
 
 		// Count houses with at least 1 present.
 		int houses = 0;
-		for (int y = 0; y < grid.getSize(); y++) {
-			for (int x = 0; x < grid.getSize(); x++) {
+		for (int y = 0; y < grid.getHeight(); y++) {
+			for (int x = 0; x < grid.getWidth(); x++) {
 				if (grid.get(x, y) > 0) {
 					houses++;
 				}

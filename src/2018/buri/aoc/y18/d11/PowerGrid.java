@@ -1,5 +1,6 @@
 package buri.aoc.y18.d11;
 
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 
 /**
@@ -15,10 +16,10 @@ public class PowerGrid extends IntGrid {
 	 * Constructor. Initializes all power levels.
 	 */
 	public PowerGrid(int size, int serial) {
-		super(size);
+		super(new Pair(size, size));
 		_serial = serial;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				int rackId = x + 10;
 				int power = (rackId * y) + getSerial();
 				power = power * rackId;
@@ -40,9 +41,9 @@ public class PowerGrid extends IntGrid {
 	 * Generates a reduced grid containing the sums of squares within the larger grid.
 	 */
 	public PowerGrid getReduction(int squareSumSize) {
-		PowerGrid grid = new PowerGrid(getSize() - (squareSumSize - 1), 0);
-		for (int y = 0; y < grid.getSize(); y++) {
-			for (int x = 0; x < grid.getSize(); x++) {
+		PowerGrid grid = new PowerGrid(getWidth() - (squareSumSize - 1), 0);
+		for (int y = 0; y < grid.getHeight(); y++) {
+			for (int x = 0; x < grid.getWidth(); x++) {
 				Position upperLeft = new Position(x, y);
 				grid.set(upperLeft, getSquareSum(upperLeft, squareSumSize));
 			}
@@ -56,8 +57,8 @@ public class PowerGrid extends IntGrid {
 	public Position getMaxValuePosition() {
 		Position maxPosition = null;
 		long maxValue = Long.MIN_VALUE;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				Position position = new Position(x, y);
 				long value = get(position);
 				if (value > maxValue) {

@@ -42,15 +42,15 @@ public class Day11 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, List<Long> program) {
 		int size = (part == Part.ONE ? 200 : 90);
-		CharGrid hull = new CharGrid(size); 
-		for (int y = 0; y < hull.getSize(); y++) {
-			for (int x = 0; x < hull.getSize(); x++) {
+		CharGrid hull = new CharGrid(new Pair(size, size)); 
+		for (int y = 0; y < hull.getHeight(); y++) {
+			for (int x = 0; x < hull.getWidth(); x++) {
 				hull.set(x, y, DEFAULT_BLACK);
 			}
 		}
 		
 		Direction direction = Direction.UP;
-		Pair position = new Pair(hull.getSize() / 2, hull.getSize() / 2);
+		Pair position = new Pair(hull.getWidth() / 2, hull.getHeight() / 2);
 		hull.set(position, part == Part.ONE ? BLACK : WHITE);
 		Computer computer = new Computer(program);
 		while (true) {
@@ -69,8 +69,8 @@ public class Day11 extends BasePuzzle {
 		}
 		if (part == Part.ONE) {
 			int panels = 0;
-			for (int y = 0; y < hull.getSize(); y++) {
-				for (int x = 0; x < hull.getSize(); x++) {
+			for (int y = 0; y < hull.getHeight(); y++) {
+				for (int x = 0; x < hull.getWidth(); x++) {
 					if (hull.get(x, y) != DEFAULT_BLACK) {
 						panels++;
 					}
@@ -81,8 +81,8 @@ public class Day11 extends BasePuzzle {
 		
 		// Part TWO		
 		// Make easier to read.
-		for (int y = 0; y < hull.getSize(); y++) {
-			for (int x = 0; x < hull.getSize(); x++) {
+		for (int y = 0; y < hull.getHeight(); y++) {
+			for (int x = 0; x < hull.getWidth(); x++) {
 				if (hull.get(x, y) == BLACK) {
 					hull.set(x, y, DEFAULT_BLACK);
 				}

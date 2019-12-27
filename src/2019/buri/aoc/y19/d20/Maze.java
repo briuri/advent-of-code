@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.Part;
+import buri.aoc.data.Pair;
 import buri.aoc.data.Path;
 import buri.aoc.data.Triple;
 import buri.aoc.data.grid.CharGrid;
@@ -31,7 +32,7 @@ public class Maze extends CharGrid {
 	 * Constructor
 	 */
 	public Maze(List<String> input) {
-		super(input.get(0).length());
+		super(new Pair(input.get(0).length(), input.size()));
 		_warpPoints = new HashMap<>();
 
 		for (int y = 0; y < input.size(); y++) {

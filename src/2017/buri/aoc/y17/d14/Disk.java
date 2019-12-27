@@ -2,6 +2,7 @@ package buri.aoc.y17.d14;
 
 import java.util.List;
 
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
 
 /**
@@ -13,9 +14,9 @@ public class Disk extends IntGrid {
 	 * Constructor
 	 */
 	public Disk(List<String> rows) {
-		super(128);
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		super(new Pair(128, 128));
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				// Convert to 0/1.
 				int value = Integer.valueOf(rows.get(x).charAt(y)) - 48;
 				// Switch 1 to -1 to represent "unevaluated".
@@ -31,8 +32,8 @@ public class Disk extends IntGrid {
 	 */
 	public int countRegions() {
 		int regions = 0;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				Integer value = get(x, y);
 				if (value == -1) {
 					regions++;
@@ -62,14 +63,14 @@ public class Disk extends IntGrid {
 			}
 		}
 		// Right
-		if (x < getSize() - 1) {
+		if (x < getWidth() - 1) {
 			changed = fillUnevaluatedCell(x + 1, y, value);
 			if (changed) {
 				touchAdjacentCells(x + 1, y, value);
 			}
 		}
 		// Down
-		if (y < getSize() - 1) {
+		if (y < getHeight() - 1) {
 			changed = fillUnevaluatedCell(x, y + 1, value);
 			if (changed) {
 				touchAdjacentCells(x, y + 1, value);

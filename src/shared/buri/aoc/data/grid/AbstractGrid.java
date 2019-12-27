@@ -14,12 +14,12 @@ import buri.aoc.data.Pair;
  * @author Brian Uri!
  */
 public abstract class AbstractGrid<T> {
-	private int _size;
+	private Pair _size;
 
 	/**
 	 * Constructor
 	 */
-	protected AbstractGrid(int size) {
+	protected AbstractGrid(Pair size) {
 		_size = size;
 	}
 
@@ -54,8 +54,8 @@ public abstract class AbstractGrid<T> {
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				buffer.append(toOutput((T) get(x, y)));
 			}
 			buffer.append("\n");
@@ -82,16 +82,23 @@ public abstract class AbstractGrid<T> {
 	protected abstract void setGrid(T[][] grid);
 	
 	/**
-	 * Accessor for the size
+	 * Accessor for the horizontal size
 	 */
-	public int getSize() {
-		return _size;
+	public int getWidth() {
+		return _size.getX();
+	}
+	
+	/**
+	 * Accessor for the vertical size
+	 */
+	public int getHeight() {
+		return _size.getY();
 	}
 	
 	/**
 	 * Accessor for the size
 	 */
-	protected void setSize(int size) {
+	protected void setSize(Pair size) {
 		_size = size;
 	}
 }

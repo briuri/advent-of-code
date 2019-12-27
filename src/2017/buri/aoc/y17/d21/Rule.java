@@ -57,7 +57,7 @@ public class Rule {
 	 * Returns 2 or 3, depending on what type of grid the patterns match to.
 	 */
 	public int getPatternSize() {
-		return (getResult().getSize() - 1);
+		return (getResult().getWidth() - 1);
 	}
 	
 	/**

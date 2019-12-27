@@ -41,15 +41,15 @@ public class RoomMap extends CharGrid {
 	 * Constructor
 	 */
 	public RoomMap() {
-		super(225);
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		super(new Pair(225, 225));
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, WALL);
 			}
 		}
 		
 		// Start in the middle of the grid.
-		_start = new Pair(getSize() / 2, getSize() / 2);
+		_start = new Pair(getWidth() / 2, getHeight() / 2);
 		set(getStart(), START);
 	}
 
@@ -194,8 +194,8 @@ public class RoomMap extends CharGrid {
 	private List<Path> getPaths() {
 		// Get all known rooms.
 		List<Pair> destinations = new ArrayList<>();
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				if (get(x, y) == ROOM) {
 					destinations.add(new Pair(x, y));
 				}

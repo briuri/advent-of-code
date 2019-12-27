@@ -29,7 +29,7 @@ public class Day06 extends BasePuzzle {
 	 * QUESTION
 	 */
 	public static int getResult(Part part, List<String> input) {
-		IntGrid grid = new IntGrid(1000);
+		IntGrid grid = new IntGrid(new Pair(1000, 1000));
 		for (String command : input) {
 			String[] tokens = command.split(" ");
 			Pair lowerBound = new Pair(tokens[tokens.length - 3]);
@@ -65,8 +65,8 @@ public class Day06 extends BasePuzzle {
 		}
 
 		int lit = 0;
-		for (int y = 0; y < grid.getSize(); y++) {
-			for (int x = 0; x < grid.getSize(); x++) {
+		for (int y = 0; y < grid.getHeight(); y++) {
+			for (int x = 0; x < grid.getWidth(); x++) {
 				lit += grid.get(x, y);
 			}
 		}

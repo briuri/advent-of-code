@@ -30,9 +30,9 @@ public class Reservoir extends CharGrid {
 	 * Constructor
 	 */
 	public Reservoir(List<String> input) {
-		super(1860);
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		super(new Pair(1860, 1860));
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, SAND);
 			}
 		}
@@ -144,7 +144,7 @@ public class Reservoir extends CharGrid {
 			}
 		}
 		else {
-			for (int x = start.getX(); x < getSize(); x++) {
+			for (int x = start.getX(); x < getWidth(); x++) {
 				if (get(x, start.getY()) == CLAY) {
 					break;
 				}
@@ -168,7 +168,7 @@ public class Reservoir extends CharGrid {
 			}
 			set(x, start.getY(), WATER);
 		}
-		for (int x = start.getX(); x < getSize(); x++) {
+		for (int x = start.getX(); x < getWidth(); x++) {
 			if (get(x, start.getY()) == CLAY) {
 				break;
 			}
@@ -181,7 +181,7 @@ public class Reservoir extends CharGrid {
 	 */
 	private Pair getOpenTileBelow(Pair top) {
 		int y;
-		for (y = top.getY(); y < getSize(); y++) {
+		for (y = top.getY(); y < getHeight(); y++) {
 			char value = get(top.getX(), y);
 			if (value == CLAY || value == WATER) {
 				break;
@@ -194,7 +194,7 @@ public class Reservoir extends CharGrid {
 	 * Returns true if the position is at the bottom of the usable grid.
 	 */
 	private boolean isOffGrid(Pair position) {
-		return (position.getY() + 1 == getSize());
+		return (position.getY() + 1 == getHeight());
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class Reservoir extends CharGrid {
 		}
 
 		// Check for right wall.
-		for (int x = position.getX(); x < getSize(); x++) {
+		for (int x = position.getX(); x < getWidth(); x++) {
 			if (get(x, position.getY()) == CLAY) {
 				maxX = x;
 				break;

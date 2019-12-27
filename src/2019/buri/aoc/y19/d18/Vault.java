@@ -33,7 +33,7 @@ public class Vault extends CharGrid {
 	 * Constructor
 	 */
 	public Vault(List<String> input) {
-		super(input.get(0).length());
+		super(new Pair(input.get(0).length(), input.size()));
 		_starts = new HashMap<>();
 		_doors = new HashMap<>();
 		_keys = new HashMap<>();

@@ -28,11 +28,11 @@ public class Ducts extends CharGrid {
 	 * Constructor
 	 */
 	public Ducts(List<String> input) {
-		super(input.get(0).length());
+		super(new Pair(input.get(0).length(), input.size()));
 		_destinations = new HashMap<>();
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
-			for (int x = 0; x < getSize(); x++) {
+			for (int x = 0; x < getWidth(); x++) {
 				char value = line.charAt(x);
 				if (value >= '0' && value <= '9') {
 					set(x, y, OPEN);
@@ -132,7 +132,7 @@ public class Ducts extends CharGrid {
 	 */
 	private List<Pair> getTraversableNeighbors(Pair center) {
 		List<Pair> neighbors = new ArrayList<>();
-		if (center.getY() < getSize() - 1) {
+		if (center.getY() < getHeight() - 1) {
 			neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		}
 		if (center.getY() > 0) {
@@ -141,7 +141,7 @@ public class Ducts extends CharGrid {
 		if (center.getX() > 0) {
 			neighbors.add(new Pair(center.getX() - 1, center.getY()));
 		}
-		if (center.getX() < getSize() - 1) {
+		if (center.getX() < getWidth() - 1) {
 			neighbors.add(new Pair(center.getX() + 1, center.getY()));
 		}
 

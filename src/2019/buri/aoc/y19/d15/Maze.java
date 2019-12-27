@@ -42,15 +42,15 @@ public class Maze extends CharGrid {
 	 * Constructor
 	 */
 	public Maze() {
-		super(42);
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		super(new Pair(42, 42));
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, UNEXPLORED);
 			}
 		}
 
 		// Start in the middle of the grid.
-		_start = new Pair(getSize() / 2, getSize() / 2);
+		_start = new Pair(getWidth() / 2, getHeight() / 2);
 		set(getStart(), START);
 	}
 
@@ -125,8 +125,8 @@ public class Maze extends CharGrid {
 	private List<Path> getPaths(Pair origin, Set<Character> destinationTiles) {
 		// Get all locations.
 		List<Pair> destinations = new ArrayList<>();
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				if (destinationTiles.contains(get(x, y))) {
 					destinations.add(new Pair(x, y));
 				}

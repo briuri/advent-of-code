@@ -4,8 +4,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
 
 /**
@@ -65,7 +66,7 @@ public class Day10 extends BasePuzzle {
 				position.offset(offset);
 				maxX = Math.max(position.getX(), maxX);
 			}
-			CharGrid grid = new CharGrid(maxX + 1);
+			CharGrid grid = new CharGrid(new Pair(maxX + 1, 10));
 			for (Position position : input) {
 				grid.set(position, '#');
 			}

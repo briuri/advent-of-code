@@ -34,8 +34,8 @@ public class Day03 extends BasePuzzle {
 	 * What is the fewest combined steps the wires must take to reach an intersection?
 	 */
 	public static int getResult(Part part, List<String> input, int gridSize) {
-		CharGrid grid = new CharGrid(gridSize);
-		final Pair centralPort = new Pair(grid.getSize() / 2, grid.getSize() / 2);
+		CharGrid grid = new CharGrid(new Pair(gridSize, gridSize));
+		final Pair centralPort = new Pair(grid.getWidth() / 2, grid.getHeight() / 2);
 		Set<Pair> intersections = new HashSet<>();
 		char wireChar = 'A';
 		for (String wirePath : input) {

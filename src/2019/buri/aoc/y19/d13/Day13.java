@@ -39,7 +39,7 @@ public class Day13 extends BasePuzzle {
 	 * What is your score after the last block is broken?
 	 */	
 	public static int getResult(Part part, List<Long> program) {
-		IntGrid grid = new IntGrid(40);
+		IntGrid grid = new IntGrid(new Pair(37, 37));
 		Computer computer = new Computer(program);
 		computer.run();
 		List<Long> outputs = computer.getOutputs();
@@ -102,8 +102,8 @@ public class Day13 extends BasePuzzle {
 	 */
 	private static int countBlocks(IntGrid grid) {
 		int count = 0;
-		for (int y = 0; y < grid.getSize(); y++) {
-			for (int x = 0; x < grid.getSize(); x++) {
+		for (int y = 0; y < grid.getHeight(); y++) {
+			for (int x = 0; x < grid.getWidth(); x++) {
 				if (grid.get(x, y) == BLOCK) {
 					count++;
 				}

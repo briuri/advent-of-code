@@ -3,8 +3,9 @@ package buri.aoc.y19.d21;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.Part;
 import buri.aoc.BasePuzzle;
+import buri.aoc.Part;
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.intcode.Computer;
 
@@ -73,7 +74,7 @@ public class Day21 extends BasePuzzle {
 		computer.run();
 		// Only build grid if springdroid failed.
 		if (computer.getOutputs().size() > 34) {
-			CharGrid grid = new CharGrid(60);
+			CharGrid grid = new CharGrid(new Pair(60, 60));
 			int x = 0;
 			int y = 0;
 			for (Long value : computer.getOutputs()) {

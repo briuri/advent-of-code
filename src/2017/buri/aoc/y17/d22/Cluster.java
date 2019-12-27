@@ -27,9 +27,10 @@ public class Cluster extends IntGrid {
 	 * Constructor
 	 */
 	public Cluster(List<String> input) {
-		super(input.get(0).length() * GRID_BUFFER_RATIO);
+		super(new Pair(input.get(0).length() * GRID_BUFFER_RATIO, input.size() * GRID_BUFFER_RATIO));
 		int offset = input.get(0).length() * ((GRID_BUFFER_RATIO - 1) / 2);
-		int centerCoord = getSize() / 2;
+		int centerCoordX = getWidth() / 2;
+		int centerCoordY = getHeight() / 2;
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
@@ -38,7 +39,7 @@ public class Cluster extends IntGrid {
 				set(position, (icon == '#' ? INFECTED : CLEAN));
 			}
 		}
-		_virus = new Virus(new Pair(centerCoord, centerCoord));
+		_virus = new Virus(new Pair(centerCoordX, centerCoordY));
 		setInfections(0);
 	}
 

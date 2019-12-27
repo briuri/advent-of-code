@@ -29,9 +29,9 @@ public class Grid extends CharGrid {
 	 * Constructor
 	 */
 	public Grid(int magicNumber) {
-		super(50);
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		super(new Pair(50, 50));
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				int interim = (x * x) + (3 * x) + (2 * x * y) + y + (y * y) + magicNumber;
 				int oneCount = Integer.toBinaryString(interim).replaceAll("0", "").length();
 				char value = (oneCount % 2 == 0 ? OPEN : WALL);
@@ -59,8 +59,8 @@ public class Grid extends CharGrid {
 	public int getClosePositions(int steps) {
 		// Add all potential destinations.
 		List<Pair> destinations = new ArrayList<>();
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				char value = get(x, y);
 				if (value == OPEN) {
 					destinations.add(new Pair(x, y));
@@ -112,10 +112,10 @@ public class Grid extends CharGrid {
 		if (center.getX() > 0) {
 			neighbors.add(new Pair(center.getX() - 1, center.getY()));
 		}
-		if (center.getX() < getSize() - 1) {
+		if (center.getX() < getWidth() - 1) {
 			neighbors.add(new Pair(center.getX() + 1, center.getY()));
 		}
-		if (center.getY() < getSize() - 1) {
+		if (center.getY() < getHeight() - 1) {
 			neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		}
 		// Remove any that are not traversable.

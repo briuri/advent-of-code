@@ -21,7 +21,7 @@ public class Keypad extends IntGrid {
 	 * Models both layouts of keypad in a 7x7 grid (0 represents an edge). Both layouts start at the "5" button.
 	 */
 	public Keypad(Part part) {
-		super(7);
+		super(new Pair(7, 7));
 		if (part == Part.ONE) {
 			getGrid()[0] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
 			getGrid()[1] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };

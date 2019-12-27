@@ -3,6 +3,7 @@ package buri.aoc.y18.d18;
 import java.util.ArrayList;
 import java.util.List;
 
+import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
 
 /**
@@ -19,10 +20,10 @@ public class Acreage extends CharGrid {
 	 * Constructor
 	 */
 	public Acreage(List<String> input) {
-		super(input.size());
-		for (int y = 0; y < getSize(); y++) {
+		super(new Pair(input.get(0).length(), input.size()));
+		for (int y = 0; y < getHeight(); y++) {
 			String line = input.get(y);
-			for (int x = 0; x < getSize(); x++) {
+			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, line.charAt(x));
 			}
 		}
@@ -37,13 +38,13 @@ public class Acreage extends CharGrid {
 		List<Integer> resourceValues = new ArrayList<>();
 		for (int i = 0; i < minutes; i++) {
 			// Make changes in a separate grid and copy back onto this one.
-			Character[][] updatedGrid = new Character[getSize()][getSize()];
-			for (int y = 0; y < getSize(); y++) {
-				for (int x = 0; x < getSize(); x++) {
+			Character[][] updatedGrid = new Character[getWidth()][getHeight()];
+			for (int y = 0; y < getHeight(); y++) {
+				for (int x = 0; x < getWidth(); x++) {
 					updatedGrid[x][y] = getNewValue(x, y);
 				}
 			}
-			System.arraycopy(updatedGrid, 0, getGrid(), 0, getSize());
+			System.arraycopy(updatedGrid, 0, getGrid(), 0, getWidth());
 
 			// Keep records of old grid changes so we can detect cycles.
 			String output = toString();
@@ -97,7 +98,7 @@ public class Acreage extends CharGrid {
 			// Up
 			adjacentValues.add(get(x, y - 1));
 			// Upper Right
-			if (x < getSize() - 1) {
+			if (x < getWidth() - 1) {
 				adjacentValues.add(get(x + 1, y - 1));
 			}
 		}
@@ -105,11 +106,11 @@ public class Acreage extends CharGrid {
 			// Left
 			adjacentValues.add(get(x - 1, y));
 		}
-		if (x < getSize() - 1) {
+		if (x < getWidth() - 1) {
 			// Right
 			adjacentValues.add(get(x + 1, y));
 		}
-		if (y < getSize() - 1) {
+		if (y < getHeight() - 1) {
 			// Lower Left
 			if (x > 0) {
 				adjacentValues.add(get(x - 1, y + 1));
@@ -117,7 +118,7 @@ public class Acreage extends CharGrid {
 			// Down
 			adjacentValues.add(get(x, y + 1));
 			// Lower Right
-			if (x < getSize() - 1) {
+			if (x < getWidth() - 1) {
 				adjacentValues.add(get(x + 1, y + 1));
 			}
 		}
@@ -130,8 +131,8 @@ public class Acreage extends CharGrid {
 	private int getTotalResourceValue() {
 		int trees = 0;
 		int yards = 0;
-		for (int y = 0; y < getSize(); y++) {
-			for (int x = 0; x < getSize(); x++) {
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
 				Character value = get(x, y);
 				if (value == TREES) {
 					trees++;
