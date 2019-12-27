@@ -20,7 +20,7 @@ public class Day14 extends BasePuzzle {
 	 */
 	public static List<Reaction> getInput(int fileIndex) {
 		List<Reaction> list = new ArrayList<>();
-		for (String input : readFile("2019/14", fileIndex)) {
+		for (String input : readFile(fileIndex)) {
 			list.add(new Reaction(input));
 		}
 		return (list);

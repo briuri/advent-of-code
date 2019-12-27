@@ -18,7 +18,7 @@ public class Day01 extends BasePuzzle {
 	 * Returns input file as a list of integers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
-		return (convertStringsToInts(readFile("2018/01", fileIndex)));
+		return (convertStringsToInts(readFile(fileIndex)));
 	}
 
 	/**

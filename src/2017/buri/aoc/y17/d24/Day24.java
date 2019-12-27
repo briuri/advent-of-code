@@ -20,7 +20,7 @@ public class Day24 extends BasePuzzle {
 	 * Returns input file as a PieceBag. Assumes no duplicates -- all port combinations are different.
 	 */
 	public static PieceBag getInput(int fileIndex) {
-		return (new PieceBag(readFile("2017/24", fileIndex)));
+		return (new PieceBag(readFile(fileIndex)));
 	}
 
 	/**

@@ -13,7 +13,7 @@ public class Day25 extends BasePuzzle {
 	 * Returns the input file as a Machine object.
 	 */
 	public static Machine getInput(int fileIndex) {
-		return (new Machine(readFile("2017/25", fileIndex)));
+		return (new Machine(readFile(fileIndex)));
 	}
 
 	/**

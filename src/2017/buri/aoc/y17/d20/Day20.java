@@ -20,7 +20,7 @@ public class Day20 extends BasePuzzle {
 	 */
 	public static List<Particle> getInput(int fileIndex) {
 		List<Particle> list = new ArrayList<>();
-		for (String particle : readFile("2017/20", fileIndex)) {
+		for (String particle : readFile(fileIndex)) {
 			list.add(new Particle(particle));
 		}
 		return (list);

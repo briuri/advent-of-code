@@ -18,7 +18,7 @@ public class Day08 extends BasePuzzle {
 	 * Returns input file as a list of integers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
-		String input = readFile("2018/08", fileIndex).get(0);
+		String input = readFile(fileIndex).get(0);
 		return (convertStringsToInts(Arrays.asList(input.split(" "))));
 	}
 

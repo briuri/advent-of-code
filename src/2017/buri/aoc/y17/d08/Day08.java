@@ -18,7 +18,7 @@ public class Day08 extends BasePuzzle {
 	 */
 	public static List<RegisterInstruction> getInput(int fileIndex) {
 		List<RegisterInstruction> instructions = new ArrayList<>();
-		for (String instruction : readFile("2017/08", fileIndex)) {
+		for (String instruction : readFile(fileIndex)) {
 			instructions.add(new RegisterInstruction(instruction));
 		}
 		return (instructions);

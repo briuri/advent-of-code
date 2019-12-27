@@ -21,7 +21,7 @@ public class Day20 extends BasePuzzle {
 	 */
 	public static List<Range> getInput(int fileIndex) {
 		List<Range> ranges = new ArrayList<>();
-		for (String line : readFile("2016/20", fileIndex)) {
+		for (String line : readFile(fileIndex)) {
 			ranges.add(new Range(line));
 		}
 		return (ranges);

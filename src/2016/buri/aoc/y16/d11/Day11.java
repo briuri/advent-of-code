@@ -19,7 +19,7 @@ public class Day11 extends BasePuzzle {
 	 * Returns the input file as a snapshot of facility state (from line 1).
 	 */
 	public static String getInput(int fileIndex) {
-		return (readFile("2016/11", fileIndex).get(0));
+		return (readFile(fileIndex).get(0));
 	}
 
 	/**

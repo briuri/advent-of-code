@@ -19,7 +19,7 @@ public class Day06 extends BasePuzzle {
 	 * Returns input file as a list of numbers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
-		String[] rawIntegers = readFile("2017/06", fileIndex).get(0).split("\t");
+		String[] rawIntegers = readFile(fileIndex).get(0).split("\t");
 		return (convertStringsToInts(Arrays.asList(rawIntegers)));
 	}
 

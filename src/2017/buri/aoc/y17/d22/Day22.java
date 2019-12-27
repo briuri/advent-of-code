@@ -14,7 +14,7 @@ public class Day22 extends BasePuzzle {
 	 * Returns input file as Cluster object
 	 */
 	public static Cluster getInput(int fileIndex) {
-		return (new Cluster(readFile("2017/22", fileIndex)));
+		return (new Cluster(readFile(fileIndex)));
 	}
 
 	/**

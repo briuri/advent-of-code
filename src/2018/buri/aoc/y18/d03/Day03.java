@@ -18,7 +18,7 @@ public class Day03 extends BasePuzzle {
 	 */
 	public static List<Claim> getInput(int fileIndex) {
 		List<Claim> claims = new ArrayList<>();
-		for (String rawClaim : readFile("2018/03", fileIndex)) {
+		for (String rawClaim : readFile(fileIndex)) {
 			claims.add(new Claim(rawClaim));
 		}
 		return (claims);

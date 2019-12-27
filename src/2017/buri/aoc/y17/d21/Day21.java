@@ -17,7 +17,7 @@ public class Day21 extends BasePuzzle {
 	 */
 	public static List<Rule> getInput(int fileIndex) {
 		List<Rule> rules = new ArrayList<>();
-		for (String line : readFile("2017/21", fileIndex)) {
+		for (String line : readFile(fileIndex)) {
 			rules.add(new Rule(line));
 		}
 		return (rules);

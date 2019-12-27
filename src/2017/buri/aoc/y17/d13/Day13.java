@@ -20,7 +20,7 @@ public class Day13 extends BasePuzzle {
 	 */
 	public static List<Layer> getInput(int fileIndex) {
 		List<Layer> data = new ArrayList<>();
-		for (String rawData : readFile("2017/13", fileIndex)) {
+		for (String rawData : readFile(fileIndex)) {
 			data.add(new Layer(rawData));
 		}
 		return (data);

@@ -20,7 +20,7 @@ public class Day02 extends BasePuzzle {
 	 * Returns input file as a list of string IDs.
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/02", fileIndex));
+		return (readFile(fileIndex));
 	}
 
 	/**

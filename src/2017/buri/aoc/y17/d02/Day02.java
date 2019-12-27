@@ -20,7 +20,7 @@ public class Day02 extends BasePuzzle {
 	 */
 	public static List<List<Integer>> getInput(int fileIndex) {
 		List<List<Integer>> rows = new ArrayList<>();
-		for (String rawRow : readFile("2017/02", fileIndex)) {
+		for (String rawRow : readFile(fileIndex)) {
 			List<Integer> row = convertStringsToInts(Arrays.asList(rawRow.split("\t")));
 			Collections.sort(row);
 			rows.add(row);

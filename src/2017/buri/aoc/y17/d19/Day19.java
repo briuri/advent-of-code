@@ -14,7 +14,7 @@ public class Day19 extends BasePuzzle {
 	 * Returns input file as a diagram of the route.
 	 */
 	public static Diagram getInput(int fileIndex) {
-		return (new Diagram(readFile("2017/19", fileIndex)));
+		return (new Diagram(readFile(fileIndex)));
 	}
 
 	/**

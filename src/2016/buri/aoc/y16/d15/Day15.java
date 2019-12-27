@@ -18,7 +18,7 @@ public class Day15 extends BasePuzzle {
 	 */
 	public static List<Disc> getInput(int fileIndex) {
 		List<Disc> discs = new ArrayList<>();
-		for (String line : readFile("2016/15", fileIndex)) {
+		for (String line : readFile(fileIndex)) {
 			discs.add(new Disc(line));
 		}
 		return (discs);

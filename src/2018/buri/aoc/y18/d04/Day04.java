@@ -21,7 +21,7 @@ public class Day04 extends BasePuzzle {
 	 */
 	public static List<Observation> getInput(int fileIndex) {
 		List<Observation> data = new ArrayList<>();
-		for (String rawData : readFile("2018/04", fileIndex)) {
+		for (String rawData : readFile(fileIndex)) {
 			data.add(new Observation(rawData));
 		}
 		Collections.sort(data);

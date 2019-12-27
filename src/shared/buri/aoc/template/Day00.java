@@ -16,9 +16,9 @@ public class Day00 extends BasePuzzle {
 	 * Returns the input file HOW
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2020a/00", fileIndex));
+		return (readFile(fileIndex));
 		// List<Data> list = new ArrayList<>();
-		// for (String input : readFile("2020a/00", fileIndex)) {
+		// for (String input : readFile(fileIndex)) {
 		// list.add(new Data(input));
 		// }
 		// return (list);

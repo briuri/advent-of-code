@@ -18,23 +18,27 @@ public abstract class BasePuzzle {
 	/**
 	 * Loads a file as a list of string lines.
 	 */
-	protected static List<String> readFile(String puzzleId, int fileIndex) {
-		Path path = Paths.get("data/" + puzzleId + "-" + fileIndex + ".txt");
+	protected static List<String> readFile(int fileIndex) {
+		String packageName = new Throwable().getStackTrace()[1].getClassName();
+		String year = "20" + packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
+		String day = packageName.substring(packageName.indexOf(".d") + 2, packageName.indexOf(".Day"));
+		
+		Path path = Paths.get("data/" + year + "/" + day + "-" + fileIndex + ".txt");
 		try {
 			return (Files.readAllLines(path));
 		}
 		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file: " + path.toAbsolutePath(), e);
+			// Input file hasn't been moved to permanent location yet.
+			path = Paths.get("data/new/" + day + "-" + fileIndex + ".txt");
+			try {
+				return (Files.readAllLines(path));
+			}
+			catch (IOException e2) {
+				throw new IllegalArgumentException("Invalid file: " + path.toAbsolutePath(), e);
+			}
 		}
 	}
-
-	/**
-	 * Gets the sum of a list of integers
-	 */
-	protected static Integer getSum(List<Integer> list) {
-		return (list.stream().mapToInt(Integer::intValue).sum());
-	}
-
+	
 	/**
 	 * Converts strings into integers.
 	 */
@@ -68,6 +72,13 @@ public abstract class BasePuzzle {
 		return (maxEntry);
 	}
 
+	/**
+	 * Gets the sum of a list of integers
+	 */
+	protected static Integer getSum(List<Integer> list) {
+		return (list.stream().mapToInt(Integer::intValue).sum());
+	}
+	
 	/**
 	 * Calculates the least common multiple of two numbers.
 	 */

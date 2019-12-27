@@ -23,7 +23,7 @@ public class Day03 extends BasePuzzle {
 	 * Returns the input file unmodified, a wire path on each line.
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2019/03", fileIndex));
+		return (readFile(fileIndex));
 	}
 
 	/**

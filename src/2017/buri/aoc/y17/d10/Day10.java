@@ -24,7 +24,7 @@ public class Day10 extends BasePuzzle {
 	 */
 	public static List<Integer> getInput(Part part, int fileIndex) {
 		List<Integer> data = new ArrayList<>();
-		String rawData = readFile("2017/10", fileIndex).get(0);
+		String rawData = readFile(fileIndex).get(0);
 		if (part == Part.ONE) {
 			for (String token : rawData.split(",")) {
 				data.add(Integer.valueOf(token));

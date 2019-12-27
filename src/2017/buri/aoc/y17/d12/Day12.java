@@ -23,7 +23,7 @@ public class Day12 extends BasePuzzle {
 	 */
 	public static List<Report> getInput(int fileIndex) {
 		List<Report> data = new ArrayList<>();
-		for (String rawData : readFile("2017/12", fileIndex)) {
+		for (String rawData : readFile(fileIndex)) {
 			data.add(new Report(rawData));
 		}
 		Collections.sort(data);

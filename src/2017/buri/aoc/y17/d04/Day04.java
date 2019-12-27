@@ -21,7 +21,7 @@ public class Day04 extends BasePuzzle {
 	 */
 	public static List<List<String>> getInput(int fileIndex) {
 		List<List<String>> rows = new ArrayList<>();
-		for (String rawRow : readFile("2017/04", fileIndex)) {
+		for (String rawRow : readFile(fileIndex)) {
 			rows.add(Arrays.asList(rawRow.split(" ")));
 		}
 		return (rows);

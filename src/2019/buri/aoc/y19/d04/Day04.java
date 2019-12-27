@@ -19,7 +19,7 @@ public class Day04 extends BasePuzzle {
 	 * Returns the input file as two integers.
 	 */
 	public static List<Integer> getInput(int fileIndex) {
-		String line = readFile("2019/04", fileIndex).get(0);
+		String line = readFile(fileIndex).get(0);
 		List<Integer> range = new ArrayList<>();
 		String[] tokens = line.split("-");
 		range.add(Integer.valueOf(tokens[0]));

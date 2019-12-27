@@ -20,7 +20,7 @@ public class Day07 extends BasePuzzle {
 	 */
 	public static Map<String, Program> getInput(int fileIndex) {
 		Map<String, Program> programs = new HashMap<>();
-		for (String line : readFile("2017/07", fileIndex)) {
+		for (String line : readFile(fileIndex)) {
 			Program program = new Program(line);
 			programs.put(program.getName(), program);
 		}

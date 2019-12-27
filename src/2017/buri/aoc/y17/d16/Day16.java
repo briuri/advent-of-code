@@ -18,7 +18,7 @@ public class Day16 extends BasePuzzle {
 	 * Returns input file as a list of commands
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (Arrays.asList(readFile("2017/16", fileIndex).get(0).split(",")));
+		return (Arrays.asList(readFile(fileIndex).get(0).split(",")));
 	}
 
 	/**

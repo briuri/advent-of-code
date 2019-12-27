@@ -19,7 +19,7 @@ public class Day23 extends BasePuzzle {
 	 */
 	public static List<Bot> getInput(int fileIndex) {
 		List<Bot> list = new ArrayList<>();
-		for (String line : readFile("2018/23", fileIndex)) {
+		for (String line : readFile(fileIndex)) {
 			list.add(new Bot(line));
 		}
 		return (list);

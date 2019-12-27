@@ -18,7 +18,7 @@ public class Day11 extends BasePuzzle {
 	 */
 	public static List<String> getInput(int fileIndex) {
 		List<String> data = new ArrayList<>();
-		for (String rawData : readFile("2017/11", fileIndex).get(0).split(",")) {
+		for (String rawData : readFile(fileIndex).get(0).split(",")) {
 			data.add(rawData);
 		}
 		return (data);

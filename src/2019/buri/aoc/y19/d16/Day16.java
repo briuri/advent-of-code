@@ -24,7 +24,7 @@ public class Day16 extends BasePuzzle {
 	 */
 	public static List<Integer> getInput(int fileIndex) {
 		List<Integer> input = new ArrayList<>();
-		for (Character value : readFile("2019/16", fileIndex).get(0).toCharArray()) {
+		for (Character value : readFile(fileIndex).get(0).toCharArray()) {
 			input.add(Character.getNumericValue(value));
 		}
 		return (input);

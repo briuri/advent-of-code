@@ -23,7 +23,7 @@ public class Day06 extends BasePuzzle {
 	 */
 	public static List<Pair> getInput(int fileIndex) {
 		List<Pair> data = new ArrayList<>();
-		for (String rawString : readFile("2018/06", fileIndex)) {
+		for (String rawString : readFile(fileIndex)) {
 			data.add(new Pair(rawString));
 		}
 		return (data);

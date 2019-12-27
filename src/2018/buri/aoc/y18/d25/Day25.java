@@ -21,7 +21,7 @@ public class Day25 extends BasePuzzle {
 	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
-		return (readFile("2018/25", fileIndex));
+		return (readFile(fileIndex));
 	}
 
 	/**

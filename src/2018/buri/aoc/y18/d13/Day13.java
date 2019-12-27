@@ -14,7 +14,7 @@ public class Day13 extends BasePuzzle {
 	 * Returns input file as a Tracks object.
 	 */
 	public static Tracks getInput(int fileIndex) {
-		return (new Tracks(readFile("2018/13", fileIndex)));
+		return (new Tracks(readFile(fileIndex)));
 	}
 
 	/**
