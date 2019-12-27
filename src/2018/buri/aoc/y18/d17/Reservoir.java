@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Model for the reservoir

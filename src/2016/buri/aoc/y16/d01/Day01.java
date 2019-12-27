@@ -8,7 +8,7 @@ import java.util.Set;
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 1: No Time for a Taxicab

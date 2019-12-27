@@ -1,6 +1,6 @@
 package buri.aoc.y18.d22;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * A position in the maze, made unique by an equipped item.

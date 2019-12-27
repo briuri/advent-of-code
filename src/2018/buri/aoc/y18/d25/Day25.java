@@ -8,7 +8,7 @@ import java.util.Set;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.Quad;
+import buri.aoc.data.tuple.Quad;
 
 /**
  * Day 25: Four-Dimensional Adventure

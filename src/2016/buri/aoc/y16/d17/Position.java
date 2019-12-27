@@ -5,7 +5,7 @@ import java.util.List;
 
 import buri.aoc.data.Direction;
 import buri.aoc.data.MD5Hash;
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data class for a pair and associated set of doors around it.

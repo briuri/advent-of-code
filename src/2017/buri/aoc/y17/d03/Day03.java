@@ -3,7 +3,7 @@ package buri.aoc.y17.d03;
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 3: Spiral Memory

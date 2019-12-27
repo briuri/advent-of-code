@@ -2,8 +2,8 @@ package buri.aoc.y17.d21;
 
 import java.util.List;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * A simple 2x2 or 3x3 pattern used in a rule.

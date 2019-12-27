@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import buri.aoc.BaseTest;
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * @author Brian Uri!

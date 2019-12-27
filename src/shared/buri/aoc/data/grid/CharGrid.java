@@ -1,6 +1,6 @@
 package buri.aoc.data.grid;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Base class for grids storing characters.

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data model for the routing diagram.

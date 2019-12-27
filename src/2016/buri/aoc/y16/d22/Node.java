@@ -1,6 +1,6 @@
 package buri.aoc.y16.d22;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * @author Brian Uri!

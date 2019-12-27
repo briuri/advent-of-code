@@ -3,8 +3,8 @@ package buri.aoc.y17.d22;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Clean nodes are shown as .; infected nodes are shown as #. This map only shows the center of the grid; there are many

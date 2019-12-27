@@ -1,6 +1,6 @@
 package buri.aoc.data.grid;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Base abstract class for 2D square grids.

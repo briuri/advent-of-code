@@ -3,8 +3,8 @@ package buri.aoc.y16.d02;
 import java.util.List;
 
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data model for keypad.

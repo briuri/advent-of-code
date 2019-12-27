@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Grid for the vault.

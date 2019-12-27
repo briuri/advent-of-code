@@ -1,7 +1,7 @@
 package buri.aoc.y17.d03;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Mutable data class for the spiral memory grid.

@@ -5,8 +5,8 @@ import java.util.List;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
 import buri.aoc.data.intcode.Computer;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 19: Tractor Beam

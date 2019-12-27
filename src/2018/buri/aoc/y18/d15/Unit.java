@@ -1,6 +1,6 @@
 package buri.aoc.y18.d15;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data model for a unit (elf or goblin).

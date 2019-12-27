@@ -9,10 +9,10 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
 import buri.aoc.data.Path;
-import buri.aoc.data.Triple;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Grid for the recursive maze.

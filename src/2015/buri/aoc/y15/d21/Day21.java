@@ -7,7 +7,7 @@ import java.util.Set;
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.Permutations;
-import buri.aoc.data.Triple;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 21: RPG Simulator 20XX

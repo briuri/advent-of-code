@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data class for the Image

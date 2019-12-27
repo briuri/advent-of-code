@@ -5,7 +5,7 @@ import java.util.List;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.Triple;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 23: Experimental Emergency Teleportation

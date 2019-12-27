@@ -1,7 +1,7 @@
 package buri.aoc.y18.d13;
 
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data class for the cart.

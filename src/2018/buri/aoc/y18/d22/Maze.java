@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data class for the maze.

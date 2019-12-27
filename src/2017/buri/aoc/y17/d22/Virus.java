@@ -1,7 +1,7 @@
 package buri.aoc.y17.d22;
 
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data class for the virus carrier.

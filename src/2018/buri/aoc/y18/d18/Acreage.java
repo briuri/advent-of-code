@@ -3,8 +3,8 @@ package buri.aoc.y18.d18;
 import java.util.ArrayList;
 import java.util.List;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Model for the acreage.

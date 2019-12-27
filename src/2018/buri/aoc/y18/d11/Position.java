@@ -1,6 +1,6 @@
 package buri.aoc.y18.d11;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Integer-based ordered pair class representing a position on the grid.

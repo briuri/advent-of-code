@@ -1,6 +1,6 @@
 package buri.aoc.y19.d12;
 
-import buri.aoc.data.Triple;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Data model for one of Jupiter's moons

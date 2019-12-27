@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.Queue;
 
 import buri.aoc.Part;
-import buri.aoc.data.Pair;
 import buri.aoc.data.Permutations;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data model for the air ducts.

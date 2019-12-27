@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two

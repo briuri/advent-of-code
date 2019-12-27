@@ -1,6 +1,6 @@
 package buri.aoc.y19.d10;
 
-import buri.aoc.data.Pair;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Model of a sight line from a monitoring station to an asteroid. Contains a pair representing the slope of the sight

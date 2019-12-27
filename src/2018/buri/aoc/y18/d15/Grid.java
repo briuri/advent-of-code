@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * You scan the area, generating a map of the walls (#), open cavern (.), and starting position of every Goblin (G) and

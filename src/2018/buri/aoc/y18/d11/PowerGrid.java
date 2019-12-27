@@ -1,7 +1,7 @@
 package buri.aoc.y18.d11;
 
-import buri.aoc.data.Pair;
 import buri.aoc.data.grid.IntGrid;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Simple grid class for calculating fuel cell charges.

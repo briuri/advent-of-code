@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.Triple;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 24: Planet of Discord

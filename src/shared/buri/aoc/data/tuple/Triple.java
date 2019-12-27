@@ -1,4 +1,4 @@
-package buri.aoc.data;
+package buri.aoc.data.tuple;
 
 /**
  * Data class for a triple

@@ -12,10 +12,10 @@ import java.util.Queue;
 import java.util.Set;
 
 import buri.aoc.data.Direction;
-import buri.aoc.data.Pair;
 import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.intcode.Computer;
+import buri.aoc.data.tuple.Pair;
 
 /**
  * Data model for the oxygen maze.

@@ -1,4 +1,6 @@
-package buri.aoc.data;
+package buri.aoc.data.tuple;
+
+import buri.aoc.data.Direction;
 
 /**
  * Base class for an X-Y coordinate pair.

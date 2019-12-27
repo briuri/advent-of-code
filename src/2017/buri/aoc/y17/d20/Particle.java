@@ -1,6 +1,6 @@
 package buri.aoc.y17.d20;
 
-import buri.aoc.data.Triple;
+import buri.aoc.data.tuple.Triple;
 
 /**
  * Data model for a particle with position, velocity, and acceleration.
