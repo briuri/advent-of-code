@@ -8,14 +8,13 @@ The JUnit test harness is colocated in the same source folder as the solution, t
 Total Run Time on Test Suites:
 
 * **2015**: 00:49
-* **2016**: 19:07
+* **2016**: 01:02
 * **2017**: 02:30 
 * **2018**: 24:51
 * **2019**: 00:14
 
 These solutions use a naive solution that takes a long time to run, and could probably be replaced with a better algorithm:
 
-* **y16d23**: 18:00
 * **y18d11**: 04:53
 * **y18d21**: 09:30
  

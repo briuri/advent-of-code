@@ -30,8 +30,12 @@ public class Registers extends NamedRegisters {
 		for (int i = 0; i < input.size(); i++) {
 			String[] code = input.get(i).split(" ");
 			String opcode = code[0];
-
-			if (opcode.equals("cpy")) {
+			
+			// New instruction to optimize Part 2
+			if (opcode.equals("mul")) {
+				System.out.println(String.format("%d\treg[%s] = reg[%s] * reg[%s]", i, code[3], code[1], code[2]));
+			}
+			else if (opcode.equals("cpy")) {
 				String registerOrValue = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
 				System.out.println(String.format("%d\treg[%s] = " + registerOrValue, i, code[2], code[1]));
 			}
@@ -63,6 +67,12 @@ public class Registers extends NamedRegisters {
 				break;
 			}
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
+			// New instruction to optimize Part 2
+			if (tokens[0].equals("mul")) {
+				long value1 = getRegisterOrValue(tokens[1]);
+				long value2 = getRegisterOrValue(tokens[2]);
+				getRegisters().put(tokens[3], value1 * value2);
+			}
 			if (tokens[0].equals("tgl")) {
 				toggle(getRegisterOrValue(tokens[1]).intValue());
 			}

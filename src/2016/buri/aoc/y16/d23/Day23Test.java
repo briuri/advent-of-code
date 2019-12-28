@@ -18,11 +18,6 @@ public class Day23Test extends BaseTest {
 	}
 
 	@Test
-	public void testInputConversion() {
-		Registers.convertInput(Day23.getInput(0));
-	}
-
-	@Test
 	public void testPart1Examples() {
 		assertEquals(3L, Day23.getResult(Part.ONE, Day23.getInput(1)));
 	}
@@ -42,7 +37,7 @@ public class Day23Test extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		long result = Day23.getResult(Part.TWO, Day23.getInput(0));
+		long result = Day23.getResult(Part.TWO, Day23.getInput(2));
 		toConsole(result);
 		assertEquals(479008875L, result);
 	}
