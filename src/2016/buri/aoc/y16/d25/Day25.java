@@ -22,26 +22,26 @@ public class Day25 extends BasePuzzle {
 	/**
 	 * Reduced pseudocode:
 	 * 
-	 * reg[d] = start + (7 * 365)
+	 *   reg[d] = start + (7 * 365)
 	 * A reg[a] = reg[d]
 	 * B reg[b] = reg[a]
-	 * reg[a] = 0
-	 * 
+	 *   reg[a] = 0
+	 *   
 	 * C reg[c] = 2
 	 * D if (reg[b] != 0) then goto E else goto F
 	 * E reg[b] -= 1
-	 * reg[c] -= 1
-	 * if (reg[c] != 0) then goto D
-	 * reg[a] += 1
-	 * goto C
-	 * 
+	 *   reg[c] -= 1
+	 *   if (reg[c] != 0) then goto D
+	 *   reg[a] += 1
+	 *   goto C
+	 *   
 	 * F reg[b] = 2
-	 * while (reg[c] != 0) {
-	 * reg[b] -= 1
-	 * reg[c] -= 1
-	 * }
-	 * transmit reg[b]
-	 * if (reg[a] != 0) then goto B else goto A
+	 *   while (reg[c] != 0) {
+	 *      reg[b] -= 1
+	 *      reg[c] -= 1
+	 *   }
+	 * 	 transmit reg[b]
+	 *   if (reg[a] != 0) then goto B else goto A
 	 */
 
 	/**

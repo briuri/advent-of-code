@@ -13,7 +13,7 @@ import buri.aoc.data.tuple.Pair;
  */
 public class Keypad extends IntGrid {
 
-	private Pair _current;
+	private Pair<Integer> _current;
 
 	/**
 	 * Constructor
@@ -52,8 +52,8 @@ public class Keypad extends IntGrid {
 		StringBuffer buffer = new StringBuffer();
 		for (String line : input) {
 			for (char direction : line.toCharArray()) {
-				int x = getCurrent().getX().intValue();
-				int y = getCurrent().getY().intValue();
+				int x = getCurrent().getX();
+				int y = getCurrent().getY();
 				switch (direction) {
 					case 'U':
 						if (get(x, y - 1) != 0) {
@@ -85,7 +85,7 @@ public class Keypad extends IntGrid {
 	/**
 	 * Accessor for the current
 	 */
-	private Pair getCurrent() {
+	private Pair<Integer> getCurrent() {
 		return _current;
 	}
 }

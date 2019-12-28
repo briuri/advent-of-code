@@ -32,8 +32,8 @@ public class Day01 extends BasePuzzle {
 	 * How many blocks away is the first location you visit twice?
 	 */
 	public static int getResult(Part part, List<String> input) {
-		Pair position = followInstructions(part, input);
-		return (Math.abs(position.getX().intValue()) + Math.abs(position.getY().intValue()));
+		Pair<Integer> position = followInstructions(part, input);
+		return (Math.abs(position.getX()) + Math.abs(position.getY()));
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class Day01 extends BasePuzzle {
 	 */
 	private static Pair followInstructions(Part part, List<String> input) {
 		// Start at the given coordinates and face North.
-		Pair position = new Pair(0, 0);
+		Pair<Integer> position = new Pair(0, 0);
 		Direction direction = Direction.UP;
 
 		Set<Pair> visited = new HashSet<>();
@@ -52,16 +52,16 @@ public class Day01 extends BasePuzzle {
 			for (int i = 0; i < distance; i++) {
 				switch (direction) {
 					case UP:
-						position = new Pair(position.getX().intValue(), position.getY().intValue() + 1);
+						position = new Pair(position.getX(), position.getY() + 1);
 						break;
 					case RIGHT:
-						position = new Pair(position.getX().intValue() + 1, position.getY().intValue());
+						position = new Pair(position.getX() + 1, position.getY());
 						break;
 					case DOWN:
-						position = new Pair(position.getX().intValue(), position.getY().intValue() - 1);
+						position = new Pair(position.getX(), position.getY() - 1);
 						break;
 					default: // LEFT
-						position = new Pair(position.getX().intValue() - 1, position.getY().intValue());
+						position = new Pair(position.getX() - 1, position.getY());
 				}
 				if (part == Part.TWO && visited.contains(position)) {
 					return (position);

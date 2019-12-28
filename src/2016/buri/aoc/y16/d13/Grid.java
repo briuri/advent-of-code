@@ -88,7 +88,7 @@ public class Grid extends CharGrid {
 		frontier.add(START_POSITION);
 		Map<Pair, Pair> cameFrom = new HashMap<>();
 		cameFrom.put(START_POSITION, null);
-		Pair current = null;
+		Pair<Integer> current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (Pair next : getTraversableNeighbors(current)) {
@@ -104,19 +104,19 @@ public class Grid extends CharGrid {
 	/**
 	 * Returns traversable cells adjacent to some position.
 	 */
-	private List<Pair> getTraversableNeighbors(Pair center) {
+	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
 		List<Pair> neighbors = new ArrayList<>();
-		if (center.getY().intValue() > 0) {
-			neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
+		if (center.getY() > 0) {
+			neighbors.add(new Pair(center.getX(), center.getY() - 1));
 		}
-		if (center.getX().intValue() > 0) {
-			neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
+		if (center.getX() > 0) {
+			neighbors.add(new Pair(center.getX() - 1, center.getY()));
 		}
-		if (center.getX().intValue() < getWidth() - 1) {
-			neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
+		if (center.getX() < getWidth() - 1) {
+			neighbors.add(new Pair(center.getX() + 1, center.getY()));
 		}
-		if (center.getY().intValue() < getHeight() - 1) {
-			neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
+		if (center.getY() < getHeight() - 1) {
+			neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		}
 		// Remove any that are not traversable.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {

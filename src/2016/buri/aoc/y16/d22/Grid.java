@@ -23,8 +23,8 @@ public class Grid {
 		for (String line : input) {
 			Node node = new Node(line);
 			getNodes().put(node.getId(), node);
-			_maxX = Math.max(_maxX, node.getId().getX().intValue());
-			_maxY = Math.max(_maxY, node.getId().getY().intValue());
+			_maxX = Math.max(_maxX, node.getId().getX());
+			_maxY = Math.max(_maxY, node.getId().getY());
 		}
 	}
 
@@ -55,7 +55,7 @@ public class Grid {
 			for (int x = 0; x <= getMaxX(); x++) {
 				Pair id = new Pair(x, y);
 				Node node = getNodes().get(id);
-				if (node.getId().getX().intValue() == getMaxX() && node.getId().getY().intValue() == 0) {
+				if (node.getId().getX() == getMaxX() && node.getId().getY() == 0) {
 					buffer.append('G');
 				}
 				else if (node.getUsed() == 0) {

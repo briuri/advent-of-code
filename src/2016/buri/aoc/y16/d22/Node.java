@@ -6,7 +6,7 @@ import buri.aoc.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Node {
-	private Pair _id;
+	private Pair<Integer> _id;
 	private int _total;
 	private int _used;
 	private int _free;
@@ -26,7 +26,7 @@ public class Node {
 	/**
 	 * Accessor for the id
 	 */
-	public Pair getId() {
+	public Pair<Integer> getId() {
 		return _id;
 	}
 
