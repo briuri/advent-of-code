@@ -15,7 +15,7 @@ import buri.aoc.data.tuple.Pair;
 public class Position extends Pair {
 	private String _passcodeSoFar;
 
-	private static MD5Hash HASHER = new MD5Hash();
+	private static final MD5Hash HASHER = new MD5Hash();
 
 	/**
 	 * Constructor
