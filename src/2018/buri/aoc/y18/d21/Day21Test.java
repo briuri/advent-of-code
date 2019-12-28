@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import buri.aoc.BaseTest;
 import buri.aoc.Part;
-import buri.aoc.data.registers.IndexedRegisters;
 
 /**
  * @author Brian Uri!
@@ -16,11 +15,6 @@ public class Day21Test extends BaseTest {
 	@Test
 	public void testGetInput() {
 		assertEquals(32, Day21.getInput(0).size());
-	}
-
-	@Test
-	public void testInputConversion() {
-		IndexedRegisters.convertInput(Day21.getInput(0));
 	}
 
 	/**
