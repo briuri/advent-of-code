@@ -21,10 +21,10 @@ public class SpiralGrid extends IntGrid {
 	 * Gets the sum of all adjacent and diagonal values from a position. (0,0) is the top left corner and (x, y) is the
 	 * lower right corner.
 	 */
-	public int getSurroundingValues(Pair position) {
+	public int getSurroundingValues(Pair<Integer> position) {
 		int sum = 0;
-		int x = position.getX().intValue();
-		int y = position.getY().intValue();
+		int x = position.getX();
+		int y = position.getY();
 
 		if (y > 0) {
 			// Upper Left
