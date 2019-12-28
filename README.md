@@ -6,16 +6,14 @@ The top-level of the project can be imported as an Eclipse project. Solutions ar
 The JUnit test harness is colocated in the same source folder as the solution, to reduce context-switch / navigation overhead when competing.
 
 Total Run Time on Test Suites:
-
-* **2015**: 00:49
-* **2016**: 01:02
-* **2017**: 02:30 
-* **2018**: 24:51
-* **2019**: 00:14
+* **2015**: 00:45
+* **2016**: 01:05
+* **2017**: 02:20 
+* **2018**: 24:55
+* **2019**: 00:15
 
 These solutions use a naive solution that takes a long time to run, and could probably be replaced with a better algorithm:
-
-* **y18d11**: 04:53
+* **y18d11**: 04:55
 * **y18d21**: 09:30
  
 In addition to the solutions, this project also contains a simple visualization of the leaderboard JSON (under `src/viz`) that can show the data as a Top 10 Solve Times list for each puzzle.
