@@ -22,9 +22,9 @@ public class Day08Test extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day08.getResult(Part.ONE, Day08.getInput(0));
+		String result = Day08.getResult(Part.ONE, Day08.getInput(0));
 		toConsole(result);
-		assertEquals(116, result);
+		assertEquals("116", result);
 	}
 
 	/**
@@ -33,8 +33,8 @@ public class Day08Test extends BaseTest {
 	@Test
 	public void testPart2Puzzle() {
 		// Visual inspection: UPOJFLBCEZ
-		int result = Day08.getResult(Part.TWO, Day08.getInput(0));
+		String result = Day08.getResult(Part.TWO, Day08.getInput(0));
 		toConsole(result);
-		assertEquals(116, result);
+		assertTrue(result.startsWith("■  ■ ■■■   ■■    ■■ ■■■■ ■    ■■■   ■■  ■■■■ ■■■■"));
 	}
 }

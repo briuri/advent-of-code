@@ -37,8 +37,6 @@ public class Screen {
 				runRotateColumn(line);
 			}
 		}
-		System.out.println(this);
-
 		int litPixels = 0;
 		for (int y = 0; y < getGrid()[0].length; y++) {
 			for (int x = 0; x < getGrid().length; x++) {
@@ -127,7 +125,7 @@ public class Screen {
 	 * Converts ints into displayable characters.
 	 */
 	private char toOutput(int value) {
-		return (value == 0 ? ' ' : '#');
+		return (value == 0 ? ' ' : '■');
 	}
 
 	/**

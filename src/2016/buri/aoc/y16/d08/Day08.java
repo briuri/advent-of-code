@@ -26,8 +26,12 @@ public class Day08 extends BasePuzzle {
 	 * Part 2:
 	 * After you swipe your card, what code is the screen trying to display?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	public static String getResult(Part part, List<String> input) {
 		Screen screen = new Screen();
-		return (screen.run(input));
+		int lit = screen.run(input);
+		if (part == Part.ONE) {
+			return (String.valueOf(lit));
+		}
+		return (screen.toString());
 	}
 }
