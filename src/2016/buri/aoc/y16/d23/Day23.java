@@ -56,7 +56,7 @@ public class Day23 extends BasePuzzle {
 	 * Part 2:
 	 * Anyway, what value should actually be sent to the safe?
 	 * 
-	 * TODO: Refactor algorithm to reduce run time for part 2 (16 minutes).
+	 * TODO: Refactor algorithm to reduce run time for part 2 (18 minutes).
 	 */
 	public static long getResult(Part part, List<String> input) {
 		long start = (part == Part.ONE ? 7L : 12L);

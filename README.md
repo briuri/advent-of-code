@@ -11,10 +11,18 @@ These solutions all got the right answer for the puzzles, although I cannot guar
 
 These solutions use a naive solution that takes a long time to run, and could probably be replaced with a better algorithm.
 
-* **y16d23** (16 min)
-* **y18d11** (8 min)
-* **y18d21** (10 min)
+* **y16d23**: 18:00
+* **y18d11**: 04:53
+* **y18d21**: 09:30
 
+Total Run Time on Test Suites:
+
+* **2015**: 00:49
+* **2016**: 19:07
+* **2017**: 02:30 
+* **2018**: 24:51
+* **2019**: 00:14
+ 
 In addition to the solutions, this project also contains a simple visualization of the leaderboard JSON (under `src/viz`) that can show the data as a Top 10 Solve Times list for each puzzle.
 
 While I am making this source code available for public viewing, I am not releasing it under any sort of software license at this time.

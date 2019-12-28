@@ -23,7 +23,7 @@ public class Day11 extends BasePuzzle {
 	 * Part 2:
 	 * What is the X,Y,size identifier of the square with the largest total power?
 	 * 
-	 * TODO: Optimize Part 2 so it doesn't take so long (8 minutes for the puzzle input).
+	 * TODO: Optimize Part 2 so it doesn't take so long (6 minutes for the puzzle input).
 	 */
 	public static String getResult(Part part, int serial) {
 		final int gridSize = 300;
