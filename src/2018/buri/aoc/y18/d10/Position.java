@@ -17,11 +17,10 @@ public class Position extends Pair {
 	 * Constructor
 	 */
 	public Position(String data) {
-		String[] tokens = data.split(",");
-		setX(Integer.valueOf(tokens[0]));
-		setY(Integer.valueOf(tokens[1]));
+		super(data, Integer.class);
 		_originalX = getX().intValue();
 		_originalY = getY().intValue();
+		String tokens[] = data.split(",");
 		_velocityX = Integer.valueOf(tokens[2]);
 		_velocityY = Integer.valueOf(tokens[3]);
 	}
