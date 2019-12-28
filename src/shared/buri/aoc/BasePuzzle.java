@@ -22,7 +22,7 @@ public abstract class BasePuzzle {
 		String packageName = new Throwable().getStackTrace()[1].getClassName();
 		String year = "20" + packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
 		String day = packageName.substring(packageName.indexOf(".d") + 2, packageName.indexOf(".Day"));
-		
+
 		Path path = Paths.get("data/" + year + "/" + day + "-" + fileIndex + ".txt");
 		try {
 			return (Files.readAllLines(path));
@@ -38,7 +38,7 @@ public abstract class BasePuzzle {
 			}
 		}
 	}
-	
+
 	/**
 	 * Converts strings into integers.
 	 */
@@ -78,7 +78,7 @@ public abstract class BasePuzzle {
 	protected static Integer getSum(List<Integer> list) {
 		return (list.stream().mapToInt(Integer::intValue).sum());
 	}
-	
+
 	/**
 	 * Calculates the least common multiple of two numbers.
 	 */

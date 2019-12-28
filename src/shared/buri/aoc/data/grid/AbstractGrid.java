@@ -32,14 +32,14 @@ public abstract class AbstractGrid<T> {
 	public Pair getCenterPosition() {
 		return (new Pair(getWidth() / 2, getHeight() / 2));
 	}
-	
+
 	/**
 	 * Gets a value on the grid.
 	 */
 	public T get(Pair position) {
 		return (get(position.getX().intValue(), position.getY().intValue()));
 	}
-	
+
 	/**
 	 * Gets a value on the grid.
 	 */

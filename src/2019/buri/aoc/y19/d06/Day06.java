@@ -34,7 +34,7 @@ public class Day06 extends BasePuzzle {
 		// Build orbital map
 		Map<String, Planet> planets = new HashMap<>();
 		Planet com = new Planet("COM", null);
-		planets.put(com.getName(), com);		
+		planets.put(com.getName(), com);
 		for (String orbit : input) {
 			String[] tokens = orbit.split("\\)");
 			if (!planets.containsKey(tokens[1])) {

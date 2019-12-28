@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class BaseTuple<T extends Number> {
 	private List<T> _values;
-	
+
 	/**
 	 * Constructor
 	 */

@@ -72,7 +72,7 @@ public class Day13 extends BasePuzzle {
 			computer.getInputs().add(joystick);
 			computer.run();
 			outputs = computer.getOutputs();
-			
+
 			// Note: Entire grid does not repaint each time. Subsequent output lengths are shorter.
 			while (!outputs.isEmpty()) {
 				int x = outputs.remove(0).intValue();

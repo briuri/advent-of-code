@@ -12,7 +12,7 @@ public class Moon {
 	private Triple<Integer> _velocity;
 
 	private static final Triple<Integer> ORIGIN = new Triple(0, 0, 0);
-	
+
 	/**
 	 * Constructor
 	 * 

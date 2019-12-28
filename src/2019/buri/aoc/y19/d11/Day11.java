@@ -67,7 +67,7 @@ public class Day11 extends BasePuzzle {
 			direction = (nextTurn == 0L ? direction.turnLeft() : direction.turnRight());
 			position.move(direction);
 		}
-		
+
 		if (part == Part.ONE) {
 			int panels = 0;
 			for (int y = 0; y < hull.getHeight(); y++) {
