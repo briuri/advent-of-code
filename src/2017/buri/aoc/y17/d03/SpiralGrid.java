@@ -25,7 +25,7 @@ public class SpiralGrid extends IntGrid {
 		int sum = 0;
 		int x = position.getX().intValue();
 		int y = position.getY().intValue();
-		
+
 		if (y > 0) {
 			// Upper Left
 			if (x > 0) {

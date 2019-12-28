@@ -7,9 +7,9 @@ import buri.aoc.data.tuple.Triple;
  */
 public class Particle {
 
-	private Triple _position;
-	private Triple _velocity;
-	private Triple _acceleration;
+	private Triple<Long> _position;
+	private Triple<Long> _velocity;
+	private Triple<Long> _acceleration;
 
 	/**
 	 * Constructor
@@ -28,33 +28,33 @@ public class Particle {
 	 * Returns a string representation of the position for comparison.
 	 */
 	public String move() {
-		getVelocity().setX(getVelocity().getX().longValue() + getAcceleration().getX().longValue());
-		getVelocity().setY(getVelocity().getY().longValue() + getAcceleration().getY().longValue());
-		getVelocity().setZ(getVelocity().getZ().longValue() + getAcceleration().getZ().longValue());
-		getPosition().setX(getPosition().getX().longValue() + getVelocity().getX().longValue());
-		getPosition().setY(getPosition().getY().longValue() + getVelocity().getY().longValue());
-		getPosition().setZ(getPosition().getZ().longValue() + getVelocity().getZ().longValue());
+		getVelocity().setX(getVelocity().getX() + getAcceleration().getX());
+		getVelocity().setY(getVelocity().getY() + getAcceleration().getY());
+		getVelocity().setZ(getVelocity().getZ() + getAcceleration().getZ());
+		getPosition().setX(getPosition().getX() + getVelocity().getX());
+		getPosition().setY(getPosition().getY() + getVelocity().getY());
+		getPosition().setZ(getPosition().getZ() + getVelocity().getZ());
 		return (getPosition().toString());
 	}
 
 	/**
 	 * Accessor for the position
 	 */
-	public Triple getPosition() {
+	public Triple<Long> getPosition() {
 		return _position;
 	}
 
 	/**
 	 * Accessor for the velocity
 	 */
-	public Triple getVelocity() {
+	public Triple<Long> getVelocity() {
 		return _velocity;
 	}
 
 	/**
 	 * Accessor for the acceleration
 	 */
-	public Triple getAcceleration() {
+	public Triple<Long> getAcceleration() {
 		return _acceleration;
 	}
 }

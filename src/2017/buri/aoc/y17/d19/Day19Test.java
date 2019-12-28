@@ -14,8 +14,7 @@ public class Day19Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		Diagram input = Day19.getInput(0);
-		assertNotNull(input);
+		assertNotNull(Day19.getInput(0));
 	}
 
 	@Test

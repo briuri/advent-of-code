@@ -13,8 +13,7 @@ public class Day25Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		Machine input = Day25.getInput(0);
-		assertNotNull(input);
+		assertNotNull(Day25.getInput(0));
 	}
 
 	@Test

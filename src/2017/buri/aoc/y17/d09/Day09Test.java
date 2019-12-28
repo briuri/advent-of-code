@@ -14,8 +14,7 @@ public class Day09Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		String input = Day09.getInput(0);
-		assertEquals(19135, input.length());
+		assertEquals(19135, Day09.getInput(0).length());
 	}
 
 	@Test

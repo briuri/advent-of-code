@@ -14,8 +14,7 @@ public class Day22Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		Cluster input = Day22.getInput(0);
-		assertNotNull(input);
+		assertNotNull(Day22.getInput(0));
 	}
 
 	@Test

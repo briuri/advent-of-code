@@ -16,6 +16,8 @@ import buri.aoc.data.tuple.Triple;
  */
 public class Day20 extends BasePuzzle {
 
+	private static final Triple<Long> ORIGIN = new Triple(0L, 0L, 0L);
+	
 	/**
 	 * Returns input file as a list of Particles with position, velocity, and acceleration.
 	 */
@@ -52,10 +54,10 @@ public class Day20 extends BasePuzzle {
 	private static int getSlowestAccelerationIndex(List<Particle> input) {
 		int index = -1;
 		long minAcceleration = Long.MAX_VALUE;
-		Triple origin = new Triple(0L, 0L, 0L);
+		
 		for (int i = 0; i < input.size(); i++) {
 			Particle particle = input.get(i);
-			long acceleration = particle.getAcceleration().getManhattanDistance(origin);
+			long acceleration = particle.getAcceleration().getManhattanDistance(ORIGIN);
 			if (acceleration < minAcceleration) {
 				index = i;
 				minAcceleration = acceleration;

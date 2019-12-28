@@ -14,8 +14,7 @@ public class Day24Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		PieceBag input = Day24.getInput(0);
-		assertEquals(57, input.getSize());
+		assertEquals(57, Day24.getInput(0).getSize());
 	}
 
 	@Test

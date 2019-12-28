@@ -6,9 +6,8 @@ package buri.aoc.y17.d13;
  * @author Brian Uri!
  */
 public class Layer {
-
-	int _depth;
-	int _range;
+	private int _depth;
+	private int _range;
 
 	/**
 	 * Constructor

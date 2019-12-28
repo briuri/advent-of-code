@@ -23,7 +23,7 @@ import buri.aoc.data.tuple.Pair;
 public class Diagram extends CharGrid {
 
 	private int _steps = 0;
-	private Pair _currentPosition = null;
+	private Pair<Integer> _currentPosition = null;
 	private Direction _currentDirection = null;
 	private List<Character> _breadcrumbs = new ArrayList<>();
 
@@ -79,10 +79,10 @@ public class Diagram extends CharGrid {
 	 * Determines the next direction at a corner. Assumes 1 true path and always 90 degrees.
 	 */
 	private Direction getNextDirection() {
-		Pair up = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY().intValue() - 1);
-		Pair right = new Pair(getCurrentPosition().getX().intValue() + 1, getCurrentPosition().getY());
-		Pair down = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY().intValue() + 1);
-		Pair left = new Pair(getCurrentPosition().getX().intValue() - 1, getCurrentPosition().getY());
+		Pair up = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() - 1);
+		Pair right = new Pair(getCurrentPosition().getX() + 1, getCurrentPosition().getY());
+		Pair down = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() + 1);
+		Pair left = new Pair(getCurrentPosition().getX() - 1, getCurrentPosition().getY());
 		Direction next = null;
 		if (getCurrentDirection() != null) {
 			switch (getCurrentDirection()) {
@@ -112,9 +112,9 @@ public class Diagram extends CharGrid {
 	/**
 	 * Returns true if position is within the diagram.
 	 */
-	private boolean isBounded(Pair position) {
-		boolean xBounded = (position.getX().intValue() >= 0 && position.getX().intValue() < getWidth());
-		boolean yBounded = (position.getY().intValue() >= 0 && position.getY().intValue() < getHeight());
+	private boolean isBounded(Pair<Integer> position) {
+		boolean xBounded = (position.getX() >= 0 && position.getX() < getWidth());
+		boolean yBounded = (position.getY() >= 0 && position.getY() < getHeight());
 		return (xBounded && yBounded);
 	}
 
@@ -135,7 +135,7 @@ public class Diagram extends CharGrid {
 	/**
 	 * Accessor for the current position
 	 */
-	private Pair getCurrentPosition() {
+	private Pair<Integer> getCurrentPosition() {
 		return _currentPosition;
 	}
 

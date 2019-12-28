@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.BasePuzzle;
-import buri.aoc.Part;
 import buri.aoc.data.intcode.Computer;
 
 /**
@@ -30,7 +29,7 @@ public class Day25 extends BasePuzzle {
 	 * Part 1:
 	 * Look around the ship and see if you can find the password for the main airlock.
 	 */
-	public static String getResult(Part part, List<Long> program) throws IOException {
+	public static String getResult(List<Long> program) throws IOException {
 		Computer computer = new Computer(program);
 		// Replaced my input loop with automated commands after I beat the puzzle.
 		String[] walkthrough = new String[] { 

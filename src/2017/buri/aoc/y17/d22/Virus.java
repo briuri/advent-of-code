@@ -9,13 +9,13 @@ import buri.aoc.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Virus {
-	private Pair _position;
+	private Pair<Integer> _position;
 	private Direction _direction;
 
 	/**
 	 * Constructor
 	 */
-	public Virus(Pair position) {
+	public Virus(Pair<Integer> position) {
 		_position = position;
 		setDirection(Direction.UP);
 	}
@@ -58,7 +58,7 @@ public class Virus {
 	/**
 	 * Accessor for the position
 	 */
-	public Pair getPosition() {
+	public Pair<Integer> getPosition() {
 		return _position;
 	}
 

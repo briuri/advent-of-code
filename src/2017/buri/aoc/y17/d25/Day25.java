@@ -19,9 +19,6 @@ public class Day25 extends BasePuzzle {
 	/**
 	 * Part 1:
 	 * What is the diagnostic checksum it produces once it's working again?
-	 * 
-	 * Part 2:
-	 * N/A
 	 */
 	public static int getResult(Machine machine) {
 		return (machine.run());

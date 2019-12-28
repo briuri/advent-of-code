@@ -65,7 +65,7 @@ public class Day07 extends BasePuzzle {
 	/**
 	 * Find the weight differential.
 	 * 
-	 * TODO: This algorithm works for the input data but makes some assumptions that don't cover edge cases. I assume
+	 * This algorithm works for the input data but makes some assumptions that don't cover edge cases. I assume
 	 * that we always have 2 siblings to compare total weights to as we explore the tower. If the path from the bottom
 	 * program to the incorrect node involved a program with 1-2 children, it would not be trivially easy to identify
 	 * the imbalanced child.

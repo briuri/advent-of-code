@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import buri.aoc.BasePuzzle;
-import buri.aoc.Part;
 import buri.aoc.data.tuple.Quad;
 
 /**
@@ -28,7 +27,7 @@ public class Day25 extends BasePuzzle {
 	 * Part 1:
 	 * How many constellations are formed by the fixed points in spacetime?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	public static int getResult(List<String> input) {
 		List<Quad> stars = new ArrayList<>();
 		for (String line : input) {
 			String[] tokens = line.trim().split(",");
