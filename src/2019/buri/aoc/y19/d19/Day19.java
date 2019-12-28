@@ -54,18 +54,18 @@ public class Day19 extends BasePuzzle {
 		while (true) {
 			// Skip ahead in current row to first tractor beam.
 			while (true) {
-				Pair lowerLeft = new Pair(x, y);
+				Pair<Long> lowerLeft = new Pair(x, y);
 				if (run(program, lowerLeft) == 1) {
 					break;
 				}
 				x += 1;
 			}
-			Pair lowerRight = new Pair(x + SIZE - 1, y);
-			Pair upperLeft = new Pair(x, y - SIZE + 1);
-			Pair upperRight = new Pair(x + SIZE - 1, y - SIZE + 1);
+			Pair<Long> lowerRight = new Pair(x + SIZE - 1, y);
+			Pair<Long> upperLeft = new Pair(x, y - SIZE + 1);
+			Pair<Long> upperRight = new Pair(x + SIZE - 1, y - SIZE + 1);
 			// Boolean short-circuit avoids unnecessary corner checks.
 			if (run(program, lowerRight) == 1 && run(program, upperLeft) == 1 && run(program, upperRight) == 1) {
-				return (upperLeft.getX().longValue() * 10000 + (upperLeft.getY().longValue()));
+				return (upperLeft.getX() * 10000 + upperLeft.getY());
 			}
 			y += 1;
 		}

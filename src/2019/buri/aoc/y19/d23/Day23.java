@@ -62,7 +62,7 @@ public class Day23 extends BasePuzzle {
 						if (part == Part.ONE) {
 							return (y);
 						}
-						nat = new Pair(x.longValue(), y.longValue());
+						nat = new Pair(x, y);
 					}
 					else {
 						Computer receiver = computers.get(address);
