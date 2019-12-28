@@ -64,7 +64,7 @@ public class Day10 extends BasePuzzle {
 			int maxX = Integer.MIN_VALUE;
 			for (Position position : input) {
 				position.offset(offset);
-				maxX = Math.max(position.getX().intValue(), maxX);
+				maxX = Math.max(maxX, position.getX());
 			}
 			CharGrid grid = new CharGrid(new Pair(maxX + 1, 10));
 			for (Position position : input) {
@@ -86,10 +86,10 @@ public class Day10 extends BasePuzzle {
 		int minY = Integer.MAX_VALUE;
 		int maxY = Integer.MIN_VALUE;
 		for (Position p : positions) {
-			minX = Math.min(minX, p.getX().intValue());
-			maxX = Math.max(maxX, p.getX().intValue());
-			minY = Math.min(minY, p.getY().intValue());
-			maxY = Math.max(maxY, p.getY().intValue());
+			minX = Math.min(minX, p.getX());
+			maxX = Math.max(maxX, p.getX());
+			minY = Math.min(minY, p.getY());
+			maxY = Math.max(maxY, p.getY());
 		}
 		BigInteger xLength = new BigInteger(String.valueOf(maxX - minX));
 		BigInteger yLength = new BigInteger(String.valueOf(maxY - minY));
@@ -103,8 +103,8 @@ public class Day10 extends BasePuzzle {
 		int minX = Integer.MAX_VALUE;
 		int minY = Integer.MAX_VALUE;
 		for (Position p : positions) {
-			minX = Math.min(minX, p.getX().intValue());
-			minY = Math.min(minY, p.getY().intValue());
+			minX = Math.min(minX, p.getX());
+			minY = Math.min(minY, p.getY());
 		}
 		return (new Position(minX, minY));
 	}

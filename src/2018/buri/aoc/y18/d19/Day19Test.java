@@ -2,8 +2,6 @@ package buri.aoc.y18.d19;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.BaseTest;
@@ -17,8 +15,7 @@ public class Day19Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		List<String> input = Day19.getInput(0);
-		assertEquals(37, input.size());
+		assertEquals(37, Day19.getInput(0).size());
 	}
 
 	@Test

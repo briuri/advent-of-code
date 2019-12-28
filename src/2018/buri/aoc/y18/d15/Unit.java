@@ -9,7 +9,7 @@ import buri.aoc.data.tuple.Pair;
  */
 public class Unit implements Comparable<Unit> {
 	private char _type;
-	private Pair _position;
+	private Pair<Integer> _position;
 	private int _health;
 	private int _attackPower;
 
@@ -19,7 +19,7 @@ public class Unit implements Comparable<Unit> {
 	/**
 	 * Constructor
 	 */
-	public Unit(char type, Pair position) {
+	public Unit(char type, Pair<Integer> position) {
 		_type = type;
 		_position = position;
 		_health = 200;
@@ -30,10 +30,10 @@ public class Unit implements Comparable<Unit> {
 	 * Checks if some unit is adjacent to this one.
 	 */
 	public boolean isAdjacent(Unit unit) {
-		int x = getPosition().getX().intValue();
-		int y = getPosition().getY().intValue();
-		int x2 = unit.getPosition().getX().intValue();
-		int y2 = unit.getPosition().getY().intValue();
+		int x = getPosition().getX();
+		int y = getPosition().getY();
+		int x2 = unit.getPosition().getX();
+		int y2 = unit.getPosition().getY();
 		boolean isAbove = ((x == x2) && (y + 1 == y2));
 		boolean isLeft = ((x + 1 == x2) && (y == y2));
 		boolean isRight = ((x - 1 == x2) && (y == y2));
@@ -73,7 +73,7 @@ public class Unit implements Comparable<Unit> {
 	/**
 	 * Accessor for the position
 	 */
-	public Pair getPosition() {
+	public Pair<Integer> getPosition() {
 		return _position;
 	}
 

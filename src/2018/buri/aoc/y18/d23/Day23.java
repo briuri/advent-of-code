@@ -88,15 +88,15 @@ public class Day23 extends BasePuzzle {
 	 */
 	public static long getShortestDistance(List<Bot> bots) {
 		// Get the general area.
-		Triple min = new Triple(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
-		Triple max = new Triple(Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE);
+		Triple<Long> min = new Triple(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
+		Triple<Long> max = new Triple(Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE);
 		for (Bot bot : bots) {
-			min.setX(Math.min(min.getX().longValue(), bot.getPosition().getX().longValue()));
-			min.setY(Math.min(min.getY().longValue(), bot.getPosition().getY().longValue()));
-			min.setZ(Math.min(min.getZ().longValue(), bot.getPosition().getZ().longValue()));
-			max.setX(Math.max(max.getX().longValue(), bot.getPosition().getX().longValue()));
-			max.setY(Math.max(max.getY().longValue(), bot.getPosition().getY().longValue()));
-			max.setZ(Math.max(max.getZ().longValue(), bot.getPosition().getZ().longValue()));
+			min.setX(Math.min(min.getX(), bot.getPosition().getX()));
+			min.setY(Math.min(min.getY(), bot.getPosition().getY()));
+			min.setZ(Math.min(min.getZ(), bot.getPosition().getZ()));
+			max.setX(Math.max(max.getX(), bot.getPosition().getX()));
+			max.setY(Math.max(max.getY(), bot.getPosition().getY()));
+			max.setZ(Math.max(max.getZ(), bot.getPosition().getZ()));
 		}
 
 		// For my input, it took about 25 iterations before dx/dy/dz were all 1 and MD stabilized.
@@ -113,18 +113,18 @@ public class Day23 extends BasePuzzle {
 	 * Samples points within a volume to see how many bots are in range. Finds the position with the most bots, then
 	 * resizes min / max around it so this method can be called again. Returns the current smallest MD.
 	 */
-	private static long sampleVolumeForMaxBots(List<Bot> bots, Triple min, Triple max) {
+	private static long sampleVolumeForMaxBots(List<Bot> bots, Triple<Long> min, Triple<Long> max) {
 		long searchRatio = 4;
 		long resizeRatio = 1;
-		long dx = Math.max(1, (max.getX().longValue() - min.getX().longValue()) / searchRatio);
-		long dy = Math.max(1, (max.getY().longValue() - min.getY().longValue()) / searchRatio);
-		long dz = Math.max(1, (max.getZ().longValue() - min.getZ().longValue()) / searchRatio);
-		Triple origin = new Triple(0L, 0L, 0L);
-		Triple positionWithMaxBots = null;
+		long dx = Math.max(1, (max.getX() - min.getX()) / searchRatio);
+		long dy = Math.max(1, (max.getY() - min.getY()) / searchRatio);
+		long dz = Math.max(1, (max.getZ() - min.getZ()) / searchRatio);
+		Triple<Long> origin = new Triple(0L, 0L, 0L);
+		Triple<Long> positionWithMaxBots = null;
 		int maxBotsInRange = 0;
-		for (long z = min.getZ().longValue(); z < max.getZ().longValue() + 1; z += dz) {
-			for (long y = min.getY().longValue(); y < max.getY().longValue() + 1; y += dy) {
-				for (long x = min.getX().longValue(); x < max.getX().longValue() + 1; x += dx) {
+		for (long z = min.getZ(); z < max.getZ() + 1; z += dz) {
+			for (long y = min.getY(); y < max.getY() + 1; y += dy) {
+				for (long x = min.getX(); x < max.getX() + 1; x += dx) {
 
 					// Count up bots in range of this position.
 					Triple sampledTriple = new Triple(x, y, z);
@@ -141,8 +141,8 @@ public class Day23 extends BasePuzzle {
 						maxBotsInRange = sampledMaxBots;
 					}
 					// When we have a tie, favor the one with the smaller distance.
-					else if (sampledMaxBots == maxBotsInRange
-						&& sampledTriple.getManhattanDistance(origin) < positionWithMaxBots.getManhattanDistance(origin)) {
+					else if (sampledMaxBots == maxBotsInRange && sampledTriple.getManhattanDistance(
+						origin) < positionWithMaxBots.getManhattanDistance(origin)) {
 						positionWithMaxBots = sampledTriple;
 					}
 				}
@@ -150,12 +150,12 @@ public class Day23 extends BasePuzzle {
 		}
 
 		// Adjust min / max for next iteration.
-		min.setX(positionWithMaxBots.getX().longValue() - (resizeRatio * dx));
-		min.setY(positionWithMaxBots.getY().longValue() - (resizeRatio * dy));
-		min.setZ(positionWithMaxBots.getZ().longValue() - (resizeRatio * dz));
-		max.setX(positionWithMaxBots.getX().longValue() + (resizeRatio * dx));
-		max.setY(positionWithMaxBots.getY().longValue() + (resizeRatio * dy));
-		max.setZ(positionWithMaxBots.getZ().longValue() + (resizeRatio * dz));
+		min.setX(positionWithMaxBots.getX() - (resizeRatio * dx));
+		min.setY(positionWithMaxBots.getY() - (resizeRatio * dy));
+		min.setZ(positionWithMaxBots.getZ() - (resizeRatio * dz));
+		max.setX(positionWithMaxBots.getX() + (resizeRatio * dx));
+		max.setY(positionWithMaxBots.getY() + (resizeRatio * dy));
+		max.setZ(positionWithMaxBots.getZ() + (resizeRatio * dz));
 		return (positionWithMaxBots.getManhattanDistance(origin));
 	}
 }

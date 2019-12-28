@@ -18,7 +18,7 @@ public class Day22 extends BasePuzzle {
 	 * Part 2:
 	 * What is the fewest number of minutes you can take to reach the target?
 	 */
-	public static int getResult(Part part, int depth, Pair target) {
+	public static int getResult(Part part, int depth, Pair<Integer> target) {
 		Maze maze = new Maze(depth, target);
 		return (part == Part.ONE ? maze.getRiskLevel() : maze.getMinutes());
 	}

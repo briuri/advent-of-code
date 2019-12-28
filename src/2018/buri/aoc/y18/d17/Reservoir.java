@@ -99,16 +99,16 @@ public class Reservoir extends CharGrid {
 	 * Marks all tiles below the top tile as REACHABLE until CLAY is hit. If the bottom position is contained by CLAY,
 	 * it is filled with water. Otherwise, we mark tiles as REACHABLE to left and right until water can flow down again.
 	 */
-	private void flowDown(Pair top, Set<Pair> visitedSpillpoints) {
+	private void flowDown(Pair<Integer> top, Set<Pair> visitedSpillpoints) {
 		// Short circuit if we already spilled from this position in this iteration.
 		if (visitedSpillpoints.contains(top)) {
 			return;
 		}
 
 		visitedSpillpoints.add(top);
-		Pair bottom = getOpenTileBelow(top);
-		for (int y = top.getY().intValue() + 1; y <= bottom.getY().intValue(); y++) {
-			set(top.getX().intValue(), y, REACHABLE);
+		Pair<Integer> bottom = getOpenTileBelow(top);
+		for (int y = top.getY() + 1; y <= bottom.getY(); y++) {
+			set((int) top.getX(), y, REACHABLE);
 		}
 		if (!isOffGrid(bottom)) {
 			if (isContained(bottom)) {
@@ -130,26 +130,26 @@ public class Reservoir extends CharGrid {
 	/**
 	 * Flows water left until it hits CLAY or a hole in the CLAY to flow down from. Returns the spill point.
 	 */
-	private Pair flowAcross(Pair start, boolean goLeft) {
+	private Pair flowAcross(Pair<Integer> start, boolean goLeft) {
 		if (goLeft) {
-			for (int x = start.getX().intValue(); x >= 0; x--) {
-				if (get(x, start.getY().intValue()) == CLAY) {
+			for (int x = start.getX(); x >= 0; x--) {
+				if (get(x, start.getY()) == CLAY) {
 					break;
 				}
-				set(x, start.getY().intValue(), REACHABLE);
-				char valueBelow = get(x, start.getY().intValue() + 1);
+				set(x, (int) start.getY(), REACHABLE);
+				char valueBelow = get(x, start.getY() + 1);
 				if (valueBelow != CLAY && valueBelow != WATER) {
 					return (new Pair(x, start.getY()));
 				}
 			}
 		}
 		else {
-			for (int x = start.getX().intValue(); x < getWidth(); x++) {
-				if (get(x, start.getY().intValue()) == CLAY) {
+			for (int x = start.getX(); x < getWidth(); x++) {
+				if (get(x, start.getY()) == CLAY) {
 					break;
 				}
-				set(x, start.getY().intValue(), REACHABLE);
-				char valueBelow = get(x, start.getY().intValue() + 1);
+				set(x, (int) start.getY(), REACHABLE);
+				char valueBelow = get(x, start.getY() + 1);
 				if (valueBelow != CLAY && valueBelow != WATER) {
 					return (new Pair(x, start.getY()));
 				}
@@ -161,28 +161,28 @@ public class Reservoir extends CharGrid {
 	/**
 	 * Fills a contained row with standing water, going left to CLAY, then right to CLAY from the start.
 	 */
-	private void fillAcross(Pair start) {
-		for (int x = start.getX().intValue(); x >= 0; x--) {
-			if (get(x, start.getY().intValue()) == CLAY) {
+	private void fillAcross(Pair<Integer> start) {
+		for (int x = start.getX(); x >= 0; x--) {
+			if (get(x, start.getY()) == CLAY) {
 				break;
 			}
-			set(x, start.getY().intValue(), WATER);
+			set(x, (int) start.getY(), WATER);
 		}
-		for (int x = start.getX().intValue(); x < getWidth(); x++) {
-			if (get(x, start.getY().intValue()) == CLAY) {
+		for (int x = start.getX(); x < getWidth(); x++) {
+			if (get(x, start.getY()) == CLAY) {
 				break;
 			}
-			set(x, start.getY().intValue(), WATER);
+			set(x, (int) start.getY(), WATER);
 		}
 	}
 
 	/**
 	 * Finds the first position below the top one that is not WATER or CLAY.
 	 */
-	private Pair getOpenTileBelow(Pair top) {
+	private Pair<Integer> getOpenTileBelow(Pair<Integer> top) {
 		int y;
-		for (y = top.getY().intValue(); y < getHeight(); y++) {
-			char value = get(top.getX().intValue(), y);
+		for (y = top.getY(); y < getHeight(); y++) {
+			char value = get(top.getX(), y);
 			if (value == CLAY || value == WATER) {
 				break;
 			}
@@ -193,29 +193,29 @@ public class Reservoir extends CharGrid {
 	/**
 	 * Returns true if the position is at the bottom of the usable grid.
 	 */
-	private boolean isOffGrid(Pair position) {
-		return (position.getY().intValue() + 1 == getHeight());
+	private boolean isOffGrid(Pair<Integer> position) {
+		return (position.getY() + 1 == getHeight());
 	}
 
 	/**
 	 * Returns true if the position has CLAY to the left and right, and a continous CLAY or WATER floor underneath it
 	 * (between the left/right bounds).
 	 */
-	private boolean isContained(Pair position) {
+	private boolean isContained(Pair<Integer> position) {
 		int minX = -1;
 		int maxX = -1;
 
 		// Check for left wall.
-		for (int x = position.getX().intValue(); x >= 0; x--) {
-			if (get(x, position.getY().intValue()) == CLAY) {
+		for (int x = position.getX(); x >= 0; x--) {
+			if (get(x, position.getY()) == CLAY) {
 				minX = x;
 				break;
 			}
 		}
 
 		// Check for right wall.
-		for (int x = position.getX().intValue(); x < getWidth(); x++) {
-			if (get(x, position.getY().intValue()) == CLAY) {
+		for (int x = position.getX(); x < getWidth(); x++) {
+			if (get(x, position.getY()) == CLAY) {
 				maxX = x;
 				break;
 			}
@@ -227,7 +227,7 @@ public class Reservoir extends CharGrid {
 		}
 
 		// Check for a floor.
-		int floorY = position.getY().intValue() + 1;
+		int floorY = position.getY() + 1;
 		boolean hasFloor = true;
 		for (int x = minX + 1; x < maxX; x++) {
 			char value = get(x, floorY);

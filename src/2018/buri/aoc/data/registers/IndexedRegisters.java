@@ -23,14 +23,14 @@ public class IndexedRegisters {
 	public static final boolean VALUE = true;
 
 	/**
-	 * Constructor
+	 * Constructor (y18d16)
 	 */
 	public IndexedRegisters(int size) {
 		_registers = new int[size];
 	}
 
 	/**
-	 * Constructor with instructions
+	 * Constructor with instructions (y18d19, d21)
 	 */
 	public IndexedRegisters(int ipRegister, List<String> codes) {
 		this(6);
@@ -65,7 +65,6 @@ public class IndexedRegisters {
 
 	/**
 	 * Day 19 / 21:
-	 * 
 	 * When the instruction pointer is bound to a register:
 	 * - its value is written to that register just before each instruction is executed
 	 * - the value of that register is written back to the instruction pointer immediately after each instruction

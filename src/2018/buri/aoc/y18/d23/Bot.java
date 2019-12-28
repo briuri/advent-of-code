@@ -8,7 +8,7 @@ import buri.aoc.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Bot {
-	private Triple _position;
+	private Triple<Long> _position;
 	private long _radius;
 
 	/**
@@ -28,14 +28,14 @@ public class Bot {
 	/**
 	 * Returns true if some position is in range of this bot's signal.
 	 */
-	public boolean inRange(Triple position) {
+	public boolean inRange(Triple<Long> position) {
 		return (getPosition().getManhattanDistance(position) <= getRadius());
 	}
 
 	/**
 	 * Accessor for the position
 	 */
-	public Triple getPosition() {
+	public Triple<Long> getPosition() {
 		return _position;
 	}
 

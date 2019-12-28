@@ -78,7 +78,7 @@ public class PowerGrid extends IntGrid {
 		int sum = 0;
 		for (int dx = 0; dx < squareSumSize; dx++) {
 			for (int dy = 0; dy < squareSumSize; dy++) {
-				sum += get(ul.getX().intValue() + dx, ul.getY().intValue() + dy);
+				sum += get(ul.getX() + dx, ul.getY() + dy);
 			}
 		}
 		return (sum);

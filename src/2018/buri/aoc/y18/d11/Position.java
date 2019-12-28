@@ -9,7 +9,7 @@ import buri.aoc.data.tuple.Pair;
  * 
  * @author Brian Uri!
  */
-public class Position extends Pair {
+public class Position extends Pair<Integer> {
 
 	private Long _value = null;
 

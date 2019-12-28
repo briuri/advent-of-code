@@ -36,10 +36,10 @@ public class Maze extends CharGrid {
 	/**
 	 * Constructor
 	 */
-	public Maze(int depth, Pair target) {
-		super(new Pair(Math.max(target.getX().intValue(), target.getY().intValue() + 10), Math.max(target.getX().intValue(), target.getY().intValue() + 10)));
+	public Maze(int depth, Pair<Integer> target) {
+		super(new Pair(Math.max(target.getX(), target.getY() + 10), Math.max(target.getX(), target.getY() + 10)));
 		_depth = depth;
-		_target = new Position(target.getX().intValue(), target.getY().intValue(), TORCH);
+		_target = new Position(target.getX(), target.getY(), TORCH);
 		_erosionLevels = new int[getWidth()][getHeight()];
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
@@ -53,8 +53,8 @@ public class Maze extends CharGrid {
 	 */
 	public int getRiskLevel() {
 		int riskLevel = 0;
-		for (int y = 0; y < getTarget().getY().intValue() + 1; y++) {
-			for (int x = 0; x < getTarget().getX().intValue() + 1; x++) {
+		for (int y = 0; y < getTarget().getY() + 1; y++) {
+			for (int x = 0; x < getTarget().getX() + 1; x++) {
 				// ROCKY areas have 0 risk.
 				if (get(x, y) == WET) {
 					riskLevel += 1;
@@ -88,7 +88,7 @@ public class Maze extends CharGrid {
 	 */
 	private char getRegionType(int x, int y) {
 		int geologicIndex;
-		if ((x == 0 && y == 0) || (x == getTarget().getX().intValue() && y == getTarget().getY().intValue())) {
+		if ((x == 0 && y == 0) || (x == getTarget().getX() && y == getTarget().getY())) {
 			geologicIndex = 0;
 		}
 		else if (y == 0) {
@@ -142,7 +142,7 @@ public class Maze extends CharGrid {
 			// Evaluate staying here and swapping items. (Always exactly 1 potential swap)
 			for (char item : ALL_ITEMS) {
 				if (item != node.getPosition().getItem() && isItemAllowed(item, node.getPosition())) {
-					Position next = new Position(node.getPosition().getX().intValue(), node.getPosition().getY().intValue(), item);
+					Position next = new Position(node.getPosition().getX(), node.getPosition().getY(), item);
 					evaluateNext(frontier, visitedNodes, next, node.getCostSoFar() + 7);
 				}
 			}
@@ -165,17 +165,17 @@ public class Maze extends CharGrid {
 	 */
 	private List<Position> getTraversableNeighbors(Position center) {
 		List<Position> neighbors = new ArrayList<>();
-		if (center.getY().intValue() >= 1) {
-			neighbors.add(new Position(center.getX().intValue(), center.getY().intValue() - 1, center.getItem()));
+		if (center.getY() >= 1) {
+			neighbors.add(new Position(center.getX(), center.getY() - 1, center.getItem()));
 		}
-		if (center.getX().intValue() >= 1) {
-			neighbors.add(new Position(center.getX().intValue() - 1, center.getY().intValue(), center.getItem()));
+		if (center.getX() >= 1) {
+			neighbors.add(new Position(center.getX() - 1, center.getY(), center.getItem()));
 		}
-		if (center.getX().intValue() < getWidth() - 1) {
-			neighbors.add(new Position(center.getX().intValue() + 1, center.getY().intValue(), center.getItem()));
+		if (center.getX() < getWidth() - 1) {
+			neighbors.add(new Position(center.getX() + 1, center.getY(), center.getItem()));
 		}
-		if (center.getY().intValue() < getHeight() - 1) {
-			neighbors.add(new Position(center.getX().intValue(), center.getY().intValue() + 1, center.getItem()));
+		if (center.getY() < getHeight() - 1) {
+			neighbors.add(new Position(center.getX(), center.getY() + 1, center.getItem()));
 		}
 
 		// Remove any with incompatible item / terrain matches.
@@ -216,7 +216,7 @@ public class Maze extends CharGrid {
 	/**
 	 * Accessor for the target
 	 */
-	private Pair getTarget() {
+	private Pair<Integer> getTarget() {
 		return _target;
 	}
 

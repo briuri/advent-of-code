@@ -21,7 +21,7 @@ import buri.aoc.data.tuple.Pair;
  */
 public class RoomMap extends CharGrid {
 
-	private Pair _start;
+	private Pair<Integer> _start;
 
 	private static final char WALL = '#';
 	private static final char ROOM = '.';
@@ -94,22 +94,22 @@ public class RoomMap extends CharGrid {
 	/**
 	 * Explores from a particular position in some direction.
 	 */
-	private void move(Pair position, char direction) {
+	private void move(Pair<Integer> position, char direction) {
 		if (direction == NORTH) {
-			set(position.getX().intValue(), position.getY().intValue() - 1, DOOR);
-			position.setY(position.getY().intValue() - 2);
+			set(position.getX(), position.getY() - 1, DOOR);
+			position.setY(position.getY() - 2);
 		}
 		else if (direction == EAST) {
-			set(position.getX().intValue() + 1, position.getY().intValue(), DOOR);
-			position.setX(position.getX().intValue() + 2);
+			set(position.getX() + 1, position.getY(), DOOR);
+			position.setX(position.getX() + 2);
 		}
 		else if (direction == SOUTH) {
-			set(position.getX().intValue(), position.getY().intValue() + 1, DOOR);
-			position.setY(position.getY().intValue() + 2);
+			set(position.getX(), position.getY() + 1, DOOR);
+			position.setY(position.getY() + 2);
 		}
 		else if (direction == WEST) {
-			set(position.getX().intValue() - 1, position.getY().intValue(), DOOR);
-			position.setX(position.getX().intValue() - 2);
+			set(position.getX() - 1, position.getY(), DOOR);
+			position.setX(position.getX() - 2);
 		}
 		if (get(position) != START) {
 			set(position, ROOM);
@@ -207,7 +207,7 @@ public class RoomMap extends CharGrid {
 		frontier.add(getStart());
 		Map<Pair, Pair> cameFrom = new HashMap<>();
 		cameFrom.put(getStart(), null);
-		Pair current = null;
+		Pair<Integer> current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (Pair next : getTraversableNeighbors(current)) {
@@ -227,12 +227,12 @@ public class RoomMap extends CharGrid {
 	/**
 	 * Returns traversable cells adjacent to some position.
 	 */
-	private List<Pair> getTraversableNeighbors(Pair center) {
+	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
-		neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
+		neighbors.add(new Pair(center.getX(), center.getY() - 1));
+		neighbors.add(new Pair(center.getX() - 1, center.getY()));
+		neighbors.add(new Pair(center.getX() + 1, center.getY()));
+		neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		// Remove any that are not traversable.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();
@@ -246,7 +246,7 @@ public class RoomMap extends CharGrid {
 	/**
 	 * Accessor for the start
 	 */
-	private Pair getStart() {
+	private Pair<Integer> getStart() {
 		return _start;
 	}
 }

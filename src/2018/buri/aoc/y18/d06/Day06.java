@@ -41,7 +41,7 @@ public class Day06 extends BasePuzzle {
 		Map<Pair, Integer> minimumDistances = new HashMap<>();
 		for (int x = 0; x < gridLength; x++) {
 			for (int y = 0; y < gridLength; y++) {
-				Pair currentSpot = new Pair(x, y);
+				Pair<Integer> currentSpot = new Pair(x, y);
 
 				// Calculate all MDs between input locations and this current spot.
 				Map<Pair, Long> currentSpotDistances = new HashMap<>();
@@ -55,8 +55,8 @@ public class Day06 extends BasePuzzle {
 				if (Collections.frequency(currentSpotDistances.values(), minEntry.getValue()) == 1) {
 					Pair nearestPair = minEntry.getKey();
 					// Keep track of locations nearest to the edges of the grid, so they can be ignored later.
-					if (currentSpot.getX().intValue() == 0 || currentSpot.getY().intValue() == 0 || currentSpot.getX().intValue() == gridLength - 1
-						|| currentSpot.getY().intValue() == gridLength - 1) {
+					if (currentSpot.getX() == 0 || currentSpot.getY() == 0 || currentSpot.getX() == gridLength - 1
+						|| currentSpot.getY() == gridLength - 1) {
 						outerPairs.add(nearestPair);
 					}
 
@@ -103,15 +103,14 @@ public class Day06 extends BasePuzzle {
 		return (regionSize);
 	}
 
-
 	/**
 	 * Calculates a suitable square grid size, based on largest position coordinate.
 	 */
 	private static int getGridLength(List<Pair> input) {
 		int gridLength = 0;
-		for (Pair position : input) {
-			gridLength = Math.max(gridLength, position.getX().intValue());
-			gridLength = Math.max(gridLength, position.getY().intValue());
+		for (Pair<Integer> position : input) {
+			gridLength = Math.max(gridLength, position.getX());
+			gridLength = Math.max(gridLength, position.getY());
 		}
 		return (gridLength + 1);
 	}

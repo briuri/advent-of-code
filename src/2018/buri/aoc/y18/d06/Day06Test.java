@@ -2,12 +2,9 @@ package buri.aoc.y18.d06;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.BaseTest;
-import buri.aoc.data.tuple.Pair;
 
 /**
  * @author Brian Uri!
@@ -16,8 +13,7 @@ public class Day06Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		List<Pair> input = Day06.getInput(0);
-		assertEquals(50, input.size());
+		assertEquals(50, Day06.getInput(0).size());
 	}
 
 	@Test

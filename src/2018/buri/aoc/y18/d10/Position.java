@@ -7,7 +7,7 @@ import buri.aoc.data.tuple.Pair;
  * 
  * @author Brian Uri!
  */
-public class Position extends Pair {
+public class Position extends Pair<Integer> {
 	private int _originalX;
 	private int _originalY;
 	private int _velocityX;
@@ -18,8 +18,8 @@ public class Position extends Pair {
 	 */
 	public Position(String data) {
 		super(data, Integer.class);
-		_originalX = getX().intValue();
-		_originalY = getY().intValue();
+		_originalX = getX();
+		_originalY = getY();
 		String tokens[] = data.split(",");
 		_velocityX = Integer.valueOf(tokens[2]);
 		_velocityY = Integer.valueOf(tokens[3]);
@@ -44,16 +44,16 @@ public class Position extends Pair {
 	 * Shifts the output back to the origin for ease of reading.
 	 */
 	public void offset(Position position) {
-		setX(getX().intValue() - position.getX().intValue());
-		setY(getY().intValue() - position.getY().intValue());
+		setX(getX() - position.getX());
+		setY(getY() - position.getY());
 	}
 
 	/**
 	 * Moves this point some number of times.
 	 */
 	public void move(int times) {
-		setX(getX().intValue() + (times * getVelocityX()));
-		setY(getY().intValue() + (times * getVelocityY()));
+		setX(getX() + (times * getVelocityX()));
+		setY(getY() + (times * getVelocityY()));
 	}
 
 	/**

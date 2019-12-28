@@ -193,7 +193,7 @@ public class Grid extends CharGrid {
 		frontier.add(unit.getPosition());
 		Map<Pair, Pair> cameFrom = new HashMap<>();
 		cameFrom.put(unit.getPosition(), null);
-		Pair current = null;
+		Pair<Integer> current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (Pair next : getTraversableNeighbors(current)) {
@@ -210,12 +210,12 @@ public class Grid extends CharGrid {
 	/**
 	 * Returns open cells adjacent to some position, in reading order (up, left, right, down).
 	 */
-	private List<Pair> getTraversableNeighbors(Pair center) {
+	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
-		neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
+		neighbors.add(new Pair(center.getX(), center.getY() - 1));
+		neighbors.add(new Pair(center.getX() - 1, center.getY()));
+		neighbors.add(new Pair(center.getX() + 1, center.getY()));
+		neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		// Remove any that are already filled up.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();

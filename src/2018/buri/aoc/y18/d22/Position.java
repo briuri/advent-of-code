@@ -7,7 +7,7 @@ import buri.aoc.data.tuple.Pair;
  * 
  * @author Brian Uri!
  */
-public class Position extends Pair {
+public class Position extends Pair<Integer> {
 	private char _item;
 
 	/**
