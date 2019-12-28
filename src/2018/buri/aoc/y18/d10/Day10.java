@@ -68,7 +68,7 @@ public class Day10 extends BasePuzzle {
 			}
 			CharGrid grid = new CharGrid(new Pair(maxX + 1, 10));
 			for (Position position : input) {
-				grid.set(position, '#');
+				grid.set(position, '■');
 			}
 			return (grid.toString());
 		}

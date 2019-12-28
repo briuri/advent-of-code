@@ -22,7 +22,7 @@ public class Day10Test extends BaseTest {
 		// HI
 		String result = Day10.getResult(Part.ONE, Day10.getInput(1));
 		toConsole(result);
-		assertTrue(result.startsWith("#   #  ###\n"));
+		assertTrue(result.startsWith("■   ■  ■■■\n"));
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Day10Test extends BaseTest {
 		// PLBPGFRR
 		String result = Day10.getResult(Part.ONE, Day10.getInput(0));
 		toConsole(result);
-		assertTrue(result.startsWith("#####   #       #####   #####    ####   ######  #####   ##### \n"));
+		assertTrue(result.startsWith("■■■■■   ■       ■■■■■   ■■■■■    ■■■■   ■■■■■■  ■■■■■   ■■■■■ \n"));
 	}
 
 	/**
