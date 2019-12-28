@@ -32,10 +32,10 @@ public class Day06 extends BasePuzzle {
 		IntGrid grid = new IntGrid(new Pair(1000, 1000));
 		for (String command : input) {
 			String[] tokens = command.split(" ");
-			Pair lowerBound = new Pair(tokens[tokens.length - 3], Integer.class);
-			Pair upperBound = new Pair(tokens[tokens.length - 1], Integer.class);
-			for (int y = lowerBound.getY().intValue(); y <= upperBound.getY().intValue(); y++) {
-				for (int x = lowerBound.getX().intValue(); x <= upperBound.getX().intValue(); x++) {
+			Pair<Integer> lowerBound = new Pair(tokens[tokens.length - 3], Integer.class);
+			Pair<Integer> upperBound = new Pair(tokens[tokens.length - 1], Integer.class);
+			for (int y = lowerBound.getY(); y <= upperBound.getY(); y++) {
+				for (int x = lowerBound.getX(); x <= upperBound.getX(); x++) {
 					Integer value;
 					if (part == Part.ONE) {
 						if (tokens[1].equals("on")) {

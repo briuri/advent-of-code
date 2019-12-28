@@ -56,9 +56,10 @@ public class Battle {
 			List<Type> allowedEffects = getAllowedEffects();
 			for (Iterator<String> iterator = allowedSpells.iterator(); iterator.hasNext();) {
 				String spell = iterator.next();
-				if ((SPELLS.get(spell) > getPlayerMana()) || (spell.equals("S") && !allowedEffects.contains(
-					Type.SHIELD)) || (spell.equals("P") && !allowedEffects.contains(Type.POISON)) || (spell.equals("R")
-						&& !allowedEffects.contains(Type.RECHARGE))) {
+				if ((SPELLS.get(spell) > getPlayerMana()) 
+					|| (spell.equals("S") && !allowedEffects.contains(Type.SHIELD)) 
+					|| (spell.equals("P") && !allowedEffects.contains(Type.POISON)) 
+					|| (spell.equals("R") && !allowedEffects.contains(Type.RECHARGE))) {
 					iterator.remove();
 				}
 			}

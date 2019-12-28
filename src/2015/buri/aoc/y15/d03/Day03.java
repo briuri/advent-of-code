@@ -29,8 +29,8 @@ public class Day03 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, String input) {
 		IntGrid grid = new IntGrid(new Pair(500, 500));
-		Pair santa = new Pair(grid.getWidth() / 2, grid.getHeight() / 2);
-		Pair robosanta = new Pair(grid.getWidth() / 2, grid.getHeight() / 2);
+		Pair santa = grid.getCenterPosition();
+		Pair robosanta = grid.getCenterPosition();
 		grid.set(santa, grid.get(santa) + 1);
 		grid.set(robosanta, grid.get(santa) + 1);
 

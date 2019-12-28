@@ -17,9 +17,9 @@ import buri.aoc.data.tuple.Triple;
 public class Day21 extends BasePuzzle {
 
 	// Triple x=gold, y=attack, z=armor
-	private static final List<Triple> WEAPONS = new ArrayList<>(); // 1-1 weapons
-	private static final List<Triple> ARMOR = new ArrayList<>(); // 0-1 armor
-	private static final List<Triple> RINGS = new ArrayList<>(); // 0-2 rings
+	private static final List<Triple<Integer>> WEAPONS = new ArrayList<>(); // 1-1 weapons
+	private static final List<Triple<Integer>> ARMOR = new ArrayList<>(); // 0-1 armor
+	private static final List<Triple<Integer>> RINGS = new ArrayList<>(); // 0-2 rings
 	static {
 		WEAPONS.add(new Triple(8, 4, 0));
 		WEAPONS.add(new Triple(10, 5, 0));
@@ -55,14 +55,14 @@ public class Day21 extends BasePuzzle {
 		int minGold = Integer.MAX_VALUE;
 		int maxGold = Integer.MIN_VALUE;
 		Set<List<Integer>> ringPermutations = getRingPermutations();
-		for (Triple weapon : WEAPONS) {
-			for (Triple armor : ARMOR) {
+		for (Triple<Integer> weapon : WEAPONS) {
+			for (Triple<Integer> armor : ARMOR) {
 				for (List<Integer> rings : ringPermutations) {
-					Triple ring1 = RINGS.get(rings.get(0));
-					Triple ring2 = RINGS.get(rings.get(1));
-					int cost = weapon.getX().intValue() + armor.getX().intValue() + ring1.getX().intValue() + ring2.getX().intValue();
-					int bonusAttack = weapon.getY().intValue() + armor.getY().intValue() + ring1.getY().intValue() + ring2.getY().intValue();
-					int bonusArmor = weapon.getZ().intValue() + armor.getZ().intValue() + ring1.getZ().intValue() + ring2.getZ().intValue();
+					Triple<Integer> ring1 = RINGS.get(rings.get(0));
+					Triple<Integer> ring2 = RINGS.get(rings.get(1));
+					int cost = weapon.getX() + armor.getX() + ring1.getX() + ring2.getX();
+					int bonusAttack = weapon.getY() + armor.getY() + ring1.getY() + ring2.getY();
+					int bonusArmor = weapon.getZ() + armor.getZ() + ring1.getZ() + ring2.getZ();
 
 					Unit player = new Unit(100, bonusAttack, bonusArmor, cost);
 					Unit boss = new Unit(bossTemplate.getHealth(), bossTemplate.getDamage(), bossTemplate.getArmor(),

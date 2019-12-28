@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import buri.aoc.BasePuzzle;
-import buri.aoc.Part;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -18,7 +17,7 @@ public class Day25 extends BasePuzzle {
 	 * Part 1:
 	 * What code do you give the machine?
 	 */
-	public static long getResult(Part part, Pair target) {
+	public static long getResult(Pair<Integer> target) {
 		Pair pair = new Pair(1, 1);
 		long code = 20151125;
 		Set<String> visited = new HashSet<>();
@@ -43,10 +42,10 @@ public class Day25 extends BasePuzzle {
 	/**
 	 * Calculates the next position to insert a code. X is row count (vertical) and Y is column count (horizontal).
 	 */
-	private static void move(Pair pair) {
-		pair.setX(pair.getX().intValue() - 1);
-		pair.setY(pair.getY().intValue() + 1);
-		if (pair.getX().intValue() == 0) {
+	private static void move(Pair<Integer> pair) {
+		pair.setX(pair.getX() - 1);
+		pair.setY(pair.getY() + 1);
+		if (pair.getX() == 0) {
 			pair.setX(pair.getY());
 			pair.setY(1);
 		}

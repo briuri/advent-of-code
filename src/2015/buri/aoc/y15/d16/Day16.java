@@ -41,10 +41,11 @@ public class Day16 extends BasePuzzle {
 		}
 
 		for (Map<String, Integer> sue : sues) {
-			if (!mightMatch(part, sue, "children", 3) || !mightMatch(part, sue, "samoyeds", 2) || !mightMatch(part, sue,
-				"akitas", 0) || !mightMatch(part, sue, "vizslas", 0) || !mightMatch(part, sue, "cars", 2)
-				|| !mightMatch(part, sue, "perfumes", 1) || !mightMatch(part, sue, "cats", 7) || !mightMatch(part, sue,
-					"trees", 3) || !mightMatch(part, sue, "pomeranians", 3) || !mightMatch(part, sue, "goldfish", 5)) {
+			if (!mightMatch(part, sue, "children", 3) || !mightMatch(part, sue, "samoyeds", 2) 
+				|| !mightMatch(part, sue, "akitas", 0) || !mightMatch(part, sue, "vizslas", 0) 
+				|| !mightMatch(part, sue, "cars", 2) || !mightMatch(part, sue, "perfumes", 1) 
+				|| !mightMatch(part, sue, "cats", 7) || !mightMatch(part, sue, "trees", 3) 
+				|| !mightMatch(part, sue, "pomeranians", 3) || !mightMatch(part, sue, "goldfish", 5)) {
 				sue.clear();
 			}
 		}
