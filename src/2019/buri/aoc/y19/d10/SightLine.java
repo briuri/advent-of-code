@@ -9,33 +9,23 @@ import buri.aoc.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class SightLine implements Comparable<SightLine> {
-	private Pair _slope;
+	private Pair<Integer> _slope;
 	private Double _angle;
 
 	/**
 	 * Calculates a sight line between two points.
 	 */
-	public SightLine(Pair station, Pair asteroid) {
-		int dx = asteroid.getX().intValue() - station.getX().intValue();
-		int dy = asteroid.getY().intValue() - station.getY().intValue();
-		int gcd = getGCD(dx, dy);
+	public SightLine(Pair<Integer> station, Pair<Integer> asteroid) {
+		int dx = asteroid.getX() - station.getX();
+		int dy = asteroid.getY() - station.getY();
+		long gcd = Day10.getGCD(dx, dy);
 		if (gcd < 0) {
 			gcd = gcd * -1;
 		}
-		_slope = new Pair(dx / gcd, dy / gcd);
+		_slope = new Pair((int) (dx / gcd), (int) (dy / gcd));
 
 		// Subtract PI/2 to start facing up rather than right.
-		_angle = Math.atan2(getSlope().getX().intValue(), getSlope().getY().intValue()) - Math.PI / 2.0;
-	}
-
-	/**
-	 * Recursively finds the greatest common denominator of two numbers.
-	 */
-	protected static int getGCD(int a, int b) {
-		if (a == 0) {
-			return (b);
-		}
-		return (getGCD(b % a, a));
+		_angle = Math.atan2(getSlope().getX().doubleValue(), getSlope().getY().doubleValue()) - Math.PI / 2.0;
 	}
 
 	/**
@@ -72,7 +62,7 @@ public class SightLine implements Comparable<SightLine> {
 	/**
 	 * Accessor for the angle
 	 */
-	public Double getAngle() {
+	private Double getAngle() {
 		return _angle;
 	}
 }

@@ -11,7 +11,7 @@ import buri.aoc.Part;
 import buri.aoc.data.CharFrequency;
 
 /**
- * Day 08: TITLE
+ * Day 08: Space Image Format
  * 
  * @author Brian Uri!
  */

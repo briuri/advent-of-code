@@ -8,9 +8,11 @@ import buri.aoc.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Moon {
-	private Triple _position;
-	private Triple _velocity;
+	private Triple<Integer> _position;
+	private Triple<Integer> _velocity;
 
+	private static final Triple<Integer> ORIGIN = new Triple(0, 0, 0);
+	
 	/**
 	 * Constructor
 	 * 
@@ -36,12 +38,12 @@ public class Moon {
 	 * of moons.
 	 */
 	public void applyGravity(Moon moon) {
-		int dx = calculateGravity(getPosition().getX().intValue(), moon.getPosition().getX().intValue());
-		int dy = calculateGravity(getPosition().getY().intValue(), moon.getPosition().getY().intValue());
-		int dz = calculateGravity(getPosition().getZ().intValue(), moon.getPosition().getZ().intValue());
-		getVelocity().setX(getVelocity().getX().intValue() + dx);
-		getVelocity().setY(getVelocity().getY().intValue() + dy);
-		getVelocity().setZ(getVelocity().getZ().intValue() + dz);
+		int dx = calculateGravity(getPosition().getX(), moon.getPosition().getX());
+		int dy = calculateGravity(getPosition().getY(), moon.getPosition().getY());
+		int dz = calculateGravity(getPosition().getZ(), moon.getPosition().getZ());
+		getVelocity().setX(getVelocity().getX() + dx);
+		getVelocity().setY(getVelocity().getY() + dy);
+		getVelocity().setZ(getVelocity().getZ() + dz);
 	}
 
 	/**
@@ -51,7 +53,7 @@ public class Moon {
 	 * positions on a given axis are the same, the velocity on that axis does not change for that pair
 	 * of moons.
 	 */
-	private int calculateGravity(long posA, long posB) {
+	private int calculateGravity(Integer posA, Integer posB) {
 		if (posA > posB) {
 			return (-1);
 		}
@@ -65,18 +67,17 @@ public class Moon {
 	 * Adjusts the position based on the current velocity.
 	 */
 	public void move() {
-		getPosition().setX(getPosition().getX().intValue() + getVelocity().getX().intValue());
-		getPosition().setY(getPosition().getY().intValue() + getVelocity().getY().intValue());
-		getPosition().setZ(getPosition().getZ().intValue() + getVelocity().getZ().intValue());
+		getPosition().setX(getPosition().getX() + getVelocity().getX());
+		getPosition().setY(getPosition().getY() + getVelocity().getY());
+		getPosition().setZ(getPosition().getZ() + getVelocity().getZ());
 	}
 
 	/**
 	 * Calculates the total energy of the moon.
 	 */
 	public long getEnergy() {
-		Triple origin = new Triple(0, 0, 0);
-		long pe = getPosition().getManhattanDistance(origin);
-		long ke = getVelocity().getManhattanDistance(origin);
+		long pe = getPosition().getManhattanDistance(ORIGIN);
+		long ke = getVelocity().getManhattanDistance(ORIGIN);
 		return (pe * ke);
 	}
 
@@ -109,14 +110,14 @@ public class Moon {
 	/**
 	 * Accessor for the position
 	 */
-	public Triple getPosition() {
+	public Triple<Integer> getPosition() {
 		return _position;
 	}
 
 	/**
 	 * Accessor for the velocity
 	 */
-	public Triple getVelocity() {
+	public Triple<Integer> getVelocity() {
 		return _velocity;
 	}
 

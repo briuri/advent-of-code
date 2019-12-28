@@ -50,7 +50,7 @@ public class Day23 extends BasePuzzle {
 		}
 
 		Set<Pair> sentPackets = new HashSet<>();
-		Pair nat = null;
+		Pair<Long> nat = null;
 		while (true) {
 			// Queue up any packets.
 			for (Computer sender : computers.values()) {
@@ -62,7 +62,7 @@ public class Day23 extends BasePuzzle {
 						if (part == Part.ONE) {
 							return (y);
 						}
-						nat = new Pair(x.intValue(), y.intValue());
+						nat = new Pair(x.longValue(), y.longValue());
 					}
 					else {
 						Computer receiver = computers.get(address);
@@ -80,10 +80,10 @@ public class Day23 extends BasePuzzle {
 				}
 				if (allIdle && nat != null) {
 					Computer receiver = computers.get(0L);
-					receiver.getInputs().add(nat.getX().longValue());
-					receiver.getInputs().add(nat.getY().longValue());
+					receiver.getInputs().add(nat.getX());
+					receiver.getInputs().add(nat.getY());
 					if (sentPackets.contains(nat)) {
-						return (nat.getY().intValue());
+						return (nat.getY());
 					}
 					sentPackets.add(nat);
 				}

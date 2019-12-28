@@ -56,14 +56,14 @@ public class Day13 extends BasePuzzle {
 		// Part TWO
 		int score = 0;
 		computer = new Computer(program, 2L);
-		Pair ball = null;
-		Pair paddle = null;
+		Pair<Integer> ball = null;
+		Pair<Integer> paddle = null;
 		while (true) {
 			long joystick = 0;
 			if (ball == null || ball.getX() == paddle.getX()) {
 				joystick = 0;
 			}
-			else if (ball.getX().intValue() > paddle.getX().intValue()) {
+			else if (ball.getX() > paddle.getX()) {
 				joystick = 1;
 			}
 			else {
@@ -72,6 +72,7 @@ public class Day13 extends BasePuzzle {
 			computer.getInputs().add(joystick);
 			computer.run();
 			outputs = computer.getOutputs();
+			
 			// Note: Entire grid does not repaint each time. Subsequent output lengths are shorter.
 			while (!outputs.isEmpty()) {
 				int x = outputs.remove(0).intValue();

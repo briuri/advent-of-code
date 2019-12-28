@@ -49,7 +49,7 @@ public abstract class BasePuzzle {
 	/**
 	 * Gets the entry with the minimum value from a Map
 	 */
-	protected static <S, T extends Comparable> Map.Entry<S, T> getMin(Map<S, T> map) {
+	public static <S, T extends Comparable> Map.Entry<S, T> getMin(Map<S, T> map) {
 		Map.Entry<S, T> minEntry = null;
 		for (Map.Entry<S, T> entry : map.entrySet()) {
 			if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
@@ -89,7 +89,7 @@ public abstract class BasePuzzle {
 	/**
 	 * Recursively finds the greatest common denominator of two numbers.
 	 */
-	protected static long getGCD(long a, long b) {
+	public static long getGCD(long a, long b) {
 		if (a == 0) {
 			return (b);
 		}

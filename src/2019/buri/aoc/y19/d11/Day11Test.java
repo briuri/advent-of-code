@@ -2,8 +2,6 @@ package buri.aoc.y19.d11;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.BaseTest;
@@ -16,8 +14,7 @@ public class Day11Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		List<Long> input = Day11.getInput(0);
-		assertEquals(613, input.size());
+		assertEquals(613, Day11.getInput(0).size());
 	}
 
 	/**
@@ -25,9 +22,9 @@ public class Day11Test extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day11.getResult(Part.ONE, Day11.getInput(0));
+		String result = Day11.getResult(Part.ONE, Day11.getInput(0));
 		toConsole(result);
-		assertEquals(2319, result);
+		assertEquals("2319", result);
 	}
 
 	/**
@@ -35,9 +32,9 @@ public class Day11Test extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day11.getResult(Part.TWO, Day11.getInput(0));
+		String result = Day11.getResult(Part.TWO, Day11.getInput(0));
 		toConsole(result);
 		// UERPRFGJ
-		assertEquals(0, result);
+		assertTrue(result.startsWith(" ■  ■ ■■■■ ■■■  ■■■  ■■■  ■■■■  ■■    ■■"));
 	}
 }

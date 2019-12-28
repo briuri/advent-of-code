@@ -33,10 +33,11 @@ public class Day25 extends BasePuzzle {
 	public static String getResult(Part part, List<Long> program) throws IOException {
 		Computer computer = new Computer(program);
 		// Replaced my input loop with automated commands after I beat the puzzle.
-		String[] walkthrough = new String[] { "east", "east", "east", "take ornament", "north", "west",
-			"take fixed point", "east", "south", "west", "north", "north", "take asterisk", "south", "west", "west",
-			"take astronaut ice cream", "east", "east", "south", "west", "south", "south", "west", "north", "north",
-			"north", "east" };
+		String[] walkthrough = new String[] { 
+			"east", "east", "east", "take ornament", "north", "west", "take fixed point",
+			"east", "south", "west", "north", "north", "take asterisk", 
+			"south", "west", "west", "take astronaut ice cream", "east", "east", "south", "west", 
+			"south", "south", "west", "north", "north",	"north", "east" };
 		for (String command : walkthrough) {
 			computer.getInputs().addAll(Computer.toAscii(command));
 		}

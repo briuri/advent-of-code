@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Base class used for running Intcode programs.
+ * Computer class used for running Intcode programs.
+ * 
  * - y19d2, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25
  * 
  * @author Brian Uri!
@@ -56,7 +57,7 @@ public class Computer {
 	}
 
 	/**
-	 * Converts the program into Intcode inputs. (y19)
+	 * Converts the program into Intcode inputs and adds a line break.
 	 */
 	public static List<Long> toAscii(String routine) {
 		List<Long> list = new ArrayList<>();

@@ -16,7 +16,7 @@ import buri.aoc.Part;
 public class Day06 extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of string orbits.
+	 * Returns the input file unmodified, as a list of string orbits.
 	 */
 	public static List<String> getInput(int fileIndex) {
 		return (readFile(fileIndex));
@@ -32,15 +32,13 @@ public class Day06 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, List<String> input) {
 		// Build orbital map
-		Planet com = new Planet("COM", null);
 		Map<String, Planet> planets = new HashMap<>();
-		planets.put(com.getName(), com);
+		Planet com = new Planet("COM", null);
+		planets.put(com.getName(), com);		
 		for (String orbit : input) {
 			String[] tokens = orbit.split("\\)");
-			Planet planet = planets.get(tokens[1]);
-			if (planet == null) {
-				planet = new Planet(tokens[1], tokens[0]);
-				planets.put(tokens[1], planet);
+			if (!planets.containsKey(tokens[1])) {
+				planets.put(tokens[1], new Planet(tokens[1], tokens[0]));
 			}
 		}
 		// Initialize all parents.

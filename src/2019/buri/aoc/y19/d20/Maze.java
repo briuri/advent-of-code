@@ -20,8 +20,8 @@ import buri.aoc.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Maze extends CharGrid {
-	private Triple _start;
-	private Triple _end;
+	private Triple<Integer> _start;
+	private Triple<Integer> _end;
 	private Map<Character, Triple> _warpPoints;
 
 	private static final char WALL = '#';
@@ -39,7 +39,7 @@ public class Maze extends CharGrid {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
 				Character tile = line.charAt(x);
-				Triple position = new Triple(x, y, 0);
+				Triple<Integer> position = new Triple(x, y, 0);
 				if (tile == START) {
 					_start = position;
 				}
@@ -55,6 +55,9 @@ public class Maze extends CharGrid {
 		}
 	}
 
+	/**
+	 * Counts steps using part-specific rules for neighbor selection.
+	 */
 	public int getSteps(Part part) {
 		List<Triple> ends = new ArrayList<>();
 		ends.add(getEnd());
@@ -64,7 +67,7 @@ public class Maze extends CharGrid {
 		frontier.add(getStart());
 		Map<Triple, Triple> cameFrom = new HashMap<>();
 		cameFrom.put(getStart(), null);
-		Triple current = null;
+		Triple<Integer> current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (Triple next : getTraversableNeighbors(part, getStart(), current)) {
@@ -85,30 +88,30 @@ public class Maze extends CharGrid {
 	/**
 	 * Returns traversable cells adjacent to some position, ignoring doors.
 	 */
-	private List<Triple> getTraversableNeighbors(Part part, Triple start, Triple current) {
+	private List<Triple> getTraversableNeighbors(Part part, Triple<Integer> start, Triple<Integer> current) {
 		List<Triple> neighbors = new ArrayList<>();
-		neighbors.add(new Triple(current.getX().intValue(), current.getY().intValue() - 1, current.getZ().intValue()));
-		neighbors.add(new Triple(current.getX().intValue() - 1, current.getY().intValue(), current.getZ().intValue()));
-		neighbors.add(new Triple(current.getX().intValue() + 1, current.getY().intValue(), current.getZ().intValue()));
-		neighbors.add(new Triple(current.getX().intValue(), current.getY().intValue() + 1, current.getZ().intValue()));
+		neighbors.add(new Triple(current.getX(), current.getY() - 1, current.getZ()));
+		neighbors.add(new Triple(current.getX() - 1, current.getY(), current.getZ()));
+		neighbors.add(new Triple(current.getX() + 1, current.getY(), current.getZ()));
+		neighbors.add(new Triple(current.getX(), current.getY() + 1, current.getZ()));
 		for (Iterator<Triple> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Triple position = iterator.next();
-			Character tile = get((int) position.getX(), (int) position.getY());
+			Triple<Integer> position = iterator.next();
+			Character tile = get(position.getX(), position.getY());
 			// Remove any that are not traversable.
 			if (position.equals(start) || tile == WALL) {
 				iterator.remove();
 			}
 		}
 		// Add a teleport. Don't go too deep, in hopes that the answer is a closer path.
-		if (isTeleport(part, current) && current.getZ().intValue() < getWarpPoints().size()) {
-			Character tile = get((int) current.getX(), (int) current.getY());
+		if (isTeleport(part, current) && current.getZ() < getWarpPoints().size()) {
+			Character tile = get(current.getX(), current.getY());
 			Triple target = getWarpPoints().get(getTarget(tile)).copy();
 			if (part == Part.TWO) {
 				if (Character.isLowerCase(tile) || tile == '0') {
-					target.setZ(current.getZ().intValue() + 1);
+					target.setZ(current.getZ() + 1);
 				}
 				else {
-					target.setZ(current.getZ().intValue() - 1);
+					target.setZ(current.getZ() - 1);
 				}
 			}
 			neighbors.add(target);
@@ -119,10 +122,10 @@ public class Maze extends CharGrid {
 	/**
 	 * Returns true if on a teleport tile.
 	 */
-	private boolean isTeleport(Part part, Triple current) {
+	private boolean isTeleport(Part part, Triple<Integer> current) {
 		Character tile = get((int) current.getX(), (int) current.getY());
 		boolean isPossibleTP = (Character.isAlphabetic(tile) || Character.isDigit(tile));
-		if (part == Part.ONE || current.getZ().intValue() != 0) {
+		if (part == Part.ONE || current.getZ() != 0) {
 			return (isPossibleTP);
 		}
 		// Only inner TPs work on outermost level.
@@ -147,14 +150,14 @@ public class Maze extends CharGrid {
 	/**
 	 * Accessor for the start
 	 */
-	private Triple getStart() {
+	private Triple<Integer> getStart() {
 		return _start;
 	}
 
 	/**
 	 * Accessor for the end
 	 */
-	private Triple getEnd() {
+	private Triple<Integer> getEnd() {
 		return _end;
 	}
 

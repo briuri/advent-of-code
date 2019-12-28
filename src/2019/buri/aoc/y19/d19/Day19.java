@@ -36,10 +36,10 @@ public class Day19 extends BasePuzzle {
 	 */
 	public static long getResult(Part part, List<Long> program) {
 		if (part == Part.ONE) {
-			int sum = 0;
-			for (int y = 0; y < 50; y++) {
-				for (int x = 0; x < 50; x++) {
-					int out = run(program, new Pair(x, y));
+			long sum = 0;
+			for (long y = 0; y < 50; y++) {
+				for (long x = 0; x < 50; x++) {
+					long out = run(program, new Pair(x, y));
 					sum += out;
 				}
 			}
@@ -48,8 +48,8 @@ public class Day19 extends BasePuzzle {
 
 		// Part TWO
 		final int SIZE = 100;
-		int y = SIZE + 1;
-		int x = 0;
+		long y = SIZE + 1;
+		long x = 0;
 		// Search row by row from lower left corner of beam.
 		while (true) {
 			// Skip ahead in current row to first tractor beam.
@@ -65,7 +65,7 @@ public class Day19 extends BasePuzzle {
 			Pair upperRight = new Pair(x + SIZE - 1, y - SIZE + 1);
 			// Boolean short-circuit avoids unnecessary corner checks.
 			if (run(program, lowerRight) == 1 && run(program, upperLeft) == 1 && run(program, upperRight) == 1) {
-				return (upperLeft.getX().intValue() * 10000 + (upperLeft.getY().intValue()));
+				return (upperLeft.getX().longValue() * 10000 + (upperLeft.getY().longValue()));
 			}
 			y += 1;
 		}
@@ -74,12 +74,11 @@ public class Day19 extends BasePuzzle {
 	/**
 	 * Runs the Intcode computer against the given point.
 	 */
-	private static int run(List<Long> program, Pair position) {
+	private static long run(List<Long> program, Pair<Long> position) {
 		Computer computer = new Computer(program);
-		computer.getInputs().add(position.getX().longValue());
-		computer.getInputs().add(position.getY().longValue());
+		computer.getInputs().add(position.getX());
+		computer.getInputs().add(position.getY());
 		computer.run();
-		int out = computer.getOutputs().remove(0).intValue();
-		return (out);
+		return (computer.getOutputs().remove(0));
 	}
 }

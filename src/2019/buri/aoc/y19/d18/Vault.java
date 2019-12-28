@@ -85,8 +85,8 @@ public class Vault extends CharGrid {
 	 * Walks a route to find all the doors and the number of steps (assuming all keys acquired).
 	 */
 	private Route mapRoute(Character startChar, Character endChar) {
-		Pair start = getRoutePositionFor(startChar);
-		Pair end = getRoutePositionFor(endChar);
+		Pair<Integer> start = getRoutePositionFor(startChar);
+		Pair<Integer> end = getRoutePositionFor(endChar);
 
 		List<Pair> possibleKeys = new ArrayList<>();
 		possibleKeys.add(end);
@@ -96,7 +96,7 @@ public class Vault extends CharGrid {
 		frontier.add(start);
 		Map<Pair, Pair> cameFrom = new HashMap<>();
 		cameFrom.put(start, null);
-		Pair current = null;
+		Pair<Integer> current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (Pair next : getTraversableNeighbors(start, current)) {
@@ -162,7 +162,7 @@ public class Vault extends CharGrid {
 				int interimSteps = route.getSteps() + explore(stepCache, newKeys, end);
 				possibleSteps.put(end, interimSteps);
 			}
-			Map.Entry<Character, Integer> minimum = getMin(possibleSteps);
+			Map.Entry<Character, Integer> minimum = Day18.getMin(possibleSteps);
 			steps = minimum.getValue();
 		}
 		stepCache.put(cacheKey, steps);
@@ -201,12 +201,12 @@ public class Vault extends CharGrid {
 	/**
 	 * Returns traversable cells adjacent to some position, ignoring doors.
 	 */
-	private List<Pair> getTraversableNeighbors(Pair start, Pair current) {
+	private List<Pair> getTraversableNeighbors(Pair<Integer> start, Pair<Integer> current) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(current.getX(), current.getY().intValue() - 1));
-		neighbors.add(new Pair(current.getX().intValue() - 1, current.getY()));
-		neighbors.add(new Pair(current.getX().intValue() + 1, current.getY()));
-		neighbors.add(new Pair(current.getX(), current.getY().intValue() + 1));
+		neighbors.add(new Pair(current.getX(), current.getY() - 1));
+		neighbors.add(new Pair(current.getX() - 1, current.getY()));
+		neighbors.add(new Pair(current.getX() + 1, current.getY()));
+		neighbors.add(new Pair(current.getX(), current.getY() + 1));
 		// Remove any that are not traversable.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();
@@ -242,7 +242,7 @@ public class Vault extends CharGrid {
 	/**
 	 * Returns the location of a key or the start.
 	 */
-	private Pair getRoutePositionFor(Character character) {
+	private Pair<Integer> getRoutePositionFor(Character character) {
 		if (isStart(character)) {
 			return (getStarts().get(character));
 		}
@@ -260,19 +260,6 @@ public class Vault extends CharGrid {
 			buffer.append(key);
 		}
 		return (buffer.toString());
-	}
-
-	/**
-	 * Gets the entry with the minimum value from a Map
-	 */
-	private static <S, T extends Comparable> Map.Entry<S, T> getMin(Map<S, T> map) {
-		Map.Entry<S, T> minEntry = null;
-		for (Map.Entry<S, T> entry : map.entrySet()) {
-			if (minEntry == null || entry.getValue().compareTo(minEntry.getValue()) < 0) {
-				minEntry = entry;
-			}
-		}
-		return (minEntry);
 	}
 
 	/**

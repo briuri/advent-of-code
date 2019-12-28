@@ -1,9 +1,7 @@
 package buri.aoc.y19.d03;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import buri.aoc.BasePuzzle;
@@ -33,46 +31,44 @@ public class Day03 extends BasePuzzle {
 	 * Part 2:
 	 * What is the fewest combined steps the wires must take to reach an intersection?
 	 */
-	public static int getResult(Part part, List<String> input, int gridSize) {
+	public static long getResult(Part part, List<String> input, int gridSize) {
 		CharGrid grid = new CharGrid(new Pair(gridSize, gridSize));
-		final Pair centralPort = new Pair(grid.getWidth() / 2, grid.getHeight() / 2);
+		final Pair centralPort = grid.getCenterPosition();
 		Set<Pair> intersections = new HashSet<>();
 		char wireChar = 'A';
 		for (String wirePath : input) {
-			Pair currentPos = centralPort.copy();
+			Pair position = centralPort.copy();
 			for (String token : wirePath.split(",")) {
 				Direction direction = toDirection(token.charAt(0));
 				int length = Integer.valueOf(token.substring(1));
 				for (int i = 0; i < length; i++) {
-					currentPos.move(direction);
-					char oldChar = grid.get(currentPos);
-					grid.set(currentPos, wireChar);
+					position.move(direction);
+					char oldChar = grid.get(position);
+					grid.set(position, wireChar);
 
 					// Mark intersections while pathing out wire B.
 					if (oldChar == (wireChar - 1)) {
-						intersections.add(currentPos.copy());
+						intersections.add(position.copy());
 					}
 				}
 			}
 			wireChar++;
 		}
 		if (part == Part.ONE) {
-			Map<Pair, Long> mds = new HashMap<>();
+			long minDistance = Long.MAX_VALUE;
 			for (Pair intersection : intersections) {
-				mds.put(intersection, intersection.getManhattanDistance(centralPort));
+				minDistance = Math.min(minDistance, intersection.getManhattanDistance(centralPort));
 			}
-			return (getMin(mds).getValue().intValue());
+			return (minDistance);
 		}
 
 		// Part TWO
-		int minSteps = Integer.MAX_VALUE;
+		long minSteps = Long.MAX_VALUE;
 		for (Pair intersection : intersections) {
-			int stepsA = calcSteps(input.get(0), centralPort, intersection);
-			int stepsB = calcSteps(input.get(1), centralPort, intersection);
+			int stepsA = countSteps(input.get(0), centralPort, intersection);
+			int stepsB = countSteps(input.get(1), centralPort, intersection);
 			int totalSteps = stepsA + stepsB;
-			if (totalSteps < minSteps) {
-				minSteps = totalSteps;
-			}
+			minSteps = Math.min(minSteps, totalSteps);
 		}
 		return (minSteps);
 	}
@@ -97,16 +93,16 @@ public class Day03 extends BasePuzzle {
 	/**
 	 * Retraces a wire until it reaches an intersection for the first time and returns the distance.
 	 */
-	protected static int calcSteps(String wirePath, Pair centralPort, Pair intersection) {
+	protected static int countSteps(String wirePath, Pair centralPort, Pair intersection) {
 		int steps = 0;
-		Pair currentPos = centralPort.copy();
+		Pair position = centralPort.copy();
 		for (String token : wirePath.split(",")) {
 			Direction direction = toDirection(token.charAt(0));
 			int length = Integer.valueOf(token.substring(1));
 			for (int i = 0; i < length; i++) {
 				steps++;
-				currentPos.move(direction);
-				if (currentPos.equals(intersection)) {
+				position.move(direction);
+				if (position.equals(intersection)) {
 					return (steps);
 				}
 			}

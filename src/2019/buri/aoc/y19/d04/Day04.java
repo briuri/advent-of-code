@@ -36,9 +36,9 @@ public class Day04 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, List<Integer> range) {
 		int min = range.get(0);
-		int max = range.get(1) + 1;
+		int max = range.get(1);
 		int count = 0;
-		for (int testPassword = min; testPassword < max; testPassword++) {
+		for (int testPassword = min; testPassword < max + 1; testPassword++) {
 			if (isValidPassword(part, String.valueOf(testPassword))) {
 				count++;
 			}

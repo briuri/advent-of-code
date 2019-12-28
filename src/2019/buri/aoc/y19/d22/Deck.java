@@ -51,11 +51,11 @@ public class Deck {
 		// 2: a * (a * q + b) + b= a^2 * q + a * b + b = a^2 * q + (a + 1) * b
 		// 3: a * (a^2 * q + a * b + b) + b = a^3 * q + a^2 * b + a * b + b = a^3 * q + (a^2 + a + 1) * b
 		// t: a^t * q + ((a^t - 1) / (a - 1)) * b
-		BigInteger x1 = getA().modPow(t, getSize()).multiply(q); // a^t * q
-		BigInteger x2 = getA().modPow(t, getSize()).subtract(one); // (a^t - 1)
+		BigInteger x1 = getA().modPow(t, getSize()).multiply(q); 	// a^t * q
+		BigInteger x2 = getA().modPow(t, getSize()).subtract(one); 	// (a^t - 1)
 		BigInteger x3 = getA().subtract(one).modInverse(getSize()); // 1/(a - 1)
-		BigInteger x4 = x2.multiply(x3).multiply(getB()); // ((a^t - 1) / (a - 1)) * b
-		BigInteger result = x1.add(x4).mod(getSize()); // a^t * q + ((a^t - 1) / (a - 1)) * b
+		BigInteger x4 = x2.multiply(x3).multiply(getB()); 			// ((a^t - 1) / (a - 1)) * b
+		BigInteger result = x1.add(x4).mod(getSize()); 				// a^t * q + ((a^t - 1) / (a - 1)) * b
 		return (result.longValue());
 	}
 

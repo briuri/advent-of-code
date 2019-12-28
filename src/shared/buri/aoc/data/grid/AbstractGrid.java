@@ -27,6 +27,13 @@ public abstract class AbstractGrid<T> {
 	}
 
 	/**
+	 * Returns the point nearest to the center of the grid.
+	 */
+	public Pair getCenterPosition() {
+		return (new Pair(getWidth() / 2, getHeight() / 2));
+	}
+	
+	/**
 	 * Gets a value on the grid.
 	 */
 	public T get(Pair position) {

@@ -38,25 +38,25 @@ public class Day21 extends BasePuzzle {
 		// Jump if a hole is in A, B, or C, but only if D is ground.
 		// J = (!A || !B || !C) && D
 		String[] springscript1 = new String[] { "NOT A J", // J = !A
-			"NOT B T", // T = !B
-			"OR T J", // J = (!A || !B)
-			"NOT C T", // T = !C
-			"OR T J", // J = (!A || !B || !C)
-			"AND D J", // J = (!A || !B || !C) && D
+			"NOT B T", 	// T = !B
+			"OR T J", 	// J = (!A || !B)
+			"NOT C T", 	// T = !C
+			"OR T J", 	// J = (!A || !B || !C)
+			"AND D J", 	// J = (!A || !B || !C) && D
 			"WALK", };
 
 		// Jump if a hole is in A, B or C, but only if D is ground and you can walk or jump again.
 		// J = (!A || !B || !C) && D && (E || H))
 		String[] springscript2 = new String[] { "NOT A J", // J = !A
-			"NOT B T", // T = !B
-			"OR T J", // J = (!A || !B)
-			"NOT C T", // T = !C
-			"OR T J", // J = (!A || !B || !C)
-			"AND D J", // J = (!A || !B || !C) && D
-			"NOT E T", // T = !E
-			"NOT T T", // T = E
-			"OR H T", // T = (E || H)
-			"AND T J", // J = (!A || !B || !C) && D && (E || H)
+			"NOT B T", 	// T = !B
+			"OR T J", 	// J = (!A || !B)
+			"NOT C T", 	// T = !C
+			"OR T J", 	// J = (!A || !B || !C)
+			"AND D J", 	// J = (!A || !B || !C) && D
+			"NOT E T", 	// T = !E
+			"NOT T T", 	// T = E
+			"OR H T", 	// T = (E || H)
+			"AND T J", 	// J = (!A || !B || !C) && D && (E || H)
 			"RUN\n", };
 
 		String[] script = (part == Part.ONE ? springscript1 : springscript2);
@@ -84,9 +84,7 @@ public class Day21 extends BasePuzzle {
 					x++;
 				}
 			}
-			System.out.println(computer.getOutputs().size());
 		}
-
 		return (computer.getLastOutput());
 	}
 }

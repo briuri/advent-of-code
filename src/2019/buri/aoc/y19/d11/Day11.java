@@ -41,17 +41,16 @@ public class Day11 extends BasePuzzle {
 	 * After starting the robot on a single white panel instead, what registration identifier does it paint on your
 	 * hull?
 	 */
-	public static int getResult(Part part, List<Long> program) {
-		int size = (part == Part.ONE ? 200 : 90);
-		CharGrid hull = new CharGrid(new Pair(size, size));
+	public static String getResult(Part part, List<Long> program) {
+		Pair size = (part == Part.ONE ? new Pair(140, 128) : new Pair(85, 12));
+		CharGrid hull = new CharGrid(size);
 		for (int y = 0; y < hull.getHeight(); y++) {
 			for (int x = 0; x < hull.getWidth(); x++) {
 				hull.set(x, y, DEFAULT_BLACK);
 			}
 		}
-
 		Direction direction = Direction.UP;
-		Pair position = new Pair(hull.getWidth() / 2, hull.getHeight() / 2);
+		Pair position = hull.getCenterPosition();
 		hull.set(position, part == Part.ONE ? BLACK : WHITE);
 		Computer computer = new Computer(program);
 		while (true) {
@@ -62,12 +61,13 @@ public class Day11 extends BasePuzzle {
 			if (outputs.isEmpty()) {
 				break;
 			}
-			int nextColor = Long.valueOf(outputs.remove(0)).intValue();
+			long nextColor = outputs.remove(0);
 			long nextTurn = outputs.remove(0);
-			hull.set(position, nextColor == 0 ? BLACK : WHITE);
-			direction = (nextTurn == 0 ? direction.turnLeft() : direction.turnRight());
+			hull.set(position, nextColor == 0L ? BLACK : WHITE);
+			direction = (nextTurn == 0L ? direction.turnLeft() : direction.turnRight());
 			position.move(direction);
 		}
+		
 		if (part == Part.ONE) {
 			int panels = 0;
 			for (int y = 0; y < hull.getHeight(); y++) {
@@ -77,22 +77,33 @@ public class Day11 extends BasePuzzle {
 					}
 				}
 			}
-			return (panels);
+			return (String.valueOf(panels));
 		}
 
 		// Part TWO
-		// Make easier to read.
+		// Make easier to read and shift output to origin.
+		Pair<Integer> firstPaint = null;
 		for (int y = 0; y < hull.getHeight(); y++) {
 			for (int x = 0; x < hull.getWidth(); x++) {
-				if (hull.get(x, y) == BLACK) {
+				char value = hull.get(x, y);
+				if (value != DEFAULT_BLACK && firstPaint == null) {
+					firstPaint = new Pair(x, y);
+				}
+				if (value == BLACK) {
 					hull.set(x, y, DEFAULT_BLACK);
 				}
-				if (hull.get(x, y) == WHITE) {
+				if (value == WHITE) {
 					hull.set(x, y, VISUAL_WHITE);
 				}
 			}
 		}
-		System.out.println(hull);
-		return (0);
+		StringBuffer buffer = new StringBuffer();
+		for (int y = firstPaint.getY(); y < hull.getHeight(); y++) {
+			for (int x = firstPaint.getX(); x < hull.getWidth(); x++) {
+				buffer.append(hull.get(x, y));
+			}
+			buffer.append("\n");
+		}
+		return (buffer.toString());
 	}
 }

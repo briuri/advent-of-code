@@ -50,7 +50,7 @@ public class Maze extends CharGrid {
 		}
 
 		// Start in the middle of the grid.
-		_start = new Pair(getWidth() / 2, getHeight() / 2);
+		_start = getCenterPosition();
 		set(getStart(), START);
 	}
 
@@ -138,7 +138,7 @@ public class Maze extends CharGrid {
 		frontier.add(origin);
 		Map<Pair, Pair> cameFrom = new HashMap<>();
 		cameFrom.put(origin, null);
-		Pair current = null;
+		Pair<Integer> current = null;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (Pair next : getTraversableNeighbors(current, origin)) {
@@ -158,12 +158,12 @@ public class Maze extends CharGrid {
 	/**
 	 * Returns traversable cells adjacent to some position.
 	 */
-	private List<Pair> getTraversableNeighbors(Pair center, Pair origin) {
+	private List<Pair> getTraversableNeighbors(Pair<Integer> center, Pair origin) {
 		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY().intValue() - 1));
-		neighbors.add(new Pair(center.getX().intValue() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX().intValue() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY().intValue() + 1));
+		neighbors.add(new Pair(center.getX(), center.getY() - 1));
+		neighbors.add(new Pair(center.getX() - 1, center.getY()));
+		neighbors.add(new Pair(center.getX() + 1, center.getY()));
+		neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		// Remove any that are not traversable.
 		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
 			Pair position = iterator.next();

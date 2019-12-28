@@ -43,7 +43,7 @@ public class Day02 extends BasePuzzle {
 			for (long verb = 0; verb < 100; verb++) {
 				Computer computer = new Computer(program, noun, verb);
 				computer.run();
-				if (computer.get(0) == 19690720) {
+				if (computer.get(0) == 19690720L) {
 					return (100 * noun + verb);
 				}
 			}
