@@ -33,11 +33,11 @@ public class Day03 extends BasePuzzle {
 	 */
 	public static long getResult(Part part, List<String> input, int gridSize) {
 		CharGrid grid = new CharGrid(new Pair(gridSize, gridSize));
-		final Pair centralPort = grid.getCenterPosition();
+		final Pair<Integer> centralPort = grid.getCenterPosition();
 		Set<Pair> intersections = new HashSet<>();
 		char wireChar = 'A';
 		for (String wirePath : input) {
-			Pair position = centralPort.copy();
+			Pair<Integer> position = centralPort.copy();
 			for (String token : wirePath.split(",")) {
 				Direction direction = toDirection(token.charAt(0));
 				int length = Integer.valueOf(token.substring(1));

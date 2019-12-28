@@ -36,8 +36,8 @@ public abstract class AbstractGrid<T> {
 	/**
 	 * Gets a value on the grid.
 	 */
-	public T get(Pair position) {
-		return (get(position.getX().intValue(), position.getY().intValue()));
+	public T get(Pair<Integer> position) {
+		return (get(position.getX(), position.getY()));
 	}
 
 	/**
@@ -50,8 +50,8 @@ public abstract class AbstractGrid<T> {
 	/**
 	 * Sets a value on the grid.
 	 */
-	public void set(Pair position, T value) {
-		set(position.getX().intValue(), position.getY().intValue(), value);
+	public void set(Pair<Integer> position, T value) {
+		set(position.getX(), position.getY(), value);
 	}
 
 	/**

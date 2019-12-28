@@ -29,15 +29,15 @@ public class Day03 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, String input) {
 		IntGrid grid = new IntGrid(new Pair(500, 500));
-		Pair santa = grid.getCenterPosition();
-		Pair robosanta = grid.getCenterPosition();
+		Pair<Integer> santa = grid.getCenterPosition();
+		Pair<Integer> robosanta = grid.getCenterPosition();
 		grid.set(santa, grid.get(santa) + 1);
 		grid.set(robosanta, grid.get(santa) + 1);
 
 		// Process directions.
 		for (int i = 0; i < input.length(); i++) {
 			Direction direction = Direction.getDirectionFor(input.charAt(i));
-			Pair active;
+			Pair<Integer> active;
 			if (part == Part.ONE) {
 				active = santa;
 			}

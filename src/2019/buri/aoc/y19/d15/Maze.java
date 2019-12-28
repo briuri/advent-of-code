@@ -24,8 +24,8 @@ import buri.aoc.data.tuple.Pair;
  */
 public class Maze extends CharGrid {
 
-	private Pair _start;
-	private Pair _end;
+	private Pair<Integer> _start;
+	private Pair<Integer> _end;
 
 	private static final char WALL = '■';
 	private static final char UNEXPLORED = ' ';
@@ -85,7 +85,7 @@ public class Maze extends CharGrid {
 	/**
 	 * Recursive depth-first exploration of the maze
 	 */
-	public void explore(Pair start, Computer droid) {
+	public void explore(Pair<Integer> start, Computer droid) {
 		// Droid's location in Intcode for debugging. Offset of 16 from my grid coordinates.
 		// long x = droid.get(1039) + 16;
 		// long y = droid.get(1040) + 16;
@@ -94,7 +94,7 @@ public class Maze extends CharGrid {
 			set(start, EXPLORED);
 		}
 		for (Direction direction : Direction.values()) {
-			Pair next = start.copy();
+			Pair<Integer> next = start.copy();
 			next.move(direction);
 			if (get(next) == UNEXPLORED) {
 				droid.getInputs().add(toCommand(direction));
@@ -122,7 +122,7 @@ public class Maze extends CharGrid {
 	/**
 	 * Does a BFS determine path lengths.
 	 */
-	private List<Path> getPaths(Pair origin, Set<Character> destinationTiles) {
+	private List<Path> getPaths(Pair<Integer> origin, Set<Character> destinationTiles) {
 		// Get all locations.
 		List<Pair> destinations = new ArrayList<>();
 		for (int y = 0; y < getHeight(); y++) {
@@ -158,7 +158,7 @@ public class Maze extends CharGrid {
 	/**
 	 * Returns traversable cells adjacent to some position.
 	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> center, Pair origin) {
+	private List<Pair> getTraversableNeighbors(Pair<Integer> center, Pair<Integer> origin) {
 		List<Pair> neighbors = new ArrayList<>();
 		neighbors.add(new Pair(center.getX(), center.getY() - 1));
 		neighbors.add(new Pair(center.getX() - 1, center.getY()));
@@ -215,14 +215,14 @@ public class Maze extends CharGrid {
 	/**
 	 * Accessor for the start
 	 */
-	private Pair getStart() {
+	private Pair<Integer> getStart() {
 		return _start;
 	}
 
 	/**
 	 * Accessor for the end
 	 */
-	private Pair getEnd() {
+	private Pair<Integer> getEnd() {
 		return _end;
 	}
 

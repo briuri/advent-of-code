@@ -42,7 +42,7 @@ public class Day11 extends BasePuzzle {
 	 * hull?
 	 */
 	public static String getResult(Part part, List<Long> program) {
-		Pair size = (part == Part.ONE ? new Pair(140, 128) : new Pair(85, 12));
+		Pair<Integer> size = (part == Part.ONE ? new Pair(140, 128) : new Pair(85, 12));
 		CharGrid hull = new CharGrid(size);
 		for (int y = 0; y < hull.getHeight(); y++) {
 			for (int x = 0; x < hull.getWidth(); x++) {
@@ -50,7 +50,7 @@ public class Day11 extends BasePuzzle {
 			}
 		}
 		Direction direction = Direction.UP;
-		Pair position = hull.getCenterPosition();
+		Pair<Integer> position = hull.getCenterPosition();
 		hull.set(position, part == Part.ONE ? BLACK : WHITE);
 		Computer computer = new Computer(program);
 		while (true) {

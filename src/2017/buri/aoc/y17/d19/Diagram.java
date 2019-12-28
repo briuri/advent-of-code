@@ -79,10 +79,10 @@ public class Diagram extends CharGrid {
 	 * Determines the next direction at a corner. Assumes 1 true path and always 90 degrees.
 	 */
 	private Direction getNextDirection() {
-		Pair up = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() - 1);
-		Pair right = new Pair(getCurrentPosition().getX() + 1, getCurrentPosition().getY());
-		Pair down = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() + 1);
-		Pair left = new Pair(getCurrentPosition().getX() - 1, getCurrentPosition().getY());
+		Pair<Integer> up = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() - 1);
+		Pair<Integer> right = new Pair(getCurrentPosition().getX() + 1, getCurrentPosition().getY());
+		Pair<Integer> down = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() + 1);
+		Pair<Integer> left = new Pair(getCurrentPosition().getX() - 1, getCurrentPosition().getY());
 		Direction next = null;
 		if (getCurrentDirection() != null) {
 			switch (getCurrentDirection()) {

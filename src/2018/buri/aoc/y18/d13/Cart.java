@@ -9,14 +9,14 @@ import buri.aoc.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Cart implements Comparable<Cart> {
-	private Pair _position;
+	private Pair<Integer> _position;
 	private Direction _direction;
 	private int _intersectionCount;
 
 	/**
 	 * Constructor
 	 */
-	public Cart(Pair position, char icon) {
+	public Cart(Pair<Integer> position, char icon) {
 		_position = position;
 		setDirection(Direction.getDirectionFor(icon));
 		setIntersectionCount(0);
@@ -94,7 +94,7 @@ public class Cart implements Comparable<Cart> {
 	/**
 	 * Accessor for the position
 	 */
-	public Pair getPosition() {
+	public Pair<Integer> getPosition() {
 		return _position;
 	}
 
