@@ -11,11 +11,10 @@ These solutions all got the right answer for the puzzles, although I cannot guar
 
 These solutions use a naive solution that takes a long time to run, and could probably be replaced with a better algorithm.
 
-* **y16d23**
-* **y17d17**
-* **y18d11**
-* **y18d21** 
+* **y16d23** (16 min)
+* **y18d11** (8 min)
+* **y18d21** (10 min)
 
-In addition to the solutions, this project also contains a simple visualization of the leaderboard JSON (under `src/viz`) that can show the data as a Top 10 Fastest Times list for each puzzle.
+In addition to the solutions, this project also contains a simple visualization of the leaderboard JSON (under `src/viz`) that can show the data as a Top 10 Solve Times list for each puzzle.
 
 While I am making this source code available for public viewing, I am not releasing it under any sort of software license at this time.
