@@ -1,13 +1,8 @@
 package buri.aoc.y18.d11;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
+import buri.aoc.data.tuple.Quad;
 
 /**
  * Day 11: Chronal Charge
@@ -22,35 +17,35 @@ public class Day11 extends BasePuzzle {
 	 * 
 	 * Part 2:
 	 * What is the X,Y,size identifier of the square with the largest total power?
-	 * 
-	 * TODO: Optimize Part 2 so it doesn't take so long (6 minutes for the puzzle input).
 	 */
 	public static String getResult(Part part, int serial) {
-		final int gridSize = 300;
-		PowerGrid grid = new PowerGrid(gridSize, serial);
+	    final int size = 300;
+	    PowerGrid grid = new PowerGrid(size, serial);
 		if (part == Part.ONE) {
-			PowerGrid reduction = grid.getReduction(3);
-			return (reduction.getMaxValuePosition().toString());
+			return (grid.getMaxValuePosition(3).toString());
 		}
-
-		// Part TWO
-		List<Long> maxValues = new ArrayList<>();
-		Map<Integer, Position> positions = new HashMap<>();
-		// Calculate all possible reductions and record the max value from each.
-		for (int squareSumSize = 2; squareSumSize <= gridSize; squareSumSize++) {
-			Position p = grid.getReduction(squareSumSize).getMaxValuePosition();
-			maxValues.add(p.getValue());
-			positions.put(squareSumSize, p);
-		}
-
-		// Find the max of all square sums and then trace back to the squareSumSize for that max.
-		Long maxValue = Collections.max(maxValues);
-		for (Integer squareSumSize : positions.keySet()) {
-			Position position = positions.get(squareSumSize);
-			if (position.getValue() == maxValue) {
-				return (position.toString() + "," + squareSumSize);
+		
+		// Partial Sums for Part TWO
+	    for (int y = 1; y < size; y++) {
+	    	for (int x = 1; x < size; x++) {
+	    		// x,y is lower right corner of the square.
+	    		int value = grid.get(x, y) + grid.get(x - 1, y) + grid.get(x, y - 1) - grid.get(x - 1, y - 1);
+	    		grid.set(x, y, value);
 			}
 		}
-		throw new RuntimeException("Could not find the max sum.");
+		Quad<Integer> max = new Quad(0, 0, 0, 0);	// x, y, blockSize, power
+		for (int blockSize = 1; blockSize < size; blockSize++) {
+			for (int y = 0; y < size - blockSize; y++) {
+				for (int x = 0; x < size - blockSize; x++) {
+					// x,y is upper left corner of the square
+					int value = grid.get(x, y) + grid.get(x + blockSize, y + blockSize) 
+						- grid.get(x, y + blockSize) - grid.get(x + blockSize, y);
+					if (value > max.getT()) {
+						max = new Quad(x + 1, y + 1, blockSize, value);
+					}
+				}
+		    }
+		}
+		return (max.getX() + "," + max.getY() + "," + max.getZ());
 	}
 }

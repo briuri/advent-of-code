@@ -14,8 +14,8 @@ public class Day11Test extends BaseTest {
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals("33,45", Day11.getResult(Part.ONE, 18).toString());
-		assertEquals("21,61", Day11.getResult(Part.ONE, 42).toString());
+		assertEquals("33,45", Day11.getResult(Part.ONE, 18));
+		assertEquals("21,61", Day11.getResult(Part.ONE, 42));
 	}
 
 	/**
@@ -25,13 +25,13 @@ public class Day11Test extends BaseTest {
 	public void testPart1Puzzle() {
 		String result = Day11.getResult(Part.ONE, 7139);
 		toConsole(result);
-		assertEquals("20,62", result.toString());
+		assertEquals("20,62", result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals("90,269,16", Day11.getResult(Part.TWO, 18).toString());
-		assertEquals("232,251,12", Day11.getResult(Part.TWO, 42).toString());
+		assertEquals("90,269,16", Day11.getResult(Part.TWO, 18));
+		assertEquals("232,251,12", Day11.getResult(Part.TWO, 42));
 	}
 
 	/**
