@@ -1,17 +1,16 @@
 package buri.aoc.y19.d20;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import buri.aoc.Part;
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.path.Path;
 import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 import buri.aoc.data.tuple.Triple;
 
@@ -60,64 +59,12 @@ public class Maze extends CharGrid {
 	 * Counts steps using part-specific rules for neighbor selection.
 	 */
 	public int getSteps(Part part) {
-		List<Triple> ends = new ArrayList<>();
+		WarpStepStrategy strategy = new WarpStepStrategy(part);
+		Map<Triple<Integer>, Triple<Integer>> cameFrom = Pathfinder.breadthFirstSearch(getStart(), strategy);
+		List<Triple<Integer>> ends = new ArrayList<>();
 		ends.add(getEnd());
-
-		// BFS
-		Queue<Triple> frontier = new ArrayDeque<>();
-		frontier.add(getStart());
-		Map<Triple, Triple> cameFrom = new HashMap<>();
-		cameFrom.put(getStart(), null);
-		Triple<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Triple next : getTraversableNeighbors(part, getStart(), current)) {
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-					if (next.equals(getEnd())) {
-						break;
-					}
-				}
-			}
-		}
-
 		List<Path> paths = Pathfinder.toPaths(getStart(), ends, cameFrom);
 		return (paths.get(0).getLength());
-	}
-
-	/**
-	 * Returns traversable cells adjacent to some position, ignoring doors.
-	 */
-	private List<Triple> getTraversableNeighbors(Part part, Triple<Integer> start, Triple<Integer> current) {
-		List<Triple> neighbors = new ArrayList<>();
-		neighbors.add(new Triple(current.getX(), current.getY() - 1, current.getZ()));
-		neighbors.add(new Triple(current.getX() - 1, current.getY(), current.getZ()));
-		neighbors.add(new Triple(current.getX() + 1, current.getY(), current.getZ()));
-		neighbors.add(new Triple(current.getX(), current.getY() + 1, current.getZ()));
-		for (Iterator<Triple> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Triple<Integer> position = iterator.next();
-			Character tile = get(position.getX(), position.getY());
-			// Remove any that are not traversable.
-			if (position.equals(start) || tile == WALL) {
-				iterator.remove();
-			}
-		}
-		// Add a teleport. Don't go too deep, in hopes that the answer is a closer path.
-		if (isTeleport(part, current) && current.getZ() < getWarpPoints().size()) {
-			Character tile = get(current.getX(), current.getY());
-			Triple target = getWarpPoints().get(getTarget(tile)).copy();
-			if (part == Part.TWO) {
-				if (Character.isLowerCase(tile) || tile == '0') {
-					target.setZ(current.getZ() + 1);
-				}
-				else {
-					target.setZ(current.getZ() - 1);
-				}
-			}
-			neighbors.add(target);
-		}
-		return (neighbors);
 	}
 
 	/**
@@ -167,5 +114,56 @@ public class Maze extends CharGrid {
 	 */
 	private Map<Character, Triple> getWarpPoints() {
 		return _warpPoints;
+	}
+
+	class WarpStepStrategy implements StepStrategy<Triple<Integer>> {
+		private Part _part;
+
+		/**
+		 * Constructor
+		 */
+		public WarpStepStrategy(Part part) {
+			_part = part;
+		}
+
+		@Override
+		public List<Triple<Integer>> getNextSteps(Triple<Integer> current) {
+			List<Triple<Integer>> nextSteps = new ArrayList<>();
+			nextSteps.add(new Triple(current.getX(), current.getY() - 1, current.getZ()));
+			nextSteps.add(new Triple(current.getX() - 1, current.getY(), current.getZ()));
+			nextSteps.add(new Triple(current.getX() + 1, current.getY(), current.getZ()));
+			nextSteps.add(new Triple(current.getX(), current.getY() + 1, current.getZ()));
+			for (Iterator<Triple<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Triple<Integer> position = iterator.next();
+				Character tile = get(position.getX(), position.getY());
+				// Remove any that are not traversable.
+				if (tile == WALL) {
+					iterator.remove();
+				}
+			}
+			// Add a teleport. Don't go too deep, in hopes that the answer is a closer path.
+			if (isTeleport(getPart(), current) && current.getZ() < getWarpPoints().size()) {
+				Character tile = get(current.getX(), current.getY());
+				Triple target = getWarpPoints().get(getTarget(tile)).copy();
+				if (getPart() == Part.TWO) {
+					if (Character.isLowerCase(tile) || tile == '0') {
+						target.setZ(current.getZ() + 1);
+					}
+					else {
+						target.setZ(current.getZ() - 1);
+					}
+				}
+				nextSteps.add(target);
+			}
+			return (nextSteps);
+
+		}
+
+		/**
+		 * Accessor for the part
+		 */
+		private Part getPart() {
+			return _part;
+		}
 	}
 }
