@@ -1,14 +1,11 @@
 package buri.aoc.y19.d15;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
 
 import buri.aoc.data.Direction;
@@ -16,6 +13,7 @@ import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.intcode.Computer;
 import buri.aoc.data.path.Path;
 import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -38,7 +36,22 @@ public class Maze extends CharGrid {
 	private static final long SOUTH = 2L;
 	private static final long WEST = 3L;
 	private static final long EAST = 4L;
-
+	
+	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
+		@Override
+		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
+			List<Pair<Integer>> nextSteps = current.getAdjacent();
+			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Pair<Integer> position = iterator.next();
+				// Remove any that are walls.
+				if (get(position) == WALL) {
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
+	
 	/**
 	 * Constructor
 	 */
@@ -123,9 +136,10 @@ public class Maze extends CharGrid {
 	/**
 	 * Does a BFS determine path lengths.
 	 */
-	private List<Path> getPaths(Pair<Integer> origin, Set<Character> destinationTiles) {
+	private List<Path> getPaths(Pair<Integer> start, Set<Character> destinationTiles) {
+		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(start, STEP_STRATEGY);
 		// Get all locations.
-		List<Pair> destinations = new ArrayList<>();
+		List<Pair<Integer>> destinations = new ArrayList<>();
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				if (destinationTiles.contains(get(x, y))) {
@@ -134,45 +148,10 @@ public class Maze extends CharGrid {
 			}
 		}
 
-		// Do a BFS to find nearest location.
-		Queue<Pair> frontier = new ArrayDeque<>();
-		frontier.add(origin);
-		Map<Pair, Pair> cameFrom = new HashMap<>();
-		cameFrom.put(origin, null);
-		Pair<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Pair next : getTraversableNeighbors(current, origin)) {
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-				}
-			}
-		}
-
 		// Return all paths in descending order of length.
-		List<Path> paths = Pathfinder.toPaths(origin, destinations, cameFrom);
+		List<Path> paths = Pathfinder.toPaths(start, destinations, cameFrom);
 		Collections.reverse(paths);
 		return (paths);
-	}
-
-	/**
-	 * Returns traversable cells adjacent to some position.
-	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> center, Pair<Integer> origin) {
-		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY() + 1));
-		// Remove any that are not traversable.
-		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair position = iterator.next();
-			if (get(position) == WALL || position.equals(origin)) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
 	}
 
 	/**
