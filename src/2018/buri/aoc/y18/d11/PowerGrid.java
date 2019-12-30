@@ -32,38 +32,31 @@ public class PowerGrid extends IntGrid {
 					power = Character.getNumericValue(hundreds);
 				}
 				power = power - 5;
-				set(new Position(x, y), power);
+				set(x, y, power);
 			}
 		}
-	}
-
-	/**
-	 * Generates a reduced grid containing the sums of squares within the larger grid.
-	 */
-	public PowerGrid getReduction(int squareSumSize) {
-		PowerGrid grid = new PowerGrid(getWidth() - (squareSumSize - 1), 0);
-		for (int y = 0; y < grid.getHeight(); y++) {
-			for (int x = 0; x < grid.getWidth(); x++) {
-				Position upperLeft = new Position(x, y);
-				grid.set(upperLeft, getSquareSum(upperLeft, squareSumSize));
-			}
-		}
-		return (grid);
 	}
 
 	/**
 	 * Searches the entire grid for the cell with the largest value.
 	 */
-	public Position getMaxValuePosition() {
-		Position maxPosition = null;
+	public Pair<Integer> getMaxValuePosition(int squareSumSize) {
+		PowerGrid grid = new PowerGrid(getWidth() - (squareSumSize - 1), 0);
+		for (int y = 0; y < grid.getHeight(); y++) {
+			for (int x = 0; x < grid.getWidth(); x++) {
+				Pair<Integer> upperLeft = new Pair(x, y);
+				grid.set(upperLeft, getSquareSum(upperLeft, squareSumSize));
+			}
+		}
+		
+		Pair<Integer> maxPosition = null;
 		long maxValue = Long.MIN_VALUE;
-		for (int y = 0; y < getHeight(); y++) {
-			for (int x = 0; x < getWidth(); x++) {
-				Position position = new Position(x, y);
-				long value = get(position);
+		for (int y = 0; y < grid.getHeight(); y++) {
+			for (int x = 0; x < grid.getWidth(); x++) {
+				Pair<Integer> position = new Pair(x, y);
+				long value = grid.get(position);
 				if (value > maxValue) {
 					maxValue = value;
-					position.setValue(value);
 					maxPosition = position;
 				}
 			}
@@ -74,7 +67,7 @@ public class PowerGrid extends IntGrid {
 	/**
 	 * Returns the sum of all cells in a square starting from the upper-left cell.
 	 */
-	public int getSquareSum(Position ul, int squareSumSize) {
+	public int getSquareSum(Pair<Integer> ul, int squareSumSize) {
 		int sum = 0;
 		for (int dx = 0; dx < squareSumSize; dx++) {
 			for (int dy = 0; dy < squareSumSize; dy++) {
