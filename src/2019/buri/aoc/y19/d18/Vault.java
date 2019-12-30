@@ -1,6 +1,5 @@
 package buri.aoc.y19.d18;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,12 +7,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
 
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.path.Path;
 import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -30,6 +29,21 @@ public class Vault extends CharGrid {
 	private static final char WALL = '#';
 	private static final char START = '@';
 
+	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
+		@Override
+		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
+			List<Pair<Integer>> nextSteps = current.getAdjacent();
+			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Pair<Integer> position = iterator.next();
+				// Remove any that are walls.
+				if (get(position) == WALL) {
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
+		
 	/**
 	 * Constructor
 	 */
@@ -89,24 +103,10 @@ public class Vault extends CharGrid {
 		Pair<Integer> start = getRoutePositionFor(startChar);
 		Pair<Integer> end = getRoutePositionFor(endChar);
 
-		List<Pair> possibleKeys = new ArrayList<>();
-		possibleKeys.add(end);
-
 		// BFS with all doors unlocked
-		Queue<Pair> frontier = new ArrayDeque<>();
-		frontier.add(start);
-		Map<Pair, Pair> cameFrom = new HashMap<>();
-		cameFrom.put(start, null);
-		Pair<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Pair next : getTraversableNeighbors(start, current)) {
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-				}
-			}
-		}
+		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(start, STEP_STRATEGY);
+		List<Pair<Integer>> possibleKeys = new ArrayList<>();
+		possibleKeys.add(end);
 
 		// Exactly 1 path between keys in Part 1. Possibly 0 paths in Part 2.
 		List<Path> paths = Pathfinder.toPaths(start, possibleKeys, cameFrom);
@@ -197,26 +197,6 @@ public class Vault extends CharGrid {
 			}
 		}
 		return (false);
-	}
-
-	/**
-	 * Returns traversable cells adjacent to some position, ignoring doors.
-	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> start, Pair<Integer> current) {
-		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(current.getX(), current.getY() - 1));
-		neighbors.add(new Pair(current.getX() - 1, current.getY()));
-		neighbors.add(new Pair(current.getX() + 1, current.getY()));
-		neighbors.add(new Pair(current.getX(), current.getY() + 1));
-		// Remove any that are not traversable.
-		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair position = iterator.next();
-			Character tile = get(position);
-			if (position.equals(start) || tile == WALL) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
 	}
 
 	/**
