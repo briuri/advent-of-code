@@ -9,6 +9,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -33,6 +34,33 @@ public class Maze extends CharGrid {
 
 	private static final Position MOUTH_POSITION = new Position(0, 0, TORCH);
 
+	private final StepStrategy<Position> STEP_STRATEGY = new StepStrategy<Position>() {
+		@Override
+		public List<Position> getNextSteps(Position current) {
+			List<Position> nextSteps = new ArrayList<>();
+			if (current.getY() > 0) {
+				nextSteps.add(new Position(current.getX(), current.getY() - 1, current.getItem()));
+			}
+			if (current.getX() > 0) {
+				nextSteps.add(new Position(current.getX() - 1, current.getY(), current.getItem()));
+			}
+			if (current.getX() < getWidth() - 1) {
+				nextSteps.add(new Position(current.getX() + 1, current.getY(), current.getItem()));
+			}
+			if (current.getY() < getHeight() - 1) {
+				nextSteps.add(new Position(current.getX(), current.getY() + 1, current.getItem()));
+			}			
+			for (Iterator<Position> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Position position = iterator.next();
+				// Remove any incompatible item / terrain matches.
+				if (!isItemAllowed(position.getItem(), position)) {
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
+	
 	/**
 	 * Constructor
 	 */
@@ -135,7 +163,7 @@ public class Maze extends CharGrid {
 			}
 
 			// Evaluate moving to any allowable cells while keeping our current item.
-			for (Position next : getTraversableNeighbors(node.getPosition())) {
+			for (Position next : STEP_STRATEGY.getNextSteps(node.getPosition())) {
 				evaluateNext(frontier, visitedNodes, next, node.getCostSoFar() + 1);
 			}
 
@@ -158,34 +186,6 @@ public class Maze extends CharGrid {
 			frontier.add(new Node(next, nextTime));
 			visitedNodes.put(next.toString(), nextTime);
 		}
-	}
-
-	/**
-	 * Returns traversable cells adjacent to some position, taking equipped item into account.
-	 */
-	private List<Position> getTraversableNeighbors(Position center) {
-		List<Position> neighbors = new ArrayList<>();
-		if (center.getY() >= 1) {
-			neighbors.add(new Position(center.getX(), center.getY() - 1, center.getItem()));
-		}
-		if (center.getX() >= 1) {
-			neighbors.add(new Position(center.getX() - 1, center.getY(), center.getItem()));
-		}
-		if (center.getX() < getWidth() - 1) {
-			neighbors.add(new Position(center.getX() + 1, center.getY(), center.getItem()));
-		}
-		if (center.getY() < getHeight() - 1) {
-			neighbors.add(new Position(center.getX(), center.getY() + 1, center.getItem()));
-		}
-
-		// Remove any with incompatible item / terrain matches.
-		for (Iterator<Position> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Position position = iterator.next();
-			if (!isItemAllowed(position.getItem(), position)) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
 	}
 
 	/**

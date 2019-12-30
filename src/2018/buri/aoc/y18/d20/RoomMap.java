@@ -1,20 +1,18 @@
 package buri.aoc.y18.d20;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.path.Path;
 import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -37,6 +35,21 @@ public class RoomMap extends CharGrid {
 	private static final char EAST = 'E';
 	private static final char SOUTH = 'S';
 	private static final char WEST = 'W';
+
+	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
+		@Override
+		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
+			List<Pair<Integer>> nextSteps = current.getAdjacent();
+			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Pair<Integer> position = iterator.next();
+				// Remove any that are walls.
+				if (get(position) == WALL) {
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
 
 	/**
 	 * Constructor
@@ -193,8 +206,9 @@ public class RoomMap extends CharGrid {
 	 * Does a BFS to find nearest rooms, then generates paths to those rooms in descending length order.
 	 */
 	private List<Path> getPaths() {
+		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(getStart(), STEP_STRATEGY);
 		// Get all known rooms.
-		List<Pair> destinations = new ArrayList<>();
+		List<Pair<Integer>> destinations = new ArrayList<>();
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				if (get(x, y) == ROOM) {
@@ -202,46 +216,10 @@ public class RoomMap extends CharGrid {
 				}
 			}
 		}
-
-		// Do a BFS to find nearest room.
-		Queue<Pair> frontier = new ArrayDeque<>();
-		frontier.add(getStart());
-		Map<Pair, Pair> cameFrom = new HashMap<>();
-		cameFrom.put(getStart(), null);
-		Pair<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Pair next : getTraversableNeighbors(current)) {
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-				}
-			}
-		}
-
 		// Return all shortest paths in descending order of length.
-		List<Path> shortestPaths = Pathfinder.toPaths(getStart(), destinations, cameFrom);
-		Collections.reverse(shortestPaths);
-		return (shortestPaths);
-	}
-
-	/**
-	 * Returns traversable cells adjacent to some position.
-	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
-		List<Pair> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY() + 1));
-		// Remove any that are not traversable.
-		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair position = iterator.next();
-			if (get(position) == WALL || get(position) == START) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
+		List<Path> paths = Pathfinder.toPaths(getStart(), destinations, cameFrom);
+		Collections.reverse(paths);
+		return (paths);
 	}
 
 	/**
