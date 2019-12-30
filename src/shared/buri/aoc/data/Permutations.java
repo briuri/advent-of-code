@@ -14,6 +14,11 @@ import java.util.Set;
 public class Permutations {
 
 	/**
+	 * Private to prevent instantiation.
+	 */
+	private Permutations() {}
+	
+	/**
 	 * Returns all possible pair permutations of a list of objects.
 	 */
 	public static <T> Set<List<T>> getPairPermutations(List<T> objects) {

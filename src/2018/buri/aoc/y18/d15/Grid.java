@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.path.Path;
+import buri.aoc.data.path.Pathfinder;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -83,7 +84,7 @@ public class Grid extends CharGrid {
 			List<Path> paths = getShortestPathsFor(unit);
 			if (!paths.isEmpty()) {
 				set(unit.getPosition(), OPEN);
-				unit.setPosition(((List<Pair>) paths.get(0).getPositions()).get(1));
+				unit.setPosition(((List<Pair>) paths.get(0).getSteps()).get(1));
 				set(unit.getPosition(), unit.getType());
 			}
 		}
@@ -204,7 +205,7 @@ public class Grid extends CharGrid {
 			}
 		}
 
-		return (Path.buildPaths(unit.getPosition(), destinations, cameFrom));
+		return (Pathfinder.toPaths(unit.getPosition(), destinations, cameFrom));
 	}
 
 	/**

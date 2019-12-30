@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.path.Path;
+import buri.aoc.data.path.Pathfinder;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -98,7 +99,7 @@ public class Grid extends CharGrid {
 				}
 			}
 		}
-		return (Path.buildPaths(START_POSITION, destinations, cameFrom));
+		return (Pathfinder.toPaths(START_POSITION, destinations, cameFrom));
 	}
 
 	/**

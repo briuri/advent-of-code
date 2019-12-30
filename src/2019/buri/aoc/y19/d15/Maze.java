@@ -12,9 +12,10 @@ import java.util.Queue;
 import java.util.Set;
 
 import buri.aoc.data.Direction;
-import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.intcode.Computer;
+import buri.aoc.data.path.Path;
+import buri.aoc.data.path.Pathfinder;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -150,7 +151,7 @@ public class Maze extends CharGrid {
 		}
 
 		// Return all paths in descending order of length.
-		List<Path> paths = Path.buildPaths(origin, destinations, cameFrom);
+		List<Path> paths = Pathfinder.toPaths(origin, destinations, cameFrom);
 		Collections.reverse(paths);
 		return (paths);
 	}

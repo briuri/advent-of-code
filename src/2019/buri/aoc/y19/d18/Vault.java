@@ -11,8 +11,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.path.Path;
+import buri.aoc.data.path.Pathfinder;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -108,13 +109,13 @@ public class Vault extends CharGrid {
 		}
 
 		// Exactly 1 path between keys in Part 1. Possibly 0 paths in Part 2.
-		List<Path> paths = Path.buildPaths(start, possibleKeys, cameFrom);
+		List<Path> paths = Pathfinder.toPaths(start, possibleKeys, cameFrom);
 		if (paths.isEmpty()) {
 			return (null);
 		}
 		Path path = paths.get(0);
 		Route route = new Route(startChar, endChar, path.getLength());
-		for (Pair position : (List<Pair>) path.getPositions()) {
+		for (Pair position : (List<Pair>) path.getSteps()) {
 			Character tile = get(position);
 			if (isDoor(tile)) {
 				route.getDoors().add(tile);

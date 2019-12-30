@@ -12,8 +12,9 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
-import buri.aoc.data.Path;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.path.Path;
+import buri.aoc.data.path.Pathfinder;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -219,7 +220,7 @@ public class RoomMap extends CharGrid {
 		}
 
 		// Return all shortest paths in descending order of length.
-		List<Path> shortestPaths = Path.buildPaths(getStart(), destinations, cameFrom);
+		List<Path> shortestPaths = Pathfinder.toPaths(getStart(), destinations, cameFrom);
 		Collections.reverse(shortestPaths);
 		return (shortestPaths);
 	}
