@@ -11,7 +11,7 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Day21Test extends BaseTest {
-
+	
 	@Test
 	public void testGetInput() {
 		assertEquals(32, Day21.getInput(0).size());
