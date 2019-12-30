@@ -24,7 +24,7 @@ public class Day17 extends BasePuzzle {
 		Position start = new Position(0, 0, passcode);
 
 		// Generate breadth first mapping to find shortest paths to all points.
-		Map<Position, Position> cameFrom = Pathfinder.explore(start, Position.STEP_STRATEGY);
+		Map<Position, Position> cameFrom = Pathfinder.breadthFirstSearch(start, Position.STEP_STRATEGY);
 		
 		if (part == Part.ONE) {
 			String shortestPasscode = null;

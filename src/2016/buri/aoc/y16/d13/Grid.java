@@ -99,7 +99,7 @@ public class Grid extends CharGrid {
 	 * Does a BFS to find shortest paths.
 	 */
 	private List<Path> getPaths(List<Pair> destinations) {
-		Map<Pair, Pair> cameFrom = Pathfinder.explore(START_POSITION, STEP_STRATEGY);
+		Map<Pair, Pair> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
 		return (Pathfinder.toPaths(START_POSITION, destinations, cameFrom));
 	}
 }

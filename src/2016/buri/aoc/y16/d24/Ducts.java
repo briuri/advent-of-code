@@ -68,7 +68,7 @@ public class Ducts extends CharGrid {
 		// Do all the traversal for path-building upfront.
 		Map<Pair, Map<Pair, Pair>> cameFroms = new HashMap<>();
 		for (Pair start : getDestinations().values()) {
-			cameFroms.put(start, Pathfinder.explore(start, STEP_STRATEGY));
+			cameFroms.put(start, Pathfinder.breadthFirstSearch(start, STEP_STRATEGY));
 		}
 
 		// Get all possible path permutations.

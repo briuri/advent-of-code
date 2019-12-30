@@ -20,7 +20,7 @@ public class Pathfinder {
 	/**
 	 * Do a BFS from one tuple to all other reachable tuples.
 	 */
-	public static <T extends BaseTuple> Map<T, T> explore(T start, StepStrategy<T> strategy) {
+	public static <T extends BaseTuple> Map<T, T> breadthFirstSearch(T start, StepStrategy<T> strategy) {
 		Queue<T> frontier = new ArrayDeque<>();
 		frontier.add(start);
 		Map<T, T> cameFrom = new HashMap<>();
