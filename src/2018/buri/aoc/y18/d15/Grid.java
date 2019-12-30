@@ -12,6 +12,7 @@ import java.util.Queue;
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.path.Path;
 import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -27,6 +28,23 @@ public class Grid extends CharGrid {
 
 	private static final char OPEN = '.';
 
+	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
+		@Override
+		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
+			List<Pair<Integer>> nextSteps = current.getAdjacent();
+			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Pair<Integer> position = iterator.next();
+				// Remove out of bounds or walls.
+				if (position.getX() < 0 || position.getX() >= getWidth()
+					|| position.getY() < 0 || position.getY() >= getHeight()
+					|| get(position) != OPEN) {
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
+	
 	/**
 	 * Constructor
 	 */
@@ -183,28 +201,12 @@ public class Grid extends CharGrid {
 	 * Returns the shortest paths to each of the possible enemy-adjacent destinations, using a breadth-first search.
 	 */
 	private List<Path> getShortestPathsFor(Unit unit) {
+		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(unit.getPosition(), STEP_STRATEGY);
 		// Get all open cells adjacent to enemies.
 		List<Pair> destinations = new ArrayList<>();
 		for (Unit enemy : getEnemies(unit)) {
 			destinations.addAll(getTraversableNeighbors(enemy.getPosition()));
 		}
-
-		// Generate breadth first mapping to find shortest paths to all points.
-		Queue<Pair> frontier = new ArrayDeque<>();
-		frontier.add(unit.getPosition());
-		Map<Pair, Pair> cameFrom = new HashMap<>();
-		cameFrom.put(unit.getPosition(), null);
-		Pair<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Pair next : getTraversableNeighbors(current)) {
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-				}
-			}
-		}
-
 		return (Pathfinder.toPaths(unit.getPosition(), destinations, cameFrom));
 	}
 
