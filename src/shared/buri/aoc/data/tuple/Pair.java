@@ -54,25 +54,25 @@ public class Pair<T extends Number> extends BaseTuple implements Comparable<Pair
 	}
 
 	/**
-	 * Returns a list of adjacent tuples in an X-Y grid.
+	 * Returns a list of adjacent tuples in an X-Y grid in reading order.
 	 */
 	public List<Pair<T>> getAdjacent() {
 		List<Pair<T>> adjacent = new ArrayList<>();
 		if (getX() instanceof Integer) {
-			adjacent.add(new Pair(getX(), getY().intValue() + 1));
 			adjacent.add(new Pair(getX(), getY().intValue() - 1));
 			adjacent.add(new Pair(getX().intValue() - 1, getY()));
 			adjacent.add(new Pair(getX().intValue() + 1, getY()));
+			adjacent.add(new Pair(getX(), getY().intValue() + 1));
 		}
 		else {
-			adjacent.add(new Pair(getX(), getY().longValue() + 1L));
 			adjacent.add(new Pair(getX(), getY().longValue() - 1L));
 			adjacent.add(new Pair(getX().longValue() - 1L, getY()));
 			adjacent.add(new Pair(getX().longValue() + 1L, getY()));
+			adjacent.add(new Pair(getX(), getY().longValue() + 1L));
 		}
 		return (adjacent);
 	}
-	
+
 	/**
 	 * Moves the position 1 step in a 2D direction.
 	 * 

@@ -31,10 +31,8 @@ public class Grid extends CharGrid {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
 			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
 				Pair<Integer> position = iterator.next();
-				// Remove out of bounds or walls.
-				if (position.getX() < 0 || position.getX() >= getWidth()
-					|| position.getY() < 0 || position.getY() >= getHeight()
-					|| get(position) != OPEN) {
+				// Remove any that are already filled up.
+				if (get(position) != OPEN) {
 					iterator.remove();
 				}
 			}
@@ -202,28 +200,9 @@ public class Grid extends CharGrid {
 		// Get all open cells adjacent to enemies.
 		List<Pair<Integer>> destinations = new ArrayList<>();
 		for (Unit enemy : getEnemies(unit)) {
-			destinations.addAll(getTraversableNeighbors(enemy.getPosition()));
+			destinations.addAll(STEP_STRATEGY.getNextSteps(enemy.getPosition()));
 		}
 		return (Pathfinder.toPaths(unit.getPosition(), destinations, cameFrom));
-	}
-
-	/**
-	 * Returns open cells adjacent to some position, in reading order (up, left, right, down).
-	 */
-	private List<Pair<Integer>> getTraversableNeighbors(Pair<Integer> center) {
-		List<Pair<Integer>> neighbors = new ArrayList<>();
-		neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		neighbors.add(new Pair(center.getX(), center.getY() + 1));
-		// Remove any that are already filled up.
-		for (Iterator<Pair<Integer>> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair<Integer> position = iterator.next();
-			if (get(position) != OPEN) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
 	}
 
 	/**
