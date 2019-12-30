@@ -1,13 +1,10 @@
 package buri.aoc.y18.d15;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.path.Path;
@@ -203,7 +200,7 @@ public class Grid extends CharGrid {
 	private List<Path> getShortestPathsFor(Unit unit) {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(unit.getPosition(), STEP_STRATEGY);
 		// Get all open cells adjacent to enemies.
-		List<Pair> destinations = new ArrayList<>();
+		List<Pair<Integer>> destinations = new ArrayList<>();
 		for (Unit enemy : getEnemies(unit)) {
 			destinations.addAll(getTraversableNeighbors(enemy.getPosition()));
 		}
@@ -213,15 +210,15 @@ public class Grid extends CharGrid {
 	/**
 	 * Returns open cells adjacent to some position, in reading order (up, left, right, down).
 	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
-		List<Pair> neighbors = new ArrayList<>();
+	private List<Pair<Integer>> getTraversableNeighbors(Pair<Integer> center) {
+		List<Pair<Integer>> neighbors = new ArrayList<>();
 		neighbors.add(new Pair(center.getX(), center.getY() - 1));
 		neighbors.add(new Pair(center.getX() - 1, center.getY()));
 		neighbors.add(new Pair(center.getX() + 1, center.getY()));
 		neighbors.add(new Pair(center.getX(), center.getY() + 1));
 		// Remove any that are already filled up.
-		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair position = iterator.next();
+		for (Iterator<Pair<Integer>> iterator = neighbors.iterator(); iterator.hasNext();) {
+			Pair<Integer> position = iterator.next();
 			if (get(position) != OPEN) {
 				iterator.remove();
 			}
