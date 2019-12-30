@@ -5,6 +5,7 @@ import java.util.List;
 
 import buri.aoc.data.Direction;
 import buri.aoc.data.MD5Hash;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -17,6 +18,63 @@ public class Position extends Pair<Integer> {
 
 	private static final MD5Hash HASHER = new MD5Hash();
 
+	protected static final StepStrategy<Position> STEP_STRATEGY = new StepStrategy<Position>() {
+		@Override
+		public List<Position> getNextSteps(Position current) {
+			List<Position> nextSteps = new ArrayList<>();
+			if (!(current.getX() == 3 && current.getY() == 3)) {
+				if (canMove(current, Direction.UP)) {
+					nextSteps.add(new Position(current.getX(), current.getY() - 1, current.getPasscodeSoFar() + "U"));
+				}
+				if (canMove(current, Direction.LEFT)) {
+					nextSteps.add(new Position(current.getX() - 1, current.getY(), current.getPasscodeSoFar() + "L"));
+				}
+				if (canMove(current, Direction.RIGHT)) {
+					nextSteps.add(new Position(current.getX() + 1, current.getY(), current.getPasscodeSoFar() + "R"));
+				}
+				if (canMove(current, Direction.DOWN)) {
+					nextSteps.add(new Position(current.getX(), current.getY() + 1, current.getPasscodeSoFar() + "D"));
+				}
+			}
+			return (nextSteps);
+		}
+
+		/**
+		 * Returns true if the direction is an unlocked door. Returns false for walls or locked doors.
+		 */
+		private boolean canMove(Position current, Direction direction) {
+			boolean isWall = ((direction == Direction.LEFT && current.getX() == 0) 
+				|| (direction == Direction.UP && current.getY() == 0) 
+				|| (direction == Direction.RIGHT && current.getX() == 3)
+				|| (direction == Direction.DOWN && current.getY() == 3));
+
+			int index;
+			switch (direction) {
+				case UP:
+					index = 0;
+					break;
+				case DOWN:
+					index = 1;
+					break;
+				case LEFT:
+					index = 2;
+					break;
+				default: // RIGHT
+					index = 3;
+					break;
+			}
+			return (!isWall && isDoorUnlocked(current, index));
+		}
+
+		/**
+		 * Checks the hash character at the given index (UDLR) to see if a door is unlocked.
+		 */
+		private boolean isDoorUnlocked(Position current, int index) {
+			char value = HASHER.getHash(current.getPasscodeSoFar()).charAt(index);
+			return (value >= 'b' && value <= 'f');
+		}
+	};
+
 	/**
 	 * Constructor
 	 */
@@ -25,68 +83,10 @@ public class Position extends Pair<Integer> {
 		_passcodeSoFar = passcodeSoFar;
 	}
 
-	/**
-	 * Returns traversable cells adjacent to this position.
-	 */
-	public List<Position> getTraversableNeighbors() {
-		List<Position> neighbors = new ArrayList<>();
-		if (!(getX() == 3 && getY() == 3)) {
-			if (canMove(Direction.UP)) {
-				neighbors.add(new Position(getX(), getY() - 1, getPasscodeSoFar() + "U"));
-			}
-			if (canMove(Direction.LEFT)) {
-				neighbors.add(new Position(getX() - 1, getY(), getPasscodeSoFar() + "L"));
-			}
-			if (canMove(Direction.RIGHT)) {
-				neighbors.add(new Position(getX() + 1, getY(), getPasscodeSoFar() + "R"));
-			}
-			if (canMove(Direction.DOWN)) {
-				neighbors.add(new Position(getX(), getY() + 1, getPasscodeSoFar() + "D"));
-			}
-		}
-		return (neighbors);
-	}
-
-	/**
-	 * Returns true if the direction is an unlocked door. Returns false for walls or locked doors.
-	 */
-	public boolean canMove(Direction direction) {
-		boolean isWall = ((direction == Direction.LEFT && getX() == 0)
-			|| (direction == Direction.UP && getY() == 0)
-			|| (direction == Direction.RIGHT && getX() == 3)
-			|| (direction == Direction.DOWN && getY() == 3));
-
-		int index;
-		switch (direction) {
-			case UP:
-				index = 0;
-				break;
-			case DOWN:
-				index = 1;
-				break;
-			case LEFT:
-				index = 2;
-				break;
-			default: // RIGHT
-				index = 3;
-				break;
-		}
-		return (!isWall && isDoorUnlocked(index));
-	}
-
-	/**
-	 * Checks the hash character at the given index (UDLR) to see if a door is unlocked.
-	 */
-	private boolean isDoorUnlocked(int index) {
-		char value = HASHER.getHash(getPasscodeSoFar()).charAt(index);
-		return (value >= 'b' && value <= 'f');
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		Position p = (Position) obj;
-		return (getX().equals(p.getX())
-			&& getY().equals(p.getY()) && getPasscodeSoFar().equals(p.getPasscodeSoFar()));
+		return (getX().equals(p.getX()) && getY().equals(p.getY()) && getPasscodeSoFar().equals(p.getPasscodeSoFar()));
 	}
 
 	@Override

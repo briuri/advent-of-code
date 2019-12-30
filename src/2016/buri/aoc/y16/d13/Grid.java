@@ -1,16 +1,14 @@
 package buri.aoc.y16.d13;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.path.Path;
 import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -25,6 +23,23 @@ public class Grid extends CharGrid {
 	private static final char START = 'O';
 
 	private static final Pair START_POSITION = new Pair(1, 1);
+
+	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
+		@Override
+		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
+			List<Pair<Integer>> nextSteps = current.getAdjacent();
+			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Pair<Integer> position = iterator.next();
+				// Remove out of bounds or walls.
+				if (position.getX() < 0 || position.getX() >= getWidth()
+					|| position.getY() < 0 || position.getY() >= getHeight()
+					|| get(position) == WALL) { 
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
 
 	/**
 	 * Constructor
@@ -50,8 +65,8 @@ public class Grid extends CharGrid {
 		destinations.add(destination);
 
 		// There will be 1 path returned, since only 1 destination was provided.
-		List<Path> shortestPaths = getShortestPaths(destinations);
-		return (shortestPaths.get(0).getLength());
+		List<Path> paths = getPaths(destinations);
+		return (paths.get(0).getLength());
 	}
 
 	/**
@@ -70,7 +85,7 @@ public class Grid extends CharGrid {
 		}
 
 		int count = 0;
-		for (Path path : getShortestPaths(destinations)) {
+		for (Path path : getPaths(destinations)) {
 			if (path.getLength() <= steps) {
 				count++;
 			}
@@ -83,49 +98,8 @@ public class Grid extends CharGrid {
 	/**
 	 * Does a BFS to find shortest paths.
 	 */
-	private List<Path> getShortestPaths(List<Pair> destinations) {
-		// Do a BFS to find destination.
-		Queue<Pair> frontier = new ArrayDeque<>();
-		frontier.add(START_POSITION);
-		Map<Pair, Pair> cameFrom = new HashMap<>();
-		cameFrom.put(START_POSITION, null);
-		Pair<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Pair next : getTraversableNeighbors(current)) {
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-				}
-			}
-		}
+	private List<Path> getPaths(List<Pair> destinations) {
+		Map<Pair, Pair> cameFrom = Pathfinder.explore(START_POSITION, STEP_STRATEGY);
 		return (Pathfinder.toPaths(START_POSITION, destinations, cameFrom));
-	}
-
-	/**
-	 * Returns traversable cells adjacent to some position.
-	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
-		List<Pair> neighbors = new ArrayList<>();
-		if (center.getY() > 0) {
-			neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		}
-		if (center.getX() > 0) {
-			neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		}
-		if (center.getX() < getWidth() - 1) {
-			neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		}
-		if (center.getY() < getHeight() - 1) {
-			neighbors.add(new Pair(center.getX(), center.getY() + 1));
-		}
-		// Remove any that are not traversable.
-		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair position = iterator.next();
-			if (get(position) == WALL || get(position) == START) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
 	}
 }

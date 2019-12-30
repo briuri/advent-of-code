@@ -1,16 +1,15 @@
 package buri.aoc.y16.d24;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import buri.aoc.Part;
 import buri.aoc.data.Permutations;
 import buri.aoc.data.grid.CharGrid;
+import buri.aoc.data.path.Pathfinder;
+import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
@@ -23,6 +22,23 @@ public class Ducts extends CharGrid {
 	private Map<Integer, Pair> _destinations;
 
 	private static final char OPEN = '.';
+
+	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
+		@Override
+		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
+			List<Pair<Integer>> nextSteps = current.getAdjacent();
+			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
+				Pair<Integer> position = iterator.next();
+				// Remove out of bounds or walls.
+				if (position.getX() < 0 || position.getX() >= getWidth()
+					|| position.getY() < 0 || position.getY() >= getHeight()
+					|| get(position) != OPEN) {
+					iterator.remove();
+				}
+			}
+			return (nextSteps);
+		}
+	};
 
 	/**
 	 * Constructor
@@ -48,11 +64,11 @@ public class Ducts extends CharGrid {
 	/**
 	 * Returns the fewest steps needed to visit all numbered spots.
 	 */
-	public int getFewestSteps(Part part) {
+	public int getFewestSteps(Part part) {		
 		// Do all the traversal for path-building upfront.
 		Map<Pair, Map<Pair, Pair>> cameFroms = new HashMap<>();
 		for (Pair start : getDestinations().values()) {
-			cameFroms.put(start, getCameFrom(start));
+			cameFroms.put(start, Pathfinder.explore(start, STEP_STRATEGY));
 		}
 
 		// Get all possible path permutations.
@@ -88,31 +104,6 @@ public class Ducts extends CharGrid {
 	}
 
 	/**
-	 * Do a BFS from one position to all other positions.
-	 */
-	private Map<Pair, Pair> getCameFrom(Pair start) {
-		Queue<Pair> frontier = new ArrayDeque<>();
-		frontier.add(start);
-		Map<Pair, Pair> cameFrom = new HashMap<>();
-		cameFrom.put(start, null);
-		Pair<Integer> current = null;
-		while (!frontier.isEmpty()) {
-			current = frontier.remove();
-			for (Pair next : getTraversableNeighbors(current)) {
-				// Don't return to starting point.
-				if (next.equals(start)) {
-					continue;
-				}
-				if (cameFrom.get(next) == null) {
-					frontier.add(next);
-					cameFrom.put(next, current);
-				}
-			}
-		}
-		return (cameFrom);
-	}
-
-	/**
 	 * Returns the number of steps between two positions.
 	 */
 	private int getStepsBetween(Pair start, Pair destination, Map<Pair, Pair> cameFrom) {
@@ -125,34 +116,6 @@ public class Ducts extends CharGrid {
 			}
 		}
 		return (steps);
-	}
-
-	/**
-	 * Returns open cells adjacent to some position.
-	 */
-	private List<Pair> getTraversableNeighbors(Pair<Integer> center) {
-		List<Pair> neighbors = new ArrayList<>();
-		if (center.getY() < getHeight() - 1) {
-			neighbors.add(new Pair(center.getX(), center.getY() + 1));
-		}
-		if (center.getY() > 0) {
-			neighbors.add(new Pair(center.getX(), center.getY() - 1));
-		}
-		if (center.getX() > 0) {
-			neighbors.add(new Pair(center.getX() - 1, center.getY()));
-		}
-		if (center.getX() < getWidth() - 1) {
-			neighbors.add(new Pair(center.getX() + 1, center.getY()));
-		}
-
-		// Remove any that are walls.
-		for (Iterator<Pair> iterator = neighbors.iterator(); iterator.hasNext();) {
-			Pair position = iterator.next();
-			if (get(position) != OPEN) {
-				iterator.remove();
-			}
-		}
-		return (neighbors);
 	}
 
 	/**
