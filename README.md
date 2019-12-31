@@ -12,7 +12,7 @@ Each Day can be run from a JUnit test harness, colocated in the same source fold
 
 * **2015**: 00:45
 * **2016**: 01:05
-* **2017**: 02:20 
+* **2017**: 00:25 
 * **2018**: 00:35
 * **2019**: 00:15
 
