@@ -286,7 +286,7 @@ public class Leaderboard {
 		if (year != CURRENT_YEAR) {
 			return;
 		}
-		int numMedians = Math.min(12, medianTimes.size());
+		int numMedians = Math.min(TOP_NUM, medianTimes.size());
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
