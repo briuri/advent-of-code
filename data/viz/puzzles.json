@@ -1,4 +1,31 @@
 {
+	"2020": [
+		{"title":"Day 1: ?", "globalCount":0},
+		{"title":"Day 2: ?", "globalCount":0},
+		{"title":"Day 3: ?", "globalCount":0},
+		{"title":"Day 4: ?", "globalCount":0},
+		{"title":"Day 5: ?", "globalCount":0},
+		{"title":"Day 6: ?", "globalCount":0},
+		{"title":"Day 7: ?", "globalCount":0},
+		{"title":"Day 8: ?", "globalCount":0},
+		{"title":"Day 9: ?", "globalCount":0},
+		{"title":"Day 10: ?", "globalCount":0},
+		{"title":"Day 11: ?", "globalCount":0},
+		{"title":"Day 12: ?", "globalCount":0},
+		{"title":"Day 13: ?", "globalCount":0},
+		{"title":"Day 14: ?", "globalCount":0},
+		{"title":"Day 15: ?", "globalCount":0},
+		{"title":"Day 16: ?", "globalCount":0},
+		{"title":"Day 17: ?", "globalCount":0},
+		{"title":"Day 18: ?", "globalCount":0},
+		{"title":"Day 19: ?", "globalCount":0},
+		{"title":"Day 20: ?", "globalCount":0},
+		{"title":"Day 21: ?", "globalCount":0},
+		{"title":"Day 22: ?", "globalCount":0},
+		{"title":"Day 23: ?", "globalCount":0},
+		{"title":"Day 24: ?", "globalCount":0},
+		{"title":"Day 25: ?", "globalCount":0}
+	],
 	"2019": [
 		{"title":"Day 1: The Tyranny of the Rocket Equation", "globalCount":1},
 		{"title":"Day 2: 1202 Program Alarm", "globalCount":0},
@@ -105,7 +132,7 @@
 		{"title":"Day 22: Grid Computing", "globalCount":2},
 		{"title":"Day 23: Safe Cracking", "globalCount":2},
 		{"title":"Day 24: Air Duct Spelunking", "globalCount":1},
-		{"title":"Day 25: Clock Signal", "globalCount":3}		
+		{"title":"Day 25: Clock Signal", "globalCount":3}
 	],
 	"2015": [
 		{"title":"Day 1: Not Quite Lisp", "globalCount":0},
@@ -133,5 +160,5 @@
 		{"title":"Day 23: Opening the Turing Lock", "globalCount":0},
 		{"title":"Day 24: It Hangs in the Balance", "globalCount":0},
 		{"title":"Day 25: Let It Snow", "globalCount":0}
-	]	
+	]
 }

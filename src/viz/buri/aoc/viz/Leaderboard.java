@@ -23,11 +23,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 /**
  * Alternate visualization of Novetta's private leaderboard showing the Top X Solve Times for each puzzle. Generated
  * from the API JSON.
- * 
+ *
  * @author Brian Uri!
  */
 public class Leaderboard {
-	private static final int CURRENT_YEAR = 2019;
+	private static final int CURRENT_YEAR = 2020;
 
 	private static final int TOP_NUM = 10;
 	private static final int TOTAL_PUZZLES = 25;
@@ -41,15 +41,16 @@ public class Leaderboard {
 	 */
 	@Test
 	public void generatePages() {
-		visualizeYear(2019);
+		visualizeYear(2020);
 
 		/*
 		 * NOTE: Inactive accounts were purged from Novetta's leaderboard in 2019 to avoid the 200-player cap.
 		 * Redownloading JSON from older years and regenerating their pages will result in missing scores.
 		 */
-		// visualizeYear(2018);
-		// visualizeYear(2017);
-		// visualizeYear(2016);
+//		visualizeYear(2019);
+//		visualizeYear(2018);
+//		visualizeYear(2017);
+//		visualizeYear(2016);
 	}
 
 	/**
@@ -264,7 +265,9 @@ public class Leaderboard {
 		page.append(" (").append(year).append(")").append("</h1>\n\n");
 
 		page.append("<div class=\"navBar\">");
-		page.append(year == 2019 ? year : "<a href=\"index.html\">2019</a>");
+		page.append(year == 2020 ? year : "<a href=\"index.html\">2020</a>");
+		page.append(" | ");
+		page.append(year == 2019 ? year : "<a href=\"index-2019.html\">2019</a>");
 		page.append(" | ");
 		page.append(year == 2018 ? year : "<a href=\"index-2018.html\">2018</a>");
 		page.append(" | ");
@@ -283,10 +286,10 @@ public class Leaderboard {
 	 * Adds the Top X Median Times during the current year.
 	 */
 	private static void insertMedianTimes(StringBuffer page, int year, Players players, List<MedianTime> medianTimes) {
-		if (year != CURRENT_YEAR) {
+		int numMedians = Math.min(TOP_NUM, medianTimes.size());
+		if (numMedians == 0) {
 			return;
 		}
-		int numMedians = Math.min(TOP_NUM, medianTimes.size());
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
