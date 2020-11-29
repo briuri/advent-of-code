@@ -44,7 +44,7 @@ public class Leaderboard {
 		visualizeYear(2020);
 
 		/*
-		 * NOTE: Inactive accounts were purged from Novetta's leaderboard in 2019 to avoid the 200-player cap.
+		 * NOTE: Inactive accounts are purged yearly from Novetta's leaderboard to avoid the 200-player cap.
 		 * Redownloading JSON from older years and regenerating their pages will result in missing scores.
 		 */
 //		visualizeYear(2019);
