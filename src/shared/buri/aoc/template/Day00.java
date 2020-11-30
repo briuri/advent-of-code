@@ -7,7 +7,7 @@ import buri.aoc.Part;
 
 /**
  * Day 00: TITLE
- * 
+ *
  * @author Brian Uri!
  */
 public class Day00 extends BasePuzzle {
@@ -16,7 +16,17 @@ public class Day00 extends BasePuzzle {
 	 * Returns the input file HOW
 	 */
 	public static List<String> getInput(int fileIndex) {
+// 1 string per line
 		return (readFile(fileIndex));
+
+// 1 integer per line
+		// return (convertStringsToInts(readFile(fileIndex)));
+
+// All integers on first line
+		// String[] stringInts = readFile(fileIndex).get(0).split(" ");
+		// return (convertStringsToInts(Arrays.asList(stringInts)));
+
+// 1 data object per line
 		// List<Data> list = new ArrayList<>();
 		// for (String input : readFile(fileIndex)) {
 		// list.add(new Data(input));
@@ -27,7 +37,7 @@ public class Day00 extends BasePuzzle {
 	/**
 	 * Part 1:
 	 * QUESTION
-	 * 
+	 *
 	 * Part 2:
 	 * QUESTION
 	 */
