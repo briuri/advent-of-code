@@ -29,7 +29,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class Leaderboard {
 	private static final int CURRENT_YEAR = 2020;
 
-	private static final int TOP_NUM = 10;
+	private static final int TOP_DAILY = 25;
+	private static final int TOP_MEDIANS = 10;
 	private static final int TOTAL_PUZZLES = 25;
 
 	private static final String JSON_FOLDER = "data/viz/";
@@ -286,7 +287,7 @@ public class Leaderboard {
 	 * Adds the Top X Median Times during the current year.
 	 */
 	private static void insertMedianTimes(StringBuffer page, int year, Players players, List<MedianTime> medianTimes) {
-		int numMedians = Math.min(TOP_NUM, medianTimes.size());
+		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
 		}
@@ -379,7 +380,7 @@ public class Leaderboard {
 				page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
 				page.append("\">").append(puzzles.get(i).getTitle()).append("</a></h3>\n");
 				page.append("<ol>\n");
-				for (int place = 0; place < Math.min(TOP_NUM, places.size()); place++) {
+				for (int place = 0; place < Math.min(TOP_DAILY, places.size()); place++) {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
 					page.append("\t<li>");
