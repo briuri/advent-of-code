@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Data class for a player's median time.
- * 
+ *
  * @author Brian Uri!
  */
 public class MedianTime implements Comparable {
@@ -67,7 +67,12 @@ public class MedianTime implements Comparable {
 		if (getStars() < time.getStars()) {
 			return (1);
 		}
-		return (getMedianTime().compareTo(time.getMedianTime()));
+		int compare = getMedianTime().compareTo(time.getMedianTime());
+		// Exact timestamp ties
+		if (compare == 0) {
+			compare = getName().split(" ")[1].compareTo(time.getName().split(" ")[1]);
+		}
+		return (compare);
 	}
 
 	/**

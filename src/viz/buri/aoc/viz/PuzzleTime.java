@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 /**
  * Data class for 1 completion record in a daily puzzle.
- * 
+ *
  * @author Brian Uri!
  */
 public class PuzzleTime implements Comparable<PuzzleTime> {
@@ -81,7 +81,12 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 
 	@Override
 	public int compareTo(PuzzleTime o) {
-		return (Long.valueOf(getTimeCompleted()).compareTo(Long.valueOf(o.getTimeCompleted())));
+		int compare = Long.valueOf(getTimeCompleted()).compareTo(Long.valueOf(o.getTimeCompleted()));
+		// Exact timestamp ties
+		if (compare == 0) {
+			compare = getName().split(" ")[1].compareTo(o.getName().split(" ")[1]);
+		}
+		return (compare);
 	}
 
 	/**
