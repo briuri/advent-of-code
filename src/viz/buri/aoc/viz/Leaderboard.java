@@ -241,7 +241,7 @@ public class Leaderboard {
 		page.append("<html>\n<head>\n");
 		page.append("<meta charset=\"UTF-8\">");
 		page.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
-		page.append("<title>Novetta Advent of Code - Top ").append(TOP_NUM).append(" Solve Times");
+		page.append("<title>Novetta Advent of Code - Fastest Solve Times");
 		page.append(" (").append(year).append(")").append("</title>\n");
 		page.append("<style>\n");
 		page.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
@@ -261,7 +261,7 @@ public class Leaderboard {
 		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
 		page.append("\t.tiny { font-size: 9pt; }\n");
 		page.append("</style>\n</head>\n\n<body>\n");
-		page.append("<h1>Novetta Advent of Code - Top ").append(TOP_NUM).append(" Solve Times");
+		page.append("<h1>Novetta Advent of Code - Fastest Solve Times");
 		page.append(" (").append(year).append(")").append("</h1>\n\n");
 
 		page.append("<div class=\"navBar\">");
