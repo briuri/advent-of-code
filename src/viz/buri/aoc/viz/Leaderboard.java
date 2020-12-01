@@ -122,18 +122,35 @@ public class Leaderboard {
 	 * Reads the raw leaderboard.
 	 */
 	private static Map<String, Object> readLeaderboard(int year) {
+		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> leaderboardJson = null;
 		try {
-			ObjectMapper mapper = new ObjectMapper();
 			File file = new File(JSON_FOLDER + year + ".json");
 			JsonNode json = mapper.readTree(file);
 			leaderboardJson = mapper.readValue(json.get("members").toString(),
 				new TypeReference<Map<String, Object>>() {});
-			return (leaderboardJson);
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file.", e);
 		}
+
+		// Merge in overflow leaderboard, if available.
+		try {
+			File file = new File(JSON_FOLDER + year + "-1.json");
+			JsonNode json = mapper.readTree(file);
+			Map<String, Object> overflow = mapper.readValue(json.get("members").toString(),
+				new TypeReference<Map<String, Object>>() {});
+			for (String key : overflow.keySet()) {
+				if (!leaderboardJson.containsKey(key)) {
+					leaderboardJson.put(key, overflow.get(key));
+				}
+			}
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid file.", e);
+		}
+
+		return (leaderboardJson);
 	}
 
 	/**
