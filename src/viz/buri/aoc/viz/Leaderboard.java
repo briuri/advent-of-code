@@ -304,10 +304,12 @@ public class Leaderboard {
 		page.append(" (").append(readLastModified(year)).append(")</h3>\n");
 		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
+
+		boolean isNextTie = false;
 		for (int i = 0; i < numMedians; i++) {
 			MedianTime player = medianTimes.get(i);
 			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
-			page.append("\t<li class=\"median\">");
+			page.append(isNextTie ? "\t" : "\t<li class=\"median\">");
 			if (medianTime.length() == 8) {
 				page.append("&nbsp;");
 			}
@@ -360,7 +362,8 @@ public class Leaderboard {
 				page.append("<br />\n");
 			}
 			page.append("</div>\n");
-			page.append("</li>\n");
+			isNextTie = (i + 1 < numMedians && player.getMedianTime().equals(medianTimes.get(i + 1).getMedianTime()));
+			page.append(isNextTie ? "<br />\n" : "</li>\n");
 		}
 		page.append("</ol>\n");
 	}
@@ -380,10 +383,12 @@ public class Leaderboard {
 				page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
 				page.append("\">").append(puzzles.get(i).getTitle()).append("</a></h3>\n");
 				page.append("<ol>\n");
+
+				boolean isNextTie = false;
 				for (int place = 0; place < Math.min(TOP_DAILY, places.size()); place++) {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
-					page.append("\t<li>");
+					page.append(isNextTie ? "\t" : "\t<li>");
 					if (place + 1 <= puzzles.get(i).getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
 						page.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
@@ -392,7 +397,10 @@ public class Leaderboard {
 						page.append("&nbsp;");
 					}
 					page.append(time);
-					page.append("&nbsp;&nbsp;").append(maskName(players, record.getName())).append("</li>\n");
+					page.append("&nbsp;&nbsp;").append(maskName(players, record.getName()));
+
+					isNextTie = (place + 1 < places.size() && record.getTimeCompleted() == places.get(place + 1).getTimeCompleted());
+					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				page.append("</ol>\n");
 			}
