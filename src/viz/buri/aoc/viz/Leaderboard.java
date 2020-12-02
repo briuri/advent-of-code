@@ -288,9 +288,11 @@ public class Leaderboard {
 		page.append(year == 2017 ? year : "<a href=\"index-2017.html\">2017</a>");
 		page.append(" | ");
 		page.append(year == 2016 ? year : "<a href=\"index-2016.html\">2016</a>");
-		page.append(" | ");
+		page.append(" | Leaderboard ");
 		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
-		page.append("Leaderboard &rArr;</a>");
+		page.append("1 &rArr;</a> ");
+		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
+		page.append("2 &rArr;</a> ");
 		page.append(" | ");
 		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack &rArr;</a>");
 		page.append("</div>\n\n");
