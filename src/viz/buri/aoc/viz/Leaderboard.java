@@ -30,7 +30,7 @@ public class Leaderboard {
 	private static final int CURRENT_YEAR = 2020;
 
 	private static final int TOP_DAILY = 25;
-	private static final int TOP_MEDIANS = 10;
+	private static final int TOP_MEDIANS = 15;
 	private static final int TOTAL_PUZZLES = 25;
 
 	private static final String JSON_FOLDER = "data/viz/";
@@ -290,12 +290,16 @@ public class Leaderboard {
 		page.append(year == 2016 ? year : "<a href=\"index-2016.html\">2016</a>");
 		page.append(" | Leaderboard ");
 		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
-		page.append("1 &rArr;</a> ");
+		page.append("1&rArr;</a> ");
 		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
-		page.append("2 &rArr;</a> ");
+		page.append("2&rArr;</a> ");
 		page.append(" | ");
-		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack &rArr;</a>");
+		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
+		page.append(" | ");
+		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a>");
 		page.append("</div>\n\n");
+		page.append("<p>We use a custom scoring system so you don't have to stay up past midnight all 25 days.\n");
+		page.append("Your Novetta score is the total number of stars earned, with ties broken by the fastest median solve time.</p>");
 	}
 
 	/**
