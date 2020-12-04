@@ -42,6 +42,11 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	public static String formatTime(long time) {
 		StringBuffer buffer = new StringBuffer();
 
+		// Median timestamps may have half-second from average calculation. Round up.
+		if (time % 1000 != 0) {
+			time += 500L;
+		}
+
 		time = time / 1000L;
 		String hours = String.valueOf(time / (60 * 60));
 		if (hours.length() == 1) {
