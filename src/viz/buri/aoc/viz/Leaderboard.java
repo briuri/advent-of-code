@@ -30,7 +30,7 @@ public class Leaderboard {
 	private static final int CURRENT_YEAR = 2020;
 
 	private static final int TOP_DAILY = 25;
-	private static final int TOP_MEDIANS = 15;
+	private static final int TOP_MEDIANS = 25;
 	private static final int TOTAL_PUZZLES = 25;
 
 	private static final String JSON_FOLDER = "data/viz/";
