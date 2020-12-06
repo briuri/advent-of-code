@@ -273,7 +273,7 @@ public class Leaderboard {
 		page.append("\t.empty { font-size: 11pt; }\n");
 		page.append("\t.global { color: #ffff00; }\n");
 		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
-		page.append("\t.tiny { font-size: 9pt; }\n");
+		page.append("\t.tiny { font-size: 8pt; }\n");
 		page.append("</style>\n</head>\n\n<body>\n");
 		page.append("<h1>Novetta Advent of Code - Fastest Solve Times");
 		page.append(" (").append(year).append(")").append("</h1>\n\n");
@@ -298,8 +298,6 @@ public class Leaderboard {
 		page.append(" | ");
 		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a>");
 		page.append("</div>\n\n");
-		page.append("<p>We use a custom scoring system so you don't have to stay up past midnight all 25 days.\n");
-		page.append("Your Novetta score is the total number of stars earned, with ties broken by the fastest median solve time.</p>");
 	}
 
 	/**
@@ -321,6 +319,7 @@ public class Leaderboard {
 		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(numMedians).append(" Overall");
 		page.append(" (").append(readLastModified(year)).append(")</h3>\n");
+		page.append("<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.</p>");
 		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
 
