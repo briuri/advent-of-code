@@ -133,7 +133,7 @@ public class Leaderboard {
 			// Merge in overflow leaderboard, if available.
 			File overflowFile = new File(JSON_FOLDER + year + "-1.json");
 			if (overflowFile.exists()) {
-				json = mapper.readTree(file);
+				json = mapper.readTree(overflowFile);
 				Map<String, Object> overflow = mapper.readValue(json.get("members").toString(),
 					new TypeReference<Map<String, Object>>() {});
 				for (String key : overflow.keySet()) {
