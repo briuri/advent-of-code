@@ -318,7 +318,7 @@ public class Leaderboard {
 		page.append("}\n");
 		page.append("</script>\n");
 		page.append("\n<h3>Top ").append(numMedians).append(" Overall");
-		page.append(" (").append(readLastModified(year)).append(")</h3>\n");
+		page.append(" (as of ").append(readLastModified(year)).append(")</h3>\n");
 		page.append("<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.</p>");
 		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
