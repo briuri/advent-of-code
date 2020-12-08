@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Alternate visualization of Novetta's private leaderboard showing the Top X Solve Times for each puzzle. Generated
+ * Alternate visualization of Novetta's private leaderboard showing the Fastest Solve Times for each puzzle. Generated
  * from the API JSON.
  *
  * @author Brian Uri!
@@ -38,7 +38,7 @@ public class Leaderboard {
 	private static final String ANTI_INDEX = "<span class=\"antiIndex\">Advent of Code</span>";
 
 	/**
-	 * Generate the Top X Solve Times pages via a JUnit test in Eclipse.
+	 * Generate the Fastest Solve Times pages via a JUnit test in Eclipse.
 	 */
 	@Test
 	public void generatePages() {
@@ -55,7 +55,7 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Generates the Top X page for a specific year
+	 * Generates the page for a specific year
 	 */
 	private static void visualizeYear(int year) {
 		final Players players = readPlayers();
@@ -301,7 +301,7 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Adds the Top X Median Times during the current year.
+	 * Adds the Top X Overall during the current year.
 	 */
 	private static void insertMedianTimes(StringBuffer page, int year, Players players, List<MedianTime> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
@@ -387,7 +387,7 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Adds the Top X times for each puzzle.
+	 * Adds the Top X Daily for each puzzle.
 	 */
 	private static void insertPuzzleTimes(StringBuffer page, int year, Players players,
 		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
