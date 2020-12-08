@@ -464,7 +464,7 @@ public class Leaderboard {
 		page.append("\ttype: 'bar'\n");
 		page.append("}];\n");
 		page.append("var layout = {\n");
-		page.append("\tfont: { color: '#cccccc' },\n");
+		page.append("\tfont: { family: 'monospace', color: '#cccccc' },\n");
 		page.append("\tpaper_bgcolor: '#0f0f23',\n");
 		page.append("\tplot_bgcolor: '#0f0f23',\n");
 		page.append("\tmargin: { t: 32, r: 32, b: 50, l: 32 },\n");
