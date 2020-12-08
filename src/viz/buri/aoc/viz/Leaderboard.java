@@ -287,7 +287,8 @@ public class Leaderboard {
 		page.append("\ta:hover { color: #99ff99; }\n");
 		page.append("\ta:link { text-decoration: none; }\n");
 		page.append("\t#chartDivisions { max-height: 300px; }\n");
-		page.append("\th1 { font-size: 12pt; }\n");
+		page.append("\th1 { font-size: 13pt; }\n");
+		page.append("\th2 { font-size: 12pt; }\n");
 		page.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		page.append("\tli.median { margin-bottom: 5px; }\n");
 		page.append("\tspan.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
@@ -343,8 +344,8 @@ public class Leaderboard {
 		page.append("\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("}\n");
 		page.append("</script>\n");
-		page.append("\n<h3>Top ").append(numMedians).append(" Overall");
-		page.append(" (as of ").append(readLastModified(year)).append(")</h3>\n");
+		page.append("\n<h2>Top ").append(numMedians).append(" Overall");
+		page.append(" (as of ").append(readLastModified(year)).append(")</h2>\n");
 		page.append("<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.</p>");
 		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
@@ -436,8 +437,8 @@ public class Leaderboard {
 			max = Math.max(max, i);
 		}
 
-		page.append("\n<a name=\"division\"></a><h3>Top ").append(numMedians).append(" Overall by Division ");
-		page.append(" (as of ").append(readLastModified(year)).append(")</h3>\n");
+		page.append("\n<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division ");
+		page.append(" (as of ").append(readLastModified(year)).append(")</h2>\n");
 		page.append("<div id=\"chartDivisions\"></div>\n");
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("var xValues = [\n\t");
@@ -474,6 +475,7 @@ public class Leaderboard {
 		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
 		page.append("Plotly.newPlot('chartDivisions', dataDivisions, layout, options);\n");
 		page.append("</script>\n");
+		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
 	}
 
 	/**
@@ -482,7 +484,7 @@ public class Leaderboard {
 	private static void insertPuzzleTimes(StringBuffer page, int year, Players players,
 		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
 		boolean allEmpty = true;
-		page.append("\n<h3>Top ").append(TOP_DAILY).append(" Daily</h3>\n");
+		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
