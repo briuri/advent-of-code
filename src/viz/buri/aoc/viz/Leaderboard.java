@@ -287,9 +287,9 @@ public class Leaderboard {
 		page.append("\ta:hover { color: #99ff99; }\n");
 		page.append("\ta:link { text-decoration: none; }\n");
 		page.append("\t#chartDivisions { max-height: 300px; }\n");
-		page.append("\th1 { font-size: 13pt; }\n");
-		page.append("\th2 { font-size: 12pt; }\n");
-		page.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
+		page.append("\th1 { color: #eeeeee; font-size: 13pt; }\n");
+		page.append("\th2 { color: #eeeeee; font-size: 12pt; margin-bottom: 0px; }\n");
+		page.append("\th3 { color: #eeeeee; font-size: 11pt; margin-bottom: 0px; }\n");
 		page.append("\tli.median { margin-bottom: 5px; }\n");
 		page.append("\tspan.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
 		page.append("\tspan.medianLink:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
@@ -302,7 +302,6 @@ public class Leaderboard {
 		page.append("\t.tiny { font-size: 8pt; }\n");
 		page.append("</style>\n</head>\n\n<body>\n");
 		page.append("<h1>Novetta AoC - Fastest Solve Times</h1>\n\n");
-
 		page.append("<div class=\"navBar\">");
 		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">");
 		page.append("Your Times&rArr;</a> ");
@@ -344,10 +343,10 @@ public class Leaderboard {
 		page.append("\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("}\n");
 		page.append("</script>\n");
-		page.append("\n<h2>Top ").append(numMedians).append(" Overall");
-		page.append(" (as of ").append(readLastModified(year)).append(")</h2>\n");
-		page.append("<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.</p>");
-		page.append("<p class=\"tiny\">Click median time to show/hide all times.</p>\n");
+		page.append("\n<h2>Top ").append(numMedians).append(" Overall</h2>\n");
+		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
+		page.append("<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.\n");
+		page.append("Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
@@ -437,8 +436,7 @@ public class Leaderboard {
 			max = Math.max(max, i);
 		}
 
-		page.append("\n<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division ");
-		page.append(" (as of ").append(readLastModified(year)).append(")</h2>\n");
+		page.append("\n<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
 		page.append("<div id=\"chartDivisions\"></div>\n");
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("var xValues = [\n\t");
@@ -485,6 +483,7 @@ public class Leaderboard {
 		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
 		boolean allEmpty = true;
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
+		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
