@@ -297,13 +297,23 @@ public class Leaderboard {
 		page.append("\t.emoji { font-size: 8pt; }\n");
 		page.append("\t.empty { font-size: 11pt; }\n");
 		page.append("\t.global { color: #ffff00; }\n");
-		page.append("\t.navBar { background-color: #1f1f43; font-size: 11pt; padding: 5px; }\n");
+		page.append("\t.navBar { background-color: #1f1f43; font-size: 10pt; line-height: 18pt; padding: 5px; }\n");
 		page.append("\t.tiny { font-size: 8pt; }\n");
 		page.append("</style>\n</head>\n\n<body>\n");
-		page.append("<h1>Novetta Advent of Code - Fastest Solve Times");
-		page.append(" (").append(year).append(")").append("</h1>\n\n");
+		page.append("<h1>Novetta AoC - Fastest Solve Times</h1>\n\n");
 
 		page.append("<div class=\"navBar\">");
+		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">");
+		page.append("Your Times&rArr;</a> ");
+		page.append(" | L.Board ");
+		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
+		page.append("1&rArr;</a> ");
+		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
+		page.append("2&rArr;</a> ");
+		page.append(" | ");
+		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
+		page.append(" | ");
+		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />");
 		page.append(year == 2020 ? year : "<a href=\"index.html\">2020</a>");
 		page.append(" | ");
 		page.append(year == 2019 ? year : "<a href=\"index-2019.html\">2019</a>");
@@ -313,15 +323,6 @@ public class Leaderboard {
 		page.append(year == 2017 ? year : "<a href=\"index-2017.html\">2017</a>");
 		page.append(" | ");
 		page.append(year == 2016 ? year : "<a href=\"index-2016.html\">2016</a>");
-		page.append(" | Leaderboard ");
-		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
-		page.append("1&rArr;</a> ");
-		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
-		page.append("2&rArr;</a> ");
-		page.append(" | ");
-		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
-		page.append(" | ");
-		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a>");
 		page.append("</div>\n\n");
 	}
 
@@ -467,7 +468,7 @@ public class Leaderboard {
 		page.append("\tfont: { family: 'monospace', color: '#cccccc' },\n");
 		page.append("\tpaper_bgcolor: '#0f0f23',\n");
 		page.append("\tplot_bgcolor: '#0f0f23',\n");
-		page.append("\tmargin: { t: 32, r: 32, b: 50, l: 32 },\n");
+		page.append("\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
 		page.append("\tyaxis: {range: [0, ").append(max + 2).append("]}\n");
 		page.append("};\n");
 		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
