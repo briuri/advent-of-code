@@ -392,6 +392,7 @@ public class Leaderboard {
 	private static void insertPuzzleTimes(StringBuffer page, int year, Players players,
 		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
 		boolean allEmpty = true;
+		page.append("\n<h3>Top ").append(TOP_DAILY).append(" Daily</h3>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
