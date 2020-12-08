@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
@@ -59,6 +61,7 @@ public class Leaderboard {
 	 */
 	private static void visualizeYear(int year) {
 		final Players players = readPlayers();
+		final List<String> divisions = readDivisions();
 		final List<Puzzle> puzzles = readPuzzles(year);
 		final Map<String, Object> leaderboardJson = readLeaderboard(year);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
@@ -68,6 +71,7 @@ public class Leaderboard {
 		StringBuffer page = new StringBuffer();
 		insertHeader(page, year);
 		insertMedianTimes(page, year, players, medianTimes);
+		insertDivisions(page, year, divisions, players, medianTimes);
 		insertPuzzleTimes(page, year, players, puzzleTimes, puzzles);
 		insertFooter(page, year);
 
@@ -115,6 +119,25 @@ public class Leaderboard {
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid players file.", e);
+		}
+	}
+
+	/**
+	 * Reads ancillary division data from the file (not included in version control).
+	 */
+	private static List<String> readDivisions() {
+		List<String> divisions = new ArrayList<>();
+		try {
+			File file = new File(JSON_FOLDER + "divisions.json");
+			JsonNode json = new ObjectMapper().readTree(file);
+			ArrayNode divisionJson = (ArrayNode) json.get("divisions");
+			for (int i = 0; i < divisionJson.size(); i++) {
+				divisions.add(divisionJson.get(i).asText());
+			}
+			return (divisions);
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid divisions file.", e);
 		}
 	}
 
@@ -255,6 +278,7 @@ public class Leaderboard {
 		page.append("<html>\n<head>\n");
 		page.append("<meta charset=\"UTF-8\">");
 		page.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
+		page.append("<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
 		page.append("<title>Novetta Advent of Code - Fastest Solve Times");
 		page.append(" (").append(year).append(")").append("</title>\n");
 		page.append("<style>\n");
@@ -262,6 +286,7 @@ public class Leaderboard {
 		page.append("\ta { color: #009900; }\n");
 		page.append("\ta:hover { color: #99ff99; }\n");
 		page.append("\ta:link { text-decoration: none; }\n");
+		page.append("\t#chartDivisions { max-height: 300px; }\n");
 		page.append("\th1 { font-size: 12pt; }\n");
 		page.append("\th3 { font-size: 11pt; margin-bottom: 0px; }\n");
 		page.append("\tli.median { margin-bottom: 5px; }\n");
@@ -301,7 +326,7 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Adds the Top X Overall during the current year.
+	 * Adds the Top X Overall section.
 	 */
 	private static void insertMedianTimes(StringBuffer page, int year, Players players, List<MedianTime> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
@@ -384,6 +409,66 @@ public class Leaderboard {
 			page.append(isNextTie ? "<br />\n" : "</li>\n");
 		}
 		page.append("</ol>\n");
+	}
+
+	/**
+	 * Adds the Top X Overall by Division section.
+	 */
+	private static void insertDivisions(StringBuffer page, int year, List<String> divisions, Players players, List<MedianTime> medianTimes) {
+		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
+		if (numMedians == 0) {
+			return;
+		}
+		Map<String, Integer> counts = new TreeMap<>();
+		for (String division : divisions) {
+			counts.put(division, 0);
+		}
+		for (int i = 0; i < numMedians; i++) {
+			MedianTime player = medianTimes.get(i);
+			String division = players.getDivision(player.getName());
+			if (division.length() > 0) {
+				counts.put(division, counts.get(division) + 1);
+			}
+		}
+		int max = 0;
+		for (int i : counts.values()) {
+			max = Math.max(max, i);
+		}
+
+		page.append("\n<a name=\"division\"></a><h3>Top ").append(numMedians).append(" Overall by Division ");
+		page.append(" (as of ").append(readLastModified(year)).append(")</h3>\n");
+		page.append("<div id=\"chartDivisions\"></div>\n");
+		page.append("<script type=\"text/javascript\">\n");
+		page.append("var xValues = [\n");
+		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
+			page.append("'").append(iter.next()).append("'");
+			if (iter.hasNext()) {
+				page.append(",");
+			}
+		}
+		page.append("];\n");
+		page.append("var yValues = [\n");
+		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
+			page.append(counts.get(iter.next()));
+			if (iter.hasNext()) {
+				page.append(",");
+			}
+		}
+		page.append("];\n");
+		page.append("var dataDivisions = [{\n");
+		page.append("\tx: xValues,\n");
+		page.append("\ty: yValues,\n");
+		page.append("\ttext: yValues.map(String),\n");
+		page.append("\ttextposition: 'outside',\n");
+		page.append("\ttype: 'bar'\n");
+		page.append("}];\n");
+		page.append("var layout = {\n");
+		page.append("\tmargin: { t: 32, r: 32, b: 50, l: 32 },\n");
+		page.append("\tyaxis: {range: [0, ").append(max + 2).append("]}\n");
+		page.append("};\n");
+		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
+		page.append("Plotly.newPlot('chartDivisions', dataDivisions, layout, options);\n");
+		page.append("</script>\n");
 	}
 
 	/**
