@@ -439,7 +439,7 @@ public class Leaderboard {
 		page.append(" (as of ").append(readLastModified(year)).append(")</h3>\n");
 		page.append("<div id=\"chartDivisions\"></div>\n");
 		page.append("<script type=\"text/javascript\">\n");
-		page.append("var xValues = [\n");
+		page.append("var xValues = [\n\t");
 		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
 			page.append("'").append(iter.next()).append("'");
 			if (iter.hasNext()) {
@@ -447,7 +447,7 @@ public class Leaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("var yValues = [\n");
+		page.append("var yValues = [\n\t");
 		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
 			page.append(counts.get(iter.next()));
 			if (iter.hasNext()) {
@@ -458,11 +458,15 @@ public class Leaderboard {
 		page.append("var dataDivisions = [{\n");
 		page.append("\tx: xValues,\n");
 		page.append("\ty: yValues,\n");
+		page.append("\tmarker: { color: '#006eb7' },\n");
 		page.append("\ttext: yValues.map(String),\n");
 		page.append("\ttextposition: 'outside',\n");
 		page.append("\ttype: 'bar'\n");
 		page.append("}];\n");
 		page.append("var layout = {\n");
+		page.append("\tfont: { color: '#cccccc' },\n");
+		page.append("\tpaper_bgcolor: '#0f0f23',\n");
+		page.append("\tplot_bgcolor: '#0f0f23',\n");
 		page.append("\tmargin: { t: 32, r: 32, b: 50, l: 32 },\n");
 		page.append("\tyaxis: {range: [0, ").append(max + 2).append("]}\n");
 		page.append("};\n");
