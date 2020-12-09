@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 /**
  * Superclass of all puzzles, for shared helper utilities.
- * 
+ *
  * @author Brian Uri!
  */
 public abstract class BasePuzzle {
@@ -44,6 +44,13 @@ public abstract class BasePuzzle {
 	 */
 	public static List<Integer> convertStringsToInts(List<String> rawIntegers) {
 		return (rawIntegers.stream().map(Integer::valueOf).collect(Collectors.toList()));
+	}
+
+	/**
+	 * Converts strings into longs.
+	 */
+	public static List<Long> convertStringsToLongs(List<String> rawLongs) {
+		return (rawLongs.stream().map(Long::valueOf).collect(Collectors.toList()));
 	}
 
 	/**
