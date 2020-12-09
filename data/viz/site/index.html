@@ -1,0 +1,663 @@
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="text/javascript" src="plotly-1.58.1.min.js"></script>
+<link type="text/css" rel="stylesheet" href="aoc.css" />
+<title>Novetta Advent of Code - Fastest Solve Times (2020)</title>
+</head>
+
+<body>
+<h1>Novetta AoC - Fastest Solve Times</h1>
+
+<div class="navBar"><a href="https://adventofcode.com/2020/leaderboard/self">Your Times&rArr;</a>  | L.Board <a href="https://adventofcode.com/2020/leaderboard/private/view/105906">1&rArr;</a> <a href="https://adventofcode.com/2020/leaderboard/private/view/368083">2&rArr;</a>  | <a href="https://novetta.slack.com/archives/advent-of-code">Slack&rArr;</a> | <a href="https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1">NN&rArr;</a><br />2020 | <a href="index-2019.html">2019</a> | <a href="index-2018.html">2018</a> | <a href="index-2017.html">2017</a> | <a href="index-2016.html">2016</a></div>
+
+<script type="text/javascript">
+function expand(place) {
+	oldDisplay = document.getElementById('details' + place).style.display;
+	document.getElementById('details' + place).style.display =
+		(oldDisplay == 'block' ? 'none' : 'block');
+	document.getElementById('median' + place).style.color =
+		(oldDisplay == 'block' ? '#ffffff' : '#888800');
+}
+</script>
+
+<h2>Top 25 Overall</h2>
+<p class="tiny">(as of 2020-12-09 11:04:25)</p>
+<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.
+Click median time to show/hide all times.</p>
+<ol>
+	<li class="median">&nbsp;<span class="median medianLink" id="median0" title="Show/Hide All Times" onClick="expand(0)">00:13:23</span>&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 2<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details0">
+	&nbsp;00:08:26<br />
+	&nbsp;00:09:22<br />
+	&nbsp;00:10:57<br />
+	&nbsp;00:13:07<br />
+	&nbsp;<span class="median">00:13:23</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:17:18<br />
+	&nbsp;00:18:30<br />
+	&nbsp;00:28:15<br />
+	&nbsp;01:37:44<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median1" title="Show/Hide All Times" onClick="expand(1)">00:14:40</span>&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 2<span class="emoji" title="1st Place">&#x1F947;</span> 2<span class="emoji" title="2nd Place">&#x1F948;</span> 2<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details1">
+	&nbsp;00:06:10<br />
+	&nbsp;00:06:19<br />
+	&nbsp;00:07:36<br />
+	&nbsp;00:11:55<br />
+	&nbsp;<span class="median">00:14:40</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:19:13<br />
+	&nbsp;00:23:53<br />
+	&nbsp;00:24:33<br />
+	&nbsp;23:13:15<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median2" title="Show/Hide All Times" onClick="expand(2)">00:15:20</span>&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 2<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details2">
+	&nbsp;00:06:47<br />
+	&nbsp;00:08:22<br />
+	&nbsp;00:10:34<br />
+	&nbsp;00:12:39<br />
+	&nbsp;<span class="median">00:15:20</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:17:16<br />
+	&nbsp;00:23:23<br />
+	&nbsp;00:26:11<br />
+	&nbsp;00:46:00<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median3" title="Show/Hide All Times" onClick="expand(3)">00:16:32</span>&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer (CORP-SP)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 1<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details3">
+	&nbsp;00:06:08<br />
+	&nbsp;00:09:22<br />
+	&nbsp;00:09:33<br />
+	&nbsp;00:11:21<br />
+	&nbsp;<span class="median">00:16:32</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:18:27<br />
+	&nbsp;00:21:54<br />
+	&nbsp;00:25:44<br />
+	&nbsp;00:34:24<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median4" title="Show/Hide All Times" onClick="expand(4)">00:16:44</span>&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri (CORP-BD)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 1<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 1<span class="emoji" title="Global Leaderboard">&#x1F30E;</span> 
+<div class="details" id="details4">
+	&nbsp;00:07:01<br />
+	&nbsp;00:07:39<br />
+	&nbsp;00:12:34<br />
+	&nbsp;00:14:37<br />
+	&nbsp;<span class="median">00:16:44</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:17:11<br />
+	&nbsp;00:24:00<br />
+	&nbsp;00:29:47<br />
+	&nbsp;00:31:18<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median5" title="Show/Hide All Times" onClick="expand(5)">00:17:34</span>&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid H<span class="antiIndex">Advent of Code</span>ansen (Cyber-CSD)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 1<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details5">
+	&nbsp;00:08:02<br />
+	&nbsp;00:12:43<br />
+	&nbsp;00:15:03<br />
+	&nbsp;00:16:51<br />
+	&nbsp;<span class="median">00:17:34</span>&nbsp;&nbsp;current median<br />
+	&nbsp;20:48:52<br />
+	&nbsp;44:32:47<br />
+	&nbsp;68:24:45<br />
+	&nbsp;92:15:40<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median6" title="Show/Hide All Times" onClick="expand(6)">00:18:08</span>&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts (MI-C4ISR)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details6">
+	&nbsp;00:08:16<br />
+	&nbsp;00:10:06<br />
+	&nbsp;00:16:21<br />
+	&nbsp;00:17:37<br />
+	&nbsp;<span class="median">00:18:08</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:19:10<br />
+	&nbsp;00:19:14<br />
+	&nbsp;00:28:27<br />
+	&nbsp;00:37:29<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median7" title="Show/Hide All Times" onClick="expand(7)">00:19:21</span>&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details7">
+	&nbsp;00:07:54<br />
+	&nbsp;00:11:01<br />
+	&nbsp;00:12:05<br />
+	&nbsp;00:18:35<br />
+	&nbsp;<span class="median">00:19:21</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:29:42<br />
+	&nbsp;00:37:18<br />
+	&nbsp;01:01:54<br />
+	&nbsp;03:35:44<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median8" title="Show/Hide All Times" onClick="expand(8)">00:20:11</span>&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander (Cyber-ACD)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details8">
+	&nbsp;00:12:10<br />
+	&nbsp;00:12:49<br />
+	&nbsp;00:16:18<br />
+	&nbsp;00:16:48<br />
+	&nbsp;<span class="median">00:20:11</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:21:55<br />
+	&nbsp;00:23:35<br />
+	&nbsp;00:38:11<br />
+	&nbsp;01:03:43<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median9" title="Show/Hide All Times" onClick="expand(9)">00:21:39</span>&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno (CORP-SP)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details9">
+	&nbsp;00:13:14<br />
+	&nbsp;00:20:03<br />
+	&nbsp;00:21:02<br />
+	&nbsp;00:21:23<br />
+	&nbsp;<span class="median">00:21:39</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:41:59<br />
+	&nbsp;01:07:55<br />
+	&nbsp;01:14:12<br />
+	&nbsp;20:31:19<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median10" title="Show/Hide All Times" onClick="expand(10)">00:22:28</span>&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 1<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details10">
+	&nbsp;00:06:09<br />
+	&nbsp;00:11:39<br />
+	&nbsp;00:12:16<br />
+	&nbsp;00:15:35<br />
+	&nbsp;<span class="median">00:22:28</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:29:51<br />
+	&nbsp;00:36:24<br />
+	&nbsp;01:04:54<br />
+	&nbsp;07:59:12<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median11" title="Show/Hide All Times" onClick="expand(11)">00:27:06</span>&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith (MI-C4ISR)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details11">
+	&nbsp;00:14:37<br />
+	&nbsp;00:18:55<br />
+	&nbsp;00:19:05<br />
+	&nbsp;00:24:24<br />
+	&nbsp;<span class="median">00:27:06</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:27:30<br />
+	&nbsp;00:30:15<br />
+	&nbsp;00:33:46<br />
+	&nbsp;11:21:15<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median12" title="Show/Hide All Times" onClick="expand(12)">00:29:02</span>&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin (MI-C4ISR)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details12">
+	&nbsp;00:12:02<br />
+	&nbsp;00:13:35<br />
+	&nbsp;00:16:21<br />
+	&nbsp;00:17:19<br />
+	&nbsp;<span class="median">00:29:02</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:31:32<br />
+	&nbsp;00:46:54<br />
+	&nbsp;45:32:29<br />
+	&nbsp;70:29:29<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median13" title="Show/Hide All Times" onClick="expand(13)">00:31:50</span>&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin (MI-C4ISR)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details13">
+	&nbsp;00:14:03<br />
+	&nbsp;00:15:31<br />
+	&nbsp;00:19:47<br />
+	&nbsp;00:25:18<br />
+	&nbsp;<span class="median">00:31:50</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:32:22<br />
+	&nbsp;00:35:50<br />
+	&nbsp;00:49:44<br />
+	&nbsp;01:43:43<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median14" title="Show/Hide All Times" onClick="expand(14)">00:32:09</span>&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details14">
+	&nbsp;00:12:43<br />
+	&nbsp;00:16:15<br />
+	&nbsp;00:25:57<br />
+	&nbsp;00:26:25<br />
+	&nbsp;<span class="median">00:32:09</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:43:55<br />
+	&nbsp;01:12:52<br />
+	&nbsp;01:21:41<br />
+	&nbsp;01:48:37<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median15" title="Show/Hide All Times" onClick="expand(15)">00:35:14</span>&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen (MI-SOF)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details15">
+	&nbsp;00:12:53<br />
+	&nbsp;00:25:24<br />
+	&nbsp;00:26:00<br />
+	&nbsp;00:34:12<br />
+	&nbsp;<span class="median">00:35:14</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:36:06<br />
+	&nbsp;00:41:31<br />
+	&nbsp;01:32:28<br />
+	&nbsp;01:36:38<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median16" title="Show/Hide All Times" onClick="expand(16)">00:37:38</span>&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells (IX-ES)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details16">
+	&nbsp;00:15:22<br />
+	&nbsp;00:18:11<br />
+	&nbsp;00:22:26<br />
+	&nbsp;00:26:15<br />
+	&nbsp;<span class="median">00:37:38</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:50:16<br />
+	&nbsp;00:54:07<br />
+	&nbsp;01:00:49<br />
+	&nbsp;01:47:24<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median17" title="Show/Hide All Times" onClick="expand(17)">00:42:21</span>&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details17">
+	&nbsp;00:13:14<br />
+	&nbsp;00:16:15<br />
+	&nbsp;00:18:31<br />
+	&nbsp;00:41:23<br />
+	&nbsp;<span class="median">00:42:21</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:55:23<br />
+	&nbsp;01:02:19<br />
+	&nbsp;15:13:45<br />
+	&nbsp;23:40:47<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median18" title="Show/Hide All Times" onClick="expand(18)">00:42:24</span>&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>hirk (MI-AA)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details18">
+	&nbsp;00:18:53<br />
+	&nbsp;00:27:01<br />
+	&nbsp;00:35:47<br />
+	&nbsp;00:41:09<br />
+	&nbsp;<span class="median">00:42:24</span>&nbsp;&nbsp;current median<br />
+	&nbsp;01:00:59<br />
+	&nbsp;01:23:30<br />
+	&nbsp;01:51:38<br />
+	&nbsp;09:47:34<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median19" title="Show/Hide All Times" onClick="expand(19)">00:45:03</span>&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon (MI-C4ISR)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 1<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
+<div class="details" id="details19">
+	&nbsp;00:10:55<br />
+	&nbsp;00:18:24<br />
+	&nbsp;00:25:15<br />
+	&nbsp;00:33:55<br />
+	&nbsp;<span class="median">00:45:03</span>&nbsp;&nbsp;current median<br />
+	&nbsp;01:20:23<br />
+	&nbsp;10:18:01<br />
+	&nbsp;12:53:22<br />
+	&nbsp;33:45:00<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median20" title="Show/Hide All Times" onClick="expand(20)">00:48:08</span>&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>dam H<span class="antiIndex">Advent of Code</span>eitke (MI-AA)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details20">
+	&nbsp;00:22:23<br />
+	&nbsp;00:25:24<br />
+	&nbsp;00:38:34<br />
+	&nbsp;00:44:24<br />
+	&nbsp;<span class="median">00:48:08</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:48:14<br />
+	&nbsp;00:51:55<br />
+	&nbsp;01:09:52<br />
+	&nbsp;02:05:51<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median21" title="Show/Hide All Times" onClick="expand(21)">00:54:25</span>&nbsp;&nbsp;Z<span class="antiIndex">Advent of Code</span>ardon R<span class="antiIndex">Advent of Code</span>oger (IX-ET)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details21">
+	&nbsp;00:35:58<br />
+	&nbsp;00:41:31<br />
+	&nbsp;00:43:40<br />
+	&nbsp;00:52:34<br />
+	&nbsp;<span class="median">00:54:25</span>&nbsp;&nbsp;current median<br />
+	&nbsp;00:55:45<br />
+	&nbsp;00:58:55<br />
+	&nbsp;01:27:04<br />
+	&nbsp;08:36:20<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median22" title="Show/Hide All Times" onClick="expand(22)">01:04:01</span>&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>ric V<span class="antiIndex">Advent of Code</span>anhove (IX-ES)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details22">
+	&nbsp;00:26:46<br />
+	&nbsp;00:30:18<br />
+	&nbsp;00:38:35<br />
+	&nbsp;00:39:18<br />
+	&nbsp;<span class="median">01:04:01</span>&nbsp;&nbsp;current median<br />
+	&nbsp;01:16:16<br />
+	&nbsp;02:30:09<br />
+	&nbsp;08:56:42<br />
+	&nbsp;25:01:41<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median23" title="Show/Hide All Times" onClick="expand(23)">01:04:37</span>&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ean W<span class="antiIndex">Advent of Code</span>right (MI-SOF)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details23">
+	&nbsp;00:23:24<br />
+	&nbsp;00:40:24<br />
+	&nbsp;00:54:47<br />
+	&nbsp;01:03:29<br />
+	&nbsp;<span class="median">01:04:37</span>&nbsp;&nbsp;current median<br />
+	&nbsp;01:49:47<br />
+	&nbsp;07:41:33<br />
+	&nbsp;07:49:31<br />
+	&nbsp;08:05:46<br />
+</div>
+</li>
+	<li class="median">&nbsp;<span class="median medianLink" id="median24" title="Show/Hide All Times" onClick="expand(24)">01:06:14</span>&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>mma C<span class="antiIndex">Advent of Code</span>ooper (CORP-SP)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18<span class="emoji" title="Stars">&#x2B50;</span> 
+<div class="details" id="details24">
+	&nbsp;00:27:51<br />
+	&nbsp;00:38:24<br />
+	&nbsp;00:46:04<br />
+	&nbsp;00:58:50<br />
+	&nbsp;<span class="median">01:06:14</span>&nbsp;&nbsp;current median<br />
+	&nbsp;01:11:38<br />
+	&nbsp;01:23:52<br />
+	&nbsp;01:54:21<br />
+	&nbsp;02:51:12<br />
+</div>
+</li>
+</ol>
+
+<a name="division"></a><h2>Top 25 Overall by Division</h2>
+<div id="chartDivisions"></div>
+<script type="text/javascript">
+var xValues = [
+	'CORP-BD','CORP-SP','Cyber-ACD','Cyber-CDE','Cyber-CSD','IX-ES','IX-ET','MI-AA','MI-C4ISR','MI-SOF'];
+var yValues = [
+	1,3,1,0,1,2,8,2,5,2];
+var dataDivisions = [{
+	x: xValues,
+	y: yValues,
+	marker: { color: '#006eb7' },
+	text: yValues.map(String),
+	textposition: 'outside',
+	type: 'bar'
+}];
+var layout = {
+	font: { family: 'monospace', color: '#cccccc' },
+	paper_bgcolor: '#0f0f23',
+	plot_bgcolor: '#0f0f23',
+	margin: { t: 32, r: 32, b: 75, l: 32 },
+	yaxis: {range: [0, 10]}
+};
+var options = {displayModeBar: false, responsive: true, staticPlot: true}
+Plotly.newPlot('chartDivisions', dataDivisions, layout, options);
+</script>
+<div class="navBar"><a href="#">Jump to Top</a></div>
+<h2>Top 25 Daily</h2>
+<p class="tiny">(as of 2020-12-09 11:04:25)</p>
+<a name="day9"></a><h3><a href="https://adventofcode.com/2020/day/9">Day 9: Encoding Error</a></h3>
+<ol>
+	<li>&nbsp;00:11:39&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:13:07&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:14:40&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:16:21&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:16:32&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:16:44&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:16:51&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid H<span class="antiIndex">Advent of Code</span>ansen</li>
+	<li>&nbsp;00:18:35&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:19:10&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:20:11&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:21:02&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno</li>
+	<li>&nbsp;00:23:23&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:25:18&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:26:02&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichael Z<span class="antiIndex">Advent of Code</span>ander</li>
+	<li>&nbsp;00:27:30&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:31:11&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teve C<span class="antiIndex">Advent of Code</span>arlon</li>
+	<li>&nbsp;00:32:09&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;00:33:20&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lex S<span class="antiIndex">Advent of Code</span>torozkov</li>
+	<li>&nbsp;00:34:59&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>mith</li>
+	<li>&nbsp;00:35:14&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+	<li>&nbsp;00:35:47&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>hirk</li>
+	<li>&nbsp;00:38:35&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>ric V<span class="antiIndex">Advent of Code</span>anhove</li>
+	<li>&nbsp;00:41:23&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak</li>
+	<li>&nbsp;00:45:03&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon</li>
+	<li>&nbsp;00:51:55&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>dam H<span class="antiIndex">Advent of Code</span>eitke</li>
+</ol>
+<a name="day8"></a><h3><a href="https://adventofcode.com/2020/day/8">Day 8: Handheld Halting</a></h3>
+<ol>
+	<li>&nbsp;00:13:15&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichael Z<span class="antiIndex">Advent of Code</span>ander</li>
+	<li>&nbsp;00:15:03&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid H<span class="antiIndex">Advent of Code</span>ansen</li>
+	<li>&nbsp;00:17:16&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:18:08&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:18:27&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:19:13&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:20:03&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno</li>
+	<li>&nbsp;00:23:35&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:24:00&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:26:00&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+	<li>&nbsp;00:27:06&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:28:15&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:29:42&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:29:51&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:31:32&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:31:50&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:41:30&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teve C<span class="antiIndex">Advent of Code</span>arlon</li>
+	<li>&nbsp;00:42:21&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak</li>
+	<li>&nbsp;00:43:55&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;00:44:24&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>dam H<span class="antiIndex">Advent of Code</span>eitke</li>
+	<li>&nbsp;00:53:19&nbsp;&nbsp;L<span class="antiIndex">Advent of Code</span>aura D<span class="antiIndex">Advent of Code</span>rummer</li>
+	<li>&nbsp;00:54:07&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:54:25&nbsp;&nbsp;Z<span class="antiIndex">Advent of Code</span>ardon R<span class="antiIndex">Advent of Code</span>oger</li>
+	<li>&nbsp;00:57:31&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rent K<span class="antiIndex">Advent of Code</span>itchen</li>
+	<li>&nbsp;01:04:37&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ean W<span class="antiIndex">Advent of Code</span>right</li>
+</ol>
+<a name="day7"></a><h3><a href="https://adventofcode.com/2020/day/7">Day 7: Handy Haversacks</a></h3>
+<ol>
+	<li>&nbsp;00:17:34&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid H<span class="antiIndex">Advent of Code</span>ansen</li>
+	<li>&nbsp;00:23:53&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:28:27&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:29:47&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:32:15&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichael Z<span class="antiIndex">Advent of Code</span>ander</li>
+	<li>&nbsp;00:33:46&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:34:24&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:46:00&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:46:54&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:55:10&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>mith</li>
+	<li>&nbsp;01:01:54&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;01:02:19&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak</li>
+	<li>&nbsp;01:03:43&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;01:04:54&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;01:08:59&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teve C<span class="antiIndex">Advent of Code</span>arlon</li>
+	<li>&nbsp;01:10:01&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ordan H<span class="antiIndex">Advent of Code</span>olland</li>
+	<li>&nbsp;01:13:25&nbsp;&nbsp;P<span class="antiIndex">Advent of Code</span>aul W<span class="antiIndex">Advent of Code</span>illiams</li>
+	<li>&nbsp;01:20:23&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon</li>
+	<li>&nbsp;01:21:41&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;01:25:52&nbsp;&nbsp;L<span class="antiIndex">Advent of Code</span>aura D<span class="antiIndex">Advent of Code</span>rummer</li>
+	<li>&nbsp;01:27:04&nbsp;&nbsp;Z<span class="antiIndex">Advent of Code</span>ardon R<span class="antiIndex">Advent of Code</span>oger</li>
+	<li>&nbsp;01:32:28&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+	<li>&nbsp;01:37:44&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;01:43:43&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;01:47:24&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+</ol>
+<a name="day6"></a><h3><a href="https://adventofcode.com/2020/day/6">Day 6: Custom Customs</a></h3>
+<ol>
+	<li>&nbsp;00:06:08&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:06:09&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:07:36&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:08:02&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid H<span class="antiIndex">Advent of Code</span>ansen</li>
+	<li>&nbsp;00:10:06&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:10:55&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon</li>
+	<li>&nbsp;00:11:54&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>onathan B<span class="antiIndex">Advent of Code</span>erliner</li>
+	<li>&nbsp;00:12:05&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:12:10&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:12:39&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:13:23&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:13:48&nbsp;&nbsp;L<span class="antiIndex">Advent of Code</span>aura D<span class="antiIndex">Advent of Code</span>rummer</li>
+	<li>&nbsp;00:14:03&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:14:37&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith<br />
+	&nbsp;00:14:37&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:14:56&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ordan H<span class="antiIndex">Advent of Code</span>olland</li>
+	<li>&nbsp;00:15:22&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:17:19&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:21:23&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno</li>
+	<li>&nbsp;00:22:45&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teve C<span class="antiIndex">Advent of Code</span>arlon</li>
+	<li>&nbsp;00:25:17&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian S<span class="antiIndex">Advent of Code</span>acash</li>
+	<li>&nbsp;00:25:24&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>dam H<span class="antiIndex">Advent of Code</span>eitke</li>
+	<li>&nbsp;00:25:57&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;00:26:46&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>ric V<span class="antiIndex">Advent of Code</span>anhove</li>
+	<li>&nbsp;00:38:24&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>mma C<span class="antiIndex">Advent of Code</span>ooper</li>
+</ol>
+<a name="day5"></a><h3><a href="https://adventofcode.com/2020/day/5">Day 5: Binary Boarding</a></h3>
+<ol>
+	<li>&nbsp;00:10:11&nbsp;&nbsp;R<span class="antiIndex">Advent of Code</span>yan W<span class="antiIndex">Advent of Code</span>idmaier</li>
+	<li>&nbsp;00:11:55&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:12:43&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid H<span class="antiIndex">Advent of Code</span>ansen</li>
+	<li>&nbsp;00:15:20&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:15:35&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:16:18&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:17:11&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:17:18&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:17:37&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:18:31&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak</li>
+	<li>&nbsp;00:19:21&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:19:36&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teve C<span class="antiIndex">Advent of Code</span>arlon</li>
+	<li>&nbsp;00:20:58&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>on H<span class="antiIndex">Advent of Code</span>ill</li>
+	<li>&nbsp;00:21:31&nbsp;&nbsp;N<span class="antiIndex">Advent of Code</span>icholas P<span class="antiIndex">Advent of Code</span>erry</li>
+	<li>&nbsp;00:21:39&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno</li>
+	<li>&nbsp;00:21:48&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichael Z<span class="antiIndex">Advent of Code</span>ander</li>
+	<li>&nbsp;00:23:19&nbsp;&nbsp;Q<span class="antiIndex">Advent of Code</span>uintin D<span class="antiIndex">Advent of Code</span>eGroot</li>
+	<li>&nbsp;00:24:24&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:25:44&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:26:15&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:26:25&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;00:30:18&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>ric V<span class="antiIndex">Advent of Code</span>anhove</li>
+	<li>&nbsp;00:32:19&nbsp;&nbsp;C<span class="antiIndex">Advent of Code</span>arl Z<span class="antiIndex">Advent of Code</span>mola</li>
+	<li>&nbsp;00:33:55&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon</li>
+	<li>&nbsp;00:34:12&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+</ol>
+<a name="day4"></a><h3><a href="https://adventofcode.com/2020/day/4">Day 4: Passport Processing</a></h3>
+<ol>
+	<li>&nbsp;00:18:24&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon</li>
+	<li>&nbsp;00:18:30&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:18:55&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:21:54&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:24:33&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:26:11&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:29:44&nbsp;&nbsp;Q<span class="antiIndex">Advent of Code</span>uintin D<span class="antiIndex">Advent of Code</span>eGroot</li>
+	<li>&nbsp;00:31:18&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:36:24&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:37:18&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:37:29&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:38:11&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:39:28&nbsp;&nbsp;N<span class="antiIndex">Advent of Code</span>icholas P<span class="antiIndex">Advent of Code</span>erry</li>
+	<li>&nbsp;00:48:59&nbsp;&nbsp;L<span class="antiIndex">Advent of Code</span>aura D<span class="antiIndex">Advent of Code</span>rummer</li>
+	<li>&nbsp;00:49:44&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:50:16&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:52:34&nbsp;&nbsp;Z<span class="antiIndex">Advent of Code</span>ardon R<span class="antiIndex">Advent of Code</span>oger</li>
+	<li>&nbsp;00:54:40&nbsp;&nbsp;R<span class="antiIndex">Advent of Code</span>odney R<span class="antiIndex">Advent of Code</span>odriguez</li>
+	<li>&nbsp;00:55:23&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak</li>
+	<li>&nbsp;01:08:12&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian S<span class="antiIndex">Advent of Code</span>acash</li>
+	<li>&nbsp;01:09:52&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>dam H<span class="antiIndex">Advent of Code</span>eitke</li>
+	<li>&nbsp;01:14:12&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno</li>
+	<li>&nbsp;01:16:30&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>aniel S<span class="antiIndex">Advent of Code</span>t. George</li>
+	<li>&nbsp;01:23:02&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ames A<span class="antiIndex">Advent of Code</span>dam</li>
+	<li>&nbsp;01:23:30&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>hirk</li>
+</ol>
+<a name="day3"></a><h3><a href="https://adventofcode.com/2020/day/3">Day 3: Toboggan Trajectory</a></h3>
+<ol>
+	<li>&nbsp;00:06:19&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:08:22&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:10:55&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>on H<span class="antiIndex">Advent of Code</span>ill</li>
+	<li>&nbsp;00:10:57&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:11:01&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:11:21&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:12:34&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:16:15&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak</li>
+	<li>&nbsp;00:19:14&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:21:55&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:22:26&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:22:28&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:25:15&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>ryan D<span class="antiIndex">Advent of Code</span>ragon</li>
+	<li>&nbsp;00:25:36&nbsp;&nbsp;C<span class="antiIndex">Advent of Code</span>hido E<span class="antiIndex">Advent of Code</span>nyinna</li>
+	<li>&nbsp;00:25:54&nbsp;&nbsp;R<span class="antiIndex">Advent of Code</span>odney R<span class="antiIndex">Advent of Code</span>odriguez</li>
+	<li>&nbsp;00:26:21&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lex S<span class="antiIndex">Advent of Code</span>torozkov</li>
+	<li>&nbsp;00:28:10&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian S<span class="antiIndex">Advent of Code</span>acash</li>
+	<li>&nbsp;00:29:02&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:29:52&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ordan H<span class="antiIndex">Advent of Code</span>olland</li>
+	<li>&nbsp;00:30:15&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:30:20&nbsp;&nbsp;Q<span class="antiIndex">Advent of Code</span>uintin D<span class="antiIndex">Advent of Code</span>eGroot</li>
+	<li>&nbsp;00:32:22&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:34:16&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew D<span class="antiIndex">Advent of Code</span>oherty</li>
+	<li>&nbsp;00:34:21&nbsp;&nbsp;C<span class="antiIndex">Advent of Code</span>arl Z<span class="antiIndex">Advent of Code</span>mola</li>
+	<li>&nbsp;00:36:06&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+</ol>
+<a name="day2"></a><h3><a href="https://adventofcode.com/2020/day/2">Day 2: Password Philosophy</a></h3>
+<ol>
+	<li>&nbsp;00:06:10&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>att B<span class="antiIndex">Advent of Code</span>oehm</li>
+	<li>&nbsp;00:06:47&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:07:01&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:08:16&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:08:26&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:09:33&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer</li>
+	<li>&nbsp;00:10:20&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>on H<span class="antiIndex">Advent of Code</span>ill</li>
+	<li>&nbsp;00:12:02&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:12:16&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>evin A<span class="antiIndex">Advent of Code</span>nn Hunt</li>
+	<li>&nbsp;00:12:49&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:13:14&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ichelle R<span class="antiIndex">Advent of Code</span>ybak<br />
+	&nbsp;00:13:14&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>oseph T<span class="antiIndex">Advent of Code</span>errigno</li>
+	<li>&nbsp;00:15:31&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:16:15&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;00:16:23&nbsp;&nbsp;N<span class="antiIndex">Advent of Code</span>icholas P<span class="antiIndex">Advent of Code</span>erry</li>
+	<li>&nbsp;00:17:37&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian S<span class="antiIndex">Advent of Code</span>acash</li>
+	<li>&nbsp;00:18:11&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:18:59&nbsp;&nbsp;C<span class="antiIndex">Advent of Code</span>hido E<span class="antiIndex">Advent of Code</span>nyinna</li>
+	<li>&nbsp;00:19:05&nbsp;&nbsp;S<span class="antiIndex">Advent of Code</span>teven K<span class="antiIndex">Advent of Code</span>eith</li>
+	<li>&nbsp;00:21:20&nbsp;&nbsp;Q<span class="antiIndex">Advent of Code</span>uintin D<span class="antiIndex">Advent of Code</span>eGroot</li>
+	<li>&nbsp;00:24:39&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ordan H<span class="antiIndex">Advent of Code</span>olland</li>
+	<li>&nbsp;00:25:04&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>mith</li>
+	<li>&nbsp;00:25:24&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+	<li>&nbsp;00:27:01&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>hirk</li>
+	<li>&nbsp;00:36:09&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>yle B<span class="antiIndex">Advent of Code</span>rady</li>
+</ol>
+<a name="day1"></a><h3><a href="https://adventofcode.com/2020/day/1">Day 1: Report Repair</a></h3>
+<ol>
+	<li><a href="https://adventofcode.com/2020/leaderboard/day/1"><sup class="global">*</sup></a>00:07:39&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian U<span class="antiIndex">Advent of Code</span>ri</li>
+	<li>&nbsp;00:07:54&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>ike H<span class="antiIndex">Advent of Code</span>erms</li>
+	<li>&nbsp;00:08:41&nbsp;&nbsp;C<span class="antiIndex">Advent of Code</span>hris S<span class="antiIndex">Advent of Code</span>ieber</li>
+	<li>&nbsp;00:09:22&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ack B<span class="antiIndex">Advent of Code</span>uttimer<br />
+	&nbsp;00:09:22&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew K<span class="antiIndex">Advent of Code</span>ongsiri</li>
+	<li>&nbsp;00:10:34&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>lan R<span class="antiIndex">Advent of Code</span>einer</li>
+	<li>&nbsp;00:12:43&nbsp;&nbsp;M<span class="antiIndex">Advent of Code</span>atthew M<span class="antiIndex">Advent of Code</span>onnik<br />
+	&nbsp;00:12:43&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>radley W<span class="antiIndex">Advent of Code</span>elsh</li>
+	<li>&nbsp;00:12:53&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ayden O<span class="antiIndex">Advent of Code</span>lsen</li>
+	<li>&nbsp;00:13:35&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>en G<span class="antiIndex">Advent of Code</span>oldin</li>
+	<li>&nbsp;00:14:42&nbsp;&nbsp;K<span class="antiIndex">Advent of Code</span>yle B<span class="antiIndex">Advent of Code</span>rady</li>
+	<li>&nbsp;00:15:35&nbsp;&nbsp;B<span class="antiIndex">Advent of Code</span>rian S<span class="antiIndex">Advent of Code</span>acash</li>
+	<li>&nbsp;00:16:21&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ucker T<span class="antiIndex">Advent of Code</span>ibbetts</li>
+	<li>&nbsp;00:16:48&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>avid A<span class="antiIndex">Advent of Code</span>lexander</li>
+	<li>&nbsp;00:18:16&nbsp;&nbsp;P<span class="antiIndex">Advent of Code</span>aul W<span class="antiIndex">Advent of Code</span>illiams</li>
+	<li>&nbsp;00:18:53&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ustin S<span class="antiIndex">Advent of Code</span>hirk</li>
+	<li>&nbsp;00:19:47&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ouglas B<span class="antiIndex">Advent of Code</span>odkin</li>
+	<li>&nbsp;00:22:23&nbsp;&nbsp;A<span class="antiIndex">Advent of Code</span>dam H<span class="antiIndex">Advent of Code</span>eitke</li>
+	<li>&nbsp;00:23:24&nbsp;&nbsp;D<span class="antiIndex">Advent of Code</span>ean W<span class="antiIndex">Advent of Code</span>right</li>
+	<li>&nbsp;00:27:29&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>on H<span class="antiIndex">Advent of Code</span>ill</li>
+	<li>&nbsp;00:27:51&nbsp;&nbsp;E<span class="antiIndex">Advent of Code</span>mma C<span class="antiIndex">Advent of Code</span>ooper</li>
+	<li>&nbsp;00:29:15&nbsp;&nbsp;C<span class="antiIndex">Advent of Code</span>hido E<span class="antiIndex">Advent of Code</span>nyinna</li>
+	<li>&nbsp;00:35:44&nbsp;&nbsp;R<span class="antiIndex">Advent of Code</span>ob S<span class="antiIndex">Advent of Code</span>heen</li>
+	<li>&nbsp;00:37:38&nbsp;&nbsp;T<span class="antiIndex">Advent of Code</span>ye W<span class="antiIndex">Advent of Code</span>ells</li>
+	<li>&nbsp;00:40:11&nbsp;&nbsp;J<span class="antiIndex">Advent of Code</span>ames A<span class="antiIndex">Advent of Code</span>dam</li>
+</ol>
+<div class="navBar"><a href="#">Jump to Top</a></div><p class="tiny"><sup class="global">*</sup> Top 100 on the daily Global Leaderboard<br />&nbsp;&nbsp;last update on 2020-12-09 11:04:25</p>
+</body>
+</html>

@@ -77,7 +77,7 @@ public class Leaderboard {
 
 		try {
 			String outputFilename = (year == CURRENT_YEAR ? "index.html" : "index-" + year + ".html");
-			Files.write(Paths.get("output/" + outputFilename), page.toString().getBytes());
+			Files.write(Paths.get("data/viz/site/" + outputFilename), page.toString().getBytes());
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file.", e);
@@ -279,28 +279,9 @@ public class Leaderboard {
 		page.append("<meta charset=\"UTF-8\">");
 		page.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
 		page.append("<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
+		page.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css\" />\n");
 		page.append("<title>Novetta Advent of Code - Fastest Solve Times");
-		page.append(" (").append(year).append(")").append("</title>\n");
-		page.append("<style>\n");
-		page.append("\tbody { background-color: #0f0f23; color: #cccccc; font-family: monospace; font-size: 10pt; }\n");
-		page.append("\ta { color: #009900; }\n");
-		page.append("\ta:hover { color: #99ff99; }\n");
-		page.append("\ta:link { text-decoration: none; }\n");
-		page.append("\t#chartDivisions { max-height: 300px; }\n");
-		page.append("\th1 { color: #eeeeee; font-size: 13pt; }\n");
-		page.append("\th2 { color: #eeeeee; font-size: 12pt; margin-bottom: 0px; }\n");
-		page.append("\th3 { color: #eeeeee; font-size: 11pt; margin-bottom: 0px; }\n");
-		page.append("\tli.median { margin-bottom: 5px; }\n");
-		page.append("\tspan.median { color: #ffffff; text-shadow: 0 0 5px #ffffff; }\n");
-		page.append("\tspan.medianLink:hover { color: #99ff99; cursor: pointer; *cursor: hand; }\n");
-		page.append("\t.antiIndex { display: none; }\n");
-		page.append("\t.details { display: none; margin-bottom: 10px; }\n");
-		page.append("\t.emoji { font-size: 8pt; }\n");
-		page.append("\t.empty { font-size: 11pt; }\n");
-		page.append("\t.global { color: #ffff00; }\n");
-		page.append("\t.navBar { background-color: #1f1f43; font-size: 10pt; line-height: 18pt; padding: 5px; }\n");
-		page.append("\t.tiny { font-size: 8pt; }\n");
-		page.append("</style>\n</head>\n\n<body>\n");
+		page.append(" (").append(year).append(")").append("</title>\n</head>\n\n<body>\n");
 		page.append("<h1>Novetta AoC - Fastest Solve Times</h1>\n\n");
 		page.append("<div class=\"navBar\">");
 		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">");

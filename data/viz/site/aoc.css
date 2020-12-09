@@ -1,0 +1,72 @@
+/**
+ * Stylesheet for Novetta AoC Fastest Solve Times page
+ */
+a {
+	color: #009900;
+}
+a:hover {
+	color: #99ff99;
+}
+a:link {
+	text-decoration: none;
+}
+.antiIndex {
+	display: none;
+}
+body {
+	background-color: #0f0f23;
+	color: #cccccc;
+	font-family: monospace;
+	font-size: 10pt;
+}
+#chartDivisions {
+	max-height: 300px;
+}
+.details {
+	display: none;
+	margin-bottom: 10px;
+}
+.emoji {
+	font-size: 8pt;
+}
+.empty {
+	font-size: 11pt;
+}
+.global {
+	color: #ffff00;
+}
+h1 {
+	color: #eeeeee;
+	font-size: 13pt;
+}
+h2 {
+	color: #eeeeee;
+	font-size: 12pt;
+	margin-bottom: 0px;
+}
+h3 {
+	color: #eeeeee;
+	font-size: 11pt;
+	margin-bottom: 0px;
+}
+li.median {
+	margin-bottom: 5px;
+}
+span.median {
+	color: #ffffff;
+	text-shadow: 0 0 5px #ffffff;
+}
+span.medianLink:hover {
+	color: #99ff99;
+	cursor: pointer;
+	*cursor: hand;
+}
+.navBar {
+	background-color: #1f1f43;
+	font-size: 10pt;
+	line-height: 18pt;
+	padding: 5px;
+}
+.tiny {
+	font-size: 8pt;
+}
