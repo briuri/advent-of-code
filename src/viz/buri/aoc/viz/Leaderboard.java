@@ -72,6 +72,7 @@ public class Leaderboard {
 		insertHeader(page, year);
 		insertMedianTimes(page, year, players, medianTimes);
 		insertDivisions(page, year, divisions, players, medianTimes);
+		insertParticipation(page, year, players, puzzleTimes, puzzles);
 		insertPuzzleTimes(page, year, players, puzzleTimes, puzzles);
 		insertFooter(page, year);
 
@@ -326,7 +327,7 @@ public class Leaderboard {
 		page.append("</script>\n");
 		page.append("\n<h2>Top ").append(numMedians).append(" Overall</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<p>Scoring is based on number of stars earned, with ties broken by the fastest median solve time.\n");
+		page.append("<p>Rank is based on number of stars earned, with ties broken by the fastest median solve time.\n");
 		page.append("Click median time to show/hide all times.</p>\n");
 		page.append("<ol>\n");
 
@@ -418,6 +419,7 @@ public class Leaderboard {
 		}
 
 		page.append("\n<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
+		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		page.append("<div id=\"chartDivisions\"></div>\n");
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("var xValues = [\n\t");
@@ -454,6 +456,50 @@ public class Leaderboard {
 		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
 		page.append("Plotly.newPlot('chartDivisions', dataDivisions, layout, options);\n");
 		page.append("</script>\n");
+	}
+
+	/**
+	 * Adds the Total Participation chart.
+	 */
+	private static void insertParticipation(StringBuffer page, int year, Players players,
+		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
+		page.append("\n<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
+		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
+		page.append("<div id=\"chartParticipation\"></div>\n");
+		page.append("<script type=\"text/javascript\">\n");
+		page.append("var xValues = [\n\t");
+		for (int i = 0; i < TOTAL_PUZZLES; i++) {
+			page.append(i + 1);
+			if (i + 1 < TOTAL_PUZZLES) {
+				page.append(",");
+			}
+		}
+		page.append("];\n");
+		page.append("var yValues = [\n\t");
+		for (int i = 0; i < TOTAL_PUZZLES; i++) {
+			page.append(puzzleTimes.get(i).size());
+			if (i + 1 < TOTAL_PUZZLES) {
+				page.append(",");
+			}
+		}
+		page.append("];\n");
+		page.append("var dataParticipation = [{\n");
+		page.append("\tx: xValues,\n");
+		page.append("\ty: yValues,\n");
+		page.append("\tmarker: { color: '#006eb7' },\n");
+		page.append("\ttext: yValues.map(String),\n");
+		page.append("\ttextposition: 'outside',\n");
+		page.append("\ttype: 'bar'\n");
+		page.append("}];\n");
+		page.append("var layout = {\n");
+		page.append("\tfont: { family: 'monospace', color: '#cccccc' },\n");
+		page.append("\tpaper_bgcolor: '#0f0f23',\n");
+		page.append("\tplot_bgcolor: '#0f0f23',\n");
+		page.append("\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
+		page.append("};\n");
+		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
+		page.append("Plotly.newPlot('chartParticipation', dataParticipation, layout, options);\n");
+		page.append("</script>\n");
 		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
 	}
 
@@ -465,7 +511,7 @@ public class Leaderboard {
 		boolean allEmpty = true;
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<p>Scoring is based on time to complete both puzzle parts after midnight release.</p>\n");
+		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
