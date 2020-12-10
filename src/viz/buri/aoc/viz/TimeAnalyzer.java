@@ -72,6 +72,9 @@ public class TimeAnalyzer {
 			String name = (String) member.get("name");
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String dayKey : puzzleData.keySet()) {
+				if (!dayKey.equals("10")) {
+					continue;
+				}
 				Map<String, Object> part1Data = (Map) ((Map) puzzleData.get(dayKey)).get("1");
 				PuzzleTime record1 = null;
 				if (part1Data != null) {
