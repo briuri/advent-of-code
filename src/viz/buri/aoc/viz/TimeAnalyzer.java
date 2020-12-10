@@ -94,7 +94,7 @@ public class TimeAnalyzer {
 				long diff = record2.getTimeCompleted() - record1.getTimeCompleted();
 				System.out.print(PuzzleTime.formatTime(diff) + "\t");
 				long percentage = (long) (100.0 * diff / record2.getTimeCompleted());
-				System.out.print("\t" + percentage + "%");
+				System.out.print(percentage + "%");
 				System.out.println();
 			}
 		}
