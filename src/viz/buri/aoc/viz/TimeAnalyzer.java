@@ -84,8 +84,8 @@ public class TimeAnalyzer {
 					long unixTime = Long.valueOf((String) part2Data.get("get_star_ts"));
 					record2 = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
 				}
-				// Ignore records where part 1 took longer than 4 hours, or part 2 was never finished
-				if (record1.getTimeCompleted() > 7200000L || part2Data == null) {
+				// Ignore records where part 1 took longer than 1 hour, or part 2 was never finished
+				if (record1.getTimeCompleted() > 3600000L || part2Data == null) {
 					continue;
 				}
 				System.out.print(name + "\t" + dayKey + "\t");
