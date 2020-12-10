@@ -465,6 +465,7 @@ public class Leaderboard {
 		boolean allEmpty = true;
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
+		page.append("<p>Scoring is based on time to complete both puzzle parts after midnight release.</p>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
