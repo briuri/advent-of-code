@@ -495,6 +495,12 @@ public class Leaderboard {
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				page.append("</ol>\n");
+				if (places.size() > TOP_DAILY) {
+					for (int j = 0; j < 16; j++) {
+						page.append("&nbsp;");
+					}
+					page.append("(").append(places.size()).append(" total)\n");
+				}
 			}
 		}
 		if (allEmpty) {
