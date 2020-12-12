@@ -47,10 +47,21 @@ public class Day00 extends BasePuzzle {
 	 * QUESTION
 	 */
 	public static int getResult(Part part, List<String> input) {
-		if (part == Part.ONE) {
-			return (0);
+//		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
+//		for (int y = 0; y < grid.getHeight(); y++) {
+//			for (int x = 0; x < grid.getWidth(); x++) {
+//				grid.set(x, y, input.get(y).charAt(x));
+//			}
+//		}
+
+		int sum = 0;
+		for (String line : input) {
+
 		}
-		return (0);
+		if (part == Part.ONE) {
+			return (sum);
+		}
+		return (sum);
 	}
 
 	/**
