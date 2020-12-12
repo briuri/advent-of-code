@@ -4,13 +4,13 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Base abstract class for 2D square grids.
- * 
+ *
  * Based on Java's array indexing:
  * (0,0) is the upper left corner of a grid.
  * (x,0) is lower left corner of a grid.
  * (0,y) is upper right corner of grid.
  * (x,y) is lower right corner of grid.
- * 
+ *
  * @author Brian Uri!
  */
 public abstract class AbstractGrid<T> {
@@ -31,6 +31,21 @@ public abstract class AbstractGrid<T> {
 	 */
 	public Pair getCenterPosition() {
 		return (new Pair(getWidth() / 2, getHeight() / 2));
+	}
+
+	/**
+	 * Counts the number of occurrences of some value in the grid.
+	 */
+	public int count(T value) {
+		int count = 0;
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
+				if (value.equals(get(x, y))) {
+					count++;
+				}
+			}
+		}
+		return (count);
 	}
 
 	/**
