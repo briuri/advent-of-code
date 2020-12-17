@@ -28,8 +28,6 @@ public class Day06 extends BasePuzzle {
 				chunk.clear();
 			}
 		}
-		// Commit final group.
-		list.add(new AnswerGroup(chunk));
 		return (list);
 	}
 
@@ -42,8 +40,8 @@ public class Day06 extends BasePuzzle {
 	 */
 	public static int getResult(Part part, List<AnswerGroup> input) {
 		int sum = 0;
-		for (AnswerGroup g : input) {
-			sum += g.getYesCount(part);
+		for (AnswerGroup group : input) {
+			sum += group.getYesCount(part);
 		}
 		return (sum);
 	}
