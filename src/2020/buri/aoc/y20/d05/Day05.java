@@ -43,10 +43,9 @@ public class Day05 extends BasePuzzle {
 		}
 
 		for (int i = 1; i < seats.size(); i++) {
-			if (seats.get(i) == seats.get(i - 1) + 1) {
-				continue;
+			if (seats.get(i) != seats.get(i - 1) + 1) {
+				return (seats.get(i) - 1);
 			}
-			return (seats.get(i) - 1);
 		}
 		throw new RuntimeException("Plane is full.");
 	}
