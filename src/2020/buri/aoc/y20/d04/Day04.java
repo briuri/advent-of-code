@@ -28,8 +28,6 @@ public class Day04 extends BasePuzzle {
 				buffer.setLength(0);
 			}
 		}
-		// readFile truncates the final blank line. Commit the last passport.
-		list.add(new Passport(buffer.toString()));
 		return (list);
 	}
 
