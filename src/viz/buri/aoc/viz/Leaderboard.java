@@ -509,6 +509,8 @@ public class Leaderboard {
 	private static void insertPuzzleTimes(StringBuffer page, int year, Players players,
 		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
 		boolean allEmpty = true;
+		boolean alertShown = false;
+
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
@@ -541,6 +543,17 @@ public class Leaderboard {
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				page.append("</ol>\n");
+
+				if (!alertShown) {
+					// Show console message for most recent time recorded on most recent day.
+					PuzzleTime mostRecent = places.get(places.size() - 1);
+
+					StringBuffer alert = new StringBuffer();
+					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
+					alert.append(mostRecent.getFormattedTime()).append(" ").append(mostRecent.getName());
+					System.out.println(alert.toString());
+					alertShown = true;
+				}
 			}
 		}
 		if (allEmpty) {
