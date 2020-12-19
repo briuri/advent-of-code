@@ -46,7 +46,7 @@ public class Day00 extends BasePuzzle {
 	 * Part 2:
 	 * QUESTION
 	 */
-	public static int getResult(Part part, List<String> input) {
+	public static long getResult(Part part, List<String> input) {
 //		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
 //		for (int y = 0; y < grid.getHeight(); y++) {
 //			for (int x = 0; x < grid.getWidth(); x++) {
@@ -54,7 +54,7 @@ public class Day00 extends BasePuzzle {
 //			}
 //		}
 
-		int sum = 0;
+		long sum = 0;
 		for (String line : input) {
 
 		}

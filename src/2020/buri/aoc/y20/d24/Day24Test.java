@@ -27,7 +27,7 @@ public class Day24Test extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Day24.getResult(Part.ONE, Day24.getInput(0));
+		long result = Day24.getResult(Part.ONE, Day24.getInput(0));
 		toConsole(result);
 		assertEquals(0, result);
 	}
@@ -42,7 +42,7 @@ public class Day24Test extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Day24.getResult(Part.TWO, Day24.getInput(0));
+		long result = Day24.getResult(Part.TWO, Day24.getInput(0));
 		toConsole(result);
 		assertEquals(0, result);
 	}
