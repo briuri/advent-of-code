@@ -14,12 +14,12 @@ public class Day19Test extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		assertEquals(1, Day19.getInput(0).size());
+		assertEquals(600, Day19.getInput(0).size());
 	}
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals(0L, Day19.getResult(Part.ONE, Day19.getInput(1)));
+		assertEquals(2L, Day19.getResult(Part.ONE, Day19.getInput(1)));
 	}
 
 	/**
@@ -29,12 +29,13 @@ public class Day19Test extends BaseTest {
 	public void testPart1Puzzle() {
 		long result = Day19.getResult(Part.ONE, Day19.getInput(0));
 		toConsole(result);
-		assertEquals(0L, result);
+		assertEquals(216L, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(0L, Day19.getResult(Part.TWO, Day19.getInput(1)));
+		assertEquals(3L, Day19.getResult(Part.ONE, Day19.getInput(2)));
+		assertEquals(12L, Day19.getResult(Part.TWO, Day19.getInput(2)));
 	}
 
 	/**
@@ -44,6 +45,6 @@ public class Day19Test extends BaseTest {
 	public void testPart2Puzzle() {
 		long result = Day19.getResult(Part.TWO, Day19.getInput(0));
 		toConsole(result);
-		assertEquals(0L, result);
+		assertEquals(400L, result);
 	}
 }
