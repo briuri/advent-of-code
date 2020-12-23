@@ -22,6 +22,13 @@ body {
 #chartDivisions {
 	max-height: 300px;
 }
+.clear {
+	clear: both;
+}
+.daily {
+	float: left;
+	min-width: 300px;
+}
 .details {
 	display: none;
 	margin-bottom: 10px;
@@ -69,4 +76,10 @@ span.medianLink:hover {
 }
 .tiny {
 	font-size: 8pt;
+}
+
+@media screen and (max-width: 400px) {
+	.daily {
+		float: none;
+	}
 }

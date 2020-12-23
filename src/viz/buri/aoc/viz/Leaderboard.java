@@ -513,12 +513,13 @@ public class Leaderboard {
 
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
+		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p><div class=\"clear\"></div><div>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
 				allEmpty = false;
 				int day = i + 1;
+				page.append("<div class=\"daily\">\n");
 				page.append("<a name=\"day").append(day).append("\"></a>");
 				page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
 				page.append("\">").append(puzzles.get(i).getTitle()).append("</a></h3>\n");
@@ -543,6 +544,7 @@ public class Leaderboard {
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				page.append("</ol>\n");
+				page.append("</div>\n");
 
 				if (!alertShown) {
 					// Show console message for most recent time recorded on most recent day.
@@ -556,6 +558,7 @@ public class Leaderboard {
 				}
 			}
 		}
+		page.append("<div class=\"clear\"></div></div>\n");
 		if (allEmpty) {
 			page.append("<p class=\"empty\">No times recorded yet.</p>");
 		}
