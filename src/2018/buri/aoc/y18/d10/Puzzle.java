@@ -11,7 +11,7 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 10: The Stars Align
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -30,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Part 1:
 	 * What message will eventually appear in the sky?
-	 * 
+	 *
 	 * Part 2:
 	 * How many seconds would they have needed to wait for that message to appear?
 	 */
@@ -91,8 +91,8 @@ public class Puzzle extends BasePuzzle {
 			minY = Math.min(minY, p.getY());
 			maxY = Math.max(maxY, p.getY());
 		}
-		BigInteger xLength = new BigInteger(String.valueOf(maxX - minX));
-		BigInteger yLength = new BigInteger(String.valueOf(maxY - minY));
+		BigInteger xLength = toBigInt(maxX - minX);
+		BigInteger yLength = toBigInt(maxY - minY);
 		return xLength.multiply(yLength);
 	}
 

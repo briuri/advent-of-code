@@ -92,13 +92,13 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected static long getFirstTime(Map<String, String> idsToRemainders) {
 		// "the product of these integers"
-		BigInteger product = new BigInteger("1");
+		BigInteger product = toBigInt(1);
 		for (String id : idsToRemainders.keySet()) {
 			product = product.multiply(new BigInteger(id));
 		}
 
 		// n is the timestamp we want
-		BigInteger n = new BigInteger("0");
+		BigInteger n = toBigInt(0);
 
 		// We know the remainders of Euclidean division of n for each bus (remainderBus)
 		for (Map.Entry<String, String> bus : idsToRemainders.entrySet()) {

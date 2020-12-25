@@ -1,6 +1,7 @@
 package buri.aoc;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -77,6 +78,13 @@ public abstract class BasePuzzle {
 			}
 		}
 		return (maxEntry);
+	}
+
+	/**
+	 * Converts a long into a BigInteger
+	 */
+	protected static BigInteger toBigInt(long value) {
+		return (new BigInteger(String.valueOf(value)));
 	}
 
 	/**
