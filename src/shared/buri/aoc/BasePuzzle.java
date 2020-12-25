@@ -21,7 +21,7 @@ public abstract class BasePuzzle {
 	protected static List<String> readFile(int fileIndex) {
 		String packageName = new Throwable().getStackTrace()[1].getClassName();
 		String year = "20" + packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
-		String day = packageName.substring(packageName.indexOf(".d") + 2, packageName.indexOf(".Day"));
+		String day = packageName.substring(packageName.indexOf(".d") + 2, packageName.indexOf(".Puzzle"));
 
 		Path path = Paths.get("data/" + year + "/" + day + "-" + fileIndex + ".txt");
 		try {

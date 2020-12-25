@@ -163,7 +163,7 @@ public class Vault extends CharGrid {
 				int interimSteps = route.getSteps() + explore(stepCache, newKeys, end);
 				possibleSteps.put(end, interimSteps);
 			}
-			Map.Entry<Character, Integer> minimum = Day18.getMin(possibleSteps);
+			Map.Entry<Character, Integer> minimum = Puzzle.getMin(possibleSteps);
 			steps = minimum.getValue();
 		}
 		stepCache.put(cacheKey, steps);

@@ -18,7 +18,7 @@ public class SightLine implements Comparable<SightLine> {
 	public SightLine(Pair<Integer> station, Pair<Integer> asteroid) {
 		int dx = asteroid.getX() - station.getX();
 		int dy = asteroid.getY() - station.getY();
-		long gcd = Day10.getGCD(dx, dy);
+		long gcd = Puzzle.getGCD(dx, dy);
 		if (gcd < 0) {
 			gcd = gcd * -1;
 		}
