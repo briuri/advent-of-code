@@ -54,6 +54,13 @@ public class Grid extends CharGrid {
 	}
 
 	/**
+	 *
+	 */
+	public long getValue() {
+		return (-1);
+	}
+
+	/**
 	 * Returns the minimum number of steps to a single destination.
 	 */
 	public int getStepsTo(Pair destination) {

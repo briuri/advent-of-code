@@ -47,18 +47,14 @@ public class Puzzle extends BasePuzzle {
 	 * QUESTION
 	 */
 	public static long getResult(Part part, List<String> input) {
-//		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
-//		for (int y = 0; y < grid.getHeight(); y++) {
-//			for (int x = 0; x < grid.getWidth(); x++) {
-//				grid.set(x, y, input.get(y).charAt(x));
-//			}
-//		}
+//		Grid grid = new Grid(input);
 
 		long sum = 0;
 		for (String line : input) {
 
 		}
 		if (part == Part.ONE) {
+//			return (grid.getValue());
 			return (sum);
 		}
 		return (sum);
