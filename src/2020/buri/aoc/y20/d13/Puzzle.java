@@ -1,6 +1,5 @@
 package buri.aoc.y20.d13;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,49 +69,17 @@ public class Puzzle extends BasePuzzle {
 		}
 		*/
 
-		// Create pairs of (number, remainder) using (id, id - index)
-		// Cast as Strings to support BigInteger math
-		Map<String, String> idsToRemainders = new HashMap<>();
-		for (Integer index : indexesToIds.keySet()) {
-			idsToRemainders.put(String.valueOf(indexesToIds.get(index)), String.valueOf(indexesToIds.get(index) - index));
+		long increment = indexesToIds.get(0);
+		long timestamp = 0L;
+		// Solve 2 buses at a time and use LCM to solve for "all previous buses + next bus" instead of "every bus".
+		for (Map.Entry<Integer, Integer> entry : indexesToIds.entrySet()) {
+			if (entry.getKey() != 0) {
+				while ((timestamp + entry.getKey()) % entry.getValue() != 0) {
+					timestamp += increment;
+				}
+				increment = increment * entry.getValue();
+			}
 		}
-		return (getFirstTime(idsToRemainders));
-	}
-
-	/**
-	 * Uses Chinese Remainder Theorem to get the timestamp of the first bus, such that each remaining bus leaves [index]
-	 * minutes later.
-	 *
-	 * The Chinese remainder theorem states that if one knows the remainders of the Euclidean division of an integer n
-	 * by several integers, then one can determine uniquely the remainder of the division of n by the product of these
-	 * integers, under the condition that the divisors are pairwise coprime.
-	 *
-	 * https://en.wikipedia.org/wiki/Chinese_remainder_theorem
-	 * https://crypto.stanford.edu/pbc/notes/numbertheory/crt.html
-	 */
-	protected static long getFirstTime(Map<String, String> idsToRemainders) {
-		// "the product of these integers"
-		BigInteger product = toBigInt(1);
-		for (String id : idsToRemainders.keySet()) {
-			product = product.multiply(new BigInteger(id));
-		}
-
-		// n is the timestamp we want
-		BigInteger n = toBigInt(0);
-
-		// We know the remainders of Euclidean division of n for each bus (remainderBus)
-		for (Map.Entry<String, String> bus : idsToRemainders.entrySet()) {
-			BigInteger idBus = new BigInteger(bus.getKey());
-			BigInteger remainderBus = new BigInteger(bus.getValue());
-
-			// a = product / idBus
-			BigInteger a = product.divide(idBus);
-
-			// n += remainderBus * a * (a^-1 mod id)
-			n = n.add(remainderBus.multiply(a.multiply(a.modInverse(idBus))));
-		}
-
-		// n mod id
-		return (n.mod(product).longValue());
+		return (timestamp);
 	}
 }
