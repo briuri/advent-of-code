@@ -35,7 +35,7 @@ public class Leaderboard {
 	private static final int TOP_MEDIANS = 25;
 	private static final int TOTAL_PUZZLES = 25;
 
-	private static final String JSON_FOLDER = "data/viz/";
+	private static final String JSON_FOLDER = "data/viz/json/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final String ANTI_INDEX = "<span class=\"antiIndex\">Advent of Code</span>";
 
