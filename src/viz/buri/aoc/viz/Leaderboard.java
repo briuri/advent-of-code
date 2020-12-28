@@ -60,8 +60,8 @@ public class Leaderboard {
 	 * Generates the page for a specific year
 	 */
 	private static void visualizeYear(int year) {
-		final Players players = readPlayers();
-		final List<String> divisions = readDivisions();
+		final Players players = readPlayers(year);
+		final List<String> divisions = readDivisions(year);
 		final List<Puzzle> puzzles = readPuzzles(year);
 		final Map<String, Object> leaderboardJson = readLeaderboard(year);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
@@ -107,12 +107,12 @@ public class Leaderboard {
 	/**
 	 * Reads ancillary player data from the file (not included in version control).
 	 */
-	private static Players readPlayers() {
+	private static Players readPlayers(int year) {
 		Players players = new Players();
 		try {
-			File file = new File(JSON_FOLDER + "players.json");
+			File file = new File(JSON_FOLDER + "novetta.json");
 			JsonNode json = new ObjectMapper().readTree(file);
-			ArrayNode playerJson = (ArrayNode) json.get("players");
+			ArrayNode playerJson = (ArrayNode) json.get("players").get(String.valueOf(year));
 			for (int i = 0; i < playerJson.size(); i++) {
 				players.add((ObjectNode) playerJson.get(i));
 			}
@@ -126,12 +126,12 @@ public class Leaderboard {
 	/**
 	 * Reads ancillary division data from the file (not included in version control).
 	 */
-	private static List<String> readDivisions() {
+	private static List<String> readDivisions(int year) {
 		List<String> divisions = new ArrayList<>();
 		try {
-			File file = new File(JSON_FOLDER + "divisions.json");
+			File file = new File(JSON_FOLDER + "novetta.json");
 			JsonNode json = new ObjectMapper().readTree(file);
-			ArrayNode divisionJson = (ArrayNode) json.get("divisions");
+			ArrayNode divisionJson = (ArrayNode) json.get("divisions").get(String.valueOf(year));
 			for (int i = 0; i < divisionJson.size(); i++) {
 				divisions.add(divisionJson.get(i).asText());
 			}
