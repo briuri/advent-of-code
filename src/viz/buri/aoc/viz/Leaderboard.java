@@ -71,6 +71,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<html>\n<head>\n");
 		page.append("<meta charset=\"UTF-8\">");
 		page.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
+		page.append("<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
 		page.append("<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
 		page.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css\" />\n");
 		page.append("<title>Novetta Advent of Code - Fastest Solve Times");
