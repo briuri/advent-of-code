@@ -124,6 +124,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		page.append("<p>Rank is based on number of stars earned, with ties broken by the fastest median solve time.\n");
 		page.append("Click median time to show/hide all times.</p>\n");
+		page.append("<div class=\"clear\"></div>\n<div class=\"overall\">\n");
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
@@ -186,8 +187,12 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("</div>\n");
 			isNextTie = (i + 1 < numMedians && player.getMedianTime().equals(medianTimes.get(i + 1).getMedianTime()));
 			page.append(isNextTie ? "<br />\n" : "</li>\n");
+			// Break overall scores into two columns for > Top 10.
+			if (i == numMedians / 2 && numMedians > 10) {
+				page.append("</ol></div>\n<div class=\"overall\"><ol start=\"").append(i + 2).append("\">\n");
+			}
 		}
-		page.append("</ol>\n");
+		page.append("</ol></div>\n<div class=\"clear\"></div>\n");
 	}
 
 	/**
@@ -310,7 +315,8 @@ public class Leaderboard extends BaseLeaderboard {
 		StringBuffer page = getPage();
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p><div class=\"clear\"></div><div>\n");
+		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
+		page.append("<div class=\"clear\"></div><div>\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
@@ -361,7 +367,7 @@ public class Leaderboard extends BaseLeaderboard {
 				}
 			}
 		}
-		page.append("<div class=\"clear\"></div></div>\n");
+		page.append("</div><div class=\"clear\"></div>\n");
 		if (allEmpty) {
 			page.append("<p class=\"empty\">No times recorded yet.</p>");
 		}
