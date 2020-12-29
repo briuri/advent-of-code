@@ -1,13 +1,10 @@
 package buri.aoc.viz;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,11 +13,7 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import buri.aoc.BaseLeaderboard;
 
 /**
  * Alternate visualization of Novetta's private leaderboard showing the Fastest Solve Times for each puzzle. Generated
@@ -28,57 +21,46 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  *
  * @author Brian Uri!
  */
-public class Leaderboard {
-	private static final int CURRENT_YEAR = 2020;
+public class Leaderboard extends BaseLeaderboard {
+	private static final String CURRENT_YEAR = "2020";
 
 	private static final int TOP_DAILY = 25;
 	private static final int TOP_MEDIANS = 25;
 	private static final int TOTAL_PUZZLES = 25;
 
-	private static final String JSON_FOLDER = "data/viz/json/";
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static final String ANTI_INDEX = "<span class=\"antiIndex\">Advent of Code</span>";
-
 	/**
 	 * Generate the Fastest Solve Times pages via a JUnit test in Eclipse.
+	 *
+	 * NOTE: Inactive accounts are purged yearly from Novetta's leaderboard to avoid the 200-player cap. Redownloading
+	 * JSON from older years and regenerating their pages will result in missing scores.
 	 */
 	@Test
 	public void generatePages() {
-		visualizeYear(2020);
-
-		/*
-		 * NOTE: Inactive accounts are purged yearly from Novetta's leaderboard to avoid the 200-player cap.
-		 * Redownloading JSON from older years and regenerating their pages will result in missing scores.
-		 */
-//		visualizeYear(2019);
-//		visualizeYear(2018);
-//		visualizeYear(2017);
-//		visualizeYear(2016);
+		visualizeYear("2020");
+//		visualizeYear("2019");
+//		visualizeYear("2018");
+//		visualizeYear("2017");
+//		visualizeYear("2016");
 	}
 
 	/**
 	 * Generates the page for a specific year
 	 */
-	private static void visualizeYear(int year) {
-		final Players players = readPlayers(year);
-		final List<String> divisions = readDivisions(year);
-		final List<Puzzle> puzzles = readPuzzles(year);
+	private void visualizeYear(String year) {
 		final Map<String, Object> leaderboardJson = readLeaderboard(year);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
-		final Map<String, Integer> stars = getStars(year, leaderboardJson);
-		final List<MedianTime> medianTimes = getMedianTimes(year, puzzleTimes, stars);
+		final List<MedianTime> medianTimes = getMedianTimes(year, puzzleTimes, getStars(year, leaderboardJson));
 
-		StringBuffer page = new StringBuffer();
-		insertHeader(page, year);
-		insertMedianTimes(page, year, players, medianTimes);
-		insertDivisions(page, year, divisions, players, medianTimes);
-		insertParticipation(page, year, players, puzzleTimes, puzzles);
-		insertPuzzleTimes(page, year, players, puzzleTimes, puzzles);
-		insertFooter(page, year);
+		insertHeader(year);
+		insertMedianTimes(year, medianTimes);
+		insertDivisions(year, medianTimes);
+		insertParticipation(year, puzzleTimes);
+		insertPuzzleTimes(year, puzzleTimes);
+		insertFooter(year);
 
 		try {
-			String outputFilename = (year == CURRENT_YEAR ? "index.html" : "index-" + year + ".html");
-			Files.write(Paths.get("data/viz/site/" + outputFilename), page.toString().getBytes());
+			String outputFilename = (year.equals(CURRENT_YEAR) ? "index.html" : "index-" + year + ".html");
+			Files.write(Paths.get("data/viz/site/" + outputFilename), getPage().toString().getBytes());
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file.", e);
@@ -86,105 +68,9 @@ public class Leaderboard {
 	}
 
 	/**
-	 * Reads the puzzle metadata from the JSON file.
-	 */
-	private static List<Puzzle> readPuzzles(int year) {
-		List<Puzzle> puzzles = new ArrayList<>();
-		try {
-			File file = new File(JSON_FOLDER + "puzzles.json");
-			JsonNode json = new ObjectMapper().readTree(file);
-			ArrayNode puzzleJson = (ArrayNode) json.get(String.valueOf(year));
-			for (int i = 0; i < puzzleJson.size(); i++) {
-				puzzles.add(new Puzzle((ObjectNode) puzzleJson.get(i)));
-			}
-			return (puzzles);
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid puzzle file.", e);
-		}
-	}
-
-	/**
-	 * Reads ancillary player data from the file (not included in version control).
-	 */
-	private static Players readPlayers(int year) {
-		Players players = new Players();
-		try {
-			File file = new File(JSON_FOLDER + "novetta.json");
-			JsonNode json = new ObjectMapper().readTree(file);
-			ArrayNode playerJson = (ArrayNode) json.get("players").get(String.valueOf(year));
-			for (int i = 0; i < playerJson.size(); i++) {
-				players.add((ObjectNode) playerJson.get(i));
-			}
-			return (players);
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid players file.", e);
-		}
-	}
-
-	/**
-	 * Reads ancillary division data from the file (not included in version control).
-	 */
-	private static List<String> readDivisions(int year) {
-		List<String> divisions = new ArrayList<>();
-		try {
-			File file = new File(JSON_FOLDER + "novetta.json");
-			JsonNode json = new ObjectMapper().readTree(file);
-			ArrayNode divisionJson = (ArrayNode) json.get("divisions").get(String.valueOf(year));
-			for (int i = 0; i < divisionJson.size(); i++) {
-				divisions.add(divisionJson.get(i).asText());
-			}
-			return (divisions);
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid divisions file.", e);
-		}
-	}
-
-	/**
-	 * Reads the raw leaderboard.
-	 */
-	private static Map<String, Object> readLeaderboard(int year) {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String, Object> leaderboardJson = null;
-		try {
-			File file = new File(JSON_FOLDER + year + ".json");
-			JsonNode json = mapper.readTree(file);
-			leaderboardJson = mapper.readValue(json.get("members").toString(),
-				new TypeReference<Map<String, Object>>() {});
-
-			// Merge in overflow leaderboard, if available.
-			File overflowFile = new File(JSON_FOLDER + year + "-1.json");
-			if (overflowFile.exists()) {
-				json = mapper.readTree(overflowFile);
-				Map<String, Object> overflow = mapper.readValue(json.get("members").toString(),
-					new TypeReference<Map<String, Object>>() {});
-				for (String key : overflow.keySet()) {
-					if (!leaderboardJson.containsKey(key)) {
-						leaderboardJson.put(key, overflow.get(key));
-					}
-				}
-			}
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid file.", e);
-		}
-		return (leaderboardJson);
-	}
-
-	/**
-	 * Reads the last modified date on the leaderboard file.
-	 */
-	private static String readLastModified(int year) {
-		File file = new File(JSON_FOLDER + year + ".json");
-		return DATE_FORMAT.format(new Date(file.lastModified()));
-	}
-
-	/**
 	 * Reads puzzle completion times from the leaderboard.
 	 */
-	private static List<List<PuzzleTime>> getPuzzleTimes(int year, Map<String, Object> leaderboardJson) {
+	private List<List<PuzzleTime>> getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
 		List<List<PuzzleTime>> puzzleTimes = new ArrayList<>();
 		for (int day = 0; day < TOTAL_PUZZLES; day++) {
 			puzzleTimes.add(new ArrayList<>());
@@ -213,7 +99,7 @@ public class Leaderboard {
 	/**
 	 * Reads number of stars from the leaderboard.
 	 */
-	private static Map<String, Integer> getStars(int year, Map<String, Object> leaderboardJson) {
+	private Map<String, Integer> getStars(String year, Map<String, Object> leaderboardJson) {
 		Map<String, Integer> stars = new HashMap<>();
 		for (String key : leaderboardJson.keySet()) {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
@@ -225,9 +111,9 @@ public class Leaderboard {
 	/**
 	 * Groups puzzle completion times by name for median calculations.
 	 */
-	private static List<MedianTime> getMedianTimes(int year, List<List<PuzzleTime>> puzzleTimes,
+	private List<MedianTime> getMedianTimes(String year, List<List<PuzzleTime>> puzzleTimes,
 		Map<String, Integer> stars) {
-		if (year != CURRENT_YEAR) {
+		if (!year.equals(CURRENT_YEAR)) {
 			return (Collections.EMPTY_LIST);
 		}
 		// Create an interim map of players to all of their puzzle times.
@@ -254,28 +140,18 @@ public class Leaderboard {
 	/**
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
-	private static String maskName(Players players, String name) {
-		StringBuffer buffer = new StringBuffer(players.getAlternateName(name));
+	private String maskName(String year, String name) {
+		StringBuffer buffer = new StringBuffer(getNovettas().get(year).getAlternateNameFor(name));
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
 	}
 
 	/**
-	 * Looks up a player's division, if available.
-	 */
-	private static String getDivision(Players players, String name) {
-		String division = players.getDivision(name);
-		if (division.length() > 0) {
-			division = " (" + division + ")";
-		}
-		return (division);
-	}
-
-	/**
 	 * Adds the HTML page header
 	 */
-	private static void insertHeader(StringBuffer page, int year) {
+	private void insertHeader(String year) {
+		StringBuffer page = getPage();
 		page.append("<html>\n<head>\n");
 		page.append("<meta charset=\"UTF-8\">");
 		page.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
@@ -296,26 +172,27 @@ public class Leaderboard {
 		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
 		page.append(" | ");
 		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />");
-		page.append(year == 2020 ? year : "<a href=\"index.html\">2020</a>");
+		page.append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>");
 		page.append(" | ");
-		page.append(year == 2019 ? year : "<a href=\"index-2019.html\">2019</a>");
+		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a>");
 		page.append(" | ");
-		page.append(year == 2018 ? year : "<a href=\"index-2018.html\">2018</a>");
+		page.append(year.equals("2018") ? year : "<a href=\"index-2018.html\">2018</a>");
 		page.append(" | ");
-		page.append(year == 2017 ? year : "<a href=\"index-2017.html\">2017</a>");
+		page.append(year.equals("2017") ? year : "<a href=\"index-2017.html\">2017</a>");
 		page.append(" | ");
-		page.append(year == 2016 ? year : "<a href=\"index-2016.html\">2016</a>");
+		page.append(year.equals("2016") ? year : "<a href=\"index-2016.html\">2016</a>");
 		page.append("</div>\n\n");
 	}
 
 	/**
 	 * Adds the Top X Overall section.
 	 */
-	private static void insertMedianTimes(StringBuffer page, int year, Players players, List<MedianTime> medianTimes) {
+	private void insertMedianTimes(String year, List<MedianTime> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
 		}
+		StringBuffer page = getPage();
 		page.append("<script type=\"text/javascript\">\n");
 		page.append("function expand(place) {\n");
 		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
@@ -332,6 +209,7 @@ public class Leaderboard {
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
+		Novetta players = getNovettas().get(year);
 		for (int i = 0; i < numMedians; i++) {
 			MedianTime player = medianTimes.get(i);
 			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
@@ -343,8 +221,8 @@ public class Leaderboard {
 				"\" title=\"Show/Hide All Times\"");
 			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(medianTime);
-			page.append("</span>&nbsp;&nbsp;").append(maskName(players, player.getName()));
-			page.append(getDivision(players, player.getName())).append("<br />\n");
+			page.append("</span>&nbsp;&nbsp;").append(maskName(year, player.getName()));
+			page.append(players.getDivisionFor(player.getName(), true)).append("<br />\n");
 			for (int j = 0; j < 12; j++) {
 				page.append("&nbsp;");
 			}
@@ -354,7 +232,7 @@ public class Leaderboard {
 				page.append(player.getSecond()).append("<span class=\"emoji\" title=\"2nd Place\">&#x1F948;</span> ");
 				page.append(player.getThird()).append("<span class=\"emoji\" title=\"3rd Place\">&#x1F949;</span> ");
 			}
-			int globalCount = players.getGlobalCount(player.getName());
+			int globalCount = players.getGlobalCountFor(player.getName());
 			if (globalCount > 0) {
 				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
 			}
@@ -397,18 +275,18 @@ public class Leaderboard {
 	/**
 	 * Adds the Top X Overall by Division section.
 	 */
-	private static void insertDivisions(StringBuffer page, int year, List<String> divisions, Players players, List<MedianTime> medianTimes) {
+	private void insertDivisions(String year, List<MedianTime> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
 		}
 		Map<String, Integer> counts = new TreeMap<>();
-		for (String division : divisions) {
+		for (String division : getNovettas().get(year).getAllDivisions()) {
 			counts.put(division, 0);
 		}
 		for (int i = 0; i < numMedians; i++) {
 			MedianTime player = medianTimes.get(i);
-			String division = players.getDivision(player.getName());
+			String division = getNovettas().get(year).getDivisionFor(player.getName(), false);
 			if (division.length() > 0) {
 				counts.put(division, counts.get(division) + 1);
 			}
@@ -418,6 +296,7 @@ public class Leaderboard {
 			max = Math.max(max, i);
 		}
 
+		StringBuffer page = getPage();
 		page.append("\n<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		page.append("<div id=\"chartDivisions\"></div>\n");
@@ -461,8 +340,8 @@ public class Leaderboard {
 	/**
 	 * Adds the Total Participation chart.
 	 */
-	private static void insertParticipation(StringBuffer page, int year, Players players,
-		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
+	private void insertParticipation(String year, List<List<PuzzleTime>> puzzleTimes) {
+		StringBuffer page = getPage();
 		page.append("\n<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		page.append("<div id=\"chartParticipation\"></div>\n");
@@ -506,11 +385,10 @@ public class Leaderboard {
 	/**
 	 * Adds the Top X Daily for each puzzle.
 	 */
-	private static void insertPuzzleTimes(StringBuffer page, int year, Players players,
-		List<List<PuzzleTime>> puzzleTimes, List<Puzzle> puzzles) {
+	private void insertPuzzleTimes(String year, List<List<PuzzleTime>> puzzleTimes) {
 		boolean allEmpty = true;
 		boolean alertShown = false;
-
+		StringBuffer page = getPage();
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
 		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p><div class=\"clear\"></div><div>\n");
@@ -519,10 +397,11 @@ public class Leaderboard {
 			if (!places.isEmpty()) {
 				allEmpty = false;
 				int day = i + 1;
+				Puzzle puzzle = getPuzzles().get(year).get(i);
 				page.append("<div class=\"daily\">\n");
 				page.append("<a name=\"day").append(day).append("\"></a>");
 				page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
-				page.append("\">").append(puzzles.get(i).getTitle()).append("</a></h3>\n");
+				page.append("\">").append(puzzle.getTitle()).append("</a></h3>\n");
 				page.append("<ol>\n");
 
 				boolean isNextTie = false;
@@ -530,7 +409,7 @@ public class Leaderboard {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
 					page.append(isNextTie ? "\t" : "\t<li>");
-					if (place + 1 <= puzzles.get(i).getGlobalCount()) {
+					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
 						page.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
 					}
@@ -538,7 +417,7 @@ public class Leaderboard {
 						page.append("&nbsp;");
 					}
 					page.append(time);
-					page.append("&nbsp;&nbsp;").append(maskName(players, record.getName()));
+					page.append("&nbsp;&nbsp;").append(maskName(year, record.getName()));
 
 					isNextTie = (place + 1 < places.size() && record.getTimeCompleted() == places.get(place + 1).getTimeCompleted());
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
@@ -572,7 +451,8 @@ public class Leaderboard {
 	/**
 	 * Adds the HTML page footer
 	 */
-	private static void insertFooter(StringBuffer page, int year) {
+	private void insertFooter(String year) {
+		StringBuffer page = getPage();
 		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
 		page.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");
 		page.append("&nbsp;&nbsp;last update on ").append(readLastModified(year)).append("</p>\n");

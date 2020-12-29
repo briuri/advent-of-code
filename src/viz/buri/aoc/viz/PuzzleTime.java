@@ -17,8 +17,8 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	/**
 	 * Constructor
 	 */
-	public PuzzleTime(int year, int day, String name, long unixTime) {
-		_year = year;
+	public PuzzleTime(String year, int day, String name, long unixTime) {
+		_year = Integer.valueOf(year);
 		_name = name;
 
 		Calendar unixTimeCompleted = Calendar.getInstance();
@@ -26,7 +26,7 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		_yearCompleted = unixTimeCompleted.get(Calendar.YEAR);
 
 		Calendar puzzleTime = Calendar.getInstance();
-		puzzleTime.set(Calendar.YEAR, year);
+		puzzleTime.set(Calendar.YEAR, getYear());
 		puzzleTime.set(Calendar.MONTH, Calendar.DECEMBER);
 		puzzleTime.set(Calendar.DATE, day);
 		puzzleTime.set(Calendar.HOUR_OF_DAY, 0);

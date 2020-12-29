@@ -1,33 +1,36 @@
 package buri.aoc.viz;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Ancillary player data, read from players.json.
- * 
+ * Ancillary player and division data.
+ *
  * @author Brian Uri!
  */
-public class Players {
+public class Novetta {
 	private Map<String, String> _alternateNames;
 	private Map<String, String> _divisions;
 	private Map<String, Integer> _globalCounts;
+	private List<String> _allDivisions;
 
 	/**
 	 * Constructor
 	 */
-	public Players() {
+	public Novetta(List<String> allDivisions) {
 		_alternateNames = new HashMap<>();
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
+		_allDivisions = allDivisions;
 	}
 
 	/**
 	 * Adds a player record.
 	 */
-	public void add(ObjectNode player) {
+	public void addPlayer(ObjectNode player) {
 		String name = player.get("name").asText();
 		if (player.get("alt") != null) {
 			getAlternateNames().put(name, player.get("alt").asText());
@@ -43,21 +46,25 @@ public class Players {
 	/**
 	 * Looks up an alternate name for a player.
 	 */
-	public String getAlternateName(String name) {
+	public String getAlternateNameFor(String name) {
 		return (getAlternateNames().getOrDefault(name, name));
 	}
 
 	/**
 	 * Looks up a division for a player.
 	 */
-	public String getDivision(String name) {
-		return (getDivisions().getOrDefault(name, ""));
+	public String getDivisionFor(String name, boolean addParentheses) {
+		String division = getDivisions().getOrDefault(name, "");
+		if (addParentheses && division.length() > 0) {
+			division = " (" + division + ")";
+		}
+		return (division);
 	}
 
 	/**
 	 * Looks up the number of global ranks for a player.
 	 */
-	public int getGlobalCount(String name) {
+	public int getGlobalCountFor(String name) {
 		return (getGlobalCounts().getOrDefault(name, 0));
 	}
 
@@ -80,5 +87,12 @@ public class Players {
 	 */
 	private Map<String, Integer> getGlobalCounts() {
 		return _globalCounts;
+	}
+
+	/**
+	 * Accessor for a list of all divisions at Novetta
+	 */
+	public List<String> getAllDivisions() {
+		return _allDivisions;
 	}
 }
