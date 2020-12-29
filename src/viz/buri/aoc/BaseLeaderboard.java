@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +16,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import buri.aoc.viz.MedianTimes;
 import buri.aoc.viz.Novetta;
 import buri.aoc.viz.Puzzle;
+import buri.aoc.viz.PuzzleTime;
 
 /**
- * Base functionality for loading data to build the leaderboard. Calculation and rendering are in the inheriting class.
+ * Base functionality for loading data to build the leaderboard. Rendering is in the inheriting class.
  *
  * @author Brian Uri!
  */
@@ -27,6 +30,9 @@ public abstract class BaseLeaderboard {
 	private StringBuffer _page;
 	private Map<String, List<Puzzle>> _puzzles;
 	private Map<String, Novetta> _novettas;
+
+	// Total number of puzzles each year.
+	protected static final int TOTAL_PUZZLES = 25;
 
 	// Invisible text used to reduce search engine discoverability.
 	protected static final String ANTI_INDEX = "<span class=\"antiIndex\">AoC</span>";
@@ -88,9 +94,9 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Reads the raw leaderboards.
+	 * Reads the raw leaderboard data from the AoC leaderboard JSON files.
 	 */
-	protected static Map<String, Object> readLeaderboard(String year) {
+	protected Map<String, Object> readLeaderboards(String year) {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> leaderboardJson = null;
 		try {
@@ -117,9 +123,76 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
+	 * Loads puzzle completion times from the leaderboard JSON.
+	 */
+	protected List<List<PuzzleTime>> getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
+		List<List<PuzzleTime>> puzzleTimes = new ArrayList<>();
+		for (int day = 0; day < TOTAL_PUZZLES; day++) {
+			puzzleTimes.add(new ArrayList<>());
+		}
+		for (String key : leaderboardJson.keySet()) {
+			Map<String, Object> member = (Map) leaderboardJson.get(key);
+			String name = (String) member.get("name");
+			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
+			for (String dayKey : puzzleData.keySet()) {
+				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
+				if (part2Data != null) {
+					long unixTime = Long.valueOf((String) part2Data.get("get_star_ts"));
+					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+					if (record.completedInYear()) {
+						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
+					}
+				}
+			}
+		}
+		for (int day = 0; day < TOTAL_PUZZLES; day++) {
+			Collections.sort(puzzleTimes.get(day));
+		}
+		return (puzzleTimes);
+	}
+
+	/**
+	 * Reads number of stars each player has from the leaderboard.
+	 */
+	protected Map<String, Integer> getStars(String year, Map<String, Object> leaderboardJson) {
+		Map<String, Integer> stars = new HashMap<>();
+		for (String key : leaderboardJson.keySet()) {
+			Map<String, Object> member = (Map) leaderboardJson.get(key);
+			stars.put((String) member.get("name"), (int) member.get("stars"));
+		}
+		return (stars);
+	}
+
+	/**
+	 * Groups puzzle completion times by name for median calculations.
+	 */
+	protected List<MedianTimes> getMedianTimes(String year, List<List<PuzzleTime>> puzzleTimes,
+		Map<String, Integer> stars) {
+		// Create an interim map of players to all of their puzzle times.
+		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
+		for (List<PuzzleTime> singleDay : puzzleTimes) {
+			for (PuzzleTime time : singleDay) {
+				if (rawPuzzleTimes.get(time.getName()) == null) {
+					rawPuzzleTimes.put(time.getName(), new ArrayList<>());
+				}
+				rawPuzzleTimes.get(time.getName()).add(time.getTimeCompleted());
+			}
+		}
+		for (List<Long> times : rawPuzzleTimes.values()) {
+			Collections.sort(times);
+		}
+		List<MedianTimes> medianTimes = new ArrayList<>();
+		for (String name : rawPuzzleTimes.keySet()) {
+			medianTimes.add(new MedianTimes(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name)));
+		}
+		Collections.sort(medianTimes);
+		return (medianTimes);
+	}
+
+	/**
 	 * Reads arbitrary JSON from a file.
 	 */
-	private static JsonNode readJson(String filename) {
+	private JsonNode readJson(String filename) {
 		try {
 			File file = new File(JSON_FOLDER + filename);
 			return (file.exists() ? new ObjectMapper().readTree(file) : null);
@@ -133,7 +206,7 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Reads the last modified date on the (first) leaderboard file.
 	 */
-	protected static String readLastModified(String year) {
+	protected String readLastModified(String year) {
 		File file = new File(JSON_FOLDER + year + ".json");
 		return MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()));
 	}

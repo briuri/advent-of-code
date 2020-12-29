@@ -3,11 +3,11 @@ package buri.aoc.viz;
 import java.util.List;
 
 /**
- * Data class for a player's median time.
+ * Data class for a player's median times.
  *
  * @author Brian Uri!
  */
-public class MedianTime implements Comparable {
+public class MedianTimes implements Comparable {
 	private String _name;
 	private int _stars;
 	private long _medianTime;
@@ -20,7 +20,7 @@ public class MedianTime implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public MedianTime(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<Long> times) {
+	public MedianTimes(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<Long> times) {
 		_name = name;
 		_stars = stars;
 		_medianTime = calculateMedianTime(times);
@@ -60,7 +60,7 @@ public class MedianTime implements Comparable {
 	 */
 	@Override
 	public int compareTo(Object obj) {
-		MedianTime time = (MedianTime) obj;
+		MedianTimes time = (MedianTimes) obj;
 		if (getStars() > time.getStars()) {
 			return (-1);
 		}

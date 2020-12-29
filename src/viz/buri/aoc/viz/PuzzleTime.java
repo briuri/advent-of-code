@@ -78,9 +78,6 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Formats with HTML unless the time will be used for median calculations.
 	 */
 	public String getFormattedTime() {
-		if (!completedInYear()) {
-			return ("<i>(in " + getYearCompleted() + ")</i>");
-		}
 		return (formatTime(getTimeCompleted()));
 	}
 

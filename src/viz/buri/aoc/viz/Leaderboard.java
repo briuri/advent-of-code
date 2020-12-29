@@ -3,9 +3,6 @@ package buri.aoc.viz;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +23,6 @@ public class Leaderboard extends BaseLeaderboard {
 
 	private static final int TOP_DAILY = 25;
 	private static final int TOP_MEDIANS = 25;
-	private static final int TOTAL_PUZZLES = 25;
 
 	/**
 	 * Generate the Fastest Solve Times pages via a JUnit test in Eclipse.
@@ -47,9 +43,9 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Generates the page for a specific year
 	 */
 	private void visualizeYear(String year) {
-		final Map<String, Object> leaderboardJson = readLeaderboard(year);
+		final Map<String, Object> leaderboardJson = readLeaderboards(year);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
-		final List<MedianTime> medianTimes = getMedianTimes(year, puzzleTimes, getStars(year, leaderboardJson));
+		final List<MedianTimes> medianTimes = getMedianTimes(year, puzzleTimes, getStars(year, leaderboardJson));
 
 		insertHeader(year);
 		insertMedianTimes(year, medianTimes);
@@ -65,76 +61,6 @@ public class Leaderboard extends BaseLeaderboard {
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file.", e);
 		}
-	}
-
-	/**
-	 * Reads puzzle completion times from the leaderboard.
-	 */
-	private List<List<PuzzleTime>> getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
-		List<List<PuzzleTime>> puzzleTimes = new ArrayList<>();
-		for (int day = 0; day < TOTAL_PUZZLES; day++) {
-			puzzleTimes.add(new ArrayList<>());
-		}
-		for (String key : leaderboardJson.keySet()) {
-			Map<String, Object> member = (Map) leaderboardJson.get(key);
-			String name = (String) member.get("name");
-			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
-			for (String dayKey : puzzleData.keySet()) {
-				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
-				if (part2Data != null) {
-					long unixTime = Long.valueOf((String) part2Data.get("get_star_ts"));
-					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
-					if (record.completedInYear()) {
-						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
-					}
-				}
-			}
-		}
-		for (int day = 0; day < TOTAL_PUZZLES; day++) {
-			Collections.sort(puzzleTimes.get(day));
-		}
-		return (puzzleTimes);
-	}
-
-	/**
-	 * Reads number of stars from the leaderboard.
-	 */
-	private Map<String, Integer> getStars(String year, Map<String, Object> leaderboardJson) {
-		Map<String, Integer> stars = new HashMap<>();
-		for (String key : leaderboardJson.keySet()) {
-			Map<String, Object> member = (Map) leaderboardJson.get(key);
-			stars.put((String) member.get("name"), (int) member.get("stars"));
-		}
-		return (stars);
-	}
-
-	/**
-	 * Groups puzzle completion times by name for median calculations.
-	 */
-	private List<MedianTime> getMedianTimes(String year, List<List<PuzzleTime>> puzzleTimes,
-		Map<String, Integer> stars) {
-		if (!year.equals(CURRENT_YEAR)) {
-			return (Collections.EMPTY_LIST);
-		}
-		// Create an interim map of players to all of their puzzle times.
-		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
-		for (List<PuzzleTime> singleDay : puzzleTimes) {
-			for (PuzzleTime time : singleDay) {
-				if (rawPuzzleTimes.get(time.getName()) == null) {
-					rawPuzzleTimes.put(time.getName(), new ArrayList<>());
-				}
-				rawPuzzleTimes.get(time.getName()).add(time.getTimeCompleted());
-			}
-		}
-		for (List<Long> times : rawPuzzleTimes.values()) {
-			Collections.sort(times);
-		}
-		List<MedianTime> medianTimes = new ArrayList<>();
-		for (String name : rawPuzzleTimes.keySet()) {
-			medianTimes.add(new MedianTime(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name)));
-		}
-		Collections.sort(medianTimes);
-		return (medianTimes);
 	}
 
 	/**
@@ -187,7 +113,7 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall section.
 	 */
-	private void insertMedianTimes(String year, List<MedianTime> medianTimes) {
+	private void insertMedianTimes(String year, List<MedianTimes> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
@@ -211,7 +137,7 @@ public class Leaderboard extends BaseLeaderboard {
 		boolean isNextTie = false;
 		Novetta players = getNovettas().get(year);
 		for (int i = 0; i < numMedians; i++) {
-			MedianTime player = medianTimes.get(i);
+			MedianTimes player = medianTimes.get(i);
 			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
 			page.append(isNextTie ? "\t" : "\t<li class=\"median\">");
 			if (medianTime.length() == 8) {
@@ -275,7 +201,7 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall by Division section.
 	 */
-	private void insertDivisions(String year, List<MedianTime> medianTimes) {
+	private void insertDivisions(String year, List<MedianTimes> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
@@ -285,7 +211,7 @@ public class Leaderboard extends BaseLeaderboard {
 			counts.put(division, 0);
 		}
 		for (int i = 0; i < numMedians; i++) {
-			MedianTime player = medianTimes.get(i);
+			MedianTimes player = medianTimes.get(i);
 			String division = getNovettas().get(year).getDivisionFor(player.getName(), false);
 			if (division.length() > 0) {
 				counts.put(division, counts.get(division) + 1);
@@ -454,8 +380,7 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertFooter(String year) {
 		StringBuffer page = getPage();
 		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
-		page.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard<br />");
-		page.append("&nbsp;&nbsp;last update on ").append(readLastModified(year)).append("</p>\n");
+		page.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard</p>\n");
 		page.append("</body>\n</html>");
 	}
 }
