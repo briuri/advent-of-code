@@ -1,8 +1,5 @@
 package buri.aoc.viz;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -48,19 +45,12 @@ public class Leaderboard extends BaseLeaderboard {
 		final List<MedianTimes> medianTimes = getMedianTimes(year, puzzleTimes, getStars(year, leaderboardJson));
 
 		insertHeader(year);
-		insertMedianTimes(year, medianTimes);
-		insertDivisions(year, medianTimes);
-		insertParticipation(year, puzzleTimes);
-		insertPuzzleTimes(year, puzzleTimes);
+		insertTopOverall(year, medianTimes);
+		insertTopDivisionsChart(year, medianTimes);
+		insertTotalSolvesChart(year, puzzleTimes);
+		insertTopDaily(year, puzzleTimes);
 		insertFooter(year);
-
-		try {
-			String outputFilename = (year.equals(CURRENT_YEAR) ? "index.html" : "index-" + year + ".html");
-			Files.write(Paths.get("data/viz/site/" + outputFilename), getPage().toString().getBytes());
-		}
-		catch (IOException e) {
-			throw new IllegalArgumentException("Invalid output file.", e);
-		}
+		writePage(year, !year.equals(CURRENT_YEAR));
 	}
 
 	/**
@@ -85,19 +75,21 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css\" />\n");
 		page.append("<title>Novetta Advent of Code - Fastest Solve Times");
 		page.append(" (").append(year).append(")").append("</title>\n</head>\n\n<body>\n");
-		page.append("<h1>Novetta AoC - Fastest Solve Times</h1>\n\n");
+		page.append("<h1>Novetta AoC - Fastest Solve Times").append(" (").append(year).append(")</h1>\n\n");
 		page.append("<div class=\"navBar\">");
-		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">");
-		page.append("Your Times&rArr;</a> ");
-		page.append(" | L.Board ");
-		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
-		page.append("1&rArr;</a> ");
-		page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
-		page.append("2&rArr;</a> ");
-		page.append(" | ");
-		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
-		page.append(" | ");
-		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />");
+		if (year.equals(CURRENT_YEAR)) {
+			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">");
+			page.append("Your Times&rArr;</a> ");
+			page.append(" | L.Board ");
+			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
+			page.append("1&rArr;</a> ");
+			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
+			page.append("2&rArr;</a> ");
+			page.append(" | ");
+			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
+			page.append(" | ");
+			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />");
+		}
 		page.append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>");
 		page.append(" | ");
 		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a>");
@@ -113,7 +105,7 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall section.
 	 */
-	private void insertMedianTimes(String year, List<MedianTimes> medianTimes) {
+	private void insertTopOverall(String year, List<MedianTimes> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
@@ -135,7 +127,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
-		Novetta players = getNovettas().get(year);
+		Novetta novetta = getNovettas().get(year);
 		for (int i = 0; i < numMedians; i++) {
 			MedianTimes player = medianTimes.get(i);
 			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
@@ -148,7 +140,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(medianTime);
 			page.append("</span>&nbsp;&nbsp;").append(maskName(year, player.getName()));
-			page.append(players.getDivisionFor(player.getName(), true)).append("<br />\n");
+			page.append(novetta.getDivisionFor(player.getName(), true)).append("<br />\n");
 			for (int j = 0; j < 12; j++) {
 				page.append("&nbsp;");
 			}
@@ -158,7 +150,7 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append(player.getSecond()).append("<span class=\"emoji\" title=\"2nd Place\">&#x1F948;</span> ");
 				page.append(player.getThird()).append("<span class=\"emoji\" title=\"3rd Place\">&#x1F949;</span> ");
 			}
-			int globalCount = players.getGlobalCountFor(player.getName());
+			int globalCount = novetta.getGlobalCountFor(player.getName());
 			if (globalCount > 0) {
 				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
 			}
@@ -201,7 +193,7 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall by Division section.
 	 */
-	private void insertDivisions(String year, List<MedianTimes> medianTimes) {
+	private void insertTopDivisionsChart(String year, List<MedianTimes> medianTimes) {
 		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
 		if (numMedians == 0) {
 			return;
@@ -264,9 +256,9 @@ public class Leaderboard extends BaseLeaderboard {
 	}
 
 	/**
-	 * Adds the Total Participation chart.
+	 * Adds the Total Solves chart.
 	 */
-	private void insertParticipation(String year, List<List<PuzzleTime>> puzzleTimes) {
+	private void insertTotalSolvesChart(String year, List<List<PuzzleTime>> puzzleTimes) {
 		StringBuffer page = getPage();
 		page.append("\n<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
@@ -311,9 +303,10 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Daily for each puzzle.
 	 */
-	private void insertPuzzleTimes(String year, List<List<PuzzleTime>> puzzleTimes) {
+	private void insertTopDaily(String year, List<List<PuzzleTime>> puzzleTimes) {
 		boolean allEmpty = true;
 		boolean alertShown = false;
+
 		StringBuffer page = getPage();
 		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
 		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");

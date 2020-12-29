@@ -2,6 +2,8 @@ package buri.aoc;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,8 +42,11 @@ public abstract class BaseLeaderboard {
 	// Folder containing JSON data files.
 	private static final String JSON_FOLDER = "data/viz/json/";
 
+	// Folder where pages are saved.
+	private static final String OUTPUT_FOLDER = "data/viz/site/";
+
 	// Known puzzle years
-	private static final String[] YEARS = new String[] { "2020", "2019", "2018", "2017", "2016", "2015" };
+	protected static final String[] YEARS = new String[] { "2020", "2019", "2018", "2017", "2016" };
 
 	// Date format for the last update dates.
 	private static final SimpleDateFormat MODIFIED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -190,6 +195,27 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
+	 * Saves the page to the filesystem.
+	 */
+	protected void writePage(String year, boolean isArchive) {
+		try {
+			String outputFilename = (isArchive ? "index-" + year + ".html" : "index.html");
+			Files.write(Paths.get(OUTPUT_FOLDER + outputFilename), getPage().toString().getBytes());
+		}
+		catch (IOException e) {
+			throw new IllegalArgumentException("Invalid output file.", e);
+		}
+	}
+
+	/**
+	 * Reads the last modified date on the (first) leaderboard file.
+	 */
+	protected String readLastModified(String year) {
+		File file = new File(JSON_FOLDER + year + ".json");
+		return MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()));
+	}
+
+	/**
 	 * Reads arbitrary JSON from a file.
 	 */
 	private JsonNode readJson(String filename) {
@@ -200,15 +226,6 @@ public abstract class BaseLeaderboard {
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file: " + filename, e);
 		}
-	}
-
-
-	/**
-	 * Reads the last modified date on the (first) leaderboard file.
-	 */
-	protected String readLastModified(String year) {
-		File file = new File(JSON_FOLDER + year + ".json");
-		return MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()));
 	}
 
 	/**
