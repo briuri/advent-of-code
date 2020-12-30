@@ -27,7 +27,7 @@ body {
 }
 .daily {
 	float: left;
-	min-width: 375px;
+	min-width: 370px;
 }
 .details {
 	display: none;
@@ -53,7 +53,7 @@ h2 {
 }
 h3 {
 	color: #eeeeee;
-	font-size: 11pt;
+	font-size: 10pt;
 	margin-bottom: 0px;
 }
 li.median {
