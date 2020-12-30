@@ -146,10 +146,10 @@ public abstract class BaseLeaderboard {
 			String name = (String) member.get("name");
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String dayKey : puzzleData.keySet()) {
-				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
-				if (part2Data != null) {
-					long unixTime = toUnixTime((String) part2Data.get("get_star_ts"));
-					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+				long part1Time = getTime(Part.ONE, dayKey, puzzleData);
+				long part2Time = getTime(Part.TWO, dayKey, puzzleData);
+				if (part2Time > 0) {
+					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part2Time);
 					if (record.completedInYear()) {
 						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
 					}
@@ -160,25 +160,6 @@ public abstract class BaseLeaderboard {
 			Collections.sort(puzzleTimes.get(day));
 		}
 		return (puzzleTimes);
-	}
-
-	/**
-	 * Converts a timestamp into unix time. In 2016, this requires parsing. In 2017 and beyond, it's a direct mapping.
-	 */
-	protected static long toUnixTime(String rawTime) {
-		long unixTime;
-		if (rawTime.contains("T")) {
-			try {
-				unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
-			}
-			catch (ParseException e) {
-				throw new IllegalArgumentException("Invalid date format: " + rawTime, e);
-			}
-		}
-		else {
-			unixTime = Long.valueOf(rawTime);
-		}
-		return (unixTime);
 	}
 
 	/**
@@ -194,18 +175,16 @@ public abstract class BaseLeaderboard {
 
 			int count = 0;
 			for (String dayKey : puzzleData.keySet()) {
-				Map<String, Object> part1Data = (Map) ((Map) puzzleData.get(dayKey)).get("1");
-				if (part1Data != null) {
-					long unixTime = toUnixTime((String) part1Data.get("get_star_ts"));
-					PuzzleTime part1Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+				long part1Time = getTime(Part.ONE, dayKey, puzzleData);
+				if (part1Time > 0) {
+					PuzzleTime part1Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part1Time);
 					if (part1Record.completedInYear()) {
 						count++;
 					}
 				}
-				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
-				if (part2Data != null) {
-					long unixTime = toUnixTime((String) part2Data.get("get_star_ts"));
-					PuzzleTime part2Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+				long part2Time = getTime(Part.TWO, dayKey, puzzleData);
+				if (part2Time > 0) {
+					PuzzleTime part2Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part2Time);
 					if (part2Record.completedInYear()) {
 						count++;
 					}
@@ -249,7 +228,7 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Cleares the string buffer
+	 * Clears the string buffer
 	 */
 	protected void resetPage() {
 		getPage().setLength(0);
@@ -291,6 +270,31 @@ public abstract class BaseLeaderboard {
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file: " + filename, e);
 		}
+	}
+
+	/**
+	 * Gets a part 1 or part 2 time in unix time. Returns -1 if a value cannot be found.
+	 */
+	private static long getTime(Part part, String dayKey, Map<String, Object> puzzleData) {
+		String partKey = (part == Part.ONE ? "1" : "2");
+		Map<String, Object> partData = (Map) ((Map) puzzleData.get(dayKey)).get(partKey);
+
+		long unixTime = -1;
+		if (partData != null) {
+			String rawTime = (String) partData.get("get_star_ts");
+			if (rawTime.contains("T")) {
+				try {
+					unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
+				}
+				catch (ParseException e) {
+					throw new IllegalArgumentException("Invalid date format: " + rawTime, e);
+				}
+			}
+			else {
+				unixTime = Long.valueOf(rawTime);
+			}
+		}
+		return (unixTime);
 	}
 
 	/**
