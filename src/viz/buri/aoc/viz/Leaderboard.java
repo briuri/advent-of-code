@@ -100,10 +100,10 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a> | ");
 			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />\n");
 		}
-		page.append("\t\t").append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a> | ");
-		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a> | ");
-		page.append(year.equals("2018") ? year : "<a href=\"index-2018.html\">2018</a> | ");
-		page.append(year.equals("2017") ? year : "<a href=\"index-2017.html\">2017</a> | ");
+		page.append("\t\t").append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>").append(" | ");
+		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a>").append(" | ");
+		page.append(year.equals("2018") ? year : "<a href=\"index-2018.html\">2018</a>").append(" | ");
+		page.append(year.equals("2017") ? year : "<a href=\"index-2017.html\">2017</a>").append(" | ");
 		page.append(year.equals("2016") ? year : "<a href=\"index-2016.html\">2016</a>\n");
 		page.append("\t</div>\n\n");
 	}
@@ -118,7 +118,7 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 		StringBuffer page = getPage();
 		page.append("\t<h2>Top ").append(numMedians).append(" Overall</h2>\n");
-		page.append(readLastModified(year));
+		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on number of stars earned, with ties broken by the fastest median solve time. ");
 		page.append("Click median time to show/hide all times.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n<div class=\"overall\">\n");
@@ -216,7 +216,7 @@ public class Leaderboard extends BaseLeaderboard {
 
 		StringBuffer page = getPage();
 		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
-		page.append(readLastModified(year));
+		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartDivisions\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
 		page.append("\t\tvar xValues = [");
@@ -260,7 +260,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertTotalSolvesChart(String year, List<List<PuzzleTime>> puzzleTimes) {
 		StringBuffer page = getPage();
-		page.append("\n\t<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n").append(readLastModified(year));
+		page.append("\n\t<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
+		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartParticipation\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
 		page.append("\t\tvar xValues = [");
@@ -304,10 +305,11 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertTopDaily(String year, List<List<PuzzleTime>> puzzleTimes) {
 		boolean allEmpty = true;
-		boolean alertShown = false;
+		boolean alertShown = !year.equals(CURRENT_YEAR);
 
 		StringBuffer page = getPage();
-		page.append("\n\t<h2>Top ").append(getNovettas().get(year).getPlaces()).append(" Daily</h2>\n").append(readLastModified(year));
+		page.append("\n\t<h2>Top ").append(getNovettas().get(year).getPlaces()).append(" Daily</h2>\n");
+		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
@@ -329,7 +331,7 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
-						page.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
+						page.append("/leaderboard/day/").append(day).append("\"><span class=\"global\">*</span></a>");
 					}
 					else if (time.length() == 8) {
 						page.append("&nbsp;");
@@ -372,7 +374,7 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertFooter(String year) {
 		StringBuffer page = getPage();
 		page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
-		page.append("\t<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard</p>\n");
+		page.append("\t<p class=\"tiny\"><span class=\"global\">*</span>Top 100 on the daily Global Leaderboard</p>\n");
 		page.append("</body>\n</html>");
 	}
 }

@@ -211,10 +211,12 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Reads the last modified date on the (first) leaderboard file.
 	 */
-	protected String readLastModified(String year) {
-		File file = new File(JSON_FOLDER + year + ".json");
+	protected String readLastModified(String year, String currentYear) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("\t<p class=\"tiny\">(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")</p>\n");
+		if (year.equals(currentYear)) {
+			File file = new File(JSON_FOLDER + year + ".json");
+			buffer.append("\t<p class=\"tiny\">(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")</p>\n");
+		}
 		return (buffer.toString());
 	}
 
