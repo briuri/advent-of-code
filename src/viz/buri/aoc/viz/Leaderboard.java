@@ -354,7 +354,8 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
-						page.append("/leaderboard/day/").append(day).append("\"><span class=\"global\" title=\"Top 100 on the daily Global Leaderboard\">*</span></a>");
+						page.append("/leaderboard/day/").append(day).append("\">");
+						page.append("<span class=\"global\" title=\"Top 100 on the daily Global Leaderboard\">*</span></a>");
 					}
 					else if (time.length() == 8) {
 						page.append("&nbsp;");
