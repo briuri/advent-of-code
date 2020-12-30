@@ -76,13 +76,21 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
-		page.append("\t\tfunction expand(place) {\n");
-		page.append("\t\t\toldDisplay = document.getElementById('details' + place).style.display;\n");
-		page.append("\t\t\tdocument.getElementById('details' + place).style.display =\n");
-		page.append("\t\t\t\t(oldDisplay == 'block' ? 'none' : 'block');\n");
-		page.append("\t\t\tdocument.getElementById('median' + place).style.color =\n");
-		page.append("\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
-		page.append("\t\t}\n");
+		page.append("\t\t$(document).ready(function() {\n");
+		page.append("\t\t\t$(\"span.medianLink\").click(\n");
+		page.append("\t\t\t\tfunction() {\n");
+		page.append("\t\t\t\t\tvar place = $(this).attr(\"id\").substring(6);\n");
+		page.append("\t\t\t\t\toldDisplay = document.getElementById('details' + place).style.display;\n");
+		page.append("\t\t\t\t\tif (oldDisplay == 'block') {\n");
+		page.append("\t\t\t\t\t\t$('#details' + place).hide(150);\n");
+		page.append("\t\t\t\t\t}\n");
+		page.append("\t\t\t\t\telse {\n");
+		page.append("\t\t\t\t\t\t$('#details' + place).show(300);\n");
+		page.append("\t\t\t\t\t}\n");
+		page.append("\t\t\t\t\tdocument.getElementById('median' + place).style.color =\n");
+		page.append("\t\t\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
+		page.append("\t\t\t\t});\n");
+		page.append("\t\t\t});\n");
 		page.append("\t</script>\n");
 		page.append("</head>\n\n<body>\n");
 		page.append("\t<h1>Novetta AoC - Fastest Times").append(" (").append(year).append(")</h1>\n\n");
@@ -128,8 +136,7 @@ public class Leaderboard extends BaseLeaderboard {
 			if (medianTime.length() == 8) {
 				page.append("&nbsp;");
 			}
-			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
-			page.append(" onClick=\"expand(").append(i).append(")\">");
+			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\">");
 			page.append(medianTime);
 			page.append("</span>&nbsp;&nbsp;").append(maskName(year, player.getName()));
 			page.append(novetta.getDivisionFor(player.getName(), true)).append("<br />\n\t\t");
