@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import buri.aoc.viz.MedianTimes;
+import buri.aoc.viz.OverallTimes;
 import buri.aoc.viz.Novetta;
 import buri.aoc.viz.Puzzle;
 import buri.aoc.viz.PuzzleTime;
@@ -188,9 +188,9 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Groups puzzle completion times by name for median calculations.
+	 * Groups puzzle completion times by name for median/total calculations.
 	 */
-	protected List<MedianTimes> getMedianTimes(String year, List<List<PuzzleTime>> puzzleTimes,
+	protected List<OverallTimes> getOverallTimes(String year, List<List<PuzzleTime>> puzzleTimes,
 		Map<String, Integer> stars) {
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
@@ -209,12 +209,14 @@ public abstract class BaseLeaderboard {
 		for (List<Long> times : rawPuzzleTimes.values()) {
 			Collections.sort(times);
 		}
-		List<MedianTimes> medianTimes = new ArrayList<>();
+
+		boolean useMedian = !year.equals("2016");
+		List<OverallTimes> overallTimes = new ArrayList<>();
 		for (String name : rawPuzzleTimes.keySet()) {
-			medianTimes.add(new MedianTimes(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name)));
+			overallTimes.add(new OverallTimes(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name), useMedian));
 		}
-		Collections.sort(medianTimes);
-		return (medianTimes);
+		Collections.sort(overallTimes);
+		return (overallTimes);
 	}
 
 	/**

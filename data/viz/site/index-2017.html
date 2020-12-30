@@ -9,9 +9,9 @@
 	<script type="text/javascript" src="plotly-1.58.1.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("span.medianLink").click(
+			$("span.tieTimeLink").click(
 				function() {
-					var place = $(this).attr("id").substring(6);
+					var place = $(this).attr("id").substring(7);
 					oldDisplay = document.getElementById('details' + place).style.display;
 					if (oldDisplay == 'block') {
 						$('#details' + place).hide(150);
@@ -19,7 +19,7 @@
 					else {
 						$('#details' + place).show(300);
 					}
-					document.getElementById('median' + place).style.color =
+					document.getElementById('tieTime' + place).style.color =
 						(oldDisplay == 'block' ? '#ffffff' : '#888800');
 				});
 			});
@@ -39,7 +39,7 @@
 
 <div class="overall">
 <ol>
-	<li class="median">&nbsp;<span class="median medianLink" id="median0" title="Show/Hide All Times">00:20:05</span>&nbsp;&nbsp;N<span class="antiIndex">AoC</span>athan S<span class="antiIndex">AoC</span>hirley<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime0" title="Show/Hide All Times">00:20:05</span>&nbsp;&nbsp;N<span class="antiIndex">AoC</span>athan S<span class="antiIndex">AoC</span>hirley<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 12<span class="emoji" title="1st Place">&#x1F947;</span> 6<span class="emoji" title="2nd Place">&#x1F948;</span> 3<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details0">
 			&nbsp;00:05:02<br />
@@ -54,7 +54,7 @@
 			&nbsp;00:17:14<br />
 			&nbsp;00:18:51<br />
 			&nbsp;00:19:31<br />
-			&nbsp;<span class="median">00:20:05</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">00:20:05</span>&nbsp;&nbsp;current median<br />
 			&nbsp;00:25:57<br />
 			&nbsp;00:26:27<br />
 			&nbsp;00:26:53<br />
@@ -69,7 +69,7 @@
 			&nbsp;01:08:06<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median1" title="Show/Hide All Times">00:20:41</span>&nbsp;&nbsp;M<span class="antiIndex">AoC</span>att B<span class="antiIndex">AoC</span>oehm<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime1" title="Show/Hide All Times">00:20:41</span>&nbsp;&nbsp;M<span class="antiIndex">AoC</span>att B<span class="antiIndex">AoC</span>oehm<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 7<span class="emoji" title="1st Place">&#x1F947;</span> 8<span class="emoji" title="2nd Place">&#x1F948;</span> 7<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details1">
 			&nbsp;00:05:53<br />
@@ -84,7 +84,7 @@
 			&nbsp;00:15:37<br />
 			&nbsp;00:17:07<br />
 			&nbsp;00:20:17<br />
-			&nbsp;<span class="median">00:20:41</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">00:20:41</span>&nbsp;&nbsp;current median<br />
 			&nbsp;00:21:36<br />
 			&nbsp;00:22:33<br />
 			&nbsp;00:28:36<br />
@@ -99,7 +99,7 @@
 			&nbsp;37:17:42<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median2" title="Show/Hide All Times">00:40:32</span>&nbsp;&nbsp;G<span class="antiIndex">AoC</span>reg F<span class="antiIndex">AoC</span>uller<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime2" title="Show/Hide All Times">00:40:32</span>&nbsp;&nbsp;G<span class="antiIndex">AoC</span>reg F<span class="antiIndex">AoC</span>uller<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 2<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 4<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details2">
 			&nbsp;00:08:35<br />
@@ -114,7 +114,7 @@
 			&nbsp;00:27:20<br />
 			&nbsp;00:35:21<br />
 			&nbsp;00:35:30<br />
-			&nbsp;<span class="median">00:40:32</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">00:40:32</span>&nbsp;&nbsp;current median<br />
 			&nbsp;00:45:58<br />
 			&nbsp;01:02:08<br />
 			&nbsp;01:06:02<br />
@@ -129,7 +129,7 @@
 			107:07:07<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median3" title="Show/Hide All Times">01:02:27</span>&nbsp;&nbsp;M<span class="antiIndex">AoC</span>ike H<span class="antiIndex">AoC</span>erms (--)<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime3" title="Show/Hide All Times">01:02:27</span>&nbsp;&nbsp;M<span class="antiIndex">AoC</span>ike H<span class="antiIndex">AoC</span>erms (--)<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 1<span class="emoji" title="1st Place">&#x1F947;</span> 3<span class="emoji" title="2nd Place">&#x1F948;</span> 3<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details3">
 			&nbsp;00:04:38<br />
@@ -144,7 +144,7 @@
 			&nbsp;00:35:02<br />
 			&nbsp;00:52:10<br />
 			&nbsp;00:57:55<br />
-			&nbsp;<span class="median">01:02:27</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">01:02:27</span>&nbsp;&nbsp;current median<br />
 			&nbsp;01:05:26<br />
 			&nbsp;01:09:33<br />
 			&nbsp;01:18:32<br />
@@ -159,7 +159,7 @@
 			&nbsp;20:44:06<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median4" title="Show/Hide All Times">01:05:35</span>&nbsp;&nbsp;J<span class="antiIndex">AoC</span>ason S<span class="antiIndex">AoC</span>tevens<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime4" title="Show/Hide All Times">01:05:35</span>&nbsp;&nbsp;J<span class="antiIndex">AoC</span>ason S<span class="antiIndex">AoC</span>tevens<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 4<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details4">
 			&nbsp;00:07:33<br />
@@ -174,7 +174,7 @@
 			&nbsp;00:47:06<br />
 			&nbsp;01:04:18<br />
 			&nbsp;01:04:47<br />
-			&nbsp;<span class="median">01:05:35</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">01:05:35</span>&nbsp;&nbsp;current median<br />
 			&nbsp;01:11:32<br />
 			&nbsp;01:18:19<br />
 			&nbsp;01:24:16<br />
@@ -189,7 +189,7 @@
 			&nbsp;11:56:52<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median5" title="Show/Hide All Times">01:10:35</span>&nbsp;&nbsp;D<span class="antiIndex">AoC</span>an S<span class="antiIndex">AoC</span>t. George<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime5" title="Show/Hide All Times">01:10:35</span>&nbsp;&nbsp;D<span class="antiIndex">AoC</span>an S<span class="antiIndex">AoC</span>t. George<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details5">
 			&nbsp;00:22:33<br />
@@ -204,7 +204,7 @@
 			&nbsp;00:44:12<br />
 			&nbsp;00:48:35<br />
 			&nbsp;00:56:35<br />
-			&nbsp;<span class="median">01:10:35</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">01:10:35</span>&nbsp;&nbsp;current median<br />
 			&nbsp;01:17:40<br />
 			&nbsp;01:19:44<br />
 			&nbsp;01:43:50<br />
@@ -219,7 +219,7 @@
 			&nbsp;18:33:48<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median6" title="Show/Hide All Times">01:13:16</span>&nbsp;&nbsp;B<span class="antiIndex">AoC</span>en M<span class="antiIndex">AoC</span>endis<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime6" title="Show/Hide All Times">01:13:16</span>&nbsp;&nbsp;B<span class="antiIndex">AoC</span>en M<span class="antiIndex">AoC</span>endis<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 0<span class="emoji" title="2nd Place">&#x1F948;</span> 5<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details6">
 			&nbsp;00:14:00<br />
@@ -234,7 +234,7 @@
 			&nbsp;01:06:41<br />
 			&nbsp;01:11:31<br />
 			&nbsp;01:12:55<br />
-			&nbsp;<span class="median">01:13:16</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">01:13:16</span>&nbsp;&nbsp;current median<br />
 			&nbsp;01:19:44<br />
 			&nbsp;01:21:26<br />
 			&nbsp;01:29:30<br />
@@ -249,7 +249,7 @@
 			&nbsp;67:17:12<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median7" title="Show/Hide All Times">01:42:34</span>&nbsp;&nbsp;S<span class="antiIndex">AoC</span>teve C<span class="antiIndex">AoC</span>arlon<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime7" title="Show/Hide All Times">01:42:34</span>&nbsp;&nbsp;S<span class="antiIndex">AoC</span>teve C<span class="antiIndex">AoC</span>arlon<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details7">
 			&nbsp;00:41:44<br />
@@ -264,7 +264,7 @@
 			&nbsp;01:28:07<br />
 			&nbsp;01:30:24<br />
 			&nbsp;01:40:57<br />
-			&nbsp;<span class="median">01:42:34</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">01:42:34</span>&nbsp;&nbsp;current median<br />
 			&nbsp;01:51:29<br />
 			&nbsp;02:28:04<br />
 			&nbsp;06:01:18<br />
@@ -279,7 +279,7 @@
 			&nbsp;11:59:44<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median8" title="Show/Hide All Times">03:16:48</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>ichard C<span class="antiIndex">AoC</span>ooper<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime8" title="Show/Hide All Times">03:16:48</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>ichard C<span class="antiIndex">AoC</span>ooper<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 
 		<div class="details" id="details8">
 			&nbsp;00:32:12<br />
@@ -294,7 +294,7 @@
 			&nbsp;02:36:32<br />
 			&nbsp;02:55:08<br />
 			&nbsp;03:02:34<br />
-			&nbsp;<span class="median">03:16:48</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">03:16:48</span>&nbsp;&nbsp;current median<br />
 			&nbsp;04:19:34<br />
 			&nbsp;09:29:47<br />
 			&nbsp;10:15:27<br />
@@ -309,7 +309,7 @@
 			&nbsp;22:32:56<br />
 		</div>
 	</li>
-	<li class="median">&nbsp;<span class="median medianLink" id="median9" title="Show/Hide All Times">07:24:59</span>&nbsp;&nbsp;E<span class="antiIndex">AoC</span>lise T<span class="antiIndex">AoC</span>horsen<br />
+	<li class="tieTime">&nbsp;<span class="tieTime tieTimeLink" id="tieTime9" title="Show/Hide All Times">07:24:59</span>&nbsp;&nbsp;E<span class="antiIndex">AoC</span>lise T<span class="antiIndex">AoC</span>horsen<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 
 		<div class="details" id="details9">
 			&nbsp;06:07:08<br />
@@ -324,7 +324,7 @@
 			&nbsp;07:07:17<br />
 			&nbsp;07:12:13<br />
 			&nbsp;07:18:49<br />
-			&nbsp;<span class="median">07:24:59</span>&nbsp;&nbsp;current median<br />
+			&nbsp;<span class="tieTime">07:24:59</span>&nbsp;&nbsp;current median<br />
 			&nbsp;07:28:49<br />
 			&nbsp;07:41:18<br />
 			&nbsp;07:59:37<br />

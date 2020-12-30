@@ -75,7 +75,6 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Converts timestamp into "time after midnight on day of puzzle" (01:35:40).
 	 * Adds 24 hours for completion times on later day (25:35:40).
 	 * Returns text for puzzles completed outside of the competition (in 2019).
-	 * Formats with HTML unless the time will be used for median calculations.
 	 */
 	public String getFormattedTime() {
 		return (formatTime(getTimeCompleted()));

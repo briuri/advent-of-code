@@ -3,14 +3,17 @@ package buri.aoc.viz;
 import java.util.List;
 
 /**
- * Data class for a player's median times.
+ * Data class for all of a player's times.
+ *
+ * In 2016, the total time was used as a tie breaker.
+ * In 2017 and beyond, the median time is a tie breaker.
  *
  * @author Brian Uri!
  */
-public class MedianTimes implements Comparable {
+public class OverallTimes implements Comparable {
 	private String _name;
 	private int _stars;
-	private long _medianTime;
+	private long _tiebreakerTime;
 	private List<Long> _times;
 
 	private int _first = 0;
@@ -20,10 +23,10 @@ public class MedianTimes implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public MedianTimes(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<Long> times) {
+	public OverallTimes(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<Long> times, boolean useMedian) {
 		_name = name;
 		_stars = stars;
-		_medianTime = calculateMedianTime(times);
+		_tiebreakerTime = (useMedian ? calculateMedianTime(times) : calculateTotalTime(times));
 		_times = times;
 		for (List<PuzzleTime> places : puzzleTimes) {
 			if (places.size() >= 1 && places.get(0).getName().equals(name)) {
@@ -36,6 +39,17 @@ public class MedianTimes implements Comparable {
 				_third += 1;
 			}
 		}
+	}
+
+	/**
+	 * Calculates the sum of the given times.
+	 */
+	private static long calculateTotalTime(List<Long> times) {
+		long total = 0;
+		for (Long time : times) {
+			total += time;
+		}
+		return (total);
 	}
 
 	/**
@@ -56,18 +70,18 @@ public class MedianTimes implements Comparable {
 	}
 
 	/**
-	 * Sort on number of stars, then median time.
+	 * Sort on number of stars, then tiebreaker time.
 	 */
 	@Override
 	public int compareTo(Object obj) {
-		MedianTimes time = (MedianTimes) obj;
+		OverallTimes time = (OverallTimes) obj;
 		if (getStars() > time.getStars()) {
 			return (-1);
 		}
 		if (getStars() < time.getStars()) {
 			return (1);
 		}
-		int compare = getMedianTime().compareTo(time.getMedianTime());
+		int compare = getTiebreakerTime().compareTo(time.getTiebreakerTime());
 		// Exact timestamp ties
 		if (compare == 0) {
 			compare = getName().split(" ")[1].compareTo(time.getName().split(" ")[1]);
@@ -97,10 +111,10 @@ public class MedianTimes implements Comparable {
 	}
 
 	/**
-	 * Accessor for the median time in milliseconds
+	 * Accessor for the time used in tiebreaker situations
 	 */
-	public Long getMedianTime() {
-		return _medianTime;
+	public Long getTiebreakerTime() {
+		return _tiebreakerTime;
 	}
 
 	/**

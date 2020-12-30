@@ -39,12 +39,12 @@ public class Leaderboard extends BaseLeaderboard {
 	private void visualizeYear(String year) {
 		final Map<String, Object> leaderboardJson = readLeaderboards(year);
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
-		final List<MedianTimes> medianTimes = getMedianTimes(year, puzzleTimes, getStars(year, leaderboardJson));
+		final List<OverallTimes> overallTimes = getOverallTimes(year, puzzleTimes, getStars(year, leaderboardJson));
 
 		resetPage();
 		insertHeader(year);
-		insertTopOverall(year, medianTimes);
-		insertTopDivisionsChart(year, medianTimes);
+		insertTopOverall(year, overallTimes);
+		insertTopDivisionsChart(year, overallTimes);
 		insertTotalSolvesChart(year, puzzleTimes);
 		insertTopDaily(year, puzzleTimes);
 		insertFooter(year);
@@ -75,9 +75,9 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
 		page.append("\t\t$(document).ready(function() {\n");
-		page.append("\t\t\t$(\"span.medianLink\").click(\n");
+		page.append("\t\t\t$(\"span.tieTimeLink\").click(\n");
 		page.append("\t\t\t\tfunction() {\n");
-		page.append("\t\t\t\t\tvar place = $(this).attr(\"id\").substring(6);\n");
+		page.append("\t\t\t\t\tvar place = $(this).attr(\"id\").substring(7);\n");
 		page.append("\t\t\t\t\toldDisplay = document.getElementById('details' + place).style.display;\n");
 		page.append("\t\t\t\t\tif (oldDisplay == 'block') {\n");
 		page.append("\t\t\t\t\t\t$('#details' + place).hide(150);\n");
@@ -85,7 +85,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t\t\t\telse {\n");
 		page.append("\t\t\t\t\t\t$('#details' + place).show(300);\n");
 		page.append("\t\t\t\t\t}\n");
-		page.append("\t\t\t\t\tdocument.getElementById('median' + place).style.color =\n");
+		page.append("\t\t\t\t\tdocument.getElementById('tieTime' + place).style.color =\n");
 		page.append("\t\t\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("\t\t\t\t});\n");
 		page.append("\t\t\t});\n");
@@ -112,30 +112,29 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall section.
 	 */
-	private void insertTopOverall(String year, List<MedianTimes> medianTimes) {
+	private void insertTopOverall(String year, List<OverallTimes> overallTimes) {
 		Novetta novetta = getNovettas().get(year);
-		int numMedians = Math.min(novetta.getPlaces(), medianTimes.size());
-		if (numMedians == 0) {
+		int numOverall = Math.min(novetta.getPlaces(), overallTimes.size());
+		if (numOverall == 0) {
 			return;
 		}
 		StringBuffer page = getPage();
-		page.append("\t<h2>Top ").append(numMedians).append(" Overall</h2>\n");
+		page.append("\t<h2>Top ").append(numOverall).append(" Overall</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
-		page.append("\t<p>").append(novetta.getRules()).append(" ");
-		page.append("Click median time to show/hide all times.</p>\n");
+		page.append("\t<p>").append(novetta.getRules()).append("</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n<div class=\"overall\">\n");
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
-		for (int i = 0; i < numMedians; i++) {
-			MedianTimes player = medianTimes.get(i);
-			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
-			page.append(isNextTie ? "\t" : "\t<li class=\"median\">");
-			if (medianTime.length() == 8) {
+		for (int i = 0; i < numOverall; i++) {
+			OverallTimes player = overallTimes.get(i);
+			String overallTime = PuzzleTime.formatTime(player.getTiebreakerTime());
+			page.append(isNextTie ? "\t" : "\t<li class=\"tieTime\">");
+			if (overallTime.length() == 8) {
 				page.append("&nbsp;");
 			}
-			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\">");
-			page.append(medianTime);
+			page.append("<span class=\"tieTime tieTimeLink\" id=\"tieTime").append(i).append("\" title=\"Show/Hide All Times\">");
+			page.append(overallTime);
 			page.append("</span>&nbsp;&nbsp;").append(maskName(year, player.getName()));
 			page.append(novetta.getDivisionFor(player.getName(), true)).append("<br />\n\t\t");
 			for (int j = 0; j < 12; j++) {
@@ -160,20 +159,26 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append("&nbsp;");
 				}
 
-				// Averaged median
-				if (totalTimes % 2 == 0 && (j == totalTimes / 2 - 1)) {
-					page.append("<span class=\"median\">").append(time).append("</span>");
-					page.append("&nbsp;&nbsp;average is");
-				}
-				// Single median
-				else if (j == totalTimes / 2) {
-					page.append("<span class=\"median\">").append(time).append("</span>");
-					page.append("&nbsp;&nbsp;current median");
-				}
-				// 13th median (superceded by current median once all 50 stars are earned).
-				else if (j == 12) {
-					page.append("<span class=\"median\">").append(time).append("</span>");
-					page.append("&nbsp;&nbsp;13th fastest median");
+				// 2016 used total time instead of median time.
+				if (!year.equals("2016")) {
+					// Averaged median
+					if (totalTimes % 2 == 0 && (j == totalTimes / 2 - 1)) {
+						page.append("<span class=\"tieTime\">").append(time).append("</span>");
+						page.append("&nbsp;&nbsp;average is");
+					}
+					// Single median
+					else if (j == totalTimes / 2) {
+						page.append("<span class=\"tieTime\">").append(time).append("</span>");
+						page.append("&nbsp;&nbsp;current median");
+					}
+					// 13th median (superceded by current median once all 50 stars are earned).
+					else if (j == 12) {
+						page.append("<span class=\"tieTime\">").append(time).append("</span>");
+						page.append("&nbsp;&nbsp;13th fastest median");
+					}
+					else {
+						page.append(time);
+					}
 				}
 				else {
 					page.append(time);
@@ -181,10 +186,10 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("<br />\n");
 			}
 			page.append("\t\t</div>\n");
-			isNextTie = (i + 1 < numMedians && player.getMedianTime().equals(medianTimes.get(i + 1).getMedianTime()));
+			isNextTie = (i + 1 < numOverall && player.getTiebreakerTime().equals(overallTimes.get(i + 1).getTiebreakerTime()));
 			page.append(isNextTie ? "\t<br />\n" : "\t</li>\n");
 			// Break overall scores into two columns for > Top 10.
-			if (i == numMedians / 2 && numMedians > 10) {
+			if (i == numOverall / 2 && numOverall > 10) {
 				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2).append("\">\n");
 			}
 		}
@@ -194,19 +199,19 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall by Division section.
 	 */
-	private void insertTopDivisionsChart(String year, List<MedianTimes> medianTimes) {
+	private void insertTopDivisionsChart(String year, List<OverallTimes> overallTimes) {
 		Novetta novetta = getNovettas().get(year);
-		int numMedians = Math.min(novetta.getPlaces(), medianTimes.size());
+		int numOverall = Math.min(novetta.getPlaces(), overallTimes.size());
 		List<String> allDivisions = novetta.getAllDivisions();
-		if (numMedians == 0 || allDivisions.isEmpty()) {
+		if (numOverall == 0 || allDivisions.isEmpty()) {
 			return;
 		}
 		Map<String, Integer> counts = new TreeMap<>();
 		for (String division : allDivisions) {
 			counts.put(division, 0);
 		}
-		for (int i = 0; i < numMedians; i++) {
-			MedianTimes player = medianTimes.get(i);
+		for (int i = 0; i < numOverall; i++) {
+			OverallTimes player = overallTimes.get(i);
 			String division = novetta.getDivisionFor(player.getName(), false);
 			if (division.length() > 0) {
 				counts.put(division, counts.get(division) + 1);
@@ -218,7 +223,7 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 
 		StringBuffer page = getPage();
-		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
+		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numOverall).append(" Overall by Division</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartDivisions\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");

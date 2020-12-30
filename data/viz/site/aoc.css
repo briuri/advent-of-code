@@ -56,14 +56,14 @@ h3 {
 	font-size: 10pt;
 	margin-bottom: 0px;
 }
-li.median {
+li.tieTime {
 	margin-bottom: 5px;
 }
-span.median {
+span.tieTime {
 	color: #ffffff;
 	text-shadow: 0 0 5px #ffffff;
 }
-span.medianLink:hover {
+span.tieTime:hover {
 	color: #99ff99;
 	cursor: pointer;
 	*cursor: hand;
