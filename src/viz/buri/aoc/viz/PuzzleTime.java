@@ -2,6 +2,8 @@ package buri.aoc.viz;
 
 import java.util.Calendar;
 
+import buri.aoc.Part;
+
 /**
  * Data class for 1 completion record in a daily puzzle.
  *
@@ -11,19 +13,25 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	private int _year;
 
 	private String _name;
-	private int _yearCompleted;
-	private long _timeCompleted;
+	private int _yearPart1Completed;
+	private int _yearPart2Completed;
+	private long _part1Time;
+	private long _part2Time;
 
 	/**
 	 * Constructor
 	 */
-	public PuzzleTime(String year, int day, String name, long unixTime) {
+	public PuzzleTime(String year, int day, String name, long part1Time, long part2Time) {
 		_year = Integer.valueOf(year);
 		_name = name;
 
-		Calendar unixTimeCompleted = Calendar.getInstance();
-		unixTimeCompleted.setTimeInMillis(unixTime * 1000L);
-		_yearCompleted = unixTimeCompleted.get(Calendar.YEAR);
+		Calendar unixPart1Time = Calendar.getInstance();
+		unixPart1Time.setTimeInMillis(part1Time * 1000L);
+		_yearPart1Completed = unixPart1Time.get(Calendar.YEAR);
+
+		Calendar unixPart2Time = Calendar.getInstance();
+		unixPart2Time.setTimeInMillis(part2Time * 1000L);
+		_yearPart2Completed = unixPart2Time.get(Calendar.YEAR);
 
 		Calendar puzzleTime = Calendar.getInstance();
 		puzzleTime.set(Calendar.YEAR, getYear());
@@ -33,7 +41,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		puzzleTime.set(Calendar.MINUTE, 0);
 		puzzleTime.set(Calendar.SECOND, 0);
 		puzzleTime.set(Calendar.MILLISECOND, 0);
-		_timeCompleted = unixTimeCompleted.getTimeInMillis() - puzzleTime.getTimeInMillis();
+
+		_part1Time = unixPart1Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
+		_part2Time = unixPart2Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
 	}
 
 	/**
@@ -71,18 +81,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		return (buffer.toString());
 	}
 
-	/**
-	 * Converts timestamp into "time after midnight on day of puzzle" (01:35:40).
-	 * Adds 24 hours for completion times on later day (25:35:40).
-	 * Returns text for puzzles completed outside of the competition (in 2019).
-	 */
-	public String getFormattedTime() {
-		return (formatTime(getTimeCompleted()));
-	}
-
 	@Override
 	public int compareTo(PuzzleTime o) {
-		int compare = Long.valueOf(getTimeCompleted()).compareTo(Long.valueOf(o.getTimeCompleted()));
+		int compare = Long.valueOf(getPart2Time()).compareTo(Long.valueOf(o.getPart2Time()));
 		// Exact timestamp ties
 		if (compare == 0) {
 			compare = getName().split(" ")[1].compareTo(o.getName().split(" ")[1]);
@@ -91,10 +92,10 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	}
 
 	/**
-	 * Returns true if the puzzle was completed in the same year.
+	 * Returns true if the puzzle part was completed in the same year.
 	 */
-	public boolean completedInYear() {
-		return (getYear() == getYearCompleted());
+	public boolean completedInYear(Part part) {
+		return (part == Part.ONE ? getYear() == getYearPart1Completed() : getYear() == getYearPart2Completed());
 	}
 
 	/**
@@ -111,17 +112,32 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		return _name;
 	}
 
+
 	/**
-	 * Accessor for the year this puzzle was completed
+	 * Accessor for the year part 1 was completed
 	 */
-	private int getYearCompleted() {
-		return _yearCompleted;
+	public int getYearPart1Completed() {
+		return _yearPart1Completed;
 	}
 
 	/**
-	 * Accessor for the time the puzzle was completed (after its release) in milliseconds
+	 * Accessor for the year part 2 was completed
 	 */
-	public long getTimeCompleted() {
-		return _timeCompleted;
+	private int getYearPart2Completed() {
+		return _yearPart2Completed;
+	}
+
+	/**
+	 * Accessor for the time part 1 was completed (after its release) in milliseconds
+	 */
+	public long getPart1Time() {
+		return _part1Time;
+	}
+
+	/**
+	 * Accessor for the time the whole puzzle was completed (after its release) in milliseconds
+	 */
+	public long getPart2Time() {
+		return _part2Time;
 	}
 }

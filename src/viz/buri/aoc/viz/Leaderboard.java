@@ -350,7 +350,7 @@ public class Leaderboard extends BaseLeaderboard {
 				boolean isNextTie = false;
 				for (int place = 0; place < Math.min(novetta.getPlaces(), places.size()); place++) {
 					PuzzleTime record = places.get(place);
-					String time = record.getFormattedTime();
+					String time = PuzzleTime.formatTime(record.getPart2Time());
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
@@ -363,7 +363,7 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append(time);
 					page.append("&nbsp;&nbsp;").append(maskName(year, record.getName()));
 
-					isNextTie = (place + 1 < places.size() && record.getTimeCompleted() == places.get(place + 1).getTimeCompleted());
+					isNextTie = (place + 1 < places.size() && record.getPart2Time() == places.get(place + 1).getPart2Time());
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				for (int place = places.size(); place < novetta.getPlaces(); place++) {
@@ -382,7 +382,7 @@ public class Leaderboard extends BaseLeaderboard {
 
 					StringBuffer alert = new StringBuffer();
 					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
-					alert.append(mostRecent.getFormattedTime()).append(" ").append(mostRecent.getName()).append("\n");
+					alert.append(PuzzleTime.formatTime(mostRecent.getPart2Time())).append(" ").append(mostRecent.getName()).append("\n");
 					alert.append(total).append(" Part 2 solves");
 					System.out.println(alert.toString());
 					alertShown = true;

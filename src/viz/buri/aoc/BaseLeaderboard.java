@@ -149,8 +149,8 @@ public abstract class BaseLeaderboard {
 				long part1Time = getTime(Part.ONE, dayKey, puzzleData);
 				long part2Time = getTime(Part.TWO, dayKey, puzzleData);
 				if (part2Time > 0) {
-					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part2Time);
-					if (record.completedInYear()) {
+					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part1Time, part2Time);
+					if (record.completedInYear(Part.TWO)) {
 						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
 					}
 				}
@@ -176,18 +176,13 @@ public abstract class BaseLeaderboard {
 			int count = 0;
 			for (String dayKey : puzzleData.keySet()) {
 				long part1Time = getTime(Part.ONE, dayKey, puzzleData);
-				if (part1Time > 0) {
-					PuzzleTime part1Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part1Time);
-					if (part1Record.completedInYear()) {
-						count++;
-					}
-				}
 				long part2Time = getTime(Part.TWO, dayKey, puzzleData);
-				if (part2Time > 0) {
-					PuzzleTime part2Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part2Time);
-					if (part2Record.completedInYear()) {
-						count++;
-					}
+				PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part1Time, part2Time);
+				if (part1Time > 0 && record.completedInYear(Part.ONE)) {
+					count++;
+				}
+				if (part2Time > 0 && record.completedInYear(Part.TWO)) {
+					count++;
 				}
 			}
 			stars.put(name, count);
@@ -210,7 +205,7 @@ public abstract class BaseLeaderboard {
 					if (rawPuzzleTimes.get(time.getName()) == null) {
 						rawPuzzleTimes.put(time.getName(), new ArrayList<>());
 					}
-					rawPuzzleTimes.get(time.getName()).add(time.getTimeCompleted());
+					rawPuzzleTimes.get(time.getName()).add(time.getPart2Time());
 				}
 			}
 		}
