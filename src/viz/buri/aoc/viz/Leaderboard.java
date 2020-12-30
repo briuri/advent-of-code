@@ -71,7 +71,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<meta charset=\"UTF-8\">\n");
 		page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
 		page.append("\t<title>Novetta Advent of Code - Fastest Times (").append(year).append(")").append("</title>\n\n");
-		page.append("\t<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css\" />\n");
+		page.append("\t<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css?2020-12-30-1620\" />\n");
 		page.append("\t<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\">\n");

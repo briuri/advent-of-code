@@ -38,7 +38,7 @@ public abstract class BaseLeaderboard {
 	protected static final int TOTAL_PUZZLES = 25;
 
 	// Invisible text used to reduce search engine discoverability.
-	protected static final String ANTI_INDEX = "<span class=\"antiIndex\">AoC</span>";
+	protected static final String ANTI_INDEX = "<span class=\"ai\">AoC</span>";
 
 	// Folder containing JSON data files.
 	private static final String JSON_FOLDER = "data/viz/json/";
