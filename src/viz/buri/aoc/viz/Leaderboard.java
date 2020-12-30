@@ -86,8 +86,10 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t\t\t\telse {\n");
 		page.append("\t\t\t\t\t\t$('#details' + place).show(300);\n");
 		page.append("\t\t\t\t\t}\n");
-		page.append("\t\t\t\t\tdocument.getElementById('tieTime' + place).style.color =\n");
-		page.append("\t\t\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
+		page.append("\t\t\t\t\tif (!document.getElementById('tieTime' + place).classList.contains('ineligible')) {\n");
+		page.append("\t\t\t\t\t\tdocument.getElementById('tieTime' + place).style.color =\n");
+		page.append("\t\t\t\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
+		page.append("\t\t\t\t\t}\n");
 		page.append("\t\t\t\t});\n");
 		page.append("\t\t\t});\n");
 		page.append("\t</script>\n");
@@ -130,19 +132,22 @@ public class Leaderboard extends BaseLeaderboard {
 		for (int i = 0; i < numOverall; i++) {
 			OverallTimes player = overallTimes.get(i);
 			String overallTime = PuzzleTime.formatTime(player.getTiebreakerTime());
+			boolean isIneligible = novetta.getIneligible().contains(player.getName());
+
 			page.append(isNextTie ? "\t" : "\t<li class=\"overallRecord\">");
 			if (overallTime.length() == 8) {
 				page.append("&nbsp;");
 			}
-			page.append("<span class=\"tieTime tieTimeLink\" id=\"tieTime").append(i).append("\" title=\"Show/Hide All Times\">");
-			page.append(overallTime);
-			page.append("</span>&nbsp;&nbsp;");
-			if (novetta.getIneligible().contains(player.getName())) {
+			String timeClass = (isIneligible ? "ineligible" : "tieTime");
+			page.append("<span class=\"").append(timeClass).append(" tieTimeLink\" id=\"tieTime").append(i).append("\" title=\"");
+			page.append(isIneligible ? "Ineligible for Top 3 prizes" : "Show/Hide all times");
+			page.append("\">").append(overallTime).append("</span>&nbsp;&nbsp;");
+			if (isIneligible) {
 				page.append("<span class=\"ineligible\" title=\"Ineligible for Top 3 prizes\">");
 			}
 			page.append(maskName(year, player.getName()));
 			page.append(novetta.getDivisionFor(player.getName(), true));
-			if (novetta.getIneligible().contains(player.getName())) {
+			if (isIneligible) {
 				page.append("</span>");
 			}
 			page.append("<br />\n\t\t");

@@ -19,8 +19,10 @@
 					else {
 						$('#details' + place).show(300);
 					}
-					document.getElementById('tieTime' + place).style.color =
-						(oldDisplay == 'block' ? '#ffffff' : '#888800');
+					if (!document.getElementById('tieTime' + place).classList.contains('ineligible')) {
+						document.getElementById('tieTime' + place).style.color =
+							(oldDisplay == 'block' ? '#ffffff' : '#888800');
+					}
 				});
 			});
 	</script>
@@ -39,7 +41,7 @@
 
 <div class="overall">
 <ol>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime0" title="Show/Hide All Times">00:36:39</span>&nbsp;&nbsp;M<span class="antiIndex">AoC</span>att B<span class="antiIndex">AoC</span>oehm<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime0" title="Show/Hide all times">00:36:39</span>&nbsp;&nbsp;M<span class="antiIndex">AoC</span>att B<span class="antiIndex">AoC</span>oehm<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 6<span class="emoji" title="1st Place">&#x1F947;</span> 6<span class="emoji" title="2nd Place">&#x1F948;</span> 4<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details0">
 			&nbsp;00:04:10<br />
@@ -68,7 +70,7 @@
 			&nbsp;85:33:48<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime1" title="Show/Hide All Times">00:41:44</span>&nbsp;&nbsp;N<span class="antiIndex">AoC</span>athan S<span class="antiIndex">AoC</span>hirley<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime1" title="Show/Hide all times">00:41:44</span>&nbsp;&nbsp;N<span class="antiIndex">AoC</span>athan S<span class="antiIndex">AoC</span>hirley<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 10<span class="emoji" title="1st Place">&#x1F947;</span> 4<span class="emoji" title="2nd Place">&#x1F948;</span> 3<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details1">
 			&nbsp;00:13:16<br />
@@ -97,7 +99,7 @@
 			&nbsp;24:50:50<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime2" title="Show/Hide All Times">00:51:29</span>&nbsp;&nbsp;J<span class="antiIndex">AoC</span>onathan S<span class="antiIndex">AoC</span>keate<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime2" title="Show/Hide all times">00:51:29</span>&nbsp;&nbsp;J<span class="antiIndex">AoC</span>onathan S<span class="antiIndex">AoC</span>keate<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 7<span class="emoji" title="1st Place">&#x1F947;</span> 5<span class="emoji" title="2nd Place">&#x1F948;</span> 5<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details2">
 			&nbsp;00:12:11<br />
@@ -126,7 +128,7 @@
 			&nbsp;35:04:45<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime3" title="Show/Hide All Times">01:10:02</span>&nbsp;&nbsp;B<span class="antiIndex">AoC</span>rian U<span class="antiIndex">AoC</span>ri<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime3" title="Show/Hide all times">01:10:02</span>&nbsp;&nbsp;B<span class="antiIndex">AoC</span>rian U<span class="antiIndex">AoC</span>ri<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 2<span class="emoji" title="1st Place">&#x1F947;</span> 2<span class="emoji" title="2nd Place">&#x1F948;</span> 5<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details3">
 			&nbsp;00:06:29<br />
@@ -155,7 +157,7 @@
 			&nbsp;03:40:02<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime4" title="Show/Hide All Times">02:18:43</span>&nbsp;&nbsp;T<span class="antiIndex">AoC</span>ucker T<span class="antiIndex">AoC</span>ibbetts<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime4" title="Show/Hide all times">02:18:43</span>&nbsp;&nbsp;T<span class="antiIndex">AoC</span>ucker T<span class="antiIndex">AoC</span>ibbetts<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 2<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details4">
 			&nbsp;00:47:43<br />
@@ -184,7 +186,7 @@
 			132:42:21<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime5" title="Show/Hide All Times">05:54:27</span>&nbsp;&nbsp;<span class="ineligible" title="Ineligible for Top 3 prizes">M<span class="antiIndex">AoC</span>ike H<span class="antiIndex">AoC</span>erms</span><br />
+	<li class="overallRecord">&nbsp;<span class="ineligible tieTimeLink" id="tieTime5" title="Ineligible for Top 3 prizes">05:54:27</span>&nbsp;&nbsp;<span class="ineligible" title="Ineligible for Top 3 prizes">M<span class="antiIndex">AoC</span>ike H<span class="antiIndex">AoC</span>erms</span><br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details5">
 			&nbsp;00:18:23<br />
@@ -213,7 +215,7 @@
 			325:56:40<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime6" title="Show/Hide All Times">11:48:18</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>ichard B<span class="antiIndex">AoC</span>radley<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime6" title="Show/Hide all times">11:48:18</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>ichard B<span class="antiIndex">AoC</span>radley<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 1<span class="emoji" title="2nd Place">&#x1F948;</span> 0<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details6">
 			&nbsp;06:05:13<br />
@@ -242,7 +244,7 @@
 			131:09:23<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime7" title="Show/Hide All Times">20:13:20</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>yan W<span class="antiIndex">AoC</span>idmaier<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime7" title="Show/Hide all times">20:13:20</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>yan W<span class="antiIndex">AoC</span>idmaier<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 0<span class="emoji" title="1st Place">&#x1F947;</span> 2<span class="emoji" title="2nd Place">&#x1F948;</span> 1<span class="emoji" title="3rd Place">&#x1F949;</span> 
 		<div class="details" id="details7">
 			&nbsp;00:12:35<br />
@@ -271,7 +273,7 @@
 			&nbsp;47:42:15<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime8" title="Show/Hide All Times">21:17:14</span>&nbsp;&nbsp;K<span class="antiIndex">AoC</span>en S<span class="antiIndex">AoC</span>chmedding<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime8" title="Show/Hide all times">21:17:14</span>&nbsp;&nbsp;K<span class="antiIndex">AoC</span>en S<span class="antiIndex">AoC</span>chmedding<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<span class="emoji" title="Stars">&#x2B50;</span> 
 		<div class="details" id="details8">
 			&nbsp;02:23:26<br />
@@ -300,7 +302,7 @@
 			111:06:40<br />
 		</div>
 	</li>
-	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime9" title="Show/Hide All Times">10:47:06</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>ichard C<span class="antiIndex">AoC</span>ooper<br />
+	<li class="overallRecord">&nbsp;<span class="tieTime tieTimeLink" id="tieTime9" title="Show/Hide all times">10:47:06</span>&nbsp;&nbsp;R<span class="antiIndex">AoC</span>ichard C<span class="antiIndex">AoC</span>ooper<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;47<span class="emoji" title="Stars">&#x2B50;</span> 
 		<div class="details" id="details9">
 			&nbsp;00:49:36<br />
