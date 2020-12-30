@@ -28,7 +28,7 @@ public class Leaderboard extends BaseLeaderboard {
 	public void generatePages() {
 		visualizeYear("2020");
 		visualizeYear("2019");
-//		visualizeYear("2018");
+		visualizeYear("2018");
 //		visualizeYear("2017");
 //		visualizeYear("2016");
 	}
@@ -345,6 +345,9 @@ public class Leaderboard extends BaseLeaderboard {
 
 					isNextTie = (place + 1 < places.size() && record.getTimeCompleted() == places.get(place + 1).getTimeCompleted());
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
+				}
+				for (int place = places.size(); place < novetta.getPlaces(); place++) {
+					page.append("<br />");
 				}
 				page.append("\t</ol>\n");
 				page.append("</div>\n");
