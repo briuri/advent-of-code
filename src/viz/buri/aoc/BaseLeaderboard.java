@@ -148,20 +148,7 @@ public abstract class BaseLeaderboard {
 			for (String dayKey : puzzleData.keySet()) {
 				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
 				if (part2Data != null) {
-					String rawTime = (String) part2Data.get("get_star_ts");
-					long unixTime;
-					// 2016-2017 used date strings. 2018-2020 used Unix epoch.
-					if (rawTime.contains("T")) {
-						try {
-							unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
-						}
-						catch (ParseException e) {
-							throw new IllegalArgumentException("Invalid date format: " + rawTime, e);
-						}
-					}
-					else {
-						unixTime = Long.valueOf(rawTime);
-					}
+					long unixTime = toUnixTime((String) part2Data.get("get_star_ts"));
 					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
 					if (record.completedInYear()) {
 						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
@@ -176,13 +163,55 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Reads number of stars each player has from the leaderboard.
+	 * Converts a timestamp into unix time. In 2016, this requires parsing. In 2017 and beyond, it's a direct mapping.
+	 */
+	protected static long toUnixTime(String rawTime) {
+		long unixTime;
+		if (rawTime.contains("T")) {
+			try {
+				unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
+			}
+			catch (ParseException e) {
+				throw new IllegalArgumentException("Invalid date format: " + rawTime, e);
+			}
+		}
+		else {
+			unixTime = Long.valueOf(rawTime);
+		}
+		return (unixTime);
+	}
+
+	/**
+	 * Reads number of stars each player has from the leaderboard. Based on raw puzzle records because the cumulative
+	 * "stars" field in the leaderboard JSON includes stars earned outside of Novetta's competition dates.
 	 */
 	protected Map<String, Integer> getStars(String year, Map<String, Object> leaderboardJson) {
 		Map<String, Integer> stars = new HashMap<>();
 		for (String key : leaderboardJson.keySet()) {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
-			stars.put((String) member.get("name"), (int) member.get("stars"));
+			String name = (String) member.get("name");
+			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
+
+			int count = 0;
+			for (String dayKey : puzzleData.keySet()) {
+				Map<String, Object> part1Data = (Map) ((Map) puzzleData.get(dayKey)).get("1");
+				if (part1Data != null) {
+					long unixTime = toUnixTime((String) part1Data.get("get_star_ts"));
+					PuzzleTime part1Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+					if (part1Record.completedInYear()) {
+						count++;
+					}
+				}
+				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
+				if (part2Data != null) {
+					long unixTime = toUnixTime((String) part2Data.get("get_star_ts"));
+					PuzzleTime part2Record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
+					if (part2Record.completedInYear()) {
+						count++;
+					}
+				}
+			}
+			stars.put(name, count);
 		}
 		return (stars);
 	}
