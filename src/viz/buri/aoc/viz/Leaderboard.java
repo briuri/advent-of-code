@@ -333,7 +333,7 @@ public class Leaderboard extends BaseLeaderboard {
 		StringBuffer page = getPage();
 		page.append("\n\t<h2>Top ").append(novetta.getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
-		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
+		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release. Hover over total time to see split times.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
@@ -360,8 +360,10 @@ public class Leaderboard extends BaseLeaderboard {
 					else if (time.length() == 8) {
 						page.append("&nbsp;");
 					}
+					page.append("<span title=\"").append(PuzzleTime.formatTime(record.getPart1Time())).append(" / ");
+					page.append(PuzzleTime.formatTime(record.getPart2Time() - record.getPart1Time())).append("\">");
 					page.append(time);
-					page.append("&nbsp;&nbsp;").append(maskName(year, record.getName()));
+					page.append("</span>&nbsp;&nbsp;").append(maskName(year, record.getName()));
 
 					isNextTie = (place + 1 < places.size() && record.getPart2Time() == places.get(place + 1).getPart2Time());
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
