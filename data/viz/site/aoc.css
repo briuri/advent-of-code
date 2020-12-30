@@ -85,13 +85,13 @@ span.tieTime:hover {
 	font-size: 8pt;
 }
 @media screen and (max-width: 800px) {
-	.overall {
+	div.overall {
 		float: none;
 		width: auto;
 	}
 }
 @media screen and (max-width: 400px) {
-	.daily {
+	div.daily {
 		float: none;
 	}
 }
