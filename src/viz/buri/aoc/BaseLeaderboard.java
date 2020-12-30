@@ -196,6 +196,13 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
+	 * Cleares the string buffer
+	 */
+	protected void resetPage() {
+		getPage().setLength(0);
+	}
+
+	/**
 	 * Saves the page to the filesystem.
 	 */
 	protected void writePage(String year, boolean isArchive) {

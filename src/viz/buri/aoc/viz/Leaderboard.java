@@ -27,7 +27,7 @@ public class Leaderboard extends BaseLeaderboard {
 	@Test
 	public void generatePages() {
 		visualizeYear("2020");
-//		visualizeYear("2019");
+		visualizeYear("2019");
 //		visualizeYear("2018");
 //		visualizeYear("2017");
 //		visualizeYear("2016");
@@ -41,6 +41,7 @@ public class Leaderboard extends BaseLeaderboard {
 		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
 		final List<MedianTimes> medianTimes = getMedianTimes(year, puzzleTimes, getStars(year, leaderboardJson));
 
+		resetPage();
 		insertHeader(year);
 		insertTopOverall(year, medianTimes);
 		insertTopDivisionsChart(year, medianTimes);
