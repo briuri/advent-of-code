@@ -29,7 +29,7 @@ public class Leaderboard extends BaseLeaderboard {
 		visualizeYear("2020");
 		visualizeYear("2019");
 		visualizeYear("2018");
-//		visualizeYear("2017");
+		visualizeYear("2017");
 //		visualizeYear("2016");
 	}
 

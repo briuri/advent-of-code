@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +51,9 @@ public abstract class BaseLeaderboard {
 
 	// Date format for the last update dates.
 	private static final SimpleDateFormat MODIFIED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	// Date format for 2016 - 2017 leaderboards (before Unix timestamps).
+	private static final SimpleDateFormat LEGACY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
 	/**
 	 * Constructor
@@ -144,7 +148,20 @@ public abstract class BaseLeaderboard {
 			for (String dayKey : puzzleData.keySet()) {
 				Map<String, Object> part2Data = (Map) ((Map) puzzleData.get(dayKey)).get("2");
 				if (part2Data != null) {
-					long unixTime = Long.valueOf((String) part2Data.get("get_star_ts"));
+					String rawTime = (String) part2Data.get("get_star_ts");
+					long unixTime;
+					// 2016-2017 used date strings. 2018-2020 used Unix epoch.
+					if (rawTime.contains("T")) {
+						try {
+							unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
+						}
+						catch (ParseException e) {
+							throw new IllegalArgumentException("Invalid date format: " + rawTime, e);
+						}
+					}
+					else {
+						unixTime = Long.valueOf(rawTime);
+					}
 					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, unixTime);
 					if (record.completedInYear()) {
 						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
