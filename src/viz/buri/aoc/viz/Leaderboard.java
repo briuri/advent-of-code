@@ -55,7 +55,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
 	private String maskName(String year, String name) {
-		StringBuffer buffer = new StringBuffer(getNovettas().get(year).getAlternateNameFor(name));
+		Novetta novetta = getNovettas().get(year);
+		StringBuffer buffer = new StringBuffer(novetta.getAlternateNameFor(name));
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
@@ -129,14 +130,22 @@ public class Leaderboard extends BaseLeaderboard {
 		for (int i = 0; i < numOverall; i++) {
 			OverallTimes player = overallTimes.get(i);
 			String overallTime = PuzzleTime.formatTime(player.getTiebreakerTime());
-			page.append(isNextTie ? "\t" : "\t<li class=\"tieTime\">");
+			page.append(isNextTie ? "\t" : "\t<li class=\"overallRecord\">");
 			if (overallTime.length() == 8) {
 				page.append("&nbsp;");
 			}
 			page.append("<span class=\"tieTime tieTimeLink\" id=\"tieTime").append(i).append("\" title=\"Show/Hide All Times\">");
 			page.append(overallTime);
-			page.append("</span>&nbsp;&nbsp;").append(maskName(year, player.getName()));
-			page.append(novetta.getDivisionFor(player.getName(), true)).append("<br />\n\t\t");
+			page.append("</span>&nbsp;&nbsp;");
+			if (novetta.getIneligible().contains(player.getName())) {
+				page.append("<span class=\"ineligible\" title=\"Ineligible for Top 3 prizes\">");
+			}
+			page.append(maskName(year, player.getName()));
+			page.append(novetta.getDivisionFor(player.getName(), true));
+			if (novetta.getIneligible().contains(player.getName())) {
+				page.append("</span>");
+			}
+			page.append("<br />\n\t\t");
 			for (int j = 0; j < 12; j++) {
 				page.append("&nbsp;");
 			}
@@ -340,7 +349,7 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
-						page.append("/leaderboard/day/").append(day).append("\"><span class=\"global\">*</span></a>");
+						page.append("/leaderboard/day/").append(day).append("\"><span class=\"global\" title=\"Top 100 on the daily Global Leaderboard\">*</span></a>");
 					}
 					else if (time.length() == 8) {
 						page.append("&nbsp;");
@@ -386,7 +395,6 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertFooter(String year) {
 		StringBuffer page = getPage();
 		page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
-		page.append("\t<p class=\"tiny\"><span class=\"global\">*</span>Top 100 on the daily Global Leaderboard</p>\n");
 		page.append("</body>\n</html>");
 	}
 }

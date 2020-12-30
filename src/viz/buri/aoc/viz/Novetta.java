@@ -1,8 +1,10 @@
 package buri.aoc.viz;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -15,6 +17,7 @@ public class Novetta {
 	private Map<String, String> _alternateNames;
 	private Map<String, String> _divisions;
 	private Map<String, Integer> _globalCounts;
+	private Set<String> _ineligible;
 	private List<String> _allDivisions;
 	private int _places;
 	private String _rules;
@@ -26,6 +29,7 @@ public class Novetta {
 		_alternateNames = new HashMap<>();
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
+		_ineligible = new HashSet<>();
 		_allDivisions = allDivisions;
 		_places = places;
 		_rules = rules;
@@ -44,6 +48,9 @@ public class Novetta {
 		}
 		if (player.get("globalCount") != null) {
 			getGlobalCounts().put(name, player.get("globalCount").asInt());
+		}
+		if (player.get("ineligible") != null && player.get("ineligible").asBoolean()) {
+			getIneligible().add(name);
 		}
 	}
 
@@ -91,6 +98,13 @@ public class Novetta {
 	 */
 	private Map<String, Integer> getGlobalCounts() {
 		return _globalCounts;
+	}
+
+	/**
+	 * Accessor for the ineligible
+	 */
+	public Set<String> getIneligible() {
+		return _ineligible;
 	}
 
 	/**

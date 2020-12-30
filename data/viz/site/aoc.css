@@ -25,22 +25,22 @@ body {
 .clear {
 	clear: both;
 }
-.daily {
+div.daily {
 	float: left;
 	min-width: 370px;
 }
-.details {
+div.details {
 	display: none;
 	margin-bottom: 10px;
 }
-.emoji {
+span.emoji {
 	font-size: 8pt;
 }
 .empty {
 	font-size: 11pt;
 }
-.global {
-	color: #ffff00;
+span.global {
+	color: #006eb7;
 }
 h1 {
 	color: #eeeeee;
@@ -56,7 +56,20 @@ h3 {
 	font-size: 10pt;
 	margin-bottom: 0px;
 }
-li.tieTime {
+span.ineligible {
+	color: #666666;
+}
+div.overall {
+	float: left;
+	width: 50%;
+}
+div.navBar {
+	background-color: #1f1f43;
+	font-size: 10pt;
+	line-height: 18pt;
+	padding: 5px;
+}
+li.overallRecord {
 	margin-bottom: 5px;
 }
 span.tieTime {
@@ -67,16 +80,6 @@ span.tieTime:hover {
 	color: #99ff99;
 	cursor: pointer;
 	*cursor: hand;
-}
-.overall {
-	float: left;
-	width: 50%;
-}
-.navBar {
-	background-color: #1f1f43;
-	font-size: 10pt;
-	line-height: 18pt;
-	padding: 5px;
 }
 .tiny {
 	font-size: 8pt;
