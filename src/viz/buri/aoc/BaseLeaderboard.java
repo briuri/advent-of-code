@@ -84,12 +84,13 @@ public abstract class BaseLeaderboard {
 	private void readNovettaMetadata() {
 		JsonNode json = readJson("novetta.json");
 		for (String year : YEARS) {
+			int places = json.get("places").get(year).asInt();
 			List<String> allDivisions = new ArrayList<>();
 			ArrayNode divisionJson = (ArrayNode) json.get("divisions").get(year);
 			for (int i = 0; i < divisionJson.size(); i++) {
 				allDivisions.add(divisionJson.get(i).asText());
 			}
-			Novetta novetta = new Novetta(allDivisions);
+			Novetta novetta = new Novetta(allDivisions, places);
 			ArrayNode playerJson = (ArrayNode) json.get("players").get(year);
 			for (int i = 0; i < playerJson.size(); i++) {
 				novetta.addPlayer((ObjectNode) playerJson.get(i));

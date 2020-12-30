@@ -16,15 +16,17 @@ public class Novetta {
 	private Map<String, String> _divisions;
 	private Map<String, Integer> _globalCounts;
 	private List<String> _allDivisions;
+	private int _places;
 
 	/**
 	 * Constructor
 	 */
-	public Novetta(List<String> allDivisions) {
+	public Novetta(List<String> allDivisions, int places) {
 		_alternateNames = new HashMap<>();
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
 		_allDivisions = allDivisions;
+		_places = places;
 	}
 
 	/**
@@ -94,5 +96,12 @@ public class Novetta {
 	 */
 	public List<String> getAllDivisions() {
 		return _allDivisions;
+	}
+
+	/**
+	 * Accessor for the number of places to show in the leaderboard.
+	 */
+	public int getPlaces() {
+		return _places;
 	}
 }

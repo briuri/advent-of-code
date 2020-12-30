@@ -18,9 +18,6 @@ import buri.aoc.BaseLeaderboard;
 public class Leaderboard extends BaseLeaderboard {
 	private static final String CURRENT_YEAR = "2020";
 
-	private static final int TOP_DAILY = 25;
-	private static final int TOP_MEDIANS = 25;
-
 	/**
 	 * Generate the Fastest Solve Times pages via a JUnit test in Eclipse.
 	 *
@@ -115,7 +112,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Overall section.
 	 */
 	private void insertTopOverall(String year, List<MedianTimes> medianTimes) {
-		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
+		int numMedians = Math.min(getNovettas().get(year).getPlaces(), medianTimes.size());
 		if (numMedians == 0) {
 			return;
 		}
@@ -197,7 +194,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Overall by Division section.
 	 */
 	private void insertTopDivisionsChart(String year, List<MedianTimes> medianTimes) {
-		int numMedians = Math.min(TOP_MEDIANS, medianTimes.size());
+		int numMedians = Math.min(getNovettas().get(year).getPlaces(), medianTimes.size());
 		if (numMedians == 0) {
 			return;
 		}
@@ -310,7 +307,7 @@ public class Leaderboard extends BaseLeaderboard {
 		boolean alertShown = false;
 
 		StringBuffer page = getPage();
-		page.append("\n\t<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n").append(readLastModified(year));
+		page.append("\n\t<h2>Top ").append(getNovettas().get(year).getPlaces()).append(" Daily</h2>\n").append(readLastModified(year));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
@@ -326,7 +323,7 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("\t<ol>\n");
 
 				boolean isNextTie = false;
-				for (int place = 0; place < Math.min(TOP_DAILY, places.size()); place++) {
+				for (int place = 0; place < Math.min(getNovettas().get(year).getPlaces(), places.size()); place++) {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
