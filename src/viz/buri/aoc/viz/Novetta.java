@@ -7,7 +7,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Ancillary player and division data.
+ * Ancillary player and division data in a single year.
  *
  * @author Brian Uri!
  */
@@ -17,16 +17,18 @@ public class Novetta {
 	private Map<String, Integer> _globalCounts;
 	private List<String> _allDivisions;
 	private int _places;
+	private String _rules;
 
 	/**
 	 * Constructor
 	 */
-	public Novetta(List<String> allDivisions, int places) {
+	public Novetta(List<String> allDivisions, int places, String rules) {
 		_alternateNames = new HashMap<>();
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
 		_allDivisions = allDivisions;
 		_places = places;
+		_rules = rules;
 	}
 
 	/**
@@ -103,5 +105,12 @@ public class Novetta {
 	 */
 	public int getPlaces() {
 		return _places;
+	}
+
+	/**
+	 * Accessor for this year's rules.
+	 */
+	public String getRules() {
+		return _rules;
 	}
 }

@@ -113,20 +113,20 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Overall section.
 	 */
 	private void insertTopOverall(String year, List<MedianTimes> medianTimes) {
-		int numMedians = Math.min(getNovettas().get(year).getPlaces(), medianTimes.size());
+		Novetta novetta = getNovettas().get(year);
+		int numMedians = Math.min(novetta.getPlaces(), medianTimes.size());
 		if (numMedians == 0) {
 			return;
 		}
 		StringBuffer page = getPage();
 		page.append("\t<h2>Top ").append(numMedians).append(" Overall</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
-		page.append("\t<p>Rank is based on number of stars earned, with ties broken by the fastest median solve time. ");
+		page.append("\t<p>").append(novetta.getRules()).append(" ");
 		page.append("Click median time to show/hide all times.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n<div class=\"overall\">\n");
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
-		Novetta novetta = getNovettas().get(year);
 		for (int i = 0; i < numMedians; i++) {
 			MedianTimes player = medianTimes.get(i);
 			String medianTime = PuzzleTime.formatTime(player.getMedianTime());
@@ -195,17 +195,19 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Overall by Division section.
 	 */
 	private void insertTopDivisionsChart(String year, List<MedianTimes> medianTimes) {
-		int numMedians = Math.min(getNovettas().get(year).getPlaces(), medianTimes.size());
-		if (numMedians == 0) {
+		Novetta novetta = getNovettas().get(year);
+		int numMedians = Math.min(novetta.getPlaces(), medianTimes.size());
+		List<String> allDivisions = novetta.getAllDivisions();
+		if (numMedians == 0 || allDivisions.isEmpty()) {
 			return;
 		}
 		Map<String, Integer> counts = new TreeMap<>();
-		for (String division : getNovettas().get(year).getAllDivisions()) {
+		for (String division : allDivisions) {
 			counts.put(division, 0);
 		}
 		for (int i = 0; i < numMedians; i++) {
 			MedianTimes player = medianTimes.get(i);
-			String division = getNovettas().get(year).getDivisionFor(player.getName(), false);
+			String division = novetta.getDivisionFor(player.getName(), false);
 			if (division.length() > 0) {
 				counts.put(division, counts.get(division) + 1);
 			}
@@ -307,9 +309,10 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertTopDaily(String year, List<List<PuzzleTime>> puzzleTimes) {
 		boolean allEmpty = true;
 		boolean alertShown = !year.equals(CURRENT_YEAR);
+		Novetta novetta = getNovettas().get(year);
 
 		StringBuffer page = getPage();
-		page.append("\n\t<h2>Top ").append(getNovettas().get(year).getPlaces()).append(" Daily</h2>\n");
+		page.append("\n\t<h2>Top ").append(novetta.getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
@@ -326,7 +329,7 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("\t<ol>\n");
 
 				boolean isNextTie = false;
-				for (int place = 0; place < Math.min(getNovettas().get(year).getPlaces(), places.size()); place++) {
+				for (int place = 0; place < Math.min(novetta.getPlaces(), places.size()); place++) {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
