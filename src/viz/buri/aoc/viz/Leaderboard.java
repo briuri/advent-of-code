@@ -69,38 +69,38 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertHeader(String year) {
 		StringBuffer page = getPage();
 		page.append("<html>\n<head>\n");
-		page.append("<meta charset=\"UTF-8\">");
-		page.append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
-		page.append("<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
-		page.append("<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
-		page.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css\" />\n");
-		page.append("<title>Novetta Advent of Code - Fastest Solve Times");
-		page.append(" (").append(year).append(")").append("</title>\n</head>\n\n<body>\n");
-		page.append("<h1>Novetta AoC - Fastest Solve Times").append(" (").append(year).append(")</h1>\n\n");
-		page.append("<div class=\"navBar\">");
+		page.append("\t<meta charset=\"UTF-8\">\n");
+		page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
+		page.append("\t<title>Novetta Advent of Code - Fastest Times (").append(year).append(")").append("</title>\n\n");
+		page.append("\t<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css\" />\n");
+		page.append("\t<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
+		page.append("\t<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
+		page.append("\t<script type=\"text/javascript\">\n");
+		page.append("\t\tfunction expand(place) {\n");
+		page.append("\t\t\toldDisplay = document.getElementById('details' + place).style.display;\n");
+		page.append("\t\t\tdocument.getElementById('details' + place).style.display =\n");
+		page.append("\t\t\t\t(oldDisplay == 'block' ? 'none' : 'block');\n");
+		page.append("\t\t\tdocument.getElementById('median' + place).style.color =\n");
+		page.append("\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
+		page.append("\t\t}\n");
+		page.append("\t</script>\n");
+		page.append("</head>\n\n<body>\n");
+		page.append("\t<h1>Novetta AoC - Fastest Times").append(" (").append(year).append(")</h1>\n\n");
+		page.append("\t<div class=\"navBar\">\n");
 		if (year.equals(CURRENT_YEAR)) {
-			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">");
-			page.append("Your Times&rArr;</a> ");
-			page.append(" | L.Board ");
-			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
-			page.append("1&rArr;</a> ");
-			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">");
-			page.append("2&rArr;</a> ");
-			page.append(" | ");
-			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
-			page.append(" | ");
-			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />");
+			page.append("\t\t<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">Your Times&rArr;</a> | ");
+			page.append("L.Board ");
+			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
+			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">2&rArr;</a> | ");
+			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a> | ");
+			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />\n");
 		}
-		page.append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>");
-		page.append(" | ");
-		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a>");
-		page.append(" | ");
-		page.append(year.equals("2018") ? year : "<a href=\"index-2018.html\">2018</a>");
-		page.append(" | ");
-		page.append(year.equals("2017") ? year : "<a href=\"index-2017.html\">2017</a>");
-		page.append(" | ");
-		page.append(year.equals("2016") ? year : "<a href=\"index-2016.html\">2016</a>");
-		page.append("</div>\n\n");
+		page.append("\t\t").append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a> | ");
+		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a> | ");
+		page.append(year.equals("2018") ? year : "<a href=\"index-2018.html\">2018</a> | ");
+		page.append(year.equals("2017") ? year : "<a href=\"index-2017.html\">2017</a> | ");
+		page.append(year.equals("2016") ? year : "<a href=\"index-2016.html\">2016</a>\n");
+		page.append("\t</div>\n\n");
 	}
 
 	/**
@@ -112,20 +112,11 @@ public class Leaderboard extends BaseLeaderboard {
 			return;
 		}
 		StringBuffer page = getPage();
-		page.append("<script type=\"text/javascript\">\n");
-		page.append("function expand(place) {\n");
-		page.append("\toldDisplay = document.getElementById('details' + place).style.display;\n");
-		page.append("\tdocument.getElementById('details' + place).style.display =\n");
-		page.append("\t\t(oldDisplay == 'block' ? 'none' : 'block');\n");
-		page.append("\tdocument.getElementById('median' + place).style.color =\n");
-		page.append("\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
-		page.append("}\n");
-		page.append("</script>\n");
-		page.append("\n<h2>Top ").append(numMedians).append(" Overall</h2>\n");
-		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<p>Rank is based on number of stars earned, with ties broken by the fastest median solve time.\n");
+		page.append("\t<h2>Top ").append(numMedians).append(" Overall</h2>\n");
+		page.append(readLastModified(year));
+		page.append("\t<p>Rank is based on number of stars earned, with ties broken by the fastest median solve time. ");
 		page.append("Click median time to show/hide all times.</p>\n");
-		page.append("<div class=\"clear\"></div>\n<div class=\"overall\">\n");
+		page.append("\t<div class=\"clear\"></div>\n\n<div class=\"overall\">\n");
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
@@ -137,12 +128,11 @@ public class Leaderboard extends BaseLeaderboard {
 			if (medianTime.length() == 8) {
 				page.append("&nbsp;");
 			}
-			page.append("<span class=\"median medianLink\" id=\"median").append(i).append(
-				"\" title=\"Show/Hide All Times\"");
+			page.append("<span class=\"median medianLink\" id=\"median").append(i).append("\" title=\"Show/Hide All Times\"");
 			page.append(" onClick=\"expand(").append(i).append(")\">");
 			page.append(medianTime);
 			page.append("</span>&nbsp;&nbsp;").append(maskName(year, player.getName()));
-			page.append(novetta.getDivisionFor(player.getName(), true)).append("<br />\n");
+			page.append(novetta.getDivisionFor(player.getName(), true)).append("<br />\n\t\t");
 			for (int j = 0; j < 12; j++) {
 				page.append("&nbsp;");
 			}
@@ -156,11 +146,11 @@ public class Leaderboard extends BaseLeaderboard {
 			if (globalCount > 0) {
 				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
 			}
-			page.append("\n<div class=\"details\" id=\"details").append(i).append("\">\n");
+			page.append("\n\t\t<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = PuzzleTime.formatTime(player.getTimes().get(j));
-				page.append("\t");
+				page.append("\t\t\t");
 				if (time.length() == 8) {
 					page.append("&nbsp;");
 				}
@@ -185,12 +175,12 @@ public class Leaderboard extends BaseLeaderboard {
 				}
 				page.append("<br />\n");
 			}
-			page.append("</div>\n");
+			page.append("\t\t</div>\n");
 			isNextTie = (i + 1 < numMedians && player.getMedianTime().equals(medianTimes.get(i + 1).getMedianTime()));
-			page.append(isNextTie ? "<br />\n" : "</li>\n");
+			page.append(isNextTie ? "\t<br />\n" : "\t</li>\n");
 			// Break overall scores into two columns for > Top 10.
 			if (i == numMedians / 2 && numMedians > 10) {
-				page.append("</ol></div>\n<div class=\"overall\"><ol start=\"").append(i + 2).append("\">\n");
+				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2).append("\">\n");
 			}
 		}
 		page.append("</ol></div>\n<div class=\"clear\"></div>\n");
@@ -221,11 +211,11 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 
 		StringBuffer page = getPage();
-		page.append("\n<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
-		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<div id=\"chartDivisions\"></div>\n");
-		page.append("<script type=\"text/javascript\">\n");
-		page.append("var xValues = [\n\t");
+		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numMedians).append(" Overall by Division</h2>\n");
+		page.append(readLastModified(year));
+		page.append("\t<div id=\"chartDivisions\"></div>\n");
+		page.append("\t<script type=\"text/javascript\">\n");
+		page.append("\t\tvar xValues = [");
 		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
 			page.append("'").append(iter.next()).append("'");
 			if (iter.hasNext()) {
@@ -233,7 +223,7 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("var yValues = [\n\t");
+		page.append("\t\tvar yValues = [");
 		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
 			page.append(counts.get(iter.next()));
 			if (iter.hasNext()) {
@@ -241,24 +231,24 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("var dataDivisions = [{\n");
-		page.append("\tx: xValues,\n");
-		page.append("\ty: yValues,\n");
-		page.append("\tmarker: { color: '#006eb7' },\n");
-		page.append("\ttext: yValues.map(String),\n");
-		page.append("\ttextposition: 'outside',\n");
-		page.append("\ttype: 'bar'\n");
-		page.append("}];\n");
-		page.append("var layout = {\n");
-		page.append("\tfont: { family: 'monospace', color: '#cccccc' },\n");
-		page.append("\tpaper_bgcolor: '#0f0f23',\n");
-		page.append("\tplot_bgcolor: '#0f0f23',\n");
-		page.append("\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
-		page.append("\tyaxis: {range: [0, ").append(max + 2).append("]}\n");
-		page.append("};\n");
-		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
-		page.append("Plotly.newPlot('chartDivisions', dataDivisions, layout, options);\n");
-		page.append("</script>\n");
+		page.append("\t\tvar dataDivisions = [{\n");
+		page.append("\t\t\tx: xValues,\n");
+		page.append("\t\t\ty: yValues,\n");
+		page.append("\t\t\tmarker: { color: '#006eb7' },\n");
+		page.append("\t\t\ttext: yValues.map(String),\n");
+		page.append("\t\t\ttextposition: 'outside',\n");
+		page.append("\t\t\ttype: 'bar'\n");
+		page.append("\t\t}];\n");
+		page.append("\t\tvar layout = {\n");
+		page.append("\t\t\tfont: { family: 'monospace', color: '#cccccc' },\n");
+		page.append("\t\t\tpaper_bgcolor: '#0f0f23',\n");
+		page.append("\t\t\tplot_bgcolor: '#0f0f23',\n");
+		page.append("\t\t\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
+		page.append("\t\t\tyaxis: {range: [0, ").append(max + 2).append("]}\n");
+		page.append("\t\t};\n");
+		page.append("\t\tvar options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
+		page.append("\t\tPlotly.newPlot('chartDivisions', dataDivisions, layout, options);\n");
+		page.append("\t</script>\n");
 	}
 
 	/**
@@ -266,11 +256,10 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertTotalSolvesChart(String year, List<List<PuzzleTime>> puzzleTimes) {
 		StringBuffer page = getPage();
-		page.append("\n<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
-		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<div id=\"chartParticipation\"></div>\n");
-		page.append("<script type=\"text/javascript\">\n");
-		page.append("var xValues = [\n\t");
+		page.append("\n\t<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n").append(readLastModified(year));
+		page.append("\t<div id=\"chartParticipation\"></div>\n");
+		page.append("\t<script type=\"text/javascript\">\n");
+		page.append("\t\tvar xValues = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
 			page.append(i + 1);
 			if (i + 1 < TOTAL_PUZZLES) {
@@ -278,7 +267,7 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("var yValues = [\n\t");
+		page.append("\t\tvar yValues = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
 			page.append(puzzleTimes.get(i).size());
 			if (i + 1 < TOTAL_PUZZLES) {
@@ -286,24 +275,24 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("var dataParticipation = [{\n");
-		page.append("\tx: xValues,\n");
-		page.append("\ty: yValues,\n");
-		page.append("\tmarker: { color: '#006eb7' },\n");
-		page.append("\ttext: yValues.map(String),\n");
-		page.append("\ttextposition: 'outside',\n");
-		page.append("\ttype: 'bar'\n");
-		page.append("}];\n");
-		page.append("var layout = {\n");
-		page.append("\tfont: { family: 'monospace', color: '#cccccc' },\n");
-		page.append("\tpaper_bgcolor: '#0f0f23',\n");
-		page.append("\tplot_bgcolor: '#0f0f23',\n");
-		page.append("\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
-		page.append("};\n");
-		page.append("var options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
-		page.append("Plotly.newPlot('chartParticipation', dataParticipation, layout, options);\n");
-		page.append("</script>\n");
-		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
+		page.append("\t\tvar dataParticipation = [{\n");
+		page.append("\t\t\tx: xValues,\n");
+		page.append("\t\t\ty: yValues,\n");
+		page.append("\t\t\tmarker: { color: '#006eb7' },\n");
+		page.append("\t\t\ttext: yValues.map(String),\n");
+		page.append("\t\t\ttextposition: 'outside',\n");
+		page.append("\t\t\ttype: 'bar'\n");
+		page.append("\t\t}];\n");
+		page.append("\t\tvar layout = {\n");
+		page.append("\t\t\tfont: { family: 'monospace', color: '#cccccc' },\n");
+		page.append("\t\t\tpaper_bgcolor: '#0f0f23',\n");
+		page.append("\t\t\tplot_bgcolor: '#0f0f23',\n");
+		page.append("\t\t\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
+		page.append("\t\t};\n");
+		page.append("\t\tvar options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
+		page.append("\t\tPlotly.newPlot('chartParticipation', dataParticipation, layout, options);\n");
+		page.append("\t</script>\n\n");
+		page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n\n");
 	}
 
 	/**
@@ -314,10 +303,9 @@ public class Leaderboard extends BaseLeaderboard {
 		boolean alertShown = false;
 
 		StringBuffer page = getPage();
-		page.append("\n<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n");
-		page.append("<p class=\"tiny\">(as of ").append(readLastModified(year)).append(")</p>\n");
-		page.append("<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
-		page.append("<div class=\"clear\"></div><div>\n");
+		page.append("\n\t<h2>Top ").append(TOP_DAILY).append(" Daily</h2>\n").append(readLastModified(year));
+		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
+		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.get(i);
 			if (!places.isEmpty()) {
@@ -325,16 +313,16 @@ public class Leaderboard extends BaseLeaderboard {
 				int day = i + 1;
 				Puzzle puzzle = getPuzzles().get(year).get(i);
 				page.append("<div class=\"daily\">\n");
-				page.append("<a name=\"day").append(day).append("\"></a>");
+				page.append("\t<a name=\"day").append(day).append("\"></a>");
 				page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
 				page.append("\">").append(puzzle.getTitle()).append("</a></h3>\n");
-				page.append("<ol>\n");
+				page.append("\t<ol>\n");
 
 				boolean isNextTie = false;
 				for (int place = 0; place < Math.min(TOP_DAILY, places.size()); place++) {
 					PuzzleTime record = places.get(place);
 					String time = record.getFormattedTime();
-					page.append(isNextTie ? "\t" : "\t<li>");
+					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
 						page.append("/leaderboard/day/").append(day).append("\"><sup class=\"global\">*</sup></a>");
@@ -348,7 +336,7 @@ public class Leaderboard extends BaseLeaderboard {
 					isNextTie = (place + 1 < places.size() && record.getTimeCompleted() == places.get(place + 1).getTimeCompleted());
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
-				page.append("</ol>\n");
+				page.append("\t</ol>\n");
 				page.append("</div>\n");
 
 				if (!alertShown) {
@@ -368,9 +356,9 @@ public class Leaderboard extends BaseLeaderboard {
 				}
 			}
 		}
-		page.append("</div><div class=\"clear\"></div>\n");
+		page.append("<div class=\"clear\"></div>\n\n");
 		if (allEmpty) {
-			page.append("<p class=\"empty\">No times recorded yet.</p>");
+			page.append("\t<p class=\"empty\">No times recorded yet.</p>\n");
 		}
 	}
 
@@ -379,8 +367,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertFooter(String year) {
 		StringBuffer page = getPage();
-		page.append("<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>");
-		page.append("<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard</p>\n");
+		page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
+		page.append("\t<p class=\"tiny\"><sup class=\"global\">*</sup> Top 100 on the daily Global Leaderboard</p>\n");
 		page.append("</body>\n</html>");
 	}
 }

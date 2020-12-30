@@ -212,7 +212,9 @@ public abstract class BaseLeaderboard {
 	 */
 	protected String readLastModified(String year) {
 		File file = new File(JSON_FOLDER + year + ".json");
-		return MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()));
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("\t<p class=\"tiny\">(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")</p>\n");
+		return (buffer.toString());
 	}
 
 	/**
