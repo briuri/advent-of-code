@@ -10,16 +10,16 @@ import buri.aoc.Part;
 /**
  * @author Brian Uri!
  */
-public class Day22Test extends BaseTest {
+public class PuzzleTest extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		assertEquals(1, Day22.getInput(0).size());
+		assertEquals(2, Puzzle.getInput(0).size());
 	}
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals(0, Day22.getResult(Part.ONE, Day22.getInput(1)));
+		assertEquals(306, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
 	}
 
 	/**
@@ -27,14 +27,14 @@ public class Day22Test extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		long result = Day22.getResult(Part.ONE, Day22.getInput(0));
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
 		toConsole(result);
-		assertEquals(0, result);
+		assertEquals(33631L, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(0, Day22.getResult(Part.TWO, Day22.getInput(1)));
+		assertEquals(291L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class Day22Test extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		long result = Day22.getResult(Part.TWO, Day22.getInput(0));
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
 		toConsole(result);
-		assertEquals(0, result);
+		assertEquals(33469L, result);
 	}
 }
