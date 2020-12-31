@@ -10,16 +10,16 @@ import buri.aoc.Part;
 /**
  * @author Brian Uri!
  */
-public class Day21Test extends BaseTest {
+public class PuzzleTest extends BaseTest {
 
 	@Test
 	public void testGetInput() {
-		assertEquals(1, Day21.getInput(0).size());
+		assertEquals(41, Puzzle.getInput(0).size());
 	}
 
 	@Test
 	public void testPart1Examples() {
-		assertEquals(0, Day21.getResult(Part.ONE, Day21.getInput(1)));
+		assertEquals("5", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
 	}
 
 	/**
@@ -27,14 +27,14 @@ public class Day21Test extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		long result = Day21.getResult(Part.ONE, Day21.getInput(0));
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
 		toConsole(result);
-		assertEquals(0, result);
+		assertEquals("2493", result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(0, Day21.getResult(Part.TWO, Day21.getInput(1)));
+		assertEquals("mxmxvkd,sqjhc,fvjkl", Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class Day21Test extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		long result = Day21.getResult(Part.TWO, Day21.getInput(0));
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
 		toConsole(result);
-		assertEquals(0, result);
+		assertEquals("kqv,jxx,zzt,dklgl,pmvfzk,tsnkknk,qdlpbt,tlgrhdh", result);
 	}
 }
