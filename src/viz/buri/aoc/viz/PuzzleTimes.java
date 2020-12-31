@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.BaseLeaderboard;
+import buri.aoc.Part;
 
 /**
  * Data class for all puzzle times in a competition year. Handles calculations for stars and orphan Part One records.
@@ -31,11 +32,11 @@ public class PuzzleTimes {
 	 * Adds a puzzle record to the appropriate list (ignores any outside of the Novetta competition window).
 	 */
 	public void add(int index, PuzzleTime record) {
-		if (record.getPart2Time() != null && record.completedInYear()) {
-			getPart2Times().get(index).add(record);
+		if (record.getTime(Part.TWO) != null && record.completedInYear()) {
+			getTimes(Part.TWO).get(index).add(record);
 		}
 		else if (record.completedInYear()) {
-			getPart1Times().get(index).add(record);
+			getTimes(Part.ONE).get(index).add(record);
 		}
 	}
 
@@ -44,8 +45,8 @@ public class PuzzleTimes {
 	 */
 	public void sort() {
 		for (int day = 0; day < BaseLeaderboard.TOTAL_PUZZLES; day++) {
-			Collections.sort(getPart1Times().get(day));
-			Collections.sort(getPart2Times().get(day));
+			Collections.sort(getTimes(Part.ONE).get(day));
+			Collections.sort(getTimes(Part.TWO).get(day));
 		}
 	}
 
@@ -54,7 +55,7 @@ public class PuzzleTimes {
 	 */
 	public int getStars(String name) {
 		int count = 0;
-		for (List<PuzzleTime> times : getPart1Times()) {
+		for (List<PuzzleTime> times : getTimes(Part.ONE)) {
 			for (PuzzleTime time : times) {
 				if (time.getName().equals(name) && time.completedInYear()) {
 					count += 1;
@@ -62,7 +63,7 @@ public class PuzzleTimes {
 				}
 			}
 		}
-		for (List<PuzzleTime> times : getPart2Times()) {
+		for (List<PuzzleTime> times : getTimes(Part.TWO)) {
 			for (PuzzleTime time : times) {
 				if (time.getName().equals(name) && time.completedInYear()) {
 					count += 2;
@@ -74,16 +75,9 @@ public class PuzzleTimes {
 	}
 
 	/**
-	 * Accessor for all records that only have Part One solved.
+	 * Accessor for all records of a type: those that only have Part One solved, and those with both parts solved.
 	 */
-	public List<List<PuzzleTime>> getPart1Times() {
-		return (_part1Times);
-	}
-
-	/**
-	 * Accessor for all records that have both parts solved.
-	 */
-	public List<List<PuzzleTime>> getPart2Times() {
-		return (_part2Times);
+	public List<List<PuzzleTime>> getTimes(Part part) {
+		return (part == Part.ONE ? _part1Times : _part2Times);
 	}
 }

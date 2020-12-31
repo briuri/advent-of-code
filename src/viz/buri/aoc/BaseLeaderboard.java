@@ -160,15 +160,15 @@ public abstract class BaseLeaderboard {
 	protected List<OverallTimes> getOverallTimes(String year, PuzzleTimes puzzleTimes) {
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
-		for (int i = 0; i < puzzleTimes.getPart2Times().size(); i++) {
+		for (int i = 0; i < puzzleTimes.getTimes(Part.TWO).size(); i++) {
 			// Skip y18d06, since it was not included in AoC or Novetta calculations.
 			if (!(year.equals("2018") && i == 5)) {
-				List<PuzzleTime> singleDay = puzzleTimes.getPart2Times().get(i);
+				List<PuzzleTime> singleDay = puzzleTimes.getTimes(Part.TWO).get(i);
 				for (PuzzleTime time : singleDay) {
 					if (rawPuzzleTimes.get(time.getName()) == null) {
 						rawPuzzleTimes.put(time.getName(), new ArrayList<>());
 					}
-					rawPuzzleTimes.get(time.getName()).add(time.getPart2Time());
+					rawPuzzleTimes.get(time.getName()).add(time.getTime(Part.TWO));
 				}
 			}
 		}

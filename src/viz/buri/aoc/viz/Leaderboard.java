@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import org.junit.Test;
 
 import buri.aoc.BaseLeaderboard;
+import buri.aoc.Part;
 
 /**
  * Alternate visualization of Novetta's private leaderboard showing the Fastest Solve Times for each puzzle. Generated
@@ -296,7 +297,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("];\n");
 		page.append("\t\tvar yValues = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
-			page.append(puzzleTimes.getPart2Times().get(i).size());
+			page.append(puzzleTimes.getTimes(Part.TWO).get(i).size());
 			if (i + 1 < TOTAL_PUZZLES) {
 				page.append(",");
 			}
@@ -336,7 +337,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release. Hover over total time to see split times.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
-			List<PuzzleTime> places = puzzleTimes.getPart2Times().get(i);
+			List<PuzzleTime> places = puzzleTimes.getTimes(Part.TWO).get(i);
 			if (!places.isEmpty()) {
 				allEmpty = false;
 				int day = i + 1;
@@ -350,7 +351,7 @@ public class Leaderboard extends BaseLeaderboard {
 				boolean isNextTie = false;
 				for (int place = 0; place < Math.min(novetta.getPlaces(), places.size()); place++) {
 					PuzzleTime record = places.get(place);
-					String time = PuzzleTime.formatTime(record.getPart2Time());
+					String time = PuzzleTime.formatTime(record.getTime(Part.TWO));
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
@@ -360,12 +361,12 @@ public class Leaderboard extends BaseLeaderboard {
 					else if (time.length() == 8) {
 						page.append("&nbsp;");
 					}
-					page.append("<span title=\"").append(PuzzleTime.formatTime(record.getPart1Time())).append(" / ");
-					page.append(PuzzleTime.formatTime(record.getPart2Time() - record.getPart1Time())).append("\">");
+					page.append("<span title=\"").append(PuzzleTime.formatTime(record.getTime(Part.ONE))).append(" / ");
+					page.append(PuzzleTime.formatTime(record.getTime(Part.TWO) - record.getTime(Part.ONE))).append("\">");
 					page.append(time);
 					page.append("</span>&nbsp;&nbsp;").append(maskName(year, record.getName()));
 
-					isNextTie = (place + 1 < places.size() && record.getPart2Time().equals(places.get(place + 1).getPart2Time()));
+					isNextTie = (place + 1 < places.size() && record.getTime(Part.TWO).equals(places.get(place + 1).getTime(Part.TWO)));
 
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
@@ -379,13 +380,13 @@ public class Leaderboard extends BaseLeaderboard {
 					// Show console message for most recent time recorded on most recent day, and total number of solves.
 					PuzzleTime mostRecent = places.get(places.size() - 1);
 					int total = 0;
-					for (List<PuzzleTime> times : puzzleTimes.getPart2Times()) {
+					for (List<PuzzleTime> times : puzzleTimes.getTimes(Part.TWO)) {
 						total += times.size();
 					}
 
 					StringBuffer alert = new StringBuffer();
 					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
-					alert.append(PuzzleTime.formatTime(mostRecent.getPart2Time())).append(" ").append(mostRecent.getName()).append("\n");
+					alert.append(PuzzleTime.formatTime(mostRecent.getTime(Part.TWO))).append(" ").append(mostRecent.getName()).append("\n");
 					alert.append(total).append(" Part 2 solves");
 					System.out.println(alert.toString());
 					alertShown = true;

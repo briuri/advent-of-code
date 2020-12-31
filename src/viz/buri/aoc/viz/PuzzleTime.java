@@ -2,6 +2,8 @@ package buri.aoc.viz;
 
 import java.util.Calendar;
 
+import buri.aoc.Part;
+
 /**
  * Data class for 1 completion record in a daily puzzle. Part One is assumed to always be solved at a minimum.
  *
@@ -93,14 +95,14 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		// Base on total solve time.
 		int compare;
 		// Part One+Two solves
-		if (getPart2Time() != null) {
+		if (getTime(Part.TWO) != null) {
 			// Part One+Two solves are always ranked higher than orphan Part One solves.
-			Long compareValue = (o.getPart2Time() == null ? Long.MAX_VALUE : o.getPart2Time());
-			compare = getPart2Time().compareTo(compareValue);
+			Long compareValue = (o.getTime(Part.TWO) == null ? Long.MAX_VALUE : o.getTime(Part.TWO));
+			compare = getTime(Part.TWO).compareTo(compareValue);
 		}
 		// Orphan Part One solves
 		else {
-			compare = getPart1Time().compareTo(o.getPart1Time());
+			compare = getTime(Part.ONE).compareTo(o.getTime(Part.ONE));
 		}
 		// For ties, alphabetize on last name.
 		if (compare == 0) {
@@ -113,7 +115,7 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Returns true if the most recent part solved was completed in the same year it was released.
 	 */
 	public boolean completedInYear() {
-		if (getPart2Time() == null) {
+		if (getTime(Part.TWO) == null) {
 			return (getYear().equals(getYearPart1Completed()));
 		}
 		return (getYear().equals(getYearPart2Completed()));
@@ -133,11 +135,17 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		return _name;
 	}
 
+	/**
+	 * Accessor for the time part of a puzzle was completed (after its release) in milliseconds
+	 */
+	public Long getTime(Part part) {
+		return (part == Part.ONE ? _part1Time : _part2Time);
+	}
 
 	/**
 	 * Accessor for the year part 1 was completed
 	 */
-	public String getYearPart1Completed() {
+	private String getYearPart1Completed() {
 		return _yearPart1Completed;
 	}
 
@@ -146,19 +154,5 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 */
 	private String getYearPart2Completed() {
 		return _yearPart2Completed;
-	}
-
-	/**
-	 * Accessor for the time part 1 was completed (after its release) in milliseconds
-	 */
-	public Long getPart1Time() {
-		return _part1Time;
-	}
-
-	/**
-	 * Accessor for the time the whole puzzle was completed (after its release) in milliseconds
-	 */
-	public Long getPart2Time() {
-		return _part2Time;
 	}
 }
