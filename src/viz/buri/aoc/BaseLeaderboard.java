@@ -146,13 +146,11 @@ public abstract class BaseLeaderboard {
 			String name = (String) member.get("name");
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String dayKey : puzzleData.keySet()) {
-				long part1Time = getTime(Part.ONE, dayKey, puzzleData);
-				long part2Time = getTime(Part.TWO, dayKey, puzzleData);
-				if (part2Time > 0) {
-					PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part1Time, part2Time);
-					if (record.completedInYear(Part.TWO)) {
-						puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
-					}
+				Long part1Time = getTime(Part.ONE, dayKey, puzzleData);
+				Long part2Time = getTime(Part.TWO, dayKey, puzzleData);
+				PuzzleTime record = new PuzzleTime(year, dayKey, name, part1Time, part2Time);
+				if (record.completedInYear() && record.getPart2Time() != null) {
+					puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
 				}
 			}
 		}
@@ -175,14 +173,14 @@ public abstract class BaseLeaderboard {
 
 			int count = 0;
 			for (String dayKey : puzzleData.keySet()) {
-				long part1Time = getTime(Part.ONE, dayKey, puzzleData);
-				long part2Time = getTime(Part.TWO, dayKey, puzzleData);
-				PuzzleTime record = new PuzzleTime(year, Integer.valueOf(dayKey), name, part1Time, part2Time);
-				if (part1Time > 0 && record.completedInYear(Part.ONE)) {
-					count++;
+				Long part1Time = getTime(Part.ONE, dayKey, puzzleData);
+				Long part2Time = getTime(Part.TWO, dayKey, puzzleData);
+				PuzzleTime record = new PuzzleTime(year, dayKey, name, part1Time, part2Time);
+				if (part2Time != null && record.completedInYear()) {
+					count += 2;
 				}
-				if (part2Time > 0 && record.completedInYear(Part.TWO)) {
-					count++;
+				else if (part1Time != null && record.completedInYear()) {
+					count += 1;
 				}
 			}
 			stars.put(name, count);
@@ -270,11 +268,11 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Gets a part 1 or part 2 time in unix time. Returns -1 if a value cannot be found.
 	 */
-	private static long getTime(Part part, String dayKey, Map<String, Object> puzzleData) {
+	private static Long getTime(Part part, String dayKey, Map<String, Object> puzzleData) {
 		String partKey = (part == Part.ONE ? "1" : "2");
 		Map<String, Object> partData = (Map) ((Map) puzzleData.get(dayKey)).get(partKey);
 
-		long unixTime = -1;
+		Long unixTime = null;
 		if (partData != null) {
 			String rawTime = (String) partData.get("get_star_ts");
 			if (rawTime.contains("T")) {

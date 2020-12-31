@@ -365,7 +365,8 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append(time);
 					page.append("</span>&nbsp;&nbsp;").append(maskName(year, record.getName()));
 
-					isNextTie = (place + 1 < places.size() && record.getPart2Time() == places.get(place + 1).getPart2Time());
+					isNextTie = (place + 1 < places.size() && record.getPart2Time().equals(places.get(place + 1).getPart2Time()));
+
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				for (int place = places.size(); place < novetta.getPlaces(); place++) {

@@ -2,48 +2,55 @@ package buri.aoc.viz;
 
 import java.util.Calendar;
 
-import buri.aoc.Part;
-
 /**
- * Data class for 1 completion record in a daily puzzle.
+ * Data class for 1 completion record in a daily puzzle. Part One is assumed to always be solved at a minimum.
  *
  * @author Brian Uri!
  */
 public class PuzzleTime implements Comparable<PuzzleTime> {
-	private int _year;
-
+	private String _year;
 	private String _name;
-	private int _yearPart1Completed;
-	private int _yearPart2Completed;
-	private long _part1Time;
-	private long _part2Time;
+
+	private Long _part1Time;
+	private String _yearPart1Completed;
+
+	private Long _part2Time;
+	private String _yearPart2Completed;
 
 	/**
 	 * Constructor
 	 */
-	public PuzzleTime(String year, int day, String name, long part1Time, long part2Time) {
-		_year = Integer.valueOf(year);
+	public PuzzleTime(String year, String day, String name, Long part1Time, Long part2Time) {
+		_year = year;
 		_name = name;
 
-		Calendar unixPart1Time = Calendar.getInstance();
-		unixPart1Time.setTimeInMillis(part1Time * 1000L);
-		_yearPart1Completed = unixPart1Time.get(Calendar.YEAR);
-
-		Calendar unixPart2Time = Calendar.getInstance();
-		unixPart2Time.setTimeInMillis(part2Time * 1000L);
-		_yearPart2Completed = unixPart2Time.get(Calendar.YEAR);
-
 		Calendar puzzleTime = Calendar.getInstance();
-		puzzleTime.set(Calendar.YEAR, getYear());
+		puzzleTime.set(Calendar.YEAR, Integer.valueOf(getYear()));
 		puzzleTime.set(Calendar.MONTH, Calendar.DECEMBER);
-		puzzleTime.set(Calendar.DATE, day);
+		puzzleTime.set(Calendar.DATE, Integer.valueOf(day));
 		puzzleTime.set(Calendar.HOUR_OF_DAY, 0);
 		puzzleTime.set(Calendar.MINUTE, 0);
 		puzzleTime.set(Calendar.SECOND, 0);
 		puzzleTime.set(Calendar.MILLISECOND, 0);
 
+		if (part1Time == null) {
+			throw new IllegalArgumentException("A puzzle record must have at least Part 1 completed.");
+		}
+		Calendar unixPart1Time = Calendar.getInstance();
+		unixPart1Time.setTimeInMillis(part1Time * 1000L);
+		_yearPart1Completed = String.valueOf(unixPart1Time.get(Calendar.YEAR));
 		_part1Time = unixPart1Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
-		_part2Time = unixPart2Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
+
+		if (part2Time == null) {
+			_yearPart2Completed = "";
+			_part2Time = null;
+		}
+		else {
+			Calendar unixPart2Time = Calendar.getInstance();
+			unixPart2Time.setTimeInMillis(part2Time * 1000L);
+			_yearPart2Completed = String.valueOf(unixPart2Time.get(Calendar.YEAR));
+			_part2Time = unixPart2Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
+		}
 	}
 
 	/**
@@ -83,8 +90,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 
 	@Override
 	public int compareTo(PuzzleTime o) {
+		// Base on total solve time.
 		int compare = Long.valueOf(getPart2Time()).compareTo(Long.valueOf(o.getPart2Time()));
-		// Exact timestamp ties
+		// For ties, alphabetize on last name.
 		if (compare == 0) {
 			compare = getName().split(" ")[1].compareTo(o.getName().split(" ")[1]);
 		}
@@ -92,16 +100,19 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	}
 
 	/**
-	 * Returns true if the puzzle part was completed in the same year.
+	 * Returns true if the most recent part solved was completed in the same year it was released.
 	 */
-	public boolean completedInYear(Part part) {
-		return (part == Part.ONE ? getYear() == getYearPart1Completed() : getYear() == getYearPart2Completed());
+	public boolean completedInYear() {
+		if (getPart2Time() == null) {
+			return (getYear().equals(getYearPart1Completed()));
+		}
+		return (getYear().equals(getYearPart2Completed()));
 	}
 
 	/**
 	 * Accessor for the year of this puzzle
 	 */
-	private int getYear() {
+	private String getYear() {
 		return _year;
 	}
 
@@ -116,28 +127,28 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	/**
 	 * Accessor for the year part 1 was completed
 	 */
-	public int getYearPart1Completed() {
+	public String getYearPart1Completed() {
 		return _yearPart1Completed;
 	}
 
 	/**
 	 * Accessor for the year part 2 was completed
 	 */
-	private int getYearPart2Completed() {
+	private String getYearPart2Completed() {
 		return _yearPart2Completed;
 	}
 
 	/**
 	 * Accessor for the time part 1 was completed (after its release) in milliseconds
 	 */
-	public long getPart1Time() {
+	public Long getPart1Time() {
 		return _part1Time;
 	}
 
 	/**
 	 * Accessor for the time the whole puzzle was completed (after its release) in milliseconds
 	 */
-	public long getPart2Time() {
+	public Long getPart2Time() {
 		return _part2Time;
 	}
 }
