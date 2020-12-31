@@ -38,8 +38,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void visualizeYear(String year) {
 		final Map<String, Object> leaderboardJson = readLeaderboards(year);
-		final List<List<PuzzleTime>> puzzleTimes = getPuzzleTimes(year, leaderboardJson);
-		final List<OverallTimes> overallTimes = getOverallTimes(year, puzzleTimes, getStars(year, leaderboardJson));
+		final PuzzleTimes puzzleTimes = getPuzzleTimes(year, leaderboardJson);
+		final List<OverallTimes> overallTimes = getOverallTimes(year, puzzleTimes);
 
 		resetPage();
 		insertHeader(year);
@@ -280,7 +280,7 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Total Solves chart.
 	 */
-	private void insertTotalSolvesChart(String year, List<List<PuzzleTime>> puzzleTimes) {
+	private void insertTotalSolvesChart(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
 		page.append("\n\t<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
@@ -296,7 +296,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("];\n");
 		page.append("\t\tvar yValues = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
-			page.append(puzzleTimes.get(i).size());
+			page.append(puzzleTimes.getPart2Times().get(i).size());
 			if (i + 1 < TOTAL_PUZZLES) {
 				page.append(",");
 			}
@@ -325,7 +325,7 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Daily for each puzzle.
 	 */
-	private void insertTopDaily(String year, List<List<PuzzleTime>> puzzleTimes) {
+	private void insertTopDaily(String year, PuzzleTimes puzzleTimes) {
 		boolean allEmpty = true;
 		boolean alertShown = !year.equals(CURRENT_YEAR);
 		Novetta novetta = getNovettas().get(year);
@@ -336,7 +336,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release. Hover over total time to see split times.</p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
-			List<PuzzleTime> places = puzzleTimes.get(i);
+			List<PuzzleTime> places = puzzleTimes.getPart2Times().get(i);
 			if (!places.isEmpty()) {
 				allEmpty = false;
 				int day = i + 1;
@@ -379,7 +379,7 @@ public class Leaderboard extends BaseLeaderboard {
 					// Show console message for most recent time recorded on most recent day, and total number of solves.
 					PuzzleTime mostRecent = places.get(places.size() - 1);
 					int total = 0;
-					for (List<PuzzleTime> times : puzzleTimes) {
+					for (List<PuzzleTime> times : puzzleTimes.getPart2Times()) {
 						total += times.size();
 					}
 

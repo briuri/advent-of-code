@@ -23,12 +23,12 @@ public class OverallTimes implements Comparable {
 	/**
 	 * Constructor
 	 */
-	public OverallTimes(List<List<PuzzleTime>> puzzleTimes, String name, int stars, List<Long> times, boolean useMedian) {
+	public OverallTimes(PuzzleTimes puzzleTimes, String name, List<Long> times, boolean useMedian) {
 		_name = name;
-		_stars = stars;
+		_stars = puzzleTimes.getStars(name);
 		_tiebreakerTime = (useMedian ? calculateMedianTime(times) : calculateTotalTime(times));
 		_times = times;
-		for (List<PuzzleTime> places : puzzleTimes) {
+		for (List<PuzzleTime> places : puzzleTimes.getPart2Times()) {
 			if (places.size() >= 1 && places.get(0).getName().equals(name)) {
 				_first += 1;
 			}

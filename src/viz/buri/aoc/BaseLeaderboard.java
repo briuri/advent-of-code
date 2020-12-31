@@ -19,10 +19,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import buri.aoc.viz.OverallTimes;
 import buri.aoc.viz.Novetta;
+import buri.aoc.viz.OverallTimes;
 import buri.aoc.viz.Puzzle;
 import buri.aoc.viz.PuzzleTime;
+import buri.aoc.viz.PuzzleTimes;
 
 /**
  * Base functionality for loading data to build the leaderboard. Rendering is in the inheriting class.
@@ -35,7 +36,7 @@ public abstract class BaseLeaderboard {
 	private Map<String, Novetta> _novettas;
 
 	// Total number of puzzles each year.
-	protected static final int TOTAL_PUZZLES = 25;
+	public static final int TOTAL_PUZZLES = 25;
 
 	// Invisible text used to reduce search engine discoverability.
 	protected static final String ANTI_INDEX = "<span class=\"ai\">AoC</span>";
@@ -136,11 +137,8 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Loads puzzle completion times from the leaderboard JSON.
 	 */
-	protected List<List<PuzzleTime>> getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
-		List<List<PuzzleTime>> puzzleTimes = new ArrayList<>();
-		for (int day = 0; day < TOTAL_PUZZLES; day++) {
-			puzzleTimes.add(new ArrayList<>());
-		}
+	protected PuzzleTimes getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
+		PuzzleTimes puzzleTimes = new PuzzleTimes();
 		for (String key : leaderboardJson.keySet()) {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			String name = (String) member.get("name");
@@ -149,56 +147,23 @@ public abstract class BaseLeaderboard {
 				Long part1Time = getTime(Part.ONE, dayKey, puzzleData);
 				Long part2Time = getTime(Part.TWO, dayKey, puzzleData);
 				PuzzleTime record = new PuzzleTime(year, dayKey, name, part1Time, part2Time);
-				if (record.completedInYear() && record.getPart2Time() != null) {
-					puzzleTimes.get(Integer.valueOf(dayKey) - 1).add(record);
-				}
+				puzzleTimes.add(Integer.valueOf(dayKey) - 1, record);
 			}
 		}
-		for (int day = 0; day < TOTAL_PUZZLES; day++) {
-			Collections.sort(puzzleTimes.get(day));
-		}
+		puzzleTimes.sort();
 		return (puzzleTimes);
-	}
-
-	/**
-	 * Reads number of stars each player has from the leaderboard. Based on raw puzzle records because the cumulative
-	 * "stars" field in the leaderboard JSON includes stars earned outside of Novetta's competition dates.
-	 */
-	protected Map<String, Integer> getStars(String year, Map<String, Object> leaderboardJson) {
-		Map<String, Integer> stars = new HashMap<>();
-		for (String key : leaderboardJson.keySet()) {
-			Map<String, Object> member = (Map) leaderboardJson.get(key);
-			String name = (String) member.get("name");
-			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
-
-			int count = 0;
-			for (String dayKey : puzzleData.keySet()) {
-				Long part1Time = getTime(Part.ONE, dayKey, puzzleData);
-				Long part2Time = getTime(Part.TWO, dayKey, puzzleData);
-				PuzzleTime record = new PuzzleTime(year, dayKey, name, part1Time, part2Time);
-				if (part2Time != null && record.completedInYear()) {
-					count += 2;
-				}
-				else if (part1Time != null && record.completedInYear()) {
-					count += 1;
-				}
-			}
-			stars.put(name, count);
-		}
-		return (stars);
 	}
 
 	/**
 	 * Groups puzzle completion times by name for median/total calculations.
 	 */
-	protected List<OverallTimes> getOverallTimes(String year, List<List<PuzzleTime>> puzzleTimes,
-		Map<String, Integer> stars) {
+	protected List<OverallTimes> getOverallTimes(String year, PuzzleTimes puzzleTimes) {
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
-		for (int i = 0; i < puzzleTimes.size(); i++) {
+		for (int i = 0; i < puzzleTimes.getPart2Times().size(); i++) {
 			// Skip y18d06, since it was not included in AoC or Novetta calculations.
 			if (!(year.equals("2018") && i == 5)) {
-				List<PuzzleTime> singleDay = puzzleTimes.get(i);
+				List<PuzzleTime> singleDay = puzzleTimes.getPart2Times().get(i);
 				for (PuzzleTime time : singleDay) {
 					if (rawPuzzleTimes.get(time.getName()) == null) {
 						rawPuzzleTimes.put(time.getName(), new ArrayList<>());
@@ -214,7 +179,7 @@ public abstract class BaseLeaderboard {
 		boolean useMedian = !year.equals("2016");
 		List<OverallTimes> overallTimes = new ArrayList<>();
 		for (String name : rawPuzzleTimes.keySet()) {
-			overallTimes.add(new OverallTimes(puzzleTimes, name, stars.get(name), rawPuzzleTimes.get(name), useMedian));
+			overallTimes.add(new OverallTimes(puzzleTimes, name, rawPuzzleTimes.get(name), useMedian));
 		}
 		Collections.sort(overallTimes);
 		return (overallTimes);
