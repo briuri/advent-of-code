@@ -1,6 +1,5 @@
 package buri.aoc.y20.d18;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.BasePuzzle;
