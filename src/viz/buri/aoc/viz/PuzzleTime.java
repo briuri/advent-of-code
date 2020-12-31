@@ -91,7 +91,17 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	@Override
 	public int compareTo(PuzzleTime o) {
 		// Base on total solve time.
-		int compare = Long.valueOf(getPart2Time()).compareTo(Long.valueOf(o.getPart2Time()));
+		int compare;
+		// Part One+Two solves
+		if (getPart2Time() != null) {
+			// Part One+Two solves are always ranked higher than orphan Part One solves.
+			Long compareValue = (o.getPart2Time() == null ? Long.MAX_VALUE : o.getPart2Time());
+			compare = getPart2Time().compareTo(compareValue);
+		}
+		// Orphan Part One solves
+		else {
+			compare = getPart1Time().compareTo(o.getPart1Time());
+		}
 		// For ties, alphabetize on last name.
 		if (compare == 0) {
 			compare = getName().split(" ")[1].compareTo(o.getName().split(" ")[1]);
