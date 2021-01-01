@@ -84,7 +84,7 @@ public class OverallTimes implements Comparable {
 			return (1);
 		}
 		int compare = getTiebreakerTime().compareTo(time.getTiebreakerTime());
-		// Exact timestamp ties
+		// For ties, alphabetize on last name.
 		if (compare == 0) {
 			compare = getName().split(" ")[1].compareTo(time.getName().split(" ")[1]);
 		}

@@ -27,11 +27,9 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	@Test
 	public void generatePages() {
-		visualizeYear("2020");
-		visualizeYear("2019");
-		visualizeYear("2018");
-		visualizeYear("2017");
-		visualizeYear("2016");
+		for (String year : YEARS) {
+			visualizeYear(year);
+		}
 	}
 
 	/**
@@ -103,7 +101,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">2&rArr;</a> | ");
 			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a> | ");
-			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code?authuser=1\">NN&rArr;</a><br />\n");
+			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code\">NN&rArr;</a><br />\n");
 		}
 		page.append("\t\t").append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>").append(" | ");
 		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a>").append(" | ");
@@ -141,7 +139,7 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 			String timeClass = (isIneligible ? "ineligible" : "tieTime");
 			page.append("<span class=\"").append(timeClass).append(" tieTimeLink\" id=\"tieTime").append(i).append("\" title=\"");
-			page.append(isIneligible ? "Ineligible for Top 3 prizes" : "Show/Hide all times");
+			page.append(isIneligible ? "Ineligible for Top 3 prizes" : "Show/hide all times");
 			page.append("\">").append(overallTime).append("</span>&nbsp;&nbsp;");
 			if (isIneligible) {
 				page.append("<span class=\"ineligible\" title=\"Ineligible for Top 3 prizes\">");
@@ -417,9 +415,9 @@ public class Leaderboard extends BaseLeaderboard {
 					}
 
 					StringBuffer alert = new StringBuffer();
+					alert.append(year).append(": ").append(puzzleTimes.getStars()).append(" stars\n");
 					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
 					alert.append(PuzzleTime.formatTime(mostRecent.getTime(Part.TWO))).append(" ").append(mostRecent.getName()).append("\n");
-					alert.append(total).append(" Part 2 solves");
 					System.out.println(alert.toString());
 					alertShown = true;
 				}

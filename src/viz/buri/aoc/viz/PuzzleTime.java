@@ -115,10 +115,10 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Returns true if the most recent part solved was completed in the same year it was released.
 	 */
 	public boolean completedInYear() {
-		if (getTime(Part.TWO) == null) {
-			return (getYear().equals(getYearPart1Completed()));
+		if (getTime(Part.TWO) != null) {
+			return (getYear().equals(getYearPart2Completed()));
 		}
-		return (getYear().equals(getYearPart2Completed()));
+		return (getYear().equals(getYearPart1Completed()));
 	}
 
 	/**

@@ -143,11 +143,11 @@ public abstract class BaseLeaderboard {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			String name = (String) member.get("name");
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
-			for (String dayKey : puzzleData.keySet()) {
-				Long part1Time = getTime(Part.ONE, dayKey, puzzleData);
-				Long part2Time = getTime(Part.TWO, dayKey, puzzleData);
-				PuzzleTime record = new PuzzleTime(year, dayKey, name, part1Time, part2Time);
-				puzzleTimes.add(Integer.valueOf(dayKey) - 1, record);
+			for (String day : puzzleData.keySet()) {
+				Long part1Time = getTime(Part.ONE, day, puzzleData);
+				Long part2Time = getTime(Part.TWO, day, puzzleData);
+				PuzzleTime record = new PuzzleTime(year, day, name, part1Time, part2Time);
+				puzzleTimes.add(day, record);
 			}
 		}
 		puzzleTimes.sort();
@@ -162,7 +162,7 @@ public abstract class BaseLeaderboard {
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
 		for (int i = 0; i < puzzleTimes.getTimes(Part.TWO).size(); i++) {
 			// Skip y18d06, since it was not included in AoC or Novetta calculations.
-			if (!(year.equals("2018") && i == 5)) {
+			if (!(year.equals("2018") && (i + 1) == 6)) {
 				List<PuzzleTime> singleDay = puzzleTimes.getTimes(Part.TWO).get(i);
 				for (PuzzleTime time : singleDay) {
 					if (rawPuzzleTimes.get(time.getName()) == null) {
@@ -212,7 +212,9 @@ public abstract class BaseLeaderboard {
 		StringBuffer buffer = new StringBuffer();
 		if (year.equals(currentYear)) {
 			File file = new File(JSON_FOLDER + year + ".json");
-			buffer.append("\t<p class=\"tiny\">(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")</p>\n");
+			buffer.append("\t<p class=\"tiny\">");
+			buffer.append("(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")");
+			buffer.append("</p>\n");
 		}
 		return (buffer.toString());
 	}
@@ -231,11 +233,11 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Gets a part 1 or part 2 time in unix time. Returns -1 if a value cannot be found.
+	 * Gets a part 1 or part 2 time in unix time. Returns null if a value does not exist.
 	 */
-	private static Long getTime(Part part, String dayKey, Map<String, Object> puzzleData) {
+	private static Long getTime(Part part, String day, Map<String, Object> puzzleData) {
 		String partKey = (part == Part.ONE ? "1" : "2");
-		Map<String, Object> partData = (Map) ((Map) puzzleData.get(dayKey)).get(partKey);
+		Map<String, Object> partData = (Map) ((Map) puzzleData.get(day)).get(partKey);
 
 		Long unixTime = null;
 		if (partData != null) {

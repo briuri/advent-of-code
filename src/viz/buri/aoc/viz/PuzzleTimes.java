@@ -31,7 +31,8 @@ public class PuzzleTimes {
 	/**
 	 * Adds a puzzle record to the appropriate list (ignores any outside of the Novetta competition window).
 	 */
-	public void add(int index, PuzzleTime record) {
+	public void add(String day, PuzzleTime record) {
+		int index = Integer.valueOf(day) - 1;
 		if (record.getTime(Part.TWO) != null && record.completedInYear()) {
 			getTimes(Part.TWO).get(index).add(record);
 		}
