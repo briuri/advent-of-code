@@ -51,6 +51,28 @@ public class PuzzleTimes {
 	}
 
 	/**
+	 * Counts the stars earned overall.
+	 */
+	public int getStars() {
+		int count = 0;
+		for (List<PuzzleTime> times : getTimes(Part.ONE)) {
+			for (PuzzleTime time : times) {
+				if (time.completedInYear()) {
+					count += 1;
+				}
+			}
+		}
+		for (List<PuzzleTime> times : getTimes(Part.TWO)) {
+			for (PuzzleTime time : times) {
+				if (time.completedInYear()) {
+					count += 2;
+				}
+			}
+		}
+		return (count);
+	}
+
+	/**
 	 * Counts the stars earned by a specific person during the competition.
 	 */
 	public int getStars(String name) {

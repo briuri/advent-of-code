@@ -283,10 +283,11 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertTotalSolvesChart(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
-		page.append("\n\t<a name=\"total\"></a><h2>Total Solves (Both Parts) by Day</h2>\n");
+		page.append("\n\t<a name=\"total\"></a><h2>Total Solves by Day (").append(puzzleTimes.getStars()).append(" stars)</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartParticipation\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
+
 		page.append("\t\tvar xValues = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
 			page.append(i + 1);
@@ -295,7 +296,24 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("\t\tvar yValues = [");
+		page.append("\t\tvar yPart1 = [");
+		for (int i = 0; i < TOTAL_PUZZLES; i++) {
+			page.append(puzzleTimes.getTimes(Part.ONE).get(i).size());
+			if (i + 1 < TOTAL_PUZZLES) {
+				page.append(",");
+			}
+		}
+		page.append("];\n");
+		page.append("\t\tvar yPart2 = [");
+		for (int i = 0; i < TOTAL_PUZZLES; i++) {
+			int split = puzzleTimes.getTimes(Part.TWO).get(i).size() - puzzleTimes.getTimes(Part.ONE).get(i).size();
+			page.append(split);
+			if (i + 1 < TOTAL_PUZZLES) {
+				page.append(",");
+			}
+		}
+		page.append("];\n");
+		page.append("\t\tvar yTotal = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
 			page.append(puzzleTimes.getTimes(Part.TWO).get(i).size());
 			if (i + 1 < TOTAL_PUZZLES) {
@@ -303,20 +321,34 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("];\n");
-		page.append("\t\tvar dataParticipation = [{\n");
+
+		page.append("\t\tvar trace1 = {\n");
 		page.append("\t\t\tx: xValues,\n");
-		page.append("\t\t\ty: yValues,\n");
-		page.append("\t\t\tmarker: { color: '#006eb7' },\n");
-		page.append("\t\t\ttext: yValues.map(String),\n");
+		page.append("\t\t\ty: yPart1,\n");
+		page.append("\t\t\tmarker: { color: '#9999cc' },\n");
+		page.append("\t\t\tname: 'Part 1',\n");
+		page.append("\t\t\ttype: 'bar'\n");
+		page.append("\t\t};\n");
+
+		page.append("\t\tvar trace2 = {\n");
+		page.append("\t\t\tx: xValues,\n");
+		page.append("\t\t\ty: yPart2,\n");
+		page.append("\t\t\tmarker: { color: '#ffff66' },\n");
+		page.append("\t\t\tname: 'Part 2',\n");
+		page.append("\t\t\ttext: yTotal.map(String),\n");
 		page.append("\t\t\ttextposition: 'outside',\n");
 		page.append("\t\t\ttype: 'bar'\n");
-		page.append("\t\t}];\n");
+		page.append("\t\t};\n");
+
+		page.append("\t\tvar dataParticipation = [trace1, trace2];\n");
 		page.append("\t\tvar layout = {\n");
+		page.append("\t\t\tbarmode: 'stack',\n");
 		page.append("\t\t\tfont: { family: 'monospace', color: '#cccccc' },\n");
+		page.append("\t\t\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
 		page.append("\t\t\tpaper_bgcolor: '#0f0f23',\n");
 		page.append("\t\t\tplot_bgcolor: '#0f0f23',\n");
-		page.append("\t\t\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
 		page.append("\t\t};\n");
+
 		page.append("\t\tvar options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
 		page.append("\t\tPlotly.newPlot('chartParticipation', dataParticipation, layout, options);\n");
 		page.append("\t</script>\n\n");
