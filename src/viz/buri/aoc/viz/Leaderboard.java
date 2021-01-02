@@ -407,13 +407,8 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("</div>\n");
 
 				if (!alertShown) {
-					// Show console message for most recent time recorded on most recent day, and total number of solves.
+					// Show console message for most recent time recorded on most recent day, and total number of stars.
 					PuzzleTime mostRecent = places.get(places.size() - 1);
-					int total = 0;
-					for (List<PuzzleTime> times : puzzleTimes.getTimes(Part.TWO)) {
-						total += times.size();
-					}
-
 					StringBuffer alert = new StringBuffer();
 					alert.append(year).append(": ").append(puzzleTimes.getStars()).append(" stars\n");
 					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
