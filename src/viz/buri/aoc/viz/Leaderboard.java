@@ -114,15 +114,15 @@ public class Leaderboard extends BaseLeaderboard {
 			OverallTimes player = overallTimes.get(i);
 			String overallTime = PuzzleTime.formatTime(player.getTiebreakerTime());
 			boolean isIneligible = novetta.getIneligible().contains(player.getName());
-
-			page.append(isNextTie ? "\t" : "\t<li class=\"overallRecord\">");
-			if (overallTime.length() == 8) {
-				page.append("&nbsp;");
-			}
 			String timeClass = (isIneligible ? "ineligible" : "tieTime");
-			page.append("<span class=\"").append(timeClass).append(" tieTimeLink\" id=\"tieTime").append(i).append("\" title=\"");
-			page.append(isIneligible ? "Ineligible for Top 3 prizes" : "Show/hide all times");
-			page.append("\">").append(overallTime).append("</span>&nbsp;&nbsp;");
+
+			// Show tiebreaker time.
+			page.append(isNextTie ? "\t" : "\t<li class=\"overallRecord\">");
+			page.append("<span class=\"").append(timeClass).append(" tieTimeLink\" id=\"tieTime").append(i).append("\" ");
+			page.append("title=\"").append(isIneligible ? "Ineligible for Top 3 prizes" : "Show/hide all times").append("\">");
+			page.append(overallTime).append("</span>&nbsp;&nbsp;");
+
+			// Show player name and division.
 			if (isIneligible) {
 				page.append("<span class=\"ineligible\" title=\"Ineligible for Top 3 prizes\">");
 			}
@@ -132,6 +132,8 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("</span>");
 			}
 			page.append("<br />\n\t\t");
+
+			// Show summary of medals and global records
 			for (int j = 0; j < 12; j++) {
 				page.append("&nbsp;");
 			}
@@ -145,16 +147,14 @@ public class Leaderboard extends BaseLeaderboard {
 			if (globalCount > 0) {
 				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
 			}
+
+			// Show expandable DIV containing all the raw times used to generate the tiebreaker time.
 			page.append("\n\t\t<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
 				String time = PuzzleTime.formatTime(player.getTimes().get(j));
 				page.append("\t\t\t");
-				if (time.length() == 8) {
-					page.append("&nbsp;");
-				}
-
-				// 2016 used total time instead of median time.
+				// 2017+ use median time, so add descriptive text next to the key times.
 				if (!year.equals("2016")) {
 					// Averaged median
 					if (totalTimes % 2 == 0 && (j == totalTimes / 2 - 1)) {
@@ -175,6 +175,7 @@ public class Leaderboard extends BaseLeaderboard {
 						page.append(time);
 					}
 				}
+				// 2016 used total time instead of median time.
 				else {
 					page.append(time);
 				}
@@ -183,6 +184,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("\t\t</div>\n");
 			isNextTie = (i + 1 < numOverall && player.getTiebreakerTime().equals(overallTimes.get(i + 1).getTiebreakerTime()));
 			page.append(isNextTie ? "\t<br />\n" : "\t</li>\n");
+
 			// Break overall scores into two columns for > Top 10.
 			if (i == numOverall / 2 && numOverall > 10) {
 				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2).append("\">\n");
@@ -212,6 +214,8 @@ public class Leaderboard extends BaseLeaderboard {
 				counts.put(division, counts.get(division) + 1);
 			}
 		}
+
+		// Calculate max for chart height.
 		int max = 0;
 		for (int i : counts.values()) {
 			max = Math.max(max, i);
@@ -223,7 +227,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<div id=\"chartDivisions\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
 		page.append("\t\tvar xValues = [");
-		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
+		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext();) {
 			page.append("'").append(iter.next()).append("'");
 			if (iter.hasNext()) {
 				page.append(",");
@@ -231,13 +235,14 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 		page.append("];\n");
 		page.append("\t\tvar yValues = [");
-		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext(); ) {
+		for (Iterator<String> iter = counts.keySet().iterator(); iter.hasNext();) {
 			page.append(counts.get(iter.next()));
 			if (iter.hasNext()) {
 				page.append(",");
 			}
 		}
 		page.append("];\n");
+
 		page.append("\t\tvar dataDivisions = [{\n");
 		page.append("\t\t\tx: xValues,\n");
 		page.append("\t\t\ty: yValues,\n");
@@ -246,6 +251,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t\ttextposition: 'outside',\n");
 		page.append("\t\t\ttype: 'bar'\n");
 		page.append("\t\t}];\n");
+
 		page.append("\t\tvar layout = {\n");
 		page.append("\t\t\tfont: { family: 'monospace', color: '#cccccc' },\n");
 		page.append("\t\t\tpaper_bgcolor: '#0f0f23',\n");
@@ -253,7 +259,9 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
 		page.append("\t\t\tyaxis: {range: [0, ").append(max + 2).append("]}\n");
 		page.append("\t\t};\n");
+
 		page.append("\t\tvar options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
+
 		page.append("\t\tPlotly.newPlot('chartDivisions', dataDivisions, layout, options);\n");
 		page.append("\t</script>\n");
 	}
@@ -263,7 +271,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertTotalSolvesChart(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
-		page.append("\n\t<a name=\"total\"></a><h2>Total Solves by Day (").append(puzzleTimes.getStars()).append(" stars)</h2>\n");
+		page.append("\n\t<a name=\"total\"></a><h2>Total Solves by Day ");
+		page.append("(").append(puzzleTimes.getStars()).append(" stars)</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartParticipation\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
@@ -321,6 +330,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t};\n");
 
 		page.append("\t\tvar dataParticipation = [trace1, trace2];\n");
+
 		page.append("\t\tvar layout = {\n");
 		page.append("\t\t\tbarmode: 'stack',\n");
 		page.append("\t\t\tfont: { family: 'monospace', color: '#cccccc' },\n");
@@ -331,6 +341,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t};\n");
 
 		page.append("\t\tvar options = {displayModeBar: false, responsive: true, staticPlot: true}\n");
+
 		page.append("\t\tPlotly.newPlot('chartParticipation', dataParticipation, layout, options);\n");
 		page.append("\t</script>\n\n");
 		page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n\n");
@@ -340,7 +351,6 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Daily for each puzzle.
 	 */
 	private void insertTopDaily(String year, PuzzleTimes puzzleTimes) {
-		boolean allEmpty = true;
 		boolean alertShown = !year.equals(CURRENT_YEAR);
 		Novetta novetta = getNovettas().get(year);
 
@@ -349,13 +359,13 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
-		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Show Split Times</span><span class=\"dS dailyLink\">Show Total Times</span>\n");
+		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Show Split Times</span>");
+		page.append("<span class=\"dS dailyLink\">Show Total Times</span>\n");
 		page.append("\t</a></p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.getTimes(Part.TWO).get(i);
 			if (!places.isEmpty()) {
-				allEmpty = false;
 				int day = i + 1;
 				Puzzle puzzle = getPuzzles().get(year).get(i);
 				page.append("<div class=\"daily\">\n");
@@ -365,49 +375,45 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("\t<ol>\n");
 
 				boolean isNextTie = false;
-				for (int place = 0; place < Math.min(novetta.getPlaces(), places.size()); place++) {
+				int maxPlaces = Math.min(novetta.getPlaces(), places.size());
+				for (int place = 0; place < maxPlaces; place++) {
 					PuzzleTime record = places.get(place);
 					String time = PuzzleTime.formatTime(record.getTime(Part.TWO));
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 
-					// Total Time
-					page.append("<span class=\"dT\">");
+					// Show total time by default
+					page.append("<span class=\"dT\">").append(time).append("</span>");
+
+					// Show split times
+					time = PuzzleTime.formatTime(record.getTime(Part.ONE));
+					page.append("<span class=\"dS\">").append(time).append(" ");
+					time = PuzzleTime.formatTime(record.getTime(Part.TWO) - record.getTime(Part.ONE));
+					page.append(time).append("</span>");
+
+					// Show global indicator and player name
+					page.append("&nbsp;");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
 						page.append("/leaderboard/day/").append(day).append("\">");
 						page.append("<span class=\"global\" title=\"Top 100 on the daily Global Leaderboard\">*</span></a>");
 					}
-					else if (time.length() == 8) {
+					else {
 						page.append("&nbsp;");
 					}
-					page.append(time).append("</span>");
-
-					// Split Times
-					page.append("<span class=\"dS\">");
-					time = PuzzleTime.formatTime(record.getTime(Part.ONE));
-					if (time.length() == 8) {
-						page.append("&nbsp;");
-					}
-					page.append(time).append(" ");
-					time = PuzzleTime.formatTime(record.getTime(Part.TWO) - record.getTime(Part.ONE));
-					if (time.length() == 8) {
-						page.append("&nbsp;");
-					}
-					page.append(time).append("</span>");
-					page.append("&nbsp;&nbsp;").append(maskName(year, record.getName()));
+					page.append(maskName(year, record.getName()));
 
 					isNextTie = (place + 1 < places.size() && record.getTime(Part.TWO).equals(places.get(place + 1).getTime(Part.TWO)));
-
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
+				// Pad incomplete lists so each Day is the same height for floating.
 				for (int place = places.size(); place < novetta.getPlaces(); place++) {
 					page.append("<br />");
 				}
 				page.append("\t</ol>\n");
 				page.append("</div>\n");
 
+				// Show console message for most recent time recorded on most recent day, and total number of stars.
 				if (!alertShown) {
-					// Show console message for most recent time recorded on most recent day, and total number of stars.
 					PuzzleTime mostRecent = places.get(places.size() - 1);
 					StringBuffer alert = new StringBuffer();
 					alert.append(year).append(": ").append(puzzleTimes.getStars()).append(" stars\n");
@@ -419,9 +425,6 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 		}
 		page.append("<div class=\"clear\"></div>\n\n");
-		if (allEmpty) {
-			page.append("\t<p class=\"empty\">No times recorded yet.</p>\n");
-		}
 	}
 
 	/**

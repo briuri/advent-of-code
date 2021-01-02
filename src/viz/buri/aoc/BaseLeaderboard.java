@@ -146,8 +146,7 @@ public abstract class BaseLeaderboard {
 			for (String day : puzzleData.keySet()) {
 				Long part1Time = getTime(Part.ONE, day, puzzleData);
 				Long part2Time = getTime(Part.TWO, day, puzzleData);
-				PuzzleTime record = new PuzzleTime(year, day, name, part1Time, part2Time);
-				puzzleTimes.add(day, record);
+				puzzleTimes.add(day, new PuzzleTime(year, day, name, part1Time, part2Time));
 			}
 		}
 		puzzleTimes.sort();
@@ -233,7 +232,7 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Gets a part 1 or part 2 time in unix time. Returns null if a value does not exist.
+	 * Gets a part 1 or part 2 time in unix time from the raw leaderboard. Returns null if a value does not exist.
 	 */
 	private static Long getTime(Part part, String day, Map<String, Object> puzzleData) {
 		String partKey = (part == Part.ONE ? "1" : "2");

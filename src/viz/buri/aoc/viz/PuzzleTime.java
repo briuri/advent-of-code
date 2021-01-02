@@ -87,6 +87,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		}
 		buffer.append(seconds);
 
+		if (buffer.length() == 8) {
+			buffer.insert(0, "&nbsp;");
+		}
 		return (buffer.toString());
 	}
 

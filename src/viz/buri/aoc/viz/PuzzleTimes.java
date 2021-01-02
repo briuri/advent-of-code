@@ -15,6 +15,7 @@ import buri.aoc.Part;
 public class PuzzleTimes {
 	private List<List<PuzzleTime>> _part1Times;
 	private List<List<PuzzleTime>> _part2Times;
+	private int _stars;
 
 	/**
 	 * Constructor
@@ -22,9 +23,11 @@ public class PuzzleTimes {
 	public PuzzleTimes() {
 		_part1Times = new ArrayList<>();
 		_part2Times = new ArrayList<>();
+		_stars = 0;
+
 		for (int i = 0; i < BaseLeaderboard.TOTAL_PUZZLES; i++) {
-			_part1Times.add(new ArrayList<>());
-			_part2Times.add(new ArrayList<>());
+			getTimes(Part.ONE).add(new ArrayList<>());
+			getTimes(Part.TWO).add(new ArrayList<>());
 		}
 	}
 
@@ -35,9 +38,11 @@ public class PuzzleTimes {
 		int index = Integer.valueOf(day) - 1;
 		if (record.getTime(Part.TWO) != null && record.completedInYear()) {
 			getTimes(Part.TWO).get(index).add(record);
+			addStar(2);
 		}
 		else if (record.completedInYear()) {
 			getTimes(Part.ONE).get(index).add(record);
+			addStar(1);
 		}
 	}
 
@@ -52,32 +57,10 @@ public class PuzzleTimes {
 	}
 
 	/**
-	 * Counts the stars earned overall.
-	 */
-	public int getStars() {
-		int count = 0;
-		for (List<PuzzleTime> times : getTimes(Part.ONE)) {
-			for (PuzzleTime time : times) {
-				if (time.completedInYear()) {
-					count += 1;
-				}
-			}
-		}
-		for (List<PuzzleTime> times : getTimes(Part.TWO)) {
-			for (PuzzleTime time : times) {
-				if (time.completedInYear()) {
-					count += 2;
-				}
-			}
-		}
-		return (count);
-	}
-
-	/**
 	 * Counts the stars earned by a specific person during the competition.
 	 */
-	public int getStars(String name) {
-		int count = 0;
+	public Integer getStars(String name) {
+		Integer count = 0;
 		for (List<PuzzleTime> times : getTimes(Part.ONE)) {
 			for (PuzzleTime time : times) {
 				if (time.getName().equals(name) && time.completedInYear()) {
@@ -102,5 +85,19 @@ public class PuzzleTimes {
 	 */
 	public List<List<PuzzleTime>> getTimes(Part part) {
 		return (part == Part.ONE ? _part1Times : _part2Times);
+	}
+
+	/**
+	 * Accessor for the total number of stars earned.
+	 */
+	public int getStars() {
+		return (_stars);
+	}
+
+	/**
+	 * Increments the star count.
+	 */
+	private void addStar(int count) {
+		_stars = _stars + count;
 	}
 }

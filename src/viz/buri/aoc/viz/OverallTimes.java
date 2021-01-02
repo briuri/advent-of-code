@@ -12,9 +12,9 @@ import buri.aoc.Part;
  *
  * @author Brian Uri!
  */
-public class OverallTimes implements Comparable {
+public class OverallTimes implements Comparable<OverallTimes> {
 	private String _name;
-	private int _stars;
+	private Integer _stars;
 	private long _tiebreakerTime;
 	private List<Long> _times;
 
@@ -47,24 +47,24 @@ public class OverallTimes implements Comparable {
 	 * Calculates the sum of the given times.
 	 */
 	private static long calculateTotalTime(List<Long> times) {
-		long total = 0;
-		for (Long time : times) {
-			total += time;
-		}
-		return (total);
+		return (times.stream().mapToLong(Long::longValue).sum());
 	}
 
 	/**
 	 * Calculates the median of the given times.
 	 */
 	private static long calculateMedianTime(List<Long> times) {
+		// Odd number of times, so median is middle time.
 		if (times.size() % 2 == 1) {
 			return (times.get(times.size() / 2));
 		}
+
+		// Otherwise, take the average of 2 middle times.
 		long low = times.get(times.size() / 2 - 1);
 		long high = times.get(times.size() / 2);
 		long median = (high + low) / 2;
-		// Round up 0.5 seconds.
+
+		// Round up 0.5 seconds in average.
 		if ((high + low) % 2 != 0) {
 			median++;
 		}
@@ -75,18 +75,16 @@ public class OverallTimes implements Comparable {
 	 * Sort on number of stars, then tiebreaker time.
 	 */
 	@Override
-	public int compareTo(Object obj) {
-		OverallTimes time = (OverallTimes) obj;
-		if (getStars() > time.getStars()) {
-			return (-1);
+	public int compareTo(OverallTimes o) {
+		// Most stars is the main rank.
+		int compare = -1 * getStars().compareTo(o.getStars());
+		// Median/Total time is the tiebreaker.
+		if (compare == 0) {
+			compare = getTiebreakerTime().compareTo(o.getTiebreakerTime());
 		}
-		if (getStars() < time.getStars()) {
-			return (1);
-		}
-		int compare = getTiebreakerTime().compareTo(time.getTiebreakerTime());
 		// For ties, alphabetize on last name.
 		if (compare == 0) {
-			compare = getName().split(" ")[1].compareTo(time.getName().split(" ")[1]);
+			compare = getName().split(" ")[1].compareTo(o.getName().split(" ")[1]);
 		}
 		return (compare);
 	}
@@ -108,7 +106,7 @@ public class OverallTimes implements Comparable {
 	/**
 	 * Accessor for the stars
 	 */
-	public int getStars() {
+	public Integer getStars() {
 		return _stars;
 	}
 
