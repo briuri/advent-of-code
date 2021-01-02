@@ -90,6 +90,18 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t\t\t\t\t\t(oldDisplay == 'block' ? '#ffffff' : '#888800');\n");
 		page.append("\t\t\t\t\t}\n");
 		page.append("\t\t\t\t});\n");
+		page.append("\t\t\t$(\"span.dailyLink\").click(\n");
+		page.append("\t\t\t\tfunction() {\n");
+		page.append("\t\t\t\t\toldDisplay = document.getElementById('dailySplit').style.display;\n");
+		page.append("\t\t\t\t\tif (oldDisplay == 'none') {\n");
+		page.append("\t\t\t\t\t\t$('span.dS').hide();\n");
+		page.append("\t\t\t\t\t\t$('span.dT').show();\n");
+		page.append("\t\t\t\t\t}\n");
+		page.append("\t\t\t\t\telse {\n");
+		page.append("\t\t\t\t\t\t$('span.dT').hide();\n");
+		page.append("\t\t\t\t\t\t$('span.dS').show();\n");
+		page.append("\t\t\t\t\t}\n");
+		page.append("\t\t\t\t});\n");
 		page.append("\t\t\t});\n");
 		page.append("\t</script>\n");
 		page.append("</head>\n\n<body>\n");
@@ -364,7 +376,10 @@ public class Leaderboard extends BaseLeaderboard {
 		StringBuffer page = getPage();
 		page.append("\n\t<h2>Top ").append(novetta.getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
-		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release. Hover over total time to see split times.</p>\n");
+		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
+		page.append("\t<p>Show: <a href=\"javascript:void(0);\">\n");
+		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Split Times</span><span class=\"dS dailyLink\">Total Times</span>\n");
+		page.append("\t</a></p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.getTimes(Part.TWO).get(i);
@@ -383,6 +398,9 @@ public class Leaderboard extends BaseLeaderboard {
 					PuzzleTime record = places.get(place);
 					String time = PuzzleTime.formatTime(record.getTime(Part.TWO));
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
+
+					// Total Time
+					page.append("<span class=\"dT\">");
 					if (place + 1 <= puzzle.getGlobalCount()) {
 						page.append("<a href=\"https://adventofcode.com/").append(year);
 						page.append("/leaderboard/day/").append(day).append("\">");
@@ -391,10 +409,21 @@ public class Leaderboard extends BaseLeaderboard {
 					else if (time.length() == 8) {
 						page.append("&nbsp;");
 					}
-					page.append("<span title=\"").append(PuzzleTime.formatTime(record.getTime(Part.ONE))).append(" / ");
-					page.append(PuzzleTime.formatTime(record.getTime(Part.TWO) - record.getTime(Part.ONE))).append("\">");
-					page.append(time);
-					page.append("</span>&nbsp;&nbsp;").append(maskName(year, record.getName()));
+					page.append(time).append("</span>");
+
+					// Split Times
+					page.append("<span class=\"dS\">");
+					time = PuzzleTime.formatTime(record.getTime(Part.ONE));
+					if (time.length() == 8) {
+						page.append("&nbsp;");
+					}
+					page.append(time).append(" ");
+					time = PuzzleTime.formatTime(record.getTime(Part.TWO) - record.getTime(Part.ONE));
+					if (time.length() == 8) {
+						page.append("&nbsp;");
+					}
+					page.append(time).append("</span>");
+					page.append("&nbsp;&nbsp;").append(maskName(year, record.getName()));
 
 					isNextTie = (place + 1 < places.size() && record.getTime(Part.TWO).equals(places.get(place + 1).getTime(Part.TWO)));
 

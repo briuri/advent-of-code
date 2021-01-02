@@ -24,6 +24,18 @@
 							(oldDisplay == 'block' ? '#ffffff' : '#888800');
 					}
 				});
+			$("span.dailyLink").click(
+				function() {
+					oldDisplay = document.getElementById('dailySplit').style.display;
+					if (oldDisplay == 'none') {
+						$('span.dS').hide();
+						$('span.dT').show();
+					}
+					else {
+						$('span.dT').hide();
+						$('span.dS').show();
+					}
+				});
 			});
 	</script>
 </head>
@@ -407,382 +419,385 @@
 
 
 	<h2>Top 10 Daily</h2>
-	<p>Rank is based on time to complete both puzzle parts after midnight release. Hover over total time to see split times.</p>
+	<p>Rank is based on time to complete both puzzle parts after midnight release.</p>
+	<p>Show: <a href="javascript:void(0);">
+		<span id="dailySplit" class="dT dailyLink">Split Times</span><span class="dS dailyLink">Total Times</span>
+	</a></p>
 	<div class="clear"></div>
 
 <div class="daily">
 	<a name="day25"></a><h3><a href="https://adventofcode.com/2019/day/25">Day 25: Cryostasis</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/25"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:14:58 / 00:00:10">00:15:08</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/25"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:32:13 / 00:00:04">00:32:17</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:35:15 / 00:00:07">00:35:22</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="00:35:56 / 00:00:07">00:36:03</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="09:39:08 / 00:00:11">09:39:19</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="14:20:24 / 00:00:08">14:20:32</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
-		<li>&nbsp;<span title="34:17:55 / 00:02:56">34:20:51</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="11:18:13 / 45:12:29">56:30:42</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
-		<li>&nbsp;<span title="63:58:21 / 01:54:39">65:53:00</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="68:27:07 / 02:43:47">71:10:54</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/25"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:15:08</span><span class="dS">&nbsp;00:14:58 &nbsp;00:00:10</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/25"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:32:17</span><span class="dS">&nbsp;00:32:13 &nbsp;00:00:04</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:35:22</span><span class="dS">&nbsp;00:35:15 &nbsp;00:00:07</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:36:03</span><span class="dS">&nbsp;00:35:56 &nbsp;00:00:07</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;09:39:19</span><span class="dS">&nbsp;09:39:08 &nbsp;00:00:11</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;14:20:32</span><span class="dS">&nbsp;14:20:24 &nbsp;00:00:08</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT">&nbsp;34:20:51</span><span class="dS">&nbsp;34:17:55 &nbsp;00:02:56</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;56:30:42</span><span class="dS">&nbsp;11:18:13 &nbsp;45:12:29</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
+		<li><span class="dT">&nbsp;65:53:00</span><span class="dS">&nbsp;63:58:21 &nbsp;01:54:39</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;71:10:54</span><span class="dS">&nbsp;68:27:07 &nbsp;02:43:47</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day24"></a><h3><a href="https://adventofcode.com/2019/day/24">Day 24: Planet of Discord</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/24"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:14:19 / 00:21:10">00:35:29</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:10:28 / 00:53:58">01:04:26</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:14:41 / 00:54:56">01:09:37</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:21:15 / 00:59:39">01:20:54</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:26:09 / 01:00:49">01:26:58</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="01:31:00 / 08:31:36">10:02:36</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
-		<li>&nbsp;<span title="00:20:53 / 10:11:10">10:32:03</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:18:50 / 11:12:48">11:31:38</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="14:45:34 / 05:33:48">20:19:22</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
-		<li>&nbsp;<span title="17:13:34 / 04:39:30">21:53:04</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/24"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:35:29</span><span class="dS">&nbsp;00:14:19 &nbsp;00:21:10</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;01:04:26</span><span class="dS">&nbsp;00:10:28 &nbsp;00:53:58</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;01:09:37</span><span class="dS">&nbsp;00:14:41 &nbsp;00:54:56</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;01:20:54</span><span class="dS">&nbsp;00:21:15 &nbsp;00:59:39</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;01:26:58</span><span class="dS">&nbsp;00:26:09 &nbsp;01:00:49</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;10:02:36</span><span class="dS">&nbsp;01:31:00 &nbsp;08:31:36</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
+		<li><span class="dT">&nbsp;10:32:03</span><span class="dS">&nbsp;00:20:53 &nbsp;10:11:10</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;11:31:38</span><span class="dS">&nbsp;00:18:50 &nbsp;11:12:48</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;20:19:22</span><span class="dS">&nbsp;14:45:34 &nbsp;05:33:48</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
+		<li><span class="dT">&nbsp;21:53:04</span><span class="dS">&nbsp;17:13:34 &nbsp;04:39:30</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day23"></a><h3><a href="https://adventofcode.com/2019/day/23">Day 23: Category Six</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:24:12 / 00:08:15">00:32:27</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="00:16:27 / 00:26:42">00:43:09</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:41:51 / 00:13:06">00:54:57</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:36:46 / 00:22:43">00:59:29</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:21:19 / 00:51:37">01:12:56</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:59:06 / 00:26:35">01:25:41</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="14:30:27 / 00:40:40">15:11:07</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="18:42:28 / 02:04:42">20:47:10</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
-		<li>&nbsp;<span title="38:56:21 / 01:58:58">40:55:19</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
-		<li>&nbsp;<span title="43:10:59 / 00:05:24">43:16:23</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:32:27</span><span class="dS">&nbsp;00:24:12 &nbsp;00:08:15</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:43:09</span><span class="dS">&nbsp;00:16:27 &nbsp;00:26:42</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;00:54:57</span><span class="dS">&nbsp;00:41:51 &nbsp;00:13:06</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:59:29</span><span class="dS">&nbsp;00:36:46 &nbsp;00:22:43</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;01:12:56</span><span class="dS">&nbsp;00:21:19 &nbsp;00:51:37</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;01:25:41</span><span class="dS">&nbsp;00:59:06 &nbsp;00:26:35</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;15:11:07</span><span class="dS">&nbsp;14:30:27 &nbsp;00:40:40</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;20:47:10</span><span class="dS">&nbsp;18:42:28 &nbsp;02:04:42</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
+		<li><span class="dT">&nbsp;40:55:19</span><span class="dS">&nbsp;38:56:21 &nbsp;01:58:58</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT">&nbsp;43:16:23</span><span class="dS">&nbsp;43:10:59 &nbsp;00:05:24</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day22"></a><h3><a href="https://adventofcode.com/2019/day/22">Day 22: Slam Shuffle</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:09:12 / 02:56:59">03:06:11</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:32:40 / 03:02:45">03:35:25</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:22:01 / 18:52:18">19:14:19</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:35:17 / 22:13:22">22:48:39</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:32:40 / 33:07:18">33:39:58</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="35:30:45 / 02:18:49">37:49:34</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="04:28:46 / 38:00:37">42:29:23</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="00:30:46 / 43:39:07">44:09:53</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="46:30:28 / 15:54:05">62:24:33</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
-		<li>&nbsp;<span title="70:39:21 / 01:35:46">72:15:07</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
+		<li><span class="dT">&nbsp;03:06:11</span><span class="dS">&nbsp;00:09:12 &nbsp;02:56:59</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;03:35:25</span><span class="dS">&nbsp;00:32:40 &nbsp;03:02:45</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;19:14:19</span><span class="dS">&nbsp;00:22:01 &nbsp;18:52:18</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;22:48:39</span><span class="dS">&nbsp;00:35:17 &nbsp;22:13:22</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;33:39:58</span><span class="dS">&nbsp;00:32:40 &nbsp;33:07:18</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;37:49:34</span><span class="dS">&nbsp;35:30:45 &nbsp;02:18:49</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;42:29:23</span><span class="dS">&nbsp;04:28:46 &nbsp;38:00:37</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;44:09:53</span><span class="dS">&nbsp;00:30:46 &nbsp;43:39:07</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;62:24:33</span><span class="dS">&nbsp;46:30:28 &nbsp;15:54:05</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT">&nbsp;72:15:07</span><span class="dS">&nbsp;70:39:21 &nbsp;01:35:46</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day21"></a><h3><a href="https://adventofcode.com/2019/day/21">Day 21: Springdroid Adventure</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/21"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:17:53 / 00:10:39">00:28:32</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:29:10 / 00:17:41">00:46:51</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:30:36 / 00:16:55">00:47:31</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="00:38:33 / 00:14:20">00:52:53</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:46:17 / 00:17:30">01:03:47</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="02:45:42 / 00:24:36">03:10:18</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="32:28:32 / 00:28:06">32:56:38</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="58:23:22 / 00:31:28">58:54:50</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="69:13:04 / 00:26:27">69:39:31</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
-		<li>&nbsp;<span title="10:21:58 / 72:58:09">83:20:07</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/21"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:28:32</span><span class="dS">&nbsp;00:17:53 &nbsp;00:10:39</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:46:51</span><span class="dS">&nbsp;00:29:10 &nbsp;00:17:41</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:47:31</span><span class="dS">&nbsp;00:30:36 &nbsp;00:16:55</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:52:53</span><span class="dS">&nbsp;00:38:33 &nbsp;00:14:20</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;01:03:47</span><span class="dS">&nbsp;00:46:17 &nbsp;00:17:30</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;03:10:18</span><span class="dS">&nbsp;02:45:42 &nbsp;00:24:36</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;32:56:38</span><span class="dS">&nbsp;32:28:32 &nbsp;00:28:06</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;58:54:50</span><span class="dS">&nbsp;58:23:22 &nbsp;00:31:28</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;69:39:31</span><span class="dS">&nbsp;69:13:04 &nbsp;00:26:27</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT">&nbsp;83:20:07</span><span class="dS">&nbsp;10:21:58 &nbsp;72:58:09</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day20"></a><h3><a href="https://adventofcode.com/2019/day/20">Day 20: Donut Maze</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:51:16 / 00:11:10">01:02:26</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:39:53 / 00:41:40">01:21:33</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="01:11:24 / 00:44:55">01:56:19</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="10:26:14 / 00:49:05">11:15:19</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="12:57:39 / 01:36:28">14:34:07</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="22:46:17 / 01:08:36">23:54:53</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="31:25:14 / 06:41:40">38:06:54</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="87:45:06 / 00:18:51">88:03:57</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
-		<li><span title="137:11:27 / 03:31:14">140:42:41</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
-		<li><span title="109:43:19 / 56:31:37">166:14:56</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;01:02:26</span><span class="dS">&nbsp;00:51:16 &nbsp;00:11:10</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;01:21:33</span><span class="dS">&nbsp;00:39:53 &nbsp;00:41:40</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;01:56:19</span><span class="dS">&nbsp;01:11:24 &nbsp;00:44:55</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;11:15:19</span><span class="dS">&nbsp;10:26:14 &nbsp;00:49:05</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;14:34:07</span><span class="dS">&nbsp;12:57:39 &nbsp;01:36:28</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;23:54:53</span><span class="dS">&nbsp;22:46:17 &nbsp;01:08:36</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;38:06:54</span><span class="dS">&nbsp;31:25:14 &nbsp;06:41:40</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;88:03:57</span><span class="dS">&nbsp;87:45:06 &nbsp;00:18:51</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT">140:42:41</span><span class="dS">137:11:27 &nbsp;03:31:14</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
+		<li><span class="dT">166:14:56</span><span class="dS">109:43:19 &nbsp;56:31:37</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day19"></a><h3><a href="https://adventofcode.com/2019/day/19">Day 19: Tractor Beam</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:04:05 / 00:39:13">00:43:18</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:19:17 / 00:25:45">00:45:02</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="00:08:59 / 00:39:03">00:48:02</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:05:43 / 00:56:27">01:02:10</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:08:55 / 01:14:50">01:23:45</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:16:12 / 01:45:33">02:01:45</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="09:12:40 / 05:59:47">15:12:27</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="16:22:19 / 00:47:38">17:09:57</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
-		<li>&nbsp;<span title="10:42:20 / 07:16:47">17:59:07</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
-		<li>&nbsp;<span title="08:07:08 / 11:04:21">19:11:29</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
+		<li><span class="dT">&nbsp;00:43:18</span><span class="dS">&nbsp;00:04:05 &nbsp;00:39:13</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:45:02</span><span class="dS">&nbsp;00:19:17 &nbsp;00:25:45</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:48:02</span><span class="dS">&nbsp;00:08:59 &nbsp;00:39:03</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;01:02:10</span><span class="dS">&nbsp;00:05:43 &nbsp;00:56:27</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;01:23:45</span><span class="dS">&nbsp;00:08:55 &nbsp;01:14:50</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;02:01:45</span><span class="dS">&nbsp;00:16:12 &nbsp;01:45:33</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;15:12:27</span><span class="dS">&nbsp;09:12:40 &nbsp;05:59:47</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;17:09:57</span><span class="dS">&nbsp;16:22:19 &nbsp;00:47:38</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
+		<li><span class="dT">&nbsp;17:59:07</span><span class="dS">&nbsp;10:42:20 &nbsp;07:16:47</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
+		<li><span class="dT">&nbsp;19:11:29</span><span class="dS">&nbsp;08:07:08 &nbsp;11:04:21</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day18"></a><h3><a href="https://adventofcode.com/2019/day/18">Day 18: Many-Worlds Interpretation</a></h3>
 	<ol>
-		<li>&nbsp;<span title="02:59:05 / 01:06:36">04:05:41</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="02:54:56 / 01:42:58">04:37:54</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="14:29:53 / 03:12:49">17:42:42</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="17:28:32 / 15:49:57">33:18:29</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="68:53:07 / 00:14:48">69:07:55</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="68:48:57 / 20:53:16">89:42:13</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
-		<li><span title="119:13:29 / 11:42:49">130:56:18</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
-		<li><span title="133:58:58 / 01:03:45">135:02:43</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li><span title="232:49:40 / 01:03:11">233:52:51</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li><span title="218:05:11 / 21:05:21">239:10:32</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
+		<li><span class="dT">&nbsp;04:05:41</span><span class="dS">&nbsp;02:59:05 &nbsp;01:06:36</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;04:37:54</span><span class="dS">&nbsp;02:54:56 &nbsp;01:42:58</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;17:42:42</span><span class="dS">&nbsp;14:29:53 &nbsp;03:12:49</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;33:18:29</span><span class="dS">&nbsp;17:28:32 &nbsp;15:49:57</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;69:07:55</span><span class="dS">&nbsp;68:53:07 &nbsp;00:14:48</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;89:42:13</span><span class="dS">&nbsp;68:48:57 &nbsp;20:53:16</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ean W<span class="ai">AoC</span>right</li>
+		<li><span class="dT">130:56:18</span><span class="dS">119:13:29 &nbsp;11:42:49</span>&nbsp;&nbsp;R<span class="ai">AoC</span>yan W<span class="ai">AoC</span>idmaier</li>
+		<li><span class="dT">135:02:43</span><span class="dS">133:58:58 &nbsp;01:03:45</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">233:52:51</span><span class="dS">232:49:40 &nbsp;01:03:11</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">239:10:32</span><span class="dS">218:05:11 &nbsp;21:05:21</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ichard G<span class="ai">AoC</span>ejji</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day17"></a><h3><a href="https://adventofcode.com/2019/day/17">Day 17: Set and Forget</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:08:34 / 00:42:14">00:50:48</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:17:08 / 00:39:01">00:56:09</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:19:43 / 00:36:55">00:56:38</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:19:14 / 00:56:21">01:15:35</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:28:52 / 00:55:02">01:23:54</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="10:00:52 / 01:26:43">11:27:35</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="10:37:50 / 02:12:01">12:49:51</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
-		<li>&nbsp;<span title="11:40:31 / 03:38:14">15:18:45</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ristan P<span class="ai">AoC</span>eck</li>
-		<li>&nbsp;<span title="19:31:49 / 02:25:05">21:56:54</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="18:35:09 / 03:47:41">22:22:50</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
+		<li><span class="dT">&nbsp;00:50:48</span><span class="dS">&nbsp;00:08:34 &nbsp;00:42:14</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:56:09</span><span class="dS">&nbsp;00:17:08 &nbsp;00:39:01</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:56:38</span><span class="dS">&nbsp;00:19:43 &nbsp;00:36:55</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;01:15:35</span><span class="dS">&nbsp;00:19:14 &nbsp;00:56:21</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;01:23:54</span><span class="dS">&nbsp;00:28:52 &nbsp;00:55:02</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;11:27:35</span><span class="dS">&nbsp;10:00:52 &nbsp;01:26:43</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;12:49:51</span><span class="dS">&nbsp;10:37:50 &nbsp;02:12:01</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
+		<li><span class="dT">&nbsp;15:18:45</span><span class="dS">&nbsp;11:40:31 &nbsp;03:38:14</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ristan P<span class="ai">AoC</span>eck</li>
+		<li><span class="dT">&nbsp;21:56:54</span><span class="dS">&nbsp;19:31:49 &nbsp;02:25:05</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;22:22:50</span><span class="dS">&nbsp;18:35:09 &nbsp;03:47:41</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day16"></a><h3><a href="https://adventofcode.com/2019/day/16">Day 16: Flawed Frequency Transmission</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:11:48 / 01:39:22">01:51:10</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:41:33 / 01:27:53">02:09:26</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:32:52 / 01:40:47">02:13:39</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:18:53 / 07:20:12">07:39:05</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:43:36 / 10:37:42">11:21:18</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="15:07:28 / 00:55:38">16:03:06</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
-		<li>&nbsp;<span title="16:03:35 / 02:58:13">19:01:48</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="14:24:50 / 16:27:58">30:52:48</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="11:05:41 / 29:35:21">40:41:02</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="02:37:06 / 38:46:23">41:23:29</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ristan P<span class="ai">AoC</span>eck</li>
+		<li><span class="dT">&nbsp;01:51:10</span><span class="dS">&nbsp;00:11:48 &nbsp;01:39:22</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;02:09:26</span><span class="dS">&nbsp;00:41:33 &nbsp;01:27:53</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;02:13:39</span><span class="dS">&nbsp;00:32:52 &nbsp;01:40:47</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;07:39:05</span><span class="dS">&nbsp;00:18:53 &nbsp;07:20:12</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;11:21:18</span><span class="dS">&nbsp;00:43:36 &nbsp;10:37:42</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;16:03:06</span><span class="dS">&nbsp;15:07:28 &nbsp;00:55:38</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
+		<li><span class="dT">&nbsp;19:01:48</span><span class="dS">&nbsp;16:03:35 &nbsp;02:58:13</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;30:52:48</span><span class="dS">&nbsp;14:24:50 &nbsp;16:27:58</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;40:41:02</span><span class="dS">&nbsp;11:05:41 &nbsp;29:35:21</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;41:23:29</span><span class="dS">&nbsp;02:37:06 &nbsp;38:46:23</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ristan P<span class="ai">AoC</span>eck</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day15"></a><h3><a href="https://adventofcode.com/2019/day/15">Day 15: Oxygen System</a></h3>
 	<ol>
-		<li>&nbsp;<span title="01:03:03 / 00:02:36">01:05:39</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="01:59:48 / 00:37:01">02:36:49</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="02:33:51 / 00:14:28">02:48:19</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="16:12:15 / 00:17:27">16:29:42</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="20:11:19 / 00:06:03">20:17:22</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan H<span class="ai">AoC</span>ill</li>
-		<li>&nbsp;<span title="20:24:34 / 00:50:05">21:14:39</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
-		<li>&nbsp;<span title="01:50:35 / 19:31:35">21:22:10</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="21:33:50 / 00:08:55">21:42:45</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="36:00:29 / 01:08:52">37:09:21</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="46:30:34 / 00:19:47">46:50:21</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;01:05:39</span><span class="dS">&nbsp;01:03:03 &nbsp;00:02:36</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;02:36:49</span><span class="dS">&nbsp;01:59:48 &nbsp;00:37:01</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;02:48:19</span><span class="dS">&nbsp;02:33:51 &nbsp;00:14:28</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;16:29:42</span><span class="dS">&nbsp;16:12:15 &nbsp;00:17:27</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;20:17:22</span><span class="dS">&nbsp;20:11:19 &nbsp;00:06:03</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan H<span class="ai">AoC</span>ill</li>
+		<li><span class="dT">&nbsp;21:14:39</span><span class="dS">&nbsp;20:24:34 &nbsp;00:50:05</span>&nbsp;&nbsp;R<span class="ai">AoC</span>oger M<span class="ai">AoC</span>aach</li>
+		<li><span class="dT">&nbsp;21:22:10</span><span class="dS">&nbsp;01:50:35 &nbsp;19:31:35</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;21:42:45</span><span class="dS">&nbsp;21:33:50 &nbsp;00:08:55</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;37:09:21</span><span class="dS">&nbsp;36:00:29 &nbsp;01:08:52</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;46:50:21</span><span class="dS">&nbsp;46:30:34 &nbsp;00:19:47</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day14"></a><h3><a href="https://adventofcode.com/2019/day/14">Day 14: Space Stoichiometry</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:46:45 / 00:23:29">01:10:14</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:42:58 / 00:32:42">01:15:40</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="01:28:34 / 00:38:53">02:07:27</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="01:23:41 / 00:59:05">02:22:46</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
-		<li>&nbsp;<span title="01:49:46 / 00:50:06">02:39:52</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="01:17:52 / 08:19:17">09:37:09</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="01:12:04 / 10:15:02">11:27:06</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="12:32:22 / 02:01:33">14:33:55</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan H<span class="ai">AoC</span>ill</li>
-		<li>&nbsp;<span title="18:35:20 / 01:07:48">19:43:08</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
-		<li>&nbsp;<span title="22:51:48 / 00:53:54">23:45:42</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
+		<li><span class="dT">&nbsp;01:10:14</span><span class="dS">&nbsp;00:46:45 &nbsp;00:23:29</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;01:15:40</span><span class="dS">&nbsp;00:42:58 &nbsp;00:32:42</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;02:07:27</span><span class="dS">&nbsp;01:28:34 &nbsp;00:38:53</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;02:22:46</span><span class="dS">&nbsp;01:23:41 &nbsp;00:59:05</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
+		<li><span class="dT">&nbsp;02:39:52</span><span class="dS">&nbsp;01:49:46 &nbsp;00:50:06</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;09:37:09</span><span class="dS">&nbsp;01:17:52 &nbsp;08:19:17</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;11:27:06</span><span class="dS">&nbsp;01:12:04 &nbsp;10:15:02</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;14:33:55</span><span class="dS">&nbsp;12:32:22 &nbsp;02:01:33</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan H<span class="ai">AoC</span>ill</li>
+		<li><span class="dT">&nbsp;19:43:08</span><span class="dS">&nbsp;18:35:20 &nbsp;01:07:48</span>&nbsp;&nbsp;K<span class="ai">AoC</span>en S<span class="ai">AoC</span>chmedding</li>
+		<li><span class="dT">&nbsp;23:45:42</span><span class="dS">&nbsp;22:51:48 &nbsp;00:53:54</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day13"></a><h3><a href="https://adventofcode.com/2019/day/13">Day 13: Care Package</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:09:17 / 00:19:19">00:28:36</span>&nbsp;&nbsp;A<span class="ai">AoC</span>rkady P<span class="ai">AoC</span>ogostkin</li>
-		<li>&nbsp;<span title="00:04:35 / 00:28:50">00:33:25</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:09:40 / 00:25:07">00:34:47</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:05:32 / 00:38:45">00:44:17</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:07:19 / 00:50:03">00:57:22</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:08:35 / 00:49:39">00:58:14</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="01:29:52 / 00:26:33">01:56:25</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
-		<li>&nbsp;<span title="00:16:04 / 01:42:25">01:58:29</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="06:20:02 / 01:14:13">07:34:15</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
-		<li>&nbsp;<span title="08:46:51 / 02:43:25">11:30:16</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
+		<li><span class="dT">&nbsp;00:28:36</span><span class="dS">&nbsp;00:09:17 &nbsp;00:19:19</span>&nbsp;&nbsp;A<span class="ai">AoC</span>rkady P<span class="ai">AoC</span>ogostkin</li>
+		<li><span class="dT">&nbsp;00:33:25</span><span class="dS">&nbsp;00:04:35 &nbsp;00:28:50</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:34:47</span><span class="dS">&nbsp;00:09:40 &nbsp;00:25:07</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:44:17</span><span class="dS">&nbsp;00:05:32 &nbsp;00:38:45</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:57:22</span><span class="dS">&nbsp;00:07:19 &nbsp;00:50:03</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:58:14</span><span class="dS">&nbsp;00:08:35 &nbsp;00:49:39</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;01:56:25</span><span class="dS">&nbsp;01:29:52 &nbsp;00:26:33</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
+		<li><span class="dT">&nbsp;01:58:29</span><span class="dS">&nbsp;00:16:04 &nbsp;01:42:25</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;07:34:15</span><span class="dS">&nbsp;06:20:02 &nbsp;01:14:13</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
+		<li><span class="dT">&nbsp;11:30:16</span><span class="dS">&nbsp;08:46:51 &nbsp;02:43:25</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day12"></a><h3><a href="https://adventofcode.com/2019/day/12">Day 12: The N-Body Problem</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/12"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:11:48 / 00:23:39">00:35:27</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:29:03 / 00:20:41">00:49:44</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:16:31 / 00:38:40">00:55:11</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:14:37 / 01:18:00">01:32:37</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:17:04 / 02:01:07">02:18:11</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="08:11:55 / 00:10:26">08:22:21</span>&nbsp;&nbsp;T<span class="ai">AoC</span>im O<span class="ai">AoC</span>rr</li>
-		<li>&nbsp;<span title="06:47:08 / 01:45:50">08:32:58</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
-		<li>&nbsp;<span title="12:29:08 / 02:47:19">15:16:27</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
-		<li>&nbsp;<span title="15:17:10 / 01:27:39">16:44:49</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ristan P<span class="ai">AoC</span>eck</li>
-		<li>&nbsp;<span title="17:01:58 / 01:01:15">18:03:13</span>&nbsp;&nbsp;J<span class="ai">AoC</span>iong H<span class="ai">AoC</span>uang</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/12"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:35:27</span><span class="dS">&nbsp;00:11:48 &nbsp;00:23:39</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:49:44</span><span class="dS">&nbsp;00:29:03 &nbsp;00:20:41</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;00:55:11</span><span class="dS">&nbsp;00:16:31 &nbsp;00:38:40</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;01:32:37</span><span class="dS">&nbsp;00:14:37 &nbsp;01:18:00</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;02:18:11</span><span class="dS">&nbsp;00:17:04 &nbsp;02:01:07</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;08:22:21</span><span class="dS">&nbsp;08:11:55 &nbsp;00:10:26</span>&nbsp;&nbsp;T<span class="ai">AoC</span>im O<span class="ai">AoC</span>rr</li>
+		<li><span class="dT">&nbsp;08:32:58</span><span class="dS">&nbsp;06:47:08 &nbsp;01:45:50</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
+		<li><span class="dT">&nbsp;15:16:27</span><span class="dS">&nbsp;12:29:08 &nbsp;02:47:19</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT">&nbsp;16:44:49</span><span class="dS">&nbsp;15:17:10 &nbsp;01:27:39</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ristan P<span class="ai">AoC</span>eck</li>
+		<li><span class="dT">&nbsp;18:03:13</span><span class="dS">&nbsp;17:01:58 &nbsp;01:01:15</span>&nbsp;&nbsp;J<span class="ai">AoC</span>iong H<span class="ai">AoC</span>uang</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day11"></a><h3><a href="https://adventofcode.com/2019/day/11">Day 11: Space Police</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/11"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:10:30 / 00:03:50">00:14:20</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:19:38 / 00:03:47">00:23:25</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:23:41 / 00:03:44">00:27:25</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:18:55 / 00:14:36">00:33:31</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:29:20 / 00:07:06">00:36:26</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:33:10 / 00:04:36">00:37:46</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:24:41 / 01:24:53">01:49:34</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="08:48:49 / 00:08:49">08:57:38</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
-		<li>&nbsp;<span title="09:17:49 / 00:14:52">09:32:41</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan H<span class="ai">AoC</span>ill</li>
-		<li>&nbsp;<span title="10:45:39 / 00:00:56">10:46:35</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/11"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:14:20</span><span class="dS">&nbsp;00:10:30 &nbsp;00:03:50</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:23:25</span><span class="dS">&nbsp;00:19:38 &nbsp;00:03:47</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:27:25</span><span class="dS">&nbsp;00:23:41 &nbsp;00:03:44</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:33:31</span><span class="dS">&nbsp;00:18:55 &nbsp;00:14:36</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;00:36:26</span><span class="dS">&nbsp;00:29:20 &nbsp;00:07:06</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:37:46</span><span class="dS">&nbsp;00:33:10 &nbsp;00:04:36</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;01:49:34</span><span class="dS">&nbsp;00:24:41 &nbsp;01:24:53</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;08:57:38</span><span class="dS">&nbsp;08:48:49 &nbsp;00:08:49</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
+		<li><span class="dT">&nbsp;09:32:41</span><span class="dS">&nbsp;09:17:49 &nbsp;00:14:52</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan H<span class="ai">AoC</span>ill</li>
+		<li><span class="dT">&nbsp;10:46:35</span><span class="dS">&nbsp;10:45:39 &nbsp;00:00:56</span>&nbsp;&nbsp;S<span class="ai">AoC</span>tefan O<span class="ai">AoC</span>llestad</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day10"></a><h3><a href="https://adventofcode.com/2019/day/10">Day 10: Monitoring Station</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/10"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:10:52 / 00:15:14">00:26:06</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/10"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:09:30 / 00:18:04">00:27:34</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:40:58 / 00:34:05">01:15:03</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="01:04:54 / 00:29:49">01:34:43</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:59:03 / 01:37:23">02:36:26</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="01:10:02 / 01:30:26">02:40:28</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="01:18:29 / 01:58:19">03:16:48</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
-		<li>&nbsp;<span title="01:29:57 / 02:11:48">03:41:45</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
-		<li>&nbsp;<span title="08:22:34 / 00:04:24">08:26:58</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
-		<li>&nbsp;<span title="09:33:58 / 00:09:38">09:43:36</span>&nbsp;&nbsp;R<span class="ai">AoC</span>obert R<span class="ai">AoC</span>oger</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/10"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:26:06</span><span class="dS">&nbsp;00:10:52 &nbsp;00:15:14</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/10"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:27:34</span><span class="dS">&nbsp;00:09:30 &nbsp;00:18:04</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;01:15:03</span><span class="dS">&nbsp;00:40:58 &nbsp;00:34:05</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;01:34:43</span><span class="dS">&nbsp;01:04:54 &nbsp;00:29:49</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;02:36:26</span><span class="dS">&nbsp;00:59:03 &nbsp;01:37:23</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;02:40:28</span><span class="dS">&nbsp;01:10:02 &nbsp;01:30:26</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;03:16:48</span><span class="dS">&nbsp;01:18:29 &nbsp;01:58:19</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
+		<li><span class="dT">&nbsp;03:41:45</span><span class="dS">&nbsp;01:29:57 &nbsp;02:11:48</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
+		<li><span class="dT">&nbsp;08:26:58</span><span class="dS">&nbsp;08:22:34 &nbsp;00:04:24</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
+		<li><span class="dT">&nbsp;09:43:36</span><span class="dS">&nbsp;09:33:58 &nbsp;00:09:38</span>&nbsp;&nbsp;R<span class="ai">AoC</span>obert R<span class="ai">AoC</span>oger</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day9"></a><h3><a href="https://adventofcode.com/2019/day/9">Day 9: Sensor Boost</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:23:35 / 00:00:41">00:24:16</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:24:14 / 00:00:41">00:24:55</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:26:55 / 00:01:38">00:28:33</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:33:25 / 00:00:49">00:34:14</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:42:22 / 00:01:01">00:43:23</span>&nbsp;&nbsp;Q<span class="ai">AoC</span>uintin D<span class="ai">AoC</span>eGroot</li>
-		<li>&nbsp;<span title="00:44:58 / 00:00:57">00:45:55</span>&nbsp;&nbsp;T<span class="ai">AoC</span>aybin R<span class="ai">AoC</span>utkin</li>
-		<li>&nbsp;<span title="00:43:19 / 00:03:35">00:46:54</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="01:20:24 / 00:01:35">01:21:59</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="01:38:38 / 00:00:25">01:39:03</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="01:53:29 / 00:01:17">01:54:46</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
+		<li><span class="dT">&nbsp;00:24:16</span><span class="dS">&nbsp;00:23:35 &nbsp;00:00:41</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:24:55</span><span class="dS">&nbsp;00:24:14 &nbsp;00:00:41</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:28:33</span><span class="dS">&nbsp;00:26:55 &nbsp;00:01:38</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:34:14</span><span class="dS">&nbsp;00:33:25 &nbsp;00:00:49</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;00:43:23</span><span class="dS">&nbsp;00:42:22 &nbsp;00:01:01</span>&nbsp;&nbsp;Q<span class="ai">AoC</span>uintin D<span class="ai">AoC</span>eGroot</li>
+		<li><span class="dT">&nbsp;00:45:55</span><span class="dS">&nbsp;00:44:58 &nbsp;00:00:57</span>&nbsp;&nbsp;T<span class="ai">AoC</span>aybin R<span class="ai">AoC</span>utkin</li>
+		<li><span class="dT">&nbsp;00:46:54</span><span class="dS">&nbsp;00:43:19 &nbsp;00:03:35</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;01:21:59</span><span class="dS">&nbsp;01:20:24 &nbsp;00:01:35</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;01:39:03</span><span class="dS">&nbsp;01:38:38 &nbsp;00:00:25</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;01:54:46</span><span class="dS">&nbsp;01:53:29 &nbsp;00:01:17</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day8"></a><h3><a href="https://adventofcode.com/2019/day/8">Day 8: Space Image Format</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/8"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:05:56 / 00:03:17">00:09:13</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:06:38 / 00:10:19">00:16:57</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:07:43 / 00:19:18">00:27:01</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:18:28 / 00:11:36">00:30:04</span>&nbsp;&nbsp;T<span class="ai">AoC</span>aybin R<span class="ai">AoC</span>utkin</li>
-		<li>&nbsp;<span title="00:10:37 / 00:20:10">00:30:47</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:18:31 / 00:21:50">00:40:21</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="00:31:23 / 00:10:37">00:42:00</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
-		<li>&nbsp;<span title="00:12:51 / 00:31:09">00:44:00</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
-		<li>&nbsp;<span title="00:45:34 / 00:10:56">00:56:30</span>&nbsp;&nbsp;A<span class="ai">AoC</span>rkady P<span class="ai">AoC</span>ogostkin</li>
-		<li>&nbsp;<span title="00:40:26 / 00:16:41">00:57:07</span>&nbsp;&nbsp;F<span class="ai">AoC</span>elix F<span class="ai">AoC</span>lath</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/8"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:09:13</span><span class="dS">&nbsp;00:05:56 &nbsp;00:03:17</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:16:57</span><span class="dS">&nbsp;00:06:38 &nbsp;00:10:19</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:27:01</span><span class="dS">&nbsp;00:07:43 &nbsp;00:19:18</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:30:04</span><span class="dS">&nbsp;00:18:28 &nbsp;00:11:36</span>&nbsp;&nbsp;T<span class="ai">AoC</span>aybin R<span class="ai">AoC</span>utkin</li>
+		<li><span class="dT">&nbsp;00:30:47</span><span class="dS">&nbsp;00:10:37 &nbsp;00:20:10</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:40:21</span><span class="dS">&nbsp;00:18:31 &nbsp;00:21:50</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:42:00</span><span class="dS">&nbsp;00:31:23 &nbsp;00:10:37</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
+		<li><span class="dT">&nbsp;00:44:00</span><span class="dS">&nbsp;00:12:51 &nbsp;00:31:09</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
+		<li><span class="dT">&nbsp;00:56:30</span><span class="dS">&nbsp;00:45:34 &nbsp;00:10:56</span>&nbsp;&nbsp;A<span class="ai">AoC</span>rkady P<span class="ai">AoC</span>ogostkin</li>
+		<li><span class="dT">&nbsp;00:57:07</span><span class="dS">&nbsp;00:40:26 &nbsp;00:16:41</span>&nbsp;&nbsp;F<span class="ai">AoC</span>elix F<span class="ai">AoC</span>lath</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day7"></a><h3><a href="https://adventofcode.com/2019/day/7">Day 7: Amplification Circuit</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:18:10 / 00:12:42">00:30:52</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:07:25 / 00:34:36">00:42:01</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:11:36 / 00:47:44">00:59:20</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:24:04 / 00:35:55">00:59:59</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:25:55 / 00:37:11">01:03:06</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ucker T<span class="ai">AoC</span>ibbetts</li>
-		<li>&nbsp;<span title="00:32:20 / 00:42:23">01:14:43</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:41:18 / 00:44:49">01:26:07</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
-		<li>&nbsp;<span title="01:05:12 / 00:37:20">01:42:32</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
-		<li>&nbsp;<span title="00:53:39 / 00:57:15">01:50:54</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
-		<li>&nbsp;<span title="01:45:16 / 00:18:02">02:03:18</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:30:52</span><span class="dS">&nbsp;00:18:10 &nbsp;00:12:42</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:42:01</span><span class="dS">&nbsp;00:07:25 &nbsp;00:34:36</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:59:20</span><span class="dS">&nbsp;00:11:36 &nbsp;00:47:44</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:59:59</span><span class="dS">&nbsp;00:24:04 &nbsp;00:35:55</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;01:03:06</span><span class="dS">&nbsp;00:25:55 &nbsp;00:37:11</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ucker T<span class="ai">AoC</span>ibbetts</li>
+		<li><span class="dT">&nbsp;01:14:43</span><span class="dS">&nbsp;00:32:20 &nbsp;00:42:23</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;01:26:07</span><span class="dS">&nbsp;00:41:18 &nbsp;00:44:49</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
+		<li><span class="dT">&nbsp;01:42:32</span><span class="dS">&nbsp;01:05:12 &nbsp;00:37:20</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
+		<li><span class="dT">&nbsp;01:50:54</span><span class="dS">&nbsp;00:53:39 &nbsp;00:57:15</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
+		<li><span class="dT">&nbsp;02:03:18</span><span class="dS">&nbsp;01:45:16 &nbsp;00:18:02</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day6"></a><h3><a href="https://adventofcode.com/2019/day/6">Day 6: Universal Orbit Map</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:09:41 / 00:10:15">00:19:56</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:16:04 / 00:04:12">00:20:16</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:07:43 / 00:13:07">00:20:50</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:11:39 / 00:14:47">00:26:26</span>&nbsp;&nbsp;Q<span class="ai">AoC</span>uintin D<span class="ai">AoC</span>eGroot</li>
-		<li>&nbsp;<span title="00:17:20 / 00:10:07">00:27:27</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
-		<li>&nbsp;<span title="00:26:22 / 00:01:29">00:27:51</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:17:01 / 00:14:59">00:32:00</span>&nbsp;&nbsp;T<span class="ai">AoC</span>aybin R<span class="ai">AoC</span>utkin</li>
-		<li>&nbsp;<span title="00:23:21 / 00:16:44">00:40:05</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
-		<li>&nbsp;<span title="00:33:09 / 00:20:29">00:53:38</span>&nbsp;&nbsp;R<span class="ai">AoC</span>obert R<span class="ai">AoC</span>oger</li>
-		<li>&nbsp;<span title="00:24:18 / 00:30:24">00:54:42</span>&nbsp;&nbsp;B<span class="ai">AoC</span>radley W<span class="ai">AoC</span>elsh</li>
+		<li><span class="dT">&nbsp;00:19:56</span><span class="dS">&nbsp;00:09:41 &nbsp;00:10:15</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:20:16</span><span class="dS">&nbsp;00:16:04 &nbsp;00:04:12</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:20:50</span><span class="dS">&nbsp;00:07:43 &nbsp;00:13:07</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:26:26</span><span class="dS">&nbsp;00:11:39 &nbsp;00:14:47</span>&nbsp;&nbsp;Q<span class="ai">AoC</span>uintin D<span class="ai">AoC</span>eGroot</li>
+		<li><span class="dT">&nbsp;00:27:27</span><span class="dS">&nbsp;00:17:20 &nbsp;00:10:07</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
+		<li><span class="dT">&nbsp;00:27:51</span><span class="dS">&nbsp;00:26:22 &nbsp;00:01:29</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;00:32:00</span><span class="dS">&nbsp;00:17:01 &nbsp;00:14:59</span>&nbsp;&nbsp;T<span class="ai">AoC</span>aybin R<span class="ai">AoC</span>utkin</li>
+		<li><span class="dT">&nbsp;00:40:05</span><span class="dS">&nbsp;00:23:21 &nbsp;00:16:44</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
+		<li><span class="dT">&nbsp;00:53:38</span><span class="dS">&nbsp;00:33:09 &nbsp;00:20:29</span>&nbsp;&nbsp;R<span class="ai">AoC</span>obert R<span class="ai">AoC</span>oger</li>
+		<li><span class="dT">&nbsp;00:54:42</span><span class="dS">&nbsp;00:24:18 &nbsp;00:30:24</span>&nbsp;&nbsp;B<span class="ai">AoC</span>radley W<span class="ai">AoC</span>elsh</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day5"></a><h3><a href="https://adventofcode.com/2019/day/5">Day 5: Sunny with a Chance of Asteroids</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/5"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:12:00 / 00:05:51">00:17:51</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:15:35 / 00:24:59">00:40:34</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:27:39 / 00:14:09">00:41:48</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:38:42 / 00:06:27">00:45:09</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:35:50 / 00:20:56">00:56:46</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
-		<li>&nbsp;<span title="00:29:42 / 00:45:19">01:15:01</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="01:19:55 / 00:02:13">01:22:08</span>&nbsp;&nbsp;J<span class="ai">AoC</span>esse F<span class="ai">AoC</span>lorig</li>
-		<li>&nbsp;<span title="00:58:20 / 00:28:18">01:26:38</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ucker T<span class="ai">AoC</span>ibbetts</li>
-		<li>&nbsp;<span title="01:24:22 / 00:05:42">01:30:04</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
-		<li>&nbsp;<span title="01:08:25 / 00:31:32">01:39:57</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/5"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:17:51</span><span class="dS">&nbsp;00:12:00 &nbsp;00:05:51</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:40:34</span><span class="dS">&nbsp;00:15:35 &nbsp;00:24:59</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:41:48</span><span class="dS">&nbsp;00:27:39 &nbsp;00:14:09</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:45:09</span><span class="dS">&nbsp;00:38:42 &nbsp;00:06:27</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;00:56:46</span><span class="dS">&nbsp;00:35:50 &nbsp;00:20:56</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
+		<li><span class="dT">&nbsp;01:15:01</span><span class="dS">&nbsp;00:29:42 &nbsp;00:45:19</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;01:22:08</span><span class="dS">&nbsp;01:19:55 &nbsp;00:02:13</span>&nbsp;&nbsp;J<span class="ai">AoC</span>esse F<span class="ai">AoC</span>lorig</li>
+		<li><span class="dT">&nbsp;01:26:38</span><span class="dS">&nbsp;00:58:20 &nbsp;00:28:18</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ucker T<span class="ai">AoC</span>ibbetts</li>
+		<li><span class="dT">&nbsp;01:30:04</span><span class="dS">&nbsp;01:24:22 &nbsp;00:05:42</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
+		<li><span class="dT">&nbsp;01:39:57</span><span class="dS">&nbsp;01:08:25 &nbsp;00:31:32</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day4"></a><h3><a href="https://adventofcode.com/2019/day/4">Day 4: Secure Container</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:05:38 / 00:01:38">00:07:16</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:06:18 / 00:05:25">00:11:43</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
-		<li>&nbsp;<span title="00:10:48 / 00:03:40">00:14:28</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
-		<li>&nbsp;<span title="00:07:35 / 00:10:01">00:17:36</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:19:20 / 00:01:10">00:20:30</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:13:03 / 00:07:32">00:20:35</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
-		<li>&nbsp;<span title="00:06:40 / 00:15:39">00:22:19</span>&nbsp;&nbsp;M<span class="ai">AoC</span>atthew K<span class="ai">AoC</span>ongsiri</li>
-		<li>&nbsp;<span title="00:16:11 / 00:07:02">00:23:13</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:19:45 / 00:09:25">00:29:10</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:16:39 / 00:14:16">00:30:55</span>&nbsp;&nbsp;B<span class="ai">AoC</span>radley W<span class="ai">AoC</span>elsh</li>
+		<li><span class="dT">&nbsp;00:07:16</span><span class="dS">&nbsp;00:05:38 &nbsp;00:01:38</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:11:43</span><span class="dS">&nbsp;00:06:18 &nbsp;00:05:25</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
+		<li><span class="dT">&nbsp;00:14:28</span><span class="dS">&nbsp;00:10:48 &nbsp;00:03:40</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
+		<li><span class="dT">&nbsp;00:17:36</span><span class="dS">&nbsp;00:07:35 &nbsp;00:10:01</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:20:30</span><span class="dS">&nbsp;00:19:20 &nbsp;00:01:10</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;00:20:35</span><span class="dS">&nbsp;00:13:03 &nbsp;00:07:32</span>&nbsp;&nbsp;E<span class="ai">AoC</span>ric H<span class="ai">AoC</span>ughes</li>
+		<li><span class="dT">&nbsp;00:22:19</span><span class="dS">&nbsp;00:06:40 &nbsp;00:15:39</span>&nbsp;&nbsp;M<span class="ai">AoC</span>atthew K<span class="ai">AoC</span>ongsiri</li>
+		<li><span class="dT">&nbsp;00:23:13</span><span class="dS">&nbsp;00:16:11 &nbsp;00:07:02</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;00:29:10</span><span class="dS">&nbsp;00:19:45 &nbsp;00:09:25</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:30:55</span><span class="dS">&nbsp;00:16:39 &nbsp;00:14:16</span>&nbsp;&nbsp;B<span class="ai">AoC</span>radley W<span class="ai">AoC</span>elsh</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day3"></a><h3><a href="https://adventofcode.com/2019/day/3">Day 3: Crossed Wires</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:10:24 / 00:05:18">00:15:42</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:22:09 / 00:07:05">00:29:14</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:27:33 / 00:04:38">00:32:11</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
-		<li>&nbsp;<span title="00:29:26 / 00:05:45">00:35:11</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
-		<li>&nbsp;<span title="00:35:37 / 00:06:53">00:42:30</span>&nbsp;&nbsp;E<span class="ai">AoC</span>lise T<span class="ai">AoC</span>horsen</li>
-		<li>&nbsp;<span title="00:45:32 / 00:03:58">00:49:30</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
-		<li>&nbsp;<span title="00:33:16 / 00:19:11">00:52:27</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:34:44 / 00:21:01">00:55:45</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ouglas B<span class="ai">AoC</span>odkin</li>
-		<li>&nbsp;<span title="00:39:22 / 00:21:28">01:00:50</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan D<span class="ai">AoC</span>aniels</li>
-		<li>&nbsp;<span title="01:01:57 / 00:00:21">01:02:18</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
+		<li><span class="dT">&nbsp;00:15:42</span><span class="dS">&nbsp;00:10:24 &nbsp;00:05:18</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:29:14</span><span class="dS">&nbsp;00:22:09 &nbsp;00:07:05</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:32:11</span><span class="dS">&nbsp;00:27:33 &nbsp;00:04:38</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
+		<li><span class="dT">&nbsp;00:35:11</span><span class="dS">&nbsp;00:29:26 &nbsp;00:05:45</span>&nbsp;&nbsp;R<span class="ai">AoC</span>ebecca M<span class="ai">AoC</span>atous</li>
+		<li><span class="dT">&nbsp;00:42:30</span><span class="dS">&nbsp;00:35:37 &nbsp;00:06:53</span>&nbsp;&nbsp;E<span class="ai">AoC</span>lise T<span class="ai">AoC</span>horsen</li>
+		<li><span class="dT">&nbsp;00:49:30</span><span class="dS">&nbsp;00:45:32 &nbsp;00:03:58</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
+		<li><span class="dT">&nbsp;00:52:27</span><span class="dS">&nbsp;00:33:16 &nbsp;00:19:11</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:55:45</span><span class="dS">&nbsp;00:34:44 &nbsp;00:21:01</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ouglas B<span class="ai">AoC</span>odkin</li>
+		<li><span class="dT">&nbsp;01:00:50</span><span class="dS">&nbsp;00:39:22 &nbsp;00:21:28</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan D<span class="ai">AoC</span>aniels</li>
+		<li><span class="dT">&nbsp;01:02:18</span><span class="dS">&nbsp;01:01:57 &nbsp;00:00:21</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day2"></a><h3><a href="https://adventofcode.com/2019/day/2">Day 2: 1202 Program Alarm</a></h3>
 	<ol>
-		<li>&nbsp;<span title="00:08:42 / 00:04:54">00:13:36</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:12:56 / 00:03:15">00:16:11</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
-		<li>&nbsp;<span title="00:09:46 / 00:08:25">00:18:11</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:13:22 / 00:05:45">00:19:07</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:12:08 / 00:08:33">00:20:41</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ouglas B<span class="ai">AoC</span>odkin</li>
-		<li>&nbsp;<span title="00:14:38 / 00:07:28">00:22:06</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ucker T<span class="ai">AoC</span>ibbetts</li>
-		<li>&nbsp;<span title="00:12:14 / 00:10:55">00:23:09</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
-		<li>&nbsp;<span title="00:12:23 / 00:11:48">00:24:11</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
-		<li>&nbsp;<span title="00:22:47 / 00:07:17">00:30:04</span>&nbsp;&nbsp;P<span class="ai">AoC</span>hilip L<span class="ai">AoC</span>astner</li>
-		<li>&nbsp;<span title="00:24:01 / 00:10:24">00:34:25</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
+		<li><span class="dT">&nbsp;00:13:36</span><span class="dS">&nbsp;00:08:42 &nbsp;00:04:54</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:16:11</span><span class="dS">&nbsp;00:12:56 &nbsp;00:03:15</span>&nbsp;&nbsp;M<span class="ai">AoC</span>att B<span class="ai">AoC</span>oehm</li>
+		<li><span class="dT">&nbsp;00:18:11</span><span class="dS">&nbsp;00:09:46 &nbsp;00:08:25</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:19:07</span><span class="dS">&nbsp;00:13:22 &nbsp;00:05:45</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;00:20:41</span><span class="dS">&nbsp;00:12:08 &nbsp;00:08:33</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ouglas B<span class="ai">AoC</span>odkin</li>
+		<li><span class="dT">&nbsp;00:22:06</span><span class="dS">&nbsp;00:14:38 &nbsp;00:07:28</span>&nbsp;&nbsp;T<span class="ai">AoC</span>ucker T<span class="ai">AoC</span>ibbetts</li>
+		<li><span class="dT">&nbsp;00:23:09</span><span class="dS">&nbsp;00:12:14 &nbsp;00:10:55</span>&nbsp;&nbsp;A<span class="ai">AoC</span>ndrew C<span class="ai">AoC</span>hang</li>
+		<li><span class="dT">&nbsp;00:24:11</span><span class="dS">&nbsp;00:12:23 &nbsp;00:11:48</span>&nbsp;&nbsp;C<span class="ai">AoC</span>hris S<span class="ai">AoC</span>ieber</li>
+		<li><span class="dT">&nbsp;00:30:04</span><span class="dS">&nbsp;00:22:47 &nbsp;00:07:17</span>&nbsp;&nbsp;P<span class="ai">AoC</span>hilip L<span class="ai">AoC</span>astner</li>
+		<li><span class="dT">&nbsp;00:34:25</span><span class="dS">&nbsp;00:24:01 &nbsp;00:10:24</span>&nbsp;&nbsp;S<span class="ai">AoC</span>teve C<span class="ai">AoC</span>arlon</li>
 	</ol>
 </div>
 <div class="daily">
 	<a name="day1"></a><h3><a href="https://adventofcode.com/2019/day/1">Day 1: The Tyranny of the Rocket Equation</a></h3>
 	<ol>
-		<li><a href="https://adventofcode.com/2019/leaderboard/day/1"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a><span title="00:01:29 / 00:02:29">00:03:58</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:02:22 / 00:02:46">00:05:08</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
-		<li>&nbsp;<span title="00:03:16 / 00:03:13">00:06:29</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ouglas B<span class="ai">AoC</span>odkin</li>
-		<li>&nbsp;<span title="00:02:34 / 00:04:07">00:06:41</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
-		<li>&nbsp;<span title="00:05:18 / 00:04:29">00:09:47</span>&nbsp;&nbsp;K<span class="ai">AoC</span>ristin S<span class="ai">AoC</span>hirley</li>
-		<li>&nbsp;<span title="00:02:22 / 00:08:28">00:10:50</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
-		<li>&nbsp;<span title="00:01:55 / 00:10:37">00:12:32</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
-		<li>&nbsp;<span title="00:06:26 / 00:06:59">00:13:25</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
-		<li>&nbsp;<span title="00:02:50 / 00:15:11">00:18:01</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
-		<li>&nbsp;<span title="00:03:06 / 00:17:29">00:20:35</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
+		<li><span class="dT"><a href="https://adventofcode.com/2019/leaderboard/day/1"><span class="global" title="Top 100 on the daily Global Leaderboard">*</span></a>00:03:58</span><span class="dS">&nbsp;00:01:29 &nbsp;00:02:29</span>&nbsp;&nbsp;N<span class="ai">AoC</span>athan S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:05:08</span><span class="dS">&nbsp;00:02:22 &nbsp;00:02:46</span>&nbsp;&nbsp;B<span class="ai">AoC</span>rian U<span class="ai">AoC</span>ri</li>
+		<li><span class="dT">&nbsp;00:06:29</span><span class="dS">&nbsp;00:03:16 &nbsp;00:03:13</span>&nbsp;&nbsp;D<span class="ai">AoC</span>ouglas B<span class="ai">AoC</span>odkin</li>
+		<li><span class="dT">&nbsp;00:06:41</span><span class="dS">&nbsp;00:02:34 &nbsp;00:04:07</span>&nbsp;&nbsp;G<span class="ai">AoC</span>reg F<span class="ai">AoC</span>uller</li>
+		<li><span class="dT">&nbsp;00:09:47</span><span class="dS">&nbsp;00:05:18 &nbsp;00:04:29</span>&nbsp;&nbsp;K<span class="ai">AoC</span>ristin S<span class="ai">AoC</span>hirley</li>
+		<li><span class="dT">&nbsp;00:10:50</span><span class="dS">&nbsp;00:02:22 &nbsp;00:08:28</span>&nbsp;&nbsp;M<span class="ai">AoC</span>ike H<span class="ai">AoC</span>erms</li>
+		<li><span class="dT">&nbsp;00:12:32</span><span class="dS">&nbsp;00:01:55 &nbsp;00:10:37</span>&nbsp;&nbsp;J<span class="ai">AoC</span>onathan S<span class="ai">AoC</span>keate</li>
+		<li><span class="dT">&nbsp;00:13:25</span><span class="dS">&nbsp;00:06:26 &nbsp;00:06:59</span>&nbsp;&nbsp;S<span class="ai">AoC</span>am H<span class="ai">AoC</span>olton</li>
+		<li><span class="dT">&nbsp;00:18:01</span><span class="dS">&nbsp;00:02:50 &nbsp;00:15:11</span>&nbsp;&nbsp;A<span class="ai">AoC</span>lan C<span class="ai">AoC</span>arvajal</li>
+		<li><span class="dT">&nbsp;00:20:35</span><span class="dS">&nbsp;00:03:06 &nbsp;00:17:29</span>&nbsp;&nbsp;L<span class="ai">AoC</span>ara D<span class="ai">AoC</span>edic</li>
 	</ol>
 </div>
 <div class="clear"></div>

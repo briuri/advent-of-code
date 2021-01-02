@@ -33,6 +33,9 @@ div.details {
 	display: none;
 	margin-bottom: 10px;
 }
+span.dS {
+	display: none;
+}
 span.emoji {
 	font-size: 8pt;
 }
