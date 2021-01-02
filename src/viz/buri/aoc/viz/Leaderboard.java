@@ -354,6 +354,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\tvar layout = {\n");
 		page.append("\t\t\tbarmode: 'stack',\n");
 		page.append("\t\t\tfont: { family: 'monospace', color: '#cccccc' },\n");
+		page.append("\t\t\tlegend: { x: 1, xanchor: 'right', y: 1 },\n");
 		page.append("\t\t\tmargin: { t: 32, r: 32, b: 75, l: 32 },\n");
 		page.append("\t\t\tpaper_bgcolor: '#0f0f23',\n");
 		page.append("\t\t\tplot_bgcolor: '#0f0f23',\n");
