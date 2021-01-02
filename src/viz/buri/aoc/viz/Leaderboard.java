@@ -377,8 +377,8 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\n\t<h2>Top ").append(novetta.getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
-		page.append("\t<p>Show: <a href=\"javascript:void(0);\">\n");
-		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Split Times</span><span class=\"dS dailyLink\">Total Times</span>\n");
+		page.append("\t<p><a href=\"javascript:void(0);\">\n");
+		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Show Split Times</span><span class=\"dS dailyLink\">Show Total Times</span>\n");
 		page.append("\t</a></p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
