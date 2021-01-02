@@ -4,40 +4,10 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Novetta Advent of Code - Fastest Times (2018)</title>
 
-	<link type="text/css" rel="stylesheet" href="aoc.css?2020-12-30-1620" />
 	<script type="text/javascript" src="jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="plotly-1.58.1.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("span.tieTimeLink").click(
-				function() {
-					var place = $(this).attr("id").substring(7);
-					oldDisplay = document.getElementById('details' + place).style.display;
-					if (oldDisplay == 'block') {
-						$('#details' + place).hide(150);
-					}
-					else {
-						$('#details' + place).show(300);
-					}
-					if (!document.getElementById('tieTime' + place).classList.contains('ineligible')) {
-						document.getElementById('tieTime' + place).style.color =
-							(oldDisplay == 'block' ? '#ffffff' : '#888800');
-					}
-				});
-			$("span.dailyLink").click(
-				function() {
-					oldDisplay = document.getElementById('dailySplit').style.display;
-					if (oldDisplay == 'none') {
-						$('span.dS').hide();
-						$('span.dT').show();
-					}
-					else {
-						$('span.dT').hide();
-						$('span.dS').show();
-					}
-				});
-			});
-	</script>
+	<script type="text/javascript" src="aoc.js?2021-01-02-1615"></script>
+	<link type="text/css" rel="stylesheet" href="aoc.css?2021-01-02-1615" />
 </head>
 
 <body>
