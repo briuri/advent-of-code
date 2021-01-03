@@ -113,11 +113,11 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code\">NN&rArr;</a><br />\n");
 		}
 		page.append("\t\t").append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>").append(" | ");
-		page.append(year.equals("2019") ? year : "<a href=\"index-2019.html\">2019</a>").append(" | ");
-		page.append(year.equals("2018") ? year : "<a href=\"index-2018.html\">2018</a>").append(" | ");
-		page.append(year.equals("2017") ? year : "<a href=\"index-2017.html\">2017</a>").append(" | ");
-		page.append(year.equals("2016") ? year : "<a href=\"index-2016.html\">2016</a>\n");
-		page.append("\t</div>\n\n");
+		page.append(year.equals("2019") ? year : "<a href=\"2019-top.html\">2019</a>").append(" | ");
+		page.append(year.equals("2018") ? year : "<a href=\"2018-top.html\">2018</a>").append(" | ");
+		page.append(year.equals("2017") ? year : "<a href=\"2017-top.html\">2017</a>").append(" | ");
+		page.append(year.equals("2016") ? year : "<a href=\"2016-top.html\">2016</a>");
+		page.append("\n\t</div>\n\n");
 	}
 
 	/**

@@ -29,6 +29,10 @@ div.daily {
 	float: left;
 	min-width: 370px;
 }
+span.dailyLink {
+	background-color: #1f1f43;
+	padding: 5px;
+}
 div.details {
 	display: none;
 	margin-bottom: 10px;

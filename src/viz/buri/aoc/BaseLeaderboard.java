@@ -196,7 +196,7 @@ public abstract class BaseLeaderboard {
 	 */
 	protected void writePage(String year, boolean isArchive) {
 		try {
-			String outputFilename = (isArchive ? "index-" + year + ".html" : "index.html");
+			String outputFilename = (isArchive ? year + "-top.html" : "index.html");
 			Files.write(Paths.get(OUTPUT_FOLDER + outputFilename), getPage().toString().getBytes());
 		}
 		catch (IOException e) {
