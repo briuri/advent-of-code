@@ -443,6 +443,8 @@ public class Leaderboard extends BaseLeaderboard {
 
 				boolean isNextTie = false;
 				int maxPlaces = Math.min(novetta.getPlaces(), places.size());
+				Long bestPart1 = getFastestSplitTime(places, maxPlaces, Part.ONE);
+				Long bestPart2 = getFastestSplitTime(places, maxPlaces, Part.TWO);
 				for (int place = 0; place < maxPlaces; place++) {
 					PuzzleTime record = places.get(place);
 					String time = PuzzleTime.formatTime(record.getTime(Part.TWO));
@@ -452,10 +454,23 @@ public class Leaderboard extends BaseLeaderboard {
 					page.append("<span class=\"dT\">").append(time).append("</span>");
 
 					// Show split times
-					time = PuzzleTime.formatTime(record.getTime(Part.ONE));
-					page.append("<span class=\"dS\">").append(time).append(" ");
-					time = PuzzleTime.formatTime(record.getTime(Part.TWO) - record.getTime(Part.ONE));
-					page.append(time).append("</span>");
+					Long part1 = record.getTime(Part.ONE);
+					page.append("<span class=\"dS\">");
+					if (part1.equals(bestPart1)) {
+						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part1)).append("</span>");
+					}
+					else {
+						page.append(PuzzleTime.formatTime(part1));
+					}
+					page.append(" ");
+					Long part2 = record.getTime(Part.TWO) - record.getTime(Part.ONE);
+					if (part2.equals(bestPart2)) {
+						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part2)).append("</span>");
+					}
+					else {
+						page.append(PuzzleTime.formatTime(part2));
+					}
+					page.append("</span>");
 
 					// Show global indicator and player name
 					page.append("&nbsp;");

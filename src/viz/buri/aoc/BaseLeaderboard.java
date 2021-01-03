@@ -256,6 +256,23 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
+	 * Returns the fastest split time for either part 1 or part 2 in a day's puzzle.
+	 */
+	protected Long getFastestSplitTime(List<PuzzleTime> places, int maxPlaces, Part part) {
+		List<Long> times = new ArrayList<>();
+		for (PuzzleTime record : places.subList(0, maxPlaces)) {
+			if (part == Part.ONE) {
+				times.add(record.getTime(Part.ONE));
+			}
+			else if (part == Part.TWO) {
+				times.add(record.getTime(Part.TWO) - record.getTime(Part.ONE));
+			}
+		}
+		Collections.sort(times);
+		return (times.get(0));
+	}
+
+	/**
 	 * Accessor for the page buffer
 	 */
 	protected StringBuffer getPage() {

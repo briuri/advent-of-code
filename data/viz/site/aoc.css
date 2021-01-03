@@ -83,6 +83,10 @@ span.overallLink {
 li.overallRecord {
 	margin-bottom: 5px;
 }
+span.splitTime {
+	color: #ffffff;
+	text-shadow: 0 0 5px #ffffff;
+}
 span.tieTime {
 	color: #ffffff;
 	text-shadow: 0 0 5px #ffffff;
