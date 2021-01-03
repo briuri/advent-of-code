@@ -194,10 +194,9 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Saves the page to the filesystem.
 	 */
-	protected void writePage(String year, boolean isArchive) {
+	protected void writePage(String filename) {
 		try {
-			String outputFilename = (isArchive ? year + "-top.html" : "index.html");
-			Files.write(Paths.get(OUTPUT_FOLDER + outputFilename), getPage().toString().getBytes());
+			Files.write(Paths.get(OUTPUT_FOLDER + filename), getPage().toString().getBytes());
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid output file.", e);

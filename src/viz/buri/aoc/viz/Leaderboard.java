@@ -18,7 +18,7 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class Leaderboard extends BaseLeaderboard {
-	private static final String CURRENT_YEAR = "2020";
+	private static final String CURRENT_YEAR = "2021";
 
 	/**
 	 * Generate the Fastest Times pages via a JUnit test in Eclipse.
@@ -28,6 +28,12 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	@Test
 	public void generatePages() {
+		// Temporary index page.
+		resetPage();
+		insertHeader("2021");
+		getPage().append("<p>See you on November 30, 2021!</p>");
+		writePage("index.html");
+
 		for (String year : YEARS) {
 			visualizeYear(year);
 		}
@@ -67,14 +73,22 @@ public class Leaderboard extends BaseLeaderboard {
 		final PuzzleTimes puzzleTimes = getPuzzleTimes(year, leaderboardJson);
 		final List<OverallTimes> overallTimes = getOverallTimes(year, puzzleTimes);
 
+		// Create Top X page.
 		resetPage();
 		insertHeader(year);
-		insertTopOverall(year, overallTimes);
+		insertTopOverall(year, overallTimes, false);
 		insertTopDivisionsChart(year, overallTimes);
 		insertTotalSolvesChart(year, puzzleTimes);
 		insertTopDaily(year, puzzleTimes);
 		insertFooter(year);
-		writePage(year, !year.equals(CURRENT_YEAR));
+		writePage(year + "-top.html");
+
+		// Create page showing everyone's times.
+		resetPage();
+		insertHeader(year);
+		insertTopOverall(year, overallTimes, true);
+		insertFooter(year);
+		writePage(year + "-all.html");
 	}
 
 	/**
@@ -104,15 +118,21 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("</head>\n\n<body>\n");
 		page.append("\t<h1>Novetta AoC - Fastest Times").append(" (").append(year).append(")</h1>\n\n");
 		page.append("\t<div class=\"navBar\">\n");
+
+		// Temporarily suppress 2021 leaderboard.
 		if (year.equals(CURRENT_YEAR)) {
-			page.append("\t\t<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/self\">Your Times&rArr;</a> | ");
+			page.append("L.Board (not open yet) | ");
+		}
+		else {
 			page.append("L.Board ");
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">2&rArr;</a> | ");
-			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a> | ");
-			page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code\">NN&rArr;</a><br />\n");
 		}
-		page.append("\t\t").append(year.equals("2020") ? year : "<a href=\"index.html\">2020</a>").append(" | ");
+		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a> | ");
+		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code\">NN&rArr;</a><br />\n");
+		page.append("\t\t");
+		page.append(year.equals("2021") ? year : "<a href=\"index.html\">2021</a>").append(" | ");
+		page.append(year.equals("2020") ? year : "<a href=\"2020-top.html\">2020</a>").append(" | ");
 		page.append(year.equals("2019") ? year : "<a href=\"2019-top.html\">2019</a>").append(" | ");
 		page.append(year.equals("2018") ? year : "<a href=\"2018-top.html\">2018</a>").append(" | ");
 		page.append(year.equals("2017") ? year : "<a href=\"2017-top.html\">2017</a>").append(" | ");
@@ -123,16 +143,29 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Overall section.
 	 */
-	private void insertTopOverall(String year, List<OverallTimes> overallTimes) {
+	private void insertTopOverall(String year, List<OverallTimes> overallTimes, boolean showAll) {
 		Novetta novetta = getNovettas().get(year);
-		int numOverall = Math.min(novetta.getPlaces(), overallTimes.size());
+		int numOverall = showAll ? overallTimes.size() : Math.min(novetta.getPlaces(), overallTimes.size());
 		if (numOverall == 0) {
 			return;
 		}
 		StringBuffer page = getPage();
-		page.append("\t<h2>Top ").append(numOverall).append(" Overall</h2>\n");
+		if (showAll) {
+			page.append("\t<h2>All Players</h2>\n");
+		}
+		else {
+			page.append("\t<h2>Top ").append(numOverall).append(" Overall</h2>\n");
+		}
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>").append(novetta.getRules()).append("</p>\n");
+		if (showAll) {
+			page.append("<a href=\"").append(year).append("-top.html\">");
+			page.append("<span class=\"overallLink\">Show Top Players</span></a>\n");
+		}
+		else {
+			page.append("<a href=\"").append(year).append("-all.html\">");
+			page.append("<span class=\"overallLink\">Show All Players</span></a>\n");
+		}
 		page.append("\t<div class=\"clear\"></div>\n\n<div class=\"overall\">\n");
 		page.append("<ol>\n");
 
@@ -154,7 +187,9 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append("<span class=\"ineligible\" title=\"Ineligible for Top 3 prizes\">");
 			}
 			page.append(maskName(year, player.getName()));
-			page.append(novetta.getDivisionFor(player.getName(), true));
+			if (!showAll) {
+				page.append(novetta.getDivisionFor(player.getName(), true));
+			}
 			if (isIneligible) {
 				page.append("</span>");
 			}
@@ -213,7 +248,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append(isNextTie ? "\t<br />\n" : "\t</li>\n");
 
 			// Break overall scores into two columns for > Top 10.
-			if (i == numOverall / 2 && numOverall > 10) {
+			if (numOverall > 10 && (i == (numOverall + 1) / 2 - 1)) {
 				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2).append("\">\n");
 			}
 		}

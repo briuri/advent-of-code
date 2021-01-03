@@ -76,6 +76,10 @@ div.navBar {
 	line-height: 18pt;
 	padding: 5px;
 }
+span.overallLink {
+	background-color: #1f1f43;
+	padding: 5px;
+}
 li.overallRecord {
 	margin-bottom: 5px;
 }
