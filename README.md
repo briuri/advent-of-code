@@ -20,7 +20,7 @@ Each Day can be run from a JUnit test harness, colocated in the same source fold
 ## Leaderboard Visualization
 
 In addition to puzzle solutions, this project also contains a simple visualization (under `src/viz`) of the private leaderboard JSON
-that can show the data as a [Fastest Solve Times page](http://aoc.urizone.net).
+that can show the data as a [Fastest Times page](http://aoc.urizone.net).
 
 ## License
 

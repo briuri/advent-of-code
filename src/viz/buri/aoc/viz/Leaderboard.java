@@ -1,5 +1,6 @@
 package buri.aoc.viz;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import buri.aoc.BaseLeaderboard;
 import buri.aoc.Part;
 
 /**
- * Alternate visualization of Novetta's private leaderboard showing the Fastest Solve Times for each puzzle. Generated
+ * Alternate visualization of Novetta's private leaderboard showing the Fastest Times for each puzzle. Generated
  * from the API JSON.
  *
  * @author Brian Uri!
@@ -20,7 +21,7 @@ public class Leaderboard extends BaseLeaderboard {
 	private static final String CURRENT_YEAR = "2020";
 
 	/**
-	 * Generate the Fastest Solve Times pages via a JUnit test in Eclipse.
+	 * Generate the Fastest Times pages via a JUnit test in Eclipse.
 	 *
 	 * NOTE: Inactive accounts are purged yearly from Novetta's leaderboard to avoid the 200-player cap. Redownloading
 	 * JSON from older years and regenerating their pages will result in missing scores.
@@ -29,6 +30,32 @@ public class Leaderboard extends BaseLeaderboard {
 	public void generatePages() {
 		for (String year : YEARS) {
 			visualizeYear(year);
+		}
+	}
+
+	/**
+	 * Generates the Fastest Times pages on a schedule, for use when I'm not around to do manual updates. Stops after 40 iterations (10 hours).
+	 *
+	 * No arguments required.
+	 */
+	public static void main(String[] args) throws Exception {
+		final int minutes = 15;
+		final int reps = 40;
+		final Leaderboard leaderboard = new Leaderboard();
+		for (int i = 0; i < reps; i++) {
+			System.out.println(new Date() + " Leaderboard Auto-Update");
+			// Script uses curl to pass session cookie and copy JSON to /data/viz/json.
+			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\get-aoc-json.bat");
+			jsonDowload.waitFor();
+
+			leaderboard.generatePages();
+
+			// Script uses AWS CLI to upload files to S3 bucket hosting static website.
+			Process htmlUpload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\put-s3-aoc.urizone.net.bat");
+			htmlUpload.waitFor();
+
+			// Wait for next iteration.
+			Thread.sleep(minutes * 60 * 1000);
 		}
 	}
 
