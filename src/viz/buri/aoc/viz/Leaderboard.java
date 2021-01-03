@@ -121,8 +121,13 @@ public class Leaderboard extends BaseLeaderboard {
 
 		// Temporarily suppress 2021 leaderboard.
 		if (year.equals(CURRENT_YEAR)) {
-			page.append("L.Board (not open yet) | ");
+			page.append("Leaderboard&rArr; | ");
 		}
+		// Show 1 leaderboard for 2016 - 2019
+		else if (year.equals("2016") || year.equals("2017") || year.equals("2018") || year.equals("2019")) {
+			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">Leaderboard&rArr;</a> | ");
+		}
+		// Show overflow leaderboard in 2020 and beyond
 		else {
 			page.append("L.Board ");
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
