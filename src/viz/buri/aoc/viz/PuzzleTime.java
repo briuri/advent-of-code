@@ -56,9 +56,16 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	}
 
 	/**
+	 * Converts milliseconds into a string timestamp. Standard timestamps allow 3 digits for the hour. 2016 sometimes had 4-digit hours.
+	 */
+	public static String formatTime(long time, boolean isStandardWidth) {
+		return (isStandardWidth ? formatTime(time, 3) : formatTime(time, 4));
+	}
+
+	/**
 	 * Converts milliseconds into a string timestamp.
 	 */
-	public static String formatTime(long time) {
+	private static String formatTime(long time, int hourWidth) {
 		StringBuffer buffer = new StringBuffer();
 
 		// Median timestamps may have half-second from average calculation. Round up.
@@ -87,7 +94,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		}
 		buffer.append(seconds);
 
-		if (buffer.length() == 8) {
+		// Left-pad time. 2016 had 4-digit hours in the All Players report.
+		int padSize = hourWidth + 6 - buffer.length();
+		for (int i = 0; i < padSize; i++) {
 			buffer.insert(0, "&nbsp;");
 		}
 		return (buffer.toString());

@@ -175,9 +175,11 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
+		boolean isStandardWidth = !(year.equals("2016") && showAll);
+		int summaryMargin = isStandardWidth ? 12 : 13;
 		for (int i = 0; i < numOverall; i++) {
 			OverallTimes player = overallTimes.get(i);
-			String overallTime = PuzzleTime.formatTime(player.getTiebreakerTime());
+			String overallTime = PuzzleTime.formatTime(player.getTiebreakerTime(), isStandardWidth);
 			boolean isIneligible = novetta.getIneligible().contains(player.getName());
 			String timeClass = (isIneligible ? "ineligible" : "tieTime");
 
@@ -201,7 +203,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("<br />\n\t\t");
 
 			// Show summary of medals and global records
-			for (int j = 0; j < 12; j++) {
+			for (int j = 0; j < summaryMargin; j++) {
 				page.append("&nbsp;");
 			}
 			page.append(player.getStars()).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ");
@@ -219,7 +221,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("\n\t\t<div class=\"details\" id=\"details").append(i).append("\">\n");
 			int totalTimes = player.getTimes().size();
 			for (int j = 0; j < totalTimes; j++) {
-				String time = PuzzleTime.formatTime(player.getTimes().get(j));
+				String time = PuzzleTime.formatTime(player.getTimes().get(j), isStandardWidth);
 				page.append("\t\t\t");
 				// 2017+ use median time, so add descriptive text next to the key times.
 				if (!year.equals("2016")) {
@@ -447,7 +449,7 @@ public class Leaderboard extends BaseLeaderboard {
 				Long bestPart2 = getFastestSplitTime(places, maxPlaces, Part.TWO);
 				for (int place = 0; place < maxPlaces; place++) {
 					PuzzleTime record = places.get(place);
-					String time = PuzzleTime.formatTime(record.getTime(Part.TWO));
+					String time = PuzzleTime.formatTime(record.getTime(Part.TWO), true);
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 
 					// Show total time by default
@@ -457,18 +459,18 @@ public class Leaderboard extends BaseLeaderboard {
 					Long part1 = record.getTime(Part.ONE);
 					page.append("<span class=\"dS\">");
 					if (part1.equals(bestPart1)) {
-						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part1)).append("</span>");
+						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part1, true)).append("</span>");
 					}
 					else {
-						page.append(PuzzleTime.formatTime(part1));
+						page.append(PuzzleTime.formatTime(part1, true));
 					}
 					page.append(" ");
 					Long part2 = record.getTime(Part.TWO) - record.getTime(Part.ONE);
 					if (part2.equals(bestPart2)) {
-						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part2)).append("</span>");
+						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part2, true)).append("</span>");
 					}
 					else {
-						page.append(PuzzleTime.formatTime(part2));
+						page.append(PuzzleTime.formatTime(part2, true));
 					}
 					page.append("</span>");
 
@@ -500,7 +502,7 @@ public class Leaderboard extends BaseLeaderboard {
 					StringBuffer alert = new StringBuffer();
 					alert.append(year).append(": ").append(puzzleTimes.getStars()).append(" stars\n");
 					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
-					alert.append(PuzzleTime.formatTime(mostRecent.getTime(Part.TWO))).append(" ").append(mostRecent.getName()).append("\n");
+					alert.append(PuzzleTime.formatTime(mostRecent.getTime(Part.TWO), true)).append(" ").append(mostRecent.getName()).append("\n");
 					System.out.println(alert.toString());
 					alertShown = true;
 				}
