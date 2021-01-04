@@ -91,6 +91,14 @@ public class PuzzleTimes {
 	}
 
 	/**
+	 * Accessor for how many records of a type exist on a particular day.
+	 */
+	public int getCount(TimeType type, int index) {
+		List<List<PuzzleTime>> list = getTimes(type);
+		return (list.get(index).size());
+	}
+
+	/**
 	 * Accessor for the total number of stars earned.
 	 */
 	public int getStars() {
