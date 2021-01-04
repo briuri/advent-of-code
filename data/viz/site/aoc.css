@@ -13,6 +13,15 @@ a:link {
 .ai {
 	display: none;
 }
+span.bestTime {
+	color: #ffffff;
+	text-shadow: 0 0 5px #ffffff;
+}
+span.bestTimeLink:hover {
+	color: #99ff99;
+	cursor: pointer;
+	*cursor: hand;
+}
 body {
 	background-color: #0f0f23;
 	color: #cccccc;
@@ -28,6 +37,9 @@ body {
 div.daily {
 	float: left;
 	min-width: 370px;
+}
+span.dailyHeader {
+	color: #ffffff;
 }
 span.dailyLink {
 	background-color: #1f1f43;
@@ -64,7 +76,7 @@ h3 {
 	margin-bottom: 0px;
 }
 span.ineligible {
-	color: #666666;
+	color: #888888;
 }
 div.overall {
 	float: left;
@@ -82,19 +94,6 @@ span.overallLink {
 }
 li.overallRecord {
 	margin-bottom: 5px;
-}
-span.splitTime {
-	color: #ffffff;
-	text-shadow: 0 0 5px #ffffff;
-}
-span.tieTime {
-	color: #ffffff;
-	text-shadow: 0 0 5px #ffffff;
-}
-span.tieTime:hover {
-	color: #99ff99;
-	cursor: pointer;
-	*cursor: hand;
 }
 .tiny {
 	font-size: 8pt;

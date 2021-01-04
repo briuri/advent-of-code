@@ -268,7 +268,10 @@ public abstract class BaseLeaderboard {
 		}
 		List<Long> times = new ArrayList<>();
 		for (PuzzleTime record : places.subList(0, maxPlaces)) {
-			times.add(record.getTime(type));
+			Long time = record.getTime(type);
+			if (time != null) {
+				times.add(record.getTime(type));
+			}
 		}
 		Collections.sort(times);
 		return (times.get(0));

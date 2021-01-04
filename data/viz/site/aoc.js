@@ -4,9 +4,9 @@
 $(document).ready(function() {
 
 	// Event handler for showing/hiding times in the Top X Overall section.
-	$("span.tieTimeLink").click(
+	$("span.bestTimeLink").click(
 		function() {
-			var place = $(this).attr("id").substring("tieTime".length);
+			var place = $(this).attr("id").substring("bestTime".length);
 			var oldDisplay = document.getElementById('details' + place).style.display;
 			if (oldDisplay == 'block') {
 				$('#details' + place).hide(150);
@@ -15,8 +15,8 @@ $(document).ready(function() {
 				$('#details' + place).show(300);
 			}
 			// Add tiebreaker time glow effect for eligible players.
-			if (!document.getElementById('tieTime' + place).classList.contains('ineligible')) {
-				document.getElementById('tieTime' + place).style.color =
+			if (!document.getElementById('bestTime' + place).classList.contains('ineligible')) {
+				document.getElementById('bestTime' + place).style.color =
 					(oldDisplay == 'block' ? '#ffffff' : '#888800');
 			}
 		});

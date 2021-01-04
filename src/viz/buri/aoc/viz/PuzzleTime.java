@@ -60,42 +60,42 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Converts milliseconds into a string timestamp. Standard timestamps allow 3 digits for the hour. 2016 sometimes
 	 * had 4-digit hours.
 	 */
-	public static String formatTime(long time, boolean isStandardWidth) {
+	public static String formatTime(Long time, boolean isStandardWidth) {
 		return (isStandardWidth ? formatTime(time, 3) : formatTime(time, 4));
 	}
 
 	/**
 	 * Converts milliseconds into a string timestamp.
 	 */
-	private static String formatTime(long time, int hourWidth) {
+	private static String formatTime(Long time, int hourWidth) {
 		StringBuffer buffer = new StringBuffer();
+		if (time != null) {
+			// Median timestamps may have half-second from average calculation. Round up.
+			if (time % 1000 != 0) {
+				time += 500L;
+			}
 
-		// Median timestamps may have half-second from average calculation. Round up.
-		if (time % 1000 != 0) {
-			time += 500L;
+			time = time / 1000L;
+			String hours = String.valueOf(time / (60 * 60));
+			if (hours.length() == 1) {
+				buffer.append("0");
+			}
+			buffer.append(hours).append(":");
+
+			time = time % (60 * 60);
+			String minutes = String.valueOf(time / 60);
+			if (minutes.length() == 1) {
+				buffer.append("0");
+			}
+			buffer.append(minutes).append(":");
+
+			time = time % 60;
+			String seconds = String.valueOf(time);
+			if (seconds.length() == 1) {
+				buffer.append("0");
+			}
+			buffer.append(seconds);
 		}
-
-		time = time / 1000L;
-		String hours = String.valueOf(time / (60 * 60));
-		if (hours.length() == 1) {
-			buffer.append("0");
-		}
-		buffer.append(hours).append(":");
-
-		time = time % (60 * 60);
-		String minutes = String.valueOf(time / 60);
-		if (minutes.length() == 1) {
-			buffer.append("0");
-		}
-		buffer.append(minutes).append(":");
-
-		time = time % 60;
-		String seconds = String.valueOf(time);
-		if (seconds.length() == 1) {
-			buffer.append("0");
-		}
-		buffer.append(seconds);
-
 		// Left-pad time. 2016 had 4-digit hours in the All Players report.
 		int padSize = hourWidth + 6 - buffer.length();
 		for (int i = 0; i < padSize; i++) {
