@@ -75,6 +75,18 @@ public class Leaderboard extends BaseLeaderboard {
 			getPage().append("<p>See you on November 31, 2021!</p>");
 			writePage("index.html");
 		}
+//
+//		// Show console message for most recent time recorded on most recent day, and total number of stars.
+//		if (!alertShown) {
+//			PuzzleTime mostRecent = places.get(places.size() - 1);
+//			StringBuffer alert = new StringBuffer();
+//			alert.append(year).append(" ");
+//			alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
+//			alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)).append(" ");
+//			alert.append(mostRecent.getName()).append("\n");
+//			System.out.println(alert.toString());
+//			alertShown = true;
+//		}
 
 		// Create Top X page.
 		resetPage();
@@ -419,11 +431,9 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Daily for each puzzle.
 	 */
 	private void insertTopDaily(String year, PuzzleTimes puzzleTimes) {
-		boolean alertShown = !year.equals(CURRENT_YEAR);
-		Novetta novetta = getNovettas().get(year);
 
 		StringBuffer page = getPage();
-		page.append("\n\t<h2>Top ").append(novetta.getPlaces()).append(" Daily</h2>\n");
+		page.append("\n\t<h2>Top ").append(getNovettas().get(year).getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
@@ -432,70 +442,67 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t</a></p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
-			List<PuzzleTime> places = puzzleTimes.getTimes(TimeType.TOTAL).get(i);
-			if (!places.isEmpty()) {
-				int day = i + 1;
-				Puzzle puzzle = getPuzzles().get(year).get(i);
-				page.append("<div class=\"daily\">\n");
-				page.append("\t<a name=\"day").append(day).append("\"></a>");
-				page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
-				page.append("\">").append(puzzle.getTitle()).append("</a></h3>\n");
-				page.append("\t<ol>\n");
+			insertDay(year, i + 1, puzzleTimes.getTimes(TimeType.TOTAL).get(i));
 
-				boolean isNextTie = false;
-				int maxPlaces = Math.min(novetta.getPlaces(), places.size());
-				Long bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE);
-				Long bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO);
-				for (int place = 0; place < maxPlaces; place++) {
-					PuzzleTime record = places.get(place);
-					page.append(isNextTie ? "\t\t" : "\t\t<li>");
-
-					// Show total time and split times
-					String totalTime = PuzzleTime.formatTime(record.getTime(TimeType.TOTAL), true);
-					page.append("<span class=\"dT\">").append(totalTime).append("</span>");
-					page.append("<span class=\"dS\">");
-					insertSplitTime(record.getTime(TimeType.ONE), bestPart1);
-					page.append(" ");
-					insertSplitTime(record.getTime(TimeType.TWO), bestPart2);
-					page.append("</span>");
-
-					// Show global indicator and player name
-					page.append("&nbsp;");
-					if (place + 1 <= puzzle.getGlobalCount()) {
-						page.append("<a href=\"https://adventofcode.com/").append(year);
-						page.append("/leaderboard/day/").append(day).append("\">");
-						page.append("<span class=\"global\" title=\"Top 100 on daily Global Leaderboard\">*</span></a>");
-					}
-					else {
-						page.append("&nbsp;");
-					}
-					page.append(maskName(year, record.getName()));
-
-					Long nextTime = (place + 1 < places.size() ? places.get(place + 1).getTime(TimeType.TOTAL) : null);
-					isNextTie = record.getTime(TimeType.TOTAL).equals(nextTime);
-					page.append(isNextTie ? "<br />\n" : "</li>\n");
-				}
-				// Pad incomplete lists so each Day is the same height for floating DIVs.
-				for (int place = places.size(); place < novetta.getPlaces(); place++) {
-					page.append("<br />");
-				}
-				page.append("\t</ol>\n");
-				page.append("</div>\n");
-
-				// Show console message for most recent time recorded on most recent day, and total number of stars.
-				if (!alertShown) {
-					PuzzleTime mostRecent = places.get(places.size() - 1);
-					StringBuffer alert = new StringBuffer();
-					alert.append(year).append(" (").append(puzzleTimes.getStars()).append(" stars) - ");
-					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
-					alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)).append(" ");
-					alert.append(mostRecent.getName()).append("\n");
-					System.out.println(alert.toString());
-					alertShown = true;
-				}
-			}
 		}
 		page.append("<div class=\"clear\"></div>\n\n");
+	}
+
+	/**
+	 * Adds the entry for a single day's puzzle.
+	 */
+	private void insertDay(String year, int day, List<PuzzleTime> places) {
+		if (!places.isEmpty()) {
+			Novetta novetta = getNovettas().get(year);
+			Puzzle puzzle = getPuzzles().get(year).get(day - 1);
+
+			StringBuffer page = getPage();
+			page.append("<div class=\"daily\">\n");
+			page.append("\t<a name=\"day").append(day).append("\"></a>");
+			page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
+			page.append("\">").append(puzzle.getTitle()).append("</a></h3>\n");
+			page.append("\t<ol>\n");
+
+			boolean isNextTie = false;
+			int maxPlaces = Math.min(novetta.getPlaces(), places.size());
+			Long bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE);
+			Long bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO);
+			for (int place = 0; place < maxPlaces; place++) {
+				PuzzleTime record = places.get(place);
+				page.append(isNextTie ? "\t\t" : "\t\t<li>");
+
+				// Show total time and split times
+				String totalTime = PuzzleTime.formatTime(record.getTime(TimeType.TOTAL), true);
+				page.append("<span class=\"dT\">").append(totalTime).append("</span>");
+				page.append("<span class=\"dS\">");
+				insertSplitTime(record.getTime(TimeType.ONE), bestPart1);
+				page.append(" ");
+				insertSplitTime(record.getTime(TimeType.TWO), bestPart2);
+				page.append("</span>");
+
+				// Show global indicator and player name
+				page.append("&nbsp;");
+				if (place + 1 <= puzzle.getGlobalCount()) {
+					page.append("<a href=\"https://adventofcode.com/").append(year);
+					page.append("/leaderboard/day/").append(day).append("\">");
+					page.append("<span class=\"global\" title=\"Top 100 on daily Global Leaderboard\">*</span></a>");
+				}
+				else {
+					page.append("&nbsp;");
+				}
+				page.append(maskName(year, record.getName()));
+
+				Long nextTime = (place + 1 < places.size() ? places.get(place + 1).getTime(TimeType.TOTAL) : null);
+				isNextTie = record.getTime(TimeType.TOTAL).equals(nextTime);
+				page.append(isNextTie ? "<br />\n" : "</li>\n");
+			}
+			// Pad incomplete lists so each Day is the same height for floating DIVs.
+			for (int place = places.size(); place < novetta.getPlaces(); place++) {
+				page.append("<br />");
+			}
+			page.append("\t</ol>\n");
+			page.append("</div>\n");
+		}
 	}
 
 	/**
