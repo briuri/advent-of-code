@@ -9,7 +9,7 @@ import java.util.TreeMap;
 import org.junit.Test;
 
 import buri.aoc.BaseLeaderboard;
-import buri.aoc.Part;
+import buri.aoc.TimeType;
 
 /**
  * Alternate visualization of Novetta's private leaderboard showing the Fastest Times for each puzzle. Generated
@@ -356,7 +356,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("];\n");
 		page.append("\t\tvar yPart1 = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
-			page.append(puzzleTimes.getTimes(Part.ONE).get(i).size());
+			page.append(puzzleTimes.getTimes(TimeType.ONE).get(i).size());
 			if (i + 1 < TOTAL_PUZZLES) {
 				page.append(",");
 			}
@@ -364,7 +364,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("];\n");
 		page.append("\t\tvar yPart2 = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
-			int split = puzzleTimes.getTimes(Part.TWO).get(i).size() - puzzleTimes.getTimes(Part.ONE).get(i).size();
+			int split = puzzleTimes.getTimes(TimeType.TOTAL).get(i).size() - puzzleTimes.getTimes(TimeType.ONE).get(i).size();
 			page.append(split);
 			if (i + 1 < TOTAL_PUZZLES) {
 				page.append(",");
@@ -373,7 +373,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("];\n");
 		page.append("\t\tvar yTotal = [");
 		for (int i = 0; i < TOTAL_PUZZLES; i++) {
-			page.append(puzzleTimes.getTimes(Part.TWO).get(i).size());
+			page.append(puzzleTimes.getTimes(TimeType.TOTAL).get(i).size());
 			if (i + 1 < TOTAL_PUZZLES) {
 				page.append(",");
 			}
@@ -433,7 +433,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t</a></p>\n");
 		page.append("\t<div class=\"clear\"></div>\n\n");
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
-			List<PuzzleTime> places = puzzleTimes.getTimes(Part.TWO).get(i);
+			List<PuzzleTime> places = puzzleTimes.getTimes(TimeType.TOTAL).get(i);
 			if (!places.isEmpty()) {
 				int day = i + 1;
 				Puzzle puzzle = getPuzzles().get(year).get(i);
@@ -445,18 +445,18 @@ public class Leaderboard extends BaseLeaderboard {
 
 				boolean isNextTie = false;
 				int maxPlaces = Math.min(novetta.getPlaces(), places.size());
-				Long bestPart1 = getFastestSplitTime(places, maxPlaces, Part.ONE);
-				Long bestPart2 = getFastestSplitTime(places, maxPlaces, Part.TWO);
+				Long bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE);
+				Long bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO);
 				for (int place = 0; place < maxPlaces; place++) {
 					PuzzleTime record = places.get(place);
-					String time = PuzzleTime.formatTime(record.getTime(Part.TWO), true);
+					String totalTime = PuzzleTime.formatTime(record.getTime(TimeType.TOTAL), true);
 					page.append(isNextTie ? "\t\t" : "\t\t<li>");
 
 					// Show total time by default
-					page.append("<span class=\"dT\">").append(time).append("</span>");
+					page.append("<span class=\"dT\">").append(totalTime).append("</span>");
 
 					// Show split times
-					Long part1 = record.getTime(Part.ONE);
+					Long part1 = record.getTime(TimeType.ONE);
 					page.append("<span class=\"dS\">");
 					if (part1.equals(bestPart1)) {
 						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part1, true)).append("</span>");
@@ -465,7 +465,7 @@ public class Leaderboard extends BaseLeaderboard {
 						page.append(PuzzleTime.formatTime(part1, true));
 					}
 					page.append(" ");
-					Long part2 = record.getTime(Part.TWO) - record.getTime(Part.ONE);
+					Long part2 = record.getTime(TimeType.TWO);
 					if (part2.equals(bestPart2)) {
 						page.append("<span class=\"splitTime\">").append(PuzzleTime.formatTime(part2, true)).append("</span>");
 					}
@@ -486,7 +486,7 @@ public class Leaderboard extends BaseLeaderboard {
 					}
 					page.append(maskName(year, record.getName()));
 
-					isNextTie = (place + 1 < places.size() && record.getTime(Part.TWO).equals(places.get(place + 1).getTime(Part.TWO)));
+					isNextTie = (place + 1 < places.size() && record.getTime(TimeType.TOTAL).equals(places.get(place + 1).getTime(TimeType.TOTAL)));
 					page.append(isNextTie ? "<br />\n" : "</li>\n");
 				}
 				// Pad incomplete lists so each Day is the same height for floating.
@@ -500,9 +500,9 @@ public class Leaderboard extends BaseLeaderboard {
 				if (!alertShown) {
 					PuzzleTime mostRecent = places.get(places.size() - 1);
 					StringBuffer alert = new StringBuffer();
-					alert.append(year).append(": ").append(puzzleTimes.getStars()).append(" stars\n");
+					alert.append(year).append(" (").append(puzzleTimes.getStars()).append(" stars) - ");
 					alert.append("Day ").append(day).append(": ").append(places.size()).append(". ");
-					alert.append(PuzzleTime.formatTime(mostRecent.getTime(Part.TWO), true)).append(" ").append(mostRecent.getName()).append("\n");
+					alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)).append(" ").append(mostRecent.getName()).append("\n");
 					System.out.println(alert.toString());
 					alertShown = true;
 				}

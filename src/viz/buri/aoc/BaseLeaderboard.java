@@ -144,9 +144,9 @@ public abstract class BaseLeaderboard {
 			String name = (String) member.get("name");
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String day : puzzleData.keySet()) {
-				Long part1Time = getTime(Part.ONE, day, puzzleData);
-				Long part2Time = getTime(Part.TWO, day, puzzleData);
-				puzzleTimes.add(day, new PuzzleTime(year, day, name, part1Time, part2Time));
+				Long part1Time = getTime(TimeType.ONE, day, puzzleData);
+				Long totalTime = getTime(TimeType.TOTAL, day, puzzleData);
+				puzzleTimes.add(day, new PuzzleTime(year, day, name, part1Time, totalTime));
 			}
 		}
 		puzzleTimes.sort();
@@ -159,15 +159,15 @@ public abstract class BaseLeaderboard {
 	protected List<OverallTimes> getOverallTimes(String year, PuzzleTimes puzzleTimes) {
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
-		for (int i = 0; i < puzzleTimes.getTimes(Part.TWO).size(); i++) {
+		for (int i = 0; i < puzzleTimes.getTimes(TimeType.TOTAL).size(); i++) {
 			// Skip y18d06, since it was not included in AoC or Novetta calculations.
 			if (!(year.equals("2018") && (i + 1) == 6)) {
-				List<PuzzleTime> singleDay = puzzleTimes.getTimes(Part.TWO).get(i);
+				List<PuzzleTime> singleDay = puzzleTimes.getTimes(TimeType.TOTAL).get(i);
 				for (PuzzleTime time : singleDay) {
 					if (rawPuzzleTimes.get(time.getName()) == null) {
 						rawPuzzleTimes.put(time.getName(), new ArrayList<>());
 					}
-					rawPuzzleTimes.get(time.getName()).add(time.getTime(Part.TWO));
+					rawPuzzleTimes.get(time.getName()).add(time.getTime(TimeType.TOTAL));
 				}
 			}
 		}
@@ -231,15 +231,19 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Gets a part 1 or part 2 time in unix time from the raw leaderboard. Returns null if a value does not exist.
+	 * Gets a part 1 or total time in unix time from the raw leaderboard. Note that total time is listed as "2" in the
+	 * JSON. Returns null if a value does not exist.
 	 */
-	private static Long getTime(Part part, String day, Map<String, Object> puzzleData) {
-		String partKey = (part == Part.ONE ? "1" : "2");
-		Map<String, Object> partData = (Map) ((Map) puzzleData.get(day)).get(partKey);
+	private static Long getTime(TimeType type, String day, Map<String, Object> puzzleData) {
+		if (type == TimeType.TWO) {
+			throw new IllegalArgumentException("Part 2 split time not included in JSON.");
+		}
+		String timeKey = (type == TimeType.ONE ? "1" : "2");
+		Map<String, Object> timeData = (Map) ((Map) puzzleData.get(day)).get(timeKey);
 
 		Long unixTime = null;
-		if (partData != null) {
-			String rawTime = (String) partData.get("get_star_ts");
+		if (timeData != null) {
+			String rawTime = (String) timeData.get("get_star_ts");
 			if (rawTime.contains("T")) {
 				try {
 					unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
@@ -258,15 +262,13 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Returns the fastest split time for either part 1 or part 2 in a day's puzzle.
 	 */
-	protected Long getFastestSplitTime(List<PuzzleTime> places, int maxPlaces, Part part) {
+	protected Long getFastestSplitTime(List<PuzzleTime> places, int maxPlaces, TimeType type) {
+		if (type == TimeType.TOTAL) {
+			throw new IllegalArgumentException("Total time is not a split time.");
+		}
 		List<Long> times = new ArrayList<>();
 		for (PuzzleTime record : places.subList(0, maxPlaces)) {
-			if (part == Part.ONE) {
-				times.add(record.getTime(Part.ONE));
-			}
-			else if (part == Part.TWO) {
-				times.add(record.getTime(Part.TWO) - record.getTime(Part.ONE));
-			}
+			times.add(record.getTime(type));
 		}
 		Collections.sort(times);
 		return (times.get(0));

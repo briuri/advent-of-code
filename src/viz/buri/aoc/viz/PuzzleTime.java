@@ -2,10 +2,11 @@ package buri.aoc.viz;
 
 import java.util.Calendar;
 
-import buri.aoc.Part;
+import buri.aoc.TimeType;
 
 /**
- * Data class for 1 completion record in a daily puzzle. Part One is assumed to always be solved at a minimum.
+ * Data class for a completion record in a daily puzzle. Part One is assumed to always be solved at a minimum. If Part
+ * Two is not solved, the Part 2 split time and Total time will be null.
  *
  * @author Brian Uri!
  */
@@ -16,13 +17,13 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	private Long _part1Time;
 	private String _yearPart1Completed;
 
-	private Long _part2Time;
+	private Long _totalTime;
 	private String _yearPart2Completed;
 
 	/**
 	 * Constructor
 	 */
-	public PuzzleTime(String year, String day, String name, Long part1Time, Long part2Time) {
+	public PuzzleTime(String year, String day, String name, Long part1Time, Long totalTime) {
 		_year = year;
 		_name = name;
 
@@ -43,20 +44,21 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		_yearPart1Completed = String.valueOf(unixPart1Time.get(Calendar.YEAR));
 		_part1Time = unixPart1Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
 
-		if (part2Time == null) {
+		if (totalTime == null) {
 			_yearPart2Completed = "";
-			_part2Time = null;
+			_totalTime = null;
 		}
 		else {
-			Calendar unixPart2Time = Calendar.getInstance();
-			unixPart2Time.setTimeInMillis(part2Time * 1000L);
-			_yearPart2Completed = String.valueOf(unixPart2Time.get(Calendar.YEAR));
-			_part2Time = unixPart2Time.getTimeInMillis() - puzzleTime.getTimeInMillis();
+			Calendar unixTotalTime = Calendar.getInstance();
+			unixTotalTime.setTimeInMillis(totalTime * 1000L);
+			_yearPart2Completed = String.valueOf(unixTotalTime.get(Calendar.YEAR));
+			_totalTime = unixTotalTime.getTimeInMillis() - puzzleTime.getTimeInMillis();
 		}
 	}
 
 	/**
-	 * Converts milliseconds into a string timestamp. Standard timestamps allow 3 digits for the hour. 2016 sometimes had 4-digit hours.
+	 * Converts milliseconds into a string timestamp. Standard timestamps allow 3 digits for the hour. 2016 sometimes
+	 * had 4-digit hours.
 	 */
 	public static String formatTime(long time, boolean isStandardWidth) {
 		return (isStandardWidth ? formatTime(time, 3) : formatTime(time, 4));
@@ -107,14 +109,14 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		// Base on total solve time.
 		int compare;
 		// Part One+Two solves
-		if (getTime(Part.TWO) != null) {
+		if (getTime(TimeType.TOTAL) != null) {
 			// Part One+Two solves are always ranked higher than orphan Part One solves.
-			Long compareValue = (o.getTime(Part.TWO) == null ? Long.MAX_VALUE : o.getTime(Part.TWO));
-			compare = getTime(Part.TWO).compareTo(compareValue);
+			Long compareValue = (o.getTime(TimeType.TOTAL) == null ? Long.MAX_VALUE : o.getTime(TimeType.TOTAL));
+			compare = getTime(TimeType.TOTAL).compareTo(compareValue);
 		}
 		// Orphan Part One solves
 		else {
-			compare = getTime(Part.ONE).compareTo(o.getTime(Part.ONE));
+			compare = getTime(TimeType.ONE).compareTo(o.getTime(TimeType.ONE));
 		}
 		// For ties, alphabetize on last name.
 		if (compare == 0) {
@@ -127,7 +129,7 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Returns true if the most recent part solved was completed in the same year it was released.
 	 */
 	public boolean completedInYear() {
-		if (getTime(Part.TWO) != null) {
+		if (getTime(TimeType.TOTAL) != null) {
 			return (getYear().equals(getYearPart2Completed()));
 		}
 		return (getYear().equals(getYearPart1Completed()));
@@ -148,10 +150,16 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	}
 
 	/**
-	 * Accessor for the time part of a puzzle was completed (after its release) in milliseconds
+	 * Accessor for one of the timestamps on a puzzle solve: Part One split, Part Two split, or Total.
 	 */
-	public Long getTime(Part part) {
-		return (part == Part.ONE ? _part1Time : _part2Time);
+	public Long getTime(TimeType type) {
+		if (type == TimeType.ONE) {
+			return (_part1Time);
+		}
+		if (type == TimeType.TOTAL) {
+			return (_totalTime);
+		}
+		return (_totalTime == null ? null : _totalTime - _part1Time);
 	}
 
 	/**

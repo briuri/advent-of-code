@@ -2,7 +2,7 @@ package buri.aoc.viz;
 
 import java.util.List;
 
-import buri.aoc.Part;
+import buri.aoc.TimeType;
 
 /**
  * Data class for all of a player's times.
@@ -30,7 +30,7 @@ public class OverallTimes implements Comparable<OverallTimes> {
 		_stars = puzzleTimes.getStars(name);
 		_tiebreakerTime = (useMedian ? calculateMedianTime(times) : calculateTotalTime(times));
 		_times = times;
-		for (List<PuzzleTime> places : puzzleTimes.getTimes(Part.TWO)) {
+		for (List<PuzzleTime> places : puzzleTimes.getTimes(TimeType.TOTAL)) {
 			if (places.size() >= 1 && places.get(0).getName().equals(name)) {
 				_first += 1;
 			}
