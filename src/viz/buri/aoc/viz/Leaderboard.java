@@ -72,7 +72,7 @@ public class Leaderboard extends BaseLeaderboard {
 		// Create Latest page.
 		if (year.equals(CURRENT_YEAR)) {
 			resetPage();
-			insertHeader(year);
+			insertHeader(year, true);
 			getPage().append("<p>Novetta's 2020 competition has ended. Find the winners <a href=\"2020-top.html\">here</a>. ");
 			getPage().append("See you on November 30, 2021!</p>");
 			insertLatestDay(year, puzzleTimes);
@@ -81,7 +81,7 @@ public class Leaderboard extends BaseLeaderboard {
 
 		// Create Top X page.
 		resetPage();
-		insertHeader(year);
+		insertHeader(year, false);
 		insertTopOverall(year, overallTimes, false);
 		insertTopDivisionsChart(year, overallTimes);
 		insertTotalSolvesChart(year, puzzleTimes);
@@ -91,7 +91,7 @@ public class Leaderboard extends BaseLeaderboard {
 
 		// Create All Players page.
 		resetPage();
-		insertHeader(year);
+		insertHeader(year, false);
 		insertTopOverall(year, overallTimes, true);
 		insertFooter(year);
 		writePage(year + "-all.html");
@@ -111,14 +111,16 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the HTML page header
 	 */
-	private void insertHeader(String year) {
+	private void insertHeader(String year, boolean isLatestPage) {
 		StringBuffer page = getPage();
 		page.append("<html>\n<head>\n");
 		page.append("\t<meta charset=\"UTF-8\">\n");
 		page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
 		page.append("\t<title>Novetta Advent of Code - Fastest Times (").append(year).append(")").append("</title>\n\n");
+		if (!isLatestPage) {
+			page.append("\t<script type=\"text/javascript\" src=\"https://cdn.plot.ly/plotly-1.58.1.min.js\" charset=\"utf-8\"></script>\n");
+		}
 		page.append("\t<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
-		page.append("\t<script type=\"text/javascript\" src=\"plotly-1.58.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\" src=\"aoc.js?2021-01-02-1615\"></script>\n");
 		page.append("\t<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css?2021-01-02-1615\" />\n");
 		page.append("</head>\n\n<body>\n");
