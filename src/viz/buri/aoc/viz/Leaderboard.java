@@ -449,6 +449,10 @@ public class Leaderboard extends BaseLeaderboard {
 		StringBuffer page = getPage();
 		page.append("\n\t<h2>Latest Puzzle</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
+		page.append("\t<p><a href=\"javascript:void(0);\">\n");
+		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Show Split Times</span>");
+		page.append("<span class=\"dS dailyLink\">Show Total Times</span>\n");
+		page.append("\t</a></p>\n");
 
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = new ArrayList<>(puzzleTimes.getTimes(TimeType.TOTAL).get(i));
@@ -483,13 +487,6 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
 		page.append("\">").append(puzzle.getTitle()).append("</a></h3>\n");
 		page.append("\t<ol>\n");
-		if (showAll) {
-			page.append("\t\t&nbsp;&nbsp;&nbsp;");
-			page.append("<span class=\"dailyHeader\">Part 1&nbsp;&nbsp;&nbsp;&nbsp;");
-			page.append("Part 2");
-			page.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-			page.append("Total</span>\n");
-		}
 
 		boolean isNextTie = false;
 		int maxPlaces = (showAll ? places.size() : Math.min(novetta.getPlaces(), places.size()));
@@ -500,15 +497,11 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append(isNextTie ? "\t\t" : "\t\t<li>");
 
 			// Show total time and split times
-			String timeClass = (showAll ? "dSAll" : "ds");
-			page.append("<span class=\"").append(timeClass).append("\">");
+			page.append("<span class=\"dS\">");
 			insertSplitTime(record.getTime(TimeType.ONE), bestPart1);
 			page.append("&nbsp;");
 			insertSplitTime(record.getTime(TimeType.TWO), bestPart2);
 			page.append("</span>");
-			if (showAll) {
-				page.append("&nbsp;&nbsp;");
-			}
 			Long totalTime = record.getTime(TimeType.TOTAL);
 			page.append("<span class=\"dT\">").append(PuzzleTime.formatTime(totalTime, true)).append("</span>");
 

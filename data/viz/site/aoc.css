@@ -38,9 +38,6 @@ div.daily {
 	float: left;
 	min-width: 370px;
 }
-span.dailyHeader {
-	color: #ffffff;
-}
 span.dailyLink {
 	background-color: #1f1f43;
 	padding: 5px;
