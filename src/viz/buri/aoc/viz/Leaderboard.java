@@ -47,13 +47,13 @@ public class Leaderboard extends BaseLeaderboard {
 		for (int i = 0; i < reps; i++) {
 			System.out.println(new Date() + " Leaderboard Auto-Update");
 			// Script uses curl to pass session cookie and copy JSON to /data/viz/json.
-			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\get-aoc-json.bat");
+			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-get-json.bat");
 			jsonDowload.waitFor();
 
 			leaderboard.generatePages();
 
 			// Script uses AWS CLI to upload files to S3 bucket hosting static website.
-			Process htmlUpload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\put-s3-aoc.urizone.net.bat");
+			Process htmlUpload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-put-s3.bat");
 			htmlUpload.waitFor();
 
 			// Wait for next iteration.
