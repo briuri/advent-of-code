@@ -115,8 +115,8 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<p>Are you ready for Novetta's 2021 competition?</p>\n");
 		page.append("<ol>\n");
 		page.append("\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with your Novetta Google account. (AFS employees may use another authentication method as long as your first and last name are visible).</li>\n");
-		page.append("\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code which will be shared before the competition starts.</li>\n");
-		page.append("\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> to chat with other puzzle solvers (but keep your code to yourself until after the competition ends).</li>\n");
+		page.append("\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code which will be shared a few days before the competition starts.</li>\n");
+		page.append("\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> to chat with other puzzle solvers. (Please keep code to yourself until after the competition ends).</li>\n");
 		page.append("\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
 		page.append("\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
 		page.append("</ol>\n");
