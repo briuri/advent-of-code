@@ -19,7 +19,7 @@ import buri.aoc.TimeType;
  * @author Brian Uri!
  */
 public class Leaderboard extends BaseLeaderboard {
-	private static final String CURRENT_YEAR = "2020";
+	private static final String CURRENT_YEAR = "2021";
 
 	/**
 	 * Generate the Fastest Times pages via a JUnit test in Eclipse.
@@ -73,9 +73,9 @@ public class Leaderboard extends BaseLeaderboard {
 		if (year.equals(CURRENT_YEAR)) {
 			resetPage();
 			insertHeader(year, true);
-			getPage().append("<p>Novetta's 2020 competition has ended. Find the winners <a href=\"2020-top.html\">here</a>. ");
-			getPage().append("See you on November 30, 2021!</p>");
-			insertLatestDay(year, puzzleTimes);
+			getPage().append("<p>Novetta's 2021 competition will begin soon. This fast-loading page will show just the results of the most recent puzzle.</p><p>See you on the night of November 30, 2021!</p>");
+//			insertLatestDay(year, puzzleTimes);
+			insertFooter(false);
 			writePage("index.html");
 		}
 
@@ -86,14 +86,23 @@ public class Leaderboard extends BaseLeaderboard {
 		insertTopDivisionsChart(year, overallTimes);
 		insertTotalSolvesChart(year, puzzleTimes);
 		insertTopDaily(year, puzzleTimes);
-		insertFooter(year);
+		insertFooter(true);
 		writePage(year + "-top.html");
+
+// Temporarily overwrite the 2021 page.
+		if (year.equals(CURRENT_YEAR)) {
+			resetPage();
+			insertHeader(year, false);
+			getPage().append("<p>Novetta's 2021 competition will begin soon. This page will show statistics and visualizations for every 2021 puzzle.</p><p>See you on the night of November 30, 2021!</p>");
+			insertFooter(false);
+			writePage(year + "-top.html");
+		}
 
 		// Create All Players page.
 		resetPage();
 		insertHeader(year, false);
 		insertTopOverall(year, overallTimes, true);
-		insertFooter(year);
+		insertFooter(true);
 		writePage(year + "-all.html");
 	}
 
@@ -133,13 +142,13 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append(" | ");
 			}
 		}
-		// Show 1 leaderboard for 2016 - 2019
+		// Show 1 leaderboard for non-2020 years
 		page.append("<br />\n\t\t");
-		if (year.equals("2016") || year.equals("2017") || year.equals("2018") || year.equals("2019")) {
+		if (!year.equals("2020")) {
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
 			page.append("Leaderboard&rArr;</a> | ");
 		}
-		// Show overflow leaderboard in 2020 and beyond
+		// Show overflow leaderboard in 2020
 		else {
 			page.append("L.Board ");
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
@@ -546,9 +555,11 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the HTML page footer
 	 */
-	private void insertFooter(String year) {
+	private void insertFooter(boolean showJumpLink) {
 		StringBuffer page = getPage();
-		page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
+		if (showJumpLink) {
+			page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
+		}
 		page.append("</body>\n</html>");
 	}
 }

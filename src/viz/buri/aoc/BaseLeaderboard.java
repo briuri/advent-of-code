@@ -48,7 +48,7 @@ public abstract class BaseLeaderboard {
 	private static final String OUTPUT_FOLDER = "data/viz/site/";
 
 	// Known puzzle years
-	protected static final String[] YEARS = new String[] { "2020", "2019", "2018", "2017", "2016" };
+	protected static final String[] YEARS = new String[] { "2021", "2020", "2019", "2018", "2017", "2016" };
 
 	// Date format for the last update dates.
 	private static final SimpleDateFormat MODIFIED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
