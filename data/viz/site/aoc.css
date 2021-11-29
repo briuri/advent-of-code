@@ -75,6 +75,10 @@ h3 {
 span.ineligible {
 	color: #888888;
 }
+div.instructions {
+	float: left;
+	max-width: 900px;
+}
 div.overall {
 	float: left;
 	width: 50%;

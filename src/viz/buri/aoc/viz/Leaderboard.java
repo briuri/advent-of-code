@@ -73,8 +73,8 @@ public class Leaderboard extends BaseLeaderboard {
 		if (year.equals(CURRENT_YEAR)) {
 			resetPage();
 			insertHeader(year, true);
-			insertInstructions(true);
-//			insertLatestDay(year, puzzleTimes);
+			insertLatestDay(year, puzzleTimes);
+			insertInstructions();
 			insertFooter(false);
 			writePage("index.html");
 		}
@@ -89,16 +89,6 @@ public class Leaderboard extends BaseLeaderboard {
 		insertFooter(true);
 		writePage(year + "-top.html");
 
-// Temporarily overwrite the 2021 page.
-		if (year.equals(CURRENT_YEAR)) {
-			resetPage();
-			insertHeader(year, false);
-			insertInstructions(false);
-			insertFooter(false);
-			writePage(year + "-top.html");
-		}
-//
-
 		// Create All Players page.
 		resetPage();
 		insertHeader(year, false);
@@ -110,32 +100,27 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Creates some instructions to get ready for a new season.
 	 */
-	private void insertInstructions(boolean onLandingPage) {
+	private void insertInstructions() {
 		StringBuffer page = getPage();
-		if (onLandingPage) {
-			page.append("<div class=\"daily\">\n");
-			page.append("<img src=\"teaser.png\" width=\"500\" height=\"281\" title=\"Novetta AoC\" class=\"teaser\" /><br />");
-			page.append("\t<h2>Want to join us?</h2>\n");
-			page.append("\t<ol>\n");
-			page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with your Novetta Google account. (AFS employees may use another authentication method as long as your full name is visible).</li>\n");
-			page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code (shared in the 11/29 email and on Slack).</li>\n");
-			page.append("\t\t<li><a href=\"https://adventofcode.com/2021/settings\">Add the secret Sponsor code</a> to your account (shared in the 11/29 email and on Slack) so people can see that Novetta is an AoC Sponsor.</li>\n");
-			page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> to chat with other puzzle solvers. (Please keep code to yourself until after the competition ends).</li>\n");
-			page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
-			page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
-			page.append("\t</ol>\n");
-			page.append("\t<h2>Scoring FAQ</h2>");
-			page.append("\t<ul>\n");
-			page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
-			page.append("\t\t<li>The winner in Novetta's competition will have the most stars by 11:59 PM on December 31.</li>");
-			page.append("\t\t<li>Last year, 33 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
-			page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
-			page.append("\t</ul>\n");
-			page.append("</div>\n");
-		}
-		else {
-			page.append("<p>There are no overall rankings yet. Check back after the first puzzle has unlocked on December 1, 2021!</p>");
-		}
+		page.append("<div class=\"instructions\">\n");
+		page.append("<img src=\"teaser.png\" width=\"500\" height=\"281\" title=\"Novetta AoC\" class=\"teaser\" /><br />");
+		page.append("\t<h2>Late to the party?</h2>\n");
+		page.append("\t<ol>\n");
+		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with your Novetta Google account. (AFS employees may use another authentication method as long as your full name is visible).</li>\n");
+		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code (shared in the 11/29 email and on Slack).</li>\n");
+		page.append("\t\t<li><a href=\"https://adventofcode.com/2021/settings\">Add the secret Sponsor code</a> to your account (shared in the 11/29 email and on Slack) so people can see that Novetta is an AoC Sponsor.</li>\n");
+		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> to chat with other puzzle solvers. (Please keep code to yourself until after the competition ends).</li>\n");
+		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
+		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
+		page.append("\t</ol>\n");
+		page.append("\t<h2>Scoring FAQ</h2>");
+		page.append("\t<ul>\n");
+		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
+		page.append("\t\t<li>The winner in Novetta's competition will have the most stars by 11:59 PM on December 31.</li>");
+		page.append("\t\t<li>Last year, 33 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
+		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
+		page.append("\t</ul>\n");
+		page.append("</div>\n");
 	}
 
 	/**
@@ -488,7 +473,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertLatestDay(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
-		page.append("\n\t<h2>Latest Puzzle</h2>\n");
+		page.append("<div class=\"daily\">\n");
+		page.append("\t<h2>Latest Puzzle</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
 		page.append("\t\t<span id=\"dailySplit\" class=\"dT dailyLink\">Show Split Times</span>");
@@ -513,6 +499,7 @@ public class Leaderboard extends BaseLeaderboard {
 				break;
 			}
 		}
+		page.append("</div>\n");
 	}
 
 	/**
