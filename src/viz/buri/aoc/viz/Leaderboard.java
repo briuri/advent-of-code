@@ -148,6 +148,7 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 		page.append("\t<script type=\"text/javascript\" src=\"jquery-3.5.1.min.js\"></script>\n");
 		page.append("\t<script type=\"text/javascript\" src=\"aoc.js?2021-01-02-1615\"></script>\n");
+		page.append("\t<link rel=\"icon\" href=\"favicon.ico\" />\n");
 		page.append("\t<link type=\"text/css\" rel=\"stylesheet\" href=\"aoc.css?2021-01-02-1615\" />\n");
 		page.append("</head>\n\n<body>\n");
 		page.append("\t<div class=\"navBar\">\n");
