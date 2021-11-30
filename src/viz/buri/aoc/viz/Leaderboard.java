@@ -103,7 +103,6 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertInstructions() {
 		StringBuffer page = getPage();
 		page.append("<div class=\"instructions\">\n");
-		page.append("<img src=\"teaser.png\" width=\"500\" height=\"281\" title=\"Novetta AoC\" class=\"teaser\" /><br />");
 		page.append("\t<h2>Late to the party?</h2>\n");
 		page.append("\t<ol>\n");
 		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with your Novetta Google account. (AFS employees may use another authentication method as long as your full name is visible).</li>\n");
@@ -500,6 +499,7 @@ public class Leaderboard extends BaseLeaderboard {
 				break;
 			}
 		}
+		page.append("<span id=\"dailySplit\" class=\"dailyLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
 		page.append("</div>\n");
 	}
 
