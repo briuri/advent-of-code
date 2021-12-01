@@ -474,6 +474,7 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertLatestDay(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
 		page.append("<div class=\"daily\">\n");
+		page.append("<span class=\"dailyLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
 		page.append("\t<h2>Latest Puzzle</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
@@ -499,7 +500,6 @@ public class Leaderboard extends BaseLeaderboard {
 				break;
 			}
 		}
-		page.append("<span id=\"dailySplit\" class=\"dailyLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
 		page.append("</div>\n");
 	}
 
