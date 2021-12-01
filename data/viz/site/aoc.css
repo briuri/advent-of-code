@@ -38,7 +38,7 @@ div.daily {
 	float: left;
 	min-width: 370px;
 }
-span.dailyLink {
+span.dailyLink, span.rankingsLink {
 	background-color: #1f1f43;
 	padding: 5px;
 }

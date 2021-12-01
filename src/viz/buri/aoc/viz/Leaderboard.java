@@ -50,6 +50,9 @@ public class Leaderboard extends BaseLeaderboard {
 			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-get-json.bat");
 			jsonDowload.waitFor();
 
+			// Add extra time (waitFor is insufficient).
+			Thread.sleep(5 * 1000);
+
 			leaderboard.generatePages();
 
 			// Script uses AWS CLI to upload files to S3 bucket hosting static website.
@@ -109,7 +112,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code (shared in the 11/29 email and on Slack).</li>\n");
 		page.append("\t\t<li><a href=\"https://adventofcode.com/2021/settings\">Add the secret Sponsor code</a> to your account (shared in the 11/29 email and on Slack) so people can see that Novetta is an AoC Sponsor.</li>\n");
 		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> to chat with other puzzle solvers. (Please keep code to yourself until after the competition ends).</li>\n");
-		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
+//		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
 		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
 		page.append("\t</ol>\n");
 		page.append("\t<h2>Scoring FAQ</h2>");
@@ -474,7 +477,7 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertLatestDay(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
 		page.append("<div class=\"daily\">\n");
-		page.append("<span class=\"dailyLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
+		page.append("<span class=\"rankingsLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
 		page.append("\t<h2>Latest Puzzle</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
