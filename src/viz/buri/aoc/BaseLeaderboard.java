@@ -243,7 +243,7 @@ public abstract class BaseLeaderboard {
 
 		Long unixTime = null;
 		if (timeData != null) {
-			String rawTime = (String) timeData.get("get_star_ts");
+			String rawTime = timeData.get("get_star_ts").toString();
 			if (rawTime.contains("T")) {
 				try {
 					unixTime = LEGACY_DATE_FORMAT.parse(rawTime).getTime() / 1000;
