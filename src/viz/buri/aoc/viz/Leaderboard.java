@@ -42,10 +42,10 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	public static void main(String[] args) throws Exception {
 		final int minutes = 15;
-		final int reps = 40;
+		final int reps = 32;
 		final Leaderboard leaderboard = new Leaderboard();
 		for (int i = 0; i < reps; i++) {
-			System.out.println(new Date() + " Leaderboard Auto-Update");
+			System.out.println(new Date() + " Leaderboard Auto-Update #" + (i + 1) + " of " + (reps - 1));
 			// Script uses curl to pass session cookie and copy JSON to /data/viz/json.
 			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-get-json.bat");
 			jsonDowload.waitFor();
@@ -493,7 +493,7 @@ public class Leaderboard extends BaseLeaderboard {
 				StringBuffer alert = new StringBuffer();
 				alert.append(year).append(" (").append(puzzleTimes.getStars()).append(") - ");
 				alert.append("Day ").append(i + 1).append(": ").append(places.size()).append(". ");
-				alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)).append(" ");
+				alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true).replace("&nbsp;", " ")).append(" ");
 				alert.append(mostRecent.getName()).append("\n");
 				System.out.println(alert.toString());
 			}
