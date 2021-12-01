@@ -142,6 +142,9 @@ public abstract class BaseLeaderboard {
 		for (String key : leaderboardJson.keySet()) {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			String name = (String) member.get("name");
+			if (name == null) {
+				continue;
+			}
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String day : puzzleData.keySet()) {
 				Long part1Time = getTime(TimeType.ONE, day, puzzleData);
