@@ -96,7 +96,12 @@ public abstract class BaseLeaderboard {
 			for (int i = 0; i < divisionJson.size(); i++) {
 				allDivisions.add(divisionJson.get(i).asText());
 			}
-			Novetta novetta = new Novetta(allDivisions, places, rules);
+			List<String> exclusions = new ArrayList<>();
+			ArrayNode exclusionsNode = (ArrayNode) json.get("exclusions").get(year);
+			for (int i = 0; i < exclusionsNode.size(); i++) {
+				exclusions.add(exclusionsNode.get(i).asText());
+			}
+			Novetta novetta = new Novetta(allDivisions, places, exclusions, rules);
 			ArrayNode playerJson = (ArrayNode) json.get("players").get(year);
 			for (int i = 0; i < playerJson.size(); i++) {
 				novetta.addPlayer((ObjectNode) playerJson.get(i));
@@ -138,11 +143,12 @@ public abstract class BaseLeaderboard {
 	 * Loads puzzle completion times from the leaderboard JSON.
 	 */
 	protected PuzzleTimes getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
+		Novetta novetta = getNovettas().get(year);
 		PuzzleTimes puzzleTimes = new PuzzleTimes();
 		for (String key : leaderboardJson.keySet()) {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			String name = (String) member.get("name");
-			if (name == null) {
+			if (name == null || novetta.getExclusions().contains(name)) {
 				continue;
 			}
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");

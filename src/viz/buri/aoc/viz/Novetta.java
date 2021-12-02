@@ -20,17 +20,19 @@ public class Novetta {
 	private Set<String> _ineligible;
 	private List<String> _allDivisions;
 	private int _places;
+	private List<String> _exclusions;
 	private String _rules;
 
 	/**
 	 * Constructor
 	 */
-	public Novetta(List<String> allDivisions, int places, String rules) {
+	public Novetta(List<String> allDivisions, int places, List<String> exclusions, String rules) {
 		_alternateNames = new HashMap<>();
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
 		_ineligible = new HashSet<>();
 		_allDivisions = allDivisions;
+		_exclusions = exclusions;
 		_places = places;
 		_rules = rules;
 	}
@@ -119,6 +121,13 @@ public class Novetta {
 	 */
 	public int getPlaces() {
 		return _places;
+	}
+
+	/**
+	 * Accessor for a list of names to exclude from the leaderboard
+	 */
+	public List<String> getExclusions() {
+		return _exclusions;
 	}
 
 	/**
