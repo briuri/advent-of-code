@@ -46,14 +46,14 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	public static void main(String[] args) throws Exception {
 		final int minutes = 15;
-		final int reps = 32;
+		final int reps = 40;
 		final Leaderboard leaderboard = new Leaderboard();
 		for (int i = 0; i < reps; i++) {
 			if (i > 0) {
 				// Wait for next iteration.
 				Thread.sleep(minutes * 60 * 1000);
 			}
-			System.out.println(new Date() + " Leaderboard Auto-Update #" + (i + 1) + " of " + (reps - 1));
+			System.out.println(new Date() + " Leaderboard Auto-Update #" + (i + 1) + " of " + (reps));
 			// Script uses curl to pass session cookie and copy JSON to /data/viz/json.
 			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-get-json.bat");
 			jsonDowload.waitFor();
