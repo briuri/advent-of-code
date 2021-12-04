@@ -53,18 +53,18 @@ public class Leaderboard extends BaseLeaderboard {
 				// Wait for next iteration.
 				Thread.sleep(minutes * 60 * 1000);
 			}
-			System.out.println(new Date() + " Leaderboard Auto-Update #" + (i + 1) + " of " + (reps));
+			System.out.println(MODIFIED_DATE_FORMAT.format(new Date()) + " Leaderboard Auto-Update #" + (i + 1) + " of " + (reps));
 			// Script uses curl to pass session cookie and copy JSON to /data/viz/json.
-			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-get-json.bat");
+			Process jsonDowload = Runtime.getRuntime().exec("cmd /c start /min C:\\projects\\aws-stage\\aoc-get-json.bat");
 			jsonDowload.waitFor();
 
 			// Add extra time (waitFor is insufficient).
-			Thread.sleep(3 * 1000);
+			Thread.sleep(2 * 1000);
 
 			leaderboard.generatePages();
 
 			// Script uses AWS CLI to upload files to S3 bucket hosting static website.
-			Process htmlUpload = Runtime.getRuntime().exec("cmd /c start C:\\projects\\aws-stage\\aoc-put-s3.bat");
+			Process htmlUpload = Runtime.getRuntime().exec("cmd /c start /min C:\\projects\\aws-stage\\aoc-put-s3.bat");
 			htmlUpload.waitFor();
 		}
 	}
@@ -496,8 +496,8 @@ public class Leaderboard extends BaseLeaderboard {
 				// Show console message for most recent total solve recorded on most recent day, and total number of stars.
 				PuzzleTime mostRecent = places.get(places.size() - 1);
 				StringBuffer alert = new StringBuffer();
-				alert.append(year).append(" (").append(puzzleTimes.getStars()).append(") - ");
-				alert.append("Day ").append(i + 1).append(": ").append(places.size()).append(". ");
+				alert.append("\t(").append(puzzleTimes.getStars()).append(" stars) - ");
+				alert.append("Day ").append(i + 1).append(": ").append(places.size()).append(".");
 				alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true).replace("&nbsp;", " ")).append(" ");
 				alert.append(mostRecent.getName()).append("\n");
 				System.out.println(alert.toString());

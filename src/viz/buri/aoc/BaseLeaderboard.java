@@ -51,7 +51,7 @@ public abstract class BaseLeaderboard {
 	protected static final String[] YEARS = new String[] { "2021", "2020", "2019", "2018", "2017", "2016" };
 
 	// Date format for the last update dates.
-	private static final SimpleDateFormat MODIFIED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	protected static final SimpleDateFormat MODIFIED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	// Date format for 2016 - 2017 leaderboards (before Unix timestamps).
 	private static final SimpleDateFormat LEGACY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
