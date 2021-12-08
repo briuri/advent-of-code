@@ -269,7 +269,7 @@ public abstract class BaseLeaderboard {
 	}
 
 	/**
-	 * Returns the fastest split time for either part 1 or part 2 in a day's puzzle.
+	 * Returns the fastest split time for either part 1 or part 2 in a day's puzzle. Returns 0 if no times are available.
 	 */
 	protected Long getFastestSplitTime(List<PuzzleTime> places, int maxPlaces, TimeType type) {
 		if (type == TimeType.TOTAL) {
@@ -283,7 +283,7 @@ public abstract class BaseLeaderboard {
 			}
 		}
 		Collections.sort(times);
-		return (times.get(0));
+		return (times.isEmpty() ? 0L : times.get(0));
 	}
 
 	/**
