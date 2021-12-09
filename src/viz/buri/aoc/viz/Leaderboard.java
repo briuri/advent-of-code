@@ -527,7 +527,12 @@ public class Leaderboard extends BaseLeaderboard {
 		Long bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO);
 		for (int place = 0; place < maxPlaces; place++) {
 			PuzzleTime record = places.get(place);
-			page.append(isNextTie ? "\t\t" : "\t\t<li>");
+			if (isNextTie) {
+				page.append("\t\t");
+			}
+			else {
+				page.append("\t\t<li value=\"").append(place + 1).append("\">");
+			}
 
 			// Show total time and split times
 			page.append("<span class=\"dS\">");
