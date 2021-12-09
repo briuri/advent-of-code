@@ -12,7 +12,7 @@ import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 /**
- * Date model for WHAT.
+ * Data model for WHAT.
  *
  * @author Brian Uri!
  */
