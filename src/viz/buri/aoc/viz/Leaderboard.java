@@ -555,8 +555,10 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append(isNextTie ? "<br />\n" : "</li>\n");
 		}
 		// Pad incomplete lists so each Day is the same height for floating DIVs.
-		for (int place = places.size(); place < novetta.getPlaces(); place++) {
-			page.append("<br />");
+		if (!showAll) {
+			for (int place = places.size(); place < novetta.getPlaces(); place++) {
+				page.append("<br />");
+			}
 		}
 		page.append("\t</ol>\n");
 		page.append("</div>\n");
