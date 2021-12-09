@@ -42,7 +42,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	public static void main(String[] args) throws Exception {
 		final int minutes = 15;
-		final int reps = 40;
+		final int reps = 48;
 		final Leaderboard leaderboard = new Leaderboard();
 		for (int i = 0; i < reps; i++) {
 			if (i > 0) {
