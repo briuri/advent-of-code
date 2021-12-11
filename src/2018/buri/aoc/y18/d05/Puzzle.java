@@ -8,28 +8,21 @@ import buri.aoc.Part;
 
 /**
  * Day 5: Alchemical Reduction
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return readFile(fileIndex).get(0);
-	}
-
-	/**
 	 * Part 1:
 	 * How many units remain after fully reacting the polymer you scanned?
-	 * 
+	 *
 	 * Part 2:
 	 * One of the unit types is causing problems; it's preventing the polymer from collapsing as much as it should. Your
 	 * goal is to figure out which unit type is causing the most problems, remove all instances of it (regardless of
 	 * polarity), fully react the remaining polymer, and measure its length. What is the length of the shortest polymer
 	 * you can produce by removing all units of exactly one type and fully reacting the result?
-	 * 
+	 *
 	 */
 	public static int getResult(Part part, String input) {
 		String newPolymer = reactPolymer(input);

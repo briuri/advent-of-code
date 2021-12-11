@@ -16,13 +16,6 @@ import buri.aoc.data.CharFrequency;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the power consumption of the submarine?
 	 *

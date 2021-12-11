@@ -10,22 +10,15 @@ import buri.aoc.Part;
 
 /**
  * Day 06: Universal Orbit Map
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified, as a list of string orbits.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the total number of direct and indirect orbits in your map data?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the minimum number of orbital transfers required to move from the object YOU are orbiting to the object
 	 * SAN is orbiting?

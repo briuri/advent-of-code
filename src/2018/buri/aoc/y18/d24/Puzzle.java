@@ -8,22 +8,15 @@ import buri.aoc.y18.d24.Battle.Outcome;
 
 /**
  * Day 24: Immune System Simulator 20XX
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many units would the winning army have?
-	 * 
+	 *
 	 * Part 2:
 	 * How many units does the immune system have left after getting the smallest boost it needs to win?
 	 */

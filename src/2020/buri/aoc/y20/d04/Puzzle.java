@@ -14,33 +14,27 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of passports.
-	 */
-	public static List<Passport> getInput(int fileIndex) {
-		List<Passport> list = new ArrayList<>();
-		StringBuffer buffer = new StringBuffer();
-		for (String input : readFile(fileIndex)) {
-			if (input.length() > 0) {
-				buffer.append(" ").append(input);
-			}
-			else {
-				list.add(new Passport(buffer.toString()));
-				buffer.setLength(0);
-			}
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * In your batch file, how many passports are valid?
 	 *
 	 * Part 2:
 	 * In your batch file, how many passports are valid?
 	 */
-	public static int getResult(Part part, List<Passport> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Passport> list = new ArrayList<>();
+		StringBuffer buffer = new StringBuffer();
+		for (String line : input) {
+			if (line.length() > 0) {
+				buffer.append(" ").append(line);
+			}
+			else {
+				list.add(new Passport(buffer.toString()));
+				buffer.setLength(0);
+			}
+		}
+
 		int valid = 0;
-		for (Passport data : input) {
+		for (Passport data : list) {
 			if (data.isValid(part)) {
 				valid++;
 			}

@@ -7,23 +7,16 @@ import buri.aoc.Part;
 
 /**
  * Day 8: Matchsticks
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Disregarding the whitespace in the file, what is the number of characters of code for string literals minus the
 	 * number of characters in memory for the values of the strings in total for the entire file?
-	 * 
+	 *
 	 * Part 2:
 	 * Your task is to find the total number of characters to represent the newly encoded strings minus the number of
 	 * characters of code in each original string literal.

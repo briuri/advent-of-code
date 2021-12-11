@@ -9,7 +9,7 @@ import buri.aoc.Part;
 
 /**
  * Day 5: Doesn't He Have Intern-Elves For This?
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -26,16 +26,9 @@ public class Puzzle extends BasePuzzle {
 	}
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many strings are nice?
-	 * 
+	 *
 	 * Part 2:
 	 * How many strings are nice under these new rules?
 	 */

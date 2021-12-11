@@ -10,22 +10,15 @@ import buri.aoc.Part;
 
 /**
  * Day 11: Radioisotope Thermoelectric Generators
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a snapshot of facility state (from line 1).
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * In your situation, what is the minimum number of steps required to bring all of the objects to the fourth floor?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the minimum number of steps required to bring all of the objects, including these four new ones, to the
 	 * fourth floor?

@@ -9,22 +9,15 @@ import buri.aoc.Part;
 
 /**
  * Day 2: I Was Told There Would Be No Math
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many total square feet of wrapping paper should they order?
-	 * 
+	 *
 	 * Part 2:
 	 * How many total feet of ribbon should they order?
 	 */

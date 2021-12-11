@@ -11,22 +11,15 @@ import buri.aoc.data.Permutations;
 
 /**
  * Day 9: All in a Single Night
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the distance of the shortest route?
-	 * 
+	 *
 	 * Part 2:
 	 * The next year, just to show off, Santa decides to take the route with the longest distance instead.
 	 */

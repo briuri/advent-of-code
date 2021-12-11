@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 3: Squares With Three Sides
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many of the listed triangles are possible?
-	 * 
+	 *
 	 * Part 2:
 	 * Reading by columns, how many of the listed triangles are possible?
 	 */

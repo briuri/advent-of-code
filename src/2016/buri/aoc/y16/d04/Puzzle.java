@@ -8,22 +8,15 @@ import buri.aoc.data.CharFrequency;
 
 /**
  * Day 4: Security Through Obscurity
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the sum of the sector IDs of the real rooms?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the sector ID of the room where North Pole objects are stored?
 	 */
@@ -50,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Each room consists of an encrypted name (lowercase letters separated by dashes) followed by a dash, a sector ID,
 	 * and a checksum in square brackets.
-	 * 
+	 *
 	 * A room is real (not a decoy) if the checksum is the five most common letters in the encrypted name, in order,
 	 * with ties broken by alphabetization.
 	 */
@@ -72,7 +65,7 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Rotates the name by its sector ID.
-	 * 
+	 *
 	 * To decrypt a room name, rotate each letter forward through the alphabet a number of times equal to the room's
 	 * sector ID. A becomes B, B becomes C, Z becomes A, and so on. Dashes become spaces.
 	 */

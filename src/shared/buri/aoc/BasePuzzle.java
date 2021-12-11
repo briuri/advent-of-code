@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 public abstract class BasePuzzle {
 
 	/**
-	 * Loads a file as a list of string lines.
+	 * Returns the input file as a list of strings.
 	 */
-	protected static List<String> readFile(int fileIndex) {
+	public static List<String> getInput(int fileIndex) {
 		String packageName = new Throwable().getStackTrace()[1].getClassName();
 		String year = "20" + packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
 		String day = packageName.substring(packageName.indexOf(".d") + 2, packageName.indexOf(".Puzzle"));

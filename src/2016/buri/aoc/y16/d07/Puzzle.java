@@ -8,22 +8,15 @@ import buri.aoc.Part;
 
 /**
  * Day 7: Internet Protocol Version 7
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many IPs in your puzzle input support TLS?
-	 * 
+	 *
 	 * Part 2:
 	 * How many IPs in your puzzle input support SSL?
 	 */

@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 23: Opening the Turing Lock
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the value in register b when the program in your puzzle input is finished executing?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the value in register b after the program is finished executing if register a starts as 1 instead?
 	 */

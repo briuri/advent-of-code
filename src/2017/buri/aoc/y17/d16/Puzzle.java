@@ -9,26 +9,20 @@ import buri.aoc.Part;
 
 /**
  * Day 16: Permutation Promenade
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of commands
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (Arrays.asList(readFile(fileIndex).get(0).split(",")));
-	}
-
-	/**
 	 * Part 1:
 	 * In what order are the programs standing after their dance?
-	 * 
+	 *
 	 * Part 2:
 	 * In what order are the programs standing after their billion dances?
 	 */
 	public static String getResult(Part part, int numDancers, List<String> input) {
+		input = Arrays.asList(input.get(0).split(","));
 		Dancers dancers = new Dancers(numDancers);
 		int iterations = (part == Part.ONE ? 1 : 1000000000);
 		List<String> dances = new ArrayList<>();

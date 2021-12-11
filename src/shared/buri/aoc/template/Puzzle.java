@@ -19,25 +19,6 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-
-// 1 integer per line
-		// return (convertStringsToInts(readFile(fileIndex)));
-// All integers on first line
-		// String[] stringInts = readFile(fileIndex).get(0).split(" ");
-		// return (convertStringsToInts(Arrays.asList(stringInts)));
-// 1 data object per line
-		// List<Data> list = new ArrayList<>();
-		// for (String input : readFile(fileIndex)) {
-		// list.add(new Data(input));
-		// }
-		// return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * QUESTION
 	 *
@@ -45,14 +26,25 @@ public class Puzzle extends BasePuzzle {
 	 * QUESTION
 	 */
 	public static long getResult(Part part, List<String> input) {
+// 1 integer per line
+//		List<Integer> values = convertStringsToInts(input);
+// all integers on first line
+//		String[] stringInts = input.get(0).split(" ");
+//		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
+// 1 data object per line
+//		 List<Data> list = new ArrayList<>();
+//		 for (String line : input) {
+//			 list.add(new Data(input));
+//		 }
+// Grid
 //		Grid grid = new Grid(input);
+
 
 		long sum = 0;
 		for (String line : input) {
 
 		}
 		if (part == Part.ONE) {
-//			return (grid.getValue());
 			return (sum);
 		}
 		return (sum);

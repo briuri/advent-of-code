@@ -11,22 +11,15 @@ import buri.aoc.Part;
 
 /**
  * Day 2: Inventory Management System
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of string IDs.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the checksum for your list of box IDs?
-	 * 
+	 *
 	 * Part 2:
 	 * What letters are common between the two correct box IDs?
 	 */
@@ -71,7 +64,7 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Compares two strings index by index and generates a list of common characters.
-	 * 
+	 *
 	 * Assumes strings are equal length.
 	 */
 	public static String getCommonLetters(String id1, String id2) {

@@ -8,25 +8,18 @@ import buri.aoc.Part;
 
 /**
  * Day 1: Inverse Captcha
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * The captcha requires you to review a sequence of digits and find the sum of all digits that match another digit
 	 * in the list.
-	 * 
+	 *
 	 * Part 1:
 	 * What is the solution when matching to the next digit in the list?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the solution when matching to the digit halfway around the circular list?
 	 */

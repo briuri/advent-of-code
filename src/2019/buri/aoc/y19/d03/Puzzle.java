@@ -12,22 +12,15 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 03: Crossed Wires
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified, a wire path on each line.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the Manhattan distance from the central port to the closest intersection?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the fewest combined steps the wires must take to reach an intersection?
 	 */

@@ -13,13 +13,6 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Execute the initialization program. What is the sum of all values left in memory after it completes?
 	 *

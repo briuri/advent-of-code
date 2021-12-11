@@ -9,22 +9,15 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 6: Probably a Fire Hazard
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * After following the instructions, how many lights are lit?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the total brightness of all lights combined after following Santa's instructions?
 	 */

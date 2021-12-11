@@ -23,13 +23,6 @@ public class Puzzle extends BasePuzzle {
 	private static final char OCCUPIED = '#';
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many seats end up occupied?
 	 *

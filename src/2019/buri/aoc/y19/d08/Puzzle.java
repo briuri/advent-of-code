@@ -12,23 +12,16 @@ import buri.aoc.data.CharFrequency;
 
 /**
  * Day 08: Space Image Format
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * To make sure the image wasn't corrupted during transmission, the Elves would like you to find the layer that
 	 * contains the fewest 0 digits. On that layer, what is the number of 1 digits multiplied by the number of 2 digits?
-	 * 
+	 *
 	 * Part 2:
 	 * What message is produced after decoding your image?
 	 */

@@ -15,13 +15,6 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * Using your labeling, simulate 100 moves. What are the labels on the cups after cup 1?
 	 *

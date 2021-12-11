@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 12: Leonardo's Monorail
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodifed.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * After executing the assembunny code in your puzzle input, what value is left in register a?
-	 * 
+	 *
 	 * Part 2:
 	 * If you instead initialize register c to be 1, what value is now left in register a?
 	 */

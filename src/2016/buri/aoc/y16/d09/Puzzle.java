@@ -5,22 +5,15 @@ import buri.aoc.Part;
 
 /**
  * Day 9: Explosives in Cyberspace
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the decompressed length of the file (your puzzle input)?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the decompressed length of the file using this improved format?
 	 */
@@ -33,7 +26,7 @@ public class Puzzle extends BasePuzzle {
 	 * repeated, a marker is added to the file, like (10x2). To decompress this marker, take the subsequent 10
 	 * characters and repeat them 2 times. Then, continue reading the file after the repeated data. The marker itself is
 	 * not included in the decompressed output.
-	 * 
+	 *
 	 * In version two, the only difference is that markers within decompressed data are decompressed.
 	 */
 	private static long decompress(Part part, String input) {

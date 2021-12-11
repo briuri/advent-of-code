@@ -1,6 +1,5 @@
 package buri.aoc.y21.d04;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

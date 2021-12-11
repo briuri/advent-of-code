@@ -8,22 +8,15 @@ import buri.aoc.Part;
 
 /**
  * Day 10: Balance Bots
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the number of the bot that is responsible for comparing value-61 microchips with value-17 microchips?
-	 * 
+	 *
 	 * Part 2:
 	 * What do you get if you multiply together the values of one chip in each of outputs 0, 1, and 2?
 	 */

@@ -12,11 +12,6 @@ import buri.aoc.Part;
  */
 public class PuzzleTest extends BaseTest {
 
-	@Test
-	public void testGetInput() {
-		assertEquals(32, Puzzle.getInput(0).size());
-	}
-
 	/**
 	 * Solves the Part 1 puzzle.
 	 */

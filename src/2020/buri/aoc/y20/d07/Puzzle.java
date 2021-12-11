@@ -16,24 +16,18 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file with 1 rule per line.
-	 */
-	public static List<Rule> getInput(int fileIndex) {
-		List<Rule> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Rule(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * How many bag colors can eventually contain at least one shiny gold bag?
 	 *
 	 * Part 2:
 	 * How many individual bags are required inside your single shiny gold bag?
 	 */
-	public static int getResult(Part part, List<Rule> rules) {
+	public static int getResult(Part part, List<String> input) {
+		List<Rule> rules = new ArrayList<>();
+		for (String line : input) {
+			rules.add(new Rule(line));
+		}
+
 		if (part == Part.ONE) {
 			return (getContainers(rules, "shiny gold").size());
 		}

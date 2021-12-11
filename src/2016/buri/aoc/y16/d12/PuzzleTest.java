@@ -2,8 +2,6 @@ package buri.aoc.y16.d12;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.BaseTest;
@@ -13,12 +11,6 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class PuzzleTest extends BaseTest {
-
-	@Test
-	public void testGetInput() {
-		List<String> input = Puzzle.getInput(0);
-		assertEquals(23, input.size());
-	}
 
 	@Test
 	public void testPart1Examples() {

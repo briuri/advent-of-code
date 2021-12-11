@@ -17,30 +17,25 @@ import buri.aoc.data.tuple.Pair;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of integers
-	 */
-	public static List<Integer> getInput(int fileIndex) {
-		String[] stringInts = readFile(fileIndex).get(0).split(",");
-		return (convertStringsToInts(Arrays.asList(stringInts)));
-	}
-
-	/**
 	 * Part 1:
 	 * Given your starting numbers, what will be the 2020th number spoken?
 	 *
 	 * Part 2:
 	 * Given your starting numbers, what will be the 30,000,000th number spoken?
 	 */
-	public static int getResult(Part part, List<Integer> input) {
+	public static int getResult(Part part, List<String> input) {
+		String[] stringInts = input.get(0).split(",");
+		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
+
 		int lastNum = 0;
 
 		Map<Integer, Pair<Integer>> game = new HashMap<>();
-		for (int i = 0; i < input.size(); i++) {
-			lastNum = addRound(game, input.get(i), i);
+		for (int i = 0; i < values.size(); i++) {
+			lastNum = addRound(game, values.get(i), i);
 		}
 
 		int target = (part == Part.ONE ? 2020 : 30000000);
-		for (int i = input.size(); i < target; i++) {
+		for (int i = values.size(); i < target; i++) {
 			Pair<Integer> history = game.get(lastNum);
 			// If lastNum's occurrence was the first time it was spoken, nextNum is 0.
 			// Otherwise, it is the age between the previous two occurrences.

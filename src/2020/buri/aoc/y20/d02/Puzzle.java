@@ -14,26 +14,20 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file with each policy on a line.
-	 */
-	public static List<Policy> getInput(int fileIndex) {
-		List<Policy> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Policy(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * How many passwords are valid according to their policies?
 	 *
 	 * Part 2:
 	 * How many passwords are valid according to the new interpretation of the policies?
 	 */
-	public static int getResult(Part part, List<Policy> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Policy> policies = new ArrayList<>();
+		for (String line : input) {
+			policies.add(new Policy(line));
+		}
+
 		int valid = 0;
-		for (Policy policy : input) {
+		for (Policy policy : policies) {
 			if (policy.isValid(part)) {
 				valid++;
 			}

@@ -11,7 +11,7 @@ import buri.aoc.Part;
 
 /**
  * Day 16: Flawed Frequency Transmission
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -20,26 +20,20 @@ public class Puzzle extends BasePuzzle {
 	private static final Map<String, List<Integer>> CACHED_PATTERNS = new HashMap<>();
 
 	/**
-	 * Returns the input file as a list of digits
-	 */
-	public static List<Integer> getInput(int fileIndex) {
-		List<Integer> input = new ArrayList<>();
-		for (Character value : readFile(fileIndex).get(0).toCharArray()) {
-			input.add(Character.getNumericValue(value));
-		}
-		return (input);
-	}
-
-	/**
 	 * Part 1:
 	 * After 100 phases of FFT, what are the first eight digits in the final output list?
-	 * 
+	 *
 	 * Part 2:
 	 * After repeating your input signal 10000 times and running 100 phases of FFT, what is the eight-digit message
 	 * embedded in the final output list?
 	 */
-	public static String getResult(Part part, List<Integer> input, int phases) {
-		List<Integer> current = new ArrayList<>(input);
+	public static String getResult(Part part, List<String> input, int phases) {
+		List<Integer> values = new ArrayList<>();
+		for (Character value : input.get(0).toCharArray()) {
+			values.add(Character.getNumericValue(value));
+		}
+
+		List<Integer> current = new ArrayList<>(values);
 		if (part == Part.ONE) {
 			int length = current.size();
 			for (int phase = 0; phase < phases; phase++) {
@@ -58,9 +52,9 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Part TWO
-		int offset = Integer.valueOf(toString(input.subList(0, 7)));
+		int offset = Integer.valueOf(toString(values.subList(0, 7)));
 		for (int i = 0; i < 10000 - 1; i++) {
-			current.addAll(input);
+			current.addAll(values);
 		}
 
 		/*

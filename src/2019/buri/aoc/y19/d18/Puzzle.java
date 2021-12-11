@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 18: Many-Worlds Interpretation
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many steps is the shortest path that collects all of the keys?
-	 * 
+	 *
 	 * Part 2:
 	 * After updating your map and using the remote-controlled robots, what is the fewest steps necessary to collect all
 	 * of the keys?

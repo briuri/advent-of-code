@@ -24,11 +24,14 @@ public class Puzzle extends BasePuzzle {
 	private static final int MONSTER_HEIGHT = 3;
 
 	/**
-	 * Returns the input file as a list of tiles
+	 * Part 1:
+	 * What do you get if you multiply together the IDs of the four corner tiles?
+	 *
+	 * Part 2:
+	 * How many # are not part of a sea monster?
 	 */
-	public static List<Tile> getInput(int fileIndex) {
-		List<Tile> list = new ArrayList<>();
-		List<String> input = readFile(fileIndex);
+	public static long getResult(Part part, List<String> input) {
+		List<Tile> tiles = new ArrayList<>();
 		for (int i = 0; i < input.size(); i++) {
 			if (input.get(i).indexOf("Tile") != -1) {
 				int id = Integer.valueOf(input.get(i).split(" ")[1].split(":")[0]);
@@ -45,20 +48,10 @@ public class Puzzle extends BasePuzzle {
 					y++;
 					nextLine = input.get(i);
 				}
-				list.add(new Tile(id, grid));
+				tiles.add(new Tile(id, grid));
 			}
 		}
-		return (list);
-	}
 
-	/**
-	 * Part 1:
-	 * What do you get if you multiply together the IDs of the four corner tiles?
-	 *
-	 * Part 2:
-	 * How many # are not part of a sea monster?
-	 */
-	public static long getResult(Part part, List<Tile> tiles) {
 		Set<Tile> permutations = new HashSet<>();
 		Tile start = null;
 		// Save all permutations of each tile, except for the very first one.

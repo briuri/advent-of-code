@@ -13,12 +13,6 @@ import buri.aoc.Part;
 public class PuzzleTest extends BaseTest {
 
 	@Test
-	public void testGetInput() {
-		Tracks input = Puzzle.getInput(0);
-		assertNotNull(input);
-	}
-
-	@Test
 	public void testPart1Examples() {
 		assertEquals("7,3", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
 	}

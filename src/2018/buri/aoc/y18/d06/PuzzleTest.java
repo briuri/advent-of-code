@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import buri.aoc.BaseTest;
+import buri.aoc.Part;
 
 /**
  * @author Brian Uri!
@@ -12,13 +13,8 @@ import buri.aoc.BaseTest;
 public class PuzzleTest extends BaseTest {
 
 	@Test
-	public void testGetInput() {
-		assertEquals(50, Puzzle.getInput(0).size());
-	}
-
-	@Test
 	public void testPart1Examples() {
-		assertEquals(17, Puzzle.getPart1Result(Puzzle.getInput(1)));
+		assertEquals(17, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 0));
 	}
 
 	/**
@@ -26,14 +22,14 @@ public class PuzzleTest extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		int result = Puzzle.getPart1Result(Puzzle.getInput(0));
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 0);
 		toConsole(result);
 		assertEquals(3251, result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals(16, Puzzle.getPart2Result(32, Puzzle.getInput(1)));
+		assertEquals(16, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 32));
 	}
 
 	/**
@@ -41,7 +37,7 @@ public class PuzzleTest extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		int result = Puzzle.getPart2Result(10000, Puzzle.getInput(0));
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 10000);
 		toConsole(result);
 		assertEquals(47841, result);
 	}

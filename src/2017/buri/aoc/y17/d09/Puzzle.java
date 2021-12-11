@@ -5,22 +5,15 @@ import buri.aoc.Part;
 
 /**
  * Day 9: Stream Processing
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the total score for all groups in your input?
-	 * 
+	 *
 	 * Part 2:
 	 * How many non-cancelled characters are within the garbage in your puzzle input?
 	 */
@@ -47,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Counts the number of groups after erasing garbage.
-	 * 
+	 *
 	 * Groups begin with { and end with }.
 	 * Groups contain 0 or more comma-separated things: nested groups or garbage
 	 */
@@ -60,10 +53,10 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Strips garbage from a string.
-	 * 
+	 *
 	 * Garbage begins with < and ends with >. Between those angle brackets, almost any character can appear, including {
 	 * and }. Within garbage, < has no special meaning. Garbage always terminates properly.
-	 * 
+	 *
 	 * Any character that comes after ! should be ignored, including <, >, and even another !.
 	 */
 	public static String destroyGarbage(String input) {

@@ -11,32 +11,26 @@ import buri.aoc.Part;
 
 /**
  * Day 4: High-Entropy Passphrases
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a 2D list of strings.
-	 */
-	public static List<List<String>> getInput(int fileIndex) {
-		List<List<String>> rows = new ArrayList<>();
-		for (String rawRow : readFile(fileIndex)) {
-			rows.add(Arrays.asList(rawRow.split(" ")));
-		}
-		return (rows);
-	}
-
-	/**
 	 * A passphrase consists of a series of words (lowercase letters) separated by spaces.
-	 * 
+	 *
 	 * Part 1:
 	 * A valid passphrase must contain no duplicate words. How many passphrases are valid?
-	 * 
+	 *
 	 * Part 2:
 	 * A valid passphrase must contain no two words that are anagrams of each other. How many passphrases are valid?
 	 */
-	public static int getResult(Part part, List<List<String>> passphrases) {
+	public static int getResult(Part part, List<String> input) {
+		List<List<String>> passphrases = new ArrayList<>();
+		for (String line : input) {
+			passphrases.add(Arrays.asList(line.split(" ")));
+		}
+
 		int validCount = 0;
 		for (List<String> passphrase : passphrases) {
 			if (isValid(part, passphrase)) {

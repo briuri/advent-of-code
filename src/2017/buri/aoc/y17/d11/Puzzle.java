@@ -8,38 +8,32 @@ import buri.aoc.Part;
 
 /**
  * Day 11: Hex Ed
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of directions.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		List<String> data = new ArrayList<>();
-		for (String rawData : readFile(fileIndex).get(0).split(",")) {
-			data.add(rawData);
-		}
-		return (data);
-	}
-
-	/**
 	 * Using cube coordinates as described at:
 	 * https://www.redblobgames.com/grids/hexagons/
-	 * 
+	 *
 	 * Part 1:
 	 * Starting where he started, you need to determine the fewest number of steps required to reach him.
-	 * 
+	 *
 	 * Part 2:
 	 * How many steps away is the furthest he ever got from his starting position?
 	 */
 	public static int getResult(Part part, List<String> input) {
+		List<String> data = new ArrayList<>();
+		for (String rawData : input.get(0).split(",")) {
+			data.add(rawData);
+		}
+
 		int x = 0;
 		int y = 0;
 		int z = 0;
 		int max = 0;
-		for (String step : input) {
+		for (String step : data) {
 			if (step.equals("nw")) {
 				x = x - 1;
 				y = y + 1;

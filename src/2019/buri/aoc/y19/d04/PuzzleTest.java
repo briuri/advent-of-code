@@ -13,11 +13,6 @@ import buri.aoc.Part;
 public class PuzzleTest extends BaseTest {
 
 	@Test
-	public void testGetInput() {
-		assertEquals(2, Puzzle.getInput(0).size());
-	}
-
-	@Test
 	public void testPart1Examples() {
 		assertTrue(Puzzle.isValidPassword(Part.ONE, "111111"));
 		assertFalse(Puzzle.isValidPassword(Part.ONE, "223450"));

@@ -1,6 +1,5 @@
 package buri.aoc.y19.d11;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.BasePuzzle;
@@ -12,7 +11,7 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 11: Space Police
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -23,25 +22,14 @@ public class Puzzle extends BasePuzzle {
 	private static final char VISUAL_WHITE = '■';
 
 	/**
-	 * Returns the input file as a list of longs
-	 */
-	public static List<Long> getInput(int fileIndex) {
-		List<Long> list = new ArrayList<>();
-		for (String input : readFile(fileIndex).get(0).split(",")) {
-			list.add(Long.valueOf(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * How many panels does it paint at least once?
-	 * 
+	 *
 	 * Part 2:
 	 * After starting the robot on a single white panel instead, what registration identifier does it paint on your
 	 * hull?
 	 */
-	public static String getResult(Part part, List<Long> program) {
+	public static String getResult(Part part, List<String> input) {
 		Pair<Integer> size = (part == Part.ONE ? new Pair(140, 128) : new Pair(85, 12));
 		CharGrid hull = new CharGrid(size);
 		for (int y = 0; y < hull.getHeight(); y++) {
@@ -52,10 +40,10 @@ public class Puzzle extends BasePuzzle {
 		Direction direction = Direction.UP;
 		Pair<Integer> position = hull.getCenterPosition();
 		hull.set(position, part == Part.ONE ? BLACK : WHITE);
-		Computer computer = new Computer(program);
+		Computer computer = new Computer(input);
 		while (true) {
-			long input = (hull.get(position) == WHITE) ? 1 : 0;
-			computer.getInputs().add(input);
+			long inputValue = (hull.get(position) == WHITE) ? 1 : 0;
+			computer.getInputs().add(inputValue);
 			computer.run();
 			List<Long> outputs = computer.getOutputs();
 			if (outputs.isEmpty()) {

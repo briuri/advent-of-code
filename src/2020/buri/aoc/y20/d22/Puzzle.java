@@ -17,28 +17,22 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list containing to decks of cards.
-	 */
-	public static List<ArrayDeque<Integer>> getInput(int fileIndex) {
-		List<ArrayDeque<Integer>> decks = new ArrayList<>();
-		for (String line : readFile(fileIndex)) {
-			ArrayDeque<Integer> deck = new ArrayDeque<>();
-			for (String stringInt : line.split(",")) {
-				deck.add(Integer.valueOf(stringInt));
-			}
-			decks.add(deck);
-		}
-		return (decks);
-	}
-
-	/**
 	 * Part 1:
 	 * What is the winning player's score?
 	 *
 	 * Part 2:
 	 * What is the winning player's score?
 	 */
-	public static long getResult(Part part, List<ArrayDeque<Integer>> decks) {
+	public static long getResult(Part part, List<String> input) {
+		List<ArrayDeque<Integer>> decks = new ArrayList<>();
+		for (String line : input) {
+			ArrayDeque<Integer> deck = new ArrayDeque<>();
+			for (String stringInt : line.split(",")) {
+				deck.add(Integer.valueOf(stringInt));
+			}
+			decks.add(deck);
+		}
+
 		ArrayDeque<Integer> deck1 = decks.get(0);
 		ArrayDeque<Integer> deck2 = decks.get(1);
 		int totalCards = deck1.size() + deck2.size();

@@ -11,23 +11,16 @@ import buri.aoc.Part;
 
 /**
  * Day 17: No Such Thing as Too Much
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Filling all containers entirely, how many different combinations of containers can exactly fit all 150 liters of
 	 * eggnog?
-	 * 
+	 *
 	 * Part 2:
 	 * How many different ways can you fill that number of containers and still hold exactly 150 litres?
 	 */

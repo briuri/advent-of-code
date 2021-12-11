@@ -1,6 +1,5 @@
 package buri.aoc.y19.d13;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.BasePuzzle;
@@ -11,7 +10,7 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 13: Care Package
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -21,26 +20,15 @@ public class Puzzle extends BasePuzzle {
 	private static final int BALL = 4;
 
 	/**
-	 * Returns the input file as a list of longs.
-	 */
-	public static List<Long> getInput(int fileIndex) {
-		List<Long> list = new ArrayList<>();
-		for (String input : readFile(fileIndex).get(0).split(",")) {
-			list.add(Long.valueOf(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * How many block tiles are on the screen when the game exits?
-	 * 
+	 *
 	 * Part 2:
 	 * What is your score after the last block is broken?
 	 */
-	public static int getResult(Part part, List<Long> program) {
+	public static int getResult(Part part, List<String> input) {
 		IntGrid grid = new IntGrid(new Pair(37, 37));
-		Computer computer = new Computer(program);
+		Computer computer = new Computer(input);
 		computer.run();
 		List<Long> outputs = computer.getOutputs();
 		while (!outputs.isEmpty()) {
@@ -55,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 
 		// Part TWO
 		int score = 0;
-		computer = new Computer(program, 2L);
+		computer = new Computer(input, 2L);
 		Pair<Integer> ball = null;
 		Pair<Integer> paddle = null;
 		while (true) {

@@ -12,22 +12,15 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 10: Monitoring Station
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many other asteroids can be detected from that location?
-	 * 
+	 *
 	 * Part 2:
 	 * The Elves are placing bets on which will be the 200th asteroid to be vaporized. Win the bet by determining which
 	 * asteroid that will be; what do you get if you multiply its X coordinate by 100 and then add its Y coordinate?

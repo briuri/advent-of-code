@@ -10,22 +10,15 @@ import buri.aoc.Part;
 
 /**
  * Day 12: The N-Body Problem
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of strings.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the total energy in the system after simulating the moons given in your scan for 1000 steps?
-	 * 
+	 *
 	 * Part 2:
 	 * How many steps does it take to reach the first state that exactly matches a previous state?
 	 */

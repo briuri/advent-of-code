@@ -7,23 +7,16 @@ import buri.aoc.Part;
 
 /**
  * Day 15: Science for Hungry People
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Given the ingredients in your kitchen and their properties, what is the total score of the highest-scoring cookie
 	 * you can make?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the total score of the highest-scoring cookie you can make with a calorie total of 500?
 	 */

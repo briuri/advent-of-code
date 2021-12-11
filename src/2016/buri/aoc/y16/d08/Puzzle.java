@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 8: Two-Factor Authentication
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many pixels should be lit?
-	 * 
+	 *
 	 * Part 2:
 	 * After you swipe your card, what code is the screen trying to display?
 	 */

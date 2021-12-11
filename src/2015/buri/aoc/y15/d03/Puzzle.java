@@ -8,22 +8,15 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 3: Perfectly Spherical Houses in a Vacuum
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * How many houses receive at least one present?
-	 * 
+	 *
 	 * Part 2:
 	 * This year, how many houses receive at least one present?
 	 */

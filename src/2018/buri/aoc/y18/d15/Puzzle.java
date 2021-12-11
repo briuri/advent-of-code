@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 15: Beverage Bandits
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the outcome of the combat described in your puzzle input?
-	 * 
+	 *
 	 * Part 2:
 	 * After increasing the Elves' attack power until it is just barely enough for them to win without any Elves dying,
 	 * what is the outcome of the combat described in your puzzle input?

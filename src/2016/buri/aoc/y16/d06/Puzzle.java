@@ -8,22 +8,15 @@ import buri.aoc.data.CharFrequency;
 
 /**
  * Day 6: Signals and Noise
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the error-corrected version of the message being sent using the most frequent letters?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the error-corrected version of the message being sent using the least frequent letters?
 	 */

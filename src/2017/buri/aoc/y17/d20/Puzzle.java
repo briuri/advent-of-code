@@ -11,41 +11,35 @@ import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 20: Particle Swarm
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	private static final Triple<Long> ORIGIN = new Triple(0L, 0L, 0L);
-	
-	/**
-	 * Returns input file as a list of Particles with position, velocity, and acceleration.
-	 */
-	public static List<Particle> getInput(int fileIndex) {
-		List<Particle> list = new ArrayList<>();
-		for (String particle : readFile(fileIndex)) {
-			list.add(new Particle(particle));
-		}
-		return (list);
-	}
 
 	/**
 	 * Part 1:
 	 * Which particle will stay closest to position <0,0,0> in the long term?
-	 * 
+	 *
 	 * Part 2:
 	 * How many particles are left after all collisions are resolved?
 	 */
-	public static int getResult(Part part, List<Particle> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Particle> particles = new ArrayList<>();
+		for (String line : input) {
+			particles.add(new Particle(line));
+		}
+
 		if (part == Part.ONE) {
-			return (getSlowestAccelerationIndex(input));
+			return (getSlowestAccelerationIndex(particles));
 		}
 
 		// Part TWO
 		for (int i = 0; i < 100; i++) {
-			moveWithCollisions(input);
+			moveWithCollisions(particles);
 		}
-		return (input.size());
+		return (particles.size());
 	}
 
 	/**
@@ -54,7 +48,7 @@ public class Puzzle extends BasePuzzle {
 	private static int getSlowestAccelerationIndex(List<Particle> input) {
 		int index = -1;
 		long minAcceleration = Long.MAX_VALUE;
-		
+
 		for (int i = 0; i < input.size(); i++) {
 			Particle particle = input.get(i);
 			long acceleration = particle.getAcceleration().getManhattanDistance(ORIGIN);

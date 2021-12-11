@@ -17,13 +17,6 @@ public class Puzzle extends BasePuzzle {
 	private static final BigInteger MODULUS = toBigInt(20201227);
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What encryption key is the handshake trying to establish?
 	 */

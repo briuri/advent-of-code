@@ -15,23 +15,16 @@ import buri.aoc.Part;
 
 /**
  * Day 19: Medicine for Rudolph
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many distinct molecules can be created after all the different ways you can do one replacement on the
 	 * medicine molecule?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the fewest number of steps to go from e to the medicine molecule?
 	 */
@@ -69,7 +62,7 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Recursively try different random replacements until we get to e.
-	 * 
+	 *
 	 * Original solution was BFS that did not scale up to input size well.
 	 */
 	private static int getSteps(int depth, String molecule, Map<String, String> replacements) {

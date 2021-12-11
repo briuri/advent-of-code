@@ -19,17 +19,6 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of food.
-	 */
-	public static List<Food> getInput(int fileIndex) {
-		List<Food> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Food(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * - Each allergen is found in exactly one ingredient.
 	 * - Each ingredient contains zero or one allergen.
 	 * - Allergens aren't always marked. If an allergen isn't listed, the ingredient that contains that allergen could
@@ -41,7 +30,12 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is your canonical dangerous ingredient list?
 	 */
-	public static String getResult(Part part, List<Food> foods) {
+	public static String getResult(Part part, List<String> input) {
+		List<Food> foods = new ArrayList<>();
+		for (String line : input) {
+			foods.add(new Food(line));
+		}
+
 		// Map of ingredient name to number of times it appears
 		Map<String, Integer> ingredients = new HashMap<>();
 

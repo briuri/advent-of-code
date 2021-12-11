@@ -10,34 +10,28 @@ import buri.aoc.Part;
 
 /**
  * Day 2: Corruption Checksum
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a 2D list of Integers.
-	 */
-	public static List<List<Integer>> getInput(int fileIndex) {
-		List<List<Integer>> rows = new ArrayList<>();
-		for (String rawRow : readFile(fileIndex)) {
-			List<Integer> row = convertStringsToInts(Arrays.asList(rawRow.split("\t")));
-			Collections.sort(row);
-			rows.add(row);
-		}
-		return (rows);
-	}
-
-	/**
 	 * The spreadsheet consists of rows of apparently-random numbers.
-	 * 
+	 *
 	 * Part 1:
 	 * What is the checksum for the spreadsheet, using the difference between highest and lowest value in each row?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the checksum for the spreadsheet, using the dividend of the only two divisible numbers in each row?
 	 */
-	public static int getResult(Part part, List<List<Integer>> spreadsheet) {
+	public static int getResult(Part part, List<String> input) {
+		List<List<Integer>> spreadsheet = new ArrayList<>();
+		for (String line : input) {
+			List<Integer> row = convertStringsToInts(Arrays.asList(line.split("\t")));
+			Collections.sort(row);
+			spreadsheet.add(row);
+		}
+
 		List<Integer> checksums = new ArrayList<>();
 		for (List<Integer> row : spreadsheet) {
 			checksums.add((part == Part.ONE) ? getRowDifference(row) : getRowQuotient(row));

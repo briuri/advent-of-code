@@ -11,22 +11,15 @@ import buri.aoc.Part;
 
 /**
  * Day 24: It Hangs in the Balance
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodifeid
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the quantum entanglement of the first group of packages in the ideal configuration?
-	 * 
+	 *
 	 * Part 2:
 	 * Balance the sleigh again, but this time, separate the packages into four groups instead of three. The other
 	 * constraints still apply.

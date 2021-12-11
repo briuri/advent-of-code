@@ -16,13 +16,6 @@ public class Puzzle extends BasePuzzle {
 	private static final Pair<Integer> ORIGIN = new Pair(0, 0);
 
 	/**
-	 * Returns the input file unmodified
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the Manhattan distance between that location and the ship's starting position?
 	 *

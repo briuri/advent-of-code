@@ -10,7 +10,7 @@ import buri.aoc.Part;
 
 /**
  * Day 7: Some Assembly Required
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -18,17 +18,10 @@ public class Puzzle extends BasePuzzle {
 	private static final Pattern VARIABLE_NAMES = Pattern.compile("[a-z]");
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * In little Bobby's kit's instructions booklet (provided as your puzzle input), what signal is ultimately provided
 	 * to wire a?
-	 * 
+	 *
 	 * Part 2:
 	 * Now, take the signal you got on wire a, override wire b to that signal, and reset the other wires (including wire
 	 * a). What new signal is ultimately provided to wire a?

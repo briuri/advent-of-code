@@ -11,30 +11,19 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 21: Springdroid Adventure
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as an Intcode program
-	 */
-	public static List<Long> getInput(int fileIndex) {
-		List<Long> list = new ArrayList<>();
-		for (String input : readFile(fileIndex).get(0).split(",")) {
-			list.add(Long.valueOf(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * What amount of hull damage does it report?
-	 * 
+	 *
 	 * Part 2:
 	 * What amount of hull damage does the springdroid now report?
 	 */
-	public static long getResult(Part part, List<Long> program) {
+	public static long getResult(Part part, List<String> input) {
 		// Jump if a hole is in A, B, or C, but only if D is ground.
 		// J = (!A || !B || !C) && D
 		String[] springscript1 = new String[] { "NOT A J", // J = !A
@@ -65,7 +54,7 @@ public class Puzzle extends BasePuzzle {
 			inputs.addAll(Computer.toAscii(line));
 		}
 
-		Computer computer = new Computer(program);
+		Computer computer = new Computer(input);
 		computer.getInputs().addAll(inputs);
 		computer.run();
 		// Only build grid if springdroid failed.

@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 17: Reservoir Research
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many tiles can the water reach within the range of y values in your scan?
-	 * 
+	 *
 	 * Part 2:
 	 * How many water tiles are left after the water spring stops producing water and all remaining water not at rest
 	 * has drained?

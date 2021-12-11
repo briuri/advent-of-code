@@ -7,23 +7,16 @@ import buri.aoc.Part;
 
 /**
  * Day 24: Air Duct Spelunking
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Given your actual map, and starting from location 0, what is the fewest number of steps required to visit every
 	 * non-0 number marked on the map at least once?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the fewest number of steps required to start at 0, visit every non-0 number marked on the map at least
 	 * once, and then return to 0?

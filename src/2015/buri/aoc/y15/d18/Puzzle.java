@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day Day 18: Like a GIF For Your Yard
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Given your initial configuration, how many lights are on after 100 steps?
-	 * 
+	 *
 	 * Part 2:
 	 * Given your initial configuration, but with the four corners always in the on state, how many lights are on after
 	 * 100 steps?

@@ -15,26 +15,20 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file with one boarding pass per line.
-	 */
-	public static List<Pass> getInput(int fileIndex) {
-		List<Pass> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Pass(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * What is the highest seat ID on a boarding pass?
 	 *
 	 * Part 2:
 	 * What is the ID of your seat?
 	 */
-	public static int getResult(Part part, List<Pass> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Pass> list = new ArrayList<>();
+		for (String line : input) {
+			list.add(new Pass(line));
+		}
+
 		List<Integer> seats = new ArrayList<>();
-		for (Pass pass : input) {
+		for (Pass pass : list) {
 			seats.add(pass.getId());
 		}
 		Collections.sort(seats);

@@ -17,29 +17,23 @@ import buri.aoc.data.tuple.Pair;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of Positions.
-	 */
-	public static List<Position> getInput(int fileIndex) {
-		List<Position> positions = new ArrayList<>();
-		for (String data : readFile(fileIndex)) {
-			positions.add(new Position(data));
-		}
-		return (positions);
-	}
-
-	/**
 	 * Part 1:
 	 * What message will eventually appear in the sky?
 	 *
 	 * Part 2:
 	 * How many seconds would they have needed to wait for that message to appear?
 	 */
-	public static String getResult(Part part, List<Position> input) {
+	public static String getResult(Part part, List<String> input) {
+		List<Position> positions = new ArrayList<>();
+		for (String line : input) {
+			positions.add(new Position(line));
+		}
+
 		// Iterate over the position changes and find the time when the positions are closest together.
 		int minTime = 0;
 		BigInteger minArea = null;
 		for (int i = 0; i < 20000; i++) {
-			BigInteger area = getRectangleBounds(input);
+			BigInteger area = getRectangleBounds(positions);
 			// Points are converging.
 			if (minArea == null || area.compareTo(minArea) < 0) {
 				minArea = area;
@@ -49,25 +43,25 @@ public class Puzzle extends BasePuzzle {
 			else if (area.compareTo(minArea) >= 0) {
 				break;
 			}
-			for (Position position : input) {
+			for (Position position : positions) {
 				position.move(1);
 			}
 		}
 		if (part == Part.ONE) {
 			// Paint the grid at the correct time.
-			for (Position position : input) {
+			for (Position position : positions) {
 				position.reset();
 				position.move(minTime);
 			}
 			// Shift output to origin in console.
-			Position offset = getOffset(input);
+			Position offset = getOffset(positions);
 			int maxX = Integer.MIN_VALUE;
-			for (Position position : input) {
+			for (Position position : positions) {
 				position.offset(offset);
 				maxX = Math.max(maxX, position.getX());
 			}
 			CharGrid grid = new CharGrid(new Pair(maxX + 1, 10));
-			for (Position position : input) {
+			for (Position position : positions) {
 				grid.set(position, '■');
 			}
 			return (grid.toString());

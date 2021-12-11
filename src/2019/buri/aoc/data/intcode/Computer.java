@@ -5,9 +5,9 @@ import java.util.List;
 
 /**
  * Computer class used for running Intcode programs.
- * 
+ *
  * - y19d2, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25
- * 
+ *
  * @author Brian Uri!
  */
 public class Computer {
@@ -24,7 +24,12 @@ public class Computer {
 	/**
 	 * Base constructor
 	 */
-	public Computer(List<Long> program) {
+	public Computer(List<String> input) {
+		List<Long> program = new ArrayList<>();
+		for (String line : input.get(0).split(",")) {
+			program.add(Long.valueOf(line));
+		}
+
 		_memory = new ArrayList<>(program);
 		_inputs = new ArrayList<>();
 		_outputs = new ArrayList<>();
@@ -34,25 +39,25 @@ public class Computer {
 
 	/**
 	 * Constructor (y19d2)
-	 * 
-	 * @param program the intcodes to run (does not modify)
+	 *
+	 * @param input the intcodes to run (does not modify)
 	 * @param noun value to store at address 1
 	 * @param verb value to store at address 2
 	 */
-	public Computer(List<Long> program, Long noun, Long verb) {
-		this(program);
+	public Computer(List<String> input, Long noun, Long verb) {
+		this(input);
 		_memory.set(1, noun);
 		_memory.set(2, verb);
 	}
 
 	/**
 	 * Constructor (y19d13, y10d17)
-	 * 
-	 * @param program the intcodes to run (does not modify)
+	 *
+	 * @param input the intcodes to run (does not modify)
 	 * @param addressZero the value to set at address zero
 	 */
-	public Computer(List<Long> program, Long addressZero) {
-		this(program);
+	public Computer(List<String> input, Long addressZero) {
+		this(input);
 		_memory.set(0, addressZero);
 	}
 

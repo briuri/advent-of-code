@@ -13,22 +13,15 @@ import buri.aoc.Part;
 
 /**
  * Day 12: JSAbacusFramework.io
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the sum of all numbers in the document?
-	 * 
+	 *
 	 * Part 2:
 	 * Ignore any object (and all of its children) which has any property with the value "red". Do this only for objects
 	 * ({...}), not arrays ([...]).

@@ -10,25 +10,18 @@ import buri.aoc.Part;
 
 /**
  * Day 7: The Sum of Its Parts
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * In what order should the steps in your instructions be completed?
-	 * 
+	 *
 	 * (Note: Part 1 is a simple case of Part 2's algorithm using workers = 1 and any baseTime. I discarded the original
 	 * Part 1 algorithm and refactored to support this).
-	 * 
+	 *
 	 * Part 2:
 	 * With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the
 	 * steps?

@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 23: Coprocessor Conflagration
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of instructions.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * a=0, If you run the program (your puzzle input), how many times is the mul instruction invoked?
-	 * 
+	 *
 	 * Part 2:
 	 * a=1, If the program were to run to completion, what value would be left in register h?
 	 */
@@ -51,7 +44,7 @@ public class Puzzle extends BasePuzzle {
 		 * 			}
 		 * 		}
 		 * 		return (h);
-		 * 
+		 *
 		 * So it's testing all values in the outer for loop to see if that value can be made by multiply two other numbers.
 		 * A faster way to do this would be to check if the number is a prime number. If it is not, increment h.
 		 */

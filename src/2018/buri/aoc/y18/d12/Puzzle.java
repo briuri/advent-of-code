@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 12: Subterranean Sustainability
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * After 20 generations, what is the sum of the numbers of all pots which contain a plant?
-	 * 
+	 *
 	 * Part 2:
 	 * After fifty billion (50000000000) generations, what is the sum of the numbers of all pots which contain a plant?
 	 */

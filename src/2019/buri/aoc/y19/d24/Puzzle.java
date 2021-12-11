@@ -13,7 +13,7 @@ import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 24: Planet of Discord
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
@@ -22,16 +22,9 @@ public class Puzzle extends BasePuzzle {
 	private static final int SIZE = 5;
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the biodiversity rating for the first layout that appears twice?
-	 * 
+	 *
 	 * Part 2:
 	 * Starting with your scan, how many bugs are present after 200 minutes?
 	 */
@@ -121,7 +114,7 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Returns true if a tile will evolve into a bug.
-	 * 
+	 *
 	 * A bug dies (becoming an empty space) unless there is exactly one bug adjacent to it.
 	 * An empty space becomes infested with a bug if exactly one or two bugs are adjacent to it.
 	 */

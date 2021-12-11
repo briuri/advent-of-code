@@ -7,31 +7,25 @@ import buri.aoc.BasePuzzle;
 
 /**
  * Day 21: Fractal Art
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of rules.
-	 */
-	public static List<Rule> getInput(int fileIndex) {
-		List<Rule> rules = new ArrayList<>();
-		for (String line : readFile(fileIndex)) {
-			rules.add(new Rule(line));
-		}
-		return (rules);
-	}
-
-	/**
 	 * Part 1:
 	 * How many pixels stay on after 5 iterations?
-	 * 
+	 *
 	 * Part 2:
 	 * How many pixels stay on after 18 iterations?
 	 */
-	public static int getResult(List<Rule> input, int iterations) {
-		Image image = new Image(input);
+	public static int getResult(List<String> input, int iterations) {
+		List<Rule> rules = new ArrayList<>();
+		for (String line : input) {
+			rules.add(new Rule(line));
+		}
+
+		Image image = new Image(rules);
 		for (int i = 0; i < iterations; i++) {
 			image.fractalize();
 		}

@@ -10,27 +10,22 @@ import buri.aoc.Part;
 
 /**
  * Day 6: Memory Reallocation
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of numbers.
-	 */
-	public static List<Integer> getInput(int fileIndex) {
-		String[] rawIntegers = readFile(fileIndex).get(0).split("\t");
-		return (convertStringsToInts(Arrays.asList(rawIntegers)));
-	}
-
-	/**
 	 * Part 1:
 	 * How many redistribution cycles must be completed before a configuration is produced that has been seen before?
-	 * 
+	 *
 	 * Part 2:
 	 * How many cycles are in the infinite loop that arises from the configuration in your puzzle input?
 	 */
-	public static int getResult(Part part, List<Integer> banks) {
+	public static int getResult(Part part, List<String> input) {
+		String[] rawIntegers = input.get(0).split("\t");
+		List<Integer> banks = convertStringsToInts(Arrays.asList(rawIntegers));
+
 		boolean hitLoop = false;
 		int attempts = 0;
 		Set<String> snapshots = new HashSet<>();

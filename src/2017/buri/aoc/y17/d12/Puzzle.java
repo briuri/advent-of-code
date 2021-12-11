@@ -13,33 +13,27 @@ import buri.aoc.Part;
 
 /**
  * Day 12: Digital Plumber
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a sorted list of reports.
-	 */
-	public static List<Report> getInput(int fileIndex) {
-		List<Report> data = new ArrayList<>();
-		for (String rawData : readFile(fileIndex)) {
-			data.add(new Report(rawData));
-		}
-		Collections.sort(data);
-		return (data);
-	}
-
-	/**
 	 * Part 1:
 	 * How many programs are in the group that contains program ID 0?
-	 * 
+	 *
 	 * Part 2:
 	 * How many groups are there in total?
 	 */
-	public static int getResult(Part part, List<Report> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Report> reports = new ArrayList<>();
+		for (String line : input) {
+			reports.add(new Report(line));
+		}
+		Collections.sort(reports);
+
 		Map<Integer, Set<Integer>> connections = new HashMap<>();
-		for (Report report : input) {
+		for (Report report : reports) {
 			connections.put(report.getId(), report.getConnections());
 		}
 		Set<Integer> zeroConnections = getConnections(connections, 0);

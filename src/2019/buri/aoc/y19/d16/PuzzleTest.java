@@ -15,13 +15,6 @@ import buri.aoc.Part;
 public class PuzzleTest extends BaseTest {
 
 	@Test
-	public void testGetInput() {
-		List<Integer> input = Puzzle.getInput(0);
-		assertEquals(650, input.size());
-		assertEquals(Integer.valueOf(5), input.get(0));
-	}
-
-	@Test
 	public void testPatternGeneration() {
 		List<Integer> pattern = Puzzle.getPattern(0, 8);
 		assertEquals(1, (int) pattern.get(0));

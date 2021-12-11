@@ -8,23 +8,16 @@ import buri.aoc.Part;
 
 /**
  * Day 14: Reindeer Olympics
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, what distance has the
 	 * winning reindeer traveled?
-	 * 
+	 *
 	 * Part 2:
 	 * Again given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, how many points
 	 * does the winning reindeer have?

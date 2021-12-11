@@ -9,23 +9,16 @@ import buri.aoc.Part;
 
 /**
  * Day 18: Duet
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the value of the recovered frequency (the value of the most recently played sound) the first time a rcv
 	 * instruction is executed with a non-zero value?
-	 * 
+	 *
 	 * Part 2:
 	 * Once both of your programs have terminated (regardless of what caused them to do so), how many times did program
 	 * 1 send a value?

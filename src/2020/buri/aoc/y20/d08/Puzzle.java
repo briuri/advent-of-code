@@ -16,31 +16,25 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of instructions
-	 */
-	public static List<Instruction> getInput(int fileIndex) {
-		List<Instruction> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Instruction(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * Immediately before any instruction is executed a second time, what value is in the accumulator?
 	 *
 	 * Part 2:
 	 * What is the value of the accumulator after the program terminates?
 	 */
-	public static int getResult(Part part, List<Instruction> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Instruction> instructions = new ArrayList<>();
+		for (String line : input) {
+			instructions.add(new Instruction(line));
+		}
+
 		if (part == Part.ONE) {
-			return (runProgram(input));
+			return (runProgram(instructions));
 		}
 
 		ModIndex modIndex = new ModIndex();
 		while (modIndex.getIndex() < input.size()) {
-			List<Instruction> modded = modProgram(input, modIndex);
+			List<Instruction> modded = modProgram(instructions, modIndex);
 			if (!repeatsInstruction(modded)) {
 				return (runProgram(modded));
 			}

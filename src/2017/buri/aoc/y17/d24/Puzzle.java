@@ -11,26 +11,20 @@ import buri.aoc.Part;
 
 /**
  * Day 24: Electromagnetic Moat
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a PieceBag. Assumes no duplicates -- all port combinations are different.
-	 */
-	public static PieceBag getInput(int fileIndex) {
-		return (new PieceBag(readFile(fileIndex)));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the strength of the strongest bridge you can make with the components you have available?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the strength of the longest bridge you can make?
 	 */
-	public static int getResult(Part part, PieceBag bag) {
+	public static int getResult(Part part, List<String> input) {
+		PieceBag bag = new PieceBag(input);
 		List<Piece> bridge = new ArrayList<>();
 		Map<Integer, List<Integer>> lengthsToScores = new HashMap<>();
 

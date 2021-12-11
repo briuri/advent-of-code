@@ -1,6 +1,5 @@
 package buri.aoc.y19.d23;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,36 +13,25 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 23: Category Six
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as an Intcode program
-	 */
-	public static List<Long> getInput(int fileIndex) {
-		List<Long> list = new ArrayList<>();
-		for (String input : readFile(fileIndex).get(0).split(",")) {
-			list.add(Long.valueOf(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * Boot up all 50 computers and attach them to your network. What is the Y value of the first packet sent to address
 	 * 255?
-	 * 
+	 *
 	 * Part 2:
 	 * Monitor packets released to the computer at address 0 by the NAT. What is the first Y value delivered by the NAT
 	 * to the computer at address 0 twice in a row?
 	 */
-	public static long getResult(Part part, List<Long> program) {
+	public static long getResult(Part part, List<String> input) {
 		// Initialize computers.
 		Map<Long, Computer> computers = new HashMap<>();
 		for (long i = 0; i < 50; i++) {
-			Computer computer = new Computer(program);
+			Computer computer = new Computer(input);
 			computers.put(i, computer);
 			computer.getInputs().add(i);
 			computer.run();

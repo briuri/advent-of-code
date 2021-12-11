@@ -11,34 +11,28 @@ import buri.aoc.Part;
 
 /**
  * Day 4: Repose Record
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of Observations, sorted chronologically.
-	 */
-	public static List<Observation> getInput(int fileIndex) {
-		List<Observation> data = new ArrayList<>();
-		for (String rawData : readFile(fileIndex)) {
-			data.add(new Observation(rawData));
-		}
-		Collections.sort(data);
-		return (data);
-	}
-
-	/**
 	 * Part 1:
 	 * Find the guard that has the most minutes asleep. What minute does that guard spend asleep the most? What is the
 	 * ID of the guard you chose multiplied by the minute you chose?
-	 * 
+	 *
 	 * Part 2:
 	 * Of all guards, which guard is most frequently asleep on the same minute? What is the ID of the guard you chose
 	 * multiplied by the minute you chose?
 	 */
-	public static int getResult(Part part, List<Observation> input) {
-		Map<Integer, SleepSchedule> sleepSchedules = buildSleepSchedules(input);
+	public static int getResult(Part part, List<String> input) {
+		List<Observation> data = new ArrayList<>();
+		for (String line : input) {
+			data.add(new Observation(line));
+		}
+		Collections.sort(data);
+
+		Map<Integer, SleepSchedule> sleepSchedules = buildSleepSchedules(data);
 
 		if (part == Part.ONE) {
 			// Tally up the total sleep for each guard.

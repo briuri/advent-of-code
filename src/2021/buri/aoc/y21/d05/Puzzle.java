@@ -17,24 +17,18 @@ import buri.aoc.data.tuple.Pair;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of lines.
-	 */
-	public static List<Line> getInput(int fileIndex) {
-		List<Line> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Line(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * At how many points do at least two lines overlap?
 	 *
 	 * Part 2:
 	 * At how many points do at least two lines overlap? (diagonals)
 	 */
-	public static long getResult(Part part, List<Line> lines) {
+	public static long getResult(Part part, List<String> input) {
+		List<Line> lines = new ArrayList<>();
+		for (String line : input) {
+			lines.add(new Line(line));
+		}
+
 		Map<Pair<Integer>, Integer> grid = new HashMap<>();
 		for (Line line : lines) {
 			if (part == Part.ONE && line.isDiagonal()) {

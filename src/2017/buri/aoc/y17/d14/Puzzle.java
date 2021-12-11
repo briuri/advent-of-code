@@ -42,10 +42,8 @@ public class Puzzle extends BasePuzzle {
 	 * Marshals the raw data into the form needed for a knot hash and returns the knot hash hex string.
 	 */
 	private static String getKnotHashFor(String input) {
-		List<Integer> data = new ArrayList<>();
-		for (int i = 0; i < input.length(); i++) {
-			data.add((int) input.charAt(i));
-		}
+		List<String> data = new ArrayList<>();
+		data.add(input);
 		return (buri.aoc.y17.d10.Puzzle.getResult(Part.TWO, 256, data));
 	}
 

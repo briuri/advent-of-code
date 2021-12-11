@@ -9,22 +9,15 @@ import buri.aoc.Part;
 
 /**
  * Day 21: Scrambled Letters and Hash
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * Given the list of scrambling operations in your puzzle input, what is the result of scrambling abcdefgh?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the un-scrambled version of the scrambled password fbgdceah?
 	 */

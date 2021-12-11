@@ -9,31 +9,25 @@ import buri.aoc.data.tuple.Triple;
 
 /**
  * Day 23: Experimental Emergency Teleportation
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of nanobots.
-	 */
-	public static List<Bot> getInput(int fileIndex) {
-		List<Bot> list = new ArrayList<>();
-		for (String line : readFile(fileIndex)) {
-			list.add(new Bot(line));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * How many nanobots are in range of its signals?
-	 * 
+	 *
 	 * Part 2:
 	 * Find the coordinates that are in range of the largest number of nanobots. What is the shortest manhattan distance
 	 * between any of those points and 0,0,0?
 	 */
-	public static long getResult(Part part, List<Bot> bots) {
+	public static long getResult(Part part, List<String> input) {
+		List<Bot> bots = new ArrayList<>();
+		for (String line : input) {
+			bots.add(new Bot(line));
+		}
+
 		if (part == Part.ONE) {
 			return (getBotsInRangeOfStrongest(bots));
 		}
@@ -65,21 +59,21 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Find the coordinates that are in range of the largest number of nanobots. if there are multiple, choose the one
 	 * closest to origin.
-	 * 
+	 *
 	 * Naive solution (too slow):
 	 * - Store all possible coordinates in range of each bot in a frequency map.
 	 * - Determine the frequency of positions that occurs most.
 	 * - Find all positions that had that frequency and get the one with the smallest MD to origin.
-	 * 
+	 *
 	 * Optimized solution (still too slow):
 	 * - Only put the coordinates that are common between any 2 bots in the frequency map.
 	 * - Determine the frequency of positions that occurs most.
 	 * - Find all positions that had that frequency and get the one with the smallest MD to origin.
-	 * 
+	 *
 	 * Also failed:
 	 * - Try to calculate some sort of weighted center-of-mass (using radius to mock the weight) and search around
 	 * there.
-	 * 
+	 *
 	 * Final solution:
 	 * - Get the bounds of all bot positions.
 	 * - Break volume into chunks and take sample readings of the maxBotsInRange at different positions.

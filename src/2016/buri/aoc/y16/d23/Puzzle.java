@@ -7,21 +7,14 @@ import buri.aoc.Part;
 
 /**
  * Day 23: Safe Cracking
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-	
-	/**
 	 * Part One (23-0.txt)
-	 * 
+	 *
 	 * 0 reg[b] = reg[a]
 	 * 1 reg[b] -= 1
 	 * 2 reg[d] = reg[a]
@@ -48,10 +41,10 @@ public class Puzzle extends BasePuzzle {
 	 * 23 if (reg[d] != 0) then goto (21)
 	 * 24 reg[c] += 1
 	 * 25 if (reg[c] != 0) then goto (20)
-	 * 
+	 *
 	 * Part Two (23-2.txt)
 	 * Replace lines 4 - 9 with a new multiply instruction to optimize.
-	 * 
+	 *
 	 * 0 reg[b] = reg[a]
 	 * 1 reg[b] -= 1
 	 * 2 reg[d] = reg[a]
@@ -83,7 +76,7 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Part 1:
 	 * What value should be sent to the safe?
-	 * 
+	 *
 	 * Part 2:
 	 * Anyway, what value should actually be sent to the safe?
 	 */

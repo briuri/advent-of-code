@@ -13,13 +13,8 @@ import buri.aoc.Part;
 public class PuzzleTest extends BaseTest {
 
 	@Test
-	public void testGetInput() {
-		assertEquals(9, Puzzle.getInput(0).length());
-	}
-
-	@Test
 	public void testPart1Examples() {
-		assertEquals("67384529", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+		assertEquals("67384529", Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0)));
 	}
 
 	/**
@@ -27,14 +22,14 @@ public class PuzzleTest extends BaseTest {
 	 */
 	@Test
 	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
 		toConsole(result);
 		assertEquals("45798623", result);
 	}
 
 	@Test
 	public void testPart2Examples() {
-		assertEquals("149245887792", Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+		assertEquals("149245887792", Puzzle.getResult(Part.TWO, Puzzle.getInput(1).get(0)));
 	}
 
 	/**
@@ -42,7 +37,7 @@ public class PuzzleTest extends BaseTest {
 	 */
 	@Test
 	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
 		toConsole(result);
 		assertEquals("235551949822", result);
 	}

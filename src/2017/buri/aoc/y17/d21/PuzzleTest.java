@@ -12,11 +12,6 @@ import buri.aoc.BaseTest;
 public class PuzzleTest extends BaseTest {
 
 	@Test
-	public void testGetInput() {
-		assertEquals(108, Puzzle.getInput(0).size());
-	}
-
-	@Test
 	public void testPart1Examples() {
 		assertEquals(12, Puzzle.getResult(Puzzle.getInput(1), 2));
 	}

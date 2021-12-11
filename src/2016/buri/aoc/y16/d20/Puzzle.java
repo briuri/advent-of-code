@@ -11,30 +11,24 @@ import buri.aoc.Part;
 
 /**
  * Day 20: Firewall Rules
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of Ranges (may overlap).
-	 */
-	public static List<Range> getInput(int fileIndex) {
-		List<Range> ranges = new ArrayList<>();
-		for (String line : readFile(fileIndex)) {
-			ranges.add(new Range(line));
-		}
-		return (ranges);
-	}
-
-	/**
 	 * Part 1:
 	 * What is the lowest-valued IP that is not blocked?
-	 * 
+	 *
 	 * Part 2:
 	 * How many IPs are allowed by the blacklist?
 	 */
-	public static long getResult(Part part, List<Range> ranges, long max) {
+	public static long getResult(Part part, List<String> input, long max) {
+		List<Range> ranges = new ArrayList<>();
+		for (String line : input) {
+			ranges.add(new Range(line));
+		}
+
 		// Merge ranges until no more ranges can be merged.
 		int rangesMerged = -1;
 		while (rangesMerged != 0) {

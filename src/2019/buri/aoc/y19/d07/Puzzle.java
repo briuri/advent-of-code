@@ -10,30 +10,19 @@ import buri.aoc.data.intcode.Computer;
 
 /**
  * Day 07: Amplification Circuit
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of longs
-	 */
-	public static List<Long> getInput(int fileIndex) {
-		List<Long> list = new ArrayList<>();
-		for (String input : readFile(fileIndex).get(0).split(",")) {
-			list.add(Long.valueOf(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * What is the highest signal that can be sent to the thrusters?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the highest signal that can be sent to the thrusters?
 	 */
-	public static long getResult(Part part, List<Long> program) {
+	public static long getResult(Part part, List<String> input) {
 		Long[] phases = (part == Part.ONE ? new Long[] { 0L, 1L, 2L, 3L, 4L } : new Long[] { 5L, 6L, 7L, 8L, 9L });
 		List<Long[]> permutations = Permutations.getPermutations(phases);
 
@@ -42,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 			// Initialize all amplifiers with phases.
 			List<Computer> amps = new ArrayList<>();
 			for (int i = 0; i < perm.length; i++) {
-				Computer amp = new Computer(program);
+				Computer amp = new Computer(input);
 				amp.getInputs().add(perm[i]);
 				amps.add(amp);
 			}

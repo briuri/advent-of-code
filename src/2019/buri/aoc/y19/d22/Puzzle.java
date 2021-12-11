@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 22: Slam Shuffle
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * After shuffling your factory order deck of 10007 cards, what is the position of card 2019?
-	 * 
+	 *
 	 * Part 2:
 	 * After shuffling your new, giant, factory order deck that many times, what number is on the card that ends up in
 	 * position 2020?

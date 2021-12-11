@@ -16,13 +16,6 @@ import buri.aoc.data.tuple.Quad;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * How many cubes are left in the active state after the sixth cycle?
 	 *

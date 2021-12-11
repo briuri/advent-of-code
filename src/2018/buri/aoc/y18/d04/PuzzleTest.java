@@ -8,15 +8,10 @@ import buri.aoc.BaseTest;
 import buri.aoc.Part;
 
 /**
- * 
+ *
  * @author Brian Uri!
  */
 public class PuzzleTest extends BaseTest {
-
-	@Test
-	public void testGetInput() {
-		assertEquals(905, Puzzle.getInput(0).size());
-	}
 
 	@Test
 	public void testPart1Examples() {

@@ -7,24 +7,17 @@ import buri.aoc.Part;
 
 /**
  * Day 16: Chronal Classification
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
 	 * For ease of processing, I split the raw input file into the data for Part 1 (16-0, 16-1) and Part 2 (16-2).
-	 * 
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
+	 *
 	 * Part 1:
 	 * Ignoring the opcode numbers, how many samples in your puzzle input behave like three or more opcodes?
-	 * 
+	 *
 	 * Part 2:
 	 * What value is contained in register 0 after executing the test program?
 	 */

@@ -2,8 +2,6 @@ package buri.aoc.y17.d04;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import buri.aoc.BaseTest;
@@ -13,14 +11,6 @@ import buri.aoc.Part;
  * @author Brian Uri!
  */
 public class PuzzleTest extends BaseTest {
-
-	@Test
-	public void testGetInput() {
-		List<List<String>> rows = Puzzle.getInput(0);
-		assertEquals(512, rows.size());
-		assertEquals(10, rows.get(0).size());
-		assertEquals("pphsv", rows.get(0).get(0));
-	}
 
 	@Test
 	public void testPart1Examples() {

@@ -10,31 +10,25 @@ import buri.aoc.Part;
 
 /**
  * Day 14: Space Stoichiometry
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of reactions
-	 */
-	public static List<Reaction> getInput(int fileIndex) {
-		List<Reaction> list = new ArrayList<>();
-		for (String input : readFile(fileIndex)) {
-			list.add(new Reaction(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * Given the list of reactions in your puzzle input, what is the minimum amount of ORE required to produce exactly 1
 	 * FUEL?
-	 * 
+	 *
 	 * Part 2:
 	 * Given 1 trillion ORE, what is the maximum amount of FUEL you can produce?
 	 */
-	public static long getResult(Part part, List<Reaction> rawReactions) {
+	public static long getResult(Part part, List<String> input) {
+		List<Reaction> rawReactions = new ArrayList<>();
+		for (String line : input) {
+			rawReactions.add(new Reaction(line));
+		}
+
 		Map<String, Reaction> reactions = new HashMap<>();
 		for (Reaction reaction : rawReactions) {
 			reactions.put(reaction.getOutput().getName(), reaction);

@@ -16,15 +16,6 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a sorted list of adapters.
-	 */
-	public static List<Integer> getInput(int fileIndex) {
-		List<Integer> list = convertStringsToInts(readFile(fileIndex));
-		Collections.sort(list);
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * What is the number of 1-jolt differences multiplied by the number of 3-jolt differences?
 	 *
@@ -32,7 +23,10 @@ public class Puzzle extends BasePuzzle {
 	 * What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your
 	 * device?
 	 */
-	public static long getResult(Part part, List<Integer> adapters) {
+	public static long getResult(Part part, List<String> input) {
+		List<Integer> adapters = convertStringsToInts(input);
+		Collections.sort(adapters);
+
 		int charge = 0;
 		int oneJolt = 0;
 		int threeJolts = 0;

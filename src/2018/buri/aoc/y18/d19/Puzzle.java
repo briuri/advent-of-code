@@ -8,22 +8,15 @@ import buri.aoc.data.registers.IndexedRegisters;
 
 /**
  * Day 19: Go With the Flow
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What value is left in register 0 when the background process halts?
-	 * 
+	 *
 	 * Part 2:
 	 * This time, register 0 started with the value 1. What value is left in register 0 when this new background process
 	 * halts?
@@ -42,9 +35,9 @@ public class Puzzle extends BasePuzzle {
 		 * Solution for part 2 was fairly exploratory. I ran the program until it started looping instruction pointers
 		 * then converted the assembly instructions into pseudocode. I set the initial states of the registers to be
 		 * near the loop points to observe behavior.
-		 * 
+		 *
 		 * ip = 3, 4, 5, 6, 8, 9, 10, 11
-		 * 
+		 *
 		 * reg[1] = reg[5] * reg[2]
 		 * reg[1] = (reg[1] == reg[4]) ? 1: 0;
 		 * reg[3] = reg[1] + reg[3]
@@ -53,11 +46,11 @@ public class Puzzle extends BasePuzzle {
 		 * reg[1] = (reg[2] > reg[4]) ? 1 : 0;
 		 * reg[3] = reg[3] + reg[1]
 		 * reg[3] = 2
-		 * 
+		 *
 		 * reg[4] was a fixed value of 101551389. The loop was iterating over all numbers under it to find its factors
 		 * and summing them. Rather than simulate this, I switched gears and wrote a function to sum factors in
 		 * isolation.
-		 * 
+		 *
 		 * (This was very similar to y17d23).
 		 */
 		int sum = 0;

@@ -11,17 +11,10 @@ import buri.aoc.data.tuple.Quad;
 
 /**
  * Day 25: Four-Dimensional Adventure
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
-	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
 
 	/**
 	 * Part 1:

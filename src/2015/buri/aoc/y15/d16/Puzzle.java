@@ -10,22 +10,15 @@ import buri.aoc.Part;
 
 /**
  * Day 16: Aunt Sue
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the number of the Sue that got you the gift?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the number of the real Aunt Sue?
 	 */
@@ -41,10 +34,10 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		for (Map<String, Integer> sue : sues) {
-			if (!mightMatch(part, sue, "children", 3) || !mightMatch(part, sue, "samoyeds", 2) 
-				|| !mightMatch(part, sue, "akitas", 0) || !mightMatch(part, sue, "vizslas", 0) 
-				|| !mightMatch(part, sue, "cars", 2) || !mightMatch(part, sue, "perfumes", 1) 
-				|| !mightMatch(part, sue, "cats", 7) || !mightMatch(part, sue, "trees", 3) 
+			if (!mightMatch(part, sue, "children", 3) || !mightMatch(part, sue, "samoyeds", 2)
+				|| !mightMatch(part, sue, "akitas", 0) || !mightMatch(part, sue, "vizslas", 0)
+				|| !mightMatch(part, sue, "cars", 2) || !mightMatch(part, sue, "perfumes", 1)
+				|| !mightMatch(part, sue, "cats", 7) || !mightMatch(part, sue, "trees", 3)
 				|| !mightMatch(part, sue, "pomeranians", 3) || !mightMatch(part, sue, "goldfish", 5)) {
 				sue.clear();
 			}

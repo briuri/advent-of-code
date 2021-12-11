@@ -9,30 +9,24 @@ import buri.aoc.Part;
 
 /**
  * Day 8: Memory Maneuver
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of integers.
-	 */
-	public static List<Integer> getInput(int fileIndex) {
-		String input = readFile(fileIndex).get(0);
-		return (convertStringsToInts(Arrays.asList(input.split(" "))));
-	}
-
-	/**
 	 * Part 1:
 	 * The first check done on the license file is to simply add up all of the metadata entries. What is the sum of all
 	 * metadata entries?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the value of the root node?
 	 */
-	public static int getResult(Part part, List<Integer> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Integer> data = convertStringsToInts(Arrays.asList(input.get(0).split(" ")));
+
 		List<Node> nodes = new ArrayList<>();
-		addNode(input, nodes, 0);
+		addNode(data, nodes, 0);
 
 		if (part == Part.ONE) {
 			int sum = 0;

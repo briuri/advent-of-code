@@ -7,22 +7,15 @@ import buri.aoc.Part;
 
 /**
  * Day 2: Bathroom Security
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the bathroom code? (3x3 grid)
-	 * 
+	 *
 	 * Part 2:
 	 * What is the bathroom code? (diamond grid)
 	 */

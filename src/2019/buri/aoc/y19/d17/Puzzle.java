@@ -9,40 +9,29 @@ import buri.aoc.data.intcode.Computer;
 
 /**
  * Day 17: Set and Forget
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as an Intcode program
-	 */
-	public static List<Long> getInput(int fileIndex) {
-		List<Long> list = new ArrayList<>();
-		for (String input : readFile(fileIndex).get(0).split(",")) {
-			list.add(Long.valueOf(input));
-		}
-		return (list);
-	}
-
-	/**
 	 * Part 1:
 	 * What is the sum of the alignment parameters for the scaffold intersections?
-	 * 
+	 *
 	 * Part 2:
 	 * After visiting every part of the scaffold at least once, how much dust does the vacuum robot report it has
 	 * collected?
 	 */
-	public static long getResult(Part part, List<Long> program) {
+	public static long getResult(Part part, List<String> input) {
 		if (part == Part.ONE) {
-			Computer computer = new Computer(program);
+			Computer computer = new Computer(input);
 			computer.run();
 			VacuumGrid grid = new VacuumGrid(computer.getOutputs());
 			return (grid.getParameters());
 		}
 
 		// Part TWO
-		Computer computer = new Computer(program, 2L);
+		Computer computer = new Computer(input, 2L);
 
 		// Function definitions calculated by hand against the Part One grid.
 		String mainRoutine = "A,B,A,B,A,C,A,C,B,C";

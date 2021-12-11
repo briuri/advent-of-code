@@ -12,26 +12,20 @@ import buri.aoc.data.tuple.Pair;
 
 /**
  * Day 1: No Time for a Taxicab
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of individual instructions.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (Arrays.asList(readFile(fileIndex).get(0).split(", ")));
-	}
-
-	/**
 	 * Part 1:
 	 * How many blocks away is Easter Bunny HQ?
-	 * 
+	 *
 	 * Part 2:
 	 * How many blocks away is the first location you visit twice?
 	 */
 	public static int getResult(Part part, List<String> input) {
+		input = Arrays.asList(input.get(0).split(", "));
 		Pair<Integer> position = followInstructions(part, input);
 		return (Math.abs(position.getX()) + Math.abs(position.getY()));
 	}

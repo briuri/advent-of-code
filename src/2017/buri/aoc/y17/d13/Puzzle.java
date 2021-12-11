@@ -10,34 +10,28 @@ import buri.aoc.Part;
 
 /**
  * Day 13: Packet Scanners
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns input file as a list of layers
-	 */
-	public static List<Layer> getInput(int fileIndex) {
-		List<Layer> data = new ArrayList<>();
-		for (String rawData : readFile(fileIndex)) {
-			data.add(new Layer(rawData));
-		}
-		return (data);
-	}
-
-	/**
 	 * Part 1:
 	 * The severity of getting caught on a layer is equal to its depth multiplied by its range. (Ignore layers in which
 	 * you do not get caught.) The severity of the whole trip is the sum of these values.
-	 * 
+	 *
 	 * Part 2:
 	 * What is the fewest number of picoseconds that you need to delay the packet to pass through the firewall without
 	 * being caught?
 	 */
-	public static int getResult(Part part, List<Layer> input) {
+	public static int getResult(Part part, List<String> input) {
+		List<Layer> layers = new ArrayList<>();
+		for (String line : input) {
+			layers.add(new Layer(line));
+		}
+
 		Map<Integer, Layer> firewall = new HashMap<>();
-		for (Layer layer : input) {
+		for (Layer layer : layers) {
 			firewall.put(layer.getDepth(), layer);
 		}
 		if (part == Part.ONE) {

@@ -5,22 +5,15 @@ import buri.aoc.Part;
 
 /**
  * Day 1: Not Quite Lisp
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static String getInput(int fileIndex) {
-		return (readFile(fileIndex).get(0));
-	}
-
-	/**
 	 * Part 1:
 	 * To what floor do the instructions take Santa?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the position of the character that causes Santa to first enter the basement?
 	 */

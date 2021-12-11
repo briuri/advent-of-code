@@ -15,13 +15,6 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the ID of the earliest bus you can take to the airport multiplied by the number of minutes you'll need to
 	 * wait for that bus?

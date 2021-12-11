@@ -11,22 +11,15 @@ import buri.aoc.data.Permutations;
 
 /**
  * Day 13: Knights of the Dinner Table
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
-
-	/**
 	 * Part 1:
 	 * What is the total change in happiness for the optimal seating arrangement of the actual guest list?
-	 * 
+	 *
 	 * Part 2:
 	 * What is the total change in happiness for the optimal seating arrangement that actually includes yourself?
 	 */

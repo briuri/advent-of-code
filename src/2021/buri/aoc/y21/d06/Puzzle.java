@@ -16,24 +16,19 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file as a list of integers.
-	 */
-	public static List<Integer> getInput(int fileIndex) {
-		String[] stringInts = readFile(fileIndex).get(0).split(",");
-		return (convertStringsToInts(Arrays.asList(stringInts)));
-	}
-
-	/**
 	 * Part 1:
 	 * How many lanternfish would there be after 80 days?
 	 *
 	 * Part 2:
 	 * How many lanternfish would there be after 256 days?
 	 */
-	public static long getResult(Part part, List<Integer> input) {
+	public static long getResult(Part part, List<String> input) {
+		String[] stringInts = input.get(0).split(",");
+		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
+
 		int days = (part == Part.ONE ? 80 : 256);
 		Map<Integer, Long> counts = new HashMap<>();
-		for (int fish : input) {
+		for (int fish : values) {
 			counts.put(fish, counts.getOrDefault(fish, 0L) + 1);
 		}
 

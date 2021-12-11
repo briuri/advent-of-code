@@ -4,7 +4,6 @@ import java.util.List;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.tuple.Pair;
 import buri.aoc.data.tuple.Triple;
 
 /**
@@ -13,13 +12,6 @@ import buri.aoc.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
-	/**
-	 * Returns the input file unmodified.
-	 */
-	public static List<String> getInput(int fileIndex) {
-		return (readFile(fileIndex));
-	}
 
 	/**
 	 * Part 1:

@@ -19,15 +19,9 @@ public class PuzzleTest extends BaseTest {
 	/**
 	 * Boilerplate conversion for example input
 	 */
-	private static List<Integer> getInput(String values) {
+	private static List<String> getInput(String values) {
 		List<String> input = new ArrayList<>(Arrays.asList(values.split(" ")));
-		return (Puzzle.convertStringsToInts(input));
-	}
-
-	@Test
-	public void testGetInput() {
-		List<Integer> input = Puzzle.getInput(0);
-		assertEquals(965, input.size());
+		return (input);
 	}
 
 	@Test
