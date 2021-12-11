@@ -57,7 +57,13 @@ public class Leaderboard extends BaseLeaderboard {
 			// Add extra time (waitFor is insufficient).
 			Thread.sleep(2 * 1000);
 
-			leaderboard.generatePages();
+			// Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
+			try {
+				leaderboard.generatePages();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			// Script uses AWS CLI to upload files to S3 bucket hosting static website.
 			Process htmlUpload = Runtime.getRuntime().exec("cmd /c start /min C:\\projects\\aws-stage\\aoc-put-s3.bat");
