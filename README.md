@@ -1,7 +1,7 @@
 # Advent of Code
 
 This project contains my Advent of Code solutions, written in Java.
-I participated in real-time for 2018-2020, and also did 2015-2017 as practice.
+I participated in real-time for 2018-2021, and also did 2015-2017 as practice.
 
 The top-level of the project can be imported as an Eclipse project.
 Solutions are found under `/src/<year>/` with a package naming convention of `buri.aoc.y<yy>.d<dd>`.
@@ -16,6 +16,7 @@ Each Day can be run from a JUnit test harness, colocated in the same source fold
 * **2018**: 00:35
 * **2019**: 00:15
 * **2020**: 00:25
+* **2021**:
 
 ## Leaderboard Visualization
 
