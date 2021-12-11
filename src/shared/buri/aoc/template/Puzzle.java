@@ -19,19 +19,16 @@ import buri.aoc.Part;
 public class Puzzle extends BasePuzzle {
 
 	/**
-	 * Returns the input file HOW
+	 * Returns the input file unmodified.
 	 */
 	public static List<String> getInput(int fileIndex) {
-// 1 string per line
 		return (readFile(fileIndex));
 
 // 1 integer per line
 		// return (convertStringsToInts(readFile(fileIndex)));
-
 // All integers on first line
 		// String[] stringInts = readFile(fileIndex).get(0).split(" ");
 		// return (convertStringsToInts(Arrays.asList(stringInts)));
-
 // 1 data object per line
 		// List<Data> list = new ArrayList<>();
 		// for (String input : readFile(fileIndex)) {
