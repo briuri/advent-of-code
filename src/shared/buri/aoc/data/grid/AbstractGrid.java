@@ -49,6 +49,13 @@ public abstract class AbstractGrid<T> {
 	}
 
 	/**
+	 * Returns true if the point is in-bounds of the grid.
+	 */
+	public boolean isInBounds(Pair<Integer> point) {
+		return (point.getX() >= 0 && point.getX() < getWidth() && point.getY() >= 0 && point.getY() < getHeight());
+	}
+
+	/**
 	 * Gets a value on the grid.
 	 */
 	public T get(Pair<Integer> position) {
