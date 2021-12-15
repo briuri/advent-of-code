@@ -1,6 +1,7 @@
 package buri.aoc.y21.d07;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.BasePuzzle;
@@ -24,13 +25,8 @@ public class Puzzle extends BasePuzzle {
 		String[] stringInts = input.get(0).split(",");
 		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
 
-		int maxPosition = Integer.MIN_VALUE;
-		for (Integer crab : values) {
-			maxPosition = Math.max(maxPosition, crab);
-		}
-
 		int minFuel = Integer.MAX_VALUE;
-		for (int i = 0; i <= maxPosition; i++) {
+		for (int i = 0; i <= Collections.max(values); i++) {
 			int testFuel = 0;
 			for (Integer crab : values) {
 				int distance = Math.abs(crab - i);
