@@ -164,6 +164,8 @@ public abstract class BaseLeaderboard {
 
 	/**
 	 * Groups puzzle completion times by name for median/total calculations.
+	 *
+	 * NOTE: This does not handle any player who has not yet completed Part 2 of any puzzle.
 	 */
 	protected List<OverallTimes> getOverallTimes(String year, PuzzleTimes puzzleTimes) {
 		// Create an interim map of players to all of their puzzle times.
