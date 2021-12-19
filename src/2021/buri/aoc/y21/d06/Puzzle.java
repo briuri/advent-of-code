@@ -33,11 +33,9 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		for (int day = 0; day < days; day++) {
-
 			// Decrease each fish timer by 1.
 			for (int timer = 0; timer <= 8; timer++) {
 				counts.put(timer - 1, counts.getOrDefault(timer, 0L));
-
 			}
 
 			// Reallocated expired fish timers.
