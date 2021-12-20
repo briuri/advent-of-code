@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import buri.aoc.data.tuple.Pair;
+
 /**
  * Superclass of all puzzles, for shared helper utilities.
  *
@@ -52,6 +54,31 @@ public abstract class BasePuzzle {
 	 */
 	public static List<Long> convertStringsToLongs(List<String> rawLongs) {
 		return (rawLongs.stream().map(Long::valueOf).collect(Collectors.toList()));
+	}
+
+	/**
+	 * Renders a sparse set of points as a visual grid.
+	 */
+	public static <T> void showAsGrid(Map<Pair<Integer>, T> grid) {
+		int minX = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		int minY = Integer.MAX_VALUE;
+		int maxY = Integer.MIN_VALUE;
+		for (Pair<Integer> point : grid.keySet()) {
+			minX = Math.min(minX, point.getX());
+			maxX = Math.max(maxX, point.getX());
+			minY = Math.min(minY, point.getY());
+			maxY = Math.max(maxY, point.getY());
+		}
+		StringBuffer buffer = new StringBuffer();
+		for (int y = minY; y <= maxY; y++) {
+			for (int x = minX; x < maxX; x++) {
+				buffer.append(String.valueOf(grid.get(new Pair<Integer>(x, y))));
+			}
+			buffer.append("\n");
+		}
+		buffer.append("\n");
+		System.out.println(buffer.toString());
 	}
 
 	/**
