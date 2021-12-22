@@ -24,7 +24,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the solution when matching to the digit halfway around the circular list?
 	 */
 	public static int getResult(Part part, String input) {
-		return (getSum(getMatchingDigits(part, input)));
+		return (getIntSum(getMatchingDigits(part, input)));
 	}
 
 	/**

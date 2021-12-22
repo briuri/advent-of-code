@@ -36,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 		for (List<Integer> row : spreadsheet) {
 			checksums.add((part == Part.ONE) ? getRowDifference(row) : getRowQuotient(row));
 		}
-		return (getSum(checksums));
+		return (getIntSum(checksums));
 	}
 
 	/**

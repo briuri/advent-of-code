@@ -117,8 +117,15 @@ public abstract class BasePuzzle {
 	/**
 	 * Gets the sum of a list of integers
 	 */
-	protected static Integer getSum(List<Integer> list) {
+	protected static int getIntSum(List<Integer> list) {
 		return (list.stream().mapToInt(Integer::intValue).sum());
+	}
+
+	/**
+	 * Gets the sum of a list of longs
+	 */
+	protected static long getLongSum(List<Long> list) {
+		return (list.stream().mapToLong(Long::longValue).sum());
 	}
 
 	/**

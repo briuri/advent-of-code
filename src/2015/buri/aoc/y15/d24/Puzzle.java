@@ -30,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 			weights.add(Integer.valueOf(line));
 		}
 		int division = part == Part.ONE ? 3 : 4;
-		int targetWeight = getSum(weights) / division;
+		int targetWeight = getIntSum(weights) / division;
 
 		// Get the smallest possible First Bag.
 		List<List<Integer>> bag1Permutations = getPermutations(weights, targetWeight);
