@@ -55,12 +55,12 @@ public class Packet {
 			long length = binToDec(raw.substring(i, i + lengthLength));
 			i += lengthLength;
 			if (lengthLength == 15) {
-                int subpacketStart = i;
-                while (i < subpacketStart + length) {
-                	Packet sub = new Packet(raw, i);
-                	getSubpackets().add(sub);
-                	i += sub.getLength();
-                }
+				int subpacketStart = i;
+				while (i < subpacketStart + length) {
+					Packet sub = new Packet(raw, i);
+					getSubpackets().add(sub);
+					i += sub.getLength();
+				}
 			}
 			else {
 				for (int j = 0; j < length; j++) {

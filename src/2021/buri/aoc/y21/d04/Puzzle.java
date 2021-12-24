@@ -30,10 +30,7 @@ public class Puzzle extends BasePuzzle {
 				drawnNumbers = convertStringsToInts(Arrays.asList(input.get(0).split(",")));
 			}
 			// Skip board separator lines
-			else if (input.get(i).length() == 0) {
-				continue;
-			}
-			else {
+			else if (input.get(i).length() != 0) {
 				List<Integer> rawBoard = new ArrayList<>();
 				for (int x = i; x < i + Board.SIZE; x++) {
 					for (String value : input.get(x).split(" ")) {

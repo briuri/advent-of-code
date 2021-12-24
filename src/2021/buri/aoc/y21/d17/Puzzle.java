@@ -40,8 +40,7 @@ public class Puzzle extends BasePuzzle {
 					velocity.setX(Math.max(0, velocity.getX() - 1));
 					velocity.setY(velocity.getY() - 1);
 					localMaxY = Math.max(localMaxY, probe.getY());
-					if (probe.getX() >= targetMinX && probe.getX() <= targetMaxX
-						&& probe.getY() >= targetMinY && probe.getY() <= targetMaxY) {
+					if (probe.getX() >= targetMinX && probe.getX() <= targetMaxX && probe.getY() >= targetMinY && probe.getY() <= targetMaxY) {
 						maxY = Math.max(maxY, localMaxY);
 						successes++;
 						break;

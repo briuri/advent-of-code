@@ -15,7 +15,7 @@ public class PointRisk implements Comparable<PointRisk> {
 	 * Constructor
 	 */
 	public PointRisk(Pair<Integer> point, int riskSoFar) {
-		_point =point;
+		_point = point;
 		_riskSoFar = riskSoFar;
 	}
 

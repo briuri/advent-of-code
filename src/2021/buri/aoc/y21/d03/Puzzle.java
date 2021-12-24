@@ -65,7 +65,8 @@ public class Puzzle extends BasePuzzle {
 	}
 
 	/**
-	 * Cycles through the list of numbers and removes those that don't meet the criteria. Returns the final remaining binary number.
+	 * Cycles through the list of numbers and removes those that don't meet the criteria. Returns the final remaining
+	 * binary number.
 	 *
 	 * @param input the starting list (a copy is made)
 	 * @param keepMostCommon true for the oxygen calculation, false for the scrubber calculation.
