@@ -49,7 +49,8 @@ public class Puzzle extends BasePuzzle {
 	 */
 	private static Map<Pair<Integer>, Integer> enhanceImage(Map<Pair<Integer>, Integer> image, String algorithm, int maxSteps) {
 		for (int step = 0; step < maxSteps; step++) {
-			// Figure out bounds of all known points and add a padding around edges (padding points depend on inner ones).
+			// Figure out bounds of all known points and add a padding around edges (padding points depend on inner
+			// ones).
 			int minX = Integer.MAX_VALUE;
 			int maxX = Integer.MIN_VALUE;
 			int minY = Integer.MAX_VALUE;

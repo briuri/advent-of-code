@@ -18,7 +18,7 @@ public class Die {
 	 */
 	public int roll() {
 		incrementRollCount();
-		return ((getRollCount() -1) % 100 + 1);
+		return ((getRollCount() - 1) % 100 + 1);
 	}
 
 	public int getRollCount() {

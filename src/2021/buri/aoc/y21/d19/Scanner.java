@@ -217,7 +217,6 @@ public class Scanner {
 		_beacons = beacons;
 	}
 
-
 	/**
 	 * Accessor for the permutations
 	 */
