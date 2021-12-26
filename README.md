@@ -16,7 +16,7 @@ Each Day can be run from a JUnit test harness, colocated in the same source fold
 * **2018**: 00:35
 * **2019**: 00:15
 * **2020**: 00:25
-* **2021**:
+* **2021**: 01:20
 
 ## Leaderboard Visualization
 
