@@ -35,14 +35,13 @@ public class Leaderboard extends BaseLeaderboard {
 	}
 
 	/**
-	 * Generates the Fastest Times pages on a schedule, for use when I'm not around to do manual updates. Stops after 40
-	 * iterations (10 hours).
+	 * Generates the Fastest Times pages on a schedule, for use when I'm not around to do manual updates.
 	 *
 	 * No arguments required.
 	 */
 	public static void main(String[] args) throws Exception {
 		final int minutes = 15;
-		final int reps = 288;
+		final int reps = 96;
 		final Leaderboard leaderboard = new Leaderboard();
 		for (int i = 0; i < reps; i++) {
 			if (i > 0) {
@@ -113,13 +112,14 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertInstructions() {
 		StringBuffer page = getPage();
 		page.append("<div class=\"instructions\">\n");
-		page.append("\t<h2>Scoring FAQ</h2>");
-		page.append("\t<ul>\n");
-		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
-		page.append("\t\t<li>The winner in Novetta's competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
-		page.append("\t\t<li>Last year, 33 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
+		page.append("<p>The 2021 competition is complete. See you on November 30, 2022!</p>");
+//		page.append("\t<h2>Scoring FAQ</h2>");
+//		page.append("\t<ul>\n");
+//		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
+//		page.append("\t\t<li>The winner in Novetta's competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
+//		page.append("\t\t<li>Last year, 33 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
 //		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
-		page.append("\t</ul>\n");
+//		page.append("\t</ul>\n");
 //		page.append("\t<h2>Late to the party?</h2>\n");
 //		page.append("\t<ol>\n");
 //		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with your Novetta Google account. (AFS employees may use another authentication method as long as your full name is visible).</li>\n");
