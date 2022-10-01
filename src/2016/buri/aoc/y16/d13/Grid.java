@@ -60,9 +60,9 @@ public class Grid extends CharGrid {
 	/**
 	 * Returns the minimum number of steps to a single destination.
 	 */
-	public int getStepsTo(Pair destination) {
-		Map<Pair, Pair> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
-		List<Pair> destinations = new ArrayList<>();
+	public int getStepsTo(Pair<Integer> destination) {
+		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
+		List<Pair<Integer>> destinations = new ArrayList<>();
 		destinations.add(destination);		
 		List<Path> paths = Pathfinder.toPaths(START_POSITION, destinations, cameFrom);
 		// There will be 1 path returned, since only 1 destination was provided.
@@ -73,9 +73,9 @@ public class Grid extends CharGrid {
 	 * Returns the number of locations reachable within X steps.
 	 */
 	public int getClosePositions(int steps) {
-		Map<Pair, Pair> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
+		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
 		// Add all potential destinations.
-		List<Pair> destinations = new ArrayList<>();
+		List<Pair<Integer>> destinations = new ArrayList<>();
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				char value = get(x, y);

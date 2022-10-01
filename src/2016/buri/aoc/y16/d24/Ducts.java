@@ -66,7 +66,7 @@ public class Ducts extends CharGrid {
 	 */
 	public int getFewestSteps(Part part) {		
 		// Do all the traversal for path-building upfront.
-		Map<Pair, Map<Pair, Pair>> cameFroms = new HashMap<>();
+		Map<Pair, Map<Pair<Integer>, Pair<Integer>>> cameFroms = new HashMap<>();
 		for (Pair start : getDestinations().values()) {
 			cameFroms.put(start, Pathfinder.breadthFirstSearch(start, STEP_STRATEGY));
 		}
@@ -106,7 +106,7 @@ public class Ducts extends CharGrid {
 	/**
 	 * Returns the number of steps between two positions.
 	 */
-	private int getStepsBetween(Pair start, Pair destination, Map<Pair, Pair> cameFrom) {
+	private int getStepsBetween(Pair start, Pair destination, Map<Pair<Integer>, Pair<Integer>> cameFrom) {
 		int steps = 0;
 		if (!destination.equals(start)) {
 			Pair previous = cameFrom.get(destination);
