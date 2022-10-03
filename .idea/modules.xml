@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/advent-of-code.iml" filepath="$PROJECT_DIR$/advent-of-code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shared/shared.iml" filepath="$PROJECT_DIR$/shared/shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viz/viz.iml" filepath="$PROJECT_DIR$/viz/viz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y15/y15.iml" filepath="$PROJECT_DIR$/y15/y15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y16/y16.iml" filepath="$PROJECT_DIR$/y16/y16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y17/y17.iml" filepath="$PROJECT_DIR$/y17/y17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y18/y18.iml" filepath="$PROJECT_DIR$/y18/y18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y19/y19.iml" filepath="$PROJECT_DIR$/y19/y19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y20/y20.iml" filepath="$PROJECT_DIR$/y20/y20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/y21/y21.iml" filepath="$PROJECT_DIR$/y21/y21.iml" />
     </modules>
   </component>
 </project>

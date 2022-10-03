@@ -3,8 +3,8 @@
 This project contains my Advent of Code solutions, written in Java.
 I participated in real-time for 2018-2021, and also did 2015-2017 as practice.
 
-The top-level of the project can be imported as an Eclipse project.
-Solutions are found under `/src/<year>/` with a package naming convention of `buri.aoc.y<yy>.d<dd>`.
+The top-level of the project can be imported as an IntelliJ IDEA project.
+Solutions are found under `y<year>/src/` with a package naming convention of `buri.aoc.y<yy>.d<dd>`.
 Each Day can be run from a JUnit test harness, colocated in the same source folder as the solution
 (this reduces the overhead of navigating out to `/src/test/` when competing).
 
@@ -20,7 +20,7 @@ Each Day can be run from a JUnit test harness, colocated in the same source fold
 
 ## Leaderboard Visualization
 
-In addition to puzzle solutions, this project also contains a simple visualization (under `src/viz`) of the private leaderboard JSON
+In addition to puzzle solutions, this project also contains a simple visualization (under `viz/src`) of the private leaderboard JSON
 that can show the data as a [Fastest Times page](http://aoc.urizone.net).
 
 ## License
