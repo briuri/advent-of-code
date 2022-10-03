@@ -1,6 +1,8 @@
 <component name="libraryTable">
-  <library name="jackson-databind-2.9.7">
+  <library name="viz">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/shared/lib/viz/jackson-annotations-2.9.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/shared/lib/viz/jackson-core-2.9.7.jar!/" />
       <root url="jar://$PROJECT_DIR$/shared/lib/viz/jackson-databind-2.9.7.jar!/" />
     </CLASSES>
     <JAVADOC />
