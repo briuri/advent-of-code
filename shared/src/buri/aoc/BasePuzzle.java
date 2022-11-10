@@ -29,7 +29,15 @@ public abstract class BasePuzzle {
 		try {
 			return (Files.readAllLines(path));
 		}
+		// Current puzzle stores data in a holding area for faster saving / browsing.
 		catch (IOException e) {
+			Path newPath = Paths.get("dataNew/" + day + "-" + fileIndex + ".txt");
+			try {
+				return (Files.readAllLines(newPath));
+			}
+			catch (IOException e2) {
+				// Fall through.
+			}
 			throw new IllegalArgumentException("Invalid file: " + path.toAbsolutePath(), e);
 		}
 	}
