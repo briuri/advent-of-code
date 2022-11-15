@@ -13,18 +13,18 @@ import buri.aoc.BaseLeaderboard;
 import buri.aoc.TimeType;
 
 /**
- * Alternate visualization of Novetta's private leaderboard showing the Fastest Times for each puzzle. Generated
+ * Alternate visualization of our private leaderboard showing the Fastest Times for each puzzle. Generated
  * from the API JSON.
  *
  * @author Brian Uri!
  */
 public class Leaderboard extends BaseLeaderboard {
-	private static final String CURRENT_YEAR = "2021";
+	private static final String CURRENT_YEAR = "2022";
 
 	/**
 	 * Generate the Fastest Times pages via a JUnit test in Eclipse.
 	 *
-	 * NOTE: Inactive accounts are purged yearly from Novetta's leaderboard to avoid the 200-player cap. Redownloading
+	 * NOTE: Inactive accounts are purged yearly from our leaderboard to avoid the 200-player cap. Redownloading
 	 * JSON from older years and regenerating their pages will result in missing scores.
 	 */
 	@Test
@@ -116,16 +116,16 @@ public class Leaderboard extends BaseLeaderboard {
 //		page.append("\t<h2>Scoring FAQ</h2>");
 //		page.append("\t<ul>\n");
 //		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
-//		page.append("\t\t<li>The winner in Novetta's competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
-//		page.append("\t\t<li>Last year, 33 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
+//		page.append("\t\t<li>The winner in the AFS competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
+//		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
 //		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
 //		page.append("\t</ul>\n");
 //		page.append("\t<h2>Late to the party?</h2>\n");
 //		page.append("\t<ol>\n");
-//		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with your Novetta Google account. (AFS employees may use another authentication method as long as your full name is visible).</li>\n");
+//		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with a personal account. (Your full name should be visible so we can confirm you are an AFS employee).</li>\n");
 //		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code (shared in the 11/29 email and on Slack).</li>\n");
-//		page.append("\t\t<li><a href=\"https://adventofcode.com/2021/settings\">Add the secret Sponsor code</a> to your account (shared in the 11/29 email and on Slack) so people can see that Novetta is an AoC Sponsor.</li>\n");
-//		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> to chat with other puzzle solvers. (Please keep code to yourself until after the competition ends).</li>\n");
+//		page.append("\t\t<li><a href=\"https://adventofcode.com/2021/settings\">Add the secret Sponsor code</a> to your account (shared in the 11/29 email and on Slack) so people can see that AFS is an AoC Sponsor.</li>\n");
+//		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> (requires an AFS Defense account) to chat with other puzzle solvers.</li>\n");
 //		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
 //		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
 //		page.append("\t</ol>\n");
@@ -136,8 +136,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
 	private String maskName(String year, String name) {
-		Novetta novetta = getNovettas().get(year);
-		StringBuffer buffer = new StringBuffer(novetta.getAlternateNameFor(name));
+		Company company = getCompanies().get(year);
+		StringBuffer buffer = new StringBuffer(company.getAlternateNameFor(name));
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
@@ -151,7 +151,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<html>\n<head>\n");
 		page.append("\t<meta charset=\"UTF-8\">\n");
 		page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
-		page.append("\t<title>Novetta Advent of Code - Fastest Times (").append(year).append(")").append("</title>\n\n");
+		page.append("\t<title>AFS Advent of Code - Unofficial Rankings (").append(year).append(")").append("</title>\n\n");
 		if (!isLatestPage) {
 			page.append("\t<script type=\"text/javascript\" src=\"https://cdn.plot.ly/plotly-1.58.1.min.js\" charset=\"utf-8\"></script>\n");
 		}
@@ -181,18 +181,17 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
 			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">2&rArr;</a> | ");
 		}
-		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a> | ");
-		page.append("<a href=\"https://sites.google.com/novetta.com/novettanet/lifeatnovetta/advent-of-code\">NN&rArr;</a>");
+		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
 		page.append("\n\t</div>\n\n");
-		page.append("\t<h1>Novetta AoC - Fastest Times").append(" (").append(year).append(")</h1>\n\n");
+		page.append("\t<h1>AFS AoC - Unofficial Rankings (").append(year).append(")</h1>\n\n");
 	}
 
 	/**
 	 * Adds the Top X Overall section.
 	 */
 	private void insertTopOverall(String year, List<OverallTimes> overallTimes, boolean showAll) {
-		Novetta novetta = getNovettas().get(year);
-		int numOverall = showAll ? overallTimes.size() : Math.min(novetta.getPlaces(), overallTimes.size());
+		Company company = getCompanies().get(year);
+		int numOverall = showAll ? overallTimes.size() : Math.min(company.getPlaces(), overallTimes.size());
 		if (numOverall == 0) {
 			return;
 		}
@@ -205,7 +204,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("\t<h2>Top ").append(numOverall).append(" Overall</h2>\n");
 		}
 		page.append(readLastModified(year, CURRENT_YEAR));
-		page.append("\t<p>").append(novetta.getRules()).append("</p>\n");
+		page.append("\t<p>").append(company.getRules()).append("</p>\n");
 
 		String linkText = (showAll ? "Top" : "All");
 		page.append("<a href=\"").append(year).append("-").append(linkText.toLowerCase()).append(".html\">");
@@ -218,7 +217,7 @@ public class Leaderboard extends BaseLeaderboard {
 		int summaryMargin = (isStandardWidth ? 12 : 13);
 		for (int i = 0; i < numOverall; i++) {
 			OverallTimes player = overallTimes.get(i);
-			boolean isIneligible = novetta.getIneligible().contains(player.getName());
+			boolean isIneligible = company.getIneligible().contains(player.getName());
 			String timeClass = (isIneligible ? "ineligible" : "bestTime");
 
 			// Show tiebreaker time.
@@ -234,7 +233,7 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 			page.append(maskName(year, player.getName()));
 			if (!showAll) {
-				page.append(novetta.getDivisionFor(player.getName(), true));
+				page.append(company.getDivisionFor(player.getName(), true));
 			}
 			if (isIneligible) {
 				page.append("</span>");
@@ -251,7 +250,7 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append(player.getSecond()).append("<span class=\"emoji\" title=\"2nd Place\">&#x1F948;</span> ");
 				page.append(player.getThird()).append("<span class=\"emoji\" title=\"3rd Place\">&#x1F949;</span> ");
 			}
-			int globalCount = novetta.getGlobalCountFor(player.getName());
+			int globalCount = company.getGlobalCountFor(player.getName());
 			if (globalCount > 0) {
 				page.append(globalCount).append("<span class=\"emoji\" title=\"Global Leaderboard\">&#x1F30E;</span> ");
 			}
@@ -305,9 +304,9 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Overall by Division section.
 	 */
 	private void insertTopDivisionsChart(String year, List<OverallTimes> overallTimes) {
-		Novetta novetta = getNovettas().get(year);
-		int numOverall = Math.min(novetta.getPlaces(), overallTimes.size());
-		List<String> allDivisions = novetta.getAllDivisions();
+		Company company = getCompanies().get(year);
+		int numOverall = Math.min(company.getPlaces(), overallTimes.size());
+		List<String> allDivisions = company.getAllDivisions();
 		if (numOverall == 0 || allDivisions.isEmpty()) {
 			return;
 		}
@@ -318,7 +317,7 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 		for (int i = 0; i < numOverall; i++) {
 			OverallTimes player = overallTimes.get(i);
-			String division = novetta.getDivisionFor(player.getName(), false);
+			String division = company.getDivisionFor(player.getName(), false);
 			if (division.length() > 0) {
 				counts.put(division, counts.get(division) + 1);
 			}
@@ -461,7 +460,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private void insertTopDaily(String year, PuzzleTimes puzzleTimes) {
 		StringBuffer page = getPage();
-		page.append("\n\t<h2>Top ").append(getNovettas().get(year).getPlaces()).append(" Daily</h2>\n");
+		page.append("\n\t<h2>Top ").append(getCompanies().get(year).getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
@@ -517,7 +516,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the entry for a single day's puzzle.
 	 */
 	private void insertDay(String year, int day, List<PuzzleTime> places, boolean showAll) {
-		Novetta novetta = getNovettas().get(year);
+		Company company = getCompanies().get(year);
 		Puzzle puzzle = getPuzzles().get(year).get(day - 1);
 
 		StringBuffer page = getPage();
@@ -528,7 +527,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<ol>\n");
 
 		boolean isNextTie = false;
-		int maxPlaces = (showAll ? places.size() : Math.min(novetta.getPlaces(), places.size()));
+		int maxPlaces = (showAll ? places.size() : Math.min(company.getPlaces(), places.size()));
 		Long bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE);
 		Long bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO);
 		for (int place = 0; place < maxPlaces; place++) {
@@ -567,7 +566,7 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 		// Pad incomplete lists so each Day is the same height for floating DIVs.
 		if (!showAll) {
-			for (int place = places.size(); place < novetta.getPlaces(); place++) {
+			for (int place = places.size(); place < company.getPlaces(); place++) {
 				page.append("<br />");
 			}
 		}
@@ -597,6 +596,7 @@ public class Leaderboard extends BaseLeaderboard {
 		if (showJumpLink) {
 			page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
 		}
+		page.append("<div class=\"clear disclaimer\">This unofficial rankings page is a volunteer project that is not endorsed or supported by Accenture Federal Services.</div>");
 		page.append("</body>\n</html>");
 	}
 }

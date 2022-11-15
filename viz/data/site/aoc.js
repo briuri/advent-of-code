@@ -1,5 +1,5 @@
 /**
- * Shared Javascript for Novetta AoC Fastest Times page.
+ * Shared Javascript for the AoC Fastest Times page.
  */
 $(document).ready(function() {
 

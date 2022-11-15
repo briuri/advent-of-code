@@ -13,13 +13,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import buri.aoc.viz.Company;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import buri.aoc.viz.Novetta;
 import buri.aoc.viz.OverallTimes;
 import buri.aoc.viz.Puzzle;
 import buri.aoc.viz.PuzzleTime;
@@ -33,7 +33,7 @@ import buri.aoc.viz.PuzzleTimes;
 public abstract class BaseLeaderboard {
 	private StringBuffer _page;
 	private Map<String, List<Puzzle>> _puzzles;
-	private Map<String, Novetta> _novettas;
+	private Map<String, Company> _companies;
 
 	// Total number of puzzles each year.
 	public static final int TOTAL_PUZZLES = 25;
@@ -48,7 +48,7 @@ public abstract class BaseLeaderboard {
 	private static final String OUTPUT_FOLDER = "data/site/";
 
 	// Known puzzle years
-	protected static final String[] YEARS = new String[] { "2021", "2020", "2019", "2018", "2017", "2016" };
+	protected static final String[] YEARS = new String[] { "2022", "2021", "2020", "2019", "2018", "2017", "2016" };
 
 	// Date format for the last update dates.
 	protected static final SimpleDateFormat MODIFIED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -62,10 +62,10 @@ public abstract class BaseLeaderboard {
 	protected BaseLeaderboard() {
 		_page = new StringBuffer();
 		_puzzles = new HashMap<>();
-		_novettas = new HashMap<>();
+		_companies = new HashMap<>();
 
 		readPuzzleMetadata();
-		readNovettaMetadata();
+		readCompanyMetadata();
 	}
 
 	/**
@@ -86,8 +86,8 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Reads ancillary player and division data from the JSON file (not included in version control).
 	 */
-	private void readNovettaMetadata() {
-		JsonNode json = readJson("novetta.json");
+	private void readCompanyMetadata() {
+		JsonNode json = readJson("company.json");
 		for (String year : YEARS) {
 			String rules = json.get("rules").get(year).asText();
 			int places = json.get("places").get(year).asInt();
@@ -101,12 +101,12 @@ public abstract class BaseLeaderboard {
 			for (int i = 0; i < exclusionsNode.size(); i++) {
 				exclusions.add(exclusionsNode.get(i).asText());
 			}
-			Novetta novetta = new Novetta(allDivisions, places, exclusions, rules);
+			Company company = new Company(allDivisions, places, exclusions, rules);
 			ArrayNode playerJson = (ArrayNode) json.get("players").get(year);
 			for (int i = 0; i < playerJson.size(); i++) {
-				novetta.addPlayer((ObjectNode) playerJson.get(i));
+				company.addPlayer((ObjectNode) playerJson.get(i));
 			}
-			getNovettas().put(year, novetta);
+			getCompanies().put(year, company);
 		}
 	}
 
@@ -143,12 +143,12 @@ public abstract class BaseLeaderboard {
 	 * Loads puzzle completion times from the leaderboard JSON.
 	 */
 	protected PuzzleTimes getPuzzleTimes(String year, Map<String, Object> leaderboardJson) {
-		Novetta novetta = getNovettas().get(year);
+		Company company = getCompanies().get(year);
 		PuzzleTimes puzzleTimes = new PuzzleTimes();
 		for (String key : leaderboardJson.keySet()) {
 			Map<String, Object> member = (Map) leaderboardJson.get(key);
 			String name = (String) member.get("name");
-			if (name == null || novetta.getExclusions().contains(name)) {
+			if (name == null || company.getExclusions().contains(name)) {
 				continue;
 			}
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
@@ -171,7 +171,7 @@ public abstract class BaseLeaderboard {
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
 		for (int i = 0; i < puzzleTimes.getTimes(TimeType.TOTAL).size(); i++) {
-			// Skip y18d06, since it was not included in AoC or Novetta calculations.
+			// Skip y18d06, since it was not included in AoC or our calculations.
 			if (!(year.equals("2018") && (i + 1) == 6)) {
 				List<PuzzleTime> singleDay = puzzleTimes.getTimes(TimeType.TOTAL).get(i);
 				for (PuzzleTime time : singleDay) {
@@ -305,7 +305,7 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Accessor for the player / division data.
 	 */
-	protected Map<String, Novetta> getNovettas() {
-		return _novettas;
+	protected Map<String, Company> getCompanies() {
+		return _companies;
 	}
 }

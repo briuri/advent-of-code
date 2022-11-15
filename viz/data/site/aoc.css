@@ -1,5 +1,5 @@
 /**
- * Stylesheet for Novetta AoC Fastest Times page
+ * Stylesheet for the AoC Fastest Times page
  */
 a {
 	color: #009900;
@@ -45,6 +45,11 @@ span.dailyLink, span.rankingsLink {
 div.details {
 	display: none;
 	margin-bottom: 10px;
+}
+div.disclaimer {
+	color: #888888;
+	font-size: 8pt;
+	margin-top: 4px;
 }
 span.dS {
 	display: none;

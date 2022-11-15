@@ -32,7 +32,7 @@ public class PuzzleTimes {
 	}
 
 	/**
-	 * Adds a puzzle record to the appropriate list (ignores any outside of the Novetta competition window).
+	 * Adds a puzzle record to the appropriate list (ignores any outside of our company's competition window).
 	 */
 	public void add(String day, PuzzleTime record) {
 		int index = Integer.valueOf(day) - 1;

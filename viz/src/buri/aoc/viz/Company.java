@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  *
  * @author Brian Uri!
  */
-public class Novetta {
+public class Company {
 	private Map<String, String> _alternateNames;
 	private Map<String, String> _divisions;
 	private Map<String, Integer> _globalCounts;
@@ -26,7 +26,7 @@ public class Novetta {
 	/**
 	 * Constructor
 	 */
-	public Novetta(List<String> allDivisions, int places, List<String> exclusions, String rules) {
+	public Company(List<String> allDivisions, int places, List<String> exclusions, String rules) {
 		_alternateNames = new HashMap<>();
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
@@ -110,7 +110,7 @@ public class Novetta {
 	}
 
 	/**
-	 * Accessor for a list of all divisions at Novetta
+	 * Accessor for a list of all divisions at the company
 	 */
 	public List<String> getAllDivisions() {
 		return _allDivisions;
