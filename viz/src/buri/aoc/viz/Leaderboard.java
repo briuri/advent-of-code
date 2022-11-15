@@ -104,7 +104,7 @@ public class Leaderboard extends BaseLeaderboard {
 		else {
 			StringBuffer page = getPage();
 			page.append("<div class=\"instructions\">\n");
-			page.append("<p>The 2022 competition is almost here. See you on November 30, 2022!</p>");
+			page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
 			insertFooter(false);
 		}
 		writePage(year + "-top.html");
@@ -123,7 +123,7 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertInstructions() {
 		StringBuffer page = getPage();
 		page.append("<div class=\"instructions\">\n");
-		page.append("<p>The 2022 competition is almost here. See you on November 30, 2022!</p>");
+		page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
 		page.append("\t<h2>Scoring FAQ</h2>");
 		page.append("\t<ul>\n");
 		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
