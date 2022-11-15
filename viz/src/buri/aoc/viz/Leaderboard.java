@@ -82,7 +82,8 @@ public class Leaderboard extends BaseLeaderboard {
 		if (year.equals(CURRENT_YEAR)) {
 			resetPage();
 			insertHeader(year, true);
-			insertLatestDay(year, puzzleTimes);
+			// Temporarily removed until 2022 starts.
+			//insertLatestDay(year, puzzleTimes);
 			insertInstructions();
 			insertFooter(false);
 			writePage("index.html");
@@ -91,11 +92,21 @@ public class Leaderboard extends BaseLeaderboard {
 		// Create Top X page.
 		resetPage();
 		insertHeader(year, false);
-		insertTopOverall(year, overallTimes, false);
-		insertTopDivisionsChart(year, overallTimes);
-		insertTotalSolvesChart(year, puzzleTimes);
-		insertTopDaily(year, puzzleTimes);
-		insertFooter(true);
+
+		// Temporarily removed until 2022 starts.
+		if (!year.equals("2022")) {
+			insertTopOverall(year, overallTimes, false);
+			insertTopDivisionsChart(year, overallTimes);
+			insertTotalSolvesChart(year, puzzleTimes);
+			insertTopDaily(year, puzzleTimes);
+			insertFooter(true);
+		}
+		else {
+			StringBuffer page = getPage();
+			page.append("<div class=\"instructions\">\n");
+			page.append("<p>The 2022 competition is almost here. See you on November 30, 2022!</p>");
+			insertFooter(false);
+		}
 		writePage(year + "-top.html");
 
 		// Create All Players page.
@@ -112,14 +123,14 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertInstructions() {
 		StringBuffer page = getPage();
 		page.append("<div class=\"instructions\">\n");
-		page.append("<p>The 2021 competition is complete. See you on November 30, 2022!</p>");
-//		page.append("\t<h2>Scoring FAQ</h2>");
-//		page.append("\t<ul>\n");
-//		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
-//		page.append("\t\t<li>The winner in the AFS competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
-//		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
-//		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
-//		page.append("\t</ul>\n");
+		page.append("<p>The 2022 competition is almost here. See you on November 30, 2022!</p>");
+		page.append("\t<h2>Scoring FAQ</h2>");
+		page.append("\t<ul>\n");
+		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
+		page.append("\t\t<li>The winner in the AFS competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
+		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
+		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
+		page.append("\t</ul>\n");
 //		page.append("\t<h2>Late to the party?</h2>\n");
 //		page.append("\t<ol>\n");
 //		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with a personal account. (Your full name should be visible so we can confirm you are an AFS employee).</li>\n");
