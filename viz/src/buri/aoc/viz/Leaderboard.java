@@ -104,7 +104,7 @@ public class Leaderboard extends BaseLeaderboard {
 		else {
 			StringBuilder page = getPage();
 			page.append("<div class=\"instructions\">\n");
-			page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
+			page.append("<p>The 2022 competition has not started yet. Check back after December 1 for rankings!</p>");
 			insertFooter(false);
 		}
 		writePage(year + "-top.html");
@@ -125,6 +125,13 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"174\" title=\"Advent of Code 2022\"/>\n");
 		page.append("<div class=\"instructions\">\n");
 		page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
+		page.append("\t<h2>Want to join?</h2>\n");
+		page.append("\t<ol>\n");
+		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">AFS Portal Page</a> (AFS Commercial login).</li>\n");
+		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> (AFS Defense login) to chat with other puzzle solvers.</li>\n");
+		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
+		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
+		page.append("\t</ol>\n");
 		page.append("\t<h2>Scoring FAQ</h2>");
 		page.append("\t<ul>\n");
 		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
@@ -132,15 +139,6 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
 		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
 		page.append("\t</ul>\n");
-//		page.append("\t<h2>Late to the party?</h2>\n");
-//		page.append("\t<ol>\n");
-//		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/auth/login\">Login to Advent of Code</a> with a personal account. (Your full name should be visible so we can confirm you are an AFS employee).</li>\n");
-//		page.append("\t\t<li><a href=\"https://adventofcode.com/").append(CURRENT_YEAR).append("/leaderboard/private\">Join our Private Leaderboard</a> using the secret Join Code (shared in the 11/29 email and on Slack).</li>\n");
-//		page.append("\t\t<li><a href=\"https://adventofcode.com/2021/settings\">Add the secret Sponsor code</a> to your account (shared in the 11/29 email and on Slack) so people can see that AFS is an AoC Sponsor.</li>\n");
-//		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> (requires an AFS Defense account) to chat with other puzzle solvers.</li>\n");
-//		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
-//		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
-//		page.append("\t</ol>\n");
 		page.append("</div>\n");
 	}
 
