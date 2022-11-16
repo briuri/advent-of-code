@@ -181,19 +181,11 @@ public class Leaderboard extends BaseLeaderboard {
 				page.append(" | ");
 			}
 		}
-		// Show 1 leaderboard for non-2020 years
-		page.append("<br />\n\t\t");
-		if (!year.equals("2020")) {
-			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
+		if (year.equals(CURRENT_YEAR)) {
+			page.append("<br />\n<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
 			page.append("Leaderboard&rArr;</a> | ");
+			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
 		}
-		// Show overflow leaderboard in 2020
-		else {
-			page.append("L.Board ");
-			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">1&rArr;</a> ");
-			page.append("<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/368083\">2&rArr;</a> | ");
-		}
-		page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
 		page.append("\n\t</div>\n\n");
 		page.append("\t<h1>AFS AoC - Unofficial Rankings (").append(year).append(")</h1>\n\n");
 	}
