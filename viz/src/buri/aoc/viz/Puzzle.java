@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Metadata for each puzzle, read from puzzles.json.
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle {
-	private String _title;
-	private int _globalCount;
+	private final String _title;
+	private final int _globalCount;
 
 	/**
 	 * Constructor

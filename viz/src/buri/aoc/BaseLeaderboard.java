@@ -31,9 +31,9 @@ import buri.aoc.viz.PuzzleTimes;
  * @author Brian Uri!
  */
 public abstract class BaseLeaderboard {
-	private StringBuffer _page;
-	private Map<String, List<Puzzle>> _puzzles;
-	private Map<String, Company> _companies;
+	private final StringBuilder _page;
+	private final Map<String, List<Puzzle>> _puzzles;
+	private final Map<String, Company> _companies;
 
 	// Total number of puzzles each year.
 	public static final int TOTAL_PUZZLES = 25;
@@ -60,7 +60,7 @@ public abstract class BaseLeaderboard {
 	 * Constructor
 	 */
 	protected BaseLeaderboard() {
-		_page = new StringBuffer();
+		_page = new StringBuilder();
 		_puzzles = new HashMap<>();
 		_companies = new HashMap<>();
 
@@ -218,14 +218,14 @@ public abstract class BaseLeaderboard {
 	 * Reads the last modified date on the (first) leaderboard file.
 	 */
 	protected String readLastModified(String year, String currentYear) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		if (year.equals(currentYear)) {
 			File file = new File(JSON_FOLDER + year + ".json");
-			buffer.append("\t<p class=\"tiny\">");
-			buffer.append("(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")");
-			buffer.append("</p>\n");
+			builder.append("\t<p class=\"tiny\">");
+			builder.append("(as of ").append(MODIFIED_DATE_FORMAT.format(new Date(file.lastModified()))).append(")");
+			builder.append("</p>\n");
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**
@@ -291,7 +291,7 @@ public abstract class BaseLeaderboard {
 	/**
 	 * Accessor for the page buffer
 	 */
-	protected StringBuffer getPage() {
+	protected StringBuilder getPage() {
 		return _page;
 	}
 

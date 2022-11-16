@@ -14,14 +14,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @author Brian Uri!
  */
 public class Company {
-	private Map<String, String> _alternateNames;
-	private Map<String, String> _divisions;
-	private Map<String, Integer> _globalCounts;
-	private Set<String> _ineligible;
-	private List<String> _allDivisions;
-	private int _places;
-	private List<String> _exclusions;
-	private String _rules;
+	private final Map<String, String> _alternateNames;
+	private final Map<String, String> _divisions;
+	private final Map<String, Integer> _globalCounts;
+	private final Set<String> _ineligible;
+	private final List<String> _allDivisions;
+	private final int _places;
+	private final List<String> _exclusions;
+	private final String _rules;
 
 	/**
 	 * Constructor

@@ -7,16 +7,16 @@ import buri.aoc.TimeType;
 /**
  * Data class for all of a player's times.
  *
- * In 2016, the total time was used as a tie breaker.
- * In 2017 and beyond, the median time is a tie breaker.
+ * In 2016, the total time was used as a tiebreaker.
+ * In 2017 and beyond, the median time is a tiebreaker.
  *
  * @author Brian Uri!
  */
 public class OverallTimes implements Comparable<OverallTimes> {
-	private String _name;
-	private Integer _stars;
-	private long _tiebreakerTime;
-	private List<Long> _times;
+	private final String _name;
+	private final Integer _stars;
+	private final long _tiebreakerTime;
+	private final List<Long> _times;
 
 	private int _first = 0;
 	private int _second = 0;

@@ -102,7 +102,7 @@ public class Leaderboard extends BaseLeaderboard {
 			insertFooter(true);
 		}
 		else {
-			StringBuffer page = getPage();
+			StringBuilder page = getPage();
 			page.append("<div class=\"instructions\">\n");
 			page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
 			insertFooter(false);
@@ -121,7 +121,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Creates some instructions to get ready for a new season.
 	 */
 	private void insertInstructions() {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
+		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"174\" title=\"Advent of Code 2022\"/>\n");
 		page.append("<div class=\"instructions\">\n");
 		page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
 		page.append("\t<h2>Scoring FAQ</h2>");
@@ -148,7 +149,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private String maskName(String year, String name) {
 		Company company = getCompanies().get(year);
-		StringBuffer buffer = new StringBuffer(company.getAlternateNameFor(name));
+		StringBuilder buffer = new StringBuilder(company.getAlternateNameFor(name));
 		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
 		buffer.insert(1, ANTI_INDEX);
 		return (buffer.toString());
@@ -158,7 +159,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the HTML page header
 	 */
 	private void insertHeader(String year, boolean isLatestPage) {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		page.append("<html>\n<head>\n");
 		page.append("\t<meta charset=\"UTF-8\">\n");
 		page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
@@ -207,7 +208,7 @@ public class Leaderboard extends BaseLeaderboard {
 			return;
 		}
 
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		if (showAll) {
 			page.append("\t<h2>All Players</h2>\n");
 		}
@@ -340,7 +341,7 @@ public class Leaderboard extends BaseLeaderboard {
 			max = Math.max(max, i);
 		}
 
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numOverall).append(" Overall by Division</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartDivisions\"></div>\n");
@@ -389,7 +390,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Total Solves chart.
 	 */
 	private void insertTotalSolvesChart(String year, PuzzleTimes puzzleTimes) {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		page.append("\n\t<a name=\"total\"></a><h2>Total Solves by Day ");
 		page.append("(").append(puzzleTimes.getStars()).append(" stars)</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
@@ -470,7 +471,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the Top X Daily for each puzzle.
 	 */
 	private void insertTopDaily(String year, PuzzleTimes puzzleTimes) {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		page.append("\n\t<h2>Top ").append(getCompanies().get(year).getPlaces()).append(" Daily</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
@@ -492,7 +493,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds a fast-loading dashboard showing just the most recent puzzle.
 	 */
 	private void insertLatestDay(String year, PuzzleTimes puzzleTimes) {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		page.append("<div class=\"daily\">\n");
 		page.append("<span class=\"rankingsLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
 		page.append("\t<h2>Latest Puzzle</h2>\n");
@@ -507,7 +508,7 @@ public class Leaderboard extends BaseLeaderboard {
 			if (!places.isEmpty()) {
 				// Show console message for most recent total solve recorded on most recent day, and total number of stars.
 				PuzzleTime mostRecent = places.get(places.size() - 1);
-				StringBuffer alert = new StringBuffer();
+				StringBuilder alert = new StringBuilder();
 				alert.append("\t(").append(puzzleTimes.getStars()).append(" stars) - ");
 				alert.append("Day ").append(i + 1).append(": ").append(places.size()).append(".");
 				alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true).replace("&nbsp;", " ")).append(" ");
@@ -530,7 +531,7 @@ public class Leaderboard extends BaseLeaderboard {
 		Company company = getCompanies().get(year);
 		Puzzle puzzle = getPuzzles().get(year).get(day - 1);
 
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		page.append("<div class=\"daily\">\n");
 		page.append("\t<a name=\"day").append(day).append("\"></a>");
 		page.append("<h3><a href=\"https://adventofcode.com/").append(year).append("/day/").append(day);
@@ -589,7 +590,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Records a split time, highlighting it if it's the fastest.
 	 */
 	private void insertSplitTime(Long splitTime, Long fastestTime) {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		if (splitTime != null && splitTime.equals(fastestTime)) {
 			page.append("<span class=\"bestTime\">");
 		}
@@ -603,7 +604,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Adds the HTML page footer
 	 */
 	private void insertFooter(boolean showJumpLink) {
-		StringBuffer page = getPage();
+		StringBuilder page = getPage();
 		if (showJumpLink) {
 			page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
 		}

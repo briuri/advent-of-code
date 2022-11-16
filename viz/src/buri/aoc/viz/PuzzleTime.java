@@ -11,14 +11,14 @@ import buri.aoc.TimeType;
  * @author Brian Uri!
  */
 public class PuzzleTime implements Comparable<PuzzleTime> {
-	private String _year;
-	private String _name;
+	private final String _year;
+	private final String _name;
 
-	private Long _part1Time;
-	private String _yearPart1Completed;
+	private final Long _part1Time;
+	private final String _yearPart1Completed;
 
-	private Long _totalTime;
-	private String _yearPart2Completed;
+	private final Long _totalTime;
+	private final String _yearPart2Completed;
 
 	/**
 	 * Constructor
@@ -28,9 +28,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		_name = name;
 
 		Calendar puzzleTime = Calendar.getInstance();
-		puzzleTime.set(Calendar.YEAR, Integer.valueOf(getYear()));
+		puzzleTime.set(Calendar.YEAR, Integer.parseInt(getYear()));
 		puzzleTime.set(Calendar.MONTH, Calendar.DECEMBER);
-		puzzleTime.set(Calendar.DATE, Integer.valueOf(day));
+		puzzleTime.set(Calendar.DATE, Integer.parseInt(day));
 		puzzleTime.set(Calendar.HOUR_OF_DAY, 0);
 		puzzleTime.set(Calendar.MINUTE, 0);
 		puzzleTime.set(Calendar.SECOND, 0);
@@ -68,7 +68,7 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 	 * Converts milliseconds into a string timestamp.
 	 */
 	private static String formatTime(Long time, int hourWidth) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		if (time != null) {
 			// Median timestamps may have half-second from average calculation. Round up.
 			if (time % 1000 != 0) {
@@ -78,30 +78,30 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 			time = time / 1000L;
 			String hours = String.valueOf(time / (60 * 60));
 			if (hours.length() == 1) {
-				buffer.append("0");
+				builder.append("0");
 			}
-			buffer.append(hours).append(":");
+			builder.append(hours).append(":");
 
 			time = time % (60 * 60);
 			String minutes = String.valueOf(time / 60);
 			if (minutes.length() == 1) {
-				buffer.append("0");
+				builder.append("0");
 			}
-			buffer.append(minutes).append(":");
+			builder.append(minutes).append(":");
 
 			time = time % 60;
 			String seconds = String.valueOf(time);
 			if (seconds.length() == 1) {
-				buffer.append("0");
+				builder.append("0");
 			}
-			buffer.append(seconds);
+			builder.append(seconds);
 		}
 		// Left-pad time. 2016 had 4-digit hours in the All Players report.
-		int padSize = hourWidth + 6 - buffer.length();
+		int padSize = hourWidth + 6 - builder.length();
 		for (int i = 0; i < padSize; i++) {
-			buffer.insert(0, "&nbsp;");
+			builder.insert(0, "&nbsp;");
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	@Override

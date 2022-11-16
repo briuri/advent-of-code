@@ -13,8 +13,8 @@ import buri.aoc.TimeType;
  * @author Brian Uri!
  */
 public class PuzzleTimes {
-	private List<List<PuzzleTime>> _part1Times;
-	private List<List<PuzzleTime>> _totalTimes;
+	private final List<List<PuzzleTime>> _part1Times;
+	private final List<List<PuzzleTime>> _totalTimes;
 	private int _stars;
 
 	/**
@@ -35,7 +35,7 @@ public class PuzzleTimes {
 	 * Adds a puzzle record to the appropriate list (ignores any outside of our company's competition window).
 	 */
 	public void add(String day, PuzzleTime record) {
-		int index = Integer.valueOf(day) - 1;
+		int index = Integer.parseInt(day) - 1;
 		if (record.getTime(TimeType.TOTAL) != null && record.completedInYear()) {
 			getTimes(TimeType.TOTAL).get(index).add(record);
 			addStar(2);
@@ -59,8 +59,8 @@ public class PuzzleTimes {
 	/**
 	 * Counts the stars earned by a specific person during the competition.
 	 */
-	public Integer getStars(String name) {
-		Integer count = 0;
+	public int getStars(String name) {
+		int count = 0;
 		for (List<PuzzleTime> times : getTimes(TimeType.ONE)) {
 			for (PuzzleTime time : times) {
 				if (time.getName().equals(name) && time.completedInYear()) {
