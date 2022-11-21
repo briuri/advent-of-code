@@ -128,8 +128,8 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("\t<h2>Want to join?</h2>\n");
 		page.append("\t<ol>\n");
 		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">AFS Portal Page</a> (AFS Commercial login).</li>\n");
-		page.append("\t\t<li><a href=\"https://novetta.slack.com/archives/advent-of-code\">Join the #advent-of-code Slack channel</a> (AFS Defense login) to chat with other puzzle solvers.</li>\n");
-		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on December 1st. This is the night of November 30, <i>not</i> the night of December 1!</li>\n");
+		page.append("\t\t<li><a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Join the Advent of Code Teams channel</a> (AFS Commercial login) to chat with other puzzle solvers.</li>\n");
+		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n");
 		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
 		page.append("\t</ol>\n");
 		page.append("\t<h2>Scoring FAQ</h2>");
@@ -181,8 +181,8 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 		if (year.equals(CURRENT_YEAR)) {
 			page.append("<br />\n<a href=\"https://adventofcode.com/").append(year).append("/leaderboard/private/view/105906\">");
-			page.append("Leaderboard&rArr;</a> | ");
-			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
+			page.append("Private Leaderboard&rArr;</a> | ");
+			page.append("<a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Teams&rArr;</a>");
 		}
 		page.append("\n\t</div>\n\n");
 		page.append("\t<h1>AFS AoC - Rankings (").append(year).append(")</h1>\n\n");
