@@ -161,7 +161,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<html>\n<head>\n");
 		page.append("\t<meta charset=\"UTF-8\">\n");
 		page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n");
-		page.append("\t<title>AFS Advent of Code - Unofficial Rankings (").append(year).append(")").append("</title>\n\n");
+		page.append("\t<title>AFS Advent of Code - Rankings (").append(year).append(")").append("</title>\n\n");
 		if (!isLatestPage) {
 			page.append("\t<script type=\"text/javascript\" src=\"https://cdn.plot.ly/plotly-1.58.1.min.js\" charset=\"utf-8\"></script>\n");
 		}
@@ -185,7 +185,7 @@ public class Leaderboard extends BaseLeaderboard {
 			page.append("<a href=\"https://novetta.slack.com/archives/advent-of-code\">Slack&rArr;</a>");
 		}
 		page.append("\n\t</div>\n\n");
-		page.append("\t<h1>AFS AoC - Unofficial Rankings (").append(year).append(")</h1>\n\n");
+		page.append("\t<h1>AFS AoC - Rankings (").append(year).append(")</h1>\n\n");
 	}
 
 	/**
