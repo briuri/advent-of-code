@@ -96,7 +96,7 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 			}
 			builder.append(seconds);
 		}
-		// Left-pad time. 2016 had 4-digit hours in the All Players report.
+		// Left-pad time. 2016 had 4-digit hours in All Players report.
 		int padSize = hourWidth + 6 - builder.length();
 		for (int i = 0; i < padSize; i++) {
 			builder.insert(0, "&nbsp;");

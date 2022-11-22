@@ -70,15 +70,15 @@ public abstract class BasePuzzle {
 			minY = Math.min(minY, point.getY());
 			maxY = Math.max(maxY, point.getY());
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int y = minY; y <= maxY; y++) {
 			for (int x = minX; x < maxX; x++) {
-				buffer.append(String.valueOf(grid.get(new Pair<Integer>(x, y))));
+				builder.append(grid.get(new Pair<>(x, y)));
 			}
-			buffer.append("\n");
+			builder.append("\n");
 		}
-		buffer.append("\n");
-		System.out.println(buffer.toString());
+		builder.append("\n");
+		System.out.println(builder);
 	}
 
 	/**

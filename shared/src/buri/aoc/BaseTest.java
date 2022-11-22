@@ -6,7 +6,7 @@ import java.awt.datatransfer.StringSelection;
 
 /**
  * Superclass of all test case classes, for shared helper utilities.
- * 
+ *
  * @author Brian Uri!
  */
 public abstract class BaseTest {
@@ -23,10 +23,10 @@ public abstract class BaseTest {
 		String testName = Thread.currentThread().getStackTrace()[3].getMethodName();
 		String part = testName.substring(testName.indexOf("Part") + 4).substring(0, 1);
 
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("### Year ").append(year).append(" Day ").append(day).append(" Part ").append(part).append(
+		StringBuilder builder = new StringBuilder();
+		builder.append("### Year ").append(year).append(" Day ").append(day).append(" Part ").append(part).append(
 			" ###");
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

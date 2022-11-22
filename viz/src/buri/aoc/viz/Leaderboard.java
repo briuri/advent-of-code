@@ -78,7 +78,7 @@ public class Leaderboard extends BaseLeaderboard {
 		final PuzzleTimes puzzleTimes = getPuzzleTimes(year, leaderboardJson);
 		final List<OverallTimes> overallTimes = getOverallTimes(year, puzzleTimes);
 
-		// Create Latest page.
+		// Create the Latest page.
 		if (year.equals(CURRENT_YEAR)) {
 			resetPage();
 			insertHeader(year, true);
@@ -506,7 +506,7 @@ public class Leaderboard extends BaseLeaderboard {
 				alert.append("Day ").append(i + 1).append(": ").append(places.size()).append(".");
 				alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true).replace("&nbsp;", " ")).append(" ");
 				alert.append(mostRecent.getName()).append("\n");
-				System.out.println(alert.toString());
+				System.out.println(alert);
 			}
 			places.addAll(puzzleTimes.getTimes(TimeType.ONE).get(i));
 			if (!places.isEmpty()) {

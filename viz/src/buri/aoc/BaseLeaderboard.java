@@ -116,7 +116,7 @@ public abstract class BaseLeaderboard {
 	 */
 	protected Map<String, Object> readLeaderboards(String year) {
 		ObjectMapper mapper = new ObjectMapper();
-		Map<String, Object> leaderboardJson = null;
+		Map<String, Object> leaderboardJson;
 		try {
 			JsonNode json = readJson(year + ".json");
 			leaderboardJson = mapper.readValue(json.get("members").toString(),
@@ -176,9 +176,7 @@ public abstract class BaseLeaderboard {
 			if (!(year.equals("2018") && (i + 1) == 6)) {
 				List<PuzzleTime> singleDay = puzzleTimes.getTimes(TimeType.TOTAL).get(i);
 				for (PuzzleTime time : singleDay) {
-					if (rawPuzzleTimes.get(time.getName()) == null) {
-						rawPuzzleTimes.put(time.getName(), new ArrayList<>());
-					}
+					rawPuzzleTimes.computeIfAbsent(time.getName(), k -> new ArrayList<>());
 					rawPuzzleTimes.get(time.getName()).add(time.getTime(TimeType.TOTAL));
 				}
 			}
