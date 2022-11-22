@@ -147,10 +147,13 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private String maskName(String year, String name) {
 		Company company = getCompanies().get(year);
-		StringBuilder buffer = new StringBuilder(company.getAlternateNameFor(name));
-		buffer.insert(buffer.indexOf(" ") + 2, ANTI_INDEX);
-		buffer.insert(1, ANTI_INDEX);
-		return (buffer.toString());
+		StringBuilder builder = new StringBuilder(company.getAlternateNameFor(name));
+		int truncate = builder.indexOf(" ") + 2;
+		int length = builder.length();
+		builder.delete(truncate, length);
+		builder.append(".");
+		builder.insert(1, ANTI_INDEX);
+		return (builder.toString());
 	}
 
 	/**
