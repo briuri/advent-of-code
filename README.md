@@ -21,7 +21,7 @@ Each Day can be run from a JUnit test harness, colocated in the same source fold
 ## Leaderboard Visualization
 
 In addition to puzzle solutions, this project also contains a simple visualization (under `viz/src`) of the private leaderboard JSON
-that can show the data as an [Unofficial Rankings page](http://aoc.urizone.net).
+that can show the data as a median-based [Rankings page](http://aoc.urizone.net).
 
 ## License
 
