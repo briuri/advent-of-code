@@ -89,6 +89,7 @@ public abstract class BaseLeaderboard {
 	private void readCompanyMetadata() {
 		JsonNode json = readJson("company.json");
 		for (String year : YEARS) {
+			String divisionLabel = json.get("divisionLabel").get(year).asText();
 			String rules = json.get("rules").get(year).asText();
 			int places = json.get("places").get(year).asInt();
 			List<String> allDivisions = new ArrayList<>();
@@ -101,7 +102,7 @@ public abstract class BaseLeaderboard {
 			for (int i = 0; i < exclusionsNode.size(); i++) {
 				exclusions.add(exclusionsNode.get(i).asText());
 			}
-			Company company = new Company(allDivisions, places, exclusions, rules);
+			Company company = new Company(divisionLabel, allDivisions, places, exclusions, rules);
 			ArrayNode playerJson = (ArrayNode) json.get("players").get(year);
 			for (int i = 0; i < playerJson.size(); i++) {
 				company.addPlayer((ObjectNode) playerJson.get(i));

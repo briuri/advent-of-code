@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class Company {
 	private final Map<String, String> _alternateNames;
+
+	private final String _divisionLabel;
 	private final Map<String, String> _divisions;
 	private final Map<String, Integer> _globalCounts;
 	private final Set<String> _ineligible;
@@ -26,8 +28,9 @@ public class Company {
 	/**
 	 * Constructor
 	 */
-	public Company(List<String> allDivisions, int places, List<String> exclusions, String rules) {
+	public Company(String divisionLabel, List<String> allDivisions, int places, List<String> exclusions, String rules) {
 		_alternateNames = new HashMap<>();
+		_divisionLabel = divisionLabel;
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
 		_ineligible = new HashSet<>();
@@ -86,6 +89,13 @@ public class Company {
 	 */
 	private Map<String, String> getAlternateNames() {
 		return _alternateNames;
+	}
+
+	/**
+	 * Accessor for the Portfolio/Division label
+	 */
+	public String getDivisionLabel() {
+		return _divisionLabel;
 	}
 
 	/**

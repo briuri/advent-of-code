@@ -332,7 +332,7 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 
 		StringBuilder page = getPage();
-		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numOverall).append(" Overall by Division</h2>\n");
+		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numOverall).append(" Overall by ").append(company.getDivisionLabel()).append("</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartDivisions\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
