@@ -26,11 +26,10 @@ public class Puzzle extends BasePuzzle {
 	 * QUESTION
 	 */
 	public static long getResult(Part part, List<String> input) {
+// all integers on first line
+//		input = Arrays.asList(input.get(0).split(" "));
 // 1 integer per line
 //		List<Integer> values = convertStringsToInts(input);
-// all integers on first line
-//		String[] stringInts = input.get(0).split(" ");
-//		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
 // 1 data object per line
 //		 List<Data> list = new ArrayList<>();
 //		 for (String line : input) {
