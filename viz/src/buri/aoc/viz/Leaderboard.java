@@ -1,6 +1,7 @@
 package buri.aoc.viz;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +32,31 @@ public class Leaderboard extends BaseLeaderboard {
 	public void generatePages() {
 		for (String year : YEARS) {
 			visualizeYear(year);
+		}
+	}
+
+	/**
+	 * Utility Method to output all of the different names in the leadership to help build company.json.
+	 */
+	@Test
+	public void showLeaderboardNames() {
+		final Map<String, Object> leaderboardJson = readLeaderboards(CURRENT_YEAR);
+		List<String> names = new ArrayList<>();
+		for (String key : leaderboardJson.keySet()) {
+			Map<String, Object> member = (Map) leaderboardJson.get(key);
+			String name = (String) member.get("name");
+			if (name != null) {
+				names.add(name);
+			}
+		}
+		Collections.sort(names);
+		for (String name : names) {
+			StringBuilder builder = new StringBuilder();
+			builder.append("\t\t\t{\"name\": \"").append(name).append("\", ");
+			builder.append("\"alt\": \"").append(name).append("\",");
+			builder.append("\n\t\t\t\t");
+			builder.append("\"division\": \"\", \"globalCount\": 0},");
+			System.out.println(builder);
 		}
 	}
 
@@ -601,7 +627,7 @@ public class Leaderboard extends BaseLeaderboard {
 		if (showJumpLink) {
 			page.append("\t<div class=\"navBar\"><a href=\"#\">Jump to Top</a></div>\n");
 		}
-		page.append("<div class=\"clear disclaimer\">This unofficial rankings page is a volunteer project that is not endorsed or supported by our company.</div>");
+		page.append("<div class=\"clear disclaimer\">This rankings page is a volunteer project that is not endorsed or supported by our company.</div>");
 		page.append("</body>\n</html>");
 	}
 }
