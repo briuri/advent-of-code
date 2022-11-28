@@ -33,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 // 1 data object per line
 //		 List<Data> list = new ArrayList<>();
 //		 for (String line : input) {
-//			 list.add(new Data(input));
+//			 list.add(new Data(line));
 //		 }
 // Grid
 //		Grid grid = new Grid(input);
