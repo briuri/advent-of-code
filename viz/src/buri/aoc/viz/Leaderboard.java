@@ -36,31 +36,6 @@ public class Leaderboard extends BaseLeaderboard {
 	}
 
 	/**
-	 * Utility Method to output all of the different names in the leadership to help build company.json.
-	 */
-	@Test
-	public void showLeaderboardNames() {
-		final Map<String, Object> leaderboardJson = readLeaderboards(CURRENT_YEAR);
-		List<String> names = new ArrayList<>();
-		for (String key : leaderboardJson.keySet()) {
-			Map<String, Object> member = (Map) leaderboardJson.get(key);
-			String name = (String) member.get("name");
-			if (name != null) {
-				names.add(name);
-			}
-		}
-		Collections.sort(names);
-		for (String name : names) {
-			StringBuilder builder = new StringBuilder();
-			builder.append("\t\t\t{\"name\": \"").append(name).append("\", ");
-			builder.append("\"alt\": \"").append(name).append("\",");
-			builder.append("\n\t\t\t\t");
-			builder.append("\"division\": \"\", \"globalCount\": 0},");
-			System.out.println(builder);
-		}
-	}
-
-	/**
 	 * Generates the Fastest Times pages on a schedule, for use when I'm not around to do manual updates.
 	 *
 	 * No arguments required.
