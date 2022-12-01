@@ -120,7 +120,9 @@ public class PuzzleTime implements Comparable<PuzzleTime> {
 		}
 		// For ties, alphabetize on last name.
 		if (compare == 0) {
-			compare = getName().split(" ")[1].compareTo(o.getName().split(" ")[1]);
+			String last1 = (getName().indexOf(" ") != -1) ? getName().split(" ")[1] : getName();
+			String last2 = (o.getName().indexOf(" ") != -1) ? o.getName().split(" ")[1] : o.getName();
+			compare = last1.compareTo(last2);
 		}
 		return (compare);
 	}
