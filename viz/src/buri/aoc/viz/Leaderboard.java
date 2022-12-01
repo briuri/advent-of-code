@@ -165,10 +165,12 @@ public class Leaderboard extends BaseLeaderboard {
 	private String maskName(String year, String name) {
 		Company company = getCompanies().get(year);
 		StringBuilder builder = new StringBuilder(company.getAlternateNameFor(name));
-		int truncate = builder.indexOf(" ") + 2;
-		int length = builder.length();
-		builder.delete(truncate, length);
-		builder.append(".");
+		if (builder.indexOf(" ") != -1) {
+			int truncate = builder.indexOf(" ") + 2;
+			int length = builder.length();
+			builder.delete(truncate, length);
+			builder.append(".");
+		}
 		builder.insert(1, ANTI_INDEX);
 		return (builder.toString());
 	}
