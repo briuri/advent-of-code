@@ -14,8 +14,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @author Brian Uri!
  */
 public class Company {
-	private final Map<String, String> _alternateNames;
-
+	private final Map<String, String> _nicknames;
 	private final String _divisionLabel;
 	private final Map<String, String> _divisions;
 	private final Map<String, Integer> _globalCounts;
@@ -29,7 +28,7 @@ public class Company {
 	 * Constructor
 	 */
 	public Company(String divisionLabel, List<String> allDivisions, int places, List<String> exclusions, String rules) {
-		_alternateNames = new HashMap<>();
+		_nicknames = new HashMap<>();
 		_divisionLabel = divisionLabel;
 		_divisions = new HashMap<>();
 		_globalCounts = new HashMap<>();
@@ -44,9 +43,9 @@ public class Company {
 	 * Adds a player record.
 	 */
 	public void addPlayer(ObjectNode player) {
-		String name = player.get("name").asText();
-		if (player.get("alt") != null) {
-			getAlternateNames().put(name, player.get("alt").asText());
+		String name = player.get("username").asText();
+		if (player.get("nickname") != null) {
+			getNicknames().put(name, player.get("nickname").asText());
 		}
 		if (player.get("division") != null) {
 			getDivisions().put(name, player.get("division").asText());
@@ -60,10 +59,10 @@ public class Company {
 	}
 
 	/**
-	 * Looks up an alternate name for a player.
+	 * Looks up a nickname for a player.
 	 */
-	public String getAlternateNameFor(String name) {
-		return (getAlternateNames().getOrDefault(name, name));
+	public String getNicknameFor(String name) {
+		return (getNicknames().getOrDefault(name, name));
 	}
 
 	/**
@@ -85,10 +84,10 @@ public class Company {
 	}
 
 	/**
-	 * Accessor for the alternateNames map
+	 * Accessor for the nicknames map
 	 */
-	private Map<String, String> getAlternateNames() {
-		return _alternateNames;
+	private Map<String, String> getNicknames() {
+		return _nicknames;
 	}
 
 	/**

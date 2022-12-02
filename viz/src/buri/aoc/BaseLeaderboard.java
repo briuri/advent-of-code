@@ -152,6 +152,10 @@ public abstract class BaseLeaderboard {
 			if (name == null || company.getExclusions().contains(name)) {
 				continue;
 			}
+			// For some reason, "Manuel \"DZ\" Dominguez" doesn't work as a key in the alternateNames map.
+			if (year.equals("2022") && name.indexOf("\"DZ\"") != -1) {
+				name = "Manuel Dominguez";
+			}
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");
 			for (String day : puzzleData.keySet()) {
 				Long part1Time = getTime(TimeType.ONE, day, puzzleData);

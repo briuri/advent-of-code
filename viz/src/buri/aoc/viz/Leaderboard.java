@@ -1,7 +1,6 @@
 package buri.aoc.viz;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -139,7 +138,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 */
 	private String maskName(String year, String name) {
 		Company company = getCompanies().get(year);
-		StringBuilder builder = new StringBuilder(company.getAlternateNameFor(name));
+		StringBuilder builder = new StringBuilder(company.getNicknameFor(name));
 		if (builder.indexOf(" ") != -1) {
 			int truncate = builder.indexOf(" ") + 2;
 			int length = builder.length();
