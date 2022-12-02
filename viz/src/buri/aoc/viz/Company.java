@@ -43,18 +43,20 @@ public class Company {
 	 * Adds a player record.
 	 */
 	public void addPlayer(ObjectNode player) {
-		String name = player.get("username").asText();
+		String username = player.get("username").asText();
 		if (player.get("nickname") != null) {
-			getNicknames().put(name, player.get("nickname").asText());
+			getNicknames().put(username, player.get("nickname").asText());
 		}
+		String nickname = getNicknames().getOrDefault(username, username);
+
 		if (player.get("division") != null) {
-			getDivisions().put(name, player.get("division").asText());
+			getDivisions().put(nickname, player.get("division").asText());
 		}
 		if (player.get("globalCount") != null) {
-			getGlobalCounts().put(name, player.get("globalCount").asInt());
+			getGlobalCounts().put(nickname, player.get("globalCount").asInt());
 		}
 		if (player.get("ineligible") != null && player.get("ineligible").asBoolean()) {
-			getIneligible().add(name);
+			getIneligible().add(nickname);
 		}
 	}
 

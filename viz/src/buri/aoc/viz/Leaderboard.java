@@ -137,8 +137,7 @@ public class Leaderboard extends BaseLeaderboard {
 	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
 	 */
 	private String maskName(String year, String name) {
-		Company company = getCompanies().get(year);
-		StringBuilder builder = new StringBuilder(company.getNicknameFor(name));
+		StringBuilder builder = new StringBuilder(name);
 		if (builder.indexOf(" ") != -1) {
 			int truncate = builder.indexOf(" ") + 2;
 			int length = builder.length();

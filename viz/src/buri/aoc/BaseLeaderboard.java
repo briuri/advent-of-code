@@ -160,7 +160,7 @@ public abstract class BaseLeaderboard {
 			for (String day : puzzleData.keySet()) {
 				Long part1Time = getTime(TimeType.ONE, day, puzzleData);
 				Long totalTime = getTime(TimeType.TOTAL, day, puzzleData);
-				puzzleTimes.add(day, new PuzzleTime(year, day, name, part1Time, totalTime));
+				puzzleTimes.add(day, new PuzzleTime(year, day, company.getNicknameFor(name), part1Time, totalTime));
 			}
 		}
 		puzzleTimes.sort();
@@ -173,6 +173,7 @@ public abstract class BaseLeaderboard {
 	 * NOTE: This does not handle any player who has not yet completed Part 2 of any puzzle.
 	 */
 	protected List<OverallTimes> getOverallTimes(String year, PuzzleTimes puzzleTimes) {
+		Company company = getCompanies().get(year);
 		// Create an interim map of players to all of their puzzle times.
 		Map<String, List<Long>> rawPuzzleTimes = new HashMap<>();
 		for (int i = 0; i < puzzleTimes.getTimes(TimeType.TOTAL).size(); i++) {
@@ -192,7 +193,7 @@ public abstract class BaseLeaderboard {
 		boolean useMedian = !year.equals("2016");
 		List<OverallTimes> overallTimes = new ArrayList<>();
 		for (String name : rawPuzzleTimes.keySet()) {
-			overallTimes.add(new OverallTimes(puzzleTimes, name, rawPuzzleTimes.get(name), useMedian));
+			overallTimes.add(new OverallTimes(puzzleTimes, company.getNicknameFor(name), rawPuzzleTimes.get(name), useMedian));
 		}
 		Collections.sort(overallTimes);
 		return (overallTimes);
