@@ -139,8 +139,9 @@ public class Leaderboard extends BaseLeaderboard {
 	private String maskName(String year, String name) {
 		StringBuilder builder = new StringBuilder(name);
 		int index = builder.indexOf(" ");
-		if (index != -1 && index + 3 < builder.length()) {
-			int truncate = index + 3;
+		int maskPoint = 3;
+		if (index != -1 && index + maskPoint < builder.length()) {
+			int truncate = index + maskPoint;
 			int length = builder.length();
 			builder.delete(truncate, length);
 			builder.append(".");
