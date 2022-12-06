@@ -212,6 +212,7 @@ public class Leaderboard extends BaseLeaderboard {
 		page.append("<ol>\n");
 
 		boolean isNextTie = false;
+		int tieCount = 0;
 		boolean isStandardWidth = !(year.equals("2016") && showAll);
 		int summaryMargin = (isStandardWidth ? 12 : 13);
 		for (int i = 0; i < numOverall; i++) {
@@ -289,11 +290,14 @@ public class Leaderboard extends BaseLeaderboard {
 			}
 			page.append("\t\t</div>\n");
 			isNextTie = (i + 1 < numOverall && player.getTiebreakerTime().equals(overallTimes.get(i + 1).getTiebreakerTime()));
+			if (isNextTie) {
+				tieCount++;
+			}
 			page.append(isNextTie ? "\t<br />\n" : "\t</li>\n");
 
 			// Break overall scores into two columns for > Top 10.
 			if (numOverall > 10 && (i == (numOverall + 1) / 2 - 1)) {
-				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2).append("\">\n");
+				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2 - tieCount).append("\">\n");
 			}
 		}
 		page.append("</ol></div>\n<div class=\"clear\"></div>\n");
