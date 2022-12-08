@@ -91,12 +91,10 @@ public class Leaderboard extends BaseLeaderboard {
 		// Create Top X page.
 		resetPage();
 		insertHeader(year, false);
-
-		// Temporarily removed until 2022 starts.
 		insertTopOverall(year, overallTimes, false);
 		insertTopDivisionsChart(year, overallTimes);
 		insertTotalSolvesChart(year, puzzleTimes);
-		insertTopDaily(year, puzzleTimes);
+		insertTopDaily(year, puzzleTimes, false);
 		insertFooter(true);
 		writePage(year + "-top.html");
 
@@ -104,6 +102,9 @@ public class Leaderboard extends BaseLeaderboard {
 		resetPage();
 		insertHeader(year, false);
 		insertTopOverall(year, overallTimes, true);
+		if (year.equals(CURRENT_YEAR)) {
+			insertTopDaily(year, puzzleTimes, true);
+		}
 		insertFooter(true);
 		writePage(year + "-all.html");
 	}
@@ -461,9 +462,14 @@ public class Leaderboard extends BaseLeaderboard {
 	/**
 	 * Adds the Top X Daily for each puzzle.
 	 */
-	private void insertTopDaily(String year, PuzzleTimes puzzleTimes) {
+	private void insertTopDaily(String year, PuzzleTimes puzzleTimes, boolean showAll) {
 		StringBuilder page = getPage();
-		page.append("\n\t<h2>Top ").append(getCompanies().get(year).getPlaces()).append(" Daily</h2>\n");
+		if (showAll) {
+			page.append("\t<h2>All Players Daily</h2>\n");
+		}
+		else {
+			page.append("\n\t<h2>Top ").append(getCompanies().get(year).getPlaces()).append(" Daily</h2>\n");
+		}
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n");
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
@@ -474,7 +480,7 @@ public class Leaderboard extends BaseLeaderboard {
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = puzzleTimes.getTimes(TimeType.TOTAL).get(i);
 			if (!places.isEmpty()) {
-				insertDay(year, i + 1, places, false);
+				insertDay(year, i + 1, places, showAll);
 			}
 		}
 		page.append("<div class=\"clear\"></div>\n\n");
