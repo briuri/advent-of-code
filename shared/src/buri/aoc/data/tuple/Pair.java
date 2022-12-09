@@ -7,7 +7,7 @@ import buri.aoc.data.Direction;
 
 /**
  * Data class for a pair tuple, intended for Integers or Longs.
- * 
+ *
  * @author Brian Uri!
  */
 public class Pair<T extends Number> extends BaseTuple implements Comparable<Pair> {
@@ -54,28 +54,59 @@ public class Pair<T extends Number> extends BaseTuple implements Comparable<Pair
 	}
 
 	/**
-	 * Returns a list of adjacent tuples in an X-Y grid in reading order.
+	 * Returns a list of adjacent tuples in an X-Y grid in reading order, not including diagonals.
 	 */
 	public List<Pair<T>> getAdjacent() {
+		return (getAdjacent(false));
+	}
+
+	/**
+	 * Returns a list of adjacent tuples in an X-Y grid in reading order, possibly including diagonals.
+	 */
+	public List<Pair<T>> getAdjacent(boolean includeDiagonals) {
 		List<Pair<T>> adjacent = new ArrayList<>();
 		if (getX() instanceof Integer) {
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().intValue() - 1, getY().intValue() - 1));
+			}
 			adjacent.add(new Pair(getX(), getY().intValue() - 1));
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().intValue() + 1, getY().intValue() - 1));
+			}
 			adjacent.add(new Pair(getX().intValue() - 1, getY()));
 			adjacent.add(new Pair(getX().intValue() + 1, getY()));
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().intValue() - 1, getY().intValue() + 1));
+			}
 			adjacent.add(new Pair(getX(), getY().intValue() + 1));
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().intValue() + 1, getY().intValue() + 1));
+			}
 		}
 		else {
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().longValue() - 1L, getY().longValue() - 1L));
+			}
 			adjacent.add(new Pair(getX(), getY().longValue() - 1L));
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().longValue() + 1L, getY().longValue() - 1L));
+			}
 			adjacent.add(new Pair(getX().longValue() - 1L, getY()));
 			adjacent.add(new Pair(getX().longValue() + 1L, getY()));
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().longValue() - 1L, getY().longValue() + 1L));
+			}
 			adjacent.add(new Pair(getX(), getY().longValue() + 1L));
+			if (includeDiagonals) {
+				adjacent.add(new Pair(getX().longValue() + 1L, getY().longValue() + 1L));
+			}
 		}
 		return (adjacent);
 	}
 
 	/**
 	 * Moves the position 1 step in a 2D direction.
-	 * 
+	 *
 	 * Based on Java's array indexing:
 	 * (0,0) is the upper left corner of a grid.
 	 * (x,0) is lower left corner of a grid.

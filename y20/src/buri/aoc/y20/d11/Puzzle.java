@@ -78,13 +78,7 @@ public class Puzzle extends BasePuzzle {
 	protected static int countAdjacentOccupiedSeats(Part part, CharGrid grid, Pair<Integer> center) {
 		List<Pair<Integer>> adjacents = new ArrayList<>();
 		if (part == Part.ONE) {
-			// Four cardinal directions.
-			adjacents.addAll(center.getAdjacent());
-			// Add diagonals.
-			adjacents.add(new Pair(center.getX() - 1, center.getY() - 1));
-			adjacents.add(new Pair(center.getX() + 1, center.getY() - 1));
-			adjacents.add(new Pair(center.getX() + 1, center.getY() + 1));
-			adjacents.add(new Pair(center.getX() - 1, center.getY() + 1));
+			adjacents.addAll(center.getAdjacent(true));
 		}
 		else {
 			// Four cardinal directions.

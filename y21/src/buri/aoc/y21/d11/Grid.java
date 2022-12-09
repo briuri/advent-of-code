@@ -55,12 +55,7 @@ public class Grid extends IntGrid {
 
 						// This increases the energy level of all adjacent octopuses by 1.
 						Pair<Integer> point = new Pair(x, y);
-						List<Pair<Integer>> adjacent = point.getAdjacent();
-						// (including diagonals)
-						adjacent.add(new Pair(x - 1, y - 1));
-						adjacent.add(new Pair(x - 1, y + 1));
-						adjacent.add(new Pair(x + 1, y - 1));
-						adjacent.add(new Pair(x + 1, y + 1));
+						List<Pair<Integer>> adjacent = point.getAdjacent(true);
 						for (Pair<Integer> adj : adjacent) {
 							if (adj.getX() >= 0 && adj.getX() < getWidth() && adj.getY() >= 0 && adj.getY() < getHeight()) {
 								set(adj, get(adj) + 1);
