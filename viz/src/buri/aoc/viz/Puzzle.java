@@ -9,7 +9,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class Puzzle {
 	private final String _title;
-	private int _globalCount = 0;
+	private int _globalPart1Count = 0;
+	private int _globalPart2Count = 0;
 
 	/**
 	 * Constructor
@@ -17,7 +18,9 @@ public class Puzzle {
 	public Puzzle(ObjectNode puzzleNode) {
 		_title = puzzleNode.get("title").asText();
 		if (puzzleNode.get("globalCount") != null) {
-			_globalCount = puzzleNode.get("globalCount").asInt();
+			String[] tokens = puzzleNode.get("globalCount").asText().split(",");
+			_globalPart1Count = Integer.parseInt(tokens[0]);
+			_globalPart2Count = Integer.parseInt(tokens[1]);
 		}
 	}
 
@@ -29,9 +32,16 @@ public class Puzzle {
 	}
 
 	/**
-	 * Accessor for the number of spots on the global leaderboard
+	 * Accessor for the number of Part 1 spots on the global leaderboard
 	 */
-	public int getGlobalCount() {
-		return _globalCount;
+	public int getGlobalPart1Count() {
+		return _globalPart1Count;
+	}
+
+	/**
+	 * Accessor for the number of Part 2 spots on the global leaderboard
+	 */
+	public int getGlobalPart2Count() {
+		return _globalPart2Count;
 	}
 }
