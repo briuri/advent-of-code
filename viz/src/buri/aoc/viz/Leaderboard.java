@@ -559,7 +559,7 @@ public class Leaderboard extends BaseLeaderboard {
 
 			// Show global indicator and player name
 			page.append("&nbsp;");
-			if (place + 1 <= puzzle.getGlobalPart2Count()) {
+			if (puzzle.getGlobalNames().contains(record.getName())) {
 				page.append("<a href=\"https://adventofcode.com/").append(year);
 				page.append("/leaderboard/day/").append(day).append("\">");
 				page.append("<span class=\"global\" title=\"Top 100 on daily Global Leaderboard\">*</span></a>");

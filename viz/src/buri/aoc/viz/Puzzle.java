@@ -1,6 +1,11 @@
 package buri.aoc.viz;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Metadata for each puzzle, read from puzzles.json.
@@ -9,18 +14,17 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class Puzzle {
 	private final String _title;
-	private int _globalPart1Count = 0;
-	private int _globalPart2Count = 0;
+	private List<String> _globalNames = new ArrayList<>();
 
 	/**
 	 * Constructor
 	 */
 	public Puzzle(ObjectNode puzzleNode) {
 		_title = puzzleNode.get("title").asText();
-		if (puzzleNode.get("globalCount") != null) {
-			String[] tokens = puzzleNode.get("globalCount").asText().split(",");
-			_globalPart1Count = Integer.parseInt(tokens[0]);
-			_globalPart2Count = Integer.parseInt(tokens[1]);
+		if (puzzleNode.get("globalNames") != null) {
+			for (Iterator<JsonNode> iterator = puzzleNode.get("globalNames").iterator(); iterator.hasNext();) {
+				_globalNames.add(iterator.next().asText());
+			}
 		}
 	}
 
@@ -32,16 +36,9 @@ public class Puzzle {
 	}
 
 	/**
-	 * Accessor for the number of Part 1 spots on the global leaderboard
+	 * Accessor for the names of players who made the global leaderboard
 	 */
-	public int getGlobalPart1Count() {
-		return _globalPart1Count;
-	}
-
-	/**
-	 * Accessor for the number of Part 2 spots on the global leaderboard
-	 */
-	public int getGlobalPart2Count() {
-		return _globalPart2Count;
+	public List<String> getGlobalNames() {
+		return _globalNames;
 	}
 }
