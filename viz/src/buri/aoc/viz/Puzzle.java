@@ -9,14 +9,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class Puzzle {
 	private final String _title;
-	private final int _globalCount;
+	private int _globalCount = 0;
 
 	/**
 	 * Constructor
 	 */
 	public Puzzle(ObjectNode puzzleNode) {
 		_title = puzzleNode.get("title").asText();
-		_globalCount = puzzleNode.get("globalCount").asInt();
+		if (puzzleNode.get("globalCount") != null) {
+			_globalCount = puzzleNode.get("globalCount").asInt();
+		}
 	}
 
 	/**
