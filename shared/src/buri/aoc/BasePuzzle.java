@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import buri.aoc.data.tuple.Pair;
@@ -73,7 +74,8 @@ public abstract class BasePuzzle {
 		StringBuilder builder = new StringBuilder();
 		for (int y = minY; y <= maxY; y++) {
 			for (int x = minX; x < maxX; x++) {
-				builder.append(grid.get(new Pair<>(x, y)));
+				T value = grid.get(new Pair<>(x, y));
+				builder.append(value == null ? ' ' : value);
 			}
 			builder.append("\n");
 		}
@@ -81,6 +83,36 @@ public abstract class BasePuzzle {
 		System.out.println(builder);
 	}
 
+	/**
+	 * Renders a sparse set of points as a visual grid.
+	 */
+	public static void showAsGrid(Set<Pair<Integer>> grid) {
+		int minX = Integer.MAX_VALUE;
+		int maxX = Integer.MIN_VALUE;
+		int minY = Integer.MAX_VALUE;
+		int maxY = Integer.MIN_VALUE;
+		for (Pair<Integer> point : grid) {
+			minX = Math.min(minX, point.getX());
+			maxX = Math.max(maxX, point.getX());
+			minY = Math.min(minY, point.getY());
+			maxY = Math.max(maxY, point.getY());
+		}
+		StringBuilder builder = new StringBuilder();
+		for (int y = minY; y <= maxY; y++) {
+			for (int x = minX; x < maxX; x++) {
+				Pair<Integer> point = new Pair<>(x, y);
+				if (grid.contains(point)) {
+					builder.append('■');
+				}
+				else {
+					builder.append(' ');
+				}
+			}
+			builder.append("\n");
+		}
+		builder.append("\n");
+		System.out.println(builder);
+	}
 	/**
 	 * Gets the entry with the minimum value from a Map
 	 */
