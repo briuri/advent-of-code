@@ -11,12 +11,12 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Monkey {
-	private int _id;
-	private List<Long> _items = new ArrayList<>();
-	private String _operation;
-	private Long _testDivisor;
-	private int _targetTrue;
-	private int _targetFalse;
+	private final int _id;
+	private final List<Long> _items = new ArrayList<>();
+	private final String _operation;
+	private final long _testDivisor;
+	private final int _targetTrue;
+	private final int _targetFalse;
 	private long _inspectCount = 0L;
 
 	/**

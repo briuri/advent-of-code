@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class File {
 
-	private String _name;
-	private boolean _directory;
+	private final String _name;
+	private final boolean _directory;
 	private long _size;
 	private File _parent;
-	private List<File> _files = new ArrayList<>();
+	private final List<File> _files = new ArrayList<>();
 
 	/**
 	 * Constructor for a directory

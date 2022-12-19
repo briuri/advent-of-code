@@ -19,7 +19,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Grid extends CharGrid {
-	private Pair _originalStart, _end;
+	private Pair<Integer> _originalStart, _end;
 
 	private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
@@ -42,7 +42,7 @@ public class Grid extends CharGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				char value = input.get(y).charAt(x);
@@ -109,14 +109,14 @@ public class Grid extends CharGrid {
 	/**
 	 * Accessor for the original starting point.
 	 */
-	private Pair getOriginalStart() {
+	private Pair<Integer> getOriginalStart() {
 		return _originalStart;
 	}
 
 	/**
 	 * Accessor for the signal point.
 	 */
-	private Pair getEnd() {
+	private Pair<Integer> getEnd() {
 		return _end;
 	}
 }

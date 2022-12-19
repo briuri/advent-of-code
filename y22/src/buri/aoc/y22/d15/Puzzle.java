@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * Day 15: Beacon Exclusion Zone
@@ -39,8 +38,8 @@ public class Puzzle extends BasePuzzle {
 			tokens = line.split("y=");
 			long sY = Long.parseLong(tokens[1].split(": ")[0]);
 			long bY = Long.parseLong(tokens[2]);
-			Pair<Long> sensor = new Pair<Long>(sX, sY);
-			Pair<Long> beacon = new Pair<Long>(bX, bY);
+			Pair<Long> sensor = new Pair<>(sX, sY);
+			Pair<Long> beacon = new Pair<>(bX, bY);
 			sensorsBeacons.add(sensor);
 			sensorsBeacons.add(beacon);
 			sensorDistances.put(sensor, sensor.getManhattanDistance(beacon));
@@ -58,7 +57,7 @@ public class Puzzle extends BasePuzzle {
 
 			long noBeaconPositions = 0;
 			for (long x = minX - largestDistance; x <= maxX + largestDistance; x++) {
-				Pair<Long> test = new Pair<Long>(x, answerY);
+				Pair<Long> test = new Pair<>(x, answerY);
 				if (sensorsBeacons.contains(test)) {
 					continue;
 				}
@@ -78,7 +77,7 @@ public class Puzzle extends BasePuzzle {
 		// Part 2 run time, but I'm not sure if there's something programmatically consistent that can be used as a
 		// sort order.
 		List<Pair<Long>> sortedSensors = new ArrayList<>(sensorDistances.keySet());
-		Collections.sort(sortedSensors, new Comparator<Pair<Long>>() {
+		sortedSensors.sort(new Comparator<Pair<Long>>() {
 			@Override
 			public int compare(Pair<Long> o1, Pair<Long> o2) {
 				return (Long.compare(sensorDistances.get(o1), sensorDistances.get(o2)));
@@ -116,25 +115,25 @@ public class Puzzle extends BasePuzzle {
 			x = ringSensor.getX() - ringDistance + i;
 			y = ringSensor.getY() - i;
 			if (isInBounds(x, y)) {
-				tests.add(new Pair<Long>(x, y));
+				tests.add(new Pair<>(x, y));
 			}
 			// Upper right side
 			x = ringSensor.getX() + ringDistance - i;
 			y = ringSensor.getY() - i;
 			if (isInBounds(x, y)) {
-				tests.add(new Pair<Long>(x, y));
+				tests.add(new Pair<>(x, y));
 			}
 			// Lower right side
 			x = ringSensor.getX() + ringDistance - i;
 			y = ringSensor.getY() + i;
 			if (isInBounds(x, y)) {
-				tests.add(new Pair<Long>(x, y));
+				tests.add(new Pair<>(x, y));
 			}
 			// Lower left side
 			x = ringSensor.getX() - ringDistance - i;
 			y = ringSensor.getY() + i;
 			if (isInBounds(x, y)) {
-				tests.add(new Pair<Long>(x, y));
+				tests.add(new Pair<>(x, y));
 			}
 		}
 
@@ -146,7 +145,7 @@ public class Puzzle extends BasePuzzle {
 			boolean outOfRangeOfAllSensors = true;
 			for (Pair<Long> sensor : sensorDistances.keySet()) {
 				long distance = sensorDistances.get(sensor);
-				outOfRangeOfAllSensors = outOfRangeOfAllSensors && sensor.getManhattanDistance(test) > distance;
+				outOfRangeOfAllSensors = outOfRangeOfAllSensors && (sensor.getManhattanDistance(test) > distance);
 				if (!outOfRangeOfAllSensors) {
 					break;
 				}

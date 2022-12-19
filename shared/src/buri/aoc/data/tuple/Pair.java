@@ -49,7 +49,7 @@ public class Pair<T extends Number> extends BaseTuple implements Comparable<Pair
 	/**
 	 * Returns a copy of this pair.
 	 */
-	public Pair copy() {
+	public Pair<T> copy() {
 		return (new Pair(getX(), getY()));
 	}
 

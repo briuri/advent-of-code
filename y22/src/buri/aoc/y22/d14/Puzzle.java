@@ -2,7 +2,6 @@ package buri.aoc.y22.d14;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.Direction;
 import buri.aoc.data.tuple.Pair;
 
 import java.util.ArrayList;
@@ -45,14 +44,14 @@ public class Puzzle extends BasePuzzle {
 					int minY = Math.min(rockStart.getY(), rockEnd.getY());
 					int maxY = Math.max(rockStart.getY(), rockEnd.getY());
 					for (int y = minY; y <= maxY; y++) {
-						grid.put(new Pair<Integer>(rockStart.getX(), y), ROCK);
+						grid.put(new Pair<>(rockStart.getX(), y), ROCK);
 					}
 				}
 				else if (rockStart.getY().equals(rockEnd.getY())) {
 					int minX = Math.min(rockStart.getX(), rockEnd.getX());
 					int maxX = Math.max(rockStart.getX(), rockEnd.getX());
 					for (int x = minX; x <= maxX; x++) {
-						grid.put(new Pair<Integer>(x, rockStart.getY()), ROCK);
+						grid.put(new Pair<>(x, rockStart.getY()), ROCK);
 					}
 				}
 			}
@@ -67,7 +66,7 @@ public class Puzzle extends BasePuzzle {
 		if (part == Part.TWO) {
 			floorLevel = floorLevel + 2;
 			for (int x = START.getX() - floorLevel; x <= START.getX() + floorLevel; x++) {
-				grid.put(new Pair<Integer>(x, floorLevel), ROCK);
+				grid.put(new Pair<>(x, floorLevel), ROCK);
 			}
 		}
 

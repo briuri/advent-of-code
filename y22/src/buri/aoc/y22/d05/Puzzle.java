@@ -33,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 		// Stacks in the list are 0-based, while input file is 1-based.
 		List<Stack<Character>> stacks = new ArrayList<>();
 		for (int i = 0; i < numStacks; i++) {
-			stacks.add(new Stack<Character>());
+			stacks.add(new Stack<>());
 		}
 
 		// Load stacks from the bottom up.

@@ -2,16 +2,13 @@ package buri.aoc.y22.d13;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.y22.d11.Monkey;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.bcel.internal.generic.NOP;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -65,15 +62,15 @@ public class Puzzle extends BasePuzzle {
 
 		// Part 2
 		List<JsonNode> allNodes = new ArrayList<>();
-		for (int i = 0; i < input.size(); i++) {
-			if (input.get(i).length() > 0) {
-				allNodes.add(buildNode(input.get(i)));
+		for (String node : input) {
+			if (node.length() > 0) {
+				allNodes.add(buildNode(node));
 			}
 		}
 		for (String divider : DIVIDERS) {
 			allNodes.add(buildNode(divider));
 		}
-		Collections.sort(allNodes, COMPARATOR);
+		allNodes.sort(COMPARATOR);
 
 		long product = 1;
 		for (int i = 0; i < allNodes.size(); i++) {

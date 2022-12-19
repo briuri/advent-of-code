@@ -5,12 +5,9 @@ import buri.aoc.Part;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Day 07: No Space Left on Device
@@ -28,7 +25,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	public static long getResult(Part part, List<String> input) {
 		File rootDirectory = new File("/");
-		File currentDirectory = null;
+		File currentDirectory = rootDirectory;
 		Set<File> files = new HashSet<>();
 
 		int i = 0;

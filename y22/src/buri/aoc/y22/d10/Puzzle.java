@@ -2,8 +2,6 @@ package buri.aoc.y22.d10;
 
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
-import buri.aoc.data.grid.CharGrid;
-import buri.aoc.data.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;

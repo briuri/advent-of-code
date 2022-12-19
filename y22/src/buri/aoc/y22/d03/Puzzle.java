@@ -29,7 +29,7 @@ public class Puzzle extends BasePuzzle {
 				int half = line.length() / 2;
 				List<String> group = new ArrayList<>();
 				group.add(line.substring(0, half));
-				group.add(line.substring(half, line.length()));
+				group.add(line.substring(half));
 				groups.add(group);
 			}
 		}

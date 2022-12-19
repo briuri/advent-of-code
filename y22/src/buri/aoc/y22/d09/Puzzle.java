@@ -3,7 +3,6 @@ package buri.aoc.y22.d09;
 import buri.aoc.BasePuzzle;
 import buri.aoc.Part;
 import buri.aoc.data.Direction;
-import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.tuple.Pair;
 
 import java.util.ArrayList;

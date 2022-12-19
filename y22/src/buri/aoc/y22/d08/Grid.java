@@ -1,19 +1,12 @@
 package buri.aoc.y22.d08;
 
 import buri.aoc.Part;
-import buri.aoc.data.grid.CharGrid;
 import buri.aoc.data.grid.IntGrid;
-import buri.aoc.data.path.Path;
-import buri.aoc.data.path.Pathfinder;
-import buri.aoc.data.path.StepStrategy;
 import buri.aoc.data.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Data model for the grid of trees.
@@ -25,7 +18,7 @@ public class Grid extends IntGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, Character.getNumericValue(input.get(y).charAt(x)));
