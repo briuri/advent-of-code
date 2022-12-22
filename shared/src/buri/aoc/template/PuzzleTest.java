@@ -17,9 +17,6 @@ public class PuzzleTest extends BaseTest {
 		assertEquals(0L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
 	}
 
-	/**
-	 * Solves the Part 1 puzzle.
-	 */
 	@Test
 	public void testPart1Puzzle() {
 		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
@@ -32,9 +29,6 @@ public class PuzzleTest extends BaseTest {
 		assertEquals(0L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
 	}
 
-	/**
-	 * Solves the Part 2 puzzle.
-	 */
 	@Test
 	public void testPart2Puzzle() {
 		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
