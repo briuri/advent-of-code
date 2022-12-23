@@ -99,7 +99,7 @@ public abstract class BasePuzzle {
 		}
 		StringBuilder builder = new StringBuilder();
 		for (int y = minY; y <= maxY; y++) {
-			for (int x = minX; x < maxX; x++) {
+			for (int x = minX; x <= maxX; x++) {
 				Pair<Integer> point = new Pair<>(x, y);
 				if (grid.contains(point)) {
 					builder.append('■');
