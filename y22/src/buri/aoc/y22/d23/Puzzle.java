@@ -5,8 +5,6 @@ import buri.aoc.Part;
 import buri.aoc.data.tuple.Pair;
 import buri.aoc.data.tuple.Quad;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
