@@ -40,8 +40,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 * No arguments required.
 	 */
 	public static void main(String[] args) throws Exception {
-		final int minutes = 15;
-		final int reps = 96;
+		final int minutes = 30;
+		final int reps = 192;
 		final Leaderboard leaderboard = new Leaderboard();
 		for (int i = 0; i < reps; i++) {
 			if (i > 0) {
