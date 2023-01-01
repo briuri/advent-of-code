@@ -40,8 +40,8 @@ public class Leaderboard extends BaseLeaderboard {
 	 * No arguments required.
 	 */
 	public static void main(String[] args) throws Exception {
-		final int minutes = 30;
-		final int reps = 192;
+		final int minutes = 15;
+		final int reps = 96;
 		final Leaderboard leaderboard = new Leaderboard();
 		for (int i = 0; i < reps; i++) {
 			if (i > 0) {
@@ -116,7 +116,7 @@ public class Leaderboard extends BaseLeaderboard {
 		StringBuilder page = getPage();
 //		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"174\" title=\"Advent of Code 2022\"/>\n");
 		page.append("<div class=\"instructions\">\n");
-//		page.append("<p>The 2022 competition is almost here. See you after hours on November 30, 2022!</p>");
+		page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>");
 //		page.append("\t<h2>Late to the party?</h2>\n");
 //		page.append("\t<ol>\n");
 //		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> (Commercial login).</li>\n");
@@ -124,13 +124,13 @@ public class Leaderboard extends BaseLeaderboard {
 //		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n");
 //		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
 //		page.append("\t</ol>\n");
-		page.append("\t<h2>Scoring FAQ</h2>");
-		page.append("\t<ul>\n");
-		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
-		page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
-		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
-		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
-		page.append("\t</ul>\n");
+//		page.append("\t<h2>Scoring FAQ</h2>");
+//		page.append("\t<ul>\n");
+//		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
+//		page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
+//		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
+//		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
+//		page.append("\t</ul>\n");
 		page.append("</div>\n");
 	}
 
