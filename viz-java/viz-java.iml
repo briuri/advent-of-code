@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/hamcrest-core-1.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.13.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/hamcrest-library-1.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-core-2.13.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/junit-4.11.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.13.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,25 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.9.7.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-core-2.9.7.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.9.7.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/junit-platform-console-standalone-1.9.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
