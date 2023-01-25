@@ -5,6 +5,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.data.intcode.Computer;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Cryostasis
@@ -12,6 +15,13 @@ import buri.aoc.common.data.intcode.Computer;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() throws IOException {
+		String result = Puzzle.getResult(Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("134227456", result);
+	}
 
 	/**
 	 * Part 1:

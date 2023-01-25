@@ -3,6 +3,7 @@ package buri.aoc.y22.d17;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,12 +11,38 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Day 17: Pyroclastic Flow
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(3068L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(3197L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1514285714288L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1568513119571L, result);
+	}
 
 	// Need enough rows in the Part 2 snapshot to show uniqueness.
 	// I tweaked this value until the answer was consistent with the smallest height.

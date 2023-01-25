@@ -8,6 +8,9 @@ import java.util.Set;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 19: Beacon Scanner
@@ -15,6 +18,30 @@ import buri.aoc.common.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(79L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(308L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(3621L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(12124L, result);
+	}
 
 	/**
 	 * Part 1:

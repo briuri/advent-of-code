@@ -8,6 +8,9 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 21: Springdroid Adventure
@@ -15,6 +18,20 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(19360288, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1143814750, result);
+	}
 
 	/**
 	 * Part 1:

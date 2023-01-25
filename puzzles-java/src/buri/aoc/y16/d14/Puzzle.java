@@ -11,13 +11,40 @@ import java.util.regex.Pattern;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 14: One-Time Pad
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(22728, Puzzle.getResult(Part.ONE, "abc"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, "ihaygndm");
+		toConsole(result);
+		assertEquals(15035, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(22551, Puzzle.getResult(Part.TWO, "abc"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, "ihaygndm");
+		toConsole(result);
+		assertEquals(19968, result);
+	}
 
 	private static final Pattern THREES = Pattern.compile("([a-f0-9])\\1{2}");
 
@@ -26,7 +53,7 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Part 1:
 	 * Given the actual salt in your puzzle input, what index produces your 64th one-time pad key?
-	 * 
+	 *
 	 * Part 2:
 	 * Using 2016 extra MD5 calls of key stretching, what index now produces your 64th one-time pad key?
 	 */
@@ -55,7 +82,7 @@ public class Puzzle extends BasePuzzle {
 				for (int i = index + 1; i < index + 1000; i++) {
 					if (!hashes.containsKey(i)) {
 						String current = salt + i;
-						hashes.put(i, getHash(part, digest, current.getBytes()));		
+						hashes.put(i, getHash(part, digest, current.getBytes()));
 					}
 					Pattern pattern = Pattern.compile("(" + repeating + ")\\1{4}");
 					matcher = pattern.matcher(hashes.get(i));

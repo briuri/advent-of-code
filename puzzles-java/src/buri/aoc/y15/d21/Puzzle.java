@@ -8,6 +8,9 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
 import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 21: RPG Simulator 20XX
@@ -15,6 +18,20 @@ import buri.aoc.common.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, new Unit(103, 9, 2, 0));
+		toConsole(result);
+		assertEquals(121, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, new Unit(103, 9, 2, 0));
+		toConsole(result);
+		assertEquals(201, result);
+	}
 
 	// Triple x=gold, y=attack, z=armor
 	private static final List<Triple<Integer>> WEAPONS = new ArrayList<>(); // 1-1 weapons

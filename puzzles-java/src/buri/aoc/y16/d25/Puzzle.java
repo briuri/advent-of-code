@@ -4,6 +4,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Clock Signal
@@ -11,6 +14,13 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(175, result);
+	}
 
 	/**
 	 * Reduced pseudocode:

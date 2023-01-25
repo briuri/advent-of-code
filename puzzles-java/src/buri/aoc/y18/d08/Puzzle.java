@@ -6,6 +6,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 8: Memory Maneuver
@@ -13,6 +16,30 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(138, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(48260, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(66, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(25981, result);
+	}
 
 	/**
 	 * Part 1:

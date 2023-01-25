@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 12: JSAbacusFramework.io
@@ -17,6 +20,20 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(111754, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(65402, result);
+	}
 
 	/**
 	 * Part 1:

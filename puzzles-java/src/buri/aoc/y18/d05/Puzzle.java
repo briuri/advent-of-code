@@ -5,6 +5,9 @@ import java.util.Set;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 5: Alchemical Reduction
@@ -12,6 +15,38 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(10, Puzzle.getResult(Part.ONE, "dabAcCaCBAcCcaDA"));
+	}
+
+	/**
+	 * Real input failed because I wasn't backing index up far enough and it missed "pP".
+	 */
+	@Test
+	public void testEarlyIndexBugCase() {
+		assertEquals(1, Puzzle.getResult(Part.ONE, "pQqGgPz"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(9686, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(4, Puzzle.getResult(Part.TWO, "dabAcCaCBAcCcaDA"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(5524, result);
+	}
 
 	/**
 	 * Part 1:

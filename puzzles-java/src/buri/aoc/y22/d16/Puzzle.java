@@ -2,6 +2,7 @@ package buri.aoc.y22.d16;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,12 +13,38 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Day 16: Proboscidea Volcanium
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(1651L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1796L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1707L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1999L, result);
+	}
 
 	/**
 	 * Part 1:

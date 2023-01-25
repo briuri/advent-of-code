@@ -4,11 +4,14 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 1: No Time for a Taxicab
@@ -16,6 +19,32 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(5, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
+		assertEquals(12, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(307, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(4, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(165, result);
+	}
 
 	/**
 	 * Part 1:

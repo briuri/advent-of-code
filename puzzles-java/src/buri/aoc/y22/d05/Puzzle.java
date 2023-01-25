@@ -2,10 +2,13 @@ package buri.aoc.y22.d05;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 05: Supply Stacks
@@ -13,6 +16,30 @@ import java.util.Stack;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("CMZ", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("HNSNMTLHQ", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals("MCD", Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("RNLFDJMCT", result);
+	}
 
 	/**
 	 * Part 1:

@@ -8,6 +8,10 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Day 10: The Stars Align
@@ -15,6 +19,28 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		// HI
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(1));
+		assertTrue(result.startsWith("■   ■  ■■■\n"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		// PLBPGFRR
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertTrue(result.startsWith("■■■■■   ■       ■■■■■   ■■■■■    ■■■■   ■■■■■■  ■■■■■   ■■■■■ \n"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("10519", result);
+	}
 
 	/**
 	 * Part 1:

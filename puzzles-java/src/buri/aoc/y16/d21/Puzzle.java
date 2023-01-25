@@ -6,6 +6,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 21: Scrambled Letters and Hash
@@ -13,6 +16,25 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("decab", Puzzle.getResult(Part.ONE, Puzzle.getInput(1), "abcde"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), "abcdefgh");
+		toConsole(result);
+		assertEquals("agcebfdh", result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), "fbgdceah");
+		toConsole(result);
+		assertEquals("afhdbegc", result);
+	}
 
 	/**
 	 * Part 1:

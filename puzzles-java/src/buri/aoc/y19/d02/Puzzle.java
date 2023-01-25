@@ -4,6 +4,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.data.intcode.Computer;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 02: 1202 Program Alarm
@@ -11,6 +14,25 @@ import buri.aoc.common.data.intcode.Computer;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(3500L, Puzzle.getPart1Result(Puzzle.getInput(1), true));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getPart1Result(Puzzle.getInput(0), false);
+		toConsole(result);
+		assertEquals(4930687L, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getPart2Result(Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(5335, result);
+	}
 
 	/**
 	 * Part 1:

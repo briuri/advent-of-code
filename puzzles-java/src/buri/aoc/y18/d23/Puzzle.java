@@ -6,6 +6,9 @@ import java.util.List;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 23: Experimental Emergency Teleportation
@@ -13,6 +16,30 @@ import buri.aoc.common.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(7, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(691, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(36, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(126529978, result);
+	}
 
 	/**
 	 * Part 1:

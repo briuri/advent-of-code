@@ -5,6 +5,9 @@ import java.util.List;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 05: Sunny with a Chance of Asteroids
@@ -12,6 +15,25 @@ import buri.aoc.common.data.intcode.Computer;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(15259545L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(999L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(7616021L, result);
+	}
 
 	/**
 	 * Part 1:

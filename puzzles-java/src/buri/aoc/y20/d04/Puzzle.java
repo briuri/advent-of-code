@@ -5,6 +5,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 04: Passport Processing
@@ -12,6 +15,31 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(237, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+//		assertEquals(0, Day04.getResult(Part.TWO, Day04.getInput(2)));
+		assertEquals(4, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(172, result);
+	}
 
 	/**
 	 * Part 1:

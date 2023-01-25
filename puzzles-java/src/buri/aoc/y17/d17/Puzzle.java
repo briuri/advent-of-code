@@ -2,6 +2,9 @@ package buri.aoc.y17.d17;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 17: Spinlock
@@ -9,6 +12,25 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(638, Puzzle.getResult(Part.ONE, 3));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, 359);
+		toConsole(result);
+		assertEquals(1506, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, 359);
+		toConsole(result);
+		assertEquals(39479736, result);
+	}
 
 	/**
 	 * Part 1:

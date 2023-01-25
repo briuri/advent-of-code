@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Stack;
 
 import buri.aoc.common.BasePuzzle;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 23: Amphipod
@@ -13,6 +16,25 @@ import buri.aoc.common.BasePuzzle;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(12521L, Puzzle.getResult(Puzzle.getInput(2)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(18195L, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Puzzle.getInput(1));
+		toConsole(result);
+		assertEquals(50265L, result);
+	}
 
 	/**
 	 * I originally did this puzzle by hand in Google Sheets. I coded up this solution over the next few days.

@@ -5,6 +5,7 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.tuple.Pair;
 import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,12 +13,38 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Day 24: Blizzard Basin
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(18L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(314L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(54L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(896L, result);
+	}
 
 	private static final int MAX_MINUTES = 900;
 

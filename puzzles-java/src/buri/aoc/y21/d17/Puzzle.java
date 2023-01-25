@@ -3,6 +3,9 @@ package buri.aoc.y21.d17;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 17: Trick Shot
@@ -10,6 +13,30 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(45L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(10878L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(112L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1).get(0)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(4716L, result);
+	}
 
 	/**
 	 * Part 1:

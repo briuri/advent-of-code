@@ -5,6 +5,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Combo Breaker
@@ -12,6 +15,18 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(14897079L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 15));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 11900000);
+		toConsole(result);
+		assertEquals(10548634L, result);
+	}
 
 	private static final BigInteger STARTING_VALUE = toBigInt(7);
 	private static final BigInteger MODULUS = toBigInt(20201227);

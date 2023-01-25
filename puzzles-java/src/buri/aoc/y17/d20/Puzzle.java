@@ -8,6 +8,9 @@ import java.util.Map;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 20: Particle Swarm
@@ -15,6 +18,30 @@ import buri.aoc.common.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(0, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(364, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(420, result);
+	}
 
 	private static final Triple<Long> ORIGIN = new Triple(0L, 0L, 0L);
 

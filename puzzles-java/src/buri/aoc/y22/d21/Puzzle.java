@@ -2,6 +2,7 @@ package buri.aoc.y22.d21;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,12 +10,38 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Day 21: Monkey Math
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(152L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(299983725663456L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(301L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(3093175982595L, result);
+	}
 
 	/**
 	 * My original solution for this was to build up equations using Pattern and Matcher to replace names

@@ -5,6 +5,9 @@ import java.util.Set;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Let It Snow
@@ -12,6 +15,13 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(new Pair(2947, 3029));
+		toConsole(result);
+		assertEquals(19980801, result);
+	}
 
 	/**
 	 * Part 1:

@@ -3,22 +3,49 @@ package buri.aoc.y16.d05;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.MD5Hash;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 5: How About a Nice Game of Chess?
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("18f47a30", Puzzle.getResult(Part.ONE, "abc"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, "wtnhxymk");
+		toConsole(result);
+		assertEquals("2414bc77", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals("05ace8e3", Puzzle.getResult(Part.TWO, "abc"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, "wtnhxymk");
+		toConsole(result);
+		assertEquals("437e60fc", result);
+	}
 
 	/**
 	 * The eight-character password for the door is generated one character at a time by finding the MD5 hash of some
 	 * Door ID and an increasing integer index (starting with 0). A hash indicates the next character in the password if
 	 * its hexadecimal representation starts with five zeroes.
-	 * 
+	 *
 	 * Part 1:
 	 * The 6th character in the hash is the next character in the password. What is the password?
-	 * 
+	 *
 	 * Part 2:
 	 * The 6th character is the position (0-7) and the 7th character is that character in the password. Use only the
 	 * first result for each position and ignore invalid positions. What is the password?

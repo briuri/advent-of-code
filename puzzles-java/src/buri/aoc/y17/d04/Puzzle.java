@@ -8,6 +8,9 @@ import java.util.Set;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 4: High-Entropy Passphrases
@@ -15,6 +18,36 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	/**
+	 * Solves the Part 1 puzzle against the real input.
+	 */
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(466, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(3, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
+	}
+
+	/**
+	 * Solves the Part 2 puzzle against the real input.
+	 */
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(251, result);
+	}
 
 	/**
 	 * A passphrase consists of a series of words (lowercase letters) separated by spaces.

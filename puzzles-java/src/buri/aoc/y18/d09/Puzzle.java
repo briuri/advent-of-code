@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 9: Marble Mania
@@ -12,6 +15,30 @@ import buri.aoc.common.BasePuzzle;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(32, Puzzle.getResult(9, 25));
+		assertEquals(8317, Puzzle.getResult(10, 1618));
+		assertEquals(146373, Puzzle.getResult(13, 7999));
+		assertEquals(2764, Puzzle.getResult(17, 1104));
+		assertEquals(54718, Puzzle.getResult(21, 6111));
+		assertEquals(37305, Puzzle.getResult(30, 5807));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(411, 72059);
+		toConsole(result);
+		assertEquals(429943, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(411, 7205900);
+		toConsole(result);
+		assertEquals(3615691746L, result);
+	}
 
 	/**
 	 * Part 1: What is the winning Elf's score?

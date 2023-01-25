@@ -2,8 +2,11 @@ package buri.aoc.y22.d25;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Full of Hot Air
@@ -11,6 +14,24 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testConversion() {
+		assertEquals("1=12=0202-000-=0", Puzzle.toSnafu(19925921840L));
+		assertEquals(19925921840L, Puzzle.toLong("1=12=0202-000-=0"));
+	}
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("2=-1=0", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("2=001=-2=--0212-22-2", result);
+	}
 
 	/**
 	 * Part 1:

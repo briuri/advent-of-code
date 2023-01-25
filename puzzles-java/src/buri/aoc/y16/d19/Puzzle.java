@@ -4,18 +4,45 @@ import java.util.ArrayDeque;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 19: An Elephant Named Joseph
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
+	@Test
+	public void testPart1Examples() {
+		assertEquals(3, Puzzle.getResult(Part.ONE, 5));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, 3005290);
+		toConsole(result);
+		assertEquals(1816277, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(2, Puzzle.getResult(Part.TWO, 5));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, 3005290);
+		toConsole(result);
+		assertEquals(1410967, result);
+	}
+
 	/**
 	 * Part 1:
 	 * With the number of Elves given in your puzzle input, which Elf gets all the presents?
-	 * 
+	 *
 	 * Part 2:
 	 * With the number of Elves given in your puzzle input, which Elf now gets all the presents?
 	 */

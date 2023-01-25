@@ -5,6 +5,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 14: Chocolate Charts
@@ -12,6 +15,36 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("0124515891", Puzzle.getResult(Part.ONE, "5"));
+		assertEquals("5158916779", Puzzle.getResult(Part.ONE, "9"));
+		assertEquals("9251071085", Puzzle.getResult(Part.ONE, "18"));
+		assertEquals("5941429882", Puzzle.getResult(Part.ONE, "2018"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, "652601");
+		toConsole(result);
+		assertEquals("1221283494", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals("5", Puzzle.getResult(Part.TWO, "01245"));
+		assertEquals("9", Puzzle.getResult(Part.TWO, "51589"));
+		assertEquals("18", Puzzle.getResult(Part.TWO, "92510"));
+		assertEquals("2018", Puzzle.getResult(Part.TWO, "59414"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, "652601");
+		toConsole(result);
+		assertEquals("20261485", result);
+	}
 
 	/**
 	 * After all new recipes are added to the scoreboard, each Elf picks a new current recipe. To do this, the Elf steps

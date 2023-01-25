@@ -4,11 +4,14 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 13: Distress Signal
@@ -16,6 +19,30 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(13L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(5588L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(140L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(23958L, result);
+	}
 
 	private static final int IN_ORDER = -1;
 	private static final int NO_DECISION = 0;

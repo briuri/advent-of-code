@@ -12,6 +12,9 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 20: Jurassic Jigsaw
@@ -19,6 +22,31 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(20899048083289L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(21599955909991L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(273L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(2495L, result);
+	}
+
 	private static final int MONSTER_SIZE = 15;
 	private static final int MONSTER_WIDTH = 20;
 	private static final int MONSTER_HEIGHT = 3;

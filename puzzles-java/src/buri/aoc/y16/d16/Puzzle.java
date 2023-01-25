@@ -2,18 +2,53 @@ package buri.aoc.y16.d16;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 16: Dragon Checksum
- * 
+ *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
 
+	@Test
+	public void testPart1GenerateCurve() {
+		assertEquals("100", Puzzle.generateCurve("1", 3));
+		assertEquals("001", Puzzle.generateCurve("0", 3));
+		assertEquals("11111000000", Puzzle.generateCurve("11111", 11));
+		assertEquals("1111000010100101011110000", Puzzle.generateCurve("111100001010", 25));
+	}
+
+	@Test
+	public void testPart1GetChecksum() {
+		assertEquals("100", Puzzle.getChecksum("110010110100"));
+	}
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("01100", Puzzle.getResult(Part.ONE, "10000", 20));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, "11011110011011101", 272);
+		toConsole(result);
+		assertEquals("00000100100001100", result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, "11011110011011101", 35651584);
+		toConsole(result);
+		assertEquals("00011010100010010", result);
+	}
+
 	/**
 	 * Part 1:
 	 * What is the correct checksum?
-	 * 
+	 *
 	 * Part 2:
 	 * The second disk you have to fill has length 35651584. Again using the initial state in your puzzle input, what is
 	 * the correct checksum for this disk?
@@ -25,10 +60,10 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Generates a dragon curve and returns the first segment (up to diskLength).
-	 * 
+	 *
 	 * Start with an appropriate initial state (your puzzle input). Then, so long as you don't have enough data yet to
 	 * fill the disk, repeat the following steps:
-	 * 
+	 *
 	 * - Call the data you have at this point "a".
 	 * - Make a copy of "a"; call this copy "b".
 	 * - Reverse the order of the characters in "b".
@@ -50,11 +85,11 @@ public class Puzzle extends BasePuzzle {
 
 	/**
 	 * Generates a checksum for a string value.
-	 * 
+	 *
 	 * - Consider each non-overlapping pair of characters in the input data.
 	 * - If the two characters match (00 or 11), the next checksum character is a 1.
 	 * - If the characters do not match (01 or 10), the next checksum character is a 0.
-	 * 
+	 *
 	 * This should produce a new string which is exactly half as long as the original. If the length of the checksum is
 	 * even, repeat the process until you end up with a checksum with an odd length.
 	 */

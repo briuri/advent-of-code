@@ -6,6 +6,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 24: Arithmetic Logic Unit
@@ -13,6 +16,20 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(98998519596997L, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(31521119151421L, result);
+	}
 
 	// Unique parts of each digit processing algorithm, extracted from the puzzle input.
 	private final static int[] STEP_5_AMOUNTS = new int[] { 1, 1, 1, 1, 26, 26, 1, 26, 1, 26, 1, 26, 26, 26 };

@@ -3,6 +3,9 @@ package buri.aoc.y18.d11;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Quad;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 11: Chronal Charge
@@ -10,6 +13,32 @@ import buri.aoc.common.data.tuple.Quad;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("33,45", Puzzle.getResult(Part.ONE, 18));
+		assertEquals("21,61", Puzzle.getResult(Part.ONE, 42));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, 7139);
+		toConsole(result);
+		assertEquals("20,62", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals("90,269,16", Puzzle.getResult(Part.TWO, 18));
+		assertEquals("232,251,12", Puzzle.getResult(Part.TWO, 42));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, 7139);
+		toConsole(result);
+		assertEquals("229,61,16", result);
+	}
 
 	/**
 	 * Part 1:

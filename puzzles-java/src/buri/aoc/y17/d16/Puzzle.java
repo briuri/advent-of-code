@@ -6,6 +6,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 16: Permutation Promenade
@@ -13,6 +16,25 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("baedc", Puzzle.getResult(Part.ONE, 5, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, 16, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("jcobhadfnmpkglie", result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, 16, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("pclhmengojfdkaib", result);
+	}
 
 	/**
 	 * Part 1:

@@ -9,6 +9,9 @@ import java.util.Map;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.CharFrequency;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 08: Space Image Format
@@ -16,6 +19,33 @@ import buri.aoc.common.data.CharFrequency;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("1", Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0), 3, 2));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0), 25, 6);
+		toConsole(result);
+		assertEquals("2684", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(" ■\n■ ", Puzzle.getResult(Part.TWO, Puzzle.getInput(2).get(0), 2, 2));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0), 25, 6);
+		toConsole(result);
+		// YGRYZ
+		assertEquals(
+				"■   ■ ■■  ■■■  ■   ■■■■■ \n■   ■■  ■ ■  ■ ■   ■   ■ \n ■ ■ ■    ■  ■  ■ ■   ■  \n  ■  ■ ■■ ■■■    ■   ■   \n  ■  ■  ■ ■ ■    ■  ■    \n  ■   ■■■ ■  ■   ■  ■■■■ ",
+				result);
+	}
 
 	/**
 	 * Part 1:

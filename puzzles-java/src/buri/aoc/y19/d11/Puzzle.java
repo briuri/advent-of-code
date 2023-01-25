@@ -8,6 +8,10 @@ import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Day 11: Space Police
@@ -15,6 +19,21 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("2319", result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		// UERPRFGJ
+		assertTrue(result.startsWith(" ■  ■ ■■■■ ■■■  ■■■  ■■■  ■■■■  ■■    ■■"));
+	}
 
 	private static final char BLACK = '#';
 	private static final char WHITE = '.';

@@ -7,6 +7,9 @@ import java.util.List;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 09: Encoding Error
@@ -14,6 +17,30 @@ import buri.aoc.common.data.Permutations;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(127, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 5));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 25);
+		toConsole(result);
+		assertEquals(1930745883L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(62, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 5));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 25);
+		toConsole(result);
+		assertEquals(268878261L, result);
+	}
 
 	/**
 	 * Part 1:

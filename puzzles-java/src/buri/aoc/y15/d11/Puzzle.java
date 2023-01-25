@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 11: Corporate Policy
@@ -14,6 +17,26 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("abcdffaa", Puzzle.getResult(Part.ONE, "abcdefgh"));
+		assertEquals("ghjaabcc", Puzzle.getResult(Part.ONE, "ghijklmn"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, "hepxcrrq");
+		toConsole(result);
+		assertEquals("hepxxyzz", result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, "hepxxyzz");
+		toConsole(result);
+		assertEquals("heqaabcc", result);
+	}
 
 	private static final Pattern FORBIDDEN_CHARS = Pattern.compile("[iol]");
 	private static final Pattern STRAIGHT = Pattern.compile(

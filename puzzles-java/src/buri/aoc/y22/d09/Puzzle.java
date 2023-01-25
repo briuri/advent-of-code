@@ -4,11 +4,14 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 09: Rope Bridge
@@ -16,6 +19,31 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(13L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(5878L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+		assertEquals(36L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(2405L, result);
+	}
 
 	/**
 	 * Part 1:

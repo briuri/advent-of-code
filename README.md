@@ -1,23 +1,23 @@
 # Advent of Code
 
-This project contains my Advent of Code solutions. I participated in real-time for the 2018-2022 competitions in Java.
+This project contains my Advent of Code solutions. I participated in real-time for the 2018-2022 competitions (in Java).
 I also went back and did 2015-2017 in Java for completeness.
 
 The top-level of the project can be imported as an IntelliJ IDEA project. Solutions are found under 
 `puzzles-<language>/src/` with a package naming convention of `buri.aoc.y<yy>.d<dd>`. Each Day can be run from a JUnit 
-test harness, colocated in the same source folder as the solution (this reduces the overhead of navigating out to 
+test harness, colocated in the day's `Puzzle` class (this reduces the overhead of switching over to a TestCase file in 
 `/src/test/` when competing).
 
-## Test Suite Run Time (Java)
+## Test Suite Run Time
 
-* **2015**: 00:55
-* **2016**: 01:10
-* **2017**: 00:30
-* **2018**: 00:35
-* **2019**: 00:15
-* **2020**: 00:25
-* **2021**: 01:20
-* **2022**: 00:45
+* **2015**: 00:55 (Java)
+* **2016**: 01:10 (Java)
+* **2017**: 00:30 (Java)
+* **2018**: 00:35 (Java)
+* **2019**: 00:15 (Java)
+* **2020**: 00:25 (Java)
+* **2021**: 01:20 (Java)
+* **2022**: 00:45 (Java)
 
 ## Leaderboard Visualization
 

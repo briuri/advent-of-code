@@ -7,6 +7,9 @@ import java.util.List;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.CharFrequency;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Day 04: Secure Container
@@ -14,6 +17,34 @@ import buri.aoc.common.data.CharFrequency;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertTrue(Puzzle.isValidPassword(Part.ONE, "111111"));
+		assertFalse(Puzzle.isValidPassword(Part.ONE, "223450"));
+		assertFalse(Puzzle.isValidPassword(Part.ONE, "123789"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1929, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertTrue(Puzzle.isValidPassword(Part.TWO, "112233"));
+		assertFalse(Puzzle.isValidPassword(Part.TWO, "123444"));
+		assertTrue(Puzzle.isValidPassword(Part.TWO, "111122"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1306, result);
+	}
 
 	/**
 	 * Part 1:

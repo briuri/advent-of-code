@@ -8,6 +8,9 @@ import java.util.Set;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 20: Firewall Rules
@@ -15,6 +18,30 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(3, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 9L));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 4294967295L);
+		toConsole(result);
+		assertEquals(14975795, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(2, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 9L));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 4294967295L);
+		toConsole(result);
+		assertEquals(101, result);
+	}
 
 	/**
 	 * Part 1:

@@ -2,6 +2,9 @@ package buri.aoc.y15.d01;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 1: Not Quite Lisp
@@ -9,6 +12,18 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(74, result);
+	}
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(1795, result);
+	}
 
 	/**
 	 * Part 1:

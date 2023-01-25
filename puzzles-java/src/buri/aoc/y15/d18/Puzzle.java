@@ -4,6 +4,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day Day 18: Like a GIF For Your Yard
@@ -11,6 +14,29 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(4, Puzzle.getResult(Part.ONE, 4, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, 100, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(821, result);
+	}
+	@Test
+	public void testPart2Examples() {
+		assertEquals(17, Puzzle.getResult(Part.TWO, 5, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, 100, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(886, result);
+	}
 
 	/**
 	 * Part 1:

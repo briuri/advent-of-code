@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 21: Fractal Art
@@ -11,6 +14,25 @@ import buri.aoc.common.BasePuzzle;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(12, Puzzle.getResult(Puzzle.getInput(1), 2));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Puzzle.getInput(0), 5);
+		toConsole(result);
+		assertEquals(139, result);
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Puzzle.getInput(0), 18);
+		toConsole(result);
+		assertEquals(1857134, result);
+	}
 
 	/**
 	 * Part 1:

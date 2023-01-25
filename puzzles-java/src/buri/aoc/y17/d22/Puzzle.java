@@ -4,6 +4,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 22: Sporifica Virus
@@ -11,6 +14,32 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(41, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 70));
+		assertEquals(5587, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 10000));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 10000);
+		toConsole(result);
+		assertEquals(5196, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(26, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 100));
+		assertEquals(2511944, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 10000000));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 10000000);
+		toConsole(result);
+		assertEquals(2511633, result);
+	}
 
 	/**
 	 * Part 1:

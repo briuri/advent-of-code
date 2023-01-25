@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Day 7: Some Assembly Required
@@ -14,6 +18,22 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+	@Test
+	public void testPart1Examples() {
+		assertNull(Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("46065", result);
+	}
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("14134", result);
+	}
 
 	private static final Pattern VARIABLE_NAMES = Pattern.compile("[a-z]");
 

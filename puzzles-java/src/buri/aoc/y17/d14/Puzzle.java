@@ -5,6 +5,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 14: Disk Defragmentation
@@ -12,6 +15,30 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(8108, Puzzle.getResult(Part.ONE, "flqrgnkx"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, "jxqlasbh");
+		toConsole(result);
+		assertEquals(8140, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1242, Puzzle.getResult(Part.TWO, "flqrgnkx"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, "jxqlasbh");
+		toConsole(result);
+		assertEquals(1182, result);
+	}
 
 	/**
 	 * Part 1:

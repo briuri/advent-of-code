@@ -11,6 +11,9 @@ import java.util.Set;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 6: Chronal Coordinates
@@ -18,6 +21,30 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(17, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 0));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 0);
+		toConsole(result);
+		assertEquals(3251, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(16, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 32));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 10000);
+		toConsole(result);
+		assertEquals(47841, result);
+	}
 
 	/**
 	 * Part 1:

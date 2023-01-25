@@ -8,6 +8,9 @@ import java.util.Set;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.data.tuple.Quad;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Four-Dimensional Adventure
@@ -15,6 +18,22 @@ import buri.aoc.common.data.tuple.Quad;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(2, Puzzle.getResult(Puzzle.getInput(1)));
+		assertEquals(1, Puzzle.getResult(Puzzle.getInput(2)));
+		assertEquals(4, Puzzle.getResult(Puzzle.getInput(3)));
+		assertEquals(3, Puzzle.getResult(Puzzle.getInput(4)));
+		assertEquals(8, Puzzle.getResult(Puzzle.getInput(5)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(388, result);
+	}
 
 	/**
 	 * Part 1:

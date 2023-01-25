@@ -9,6 +9,9 @@ import java.util.Set;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 22: Reactor Reboot
@@ -16,6 +19,33 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("39", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+		assertEquals("590784", Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
+		assertEquals("474140", Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("582644", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals("2758514936282235", Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
+
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals("1263804707062415", result);
+	}
 
 	/**
 	 * Part 1:

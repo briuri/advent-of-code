@@ -3,10 +3,13 @@ package buri.aoc.y22.d18;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 18: Boiling Boulders
@@ -15,6 +18,31 @@ import java.util.Set;
  */
 public class Puzzle extends BasePuzzle {
 
+	@Test
+	public void testPart1Examples() {
+		assertEquals(10L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+		assertEquals(64L, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(4504L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(10L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+		assertEquals(58L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(2556L, result);
+	}
 
 	/**
 	 * Part 1:

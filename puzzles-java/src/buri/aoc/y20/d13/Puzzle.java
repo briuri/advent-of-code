@@ -6,6 +6,9 @@ import java.util.Map;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 13: Shuttle Search
@@ -13,6 +16,34 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(295, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(2845L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1068781L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+		assertEquals(754018L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
+		assertEquals(779210L, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
+		assertEquals(1261476L, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
+		assertEquals(1202161486L, Puzzle.getResult(Part.TWO, Puzzle.getInput(5)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(487905974205117L, result);
+	}
 
 	/**
 	 * Part 1:

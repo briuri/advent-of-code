@@ -7,6 +7,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 7: The Sum of Its Parts
@@ -14,6 +17,30 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals("CABDFE", Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 1, 0));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 1, 0);
+		toConsole(result);
+		assertEquals("ABGKCMVWYDEHFOPQUILSTNZRJX", result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals("15", Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 2, 0));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 5, 60);
+		toConsole(result);
+		assertEquals("898", result);
+	}
 
 	/**
 	 * Part 1:

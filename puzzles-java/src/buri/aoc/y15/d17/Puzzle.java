@@ -8,6 +8,9 @@ import java.util.Map;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 17: No Such Thing as Too Much
@@ -15,6 +18,29 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(4, Puzzle.getResult(Part.ONE, 25, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, 150, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(1638, result);
+	}
+	@Test
+	public void testPart2Examples() {
+		assertEquals(3, Puzzle.getResult(Part.TWO, 25, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, 150, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(17, result);
+	}
 
 	/**
 	 * Part 1:

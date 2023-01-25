@@ -5,6 +5,9 @@ import java.util.List;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 1: Inverse Captcha
@@ -12,6 +15,37 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(3, Puzzle.getResult(Part.ONE, "1122"));
+		assertEquals(4, Puzzle.getResult(Part.ONE, "1111"));
+		assertEquals(0, Puzzle.getResult(Part.ONE, "1234"));
+		assertEquals(9, Puzzle.getResult(Part.ONE, "91212129"));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(1171, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(6, Puzzle.getResult(Part.TWO, "1212"));
+		assertEquals(0, Puzzle.getResult(Part.TWO, "1221"));
+		assertEquals(4, Puzzle.getResult(Part.TWO, "123425"));
+		assertEquals(12, Puzzle.getResult(Part.TWO, "123123"));
+		assertEquals(4, Puzzle.getResult(Part.TWO, "12131415"));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
+		toConsole(result);
+		assertEquals(1024, result);
+	}
 
 	/**
 	 * The captcha requires you to review a sequence of digits and find the sum of all digits that match another digit

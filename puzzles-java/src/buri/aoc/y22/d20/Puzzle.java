@@ -3,9 +3,12 @@ package buri.aoc.y22.d20;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
 
 import java.util.ArrayDeque;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Day 20: Grove Positioning System
@@ -13,6 +16,30 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
+
+	@Test
+	public void testPart1Examples() {
+		assertEquals(3L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart1Puzzle() {
+		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(14888L, result);
+	}
+
+	@Test
+	public void testPart2Examples() {
+		assertEquals(1623178306L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
+	}
+
+	@Test
+	public void testPart2Puzzle() {
+		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
+		toConsole(result);
+		assertEquals(3760092545849L, result);
+	}
 
 	/**
 	 * Part 1:
