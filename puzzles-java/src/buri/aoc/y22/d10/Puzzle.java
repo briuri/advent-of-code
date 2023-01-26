@@ -7,40 +7,22 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 /**
  * Day 10: Cathode-Ray Tube
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("13140", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("13140", 1, false);
+		assertRun("13680", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("13680", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(1));
-		assertTrue(result.startsWith("■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  "));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		// Visual inspection: PZGPKPEB
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertTrue(result.startsWith("■■■  ■■■■  ■■  ■■■  ■  ■ ■■■  ■■■■ ■■■  "));
+	public void testPart2() {
+		assertRun("■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ", 1, false);
+		// PZGPKPEB
+		assertRun("■■■  ■■■■  ■■  ■■■  ■  ■ ■■■  ■■■■ ■■■  ", 0, true);
 	}
 
 	private static final List<Integer> STRENGTH_CYCLES = new ArrayList<>();
@@ -63,7 +45,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What eight capital letters appear on your CRT?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		int xRegister = 1;
 		int cycle = 1;
 		int signalStrength = 0;

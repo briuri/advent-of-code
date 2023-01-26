@@ -1,14 +1,13 @@
 package buri.aoc.y21.d23;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
-
-import buri.aoc.common.BasePuzzle;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 23: Amphipod
@@ -16,24 +15,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(12521L, Puzzle.getResult(Puzzle.getInput(2)));
+	public void testPart1() {
+		assertRun(12521L, 2, false);
+		assertRun(18195L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(18195L, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Puzzle.getInput(1));
-		toConsole(result);
-		assertEquals(50265L, result);
+	public void testPart2() {
+		assertRun(50265L, 1, true);
 	}
 
 	/**
@@ -50,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 	 * Using the initial configuration from the full diagram, what is the least energy required to organize the
 	 * amphipods?
 	 */
-	public static long getResult(List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Map<State, Long> lowestCosts = new HashMap<>();
 		long lowestEnd = Long.MAX_VALUE;
 

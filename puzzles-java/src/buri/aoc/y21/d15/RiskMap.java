@@ -1,10 +1,10 @@
 package buri.aoc.y21.d15;
 
-import java.util.List;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.List;
 
 /**
  * Data model for the risk map.

@@ -1,14 +1,12 @@
 package buri.aoc.y20.d03;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 03: Toboggan Trajectory
@@ -16,29 +14,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(7, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(7L, 1, false);
+		assertRun(167L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(167, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(336, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(736527114, result);
+	public void testPart2() {
+		assertRun(336L, 1, false);
+		assertRun(736527114L, 0, true);
 	}
 
 	private static final char TREE = '#';
@@ -51,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What do you get if you multiply together the number of trees encountered on each of the listed slopes?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
 		for (int y = 0; y < grid.getHeight(); y++) {
 			for (int x = 0; x < grid.getWidth(); x++) {

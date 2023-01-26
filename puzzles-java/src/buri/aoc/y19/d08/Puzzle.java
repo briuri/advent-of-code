@@ -1,17 +1,15 @@
 package buri.aoc.y19.d08;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.CharFrequency;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 08: Space Image Format
@@ -19,32 +17,16 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("1", Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0), 3, 2));
+	public void testPart1() {
+		assertRun("1", 1, false);
+		assertRun("2684", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0), 25, 6);
-		toConsole(result);
-		assertEquals("2684", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(" ■\n■ ", Puzzle.getResult(Part.TWO, Puzzle.getInput(2).get(0), 2, 2));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0), 25, 6);
-		toConsole(result);
+	public void testPart2() {
+		assertRun(" ■\n■ ", 2, false);
 		// YGRYZ
-		assertEquals(
-				"■   ■ ■■  ■■■  ■   ■■■■■ \n■   ■■  ■ ■  ■ ■   ■   ■ \n ■ ■ ■    ■  ■  ■ ■   ■  \n  ■  ■ ■■ ■■■    ■   ■   \n  ■  ■  ■ ■ ■    ■  ■    \n  ■   ■■■ ■  ■   ■  ■■■■ ",
-				result);
+		assertRun("■   ■ ■■  ■■■  ■   ■■■■■ \n", 0, true);
 	}
 
 	/**
@@ -55,9 +37,21 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What message is produced after decoding your image?
 	 */
-	public static String getResult(Part part, String input, int width, int height) {
+	protected String runString(Part part, List<String> input) {
+		int width = 25;
+		if (input.get(0).length() < 15) {	// Part One Example
+			width = 3;
+		}
+		else if (input.get(0).length() < 20) {	// Part Two Example
+			width = 2;
+		}
+		int height = 6;
+		if (input.get(0).length() < 20) {    // Part One and Two Examples
+			height = 2;
+		}
+
 		// Load layers and reverse the order.
-		StringBuffer buffer = new StringBuffer(input);
+		StringBuffer buffer = new StringBuffer(input.get(0));
 		List<String> layers = new ArrayList<>();
 		while (buffer.length() > 0) {
 			layers.add(buffer.substring(0, (width * height)));

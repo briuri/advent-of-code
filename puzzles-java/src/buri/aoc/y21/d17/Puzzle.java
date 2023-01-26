@@ -5,7 +5,7 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 17: Trick Shot
@@ -13,29 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(45L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0)));
+	public void testPart1() {
+		assertRun(45L, 1, false);
+		assertRun(10878L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(10878L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(112L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1).get(0)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(4716L, result);
+	public void testPart2() {
+		assertRun(112L, 1, false);
+		assertRun(4716L, 0, true);
 	}
 
 	/**
@@ -45,8 +31,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many distinct initial velocity values cause the probe to be within the target area after any step?
 	 */
-	public static long getResult(Part part, String input) {
-		String[] tokens = input.split(": ")[1].split(", ");
+	protected long runLong(Part part, List<String> input) {
+		String[] tokens = input.get(0).split(": ")[1].split(", ");
 		String[] x = tokens[0].substring(2).split("\\.\\.");
 		String[] y = tokens[1].substring(2).split("\\.\\.");
 		int targetMinX = Integer.valueOf(x[0]);

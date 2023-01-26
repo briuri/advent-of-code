@@ -6,38 +6,22 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 22: Monkey Map
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(6032L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(6032L, 1, false);
+		assertRun(155060L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(155060L, result);
-	}
-
+	public void testPart2() {
 // My solution was hardcoded to the real input.
-//	@Test
-//	public void testPart2Examples() {
-//		assertEquals(5031L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-//	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3479L, result);
+//		assertRun(5031L, 1, false);
+		assertRun(3479L, 0, true);
 	}
 
 	/**
@@ -47,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the final password?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Grid grid = new Grid(input);
 		grid.run(part, input.get(input.size() - 1));
 		return (grid.getValue());

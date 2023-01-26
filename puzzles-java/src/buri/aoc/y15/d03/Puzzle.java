@@ -7,7 +7,7 @@ import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 3: Perfectly Spherical Houses in a Vacuum
@@ -16,16 +16,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class Puzzle extends BasePuzzle {
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(2565, result);
+	public void testPart1() {
+		assertRun(2565L, 0, true);
 	}
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(2639, result);
+	public void testPart2() {
+		assertRun(2639L, 0, true);
 	}
 
 	/**
@@ -35,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * This year, how many houses receive at least one present?
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
 		IntGrid grid = new IntGrid(new Pair(500, 500));
 		Pair<Integer> santa = grid.getCenterPosition();
 		Pair<Integer> robosanta = grid.getCenterPosition();
@@ -43,8 +39,8 @@ public class Puzzle extends BasePuzzle {
 		grid.set(robosanta, grid.get(santa) + 1);
 
 		// Process directions.
-		for (int i = 0; i < input.length(); i++) {
-			Direction direction = Direction.getDirectionFor(input.charAt(i));
+		for (int i = 0; i < input.get(0).length(); i++) {
+			Direction direction = Direction.getDirectionFor(input.get(0).charAt(i));
 			Pair<Integer> active;
 			if (part == Part.ONE) {
 				active = santa;

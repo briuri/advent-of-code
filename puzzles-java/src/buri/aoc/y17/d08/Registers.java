@@ -1,10 +1,10 @@
 package buri.aoc.y17.d08;
 
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.registers.NamedRegisters;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Representation of the string-named registers containing integer values. Initialized at 0.

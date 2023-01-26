@@ -1,15 +1,13 @@
 package buri.aoc.y17.d06;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 6: Memory Reallocation
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(5, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(5L, 1, false);
+		assertRun(12841L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(12841, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(8038, result);
+	public void testPart2() {
+		assertRun(4L, 1, false);
+		assertRun(8038L, 0, true);
 	}
 
 	/**
@@ -49,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many cycles are in the infinite loop that arises from the configuration in your puzzle input?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String[] rawIntegers = input.get(0).split("\t");
 		List<Integer> banks = convertStringsToInts(Arrays.asList(rawIntegers));
 

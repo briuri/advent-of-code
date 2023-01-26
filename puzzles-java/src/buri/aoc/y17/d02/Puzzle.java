@@ -1,15 +1,13 @@
 package buri.aoc.y17.d02;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 2: Corruption Checksum
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(18, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(18L, 1, false);
+		assertRun(47136L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(47136, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(9, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(250, result);
+	public void testPart2() {
+		assertRun(9L, 2, false);
+		assertRun(250L, 0, true);
 	}
 
 	/**
@@ -51,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the checksum for the spreadsheet, using the dividend of the only two divisible numbers in each row?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<List<Integer>> spreadsheet = new ArrayList<>();
 		for (String line : input) {
 			List<Integer> row = convertStringsToInts(Arrays.asList(line.split("\t")));

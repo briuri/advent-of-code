@@ -1,12 +1,10 @@
 package buri.aoc.y18.d24;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 24: Immune System Simulator 20XX
@@ -14,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(5216, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(5216L, 1, false);
+		assertRun(26343L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(26343, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(51, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(5549, result);
+	public void testPart2() {
+		assertRun(51L, 1, false);
+		assertRun(5549L, 0, true);
 	}
 
 	/**
@@ -46,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many units does the immune system have left after getting the smallest boost it needs to win?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			Battle battle = new Battle(0, input);
 			battle.fight();

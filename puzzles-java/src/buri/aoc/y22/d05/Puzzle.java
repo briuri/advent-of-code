@@ -8,37 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 05: Supply Stacks
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("CMZ", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("CMZ", 1, false);
+		assertRun("HNSNMTLHQ", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("HNSNMTLHQ", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("MCD", Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("RNLFDJMCT", result);
+	public void testPart2() {
+		assertRun("MCD", 1, false);
+		assertRun("RNLFDJMCT", 0, true);
 	}
 
 	/**
@@ -48,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * After the rearrangement procedure completes, what crate ends up on top of each stack?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		// Isolate stacks in input file.
 		int stackNumberLine = 0;
 		while (input.get(stackNumberLine + 1).length() > 0) {

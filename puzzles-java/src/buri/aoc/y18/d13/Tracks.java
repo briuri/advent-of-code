@@ -1,12 +1,12 @@
 package buri.aoc.y18.d13;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Tracks consist of straight paths (| and -), curves (/ and \), and intersections (+). Curves connect exactly two

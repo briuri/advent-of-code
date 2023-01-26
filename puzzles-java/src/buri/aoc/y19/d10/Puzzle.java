@@ -1,17 +1,15 @@
 package buri.aoc.y19.d10;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 10: Monitoring Station
@@ -19,33 +17,19 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(8, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(33, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(35, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
-		assertEquals(41, Puzzle.getResult(Part.ONE, Puzzle.getInput(4)));
-		assertEquals(210, Puzzle.getResult(Part.ONE, Puzzle.getInput(5)));
+	public void testPart1() {
+		assertRun(8L, 1, false);
+		assertRun(33L, 2, false);
+		assertRun(35L, 3, false);
+		assertRun(41L, 4, false);
+		assertRun(210L, 5, false);
+		assertRun(230L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(230, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(802, Puzzle.getResult(Part.TWO, Puzzle.getInput(5)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1205, result);
+	public void testPart2() {
+		assertRun(802L, 5, false);
+		assertRun(1205L, 0, true);
 	}
 
 	/**
@@ -56,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * The Elves are placing bets on which will be the 200th asteroid to be vaporized. Win the bet by determining which
 	 * asteroid that will be; what do you get if you multiply its X coordinate by 100 and then add its Y coordinate?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Set<Pair> asteroids = new HashSet<>();
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);

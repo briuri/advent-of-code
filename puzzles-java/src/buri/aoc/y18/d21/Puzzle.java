@@ -1,13 +1,11 @@
 package buri.aoc.y18.d21;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 21: Chronal Conversion
@@ -15,19 +13,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(16311888, result);
+	public void testPart1() {
+		assertRun(16311888L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1413889, result);
+	public void testPart2() {
+		assertRun(1413889L, 0, true);
 	}
 
 	/**
@@ -77,7 +69,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the lowest non-negative integer value for register 0 that causes the program to halt after executing the
 	 * most instructions?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String ipRegister = input.remove(0);
 
 		/**

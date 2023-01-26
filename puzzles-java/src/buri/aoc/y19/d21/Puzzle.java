@@ -1,8 +1,5 @@
 package buri.aoc.y19.d21;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
@@ -10,7 +7,8 @@ import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 21: Springdroid Adventure
@@ -18,19 +16,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(19360288, result);
+	public void testPart1() {
+		assertRun(19360288L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1143814750, result);
+	public void testPart2() {
+		assertRun(1143814750L, 0, true);
 	}
 
 	/**
@@ -40,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What amount of hull damage does the springdroid now report?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Jump if a hole is in A, B, or C, but only if D is ground.
 		// J = (!A || !B || !C) && D
 		String[] springscript1 = new String[] { "NOT A J", // J = !A

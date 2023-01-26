@@ -1,16 +1,14 @@
 package buri.aoc.y15.d24;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 24: It Hangs in the Balance
@@ -18,28 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(99, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(10723906903L, result);
+	public void testPart1() {
+		assertRun(99L, 1, false);
+		assertRun(10723906903L, 0, true);
 	}
 	@Test
-	public void testPart2Examples() {
-		assertEquals(44, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(74850409, result);
+	public void testPart2() {
+		assertRun(44L, 1, false);
+		assertRun(74850409L, 0, true);
 	}
 
 	/**
@@ -50,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Balance the sleigh again, but this time, separate the packages into four groups instead of three. The other
 	 * constraints still apply.
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Integer> weights = new ArrayList<>();
 		for (String line : input) {
 			weights.add(Integer.valueOf(line));

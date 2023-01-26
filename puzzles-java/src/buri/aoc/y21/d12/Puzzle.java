@@ -1,5 +1,9 @@
 package buri.aoc.y21.d12;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,45 +11,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 12: Passage Pathing
  *
  * @author Brian Uri!
  */
-public class Puzzle extends BasePuzzle {
-
-	@Test
-	public void testPart1Examples() {
-		assertEquals(10L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(19L, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(226L, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
+public class Puzzle extends BasePuzzle {	@Test
+	public void testPart1() {
+		assertRun(10L, 1, false);
+		assertRun(19L, 2, false);
+		assertRun(226L, 3, false);
+		assertRun(3000L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3000L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(36L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-		assertEquals(103L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-		assertEquals(3509L, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(74222L, result);
+	public void testPart2() {
+		assertRun(36L, 1, false);
+		assertRun(103L, 2, false);
+		assertRun(3509L, 3, false);
+		assertRun(74222L, 0, true);
 	}
 
 	/**
@@ -55,7 +38,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Given these new rules, how many paths through this cave system are there?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Map<String, Cave> caves = new HashMap<>();
 		for (String line : input) {
 			String tokens[] = line.split("-");

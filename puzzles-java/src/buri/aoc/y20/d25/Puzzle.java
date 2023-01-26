@@ -1,13 +1,11 @@
 package buri.aoc.y20.d25;
 
-import java.math.BigInteger;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.math.BigInteger;
+import java.util.List;
 
 /**
  * Day 25: Combo Breaker
@@ -15,17 +13,10 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(14897079L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 15));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 11900000);
-		toConsole(result);
-		assertEquals(10548634L, result);
+	public void testPart1() {
+		assertRun(14897079L, 1, false);
+		assertRun(10548634L, 0, true);
 	}
 
 	private static final BigInteger STARTING_VALUE = toBigInt(7);
@@ -35,9 +26,11 @@ public class Puzzle extends BasePuzzle {
 	 * Part 1:
 	 * What encryption key is the handshake trying to establish?
 	 */
-	public static long getResult(Part part, List<String> input, long upperBound) {
+	protected long runLong(Part part, List<String> input) {
 		long cardPki = Long.valueOf(input.get(0));
 		long doorPki = Long.valueOf(input.get(1));
+		// Set a bounds based on the input data to speed up execution.
+		long upperBound = (cardPki == 5764801L ? 15L : 11900000L);
 
 		// Naive method
 //		long cardStart = STARTING_VALUE.longValue();

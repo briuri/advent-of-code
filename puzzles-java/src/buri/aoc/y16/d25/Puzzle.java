@@ -1,12 +1,10 @@
 package buri.aoc.y16.d25;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 25: Clock Signal
@@ -14,12 +12,9 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(175, result);
+	public void testPart1() {
+		assertRun(175L, 0, true);
 	}
 
 	/**
@@ -52,7 +47,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the lowest positive integer that can be used to initialize register a and cause the code to output a
 	 * clock signal of 0, 1, 0, 1... repeating forever?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int target = 7 * 365;
 		int n = 1;
 		while (n < target) {

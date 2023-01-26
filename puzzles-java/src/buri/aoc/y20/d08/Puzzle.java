@@ -1,15 +1,13 @@
 package buri.aoc.y20.d08;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 08: Handheld Halting
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(5, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(5L, 1, false);
+		assertRun(2025L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2025, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(8, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2001, result);
+	public void testPart2() {
+		assertRun(8L, 1, false);
+		assertRun(2001L, 0, true);
 	}
 
 	/**
@@ -49,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the value of the accumulator after the program terminates?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Instruction> instructions = new ArrayList<>();
 		for (String line : input) {
 			instructions.add(new Instruction(line));

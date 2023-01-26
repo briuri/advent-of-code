@@ -1,15 +1,13 @@
 package buri.aoc.y21.d10;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Day 10: Syntax Scoring
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(26397L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(26397L, 1, false);
+		assertRun(442131L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(442131L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(288957L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3646451424L, result);
+	public void testPart2() {
+		assertRun(288957L, 1, false);
+		assertRun(3646451424L, 0, true);
 	}
 
 	/**
@@ -49,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the middle score?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		long corruptScore = 0;
 		List<Long> incompleteScores = new ArrayList<>();
 		for (String line : input) {

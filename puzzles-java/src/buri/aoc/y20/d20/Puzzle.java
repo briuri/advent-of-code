@@ -1,12 +1,5 @@
 package buri.aoc.y20.d20;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
@@ -14,7 +7,12 @@ import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Day 20: Jurassic Jigsaw
@@ -22,29 +20,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(20899048083289L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(20899048083289L, 1, false);
+		assertRun(21599955909991L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(21599955909991L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(273L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2495L, result);
+	public void testPart2() {
+		assertRun(273L, 1, false);
+		assertRun(2495L, 0, true);
 	}
 
 	private static final int MONSTER_SIZE = 15;
@@ -58,7 +42,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many # are not part of a sea monster?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Tile> tiles = new ArrayList<>();
 		for (int i = 0; i < input.size(); i++) {
 			if (input.get(i).indexOf("Tile") != -1) {

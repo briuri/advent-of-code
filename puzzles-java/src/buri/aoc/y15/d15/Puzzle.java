@@ -1,12 +1,10 @@
 package buri.aoc.y15.d15;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 15: Science for Hungry People
@@ -14,19 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(18965440, result);
+	public void testPart1() {
+		assertRun(18965440L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(15862900, result);
+	public void testPart2() {
+		assertRun(15862900L, 0, true);
 	}
 
 	/**
@@ -37,7 +29,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the total score of the highest-scoring cookie you can make with a calorie total of 500?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int[][] ing = new int[4][5];
 		ing[0] = new int[] { 4, -2, 0, 0, 5 };
 		ing[1] = new int[] { 0, 5, -1, 0, 8 };

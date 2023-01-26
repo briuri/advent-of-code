@@ -1,5 +1,11 @@
 package buri.aoc.y19.d18;
 
+import buri.aoc.common.data.grid.CharGrid;
+import buri.aoc.common.data.path.Path;
+import buri.aoc.common.data.path.Pathfinder;
+import buri.aoc.common.data.path.StepStrategy;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,12 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import buri.aoc.common.data.grid.CharGrid;
-import buri.aoc.common.data.path.Path;
-import buri.aoc.common.data.path.Pathfinder;
-import buri.aoc.common.data.path.StepStrategy;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Grid for the vault.
@@ -163,7 +163,7 @@ public class Vault extends CharGrid {
 				int interimSteps = route.getSteps() + explore(stepCache, newKeys, end);
 				possibleSteps.put(end, interimSteps);
 			}
-			Map.Entry<Character, Integer> minimum = Puzzle.getMin(possibleSteps);
+			Map.Entry<Character, Integer> minimum = new Puzzle().getMin(possibleSteps);
 			steps = minimum.getValue();
 		}
 		stepCache.put(cacheKey, steps);

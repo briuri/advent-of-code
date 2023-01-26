@@ -12,37 +12,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 14: Regolith Reservoir
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(24L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(24L, 1, false);
+		assertRun(655L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(655L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(93L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(26484L, result);
+	public void testPart2() {
+		assertRun(93L, 1, false);
+		assertRun(26484L, 0, true);
 	}
 
 	private static final Pair<Integer> START = new Pair<>(500, 0);
@@ -58,7 +42,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many units of sand come to rest?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Eliminate duplicate lines in the walls.
 		Set<String> uniqueInput = new HashSet<>(input);
 		Map<Pair<Integer>, Character> grid = new HashMap<>();

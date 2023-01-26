@@ -1,5 +1,9 @@
 package buri.aoc.y16.d14;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -9,41 +13,19 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 14: One-Time Pad
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(22728, Puzzle.getResult(Part.ONE, "abc"));
+	public void testPart1() {
+		assertRun(15035L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, "ihaygndm");
-		toConsole(result);
-		assertEquals(15035, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(22551, Puzzle.getResult(Part.TWO, "abc"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, "ihaygndm");
-		toConsole(result);
-		assertEquals(19968, result);
+	public void testPart2() {
+		assertRun(19968L, 0, true);
 	}
 
 	private static final Pattern THREES = Pattern.compile("([a-f0-9])\\1{2}");
@@ -57,7 +39,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Using 2016 extra MD5 calls of key stretching, what index now produces your 64th one-time pad key?
 	 */
-	public static int getResult(Part part, String salt) {
+	protected long runLong(Part part, List<String> input) {
+		String salt = input.get(0);
 		// Using our MD5Hash class is too slow for this puzzle.
 		MessageDigest digest;
 		try {

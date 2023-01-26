@@ -5,7 +5,7 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 13: A Maze of Twisty Little Cubicles
@@ -13,24 +13,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(11, Puzzle.getResult(Part.ONE, 10, new Pair(7, 4)));
+	public void testPart1() {
+		assertRun(90L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, 1352, new Pair(31, 39));
-		toConsole(result);
-		assertEquals(90, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, 1352, new Pair(31, 39));
-		toConsole(result);
-		assertEquals(135, result);
+	public void testPart2() {
+		assertRun(135L, 0, true);
 	}
 
 	/**
@@ -41,7 +30,9 @@ public class Puzzle extends BasePuzzle {
 	 * How many locations (distinct x,y coordinates, including your starting location) can you reach in at most 50
 	 * steps?
 	 */
-	public static int getResult(Part part, int magicNumber, Pair destination) {
+	protected long runLong(Part part, List<String> input) {
+		int magicNumber = Integer.parseInt(input.get(0));
+		Pair<Integer> destination = new Pair(31, 39);
 		Grid grid = new Grid(magicNumber);
 		if (part == Part.ONE) {
 			return (grid.getStepsTo(destination));

@@ -1,14 +1,14 @@
 package buri.aoc.y16.d02;
 
-import java.util.List;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
 
+import java.util.List;
+
 /**
  * Data model for keypad.
- * 
+ *
  * @author Brian Uri!
  */
 public class Keypad extends IntGrid {
@@ -17,7 +17,7 @@ public class Keypad extends IntGrid {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * Models both layouts of keypad in a 7x7 grid (0 represents an edge). Both layouts start at the "5" button.
 	 */
 	public Keypad(Part part) {

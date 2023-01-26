@@ -1,16 +1,14 @@
 package buri.aoc.y21.d20;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 20: Trench Map
@@ -18,29 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(35L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(35L, 1, false);
+		assertRun(5663L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(5663L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(3351L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(19638L, result);
+	public void testPart2() {
+		assertRun(3351L, 1, false);
+		assertRun(19638L, 0, true);
 	}
 
 	private static final char LIT = '#';
@@ -52,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many pixels are lit in the resulting image? (50 times)
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String algorithm = input.get(0);
 		input = input.subList(2, input.size());
 		Map<Pair<Integer>, Integer> image = new HashMap<>();

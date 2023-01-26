@@ -10,37 +10,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 07: No Space Left on Device
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(95437L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(95437L, 1, false);
+		assertRun(1644735L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1644735L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(24933642L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1300850L, result);
+	public void testPart2() {
+		assertRun(24933642L, 1, false);
+		assertRun(1300850L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the total size of that directory?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		File rootDirectory = new File("/");
 		File currentDirectory = rootDirectory;
 		Set<File> files = new HashSet<>();

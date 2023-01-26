@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 10: Elves Look, Elves Say
@@ -12,19 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, "1113222113");
-		toConsole(result);
-		assertEquals(252594, result);
+	public void testPart1() {
+		assertRun(252594L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, "1113222113");
-		toConsole(result);
-		assertEquals(3579328, result);
+	public void testPart2() {
+		assertRun(3579328L, 0, true);
 	}
 
 	/**
@@ -35,14 +29,15 @@ public class Puzzle extends BasePuzzle {
 	 * Now, starting again with the digits in your puzzle input, apply this process 50 times. What is the length of the
 	 * new result?
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
+		String string = input.get(0);
 		int times = (part == Part.ONE ? 40 : 50);
 		for (int i = 0; i < times; i++) {
 			StringBuilder builder = new StringBuilder();
 			int lookCount = 0;
 			char currentChar = ' ';
-			for (int index = 0; index < input.length(); index++) {
-				char value = input.charAt(index);
+			for (int index = 0; index < string.length(); index++) {
+				char value = string.charAt(index);
 				if (value == currentChar) {
 					lookCount++;
 				}
@@ -55,8 +50,8 @@ public class Puzzle extends BasePuzzle {
 				}
 			}
 			builder.append(lookCount).append(currentChar);
-			input = builder.toString();
+			string = builder.toString();
 		}
-		return (input.length());
+		return (string.length());
 	}
 }

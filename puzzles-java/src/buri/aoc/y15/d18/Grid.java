@@ -1,10 +1,10 @@
 package buri.aoc.y15.d18;
 
-import java.util.List;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.List;
 
 /**
  * @author Brian Uri!

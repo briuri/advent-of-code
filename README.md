@@ -11,13 +11,13 @@ test harness, colocated in the day's `Puzzle` class (this reduces the overhead o
 ## Test Suite Run Time
 
 * **2015**: 00:55 (Java)
-* **2016**: 01:10 (Java)
+* **2016**: 01:00 (Java)
 * **2017**: 00:30 (Java)
-* **2018**: 00:35 (Java)
+* **2018**: 00:40 (Java)
 * **2019**: 00:15 (Java)
 * **2020**: 00:25 (Java)
 * **2021**: 01:20 (Java)
-* **2022**: 00:45 (Java)
+* **2022**: 00:40 (Java)
 
 ## Leaderboard Visualization
 

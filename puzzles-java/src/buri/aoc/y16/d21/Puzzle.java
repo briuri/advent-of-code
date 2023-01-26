@@ -1,14 +1,12 @@
 package buri.aoc.y16.d21;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 21: Scrambled Letters and Hash
@@ -16,24 +14,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("decab", Puzzle.getResult(Part.ONE, Puzzle.getInput(1), "abcde"));
+	public void testPart1() {
+		assertRun("agcebfdh", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), "abcdefgh");
-		toConsole(result);
-		assertEquals("agcebfdh", result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), "fbgdceah");
-		toConsole(result);
-		assertEquals("afhdbegc", result);
+	public void testPart2() {
+		assertRun("afhdbegc", 0, true);
 	}
 
 	/**
@@ -43,7 +30,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the un-scrambled version of the scrambled password fbgdceah?
 	 */
-	public static String getResult(Part part, List<String> input, String password) {
+	protected String runString(Part part, List<String> input) {
+		String password = (part == Part.ONE ? "abcdefgh" : "fbgdceah");
 		List<Character> letters = new ArrayList<>();
 		for (int i = 0; i < password.length(); i++) {
 			letters.add(password.charAt(i));

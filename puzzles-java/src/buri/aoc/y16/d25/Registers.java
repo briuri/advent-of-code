@@ -1,12 +1,12 @@
 package buri.aoc.y16.d25;
 
-import java.util.List;
-
 import buri.aoc.common.data.registers.NamedRegisters;
+
+import java.util.List;
 
 /**
  * Data class for the assembunny registers.
- * 
+ *
  * @author Brian Uri!
  */
 public class Registers extends NamedRegisters {

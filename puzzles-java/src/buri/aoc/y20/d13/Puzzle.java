@@ -1,14 +1,12 @@
 package buri.aoc.y20.d13;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 13: Shuttle Search
@@ -16,33 +14,19 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(295, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(295L, 1, false);
+		assertRun(2845L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2845L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1068781L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-		assertEquals(754018L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-		assertEquals(779210L, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
-		assertEquals(1261476L, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
-		assertEquals(1202161486L, Puzzle.getResult(Part.TWO, Puzzle.getInput(5)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(487905974205117L, result);
+	public void testPart2() {
+		assertRun(1068781L, 1, false);
+		assertRun(754018L, 2, false);
+		assertRun(779210L, 3, false);
+		assertRun(1261476L, 4, false);
+		assertRun(1202161486L, 5, false);
+		assertRun(487905974205117L, 0, true);
 	}
 
 	/**
@@ -54,7 +38,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the earliest timestamp such that all of the listed bus IDs depart at offsets matching their positions in
 	 * the list?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String[] tokens = input.get(1).split(",");
 		Map<Integer, Integer> indexesToIds = new HashMap<>();
 		for (int i = 0; i < tokens.length; i++) {

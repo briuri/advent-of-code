@@ -13,37 +13,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 19: Not Enough Minerals
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(33L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(33L, 1, false);
+		assertRun(1613L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1613L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(3472L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(46816L, result);
+	public void testPart2() {
+		assertRun(3472L, 1, false);
+		assertRun(46816L, 0, true);
 	}
 
 	/**
@@ -53,7 +37,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What do you get if you multiply these numbers together?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Blueprint> prints = new ArrayList<>();
 		if (part == Part.TWO) {
 			input = input.subList(0, Math.min(3, input.size()));
@@ -86,9 +70,7 @@ public class Puzzle extends BasePuzzle {
 				// I had to tweak the meaning of "close" to find a value that worked in both parts.
 				int threshold = 2;
 				int maxGeodesSoFar = 0;
-				int minute = 0;
 				for (State state : frontier) {
-					minute = state.getMinute();
 					maxGeodesSoFar = Math.max(maxGeodesSoFar, state.getGeodesCollected());
 				}
 				if (maxGeodesSoFar > threshold) {

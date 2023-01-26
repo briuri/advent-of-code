@@ -1,14 +1,12 @@
 package buri.aoc.y21.d14;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 14: Extended Polymerization
@@ -16,29 +14,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(1588L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(1588L, 1, false);
+		assertRun(4244L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(4244L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(2188189693529L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(4807056953866L, result);
+	public void testPart2() {
+		assertRun(2188189693529L, 1, false);
+		assertRun(4807056953866L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * (40 rounds) What do you get if you take the quantity of the most common element and subtract the quantity of the
 	 * least common element?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String firstElement = "";
 		String lastElement = "";
 		Map<String, Long> pairCounts = new HashMap<>();

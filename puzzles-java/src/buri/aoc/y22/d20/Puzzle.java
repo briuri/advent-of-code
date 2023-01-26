@@ -8,37 +8,21 @@ import org.junit.Test;
 import java.util.ArrayDeque;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 20: Grove Positioning System
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(3L, 1, false);
+		assertRun(14888L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(14888L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1623178306L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3760092545849L, result);
+	public void testPart2() {
+		assertRun(1623178306L, 1, false);
+		assertRun(3760092545849L, 0, true);
 	}
 
 	/**
@@ -48,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the sum of the three numbers that form the grove coordinates?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		final long DECRYPTION_KEY = (part == Part.ONE ? 1 : 811589153);
 		final int NUM_MIXES = (part == Part.ONE ? 1 : 10);
 

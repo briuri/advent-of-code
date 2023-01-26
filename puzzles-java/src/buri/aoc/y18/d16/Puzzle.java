@@ -1,12 +1,10 @@
 package buri.aoc.y18.d16;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 16: Chronal Classification
@@ -14,24 +12,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(1, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(1L, 1, false);
+		assertRun(592L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(592, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(2));
-		toConsole(result);
-		assertEquals(557, result);
+	public void testPart2() {
+		assertRun(557L, 2, true);
 	}
 
 	/**
@@ -43,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What value is contained in register 0 after executing the test program?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			int count = 0;
 			for (int i = 0; i < input.size(); i = i + 4) {

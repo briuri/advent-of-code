@@ -1,12 +1,10 @@
 package buri.aoc.y20.d01;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 01: Report Repair
@@ -14,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(514579, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(514579L, 1, false);
+		assertRun(138379L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(138379, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(241861950, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(85491920, result);
+	public void testPart2() {
+		assertRun(241861950L, 1, false);
+		assertRun(85491920L, 0, true);
 	}
 
 	/**
@@ -46,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * In your expense report, what is the product of the three entries that sum to 2020?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Integer> values = convertStringsToInts(input);
 		final int target = 2020;
 		for (int i = 0; i < input.size(); i++) {

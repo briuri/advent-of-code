@@ -1,11 +1,5 @@
 package buri.aoc.y19.d20;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.path.Path;
@@ -13,6 +7,12 @@ import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
 import buri.aoc.common.data.tuple.Triple;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Grid for the recursive maze.

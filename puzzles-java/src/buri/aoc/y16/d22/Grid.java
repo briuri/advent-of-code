@@ -1,10 +1,10 @@
 package buri.aoc.y16.d22;
 
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * @author Brian Uri!

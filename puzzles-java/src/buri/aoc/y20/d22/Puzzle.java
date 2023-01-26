@@ -1,16 +1,14 @@
 package buri.aoc.y20.d22;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 22: Crab Combat
@@ -18,29 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(306, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(306L, 1, false);
+		assertRun(33631L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(33631L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(291L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(33469L, result);
+	public void testPart2() {
+		assertRun(291L, 1, false);
+		assertRun(33469L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the winning player's score?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<ArrayDeque<Integer>> decks = new ArrayList<>();
 		for (String line : input) {
 			ArrayDeque<Integer> deck = new ArrayDeque<>();

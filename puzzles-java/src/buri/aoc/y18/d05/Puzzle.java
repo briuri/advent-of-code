@@ -1,13 +1,12 @@
 package buri.aoc.y18.d05;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 5: Alchemical Reduction
@@ -15,37 +14,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(10, Puzzle.getResult(Part.ONE, "dabAcCaCBAcCcaDA"));
+	public void testPart1() {
+		assertRun(10L, 1, false);
+		assertRun(9686L, 0, true);
 	}
-
-	/**
-	 * Real input failed because I wasn't backing index up far enough and it missed "pP".
-	 */
 	@Test
-	public void testEarlyIndexBugCase() {
-		assertEquals(1, Puzzle.getResult(Part.ONE, "pQqGgPz"));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(9686, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4, Puzzle.getResult(Part.TWO, "dabAcCaCBAcCcaDA"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(5524, result);
+	public void testPart2() {
+		assertRun(4L, 1, false);
+		assertRun(5524L, 0, true);
 	}
 
 	/**
@@ -59,8 +36,8 @@ public class Puzzle extends BasePuzzle {
 	 * you can produce by removing all units of exactly one type and fully reacting the result?
 	 *
 	 */
-	public static int getResult(Part part, String input) {
-		String newPolymer = reactPolymer(input);
+	protected long runLong(Part part, List<String> input) {
+		String newPolymer = reactPolymer(input.get(0));
 		if (part == Part.ONE) {
 			return (newPolymer.length());
 		}

@@ -1,16 +1,16 @@
 package buri.aoc.y18.d15;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.path.Path;
 import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * You scan the area, generating a map of the walls (#), open cavern (.), and starting position of every Goblin (G) and

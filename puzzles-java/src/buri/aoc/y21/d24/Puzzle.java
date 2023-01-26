@@ -1,14 +1,12 @@
 package buri.aoc.y21.d24;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 24: Arithmetic Logic Unit
@@ -16,19 +14,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(98998519596997L, result);
+	public void testPart1() {
+		assertRun(98998519596997L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(31521119151421L, result);
+	public void testPart2() {
+		assertRun(31521119151421L, 0, true);
 	}
 
 	// Unique parts of each digit processing algorithm, extracted from the puzzle input.
@@ -49,7 +41,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the smallest model number accepted by MONAD?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Long> numbers = new ArrayList<>();
 		for (String number : getValidNumbers(1, 0)) {
 			numbers.add(Long.valueOf(number));

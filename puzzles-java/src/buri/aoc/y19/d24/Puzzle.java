@@ -1,5 +1,10 @@
 package buri.aoc.y19.d24;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import buri.aoc.common.data.tuple.Triple;
+import org.junit.Test;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,37 +12,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import buri.aoc.common.data.tuple.Triple;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 24: Planet of Discord
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(2129920, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(2129920L, 1, false);
+		assertRun(18842609L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(18842609, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2059, result);
+	public void testPart2() {
+		assertRun(2059L, 0, true);
 	}
 
 	private static final char BUG = '#';
@@ -50,7 +38,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Starting with your scan, how many bugs are present after 200 minutes?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Set<Triple<Integer>> bugs = getBugs(input);
 		if (part == Part.ONE) {
 			Set<String> snapshots = new HashSet<>();

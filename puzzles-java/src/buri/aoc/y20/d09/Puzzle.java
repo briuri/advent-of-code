@@ -1,15 +1,13 @@
 package buri.aoc.y20.d09;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 09: Encoding Error
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(127, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 5));
+	public void testPart1() {
+		assertRun(127L, 1, false);
+		assertRun(1930745883L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 25);
-		toConsole(result);
-		assertEquals(1930745883L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(62, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 5));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 25);
-		toConsole(result);
-		assertEquals(268878261L, result);
+	public void testPart2() {
+		assertRun(62L, 1, false);
+		assertRun(268878261L, 0, true);
 	}
 
 	/**
@@ -49,7 +33,9 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the encryption weakness in your XMAS-encrypted list of numbers?
 	 */
-	public static long getResult(Part part, List<String> input, int preambleSize) {
+	protected long runLong(Part part, List<String> input) {
+		// Example has size 5, real input has 25.
+		int preambleSize = (input.size() > 20 ? 25 : 5);
 		List<Long> values = convertStringsToLongs(input);
 		long target = 0;
 		for (int i = preambleSize; i < input.size(); i++) {

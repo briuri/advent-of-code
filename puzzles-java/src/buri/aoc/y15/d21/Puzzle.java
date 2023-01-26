@@ -1,16 +1,14 @@
 package buri.aoc.y15.d21;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
 import buri.aoc.common.data.tuple.Triple;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 21: RPG Simulator 20XX
@@ -18,19 +16,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, new Unit(103, 9, 2, 0));
-		toConsole(result);
-		assertEquals(121, result);
+	public void testPart1() {
+		assertRun(121L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, new Unit(103, 9, 2, 0));
-		toConsole(result);
-		assertEquals(201, result);
+	public void testPart2() {
+		assertRun(201L, 0, true);
 	}
 
 	// Triple x=gold, y=attack, z=armor
@@ -68,7 +60,13 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the most amount of gold you can spend and still lose the fight?
 	 */
-	public static int getResult(Part part, Unit bossTemplate) {
+	protected long runLong(Part part, List<String> input) {
+		Unit bossTemplate = new Unit(
+				Integer.parseInt(input.get(0).split(": ")[1]),
+				Integer.parseInt(input.get(1).split(": ")[1]),
+				Integer.parseInt(input.get(2).split(": ")[1]),
+				0
+		);
 		int minGold = Integer.MAX_VALUE;
 		int maxGold = Integer.MIN_VALUE;
 		Set<List<Integer>> ringPermutations = getRingPermutations();

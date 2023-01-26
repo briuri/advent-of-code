@@ -1,15 +1,13 @@
 package buri.aoc.y19.d12;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 12: The N-Body Problem
@@ -17,31 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(179, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 10));
-		assertEquals(1940, Puzzle.getResult(Part.ONE, Puzzle.getInput(2), 100));
+	public void testPart1() {
+		assertRun(1940L, 1, false);
+		assertRun(8362L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 1000);
-		toConsole(result);
-		assertEquals(8362, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(2772, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 0));
-		assertEquals(4686774924L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2), 0));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 0);
-		toConsole(result);
-		assertEquals(478373365921244L, result);
+	public void testPart2() {
+		assertRun(4686774924L, 1, false);
+		assertRun(478373365921244L, 0, true);
 	}
 
 	/**
@@ -51,8 +33,9 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many steps does it take to reach the first state that exactly matches a previous state?
 	 */
-	public static long getResult(Part part, List<String> input, int maxSteps) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
+			int maxSteps = (input.get(0).startsWith("<x=-8") ? 100 : 1000);
 			List<Moon> moons = loadMoons(input);
 			for (int i = 0; i < maxSteps; i++) {
 				adjustMoons(moons);

@@ -1,15 +1,13 @@
 package buri.aoc.y15.d16;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 16: Aunt Sue
@@ -17,19 +15,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(40, result);
+	public void testPart1() {
+		assertRun(40L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(241, result);
+	public void testPart2() {
+		assertRun(241L, 0, true);
 	}
 
 	/**
@@ -39,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the number of the real Aunt Sue?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Map<String, Integer>> sues = new ArrayList<>();
 		for (String line : input) {
 			Map<String, Integer> sue = new HashMap<>();

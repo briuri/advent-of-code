@@ -1,16 +1,14 @@
 package buri.aoc.y17.d24;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 24: Electromagnetic Moat
@@ -18,29 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(31, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(31L, 1, false);
+		assertRun(2006L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2006, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(19, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1994, result);
+	public void testPart2() {
+		assertRun(19L, 1, false);
+		assertRun(1994L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the strength of the longest bridge you can make?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		PieceBag bag = new PieceBag(input);
 		List<Piece> bridge = new ArrayList<>();
 		Map<Integer, List<Integer>> lengthsToScores = new HashMap<>();

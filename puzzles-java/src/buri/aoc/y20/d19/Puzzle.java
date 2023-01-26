@@ -1,15 +1,13 @@
 package buri.aoc.y20.d19;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 19: Monster Messages
@@ -17,30 +15,16 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(2L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(2L, 1, false);
+		assertRun(3L, 2, false);
+		assertRun(216L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(216L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(3L, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(12L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(400L, result);
+	public void testPart2() {
+		assertRun(12L, 2, false);
+		assertRun(400L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * After updating rules 8 and 11, how many messages completely match rule 0?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Load data
 		Map<Integer, Rule> rules = new HashMap<>();
 		List<String> messages = new ArrayList<>();

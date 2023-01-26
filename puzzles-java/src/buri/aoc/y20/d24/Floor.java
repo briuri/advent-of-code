@@ -1,13 +1,13 @@
 package buri.aoc.y20.d24;
 
+import buri.aoc.common.data.tuple.Triple;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import buri.aoc.common.data.tuple.Triple;
 
 /**
  * Data model for a hex grid floor. Each tile can be white (0) or black (1).

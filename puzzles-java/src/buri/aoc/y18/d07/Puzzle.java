@@ -1,15 +1,13 @@
 package buri.aoc.y18.d07;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Day 7: The Sum of Its Parts
@@ -17,29 +15,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("CABDFE", Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 1, 0));
+	public void testPart1() {
+		assertRun("CABDFE", 1, false);
+		assertRun("ABGKCMVWYDEHFOPQUILSTNZRJX", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 1, 0);
-		toConsole(result);
-		assertEquals("ABGKCMVWYDEHFOPQUILSTNZRJX", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("15", Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 2, 0));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 5, 60);
-		toConsole(result);
-		assertEquals("898", result);
+	public void testPart2() {
+		assertRun("898", 0, true);
 	}
 
 	/**
@@ -53,7 +36,9 @@ public class Puzzle extends BasePuzzle {
 	 * With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the
 	 * steps?
 	 */
-	public static String getResult(Part part, List<String> input, int workers, int baseTime) {
+	protected String runString(Part part, List<String> input) {
+		int workers = (part == Part.ONE ? 1 : 5);
+		int baseTime = (part == Part.ONE ? 0 : 60);
 		Steps steps = new Steps(input, baseTime);
 		List<Step> nextSteps = steps.getStarts();
 		List<Step> runningSteps = new ArrayList<>();

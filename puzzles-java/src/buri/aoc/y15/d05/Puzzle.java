@@ -1,14 +1,12 @@
 package buri.aoc.y15.d05;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Day 5: Doesn't He Have Intern-Elves For This?
@@ -17,24 +15,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class Puzzle extends BasePuzzle {
 	@Test
-	public void testPart1Examples() {
-		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(2L, 1, false);
+		assertRun(238L, 0, true);
 	}
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(238, result);
-	}
-	@Test
-	public void testPart2Examples() {
-		assertEquals(2, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(69, result);
+	public void testPart2() {
+		assertRun(2L, 2, false);
+		assertRun(69L, 0, true);
 	}
 
 	private static final Pattern REPEATING_CHAR = Pattern.compile("(\\w)\\1+");
@@ -55,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many strings are nice under these new rules?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int nice = 0;
 		if (part == Part.ONE) {
 			for (String string : input) {

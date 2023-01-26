@@ -1,13 +1,11 @@
 package buri.aoc.y17.d11;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 11: Hex Ed
@@ -15,27 +13,17 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(0, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
-		assertEquals(3, Puzzle.getResult(Part.ONE, Puzzle.getInput(4)));
+	public void testPart1() {
+		assertRun(3L, 1, false);
+		assertRun(0L, 2, false);
+		assertRun(2L, 3, false);
+		assertRun(3L, 4, false);
+		assertRun(877L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(877, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1622, result);
+	public void testPart2() {
+		assertRun(1622L, 0, true);
 	}
 
 	/**
@@ -48,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many steps away is the furthest he ever got from his starting position?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<String> data = new ArrayList<>();
 		for (String rawData : input.get(0).split(",")) {
 			data.add(rawData);

@@ -1,14 +1,14 @@
 package buri.aoc.y19.d16;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,10 +18,23 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
+	@Test
+	public void testPart1() {
+		assertRun("24176176", 1, false);
+		assertRun("73745418", 2, false);
+		assertRun("52432133", 3, false);
+		assertRun("82435530", 0, true);
+	}
+	@Test
+	public void testPart2() {
+		assertRun("84462026", 4, false);
+		assertRun("78725270", 5, false);
+		assertRun("53553731", 6, false);
+		assertRun("83036156", 0, true);
+	}
 	@Test
 	public void testPatternGeneration() {
-		List<Integer> pattern = Puzzle.getPattern(0, 8);
+		List<Integer> pattern = new Puzzle().getPattern(0, 8);
 		assertEquals(1, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(-1, (int) pattern.get(2));
@@ -30,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(-1, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(1, 8);
+		pattern = new Puzzle().getPattern(1, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(1, (int) pattern.get(1));
 		assertEquals(1, (int) pattern.get(2));
@@ -39,7 +52,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(-1, (int) pattern.get(5));
 		assertEquals(-1, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(2, 8);
+		pattern = new Puzzle().getPattern(2, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(1, (int) pattern.get(2));
@@ -48,7 +61,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(0, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(3, 8);
+		pattern = new Puzzle().getPattern(3, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -57,7 +70,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(1, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(4, 8);
+		pattern = new Puzzle().getPattern(4, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -66,7 +79,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(1, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(5, 8);
+		pattern = new Puzzle().getPattern(5, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -75,7 +88,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(1, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(6, 8);
+		pattern = new Puzzle().getPattern(6, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -84,7 +97,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-		pattern = Puzzle.getPattern(7, 8);
+		pattern = new Puzzle().getPattern(7, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -93,35 +106,6 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(0, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-	}
-
-	@Test
-	public void testPart1Examples() {
-		assertEquals("01029498", Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 4));
-		assertEquals("24176176", Puzzle.getResult(Part.ONE, Puzzle.getInput(2), 100));
-		assertEquals("73745418", Puzzle.getResult(Part.ONE, Puzzle.getInput(3), 100));
-		assertEquals("52432133", Puzzle.getResult(Part.ONE, Puzzle.getInput(4), 100));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 100);
-		toConsole(result);
-		assertEquals("82435530", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("84462026", Puzzle.getResult(Part.TWO, Puzzle.getInput(5), 100));
-		assertEquals("78725270", Puzzle.getResult(Part.TWO, Puzzle.getInput(6), 100));
-		assertEquals("53553731", Puzzle.getResult(Part.TWO, Puzzle.getInput(7), 100));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 100);
-		toConsole(result);
-		assertEquals("83036156", result);
 	}
 
 	private static final int[] BASE_PATTERN = new int[] { 0, 1, 0, -1 };
@@ -135,7 +119,8 @@ public class Puzzle extends BasePuzzle {
 	 * After repeating your input signal 10000 times and running 100 phases of FFT, what is the eight-digit message
 	 * embedded in the final output list?
 	 */
-	public static String getResult(Part part, List<String> input, int phases) {
+	protected String runString(Part part, List<String> input) {
+		final int phases = 100;
 		List<Integer> values = new ArrayList<>();
 		for (Character value : input.get(0).toCharArray()) {
 			values.add(Character.getNumericValue(value));

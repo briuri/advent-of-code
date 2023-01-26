@@ -1,15 +1,15 @@
 package buri.aoc.common.template;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.path.Path;
 import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Data model for WHAT.

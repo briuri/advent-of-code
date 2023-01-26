@@ -1,12 +1,10 @@
 package buri.aoc.y21.d09;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 09: Smoke Basin
@@ -14,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(15L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(15L, 1, false);
+		assertRun(468L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(468L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1134L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1280496L, result);
+	public void testPart2() {
+		assertRun(1134L, 1, false);
+		assertRun(1280496L, 0, true);
 	}
 
 	/**
@@ -46,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What do you get if you multiply together the sizes of the three largest basins?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		HeightMap grid = new HeightMap(input);
 		if (part == Part.ONE) {
 			return (grid.getRisk());

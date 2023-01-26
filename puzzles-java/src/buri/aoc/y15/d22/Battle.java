@@ -1,5 +1,8 @@
 package buri.aoc.y15.d22;
 
+import buri.aoc.common.Part;
+import buri.aoc.y15.d22.Effect.Type;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,9 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import buri.aoc.common.Part;
-import buri.aoc.y15.d22.Effect.Type;
 
 /**
  * @author Brian Uri!
@@ -20,8 +20,8 @@ public class Battle {
 	private int _playerMana = 500;
 	private int _playerManaUsed = 0;
 	private int _playerArmor = 0;
-	private int _bossHealth = 55;
-	private int _bossAttack = 8;
+	private int _bossHealth;
+	private int _bossAttack;
 	private Part _part;
 
 	private static final Map<String, Integer> SPELLS = new HashMap<>();
@@ -39,9 +39,11 @@ public class Battle {
 	/**
 	 * Constructor
 	 */
-	public Battle(Part part) {
+	public Battle(Part part, int bossHealth, int bossDamage) {
 		_effects = new ArrayList<>();
 		_part = part;
+		_bossHealth = bossHealth;
+		_bossAttack = bossDamage;
 	}
 
 	/**

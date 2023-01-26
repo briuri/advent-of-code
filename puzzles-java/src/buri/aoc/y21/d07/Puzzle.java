@@ -1,14 +1,12 @@
 package buri.aoc.y21.d07;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 07: The Treachery of Whales
@@ -16,29 +14,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(37L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(37L, 1, false);
+		assertRun(326132L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(326132L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(168L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(88612508L, result);
+	public void testPart2() {
+		assertRun(168L, 1, false);
+		assertRun(88612508L, 0, true);
 	}
 
 	/**
@@ -48,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How much fuel must they spend to align to that position?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String[] stringInts = input.get(0).split(",");
 		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
 

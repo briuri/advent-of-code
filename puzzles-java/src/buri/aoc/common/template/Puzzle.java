@@ -1,12 +1,10 @@
 package buri.aoc.common.template;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 00: TITLE
@@ -14,39 +12,21 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(0L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(1L, 1, false);
+		assertRun(1L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(0L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(0L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(0L, result);
+	public void testPart2() {
+		assertRun(1L, 1, false);
+		assertRun(1L, 0, true);
 	}
 
 	/**
-	 * Part 1:
-	 * QUESTION
-	 *
-	 * Part 2:
-	 * QUESTION
+	 * Runs a part of the puzzle.
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 // all integers on first line
 //		input = Arrays.asList(input.get(0).split(" "));
 // 1 integer per line
@@ -58,7 +38,6 @@ public class Puzzle extends BasePuzzle {
 //		 }
 // Grid
 //		Grid grid = new Grid(input);
-
 
 		long sum = 0;
 		for (String line : input) {

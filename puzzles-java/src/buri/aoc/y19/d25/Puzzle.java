@@ -1,13 +1,12 @@
 package buri.aoc.y19.d25;
 
-import java.io.IOException;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Day 25: Cryostasis
@@ -15,19 +14,16 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() throws IOException {
-		String result = Puzzle.getResult(Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("134227456", result);
+	public void testPart1() throws IOException {
+		assertRun("134227456", 0, true);
 	}
 
 	/**
 	 * Part 1:
 	 * Look around the ship and see if you can find the password for the main airlock.
 	 */
-	public static String getResult(List<String> input) throws IOException {
+	protected String runString(Part part, List<String> input) {
 		Computer computer = new Computer(input);
 		// Replaced my input loop with automated commands after I beat the puzzle.
 		String[] walkthrough = new String[] {

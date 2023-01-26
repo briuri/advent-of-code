@@ -1,15 +1,13 @@
 package buri.aoc.y20.d17;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Quad;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 17: Conway Cubes
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(112, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(112L, 1, false);
+		assertRun(223L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(223, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(848, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1884, result);
+	public void testPart2() {
+		assertRun(848L, 1, false);
+		assertRun(1884L, 0, true);
 	}
 
 	/**
@@ -49,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many cubes are left in the active state after the sixth cycle?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Set<Quad> activeCubes = new HashSet<>();
 		for (int y = 0; y < input.size(); y++) {
 			for (int x = 0; x < input.get(0).length(); x++) {

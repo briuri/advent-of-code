@@ -1,12 +1,10 @@
 package buri.aoc.y17.d23;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 23: Coprocessor Conflagration
@@ -14,19 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3025, result);
+	public void testPart1() {
+		assertRun(3025L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(915, result);
+	public void testPart2() {
+		assertRun(915L, 0, true);
 	}
 
 	/**
@@ -36,7 +28,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * a=1, If the program were to run to completion, what value would be left in register h?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			Registers registers = new Registers(input);
 			registers.process();

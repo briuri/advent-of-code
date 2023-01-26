@@ -1,13 +1,11 @@
 package buri.aoc.y19.d15;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 15: Oxygen System
@@ -15,19 +13,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(280, result);
+	public void testPart1() {
+		assertRun(280L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(400, result);
+	public void testPart2() {
+		assertRun(400L, 0, true);
 	}
 
 	/**
@@ -38,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Use the repair droid to get a complete map of the area. How many minutes will it take to fill with oxygen?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Maze maze = new Maze();
 		Computer droid = new Computer(input);
 		maze.explore(droid);

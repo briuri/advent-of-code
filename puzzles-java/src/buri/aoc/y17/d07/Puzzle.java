@@ -1,16 +1,14 @@
 package buri.aoc.y17.d07;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 7: Recursive Circus
@@ -18,24 +16,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Example() {
-		assertEquals("tknk", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("tknk", 1, false);
+		assertRun("svugo", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("svugo", result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("1152", result);
+	public void testPart2() {
+		assertRun("1152", 0, true);
 	}
 
 	/**
@@ -54,7 +42,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Given that exactly one program is the wrong weight, what would its weight need to be to balance the entire tower?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		Map<String, Program> programs = new HashMap<>();
 		for (String line : input) {
 			Program program = new Program(line);

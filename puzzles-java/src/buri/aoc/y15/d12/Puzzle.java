@@ -1,18 +1,16 @@
 package buri.aoc.y15.d12;
 
-import java.io.IOException;
-import java.util.Iterator;
-
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Day 12: JSAbacusFramework.io
@@ -20,19 +18,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(111754, result);
+	public void testPart1() {
+		assertRun(111754L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(65402, result);
+	public void testPart2() {
+		assertRun(65402L, 0, true);
 	}
 
 	/**
@@ -43,11 +35,11 @@ public class Puzzle extends BasePuzzle {
 	 * Ignore any object (and all of its children) which has any property with the value "red". Do this only for objects
 	 * ({...}), not arrays ([...]).
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
 		JsonNode root;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			root = mapper.readTree(input);
+			root = mapper.readTree(input.get(0));
 		}
 		catch (IOException e) {
 			throw new IllegalArgumentException("Invalid file.", e);

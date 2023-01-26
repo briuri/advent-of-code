@@ -1,14 +1,12 @@
 package buri.aoc.y19.d19;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 19: Tractor Beam
@@ -16,19 +14,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(203, result);
+	public void testPart1() {
+		assertRun(203L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(8771057, result);
+	public void testPart2() {
+		assertRun(8771057L, 0, true);
 	}
 
 	/**
@@ -39,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * What value do you get if you take that point's X coordinate, multiply it by 10000, then add the point's Y
 	 * coordinate?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			long sum = 0;
 			for (long y = 0; y < 50; y++) {

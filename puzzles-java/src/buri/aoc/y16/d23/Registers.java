@@ -1,12 +1,12 @@
 package buri.aoc.y16.d23;
 
-import java.util.List;
-
 import buri.aoc.common.data.registers.NamedRegisters;
+
+import java.util.List;
 
 /**
  * Data class for the assembunny registers.
- * 
+ *
  * @author Brian Uri!
  */
 public class Registers extends NamedRegisters {
@@ -30,7 +30,7 @@ public class Registers extends NamedRegisters {
 		for (int i = 0; i < input.size(); i++) {
 			String[] code = input.get(i).split(" ");
 			String opcode = code[0];
-			
+
 			// New instruction to optimize Part 2
 			if (opcode.equals("mul")) {
 				System.out.println(String.format("%d\treg[%s] = reg[%s] * reg[%s]", i, code[3], code[1], code[2]));
@@ -109,16 +109,16 @@ public class Registers extends NamedRegisters {
 
 	/**
 	 * Toggles an instruction for future processing.
-	 * 
+	 *
 	 * For one-argument instructions, inc becomes dec, and all other one-argument instructions become inc.
 	 * For two-argument instructions, jnz becomes cpy, and all other two-instructions become jnz.
-	 * 
+	 *
 	 * If an attempt is made to toggle an instruction outside the program, nothing happens.
 	 * If toggling produces an invalid instruction (like cpy 1 2) and an attempt is later made to execute that
 	 * instruction, skip it instead.
 	 * If tgl toggles itself (for example, if a is 0, tgl a would target itself and become inc a), the resulting
 	 * instruction is not executed until the next time it is reached.
-	 * 
+	 *
 	 */
 	private void toggle(int jump) {
 		int instruction = getCurrent() + jump;

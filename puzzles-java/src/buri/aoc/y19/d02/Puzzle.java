@@ -1,12 +1,11 @@
 package buri.aoc.y19.d02;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 02: 1202 Program Alarm
@@ -14,41 +13,32 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3500L, Puzzle.getPart1Result(Puzzle.getInput(1), true));
+	public void testPart1() {
+		assertRun(3500L, 1, false);
+		assertRun(4930687L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getPart1Result(Puzzle.getInput(0), false);
-		toConsole(result);
-		assertEquals(4930687L, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getPart2Result(Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(5335, result);
+	public void testPart2() {
+		assertRun(5335L, 0, true);
 	}
 
 	/**
 	 * Part 1:
 	 * What value is left at position 0 after the program halts?
-	 */
-	public static long getPart1Result(List<String> input, boolean isExample) {
-		Computer computer = isExample ? new Computer(input) : new Computer(input, 12L, 2L);
-		computer.run();
-		return (computer.get(0));
-	}
-
-	/**
+	 *
 	 * Part 2:
 	 * Find the input noun and verb that cause the program to produce the output 19690720. What is 100 * noun + verb?
 	 */
-	public static long getPart2Result(List<String> input) {
+	public long runLong(Part part, List<String> input) {
+		if (part == Part.ONE) {
+			boolean isExample = input.get(0).length() < 40;
+			Computer computer = isExample ? new Computer(input) : new Computer(input, 12L, 2L);
+			computer.run();
+			return (computer.get(0));
+		}
+
+		// Part Two
 		for (long noun = 0; noun < 100; noun++) {
 			for (long verb = 0; verb < 100; verb++) {
 				Computer computer = new Computer(input, noun, verb);

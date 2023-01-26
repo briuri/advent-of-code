@@ -1,9 +1,9 @@
 package buri.aoc.y21.d11;
 
-import java.util.List;
-
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.List;
 
 /**
  * Data model for a grid of octopuses.

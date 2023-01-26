@@ -1,14 +1,14 @@
 package buri.aoc.common.data.path;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.data.tuple.BaseTuple;
 import buri.aoc.common.data.tuple.Pair;
 import buri.aoc.common.data.tuple.Quad;
 import buri.aoc.common.data.tuple.Triple;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A start-to-end ordered path between two tuples, built from a breadth-first search.

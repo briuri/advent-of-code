@@ -1,12 +1,10 @@
 package buri.aoc.y21.d18;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 18: Snailfish
@@ -14,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(4140L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(4140L, 1, false);
+		assertRun(4641L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(4641L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(3993L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(4624L, result);
+	public void testPart2() {
+		assertRun(3993L, 1, false);
+		assertRun(4624L, 0, true);
 	}
 
 	/**
@@ -46,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the largest magnitude of any sum of two different snailfish numbers from the homework assignment?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Number finalSum = new Number(input.get(0), null);
 		for (int i = 1; i < input.size(); i++) {
 			finalSum = new Number(finalSum, new Number(input.get(i), null));

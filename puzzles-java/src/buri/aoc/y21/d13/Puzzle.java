@@ -1,19 +1,16 @@
 package buri.aoc.y21.d13;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 13: Transparent Origami
@@ -21,25 +18,15 @@ import static org.junit.Assert.assertTrue;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("17", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("17", 1, false);
+		assertRun("729", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("729", result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertTrue(result.startsWith("■■■   ■■  ■■■■ ■    ■■■  ■  ■ ■■■■ ■■■"));
+	public void testPart2() {
 		// RGZLBHFP
+		assertRun("■■■   ■■  ■■■■ ■    ■■■  ■  ■ ■■■■ ■■■", 0, true);
 	}
 
 	/**
@@ -49,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What code do you use to activate the infrared thermal imaging camera system?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		Set<Pair<Integer>> dots = new HashSet<>();
 		List<String> folds = new ArrayList<>();
 		boolean atFolds = false;

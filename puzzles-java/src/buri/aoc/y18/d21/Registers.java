@@ -1,8 +1,8 @@
 package buri.aoc.y18.d21;
 
-import java.util.List;
-
 import buri.aoc.common.data.registers.IndexedRegisters;
+
+import java.util.List;
 
 /**
  * Representation of the registers based on logic from Day 16 and 19.

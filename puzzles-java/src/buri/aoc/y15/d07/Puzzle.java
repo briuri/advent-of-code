@@ -1,16 +1,13 @@
 package buri.aoc.y15.d07;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Day 7: Some Assembly Required
@@ -19,20 +16,12 @@ import static org.junit.Assert.assertNull;
  */
 public class Puzzle extends BasePuzzle {
 	@Test
-	public void testPart1Examples() {
-		assertNull(Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("46065", 0, true);
 	}
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("46065", result);
-	}
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("14134", result);
+	public void testPart2() {
+		assertRun("14134", 0, true);
 	}
 
 	private static final Pattern VARIABLE_NAMES = Pattern.compile("[a-z]");
@@ -46,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Now, take the signal you got on wire a, override wire b to that signal, and reset the other wires (including wire
 	 * a). What new signal is ultimately provided to wire a?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		// Build a map of inputs and outputs, using output as key.
 		Map<String, String> io = new HashMap<>();
 		for (String line : input) {

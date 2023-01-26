@@ -1,9 +1,9 @@
 package buri.aoc.y21.d19;
 
+import buri.aoc.common.data.tuple.Triple;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import buri.aoc.common.data.tuple.Triple;
 
 /**
  * Data model for a scanner.

@@ -1,13 +1,13 @@
 package buri.aoc.y21.d23;
 
+import buri.aoc.common.data.grid.CharGrid;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.data.grid.CharGrid;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Data model for a possible state in the amphipod game and the cost accrued so far.

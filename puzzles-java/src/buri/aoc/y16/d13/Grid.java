@@ -1,19 +1,19 @@
 package buri.aoc.y16.d13;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.path.Path;
 import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Map of the cubicles.
- * 
+ *
  * @author Brian Uri!
  */
 public class Grid extends CharGrid {
@@ -33,7 +33,7 @@ public class Grid extends CharGrid {
 				// Remove out of bounds or walls.
 				if (position.getX() < 0 || position.getX() >= getWidth()
 					|| position.getY() < 0 || position.getY() >= getHeight()
-					|| get(position) == WALL) { 
+					|| get(position) == WALL) {
 					iterator.remove();
 				}
 			}
@@ -63,7 +63,7 @@ public class Grid extends CharGrid {
 	public int getStepsTo(Pair<Integer> destination) {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
 		List<Pair<Integer>> destinations = new ArrayList<>();
-		destinations.add(destination);		
+		destinations.add(destination);
 		List<Path> paths = Pathfinder.toPaths(START_POSITION, destinations, cameFrom);
 		// There will be 1 path returned, since only 1 destination was provided.
 		return (paths.get(0).getLength());

@@ -1,5 +1,9 @@
 package buri.aoc.y20.d21;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,41 +12,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 21: Allergen Assessment
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("5", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("5", 1, false);
+		assertRun("2493", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("2493", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("mxmxvkd,sqjhc,fvjkl", Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("kqv,jxx,zzt,dklgl,pmvfzk,tsnkknk,qdlpbt,tlgrhdh", result);
+	public void testPart2() {
+		assertRun("mxmxvkd,sqjhc,fvjkl", 1, false);
+		assertRun("kqv,jxx,zzt,dklgl,pmvfzk,tsnkknk,qdlpbt,tlgrhdh", 0, true);
 	}
 
 	/**
@@ -57,7 +41,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is your canonical dangerous ingredient list?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		List<Food> foods = new ArrayList<>();
 		for (String line : input) {
 			foods.add(new Food(line));

@@ -1,9 +1,9 @@
 package buri.aoc.y15.d23;
 
-import java.util.List;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.registers.NamedRegisters;
+
+import java.util.List;
 
 /**
  * @author Brian Uri!

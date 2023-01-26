@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 17: Spinlock
@@ -12,24 +12,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(638, Puzzle.getResult(Part.ONE, 3));
+	public void testPart1() {
+		assertRun(638L, 1, false);
+		assertRun(1506L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, 359);
-		toConsole(result);
-		assertEquals(1506, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, 359);
-		toConsole(result);
-		assertEquals(39479736, result);
+	public void testPart2() {
+		assertRun(39479736L, 0, true);
 	}
 
 	/**
@@ -39,10 +29,11 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the value after 0 the moment 50000000 is inserted?
 	 */
-	public static int getResult(Part part, int input) {
+	protected long runLong(Part part, List<String> input) {
+		int value = Integer.parseInt(input.get(0));
 		final int iterations = (part == Part.ONE) ? 2018 : 50000000;
 		if (part == Part.ONE) {
-			Spinlock lock = new Spinlock(iterations, input);
+			Spinlock lock = new Spinlock(iterations, value);
 			int rightValue = 0;
 			for (int i = 1; i < iterations; i++) {
 				rightValue = lock.spinsert(i);
@@ -58,9 +49,9 @@ public class Puzzle extends BasePuzzle {
 			if (currentPosition == 1) {
 				result = i;
 			}
-			int fits = (i - currentPosition) / input;
+			int fits = (i - currentPosition) / value;
 			i += (fits + 1);
-			currentPosition = (currentPosition + (fits + 1) * (input + 1) - 1) % i + 1;
+			currentPosition = (currentPosition + (fits + 1) * (value + 1) - 1) % i + 1;
 		}
 		return (result);
 	}

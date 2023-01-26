@@ -13,37 +13,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 24: Blizzard Basin
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(18L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(18L, 1, false);
+		assertRun(314L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(314L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(54L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(896L, result);
+	public void testPart2() {
+		assertRun(54L, 1, false);
+		assertRun(896L, 0, true);
 	}
 
 	private static final int MAX_MINUTES = 900;
@@ -55,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the fewest number of minutes required to reach the goal, go back to the start, then reach the goal again?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int downWall = input.size() - 1;
 		int rightWall = input.get(0).length() - 1;
 		Blizzards blizzards = new Blizzards(MAX_MINUTES, 0, downWall, 0, rightWall);

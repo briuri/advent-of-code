@@ -1,5 +1,9 @@
 package buri.aoc.y17.d12;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,41 +12,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 12: Digital Plumber
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(6, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(6L, 1, false);
+		assertRun(134L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(134, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(2, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(193, result);
+	public void testPart2() {
+		assertRun(2L, 1, false);
+		assertRun(193L, 0, true);
 	}
 
 	/**
@@ -52,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many groups are there in total?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Report> reports = new ArrayList<>();
 		for (String line : input) {
 			reports.add(new Report(line));

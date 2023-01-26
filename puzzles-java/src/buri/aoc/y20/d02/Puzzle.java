@@ -1,13 +1,11 @@
 package buri.aoc.y20.d02;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 02: Password Philosophy
@@ -15,29 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(2L, 1, false);
+		assertRun(628L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(628, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(705, result);
+	public void testPart2() {
+		assertRun(1L, 1, false);
+		assertRun(705L, 0, true);
 	}
 
 	/**
@@ -47,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many passwords are valid according to the new interpretation of the policies?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Policy> policies = new ArrayList<>();
 		for (String line : input) {
 			policies.add(new Policy(line));

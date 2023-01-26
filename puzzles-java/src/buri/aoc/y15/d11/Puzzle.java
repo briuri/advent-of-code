@@ -1,15 +1,14 @@
 package buri.aoc.y15.d11;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Day 11: Corporate Policy
@@ -17,25 +16,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("abcdffaa", Puzzle.getResult(Part.ONE, "abcdefgh"));
-		assertEquals("ghjaabcc", Puzzle.getResult(Part.ONE, "ghijklmn"));
+	public void testPart1() {
+		assertRun("hepxxyzz", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, "hepxcrrq");
-		toConsole(result);
-		assertEquals("hepxxyzz", result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, "hepxxyzz");
-		toConsole(result);
-		assertEquals("heqaabcc", result);
+	public void testPart2() {
+		assertRun("heqaabcc", 0, true);
 	}
 
 	private static final Pattern FORBIDDEN_CHARS = Pattern.compile("[iol]");
@@ -50,10 +37,14 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Santa's password expired again. What's the next one?
 	 */
-	public static String getResult(Part part, String password) {
-		password = increment(password);
-		while (!isValid(password)) {
+	protected String runString(Part part, List<String> input) {
+		String password = input.get(0);
+		int times = (part == Part.ONE ? 1 : 2);
+		for (int i = 0; i < times; i++) {
 			password = increment(password);
+			while (!isValid(password)) {
+				password = increment(password);
+			}
 		}
 		return (password);
 	}

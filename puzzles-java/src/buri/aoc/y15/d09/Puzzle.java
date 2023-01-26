@@ -1,16 +1,14 @@
 package buri.aoc.y15.d09;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 9: All in a Single Night
@@ -18,28 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(605, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(141, result);
+	public void testPart1() {
+		assertRun(605L, 1, false);
+		assertRun(141L, 0, true);
 	}
 	@Test
-	public void testPart2Examples() {
-		assertEquals(982, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(736, result);
+	public void testPart2() {
+		assertRun(982L, 1, false);
+		assertRun(736L, 0, true);
 	}
 
 	/**
@@ -49,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * The next year, just to show off, Santa decides to take the route with the longest distance instead.
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Load lookup data
 		Map<String, Integer> distances = new HashMap<>();
 		List<String> cities = new ArrayList<>();

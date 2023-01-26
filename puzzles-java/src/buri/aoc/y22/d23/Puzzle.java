@@ -12,37 +12,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 23: Unstable Diffusion
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(110L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(110L, 1, false);
+		assertRun(3788L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3788L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(20L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(921L, result);
+	public void testPart2() {
+		assertRun(20L, 1, false);
+		assertRun(921L, 0, true);
 	}
 
 	/**
@@ -52,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the number of the first round where no Elf moves?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Set<Pair<Integer>> elves = new HashSet<>();
 		for (int y = 0; y < input.size(); y++) {
 			for (int x = 0; x < input.get(0).length(); x++) {

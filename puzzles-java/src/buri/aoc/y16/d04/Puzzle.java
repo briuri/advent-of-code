@@ -1,13 +1,11 @@
 package buri.aoc.y16.d04;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.CharFrequency;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 4: Security Through Obscurity
@@ -15,24 +13,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(1514, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(1514L, 1, false);
+		assertRun(137896L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(137896, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(501, result);
+	public void testPart2() {
+		assertRun(501L, 0, true);
 	}
 
 	/**
@@ -42,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the sector ID of the room where North Pole objects are stored?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			int sum = 0;
 			for (String room : input) {

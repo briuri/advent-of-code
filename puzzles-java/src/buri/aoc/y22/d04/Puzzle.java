@@ -7,37 +7,21 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 04: Camp Cleanup
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(2L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(2L, 1, false);
+		assertRun(431L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(431L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(823L, result);
+	public void testPart2() {
+		assertRun(4L, 1, false);
+		assertRun(823L, 0, true);
 	}
 
 	/**
@@ -47,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * In how many assignment pairs do the ranges overlap?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		long sum = 0;
 		for (String line : input) {
 			String[] tokens = line.split(",");

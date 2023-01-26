@@ -1,13 +1,11 @@
 package buri.aoc.y19.d05;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 05: Sunny with a Chance of Asteroids
@@ -15,24 +13,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(15259545L, result);
+	public void testPart1() {
+		assertRun(999L, 1, false);
+		assertRun(15259545L, 0, true);
 	}
-
 	@Test
-	public void testPart2Examples() {
-		assertEquals(999L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(7616021L, result);
+	public void testPart2() {
+		assertRun(7616021L, 0, true);
 	}
 
 	/**
@@ -43,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the diagnostic code for system ID 5?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		long inputValue = (part == Part.ONE ? 1 : 5);
 		Computer computer = new Computer(input);
 		computer.getInputs().add(inputValue);

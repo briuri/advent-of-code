@@ -1,10 +1,10 @@
 package buri.aoc.y21.d18;
 
+import buri.aoc.common.data.CharFrequency;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-import buri.aoc.common.data.CharFrequency;
 
 /**
  * Data model for a snailfish number (a pair of nested numbers).

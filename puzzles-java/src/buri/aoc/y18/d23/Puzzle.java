@@ -1,14 +1,12 @@
 package buri.aoc.y18.d23;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Triple;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 23: Experimental Emergency Teleportation
@@ -16,29 +14,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(7, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(7L, 1, false);
+		assertRun(691L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(691, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(36, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(126529978, result);
+	public void testPart2() {
+		assertRun(36L, 2, false);
+		assertRun(126529978L, 0, true);
 	}
 
 	/**
@@ -49,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Find the coordinates that are in range of the largest number of nanobots. What is the shortest manhattan distance
 	 * between any of those points and 0,0,0?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Bot> bots = new ArrayList<>();
 		for (String line : input) {
 			bots.add(new Bot(line));

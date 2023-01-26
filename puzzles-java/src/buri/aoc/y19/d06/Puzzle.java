@@ -1,15 +1,13 @@
 package buri.aoc.y19.d06;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 06: Universal Orbit Map
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(42, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(42L, 1, false);
+		assertRun(314702L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(314702, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(439, result);
+	public void testPart2() {
+		assertRun(4L, 2, false);
+		assertRun(439L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the minimum number of orbital transfers required to move from the object YOU are orbiting to the object
 	 * SAN is orbiting?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Build orbital map
 		Map<String, Planet> planets = new HashMap<>();
 		Planet com = new Planet("COM", null);

@@ -1,5 +1,9 @@
 package buri.aoc.y21.d22;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,44 +11,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 22: Reactor Reboot
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("39", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals("590784", Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals("474140", Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
+	public void testPart1() {
+		assertRun("39", 1, false);
+		assertRun("590784", 2, false);
+		assertRun("474140", 3, false);
+		assertRun("582644", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("582644", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("2758514936282235", Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
-
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("1263804707062415", result);
+	public void testPart2() {
+		assertRun("2758514936282235", 3, false);
+		assertRun("1263804707062415", 0, true);
 	}
 
 	/**
@@ -54,7 +37,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Afterward, considering all cubes, how many cubes are on?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		List<Cuboid> allCuboids = new ArrayList<>();
 		for (String line : input) {
 			Cuboid cuboid = new Cuboid(line);

@@ -5,7 +5,7 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Quad;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 11: Chronal Charge
@@ -13,31 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("33,45", Puzzle.getResult(Part.ONE, 18));
-		assertEquals("21,61", Puzzle.getResult(Part.ONE, 42));
+	public void testPart1() {
+		assertRun("33,45", 1, false);
+		assertRun("20,62", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, 7139);
-		toConsole(result);
-		assertEquals("20,62", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("90,269,16", Puzzle.getResult(Part.TWO, 18));
-		assertEquals("232,251,12", Puzzle.getResult(Part.TWO, 42));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, 7139);
-		toConsole(result);
-		assertEquals("229,61,16", result);
+	public void testPart2() {
+		assertRun("90,269,16", 1, false);
+		assertRun("229,61,16", 0, true);
 	}
 
 	/**
@@ -47,8 +31,9 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the X,Y,size identifier of the square with the largest total power?
 	 */
-	public static String getResult(Part part, int serial) {
+	protected String runString(Part part, List<String> input) {
 	    final int size = 300;
+		final int serial = Integer.parseInt(input.get(0));
 	    PowerGrid grid = new PowerGrid(size, serial);
 		if (part == Part.ONE) {
 			return (grid.getMaxValuePosition(3).toString());

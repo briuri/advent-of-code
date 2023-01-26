@@ -1,12 +1,10 @@
 package buri.aoc.y21.d08;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 07: Seven Segment Search
@@ -14,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(26L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(26L, 1, false);
+		assertRun(387L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(387L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(61229L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(986034L, result);
+	public void testPart2() {
+		assertRun(61229L, 1, false);
+		assertRun(986034L, 0, true);
 	}
 
 	/**
@@ -46,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What do you get if you add up all of the output values?
 	 */
-	public static long getResult(Part part, List<String> displays) {
+	protected long runLong(Part part, List<String> displays) {
 		long sum = 0;
 		for (String line : displays) {
 			String[] tokens = line.split(" \\| ");

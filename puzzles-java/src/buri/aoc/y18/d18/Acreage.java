@@ -1,10 +1,10 @@
 package buri.aoc.y18.d18;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model for the acreage.

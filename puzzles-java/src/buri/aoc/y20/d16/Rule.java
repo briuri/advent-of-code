@@ -1,10 +1,10 @@
 package buri.aoc.y20.d16;
 
+import buri.aoc.common.data.tuple.Quad;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import buri.aoc.common.data.tuple.Quad;
 
 /**
  * Single rule for a train ticket field.

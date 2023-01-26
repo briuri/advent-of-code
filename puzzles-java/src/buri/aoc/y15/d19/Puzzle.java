@@ -1,5 +1,9 @@
 package buri.aoc.y15.d19;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,42 +14,23 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 19: Medicine for Rudolph
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(4, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(7, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(576, result);
+	public void testPart1() {
+		assertRun(4L, 1, false);
+		assertRun(7L, 2, false);
+		assertRun(576L, 0, true);
 	}
 	@Test
-	public void testPart2Examples() {
-		assertEquals(3, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
-		assertEquals(6, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(207, result);
+	public void testPart2() {
+		assertRun(3L, 3, false);
+		assertRun(6L, 4, false);
+		assertRun(207L, 0, true);
 	}
 
 	/**
@@ -56,7 +41,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the fewest number of steps to go from e to the medicine molecule?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String molecule = input.remove(0);
 		if (part == Part.ONE) {
 			Set<String> results = new HashSet<>();

@@ -1,13 +1,11 @@
 package buri.aoc.y15.d14;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 14: Reindeer Olympics
@@ -15,19 +13,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2640, result);
+	public void testPart1() {
+		assertRun(2640L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1102, result);
+	public void testPart2() {
+		assertRun(1102L, 0, true);
 	}
 
 	/**
@@ -39,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Again given the descriptions of each reindeer (in your puzzle input), after exactly 2503 seconds, how many points
 	 * does the winning reindeer have?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int duration = 2503;
 		List<Deer> deer = new ArrayList<>();
 		for (String line : input) {

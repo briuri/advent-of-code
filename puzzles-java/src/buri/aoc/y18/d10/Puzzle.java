@@ -1,17 +1,14 @@
 package buri.aoc.y18.d10;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 10: The Stars Align
@@ -19,27 +16,16 @@ import static org.junit.Assert.assertTrue;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
+	public void testPart1() {
 		// HI
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(1));
-		assertTrue(result.startsWith("■   ■  ■■■\n"));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
+		assertRun("■   ■  ■■■\n", 1, false);
 		// PLBPGFRR
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertTrue(result.startsWith("■■■■■   ■       ■■■■■   ■■■■■    ■■■■   ■■■■■■  ■■■■■   ■■■■■ \n"));
+		assertRun("■■■■■   ■       ■■■■■   ■■■■■    ■■■■   ■■■■■■  ■■■■■   ■■■■■ \n", 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("10519", result);
+	public void testPart2() {
+		assertRun("10519", 0, true);
 	}
 
 	/**
@@ -49,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many seconds would they have needed to wait for that message to appear?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		List<Position> positions = new ArrayList<>();
 		for (String line : input) {
 			positions.add(new Position(line));

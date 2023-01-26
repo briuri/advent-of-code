@@ -1,13 +1,13 @@
 package buri.aoc.y20.d20;
 
+import buri.aoc.common.data.Direction;
+import buri.aoc.common.data.grid.CharGrid;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import buri.aoc.common.data.Direction;
-import buri.aoc.common.data.grid.CharGrid;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Data model for a single tile that can be rotated, flipped, and cropped.

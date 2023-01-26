@@ -1,21 +1,21 @@
 package buri.aoc.y16.d11;
 
+import buri.aoc.common.data.Permutations;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import buri.aoc.common.data.Permutations;
-
 /**
  * Data model for a single facility state.
- * 
+ *
  * 1|11|12|12|33|33
- * 
+ *
  * Elevator on first floor.
  * Each pair after that shows the floor of a generator, and the floor of its matching chip.
  * Pairs are given an ID based on their position: 0[11], 1[12], 2[12], 3[33], 4[33]
  * Pairs are sorted to reduce the number of possible unique states.
- * 
+ *
  * @author Brian Uri!
  */
 public class State {
@@ -178,7 +178,7 @@ public class State {
 
 	/**
 	 * Checks if generators are allowed near chips.
-	 * 
+	 *
 	 * Returns true when each chip has a matching generator to protect it. Returns false otherwise.
 	 */
 	private static boolean areGeneratorsAllowedNear(List<Integer> generatorIds, List<Integer> generatorsNext,
@@ -192,7 +192,7 @@ public class State {
 
 	/**
 	 * Checks if chips are allowed near generators.
-	 * 
+	 *
 	 * Returns true when each new chip has a matching generator to protect it, or there are no generators. Returns false
 	 * otherwise.
 	 */

@@ -1,15 +1,14 @@
 package buri.aoc.y16.d11;
 
-import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 /**
  * Day 11: Radioisotope Thermoelectric Generators
@@ -17,24 +16,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(11, Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0)));
+	public void testPart1() {
+		assertRun(11L, 1, false);
+		assertRun(31L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(31, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(2).get(0));
-		toConsole(result);
-		assertEquals(55, result);
+	public void testPart2() {
+		assertRun(55L, 2, true);
 	}
 
 	/**
@@ -45,9 +34,9 @@ public class Puzzle extends BasePuzzle {
 	 * What is the minimum number of steps required to bring all of the objects, including these four new ones, to the
 	 * fourth floor?
 	 */
-	public static int getResult(Part part, String start) {
+	protected long runLong(Part part, List<String> input) {
 		// Set up the start and final states.
-		final State START_STATE = new State(start);
+		final State START_STATE = new State(input.get(0));
 		StringBuffer buffer = new StringBuffer("4");
 		for (int i = 0; i < START_STATE.getPairs(); i++) {
 			buffer.append("|44");

@@ -1,10 +1,5 @@
 package buri.aoc.y16.d24;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
 import buri.aoc.common.data.grid.CharGrid;
@@ -12,9 +7,14 @@ import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Data model for the air ducts.
- * 
+ *
  * @author Brian Uri!
  */
 public class Ducts extends CharGrid {
@@ -64,7 +64,7 @@ public class Ducts extends CharGrid {
 	/**
 	 * Returns the fewest steps needed to visit all numbered spots.
 	 */
-	public int getFewestSteps(Part part) {		
+	public int getFewestSteps(Part part) {
 		// Do all the traversal for path-building upfront.
 		Map<Pair, Map<Pair<Integer>, Pair<Integer>>> cameFroms = new HashMap<>();
 		for (Pair start : getDestinations().values()) {

@@ -1,13 +1,11 @@
 package buri.aoc.y16.d15;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 15: Timing is Everything
@@ -15,24 +13,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(5, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(5L, 1, false);
+		assertRun(203660L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(203660, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2408135, result);
+	public void testPart2() {
+		assertRun(2408135L, 0, true);
 	}
 
 	/**
@@ -43,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * With this new disc, and counting again starting from time=0 with the configuration in your puzzle input, what is
 	 * the first time you can press the button to get another capsule?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Disc> discs = new ArrayList<>();
 		for (String line : input) {
 			discs.add(new Disc(line));

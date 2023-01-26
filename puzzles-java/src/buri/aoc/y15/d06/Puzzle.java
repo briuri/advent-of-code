@@ -1,14 +1,12 @@
 package buri.aoc.y15.d06;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 6: Probably a Fire Hazard
@@ -17,16 +15,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class Puzzle extends BasePuzzle {
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(400410, result);
+	public void testPart1() {
+		assertRun(400410L, 0, true);
 	}
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(15343601, result);
+	public void testPart2() {
+		assertRun(15343601L, 0, true);
 	}
 
 	/**
@@ -36,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the total brightness of all lights combined after following Santa's instructions?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		IntGrid grid = new IntGrid(new Pair(1000, 1000));
 		for (String command : input) {
 			String[] tokens = command.split(" ");

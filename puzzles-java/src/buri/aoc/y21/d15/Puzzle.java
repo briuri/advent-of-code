@@ -1,17 +1,15 @@
 package buri.aoc.y21.d15;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 15: Chiton
@@ -19,29 +17,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(40L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(40L, 1, false);
+		assertRun(366L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(366L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(315L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2829L, result);
+	public void testPart2() {
+		assertRun(315L, 1, false);
+		assertRun(2829L, 0, true);
 	}
 
 	/**
@@ -51,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Using the full map, what is the lowest total risk of any path from the top left to the bottom right?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		RiskMap map = RiskMap.buildMap(part, input);
 
 		// Tracks the lowest risk upon arrival at a point so we don't bother with more expensive paths.

@@ -1,15 +1,13 @@
 package buri.aoc.y17.d13;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 13: Packet Scanners
@@ -17,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(24, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(24L, 1, false);
+		assertRun(2688L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2688, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(10, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3876272, result);
+	public void testPart2() {
+		assertRun(10L, 1, false);
+		assertRun(3876272L, 0, true);
 	}
 
 	/**
@@ -51,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the fewest number of picoseconds that you need to delay the packet to pass through the firewall without
 	 * being caught?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Layer> layers = new ArrayList<>();
 		for (String line : input) {
 			layers.add(new Layer(line));

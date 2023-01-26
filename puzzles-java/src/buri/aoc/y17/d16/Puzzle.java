@@ -1,14 +1,12 @@
 package buri.aoc.y17.d16;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Day 16: Permutation Promenade
@@ -16,24 +14,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("baedc", Puzzle.getResult(Part.ONE, 5, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun("baedc", 1, false);
+		assertRun("jcobhadfnmpkglie", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, 16, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("jcobhadfnmpkglie", result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, 16, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("pclhmengojfdkaib", result);
+	public void testPart2() {
+		assertRun("pclhmengojfdkaib", 0, true);
 	}
 
 	/**
@@ -43,7 +31,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * In what order are the programs standing after their billion dances?
 	 */
-	public static String getResult(Part part, int numDancers, List<String> input) {
+	protected String runString(Part part, List<String> input) {
+		final int numDancers = (input.get(0).length() < 20 ? 5 : 16);
 		input = Arrays.asList(input.get(0).split(","));
 		Dancers dancers = new Dancers(numDancers);
 		int iterations = (part == Part.ONE ? 1 : 1000000000);

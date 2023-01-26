@@ -1,9 +1,9 @@
 package buri.aoc.common.data.tuple;
 
+import buri.aoc.common.data.Direction;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import buri.aoc.common.data.Direction;
 
 /**
  * Data class for a pair tuple, intended for Integers or Longs.

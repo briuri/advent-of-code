@@ -1,8 +1,8 @@
 package buri.aoc.y17.d18;
 
-import java.util.List;
-
 import buri.aoc.common.data.registers.NamedRegisters;
+
+import java.util.List;
 
 /**
  * Abstract base class for registers in each part.

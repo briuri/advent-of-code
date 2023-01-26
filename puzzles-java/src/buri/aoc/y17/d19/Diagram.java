@@ -1,11 +1,11 @@
 package buri.aoc.y17.d19;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data model for the routing diagram.

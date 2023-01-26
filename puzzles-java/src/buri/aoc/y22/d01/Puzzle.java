@@ -8,37 +8,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 01: Calorie Counting
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(24000L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(24000L, 1, false);
+		assertRun(66719L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(66719L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(45000L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(198551L, result);
+	public void testPart2() {
+		assertRun(45000L, 1, false);
+		assertRun(198551L, 0, true);
 	}
 
 	/**
@@ -48,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many Calories are those Elves carrying in total?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	public long runLong(Part part, List<String> input) {
 		List<Integer> elves = new ArrayList<>();
 		int elf = 0;
 		for (String line : input) {
@@ -68,7 +52,7 @@ public class Puzzle extends BasePuzzle {
 
 		Collections.sort(elves);
 		Collections.reverse(elves);
-		int sum = elves.get(0);
+		long sum = elves.get(0);
 		if (part == Part.TWO) {
 			sum += elves.get(1) + elves.get(2);
 		}

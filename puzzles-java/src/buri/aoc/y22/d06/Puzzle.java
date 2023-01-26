@@ -8,37 +8,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 06: Tuning Trouble
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(7L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(7L, 1, false);
+		assertRun(1093L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1093L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(19L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3534L, result);
+	public void testPart2() {
+		assertRun(19L, 1, false);
+		assertRun(3534L, 0, true);
 	}
 
 	/**
@@ -48,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many characters need to be processed before the first start-of-message marker is detected?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String line = input.get(0);
 		int size = (part == Part.ONE ? 4 : 14);
 		for (int i = size - 1; i < line.length(); i++) {

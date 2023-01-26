@@ -13,37 +13,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 15: Beacon Exclusion Zone
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(26L, Puzzle.getResult(Part.ONE, true, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(26L, 1, false);
+		assertRun(5335787L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, false, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(5335787L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(56000011L, Puzzle.getResult(Part.TWO, true, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, false, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(13673971349056L, result);
+	public void testPart2() {
+		assertRun(56000011L, 1, false);
+		assertRun(13673971349056L, 0, true);
 	}
 
 	/**
@@ -53,7 +37,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is its tuning frequency?
 	 */
-	public static long getResult(Part part, boolean isSample, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
+		boolean isSample = (input.size() < 15);
 		long answerY = isSample ? 10L : 2000000L;
 		Set<Pair<Long>> sensorsBeacons = new HashSet<>();
 		Map<Pair<Long>, Long> sensorDistances = new HashMap<>();

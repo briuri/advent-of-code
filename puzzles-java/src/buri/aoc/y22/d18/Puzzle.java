@@ -9,39 +9,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 18: Boiling Boulders
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(10L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(64L, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
+	public void testPart1() {
+		assertRun(10L, 1, false);
+		assertRun(64L, 2, false);
+		assertRun(4504L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(4504L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(10L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-		assertEquals(58L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2556L, result);
+	public void testPart2() {
+		assertRun(10L, 1, false);
+		assertRun(58L, 2, false);
+		assertRun(2556L, 0, true);
 	}
 
 	/**
@@ -51,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the exterior surface area of your scanned lava droplet?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		long area = 0;
 		Set<Triple<Integer>> cubes = new HashSet<>();
 		for (String line : input) {

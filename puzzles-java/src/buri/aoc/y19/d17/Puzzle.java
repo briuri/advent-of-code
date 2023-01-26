@@ -1,14 +1,12 @@
 package buri.aoc.y19.d17;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 17: Set and Forget
@@ -16,19 +14,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3660, result);
+	public void testPart1() {
+		assertRun(3660L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(962913, result);
+	public void testPart2() {
+		assertRun(962913L, 0, true);
 	}
 
 	/**
@@ -39,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * After visiting every part of the scaffold at least once, how much dust does the vacuum robot report it has
 	 * collected?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			Computer computer = new Computer(input);
 			computer.run();

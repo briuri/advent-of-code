@@ -1,15 +1,13 @@
 package buri.aoc.y19.d14;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 14: Space Stoichiometry
@@ -17,35 +15,21 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(31, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(165, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(13312, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
-		assertEquals(180697, Puzzle.getResult(Part.ONE, Puzzle.getInput(4)));
-		assertEquals(2210736, Puzzle.getResult(Part.ONE, Puzzle.getInput(5)));
+	public void testPart1() {
+		assertRun(31L, 1, false);
+		assertRun(165L, 2, false);
+		assertRun(13312L, 3, false);
+		assertRun(180697L, 4, false);
+		assertRun(2210736L, 5, false);
+		assertRun(399063L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(399063, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(82892753, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
-		assertEquals(5586022, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
-		assertEquals(460664, Puzzle.getResult(Part.TWO, Puzzle.getInput(5)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(4215654, result);
+	public void testPart2() {
+		assertRun(82892753L, 3, false);
+		assertRun(5586022L, 4, false);
+		assertRun(460664L, 5, false);
+		assertRun(4215654L, 0, true);
 	}
 
 	/**
@@ -56,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Given 1 trillion ORE, what is the maximum amount of FUEL you can produce?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Reaction> rawReactions = new ArrayList<>();
 		for (String line : input) {
 			rawReactions.add(new Reaction(line));

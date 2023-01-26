@@ -1,15 +1,16 @@
 package buri.aoc.y19.d04;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.CharFrequency;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Day 04: Secure Container
@@ -17,33 +18,19 @@ import static org.junit.Assert.*;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
+	public void testPart1() {
 		assertTrue(Puzzle.isValidPassword(Part.ONE, "111111"));
 		assertFalse(Puzzle.isValidPassword(Part.ONE, "223450"));
 		assertFalse(Puzzle.isValidPassword(Part.ONE, "123789"));
+		assertRun(1929L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1929, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
+	public void testPart2() {
 		assertTrue(Puzzle.isValidPassword(Part.TWO, "112233"));
 		assertFalse(Puzzle.isValidPassword(Part.TWO, "123444"));
 		assertTrue(Puzzle.isValidPassword(Part.TWO, "111122"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1306, result);
+		assertRun(1306L, 0, true);
 	}
 
 	/**
@@ -53,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many different passwords within the range given in your puzzle input meet all of the criteria?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Integer> range = new ArrayList<>();
 		String[] tokens = input.get(0).split("-");
 		range.add(Integer.valueOf(tokens[0]));

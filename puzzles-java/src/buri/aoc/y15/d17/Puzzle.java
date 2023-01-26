@@ -1,16 +1,14 @@
 package buri.aoc.y15.d17;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 17: No Such Thing as Too Much
@@ -18,28 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(4, Puzzle.getResult(Part.ONE, 25, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, 150, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1638, result);
+	public void testPart1() {
+		assertRun(4L, 1, false);
+		assertRun(1638L, 0, true);
 	}
 	@Test
-	public void testPart2Examples() {
-		assertEquals(3, Puzzle.getResult(Part.TWO, 25, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, 150, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(17, result);
+	public void testPart2() {
+		assertRun(3L, 1, false);
+		assertRun(17L, 0, true);
 	}
 
 	/**
@@ -50,7 +35,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many different ways can you fill that number of containers and still hold exactly 150 litres?
 	 */
-	public static int getResult(Part part, int end, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
+		final int end = (input.size() < 10 ? 25 : 150);
 		List<Integer> containers = new ArrayList<>();
 		for (String line : input) {
 			containers.add(Integer.valueOf(line));

@@ -1,7 +1,5 @@
 package buri.aoc.y19.d13;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.IntGrid;
@@ -9,7 +7,7 @@ import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 13: Care Package
@@ -17,19 +15,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(286, result);
+	public void testPart1() {
+		assertRun(286L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(14538, result);
+	public void testPart2() {
+		assertRun(14538L, 0, true);
 	}
 
 	private static final int BLOCK = 2;
@@ -43,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is your score after the last block is broken?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		IntGrid grid = new IntGrid(new Pair(37, 37));
 		Computer computer = new Computer(input);
 		computer.run();

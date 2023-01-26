@@ -1,5 +1,8 @@
 package buri.aoc.common;
 
+import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.data.tuple.Quad;
+
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -8,16 +11,14 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import buri.aoc.common.data.tuple.Pair;
-import buri.aoc.common.data.tuple.Quad;
-import buri.aoc.y15.d01.Puzzle;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Superclass of all puzzles, for shared helper utilities.
@@ -29,18 +30,14 @@ public abstract class BasePuzzle {
 	/**
 	 * Returns the input file as a list of strings.
 	 */
-	public static List<String> getInput(int fileIndex) {
-		String packageName = new Throwable().getStackTrace()[1].getClassName();
-		String year = packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
-		String day = packageName.substring(packageName.indexOf(".d") + 2, packageName.indexOf(".Puzzle"));
-
-		Path path = Paths.get("data/y" + year + "/" + day + "-" + fileIndex + ".txt");
+	public List<String> getInput(int fileIndex) {
+		Path path = Paths.get("data/y" + getYear() + "/" + getDay() + "-" + fileIndex + ".txt");
 		try {
 			return (Files.readAllLines(path));
 		}
 		// Current puzzle stores data in a holding area for faster saving / browsing.
 		catch (IOException e) {
-			Path newPath = Paths.get("dataNew/" + day + "-" + fileIndex + ".txt");
+			Path newPath = Paths.get("dataNew/" + getDay() + "-" + fileIndex + ".txt");
 			try {
 				return (Files.readAllLines(newPath));
 			}
@@ -194,20 +191,65 @@ public abstract class BasePuzzle {
 	}
 
 	/**
+	 * Wrapper method for inputs that are a single string.
+	 */
+	protected List<String> asList(String string) {
+		List<String> input = new ArrayList<>();
+		input.add(string);
+		return (input);
+	}
+
+	/**
+	 * Base run method for a puzzle to be overridden.
+	 */
+	protected long runLong(Part part, List<String> input) {
+		throw new UnsupportedOperationException("This method needs to be overridden.");
+	}
+
+	/**
+	 * Base run method for a puzzle to be overridden.
+	 */
+	protected String runString(Part part, List<String> input) {
+		throw new UnsupportedOperationException("This method needs to be overridden.");
+	}
+
+	/**
+	 * Helper method to run a puzzle with some input and check the answer.
+	 */
+	protected void assertRun(Long expected, int fileIndex, boolean toConsole) {
+		Part part = getPart().equals("1") ? Part.ONE : Part.TWO;
+		Long result = this.runLong(part, getInput(fileIndex));
+		if (toConsole) {
+			toConsole(result);
+		}
+		assertEquals(expected, result);
+	}
+
+	/**
+	 * Helper method to run a puzzle with some input and check the answer.
+	 */
+	protected void assertRun(String expected, int fileIndex, boolean toConsole) {
+		Part part = getPart().equals("1") ? Part.ONE : Part.TWO;
+		String result = this.runString(part, getInput(fileIndex));
+		if (toConsole) {
+			toConsole(result);
+		}
+		if (expected.contains("■")) {
+			assertTrue(result.startsWith(expected));
+		}
+		else {
+			assertEquals(expected, result);
+		}
+	}
+
+	/**
 	 * Builds an identifier for test output, based on the package name (buri.aoc.yXX.dYY) and test name
 	 * (testPartXPuzzle).
 	 */
 	protected String getIdentifier() {
-		String packageName = this.getClass().getPackage().getName();
-		String year = packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
-		String day = packageName.substring(packageName.indexOf(".d") + 2);
-
-		String testName = Thread.currentThread().getStackTrace()[3].getMethodName();
-		String part = testName.substring(testName.indexOf("Part") + 4).substring(0, 1);
-
 		StringBuilder builder = new StringBuilder();
-		builder.append("### Year ").append(year).append(" Day ").append(day).append(" Part ").append(part).append(
-				" ###");
+		builder.append("### Year ").append(getYear()).append(" Day ");
+		builder.append(getDay()).append(" Part ").append(getPart()).append(" ###");
 		return (builder.toString());
 	}
 
@@ -220,5 +262,39 @@ public abstract class BasePuzzle {
 		clipboard.setContents(new StringSelection(value), null);
 		System.out.println(getIdentifier());
 		System.out.println(value);
+	}
+
+	/**
+	 * Extracts the year from a package name.
+	 */
+	private String getYear() {
+		String packageName = this.getClass().getPackage().getName();
+		String year = packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
+		return (year);
+	}
+
+	/**
+	 * Extracts the day from a package name.
+	 */
+	private String getDay() {
+		String packageName = this.getClass().getPackage().getName();
+		String day = packageName.substring(packageName.indexOf(".d") + 2);
+		return (day);
+	}
+
+	/**
+	 * Extracts the part number from a test method name.
+	 */
+	private String getPart() {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		String testName = null;
+		for (int i = 0; i < trace.length; i++) {
+			if (trace[i].getMethodName().contains("testPart")) {
+				testName = trace[i].getMethodName();
+				break;
+			}
+		}
+		String part = testName.substring(testName.indexOf("Part") + 4);
+		return (part);
 	}
 }

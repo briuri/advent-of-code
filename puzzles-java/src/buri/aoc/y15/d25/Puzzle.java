@@ -1,13 +1,13 @@
 package buri.aoc.y15.d25;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 25: Let It Snow
@@ -15,19 +15,19 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(new Pair(2947, 3029));
-		toConsole(result);
-		assertEquals(19980801, result);
+	public void testPart1() {
+		assertRun(19980801L, 0, true);
 	}
 
 	/**
 	 * Part 1:
 	 * What code do you give the machine?
 	 */
-	public static long getResult(Pair<Integer> target) {
+	protected long runLong(Part part, List<String> input) {
+		int x = Integer.parseInt(input.get(0).split("row ")[1].split(",")[0]);
+		int y = Integer.parseInt(input.get(0).split("column ")[1].split("\\.")[0]);
+		Pair target = new Pair(x, y);
 		Pair pair = new Pair(1, 1);
 		long code = 20151125;
 		Set<String> visited = new HashSet<>();

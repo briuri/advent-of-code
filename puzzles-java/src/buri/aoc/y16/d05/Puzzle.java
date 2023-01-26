@@ -5,7 +5,7 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.MD5Hash;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 5: How About a Nice Game of Chess?
@@ -13,29 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("18f47a30", Puzzle.getResult(Part.ONE, "abc"));
+	public void testPart1() {
+		assertRun("18f47a30", 1, false);
+		assertRun("2414bc77", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, "wtnhxymk");
-		toConsole(result);
-		assertEquals("2414bc77", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("05ace8e3", Puzzle.getResult(Part.TWO, "abc"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, "wtnhxymk");
-		toConsole(result);
-		assertEquals("437e60fc", result);
+	public void testPart2() {
+		assertRun("05ace8e3", 1, false);
+		assertRun("437e60fc", 0, true);
 	}
 
 	/**
@@ -50,14 +36,14 @@ public class Puzzle extends BasePuzzle {
 	 * The 6th character is the position (0-7) and the 7th character is that character in the password. Use only the
 	 * first result for each position and ignore invalid positions. What is the password?
 	 */
-	public static String getResult(Part part, String input) {
+	protected String runString(Part part, List<String> input) {
 		MD5Hash hasher = new MD5Hash();
 
 		int iteration = 0;
 		// Represent password as 8 blanks, completed when all are filled in.
 		StringBuffer password = new StringBuffer("        ");
 		while (password.toString().indexOf(" ") != -1) {
-			String hash = hasher.getHash(input + iteration);
+			String hash = hasher.getHash(input.get(0) + iteration);
 			if (hash.startsWith("00000")) {
 				if (part == Part.ONE) {
 					// Fill in password in order.

@@ -1,14 +1,12 @@
 package buri.aoc.y15.d02;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 2: I Was Told There Would Be No Math
@@ -17,16 +15,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class Puzzle extends BasePuzzle {
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1588178, result);
+	public void testPart1() {
+		assertRun(1588178L, 0, true);
 	}
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3783758, result);
+	public void testPart2() {
+		assertRun(3783758L, 0, true);
 	}
 
 	/**
@@ -36,7 +30,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many total feet of ribbon should they order?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int total = 0;
 		for (String line : input) {
 			String[] tokens = line.split("x");

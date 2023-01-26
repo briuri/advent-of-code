@@ -1,10 +1,5 @@
 package buri.aoc.y20.d11;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
@@ -12,7 +7,10 @@ import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 11: Seating System
@@ -20,29 +18,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(37, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(37L, 1, false);
+		assertRun(2126L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2126, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(26, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1914, result);
+	public void testPart2() {
+		assertRun(26L, 1, false);
+		assertRun(1914L, 0, true);
 	}
 
 	private static final char FLOOR = '.';
@@ -57,7 +41,7 @@ public class Puzzle extends BasePuzzle {
 	 * Given the new visibility method and the rule change for occupied seats becoming empty, once equilibrium is
 	 * reached, how many seats end up occupied?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
 		for (int y = 0; y < grid.getHeight(); y++) {
 			for (int x = 0; x < grid.getWidth(); x++) {

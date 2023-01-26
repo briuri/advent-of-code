@@ -1,12 +1,10 @@
 package buri.aoc.y16.d23;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 23: Safe Cracking
@@ -14,24 +12,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(3L, 1, false);
+		assertRun(12315L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(12315L, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(2));
-		toConsole(result);
-		assertEquals(479008875L, result);
+	public void testPart2() {
+		assertRun(479008875L, 2, true);
 	}
 
 	/**
@@ -102,7 +90,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Anyway, what value should actually be sent to the safe?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		long start = (part == Part.ONE ? 7L : 12L);
 		Registers registers = new Registers(input, start);
 		registers.process();

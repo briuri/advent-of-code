@@ -1,13 +1,11 @@
 package buri.aoc.y16.d10;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 10: Balance Bots
@@ -15,20 +13,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(113, result);
+	public void testPart1() {
+		assertRun(113L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		// Not zero.
-		assertEquals(12803, result);
+	public void testPart2() {
+		assertRun(12803L, 0, true);
 	}
 
 	/**
@@ -38,7 +29,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What do you get if you multiply together the values of one chip in each of outputs 0, 1, and 2?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Bot> bots = new ArrayList<>();
 		for (int i = 0; i < 210; i++) {
 			bots.add(new Bot());

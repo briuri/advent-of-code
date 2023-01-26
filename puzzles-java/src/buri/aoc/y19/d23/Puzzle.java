@@ -1,18 +1,16 @@
 package buri.aoc.y19.d23;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Day 23: Category Six
@@ -20,19 +18,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(17541L, result);
+	public void testPart1() {
+		assertRun(17541L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(12415, result);
+	public void testPart2() {
+		assertRun(12415L, 0, true);
 	}
 
 	/**
@@ -44,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Monitor packets released to the computer at address 0 by the NAT. What is the first Y value delivered by the NAT
 	 * to the computer at address 0 twice in a row?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Initialize computers.
 		Map<Long, Computer> computers = new HashMap<>();
 		for (long i = 0; i < 50; i++) {

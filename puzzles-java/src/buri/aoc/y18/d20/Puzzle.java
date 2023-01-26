@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 20: A Regular Map
@@ -12,28 +12,18 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3, Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0)));
-		assertEquals(10, Puzzle.getResult(Part.ONE, Puzzle.getInput(2).get(0)));
-		assertEquals(18, Puzzle.getResult(Part.ONE, Puzzle.getInput(3).get(0)));
-		assertEquals(23, Puzzle.getResult(Part.ONE, Puzzle.getInput(4).get(0)));
-		assertEquals(31, Puzzle.getResult(Part.ONE, Puzzle.getInput(5).get(0)));
+	public void testPart1() {
+		assertRun(3L, 1, false);
+		assertRun(10L, 2, false);
+		assertRun(18L, 3, false);
+		assertRun(23L, 4, false);
+		assertRun(31L, 5, false);
+		assertRun(3465L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(3465, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(7956, result);
+	public void testPart2() {
+		assertRun(7956L, 0, true);
 	}
 
 	/**
@@ -43,9 +33,9 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many rooms have a shortest path from your current location that pass through at least 1000 doors?
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
 		RoomMap map = new RoomMap();
-		map.explore(input);
+		map.explore(input.get(0));
 		if (part == Part.ONE) {
 			return (map.getMostDoors());
 		}

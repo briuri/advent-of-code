@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 9: Stream Processing
@@ -12,65 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1DestroyGarbageExamples() {
-		assertEquals("", Puzzle.destroyGarbage("<>"));
-		assertEquals("", Puzzle.destroyGarbage("<random characters>"));
-		assertEquals("", Puzzle.destroyGarbage("<<<<>"));
-		assertEquals("", Puzzle.destroyGarbage("<{!>}>"));
-		assertEquals("", Puzzle.destroyGarbage("<!!>"));
-		assertEquals("", Puzzle.destroyGarbage("<!!!>>"));
-		assertEquals("", Puzzle.destroyGarbage("<{o\"i!a,<{i<a>"));
+	public void testPart1() {
+		assertRun(12396L, 0, true);
 	}
-
 	@Test
-	public void testPart1CountGroupsExamples() {
-		assertEquals(1, Puzzle.countGroups("{}"));
-		assertEquals(3, Puzzle.countGroups("{{{}}}"));
-		assertEquals(3, Puzzle.countGroups("{{},{}}"));
-		assertEquals(6, Puzzle.countGroups("{{{},{},{{}}}}"));
-		assertEquals(1, Puzzle.countGroups("{<{},{},{{}}>}"));
-		assertEquals(1, Puzzle.countGroups("{<a>,<a>,<a>,<a>}"));
-		assertEquals(5, Puzzle.countGroups("{{<a>},{<a>},{<a>},{<a>}}"));
-		assertEquals(2, Puzzle.countGroups("{{<!>},{<!>},{<!>},{<a>}}"));
-	}
-
-	@Test
-	public void testPart1GetResultExamples() {
-		assertEquals(1, Puzzle.getResult(Part.ONE, "{}"));
-		assertEquals(6, Puzzle.getResult(Part.ONE, "{{{}}}"));
-		assertEquals(5, Puzzle.getResult(Part.ONE, "{{},{}}"));
-		assertEquals(16, Puzzle.getResult(Part.ONE, "{{{},{},{{}}}}"));
-		assertEquals(1, Puzzle.getResult(Part.ONE, "{<a>,<a>,<a>,<a>}"));
-		assertEquals(9, Puzzle.getResult(Part.ONE, "{{<ab>},{<ab>},{<ab>},{<ab>}}"));
-		assertEquals(9, Puzzle.getResult(Part.ONE, "{{<!!>},{<!!>},{<!!>},{<!!>}}"));
-		assertEquals(3, Puzzle.getResult(Part.ONE, "{{<a!>},{<a!>},{<a!>},{<ab>}}"));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(12396, result);
-	}
-
-	@Test
-	public void testPart2GetResultExamples() {
-		assertEquals(0, Puzzle.getResult(Part.TWO, "<>"));
-		assertEquals(17, Puzzle.getResult(Part.TWO, "<random characters>"));
-		assertEquals(3, Puzzle.getResult(Part.TWO, "<<<<>"));
-		assertEquals(2, Puzzle.getResult(Part.TWO, "<{!>}>"));
-		assertEquals(0, Puzzle.getResult(Part.TWO, "<!!>"));
-		assertEquals(0, Puzzle.getResult(Part.TWO, "<!!!>>"));
-		assertEquals(10, Puzzle.getResult(Part.TWO, "<{o\"i!a,<{i<a>"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(6346, result);
+	public void testPart2() {
+		assertRun(6346L, 0, true);
 	}
 
 	/**
@@ -80,17 +28,18 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many non-cancelled characters are within the garbage in your puzzle input?
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
+		String line = input.get(0);
 		if (part == Part.ONE) {
-			input = destroyGarbage(input);
+			line = destroyGarbage(line);
 			int total = 0;
 			int levelScore = 1;
-			for (int i = 0; i < input.length(); i++) {
-				if (input.charAt(i) == '{') {
+			for (int i = 0; i < line.length(); i++) {
+				if (line.charAt(i) == '{') {
 					total += levelScore;
 					levelScore++;
 				}
-				else if (input.charAt(i) == '}') {
+				else if (line.charAt(i) == '}') {
 					levelScore--;
 				}
 				// Ignore commas.
@@ -98,7 +47,7 @@ public class Puzzle extends BasePuzzle {
 			return (total);
 		}
 		// Part.TWO
-		return (countGarbage(input));
+		return (countGarbage(line));
 	}
 
 	/**

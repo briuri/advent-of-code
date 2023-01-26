@@ -1,14 +1,12 @@
 package buri.aoc.y20.d05;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Day 05: Binary Boarding
@@ -16,25 +14,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(820, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(820L, 1, false);
+		assertRun(838L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(838, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		// 715
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(714, result);
+	public void testPart2() {
+		assertRun(714L, 0, true);
 	}
 
 	/**
@@ -44,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the ID of your seat?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Pass> list = new ArrayList<>();
 		for (String line : input) {
 			list.add(new Pass(line));

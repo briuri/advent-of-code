@@ -1,13 +1,11 @@
 package buri.aoc.y18.d19;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.registers.IndexedRegisters;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 19: Go With the Flow
@@ -15,24 +13,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(6, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(6L, 1, false);
+		assertRun(1056L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1056, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(10915260, result);
+	public void testPart2() {
+		assertRun(10915260L, 0, true);
 	}
 
 	/**
@@ -43,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * This time, register 0 started with the value 1. What value is left in register 0 when this new background process
 	 * halts?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String ipRegister = input.remove(0);
 		IndexedRegisters registers = new IndexedRegisters(Character.getNumericValue(ipRegister.charAt(4)), input);
 		int initialZeroValue = (part == Part.ONE ? 0 : 1);

@@ -1,10 +1,10 @@
 package buri.aoc.y19.d22;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,14 +14,20 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
+	@Test
+	public void testPart1() {
+		assertRun(3749L, 0, true);
+	}
+	@Test
+	public void testPart2() {
+		assertRun(77225522112241L, 0, true);
+	}
 	@Test
 	public void testDealIntoNewStack() {
 		Deck deck = new Deck(10);
 		deck.dealIntoNewStack();
 		assertEquals("[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]", deck.toString());
 	}
-
 	@Test
 	public void testCut() {
 		Deck deck = new Deck(10);
@@ -32,26 +38,11 @@ public class Puzzle extends BasePuzzle {
 		deck.cut(-4);
 		assertEquals("[6, 7, 8, 9, 0, 1, 2, 3, 4, 5]", deck.toString());
 	}
-
 	@Test
 	public void testDealWithIncrement() {
 		Deck deck = new Deck(10);
 		deck.dealWithIncrement(3);
 		assertEquals("[0, 7, 4, 1, 8, 5, 2, 9, 6, 3]", deck.toString());
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3749L, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(77225522112241L, result);
 	}
 
 	/**
@@ -62,7 +53,7 @@ public class Puzzle extends BasePuzzle {
 	 * After shuffling your new, giant, factory order deck that many times, what number is on the card that ends up in
 	 * position 2020?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Deck deck = new Deck(part == Part.ONE ? 10007L : 119315717514047L);
 		for (String line : input) {
 			String[] tokens = line.split(" ");

@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 22: Wizard Simulator 20XX
@@ -12,19 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE);
-		toConsole(result);
-		assertEquals(953, result);
+	public void testPart1() {
+		assertRun(953L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO);
-		toConsole(result);
-		assertEquals(1289, result);
+	public void testPart2() {
+		assertRun(1289L, 0, true);
 	}
 
 	/**
@@ -36,10 +30,12 @@ public class Puzzle extends BasePuzzle {
 	 * At the start of each player turn (before any other effects apply), you lose 1 hit point. If this brings you to or
 	 * below 0 hit points, you lose.
 	 */
-	public static int getResult(Part part) {
+	protected long runLong(Part part, List<String> input) {
+		int bossHealth = Integer.parseInt(input.get(0).split(": ")[1]);
+		int bossDamage = Integer.parseInt(input.get(1).split(": ")[1]);
 		int minManaCost = Integer.MAX_VALUE;
 		for (int i = 0; i < 1000000; i++) {
-			Battle battle = new Battle(part);
+			Battle battle = new Battle(part, bossHealth, bossDamage);
 			int manaCost = battle.run(minManaCost);
 			minManaCost = Math.min(minManaCost, manaCost);
 		}

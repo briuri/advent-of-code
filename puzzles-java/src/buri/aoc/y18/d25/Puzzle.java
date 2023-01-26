@@ -1,16 +1,15 @@
 package buri.aoc.y18.d25;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import buri.aoc.common.data.tuple.Quad;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.data.tuple.Quad;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 25: Four-Dimensional Adventure
@@ -18,28 +17,21 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(2, Puzzle.getResult(Puzzle.getInput(1)));
-		assertEquals(1, Puzzle.getResult(Puzzle.getInput(2)));
-		assertEquals(4, Puzzle.getResult(Puzzle.getInput(3)));
-		assertEquals(3, Puzzle.getResult(Puzzle.getInput(4)));
-		assertEquals(8, Puzzle.getResult(Puzzle.getInput(5)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(388, result);
+	public void testPart1() {
+		assertRun(2L, 1, false);
+		assertRun(1L, 2, false);
+		assertRun(4L, 3, false);
+		assertRun(3L, 4, false);
+		assertRun(8L, 5, false);
+		assertRun(388L, 0, true);
 	}
 
 	/**
 	 * Part 1:
 	 * How many constellations are formed by the fixed points in spacetime?
 	 */
-	public static int getResult(List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Quad> stars = new ArrayList<>();
 		for (String line : input) {
 			String[] tokens = line.trim().split(",");

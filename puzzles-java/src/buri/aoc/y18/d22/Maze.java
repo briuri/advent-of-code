@@ -1,5 +1,9 @@
 package buri.aoc.y18.d22;
 
+import buri.aoc.common.data.grid.CharGrid;
+import buri.aoc.common.data.path.StepStrategy;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,10 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-
-import buri.aoc.common.data.grid.CharGrid;
-import buri.aoc.common.data.path.StepStrategy;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Data class for the maze.

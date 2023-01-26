@@ -10,37 +10,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 21: Monkey Math
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(152L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(152L, 1, false);
+		assertRun(299983725663456L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(299983725663456L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(301L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3093175982595L, result);
+	public void testPart2() {
+		assertRun(301L, 1, false);
+		assertRun(3093175982595L, 0, true);
 	}
 
 	/**
@@ -56,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What number do you yell to pass root's equality test?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Map<String, Monkey> monkeys = new HashMap<>();
 		for (String line : input) {
 			Monkey monkey = new Monkey(part, line);

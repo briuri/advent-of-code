@@ -1,7 +1,5 @@
 package buri.aoc.y19.d11;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Direction;
@@ -10,8 +8,7 @@ import buri.aoc.common.data.intcode.Computer;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
 
 /**
  * Day 11: Space Police
@@ -19,20 +16,14 @@ import static org.junit.Assert.assertTrue;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("2319", result);
+	public void testPart1() {
+		assertRun("2319", 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
+	public void testPart2() {
 		// UERPRFGJ
-		assertTrue(result.startsWith(" ■  ■ ■■■■ ■■■  ■■■  ■■■  ■■■■  ■■    ■■"));
+		assertRun(" ■  ■ ■■■■ ■■■  ■■■  ■■■  ■■■■  ■■    ■■", 0, true);
 	}
 
 	private static final char BLACK = '#';
@@ -48,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 	 * After starting the robot on a single white panel instead, what registration identifier does it paint on your
 	 * hull?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		Pair<Integer> size = (part == Part.ONE ? new Pair(140, 128) : new Pair(85, 12));
 		CharGrid hull = new CharGrid(size);
 		for (int y = 0; y < hull.getHeight(); y++) {

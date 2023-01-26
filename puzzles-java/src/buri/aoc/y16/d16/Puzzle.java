@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 16: Dragon Checksum
@@ -12,37 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1GenerateCurve() {
-		assertEquals("100", Puzzle.generateCurve("1", 3));
-		assertEquals("001", Puzzle.generateCurve("0", 3));
-		assertEquals("11111000000", Puzzle.generateCurve("11111", 11));
-		assertEquals("1111000010100101011110000", Puzzle.generateCurve("111100001010", 25));
+	public void testPart1() {
+		assertRun("00000100100001100", 0, true);
 	}
-
 	@Test
-	public void testPart1GetChecksum() {
-		assertEquals("100", Puzzle.getChecksum("110010110100"));
-	}
-
-	@Test
-	public void testPart1Examples() {
-		assertEquals("01100", Puzzle.getResult(Part.ONE, "10000", 20));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, "11011110011011101", 272);
-		toConsole(result);
-		assertEquals("00000100100001100", result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, "11011110011011101", 35651584);
-		toConsole(result);
-		assertEquals("00011010100010010", result);
+	public void testPart2() {
+		assertRun("00011010100010010", 0, true);
 	}
 
 	/**
@@ -53,8 +29,9 @@ public class Puzzle extends BasePuzzle {
 	 * The second disk you have to fill has length 35651584. Again using the initial state in your puzzle input, what is
 	 * the correct checksum for this disk?
 	 */
-	public static String getResult(Part part, String input, int diskLength) {
-		String curve = generateCurve(input, diskLength);
+	protected String runString(Part part, List<String> input) {
+		int diskLength = (part == Part.ONE ? 272 : 35651584);
+		String curve = generateCurve(input.get(0), diskLength);
 		return (getChecksum(curve));
 	}
 

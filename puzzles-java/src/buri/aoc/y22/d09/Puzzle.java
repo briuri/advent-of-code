@@ -11,38 +11,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 09: Rope Bridge
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(13L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(13L, 1, false);
+		assertRun(5878L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(5878L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-		assertEquals(36L, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2405L, result);
+	public void testPart2() {
+		assertRun(1L, 1, false);
+		assertRun(36L, 2, false);
+		assertRun(2405L, 0, true);
 	}
 
 	/**
@@ -52,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many positions does the tail of the rope visit at least once?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		// Build the rope.
 		int numKnots = (part == Part.ONE ? 2 : 10);
 		List<Pair<Integer>> knots = new ArrayList<>();

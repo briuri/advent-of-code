@@ -1,16 +1,14 @@
 package buri.aoc.y20.d15;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 15: Rambunctious Recitation
@@ -18,24 +16,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(1, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(1L, 1, false);
+		assertRun(257L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(257, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(8546398, result);
+	public void testPart2() {
+		assertRun(8546398L, 0, true);
 	}
 
 	/**
@@ -45,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Given your starting numbers, what will be the 30,000,000th number spoken?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String[] stringInts = input.get(0).split(",");
 		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
 

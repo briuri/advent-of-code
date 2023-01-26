@@ -11,37 +11,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 13: Distress Signal
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(13L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(13L, 1, false);
+		assertRun(5588L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(5588L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(140L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(23958L, result);
+	public void testPart2() {
+		assertRun(140L, 1, false);
+		assertRun(23958L, 0, true);
 	}
 
 	private static final int IN_ORDER = -1;
@@ -72,7 +56,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the decoder key for the distress signal?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			int pair = 1;
 			long sum = 0;

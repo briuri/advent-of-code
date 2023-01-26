@@ -1,12 +1,10 @@
 package buri.aoc.y17.d05;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 5: A Maze of Twisty Trampolines, All Alike
@@ -14,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(5, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(5L, 1, false);
+		assertRun(336905L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(336905, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(10, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(21985262, result);
+	public void testPart2() {
+		assertRun(10L, 1, false);
+		assertRun(21985262L, 0, true);
 	}
 
 	/**
@@ -54,7 +38,7 @@ public class Puzzle extends BasePuzzle {
 	 * offset >= 3).
 	 * How many steps does it take to reach the exit?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Integer> jumps = convertStringsToInts(input);
 
 		int numSteps = 0;

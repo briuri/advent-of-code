@@ -1,13 +1,11 @@
 package buri.aoc.y17.d01;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 1: Inverse Captcha
@@ -15,36 +13,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3, Puzzle.getResult(Part.ONE, "1122"));
-		assertEquals(4, Puzzle.getResult(Part.ONE, "1111"));
-		assertEquals(0, Puzzle.getResult(Part.ONE, "1234"));
-		assertEquals(9, Puzzle.getResult(Part.ONE, "91212129"));
+	public void testPart1() {
+		assertRun(1171L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(1171, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(6, Puzzle.getResult(Part.TWO, "1212"));
-		assertEquals(0, Puzzle.getResult(Part.TWO, "1221"));
-		assertEquals(4, Puzzle.getResult(Part.TWO, "123425"));
-		assertEquals(12, Puzzle.getResult(Part.TWO, "123123"));
-		assertEquals(4, Puzzle.getResult(Part.TWO, "12131415"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals(1024, result);
+	public void testPart2() {
+		assertRun(1024L, 0, true);
 	}
 
 	/**
@@ -57,8 +32,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the solution when matching to the digit halfway around the circular list?
 	 */
-	public static int getResult(Part part, String input) {
-		return (getIntSum(getMatchingDigits(part, input)));
+	protected long runLong(Part part, List<String> input) {
+		return (getIntSum(getMatchingDigits(part, input.get(0))));
 	}
 
 	/**

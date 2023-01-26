@@ -1,10 +1,10 @@
 package buri.aoc.y20.d06;
 
+import buri.aoc.common.Part;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.Part;
 
 /**
  * Data model for a group of questionnaire responses.

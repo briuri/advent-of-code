@@ -1,5 +1,11 @@
 package buri.aoc.y18.d20;
 
+import buri.aoc.common.data.grid.CharGrid;
+import buri.aoc.common.data.path.Path;
+import buri.aoc.common.data.path.Pathfinder;
+import buri.aoc.common.data.path.StepStrategy;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,12 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-
-import buri.aoc.common.data.grid.CharGrid;
-import buri.aoc.common.data.path.Path;
-import buri.aoc.common.data.path.Pathfinder;
-import buri.aoc.common.data.path.StepStrategy;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * @author Brian Uri!

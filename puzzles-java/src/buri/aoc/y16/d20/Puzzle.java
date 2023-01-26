@@ -1,16 +1,14 @@
 package buri.aoc.y16.d20;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 20: Firewall Rules
@@ -18,29 +16,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 9L));
+	public void testPart1() {
+		assertRun(14975795L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 4294967295L);
-		toConsole(result);
-		assertEquals(14975795, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(2, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 9L));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 4294967295L);
-		toConsole(result);
-		assertEquals(101, result);
+	public void testPart2() {
+		assertRun(101L, 0, true);
 	}
 
 	/**
@@ -50,7 +32,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many IPs are allowed by the blacklist?
 	 */
-	public static long getResult(Part part, List<String> input, long max) {
+	protected long runLong(Part part, List<String> input) {
+		long max = 4294967295L;
 		List<Range> ranges = new ArrayList<>();
 		for (String line : input) {
 			ranges.add(new Range(line));

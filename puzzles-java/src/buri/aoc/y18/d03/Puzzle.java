@@ -1,13 +1,11 @@
 package buri.aoc.y18.d03;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 3: No Matter How You Slice It
@@ -15,29 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(4, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(4L, 1, false);
+		assertRun(111266L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(111266, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(3, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(266, result);
+	public void testPart2() {
+		assertRun(3L, 1, false);
+		assertRun(266L, 0, true);
 	}
 
 	/**
@@ -47,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the ID of the only claim that doesn't overlap?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Claim> claims = new ArrayList<>();
 		for (String line : input) {
 			claims.add(new Claim(line));

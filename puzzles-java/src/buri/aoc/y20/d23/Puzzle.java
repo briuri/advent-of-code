@@ -1,14 +1,13 @@
 package buri.aoc.y20.d23;
 
-import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 23: Crab Cups
@@ -16,29 +15,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("67384529", Puzzle.getResult(Part.ONE, Puzzle.getInput(1).get(0)));
+	public void testPart1() {
+		assertRun("67384529", 1, false);
+		assertRun("45798623", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals("45798623", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("149245887792", Puzzle.getResult(Part.TWO, Puzzle.getInput(1).get(0)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0).get(0));
-		toConsole(result);
-		assertEquals("235551949822", result);
+	public void testPart2() {
+		assertRun("149245887792", 1, false);
+		assertRun("235551949822", 0, true);
 	}
 
 	/**
@@ -52,13 +37,13 @@ public class Puzzle extends BasePuzzle {
 	 * Determine which two cups will end up immediately clockwise of cup 1. What do you get if you multiply their labels
 	 * together?
 	 */
-	public static String getResult(Part part, String input) {
+	protected String runString(Part part, List<String> input) {
 		// Set up the cups.
 		Map<Integer, Cup> cups = new HashMap<>();
 		Cup first = null;
 		Cup left = null;
-		for (int i = 0; i < input.length(); i++) {
-			Cup cup = new Cup(Integer.valueOf(String.valueOf(input.charAt(i))));
+		for (int i = 0; i < input.get(0).length(); i++) {
+			Cup cup = new Cup(Integer.valueOf(String.valueOf(input.get(0).charAt(i))));
 			addCup(cups, cup, left);
 			left = cup;
 			if (first == null) {
@@ -66,7 +51,7 @@ public class Puzzle extends BasePuzzle {
 			}
 		}
 		if (part == Part.TWO) {
-			for (int i = input.length() + 1; i <= 1000000; i++) {
+			for (int i = input.get(0).length() + 1; i <= 1000000; i++) {
 				Cup cup = new Cup(i);
 				addCup(cups, cup, left);
 				left = cup;

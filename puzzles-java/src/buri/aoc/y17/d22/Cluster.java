@@ -1,10 +1,10 @@
 package buri.aoc.y17.d22;
 
-import java.util.List;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.List;
 
 /**
  * Clean nodes are shown as .; infected nodes are shown as #. This map only shows the center of the grid; there are many

@@ -1,13 +1,11 @@
 package buri.aoc.y18.d14;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 14: Chocolate Charts
@@ -15,35 +13,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("0124515891", Puzzle.getResult(Part.ONE, "5"));
-		assertEquals("5158916779", Puzzle.getResult(Part.ONE, "9"));
-		assertEquals("9251071085", Puzzle.getResult(Part.ONE, "18"));
-		assertEquals("5941429882", Puzzle.getResult(Part.ONE, "2018"));
+	public void testPart1() {
+		assertRun("5941429882", 1, false);
+		assertRun("1221283494", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, "652601");
-		toConsole(result);
-		assertEquals("1221283494", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("5", Puzzle.getResult(Part.TWO, "01245"));
-		assertEquals("9", Puzzle.getResult(Part.TWO, "51589"));
-		assertEquals("18", Puzzle.getResult(Part.TWO, "92510"));
-		assertEquals("2018", Puzzle.getResult(Part.TWO, "59414"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, "652601");
-		toConsole(result);
-		assertEquals("20261485", result);
+	public void testPart2() {
+		assertRun("20261485", 0, true);
 	}
 
 	/**
@@ -55,16 +32,17 @@ public class Puzzle extends BasePuzzle {
 	 * different recipes.
 	 *
 	 * Part 1:
-	 * What are the scores of the ten recipes immediately after the number of recipes in your puzzle input?
+	 * What are the scores of the ten recipes immediately after the number of recipes in your puzzle line?
 	 *
 	 * Part 2:
 	 * As it turns out, you got the Elves' plan backwards. They actually want to know how many recipes appear on the
-	 * scoreboard to the left of the first recipes whose scores are the digits from your puzzle input. How many recipes
-	 * appear on the scoreboard to the left of the score sequence in your puzzle input?
+	 * scoreboard to the left of the first recipes whose scores are the digits from your puzzle line. How many recipes
+	 * appear on the scoreboard to the left of the score sequence in your puzzle line?
 	 */
-	public static String getResult(Part part, String input) {
+	protected String runString(Part part, List<String> input) {
+		String line = input.get(0);
 		final int outputLength = 10;
-		final int part1Iterations = Integer.valueOf(input);
+		final int part1Iterations = Integer.valueOf(line);
 
 		int first = 0;
 		int second = 1;
@@ -77,10 +55,10 @@ public class Puzzle extends BasePuzzle {
 			String sum = String.valueOf(list.get(first) + list.get(second));
 			for (int sumChar = 0; sumChar < sum.length(); sumChar++) {
 				list.add(Character.getNumericValue(sum.charAt(sumChar)));
-				if (part == Part.TWO && list.size() > input.length()) {
-					int existingRecipes = list.size() - input.length();
+				if (part == Part.TWO && list.size() > line.length()) {
+					int existingRecipes = list.size() - line.length();
 					String endString = toString(list.subList(existingRecipes, list.size()));
-					if (endString.equals(input)) {
+					if (endString.equals(line)) {
 						return (String.valueOf(existingRecipes));
 					}
 				}

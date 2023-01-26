@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Base class for integer- and long-based tuples.
- *
+ * 
  * @author Brian Uri!
  */
 public class BaseTuple<T extends Number> {

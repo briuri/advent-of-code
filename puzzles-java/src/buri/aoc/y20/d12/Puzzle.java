@@ -1,13 +1,11 @@
 package buri.aoc.y20.d12;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 12: Rain Risk
@@ -15,29 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(25, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(25L, 1, false);
+		assertRun(2057L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2057, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(286, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(71504, result);
+	public void testPart2() {
+		assertRun(286L, 1, false);
+		assertRun(71504L, 0, true);
 	}
 
 	private static final Pair<Integer> ORIGIN = new Pair(0, 0);
@@ -49,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the Manhattan distance between that location and the ship's starting position?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Pair<Integer> ship = ORIGIN.copy();
 		if (part == Part.ONE) {
 			// LR: Turn ship in by that many degrees.

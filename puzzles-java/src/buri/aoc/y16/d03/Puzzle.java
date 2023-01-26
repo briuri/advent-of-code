@@ -1,12 +1,10 @@
 package buri.aoc.y16.d03;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 3: Squares With Three Sides
@@ -14,19 +12,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(983, result);
+	public void testPart1() {
+		assertRun(983L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1836, result);
+	public void testPart2() {
+		assertRun(1836L, 0, true);
 	}
 
 	/**
@@ -36,7 +28,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Reading by columns, how many of the listed triangles are possible?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int possible = 0;
 		if (part == Part.ONE) {
 			for (String triangle : input) {

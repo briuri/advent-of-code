@@ -1,13 +1,5 @@
 package buri.aoc.y19.d15;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.intcode.Computer;
@@ -15,6 +7,14 @@ import buri.aoc.common.data.path.Path;
 import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Data model for the oxygen maze.

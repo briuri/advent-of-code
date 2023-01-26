@@ -11,39 +11,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 1: No Time for a Taxicab
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(5, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(2, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(12, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
+	public void testPart1() {
+		assertRun(5L, 1, false);
+		assertRun(2L, 2, false);
+		assertRun(12L, 3, false);
+		assertRun(307L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(307, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(165, result);
+	public void testPart2() {
+		assertRun(4L, 4, false);
+		assertRun(165L, 0, true);
 	}
 
 	/**
@@ -53,7 +37,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many blocks away is the first location you visit twice?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		input = Arrays.asList(input.get(0).split(", "));
 		Pair<Integer> position = followInstructions(part, input);
 		return (Math.abs(position.getX()) + Math.abs(position.getY()));

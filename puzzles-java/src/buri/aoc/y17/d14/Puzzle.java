@@ -1,13 +1,11 @@
 package buri.aoc.y17.d14;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Day 14: Disk Defragmentation
@@ -15,29 +13,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(8108, Puzzle.getResult(Part.ONE, "flqrgnkx"));
+	public void testPart1() {
+		assertRun(8108L, 1, false);
+		assertRun(8140L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, "jxqlasbh");
-		toConsole(result);
-		assertEquals(8140, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1242, Puzzle.getResult(Part.TWO, "flqrgnkx"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, "jxqlasbh");
-		toConsole(result);
-		assertEquals(1182, result);
+	public void testPart2() {
+		assertRun(1242L, 1, false);
+		assertRun(1182L, 0, true);
 	}
 
 	/**
@@ -47,10 +31,10 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many regions are present given your key string?
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
 		List<String> diskRows = new ArrayList<>();
 		for (int i = 0; i < 128; i++) {
-			String hex = getKnotHashFor(input + "-" + i);
+			String hex = getKnotHashFor(input.get(0) + "-" + i);
 			diskRows.add(convertToBinary(hex));
 		}
 		if (part == Part.ONE) {
@@ -69,9 +53,7 @@ public class Puzzle extends BasePuzzle {
 	 * Marshals the raw data into the form needed for a knot hash and returns the knot hash hex string.
 	 */
 	private static String getKnotHashFor(String input) {
-		List<String> data = new ArrayList<>();
-		data.add(input);
-		return (buri.aoc.y17.d10.Puzzle.getResult(Part.TWO, 256, data));
+		return (new buri.aoc.y17.d10.Puzzle().getKnotHash(input));
 	}
 
 	/**

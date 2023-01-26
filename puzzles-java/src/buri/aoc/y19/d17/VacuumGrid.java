@@ -1,9 +1,9 @@
 package buri.aoc.y19.d17;
 
-import java.util.List;
-
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.List;
 
 /**
  * Data model for the vacuum scaffolding.

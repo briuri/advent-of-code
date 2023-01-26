@@ -1,8 +1,8 @@
 package buri.aoc.common.data.path;
 
-import java.util.List;
-
 import buri.aoc.common.data.tuple.BaseTuple;
+
+import java.util.List;
 
 /**
  * Interface for a pathfinding strategy that identifies potential steps to move to next.

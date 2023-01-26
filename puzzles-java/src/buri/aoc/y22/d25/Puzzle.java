@@ -14,30 +14,22 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
+	@Test
+	public void testPart1() {
+		assertRun("2=-1=0", 1, false);
+		assertRun("2=001=-2=--0212-22-2", 0, true);
+	}
 	@Test
 	public void testConversion() {
 		assertEquals("1=12=0202-000-=0", Puzzle.toSnafu(19925921840L));
 		assertEquals(19925921840L, Puzzle.toLong("1=12=0202-000-=0"));
 	}
 
-	@Test
-	public void testPart1Examples() {
-		assertEquals("2=-1=0", Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals("2=001=-2=--0212-22-2", result);
-	}
-
 	/**
 	 * Part 1:
 	 * What SNAFU number do you supply to Bob's console?
 	 */
-	public static String getResult(Part part, List<String> input) {
+	protected String runString(Part part, List<String> input) {
 		long sum = 0;
 		for (String line : input) {
 			sum += toLong(line);

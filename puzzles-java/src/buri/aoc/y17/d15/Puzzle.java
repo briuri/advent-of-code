@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 15: Dueling Generators
@@ -12,29 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(588, Puzzle.getResult(Part.ONE, 65, 8921));
+	public void testPart1() {
+		assertRun(588L, 1, false);
+		assertRun(573L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, 634, 301);
-		toConsole(result);
-		assertEquals(573, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(309, Puzzle.getResult(Part.TWO, 65, 8921));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, 634, 301);
-		toConsole(result);
-		assertEquals(294, result);
+	public void testPart2() {
+		assertRun(309L, 1, false);
+		assertRun(294L, 0, true);
 	}
 
 	/**
@@ -44,7 +30,9 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * After 5 million pairs, but using this new generator logic, what is the judge's final count?
 	 */
-	public static int getResult(Part part, long startA, long startB) {
+	protected long runLong(Part part, List<String> input) {
+		int startA = Integer.parseInt(input.get(0).split("with ")[1]);
+		int startB = Integer.parseInt(input.get(1).split("with ")[1]);
 		final int judges = part == Part.ONE ? 40000000 : 5000000;
 		Generator a = Generator.getInstance("A", startA);
 		Generator b = Generator.getInstance("B", startB);

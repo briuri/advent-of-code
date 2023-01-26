@@ -1,5 +1,10 @@
 package buri.aoc.y18.d06;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import buri.aoc.common.data.tuple.Pair;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,42 +13,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import buri.aoc.common.data.tuple.Pair;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 6: Chronal Coordinates
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(17, Puzzle.getResult(Part.ONE, Puzzle.getInput(1), 0));
+	public void testPart1() {
+		assertRun(17L, 1, false);
+		assertRun(3251L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0), 0);
-		toConsole(result);
-		assertEquals(3251, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(16, Puzzle.getResult(Part.TWO, Puzzle.getInput(1), 32));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0), 10000);
-		toConsole(result);
-		assertEquals(47841, result);
+	public void testPart2() {
+		assertRun(16L, 1, false);
+		assertRun(47841L, 0, true);
 	}
 
 	/**
@@ -54,7 +38,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the size of the region containing all locations which have a total distance to all given coordinates of
 	 * less than 10000?
 	 */
-	public static int getResult(Part part, List<String> input, int distanceLimit) {
+	protected long runLong(Part part, List<String> input) {
 		List<Pair> data = new ArrayList<>();
 		for (String line : input) {
 			data.add(new Pair(line, Integer.class));
@@ -103,6 +87,7 @@ public class Puzzle extends BasePuzzle {
 			return (maxEntry.getValue());
 		}
 
+		int distanceLimit = (input.size() < 10 ? 32 : 10000);
 		int gridLength = getGridLength(data);
 
 		int regionSize = 0;

@@ -5,7 +5,7 @@ import buri.aoc.common.Part;
 import buri.aoc.common.data.MD5Hash;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 4: The Ideal Stocking Stuffer
@@ -14,16 +14,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class Puzzle extends BasePuzzle {
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, "iwrupvqb");
-		toConsole(result);
-		assertEquals(346386, result);
+	public void testPart1() {
+		assertRun(346386L, 0, true);
 	}
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, "iwrupvqb");
-		toConsole(result);
-		assertEquals(9958218, result);
+	public void testPart2() {
+		assertRun(9958218L, 0, true);
 	}
 
 	/**
@@ -33,12 +29,12 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * Now find one that starts with six zeroes.
 	 */
-	public static int getResult(Part part, String input) {
+	protected long runLong(Part part, List<String> input) {
 		MD5Hash hasher = new MD5Hash();
 		int number = 0;
 		String prefix = (part == Part.ONE ? "00000" : "000000");
 		while (true) {
-			if (hasher.getHash(input + number).startsWith(prefix)) {
+			if (hasher.getHash(input.get(0) + number).startsWith(prefix)) {
 				return (number);
 			}
 			number++;

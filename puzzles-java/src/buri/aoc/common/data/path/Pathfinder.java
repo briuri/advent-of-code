@@ -1,5 +1,7 @@
 package buri.aoc.common.data.path;
 
+import buri.aoc.common.data.tuple.BaseTuple;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-
-import buri.aoc.common.data.tuple.BaseTuple;
 
 /**
  * Utility class for search algorithms.

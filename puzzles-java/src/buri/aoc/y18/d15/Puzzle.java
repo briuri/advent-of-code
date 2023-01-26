@@ -1,12 +1,10 @@
 package buri.aoc.y18.d15;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 15: Beverage Bandits
@@ -14,38 +12,24 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(27730, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-		assertEquals(36334, Puzzle.getResult(Part.ONE, Puzzle.getInput(2)));
-		assertEquals(39514, Puzzle.getResult(Part.ONE, Puzzle.getInput(3)));
-		assertEquals(27755, Puzzle.getResult(Part.ONE, Puzzle.getInput(4)));
-		assertEquals(28944, Puzzle.getResult(Part.ONE, Puzzle.getInput(5)));
-		assertEquals(18740, Puzzle.getResult(Part.ONE, Puzzle.getInput(6)));
+	public void testPart1() {
+		assertRun(27730L, 1, false);
+		assertRun(36334L, 2, false);
+		assertRun(39514L, 3, false);
+		assertRun(27755L, 4, false);
+		assertRun(28944L, 5, false);
+		assertRun(18740L, 6, false);
+		assertRun(190777L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(190777, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4988, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-		assertEquals(31284, Puzzle.getResult(Part.TWO, Puzzle.getInput(3)));
-		assertEquals(3478, Puzzle.getResult(Part.TWO, Puzzle.getInput(4)));
-		assertEquals(6474, Puzzle.getResult(Part.TWO, Puzzle.getInput(5)));
-		assertEquals(1140, Puzzle.getResult(Part.TWO, Puzzle.getInput(6)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(47388, result);
+	public void testPart2() {
+		assertRun(4988L, 1, false);
+		assertRun(31284L, 3, false);
+		assertRun(3478L, 4, false);
+		assertRun(6474L, 5, false);
+		assertRun(1140L, 6, false);
+		assertRun(47388L, 0, true);
 	}
 
 	/**
@@ -56,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * After increasing the Elves' attack power until it is just barely enough for them to win without any Elves dying,
 	 * what is the outcome of the combat described in your puzzle input?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			Grid grid = new Grid(input, 3);
 			return (grid.run());

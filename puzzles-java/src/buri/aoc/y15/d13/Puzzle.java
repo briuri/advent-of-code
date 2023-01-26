@@ -1,16 +1,14 @@
 package buri.aoc.y15.d13;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 13: Knights of the Dinner Table
@@ -18,24 +16,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(330, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(330L, 1, false);
+		assertRun(709L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(709, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(668, result);
+	public void testPart2() {
+		assertRun(668L, 0, true);
 	}
 
 	/**
@@ -45,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the total change in happiness for the optimal seating arrangement that actually includes yourself?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<String> guests = new ArrayList<>();
 		Map<String, Integer> happiness = new HashMap<>();
 		for (String line : input) {

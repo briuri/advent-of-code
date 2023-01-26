@@ -1,9 +1,9 @@
 package buri.aoc.y21.d05;
 
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Data model for a line segment.

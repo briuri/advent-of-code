@@ -13,37 +13,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 16: Proboscidea Volcanium
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(1651L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(1651L, 1, false);
+		assertRun(1796L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1796L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1707L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1999L, result);
+	public void testPart2() {
+		assertRun(1707L, 1, false);
+		assertRun(1999L, 0, true);
 	}
 
 	/**
@@ -53,7 +37,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * With you and an elephant working together for 26 minutes, what is the most pressure you could release?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		String start = "AA";
 		// Valve names mapped to flow rates.
 		Map<String, Long> valves = new HashMap<>();

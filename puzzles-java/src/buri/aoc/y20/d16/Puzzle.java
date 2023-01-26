@@ -1,16 +1,14 @@
 package buri.aoc.y20.d16;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 16: Ticket Translation
@@ -18,24 +16,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(71L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(71L, 1, false);
+		assertRun(21978L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(21978L, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1053686852011L, result);
+	public void testPart2() {
+		assertRun(1053686852011L, 0, true);
 	}
 
 	/**
@@ -45,7 +33,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What do you get if you multiply those six values together?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Rule> rules = new ArrayList<>();
 		Ticket mine = null;
 		List<Ticket> nearby = new ArrayList<>();

@@ -1,13 +1,12 @@
 package buri.aoc.y15.d20;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 20: Infinite Elves and Infinite Houses
@@ -15,19 +14,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, 33100000);
-		toConsole(result);
-		assertEquals(776160, result);
+	public void testPart1() {
+		assertRun(776160L, 0, true);
 	}
-
 	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, 33100000);
-		toConsole(result);
-		assertEquals(786240, result);
+	public void testPart2() {
+		assertRun(786240L, 0, true);
 	}
 
 	/**
@@ -38,13 +31,14 @@ public class Puzzle extends BasePuzzle {
 	 * Instead, each Elf will stop after delivering presents to 50 houses. To make up for it, they decide to deliver
 	 * presents equal to eleven times their number at each house.
 	 */
-	public static int getResult(Part part, int input) {
+	protected long runLong(Part part, List<String> input) {
+		int presents = Integer.parseInt(input.get(0));
 		Map<Integer, Integer> houses = new HashMap<>();
 		int numPresents = (part == Part.ONE ? 10 : 11);
 
 		// Part 1 Worst Case: Elf 3,310,000 visits House 3,310,000 and leaves 33,100,000 presents.
 		// Part 2 Worst Case: Elf 3,009,091 visits House 3,009,091 and leaves 33,100,001 presents.
-		int maxElf = input / 10;
+		int maxElf = presents / 10;
 
 		// After I got the answers, I raised the house lower bound to speed up run time.
 		int minHouse = part == Part.ONE ? 776000 : 786000;
@@ -56,7 +50,7 @@ public class Puzzle extends BasePuzzle {
 				if (house >= elf && house % elf == 0 && allowVisit) {
 					Integer totalPresents = houses.getOrDefault(house, 0) + (elf * numPresents);
 					houses.put(house, totalPresents);
-					if (totalPresents >= input) {
+					if (totalPresents >= presents) {
 						return (house);
 					}
 				}

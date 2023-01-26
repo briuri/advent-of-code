@@ -1,13 +1,13 @@
 package buri.aoc.y21.d09;
 
+import buri.aoc.common.data.grid.IntGrid;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import buri.aoc.common.data.grid.IntGrid;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Data model for the heightmap.

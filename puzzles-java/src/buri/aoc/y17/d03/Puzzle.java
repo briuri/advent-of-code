@@ -6,7 +6,7 @@ import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 3: Spiral Memory
@@ -14,38 +14,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(0, Puzzle.getResult(Part.ONE, 1));
-		assertEquals(3, Puzzle.getResult(Part.ONE, 12));
-		assertEquals(2, Puzzle.getResult(Part.ONE, 23));
-		assertEquals(31, Puzzle.getResult(Part.ONE, 1024));
+	public void testPart1() {
+		assertRun(31L, 1, false);
+		assertRun(430L, 0, true);
 	}
-
-	/**
-	 * Solves the Part 1 puzzle against the real input.
-	 */
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, 312051);
-		toConsole(result);
-		assertEquals(430, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(747, Puzzle.getResult(Part.TWO, 700));
-	}
-
-	/**
-	 * Solves the Part 2 puzzle against the real input.
-	 */
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, 312051);
-		toConsole(result);
-		assertEquals(312453, result);
+	public void testPart2() {
+		assertRun(312453L, 0, true);
 	}
 
 	/**
@@ -106,7 +82,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the first value written that is larger than your puzzle input?
 	 */
-	public static int getResult(Part part, int value) {
+	protected long runLong(Part part, List<String> input) {
+		int value = Integer.parseInt(input.get(0));
 		if (part == Part.ONE) {
 			return (getManhattanDistance(value));
 		}

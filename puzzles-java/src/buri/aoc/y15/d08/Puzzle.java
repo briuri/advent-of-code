@@ -1,12 +1,10 @@
 package buri.aoc.y15.d08;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 8: Matchsticks
@@ -14,28 +12,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(12, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1333, result);
+	public void testPart1() {
+		assertRun(12L, 1, false);
+		assertRun(1333L, 0, true);
 	}
 	@Test
-	public void testPart2Examples() {
-		assertEquals(19, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2046, result);
+	public void testPart2() {
+		assertRun(19L, 1, false);
+		assertRun(2046L, 0, true);
 	}
 
 	/**
@@ -47,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * Your task is to find the total number of characters to represent the newly encoded strings minus the number of
 	 * characters of code in each original string literal.
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		int numCharsCode = 0;
 		int numCharsMemory = 0;
 		int numCharsEncoded = 0;

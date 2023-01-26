@@ -1,9 +1,9 @@
 package buri.aoc.y17.d14;
 
-import java.util.List;
-
 import buri.aoc.common.data.grid.IntGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.List;
 
 /**
  * @author Brian Uri!

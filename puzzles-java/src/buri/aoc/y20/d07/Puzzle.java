@@ -1,15 +1,13 @@
 package buri.aoc.y20.d07;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Day 07: Handy Haversacks
@@ -17,30 +15,16 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(4, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(4L, 1, false);
+		assertRun(289L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(289, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(32, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-		assertEquals(126, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(30055, result);
+	public void testPart2() {
+		assertRun(32L, 1, false);
+		assertRun(126L, 2, false);
+		assertRun(30055L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How many individual bags are required inside your single shiny gold bag?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Rule> rules = new ArrayList<>();
 		for (String line : input) {
 			rules.add(new Rule(line));

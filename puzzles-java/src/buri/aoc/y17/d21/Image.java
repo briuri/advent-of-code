@@ -1,12 +1,12 @@
 package buri.aoc.y17.d21;
 
+import buri.aoc.common.data.grid.IntGrid;
+import buri.aoc.common.data.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.data.grid.IntGrid;
-import buri.aoc.common.data.tuple.Pair;
 
 /**
  * Data class for the Image

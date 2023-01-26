@@ -1,12 +1,10 @@
 package buri.aoc.y16.d12;
 
-import java.util.List;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
 
 /**
  * Day 12: Leonardo's Monorail
@@ -14,24 +12,14 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(42, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(42L, 1, false);
+		assertRun(318007L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(318007, result);
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(9227661, result);
+	public void testPart2() {
+		assertRun(9227661L, 0, true);
 	}
 
 	/**
@@ -41,7 +29,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * If you instead initialize register c to be 1, what value is now left in register a?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Registers registers = new Registers(part, input);
 		registers.process();
 		if (part == Part.ONE) {

@@ -1,13 +1,12 @@
 package buri.aoc.y16.d17;
 
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.path.Pathfinder;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 17: Two Steps Forward
@@ -15,33 +14,13 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals("DDRRRD", Puzzle.getResult(Part.ONE, "ihgpwlah"));
-		assertEquals("DDUDRLRRUDRD", Puzzle.getResult(Part.ONE, "kglvqrro"));
-		assertEquals("DRURDRUDDLLDLUURRDULRLDUUDDDRR", Puzzle.getResult(Part.ONE, "ulqzkmiv"));
+	public void testPart1() {
+		assertRun("RLRDRDUDDR", 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		String result = Puzzle.getResult(Part.ONE, "rrrbmfta");
-		toConsole(result);
-		assertEquals("RLRDRDUDDR", result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals("370", Puzzle.getResult(Part.TWO, "ihgpwlah"));
-		assertEquals("492", Puzzle.getResult(Part.TWO, "kglvqrro"));
-		assertEquals("830", Puzzle.getResult(Part.TWO, "ulqzkmiv"));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		String result = Puzzle.getResult(Part.TWO, "rrrbmfta");
-		toConsole(result);
-		assertEquals("420", result);
+	public void testPart2() {
+		assertRun("420", 0, true);
 	}
 
 	/**
@@ -51,7 +30,8 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * What is the length of the longest path that reaches the vault?
 	 */
-	public static String getResult(Part part, String passcode) {
+	protected String runString(Part part, List<String> input) {
+		String passcode = input.get(0);
 		Position start = new Position(0, 0, passcode);
 
 		// Generate breadth first mapping to find shortest paths to all points.

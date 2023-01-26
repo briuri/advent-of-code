@@ -1,12 +1,12 @@
 package buri.aoc.y18.d17;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Model for the reservoir

@@ -1,16 +1,16 @@
 package buri.aoc.y16.d17;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import buri.aoc.common.data.Direction;
 import buri.aoc.common.data.MD5Hash;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Data class for a pair and associated set of doors around it.
- * 
+ *
  * @author Brian Uri!
  */
 public class Position extends Pair<Integer> {
@@ -43,8 +43,8 @@ public class Position extends Pair<Integer> {
 		 * Returns true if the direction is an unlocked door. Returns false for walls or locked doors.
 		 */
 		private boolean canMove(Position current, Direction direction) {
-			boolean isWall = ((direction == Direction.LEFT && current.getX() == 0) 
-				|| (direction == Direction.UP && current.getY() == 0) 
+			boolean isWall = ((direction == Direction.LEFT && current.getX() == 0)
+				|| (direction == Direction.UP && current.getY() == 0)
 				|| (direction == Direction.RIGHT && current.getX() == 3)
 				|| (direction == Direction.DOWN && current.getY() == 3));
 

@@ -1,15 +1,13 @@
 package buri.aoc.y21.d25;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Day 25: Sea Cucumber
@@ -17,24 +15,17 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(58L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(513L, result);
+	public void testPart1() {
+		assertRun(58L, 1, false);
+		assertRun(513L, 0, true);
 	}
 
 	/**
 	 * Part 1:
 	 * What is the first step on which no sea cucumbers move?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		Map<Pair<Integer>, Character> grid = new HashMap<>();
 		for (int y = 0; y < input.size(); y++) {
 			for (int x = 0; x < input.get(0).length(); x++) {

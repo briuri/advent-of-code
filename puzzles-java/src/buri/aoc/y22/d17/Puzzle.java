@@ -11,37 +11,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Day 17: Pyroclastic Flow
  *
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(3068L, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(3068L, 1, false);
+		assertRun(3197L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(3197L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(1514285714288L, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(1568513119571L, result);
+	public void testPart2() {
+		assertRun(1514285714288L, 1, false);
+		assertRun(1568513119571L, 0, true);
 	}
 
 	// Need enough rows in the Part 2 snapshot to show uniqueness.
@@ -55,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 	 * Part 2:
 	 * How tall will the tower be after 1000000000000 rocks have stopped?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		JetPattern pattern = new JetPattern(input.get(0));
 		RockFactory rockFactory = new RockFactory();
 
@@ -90,7 +74,7 @@ public class Puzzle extends BasePuzzle {
 					long rocksFallenPerCycle = rocksFallen - states.get(stateKey).getX();
 
 					// How many more cycles will get us near maxRocks
-					// (integer math gets us close, then we step through the last few rocks normally.
+					// (integer math gets us close, then we step through the last few rocks normally).
 					long requiredCycles = (MAX_ROCKS - rocksFallen) / rocksFallenPerCycle;
 					// Update the height growth over the cycles.
 					simulationHeight += requiredCycles * heightChangePerCycle;

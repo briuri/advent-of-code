@@ -1,14 +1,12 @@
 package buri.aoc.y17.d18;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * Day 18: Duet
@@ -16,29 +14,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(4, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(4L, 1, false);
+		assertRun(2951L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(2951, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(3, Puzzle.getResult(Part.TWO, Puzzle.getInput(2)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(7366, result);
+	public void testPart2() {
+		assertRun(3L, 2, false);
+		assertRun(7366L, 0, true);
 	}
 
 	/**
@@ -50,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * Once both of your programs have terminated (regardless of what caused them to do so), how many times did program
 	 * 1 send a value?
 	 */
-	public static long getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		if (part == Part.ONE) {
 			Part1Registers registers = new Part1Registers(input);
 			registers.process();

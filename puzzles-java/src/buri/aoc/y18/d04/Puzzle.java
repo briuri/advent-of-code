@@ -1,16 +1,14 @@
 package buri.aoc.y18.d04;
 
+import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import buri.aoc.common.BasePuzzle;
-import buri.aoc.common.Part;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Day 4: Repose Record
@@ -18,29 +16,15 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(240, Puzzle.getResult(Part.ONE, Puzzle.getInput(1)));
+	public void testPart1() {
+		assertRun(240L, 1, false);
+		assertRun(76357L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		int result = Puzzle.getResult(Part.ONE, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(76357, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(4455, Puzzle.getResult(Part.TWO, Puzzle.getInput(1)));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		int result = Puzzle.getResult(Part.TWO, Puzzle.getInput(0));
-		toConsole(result);
-		assertEquals(41668, result);
+	public void testPart2() {
+		assertRun(4455L, 1, false);
+		assertRun(41668L, 0, true);
 	}
 
 	/**
@@ -52,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * Of all guards, which guard is most frequently asleep on the same minute? What is the ID of the guard you chose
 	 * multiplied by the minute you chose?
 	 */
-	public static int getResult(Part part, List<String> input) {
+	protected long runLong(Part part, List<String> input) {
 		List<Observation> data = new ArrayList<>();
 		for (String line : input) {
 			data.add(new Observation(line));

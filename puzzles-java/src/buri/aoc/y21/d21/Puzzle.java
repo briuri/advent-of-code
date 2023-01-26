@@ -1,14 +1,14 @@
 package buri.aoc.y21.d21;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
 import buri.aoc.common.BasePuzzle;
+import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Quad;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Day 21: Dirac Dice
@@ -16,60 +16,48 @@ import static org.junit.Assert.assertEquals;
  * @author Brian Uri!
  */
 public class Puzzle extends BasePuzzle {
-
 	@Test
-	public void testPart1Examples() {
-		assertEquals(739785L, Puzzle.getPart1Result(4, 8));
+	public void testPart1() {
+		assertRun(739785L, 1, false);
+		assertRun(412344L, 0, true);
 	}
-
 	@Test
-	public void testPart1Puzzle() {
-		long result = Puzzle.getPart1Result(8, 3);
-		toConsole(result);
-		assertEquals(412344L, result);
-	}
-
-	@Test
-	public void testPart2Examples() {
-		assertEquals(444356092776315L, Puzzle.getPart2Result(4, 8));
-	}
-
-	@Test
-	public void testPart2Puzzle() {
-		long result = Puzzle.getPart2Result(8, 3);
-		toConsole(result);
-		assertEquals(214924284932572L, result);
+	public void testPart2() {
+		assertRun(444356092776315L, 1, false);
+		assertRun(214924284932572L, 0, true);
 	}
 
 	/**
 	 * Part 1:
 	 * What do you get if you multiply the score of the losing player by the number of times the die was rolled during
 	 * the game?
-	 */
-	public static long getPart1Result(int position1, int position2) {
-		int score1 = 0;
-		int score2 = 0;
-		Die die = new Die();
-		while (true) {
-			position1 = (position1 + die.roll() + die.roll() + die.roll() - 1) % 10 + 1;
-			score1 += position1;
-			if (score1 >= 1000) {
-				return (score2 * die.getRollCount());
-			}
-
-			position2 = (position2 + die.roll() + die.roll() + die.roll() - 1) % 10 + 1;
-			score2 += position2;
-			if (score2 >= 1000) {
-				return (score2 * die.getRollCount());
-			}
-		}
-	}
-
-	/**
+	 *
 	 * Part 2:
 	 * Find the player that wins in more universes; in how many universes does that player win?
 	 */
-	public static long getPart2Result(int start1, int start2) {
+	protected long runLong(Part part, List<String> input) {
+		int start1 = Integer.parseInt(input.get(0).split(": ")[1]);
+		int start2 = Integer.parseInt(input.get(1).split(": ")[1]);
+		if (part == Part.ONE) {
+			int score1 = 0;
+			int score2 = 0;
+			Die die = new Die();
+			while (true) {
+				start1 = (start1 + die.roll() + die.roll() + die.roll() - 1) % 10 + 1;
+				score1 += start1;
+				if (score1 >= 1000) {
+					return (score2 * die.getRollCount());
+				}
+
+				start2 = (start2 + die.roll() + die.roll() + die.roll() - 1) % 10 + 1;
+				score2 += start2;
+				if (score2 >= 1000) {
+					return (score2 * die.getRollCount());
+				}
+			}
+		}
+
+		// Part Two
 		// All 27 dice roll possibilities and how frequently each sum of the 3 rolls occurs.
 		final Map<Integer, Integer> ALL_ROLLS = new TreeMap<>();
 		ALL_ROLLS.put(3, 1);
@@ -121,6 +109,6 @@ public class Puzzle extends BasePuzzle {
 			}
 			universes = newUniverses;
 		}
-		return (wins1 > wins2 ? wins1 : wins2);
+		return (Math.max(wins1, wins2));
 	}
 }
