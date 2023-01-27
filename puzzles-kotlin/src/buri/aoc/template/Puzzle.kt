@@ -12,12 +12,12 @@ import org.junit.Test
 class Puzzle : BasePuzzle() {
     @Test
     fun runPart1() {
-        assertRun(0, 1, false)
+        assertRun(0, 1)
         assertRun(0, 0, true)
     }
     @Test
     fun runPart2() {
-        assertRun(0, 1, false)
+        assertRun(0, 1)
         assertRun(0, 0, true)
     }
 
