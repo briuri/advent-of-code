@@ -21,7 +21,7 @@ abstract class BasePuzzle {
     /**
      * Runs part of a puzzle and compares the result to the expected value.
      */
-    fun assertRun(expected: Any, fileIndex: Int, toConsole: Boolean) {
+    fun assertRun(expected: Any, fileIndex: Int, toConsole: Boolean = false) {
         val year = getYear()
         val day = getDay()
         val part = if (getPart() == "1") Part.ONE else Part.TWO

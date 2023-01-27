@@ -15,12 +15,12 @@ import javax.xml.bind.DatatypeConverter
 class Puzzle : BasePuzzle() {
     @Test
     fun runPart1() {
-        assertRun(609043, 1, false)
+        assertRun(609043, 1)
         assertRun(117946, 0, true)
     }
     @Test
     fun runPart2() {
-        assertRun(6742839, 1, false)
+        assertRun(6742839, 1)
         assertRun(3938038, 0, true)
     }
 
