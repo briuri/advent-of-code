@@ -148,7 +148,7 @@ public class Puzzle extends BasePuzzle {
 
 		// Start filling grid from center.
 		int currentRing = 1;
-		Pair position = grid.getCenterPosition();
+		Pair<Integer> position = grid.getCenterPosition();
 		grid.set(position, 1);
 		position.move(Direction.RIGHT);
 

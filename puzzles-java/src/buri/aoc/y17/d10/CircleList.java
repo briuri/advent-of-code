@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class CircleList {
 
-	private List<Integer> _list;
+	private final List<Integer> _list;
 
 	/**
 	 * Constructor
@@ -69,15 +69,15 @@ public class CircleList {
 			List<Integer> subList = getList().subList(i * 16, i * 16 + 16);
 			denseHash.add(toDenseHash(subList));
 		}
-		String hex = "";
-		for (int i = 0; i < denseHash.size(); i++) {
-			String subHex = Integer.toHexString(denseHash.get(i));
+		StringBuilder hex = new StringBuilder();
+		for (Integer hash : denseHash) {
+			String subHex = Integer.toHexString(hash);
 			if (subHex.length() == 1) {
 				subHex = "0" + subHex;
 			}
-			hex += subHex;
+			hex.append(subHex);
 		}
-		return (hex);
+		return (hex.toString());
 	}
 
 	/**
@@ -91,17 +91,17 @@ public class CircleList {
 	 * Output for debugging
 	 */
 	public String toString(int currentPosition) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < getList().size(); i++) {
 			if (i == currentPosition) {
-				buffer.append(String.format("[%s]", getList().get(i)));
+				builder.append(String.format("[%s]", getList().get(i)));
 			}
 			else {
-				buffer.append(getList().get(i));
+				builder.append(getList().get(i));
 			}
-			buffer.append(" ");
+			builder.append(" ");
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	@Override

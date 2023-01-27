@@ -11,8 +11,8 @@ import java.util.ArrayDeque;
  */
 public class Spinlock {
 
-	private int _steps;
-	private ArrayDeque<Integer> _spinlock;
+	private final int _steps;
+	private final ArrayDeque<Integer> _spinlock;
 
 	/**
 	 * Constructor
@@ -34,19 +34,6 @@ public class Spinlock {
 		int rightValue = getSpinlock().getFirst();
 		getSpinlock().addFirst(value);
 		return (rightValue);
-	}
-
-	/**
-	 * Returns the value after zero in the list (spins the lock to find this).
-	 */
-	public int getValueAfterZero() {
-		while (true) {
-			if (getSpinlock().getFirst() == 0) {
-				rotate(1);
-				return (getSpinlock().getFirst());
-			}
-			rotate(1);
-		}
 	}
 
 	/**

@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public class State {
 
-	private char _name;
-	private Map<Integer, Integer> _writes = new HashMap<>();
-	private Map<Integer, Integer> _moves = new HashMap<>();
-	private Map<Integer, Character> _nextStates = new HashMap<>();
+	private final char _name;
+	private final Map<Integer, Integer> _writes = new HashMap<>();
+	private final Map<Integer, Integer> _moves = new HashMap<>();
+	private final Map<Integer, Character> _nextStates = new HashMap<>();
 
 	/**
 	 * Constructor
@@ -22,25 +22,25 @@ public class State {
 	public State(List<String> definition) {
 		_name = definition.get(0).charAt(9);
 		getWrites().put(0, Character.getNumericValue(definition.get(2).charAt(22)));
-		getMoves().put(0, definition.get(3).indexOf("right") == -1 ? -1 : 1);
+		getMoves().put(0, !definition.get(3).contains("right") ? -1 : 1);
 		getNextStates().put(0, definition.get(4).charAt(26));
 
 		getWrites().put(1, Character.getNumericValue(definition.get(6).charAt(22)));
-		getMoves().put(1, definition.get(7).indexOf("right") == -1 ? -1 : 1);
+		getMoves().put(1, !definition.get(7).contains("right") ? -1 : 1);
 		getNextStates().put(1, definition.get(8).charAt(26));
 	}
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getName()).append("[");
+		StringBuilder builder = new StringBuilder();
+		builder.append(getName()).append("[");
 		for (Integer key : getWrites().keySet()) {
-			buffer.append(key).append("(").append(getWrites().get(key)).append(",");
-			buffer.append(getMoves().get(key)).append(",");
-			buffer.append(getNextStates().get(key)).append(") ");
+			builder.append(key).append("(").append(getWrites().get(key)).append(",");
+			builder.append(getMoves().get(key)).append(",");
+			builder.append(getNextStates().get(key)).append(") ");
 		}
-		buffer.append("]");
-		return (buffer.toString());
+		builder.append("]");
+		return (builder.toString());
 	}
 
 	/**

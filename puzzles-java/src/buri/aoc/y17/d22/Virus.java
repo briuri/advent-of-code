@@ -9,7 +9,7 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Virus {
-	private Pair<Integer> _position;
+	private final Pair<Integer> _position;
 	private Direction _direction;
 
 	/**

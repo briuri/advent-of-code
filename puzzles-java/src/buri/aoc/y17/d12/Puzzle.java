@@ -60,10 +60,8 @@ public class Puzzle extends BasePuzzle {
 		while (unlinkedConnections.size() > 0) {
 			Set<Integer> group = getConnections(connections, unlinkedConnections.get(0));
 			group.add(unlinkedConnections.get(0));
-			if (group.size() > 0) {
-				unlinkedConnections.removeAll(group);
-				groupCount++;
-			}
+			unlinkedConnections.removeAll(group);
+			groupCount++;
 		}
 		return (groupCount);
 	}

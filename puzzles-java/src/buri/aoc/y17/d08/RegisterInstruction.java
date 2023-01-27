@@ -19,11 +19,11 @@ public class RegisterInstruction {
 		LESS, LESS_OR_EQUAL, EQUAL, NOT_EQUAL, GREATER_OR_EQUAL, GREATER
 	}
 
-	private String _targetRegister;
+	private final String _targetRegister;
 	private Long _targetIncrement;
-	private String _conditionRegister;
-	private Conditional _conditional;
-	private Integer _conditionValue;
+	private final String _conditionRegister;
+	private final Conditional _conditional;
+	private final Integer _conditionValue;
 
 	/**
 	 * Constructor: Parses from single string
@@ -37,23 +37,25 @@ public class RegisterInstruction {
 		}
 		_conditionRegister = tokens[4];
 		Conditional operator = null;
-		if (tokens[5].equals("<")) {
-			operator = Conditional.LESS;
-		}
-		else if (tokens[5].equals("<=")) {
-			operator = Conditional.LESS_OR_EQUAL;
-		}
-		else if (tokens[5].equals("==")) {
-			operator = Conditional.EQUAL;
-		}
-		else if (tokens[5].equals("!=")) {
-			operator = Conditional.NOT_EQUAL;
-		}
-		else if (tokens[5].equals(">=")) {
-			operator = Conditional.GREATER_OR_EQUAL;
-		}
-		else if (tokens[5].equals(">")) {
-			operator = Conditional.GREATER;
+		switch (tokens[5]) {
+			case "<":
+				operator = Conditional.LESS;
+				break;
+			case "<=":
+				operator = Conditional.LESS_OR_EQUAL;
+				break;
+			case "==":
+				operator = Conditional.EQUAL;
+				break;
+			case "!=":
+				operator = Conditional.NOT_EQUAL;
+				break;
+			case ">=":
+				operator = Conditional.GREATER_OR_EQUAL;
+				break;
+			case ">":
+				operator = Conditional.GREATER;
+				break;
 		}
 		_conditional = operator;
 		_conditionValue = Integer.valueOf(tokens[6]);
@@ -61,12 +63,8 @@ public class RegisterInstruction {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getTargetRegister()).append(" ").append(getTargetIncrement());
-		buffer.append(" if ");
-		buffer.append(getConditionRegister()).append(" ");
-		buffer.append(getConditional()).append(" ").append(getConditionValue());
-		return (buffer.toString());
+		return (getTargetRegister() + " " + getTargetIncrement() +
+				" if " + getConditionRegister() + " " + getConditional() + " " + getConditionValue());
 	}
 
 	/**

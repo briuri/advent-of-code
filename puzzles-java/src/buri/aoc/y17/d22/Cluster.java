@@ -13,13 +13,12 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Cluster extends IntGrid {
-	private Virus _virus;
+	private final Virus _virus;
 	private int _infections;
 
 	private static final int GRID_BUFFER_RATIO = 243;
 
 	public static final int CLEAN = 0;
-	public static final int WEAK = 1;
 	public static final int INFECTED = 2;
 	public static final int FLAGGED = 3;
 
@@ -27,19 +26,19 @@ public class Cluster extends IntGrid {
 	 * Constructor
 	 */
 	public Cluster(List<String> input) {
-		super(new Pair(input.get(0).length() * GRID_BUFFER_RATIO, input.size() * GRID_BUFFER_RATIO));
+		super(new Pair<>(input.get(0).length() * GRID_BUFFER_RATIO, input.size() * GRID_BUFFER_RATIO));
 		int offset = input.get(0).length() * ((GRID_BUFFER_RATIO - 1) / 2);
 		int centerCoordX = getWidth() / 2;
 		int centerCoordY = getHeight() / 2;
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
-				Pair position = new Pair(x + offset, y + offset);
+				Pair<Integer> position = new Pair<>(x + offset, y + offset);
 				char icon = line.charAt(x);
 				set(position, (icon == '#' ? INFECTED : CLEAN));
 			}
 		}
-		_virus = new Virus(new Pair(centerCoordX, centerCoordY));
+		_virus = new Virus(new Pair<>(centerCoordX, centerCoordY));
 		setInfections(0);
 	}
 

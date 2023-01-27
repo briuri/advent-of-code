@@ -45,13 +45,10 @@ public class Puzzle extends BasePuzzle {
 		Queue<Long> oneOutgoing = new LinkedList<>();
 		Part2Registers programZero = new Part2Registers(input, 0, oneOutgoing, zeroOutgoing);
 		Part2Registers programOne = new Part2Registers(input, 1, zeroOutgoing, oneOutgoing);
-		while (true) {
+		do {
 			programZero.process();
 			programOne.process();
-			if (programZero.isWaitingForQueue() && programOne.isWaitingForQueue()) {
-				break;
-			}
-		}
+		} while (!programZero.isWaitingForQueue() || !programOne.isWaitingForQueue());
 		return (programOne.getOutgoingCount());
 	}
 }

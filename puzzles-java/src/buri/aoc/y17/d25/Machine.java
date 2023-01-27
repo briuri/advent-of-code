@@ -12,10 +12,10 @@ import java.util.Map;
 public class Machine {
 
 	private char _currentState;
-	private int _checksumSteps;
-	private Map<Character, State> _states = new HashMap<>();
+	private final int _checksumSteps;
+	private final Map<Character, State> _states = new HashMap<>();
 
-	private int[] _tape;
+	private final int[] _tape;
 	private int _cursor;
 
 	/**
@@ -23,7 +23,7 @@ public class Machine {
 	 */
 	public Machine(List<String> input) {
 		setCurrentState(input.get(0).charAt(15));
-		_checksumSteps = Integer.valueOf(input.get(1).split(" ")[5]);
+		_checksumSteps = Integer.parseInt(input.get(1).split(" ")[5]);
 		input = input.subList(2, input.size());
 
 		final int definitionSize = 9;

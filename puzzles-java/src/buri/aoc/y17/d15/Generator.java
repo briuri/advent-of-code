@@ -10,8 +10,8 @@ import buri.aoc.common.Part;
  * @author Brian Uri!
  */
 public class Generator {
-	private long _factor;
-	private long _multiples;
+	private final long _factor;
+	private final long _multiples;
 	private long _previousValue;
 
 	private static final long DIVISOR = 2147483647;
@@ -38,17 +38,14 @@ public class Generator {
 	 * Computes the next value and returns the lowest 16 digits of its binary representation.
 	 */
 	public String nextValue(Part part) {
-		long value = 0;
-		while (true) {
+		long value;
+		do {
 			value = (getPreviousValue() * getFactor()) % DIVISOR;
 			_previousValue = value;
-			if (part == Part.ONE || (value % getMultiples() == 0)) {
-				break;
-			}
-		}
-		String binary = Long.toBinaryString(value);
+		} while (part != Part.ONE && (value % getMultiples() != 0));
+		StringBuilder binary = new StringBuilder(Long.toBinaryString(value));
 		while (binary.length() < 16) {
-			binary = "0" + binary;
+			binary.insert(0, "0");
 		}
 		return (binary.substring(binary.length() - 16));
 	}

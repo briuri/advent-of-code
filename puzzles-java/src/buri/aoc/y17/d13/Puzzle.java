@@ -46,7 +46,7 @@ public class Puzzle extends BasePuzzle {
 			firewall.put(layer.getDepth(), layer);
 		}
 		if (part == Part.ONE) {
-			return (getSeverity(firewall, 0));
+			return (getSeverity(firewall));
 		}
 		// Part TWO
 		int delay = -1;
@@ -74,10 +74,10 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Sends the packet through the firewall and returns the total severity.
 	 */
-	private static int getSeverity(Map<Integer, Layer> firewall, int delay) {
+	private static int getSeverity(Map<Integer, Layer> firewall) {
 		int severity = 0;
 		for (Layer layer : firewall.values()) {
-			int timeToArriveHere = delay + layer.getDepth();
+			int timeToArriveHere = layer.getDepth();
 			if (layer.isCaught(timeToArriveHere)) {
 				severity += layer.getSeverity();
 			}

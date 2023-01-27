@@ -14,11 +14,11 @@ public class Disk extends IntGrid {
 	 * Constructor
 	 */
 	public Disk(List<String> rows) {
-		super(new Pair(128, 128));
+		super(new Pair<>(128, 128));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				// Convert to 0/1.
-				int value = Integer.valueOf(rows.get(x).charAt(y)) - 48;
+				int value = (int) rows.get(x).charAt(y) - 48;
 				// Switch 1 to -1 to represent "unevaluated".
 				value = (value == 1) ? -1 : value;
 				set(x, y, value);
@@ -54,7 +54,7 @@ public class Disk extends IntGrid {
 	private void touchAdjacentCells(int x, int y, Integer value) {
 		// Center
 		fillUnevaluatedCell(x, y, value);
-		boolean changed = false;
+		boolean changed;
 		// Up
 		if (y > 0) {
 			changed = fillUnevaluatedCell(x, y - 1, value);

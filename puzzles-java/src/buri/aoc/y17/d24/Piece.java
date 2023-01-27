@@ -7,16 +7,16 @@ package buri.aoc.y17.d24;
  */
 public class Piece implements Comparable<Piece> {
 
-	private int _portA;
-	private int _portB;
+	private final int _portA;
+	private final int _portB;
 
 	/**
 	 * Constructor
 	 */
 	public Piece(String input) {
 		String[] tokens = input.split("/");
-		_portA = Integer.valueOf(tokens[0]);
-		_portB = Integer.valueOf(tokens[1]);
+		_portA = Integer.parseInt(tokens[0]);
+		_portB = Integer.parseInt(tokens[1]);
 	}
 
 	/**

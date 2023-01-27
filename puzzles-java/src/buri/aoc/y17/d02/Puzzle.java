@@ -62,7 +62,7 @@ public class Puzzle extends BasePuzzle {
 	 * Locates the (unique) 2 evenly divisible integers in a row of integers and calculates the dividend.
 	 */
 	private static int getRowQuotient(List<Integer> row) {
-		// Start with highest value and try dividing all smaller numbers.
+		// Start with the highest value and try dividing all smaller numbers.
 		for (int i = row.size() - 1; i >= 0; i--) {
 			Integer dividend = row.get(i);
 			for (int j = i - 1; j >= 0; j--) {

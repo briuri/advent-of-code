@@ -32,10 +32,7 @@ public class Registers extends NamedRegisters {
 	 * next instruction, an offset of -1 jumps to the previous instruction, and so on.)
 	 */
 	public void process() {
-		while (true) {
-			if (!isWithinInstructions()) {
-				break;
-			}
+		while (isWithinInstructions()) {
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
 			if (tokens[0].equals("set")) {
 				long value = getRegisterOrValue(tokens[2]);

@@ -76,9 +76,7 @@ public class Puzzle extends BasePuzzle {
 			}
 		}
 		else {
-			if (lengthsToScores.get(bridge.size()) == null) {
-				lengthsToScores.put(bridge.size(), new ArrayList<>());
-			}
+			lengthsToScores.computeIfAbsent(bridge.size(), k -> new ArrayList<>());
 			lengthsToScores.get(bridge.size()).add(getScore(bridge));
 		}
 	}

@@ -9,7 +9,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class PieceBag {
-	private List<Piece> _pieces;
+	private final List<Piece> _pieces;
 
 	/**
 	 * Constructor for the first load.

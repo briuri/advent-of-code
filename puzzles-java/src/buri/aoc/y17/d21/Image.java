@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Image extends IntGrid {
-	private Map<Integer, List<Rule>> _rules;
+	private final Map<Integer, List<Rule>> _rules;
 
 	/**
 	 * Constructor
@@ -26,7 +26,7 @@ public class Image extends IntGrid {
 	 *
 	 */
 	public Image(List<Rule> rules) {
-		super(new Pair(3, 3));
+		super(new Pair<>(3, 3));
 		getGrid()[0] = new Integer[] { 0, 0, 1 };
 		getGrid()[1] = new Integer[] { 1, 0, 1 };
 		getGrid()[2] = new Integer[] { 0, 1, 1 };

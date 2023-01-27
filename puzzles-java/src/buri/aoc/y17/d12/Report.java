@@ -10,8 +10,8 @@ import java.util.Set;
  */
 public class Report implements Comparable {
 
-	private Integer _id;
-	private Set<Integer> _connections;
+	private final Integer _id;
+	private final Set<Integer> _connections;
 
 	/**
 	 * Constructor

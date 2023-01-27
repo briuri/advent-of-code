@@ -14,7 +14,7 @@ public class SpiralGrid extends IntGrid {
 	 * Constructor
 	 */
 	public SpiralGrid(int size) {
-		super(new Pair(size, size));
+		super(new Pair<>(size, size));
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class SpiralGrid extends IntGrid {
 			sum += get(x + 1, y);
 		}
 		if (y < getHeight() - 1) {
-			// Left Left
+			// Lower Left
 			if (x > 0) {
 				sum += get(x - 1, y + 1);
 			}

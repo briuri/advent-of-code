@@ -17,11 +17,11 @@ public class MemoryBanks {
 	 * @param banks the memory banks, with the number of blocks in each slot.
 	 */
 	public MemoryBanks(List<Integer> banks) {
-		_banks = new ArrayList(banks);
+		_banks = new ArrayList<>(banks);
 	}
 
 	/**
-	 * Find the memory bank with the most blocks (ties won by the lowest-numbered memory bank). Removes all of the
+	 * Find the memory bank with the most blocks (ties won by the lowest-numbered memory bank). Removes all the
 	 * blocks from the selected bank, then moves to the next (by index) memory bank and inserts one of the blocks.
 	 * It continues doing this until it runs out of blocks; if it reaches the last memory bank, it wraps around to
 	 * the first one.
@@ -30,7 +30,7 @@ public class MemoryBanks {
 	 */
 	public String redistribute() {
 		// Get the number of blocks in the fullest bank.
-		Integer blocks = 0;
+		int blocks = 0;
 		for (Integer value : getBanks()) {
 			blocks = Math.max(blocks, value);
 		}

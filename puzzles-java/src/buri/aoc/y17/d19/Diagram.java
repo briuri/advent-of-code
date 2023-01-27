@@ -25,7 +25,7 @@ public class Diagram extends CharGrid {
 	private int _steps = 0;
 	private Pair<Integer> _currentPosition = null;
 	private Direction _currentDirection = null;
-	private List<Character> _breadcrumbs = new ArrayList<>();
+	private final List<Character> _breadcrumbs = new ArrayList<>();
 
 	private static final char BLANK = ' ';
 	private static final char VERTICAL = '|';
@@ -36,13 +36,13 @@ public class Diagram extends CharGrid {
 	 * Constructor
 	 */
 	public Diagram(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
 				char value = line.charAt(x);
 				if (value == VERTICAL && getCurrentPosition() == null) {
-					setCurrentPosition(new Pair(x, y));
+					setCurrentPosition(new Pair<>(x, y));
 					setCurrentDirection(Direction.DOWN);
 				}
 				set(x, y, value);
@@ -57,7 +57,7 @@ public class Diagram extends CharGrid {
 		while (isBounded(getCurrentPosition()) && getCurrentDirection() != null) {
 			setSteps(getSteps() + 1);
 			getCurrentPosition().move(getCurrentDirection());
-			char value = (char) get(getCurrentPosition());
+			char value = get(getCurrentPosition());
 			if (value == HORIZONTAL || value == VERTICAL) {
 				continue;
 			}
@@ -68,21 +68,21 @@ public class Diagram extends CharGrid {
 				getBreadcrumbs().add(value);
 			}
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Character crumb : getBreadcrumbs()) {
-			buffer.append(crumb);
+			builder.append(crumb);
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**
 	 * Determines the next direction at a corner. Assumes 1 true path and always 90 degrees.
 	 */
 	private Direction getNextDirection() {
-		Pair<Integer> up = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() - 1);
-		Pair<Integer> right = new Pair(getCurrentPosition().getX() + 1, getCurrentPosition().getY());
-		Pair<Integer> down = new Pair(getCurrentPosition().getX(), getCurrentPosition().getY() + 1);
-		Pair<Integer> left = new Pair(getCurrentPosition().getX() - 1, getCurrentPosition().getY());
+		Pair<Integer> up = new Pair<>(getCurrentPosition().getX(), getCurrentPosition().getY() - 1);
+		Pair<Integer> right = new Pair<>(getCurrentPosition().getX() + 1, getCurrentPosition().getY());
+		Pair<Integer> down = new Pair<>(getCurrentPosition().getX(), getCurrentPosition().getY() + 1);
+		Pair<Integer> left = new Pair<>(getCurrentPosition().getX() - 1, getCurrentPosition().getY());
 		Direction next = null;
 		if (getCurrentDirection() != null) {
 			switch (getCurrentDirection()) {
@@ -142,7 +142,7 @@ public class Diagram extends CharGrid {
 	/**
 	 * Accessor for the current position
 	 */
-	private void setCurrentPosition(Pair currentPosition) {
+	private void setCurrentPosition(Pair<Integer> currentPosition) {
 		_currentPosition = currentPosition;
 	}
 

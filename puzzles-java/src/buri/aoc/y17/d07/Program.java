@@ -1,6 +1,7 @@
 package buri.aoc.y17.d07;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +12,10 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Program {
-	private String _name;
-	private int _weight;
+	private final String _name;
+	private final int _weight;
 	private int _cachedTotalWeight = 0;
-	private List<String> _childNames;
+	private final List<String> _childNames;
 	private List<Program> _children;
 
 	private static final String RELATION = " -> ";
@@ -28,12 +29,10 @@ public class Program {
 		String[] relationship = info.split(RELATION);
 		String[] nameWeight = relationship[0].split(WEIGHT_SEPARATOR);
 		String name = nameWeight[0];
-		int weight = Integer.valueOf(nameWeight[1].replace("(", "").replace(")", ""));
+		int weight = Integer.parseInt(nameWeight[1].replace("(", "").replace(")", ""));
 		List<String> childNames = new ArrayList<>();
 		if (relationship.length > 1) {
-			for (String child : relationship[1].split(CHILD_SEPARATOR)) {
-				childNames.add(child);
-			}
+			Collections.addAll(childNames, relationship[1].split(CHILD_SEPARATOR));
 		}
 
 		_name = name;
@@ -71,9 +70,7 @@ public class Program {
 	public Program getImbalancedChild() {
 		Map<Integer, List<Program>> weightsToChildren = new HashMap<>();
 		for (Program child : getChildren()) {
-			if (weightsToChildren.get(child.getTotalWeight()) == null) {
-				weightsToChildren.put(child.getTotalWeight(), new ArrayList<>());
-			}
+			weightsToChildren.computeIfAbsent(child.getTotalWeight(), k -> new ArrayList<>());
 			weightsToChildren.get(child.getTotalWeight()).add(child);
 		}
 		// No children, or all children have the same total weight.
@@ -94,15 +91,15 @@ public class Program {
 	 * Prints the program tower.
 	 */
 	public String toString(int level) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < level; i++) {
-			buffer.append("\t");
+			builder.append("\t");
 		}
-		buffer.append(getName()).append(" (").append(getWeight()).append(") (").append(getTotalWeight()).append(")\n");
+		builder.append(getName()).append(" (").append(getWeight()).append(") (").append(getTotalWeight()).append(")\n");
 		for (Program child : getChildren()) {
-			buffer.append(child.toString(level + 1));
+			builder.append(child.toString(level + 1));
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

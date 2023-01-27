@@ -14,14 +14,14 @@ import java.util.Set;
  */
 public class Rule {
 
-	private Set<Pattern> _patterns = new HashSet<>();
-	private Pattern _result;
+	private final Set<Pattern> _patterns = new HashSet<>();
+	private final Pattern _result;
 
 	/**
 	 * Constructor
 	 */
 	public Rule(String rule) {
-		String tokens[] = rule.split(" => ");
+		String[] tokens = rule.split(" => ");
 		_result = new Pattern(Arrays.asList(tokens[1].split("/")));
 		Pattern base = new Pattern(Arrays.asList(tokens[0].split("/")));
 		Pattern base90 = base.rotate();

@@ -60,15 +60,15 @@ public class Puzzle extends BasePuzzle {
 	 * Converts each character of a 32-character hex string into a 4-digit binary representation.
 	 */
 	private static String convertToBinary(String hex) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < hex.length(); i++) {
 			int base10 = Integer.parseInt(String.valueOf(hex.charAt(i)), 16);
 			String binary = Integer.toBinaryString(base10);
 			for (int j = 0; j < 4 - binary.length(); j++) {
-				buffer.append("0");
+				builder.append("0");
 			}
-			buffer.append(binary);
+			builder.append(binary);
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

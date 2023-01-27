@@ -53,7 +53,6 @@ public class Puzzle extends BasePuzzle {
 			return (dancers.toString());
 		}
 		// Part TWO
-		String billionthDance = dances.get((iterations % dances.size() - 1));
-		return (billionthDance);
+		return (dances.get((iterations % dances.size() - 1)));
 	}
 }

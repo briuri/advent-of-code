@@ -12,14 +12,14 @@ public class Dancers {
 	 * Constructor
 	 */
 	public Dancers(int numDancers) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (char dancer = 'a'; dancer <= 'z'; dancer++) {
-			buffer.append(dancer);
-			if (buffer.length() == numDancers) {
+			builder.append(dancer);
+			if (builder.length() == numDancers) {
 				break;
 			}
 		}
-		setPositions(buffer.toString());
+		setPositions(builder.toString());
 	}
 
 	/**
@@ -33,10 +33,10 @@ public class Dancers {
 		String[] tokens = parameters.split("/");
 		switch (move.charAt(0)) {
 			case 's':
-				spin(Integer.valueOf(tokens[0]));
+				spin(Integer.parseInt(tokens[0]));
 				break;
 			case 'x':
-				exchange(Integer.valueOf(tokens[0]), Integer.valueOf(tokens[1]));
+				exchange(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
 				break;
 			case 'p':
 				partner(tokens[0].charAt(0), tokens[1].charAt(0));
@@ -47,10 +47,9 @@ public class Dancers {
 	 * Make num programs move from end to front, but maintain their order otherwise.
 	 */
 	private void spin(int num) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getPositions().substring(getPositions().length() - num));
-		buffer.append(getPositions().substring(0, getPositions().length() - num));
-		setPositions(buffer.toString());
+		String buffer = getPositions().substring(getPositions().length() - num) +
+				getPositions().substring(0, getPositions().length() - num);
+		setPositions(buffer);
 	}
 
 	/**
@@ -59,10 +58,10 @@ public class Dancers {
 	private void exchange(int source, int target) {
 		char sourceChar = getPositions().charAt(source);
 		char targetChar = getPositions().charAt(target);
-		StringBuffer buffer = new StringBuffer(getPositions());
-		buffer.setCharAt(source, targetChar);
-		buffer.setCharAt(target, sourceChar);
-		setPositions(buffer.toString());
+		StringBuilder builder = new StringBuilder(getPositions());
+		builder.setCharAt(source, targetChar);
+		builder.setCharAt(target, sourceChar);
+		setPositions(builder.toString());
 	}
 
 	/**

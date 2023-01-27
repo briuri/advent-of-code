@@ -16,7 +16,7 @@ public class Pattern extends IntGrid {
 	 * Input-based Constructor
 	 */
 	public Pattern(List<String> rows) {
-		super(new Pair(rows.get(0).length(), rows.size()));
+		super(new Pair<>(rows.get(0).length(), rows.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, (rows.get(y).charAt(x) == '#' ? 1 : 0));
@@ -28,7 +28,7 @@ public class Pattern extends IntGrid {
 	 * Array-based Constructor
 	 */
 	public Pattern(int[][] pattern) {
-		super(new Pair(pattern[0].length, pattern.length));
+		super(new Pair<>(pattern[0].length, pattern.length));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, pattern[x][y]);
@@ -64,13 +64,13 @@ public class Pattern extends IntGrid {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
-				buffer.append(get(x, y));
+				builder.append(get(x, y));
 			}
-			buffer.append("\n");
+			builder.append("\n");
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

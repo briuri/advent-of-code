@@ -5,6 +5,7 @@ import buri.aoc.common.Part;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,38 +39,38 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		List<String> data = new ArrayList<>();
-		for (String rawData : input.get(0).split(",")) {
-			data.add(rawData);
-		}
+		Collections.addAll(data, input.get(0).split(","));
 
 		int x = 0;
 		int y = 0;
 		int z = 0;
 		int max = 0;
 		for (String step : data) {
-			if (step.equals("nw")) {
-				x = x - 1;
-				y = y + 1;
-			}
-			else if (step.equals("se")) {
-				x = x + 1;
-				y = y - 1;
-			}
-			else if (step.equals("n")) {
-				y = y + 1;
-				z = z - 1;
-			}
-			else if (step.equals("s")) {
-				y = y - 1;
-				z = z + 1;
-			}
-			else if (step.equals("ne")) {
-				x = x + 1;
-				z = z - 1;
-			}
-			else if (step.equals("sw")) {
-				x = x - 1;
-				z = z + 1;
+			switch (step) {
+				case "nw":
+					x = x - 1;
+					y = y + 1;
+					break;
+				case "se":
+					x = x + 1;
+					y = y - 1;
+					break;
+				case "n":
+					y = y + 1;
+					z = z - 1;
+					break;
+				case "s":
+					y = y - 1;
+					z = z + 1;
+					break;
+				case "ne":
+					x = x + 1;
+					z = z - 1;
+					break;
+				case "sw":
+					x = x - 1;
+					z = z + 1;
+					break;
 			}
 			max = Math.max(getDistance(x, y, z), max);
 		}

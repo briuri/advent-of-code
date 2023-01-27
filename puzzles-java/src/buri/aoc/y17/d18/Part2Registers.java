@@ -9,8 +9,8 @@ import java.util.Queue;
  * @author Brian Uri!
  */
 public class Part2Registers extends AbstractRegisters {
-	private Queue<Long> _incomingQueue;
-	private Queue<Long> _outgoingQueue;
+	private final Queue<Long> _incomingQueue;
+	private final Queue<Long> _outgoingQueue;
 	private int _outgoingCount;
 
 	/**

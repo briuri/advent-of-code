@@ -6,8 +6,8 @@ package buri.aoc.y17.d13;
  * @author Brian Uri!
  */
 public class Layer {
-	private int _depth;
-	private int _range;
+	private final int _depth;
+	private final int _range;
 
 	/**
 	 * Constructor
@@ -16,8 +16,8 @@ public class Layer {
 	 */
 	public Layer(String input) {
 		String[] tokens = input.split(": ");
-		_depth = Integer.valueOf(tokens[0]);
-		_range = Integer.valueOf(tokens[1]);
+		_depth = Integer.parseInt(tokens[0]);
+		_range = Integer.parseInt(tokens[1]);
 	}
 
 	/**

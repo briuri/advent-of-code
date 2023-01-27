@@ -27,7 +27,7 @@ public class Puzzle extends BasePuzzle {
 		assertRun(420L, 0, true);
 	}
 
-	private static final Triple<Long> ORIGIN = new Triple(0L, 0L, 0L);
+	private static final Triple<Long> ORIGIN = new Triple<>(0L, 0L, 0L);
 
 	/**
 	 * Part 1:
@@ -78,9 +78,7 @@ public class Puzzle extends BasePuzzle {
 		Map<String, List<Particle>> collisions = new HashMap<>();
 		for (Particle particle : input) {
 			String position = particle.move();
-			if (collisions.get(position) == null) {
-				collisions.put(position, new ArrayList<>());
-			}
+			collisions.computeIfAbsent(position, k -> new ArrayList<>());
 			collisions.get(position).add(particle);
 		}
 		for (String position : collisions.keySet()) {

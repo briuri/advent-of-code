@@ -7,18 +7,18 @@ import buri.aoc.common.data.tuple.Triple;
  */
 public class Particle {
 
-	private Triple<Long> _position;
-	private Triple<Long> _velocity;
-	private Triple<Long> _acceleration;
+	private final Triple<Long> _position;
+	private final Triple<Long> _velocity;
+	private final Triple<Long> _acceleration;
 
 	/**
 	 * Constructor
 	 */
 	public Particle(String input) {
 		String[] tokens = input.split(",");
-		_position = new Triple(Long.valueOf(tokens[0]), Long.valueOf(tokens[1]), Long.valueOf(tokens[2]));
-		_velocity = new Triple(Long.valueOf(tokens[3]), Long.valueOf(tokens[4]), Long.valueOf(tokens[5]));
-		_acceleration = new Triple(Long.valueOf(tokens[6]), Long.valueOf(tokens[7]), Long.valueOf(tokens[8]));
+		_position = new Triple<>(Long.valueOf(tokens[0]), Long.valueOf(tokens[1]), Long.valueOf(tokens[2]));
+		_velocity = new Triple<>(Long.valueOf(tokens[3]), Long.valueOf(tokens[4]), Long.valueOf(tokens[5]));
+		_acceleration = new Triple<>(Long.valueOf(tokens[6]), Long.valueOf(tokens[7]), Long.valueOf(tokens[8]));
 	}
 
 	/**
