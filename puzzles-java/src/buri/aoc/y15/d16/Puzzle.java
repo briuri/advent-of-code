@@ -43,11 +43,11 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		for (Map<String, Integer> sue : sues) {
-			if (!mightMatch(part, sue, "children", 3) || !mightMatch(part, sue, "samoyeds", 2)
-				|| !mightMatch(part, sue, "akitas", 0) || !mightMatch(part, sue, "vizslas", 0)
-				|| !mightMatch(part, sue, "cars", 2) || !mightMatch(part, sue, "perfumes", 1)
-				|| !mightMatch(part, sue, "cats", 7) || !mightMatch(part, sue, "trees", 3)
-				|| !mightMatch(part, sue, "pomeranians", 3) || !mightMatch(part, sue, "goldfish", 5)) {
+			if (doesNotMatch(part, sue, "children", 3) || doesNotMatch(part, sue, "samoyeds", 2)
+				|| doesNotMatch(part, sue, "akitas", 0) || doesNotMatch(part, sue, "vizslas", 0)
+				|| doesNotMatch(part, sue, "cars", 2) || doesNotMatch(part, sue, "perfumes", 1)
+				|| doesNotMatch(part, sue, "cats", 7) || doesNotMatch(part, sue, "trees", 3)
+				|| doesNotMatch(part, sue, "pomeranians", 3) || doesNotMatch(part, sue, "goldfish", 5)) {
 				sue.clear();
 			}
 		}
@@ -62,16 +62,16 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Returns true if Sue has a null value or it matches the expected value.
 	 */
-	private static boolean mightMatch(Part part, Map<String, Integer> sue, String name, Integer expected) {
+	private static boolean doesNotMatch(Part part, Map<String, Integer> sue, String name, Integer expected) {
 		Integer value = sue.get(name);
 		if (part == Part.TWO) {
 			if (name.equals("cats") || name.equals("trees")) {
-				return (value == null || value > expected);
+				return (value != null && value <= expected);
 			}
 			if (name.equals("pomeranians") || name.equals("goldfish")) {
-				return (value == null || value < expected);
+				return (value != null && value >= expected);
 			}
 		}
-		return (value == null || value.equals(expected));
+		return (value != null && !value.equals(expected));
 	}
 }

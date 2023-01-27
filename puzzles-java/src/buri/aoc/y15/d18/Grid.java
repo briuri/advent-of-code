@@ -15,7 +15,7 @@ public class Grid extends IntGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < getWidth(); x++) {

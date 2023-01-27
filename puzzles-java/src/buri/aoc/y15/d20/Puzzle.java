@@ -41,14 +41,12 @@ public class Puzzle extends BasePuzzle {
 		int maxElf = presents / 10;
 
 		// After I got the answers, I raised the house lower bound to speed up run time.
-		int minHouse = part == Part.ONE ? 776000 : 786000;
-
-		int house = minHouse;
+		int house = (part == Part.ONE ? 776000 : 786000);
 		while (true) {
 			for (int elf = 1; elf < maxElf; elf++) {
 				boolean allowVisit = (part == Part.ONE || (part == Part.TWO && house <= elf * 50));
 				if (house >= elf && house % elf == 0 && allowVisit) {
-					Integer totalPresents = houses.getOrDefault(house, 0) + (elf * numPresents);
+					int totalPresents = houses.getOrDefault(house, 0) + (elf * numPresents);
 					houses.put(house, totalPresents);
 					if (totalPresents >= presents) {
 						return (house);

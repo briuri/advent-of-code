@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 /**
- * Day Day 18: Like a GIF For Your Yard
+ * Day 18: Like a GIF For Your Yard
  *
  * @author Brian Uri!
  */

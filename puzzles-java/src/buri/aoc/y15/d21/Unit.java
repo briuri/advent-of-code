@@ -5,9 +5,9 @@ package buri.aoc.y15.d21;
  */
 public class Unit {
 	private int _health;
-	private int _damage;
-	private int _armor;
-	private int _gold;
+	private final int _damage;
+	private final int _armor;
+	private final int _gold;
 
 	/**
 	 * Constructor

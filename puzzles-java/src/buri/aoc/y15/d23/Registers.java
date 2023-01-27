@@ -23,10 +23,7 @@ public class Registers extends NamedRegisters {
 	 * Processes all instructions.
 	 */
 	public void process() {
-		while (true) {
-			if (!isWithinInstructions()) {
-				break;
-			}
+		while (isWithinInstructions()) {
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
 			if (tokens[0].equals("hlf")) {
 				long value = getRegisters().get(tokens[1]);
@@ -44,17 +41,17 @@ public class Registers extends NamedRegisters {
 				setCurrent(getCurrent() + 1);
 			}
 			if (tokens[0].equals("jmp")) {
-				int jump = Integer.valueOf(tokens[1]);
+				int jump = Integer.parseInt(tokens[1]);
 				setCurrent(getCurrent() + jump);
 			}
 			if (tokens[0].equals("jie")) {
 				long condition = getRegisterOrValue(tokens[1]);
-				int jump = (condition % 2 == 0 ? Integer.valueOf(tokens[2]) : 1);
+				int jump = (condition % 2 == 0 ? Integer.parseInt(tokens[2]) : 1);
 				setCurrent(getCurrent() + jump);
 			}
 			if (tokens[0].equals("jio")) {
 				long condition = getRegisterOrValue(tokens[1]);
-				int jump = (condition == 1 ? Integer.valueOf(tokens[2]) : 1);
+				int jump = (condition == 1 ? Integer.parseInt(tokens[2]) : 1);
 				setCurrent(getCurrent() + jump);
 			}
 		}

@@ -83,7 +83,7 @@ public class Puzzle extends BasePuzzle {
 	private static boolean hasNoForbiddenPairs(String string) {
 		boolean hasNoPairs = true;
 		for (String pair : FORBIDDEN_PAIRS) {
-			hasNoPairs = hasNoPairs && string.indexOf(pair) == -1;
+			hasNoPairs = hasNoPairs && !string.contains(pair);
 		}
 		return (hasNoPairs);
 	}

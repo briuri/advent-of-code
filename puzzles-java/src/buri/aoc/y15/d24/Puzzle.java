@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -48,18 +47,14 @@ public class Puzzle extends BasePuzzle {
 		List<List<Integer>> bag1Permutations = getPermutations(weights, targetWeight);
 		sortBags(bag1Permutations);
 		int smallestBagSize = bag1Permutations.get(0).size();
-		for (Iterator<List<Integer>> iterator = bag1Permutations.iterator(); iterator.hasNext();) {
-			List<Integer> bag1 = iterator.next();
-			// Filter out bags that are too big, or leave undividable bags behind.
-			if (bag1.size() > smallestBagSize) {
-				iterator.remove();
-			}
-			/**
-			 * Assumes that all valid bag1 possibilities result in remaining weights that can be evenly divided into the
-			 * remaining bags. I originally had a method to validate this condition, but it had no impact on my puzzle
-			 * input.
-			 */
-		}
+		// Filter out bags that are too big, or leave undividable bags behind.
+
+		/*
+		  Assumes that all valid bag1 possibilities result in remaining weights that can be evenly divided into the
+		  remaining bags. I originally had a method to validate this condition, but it had no impact on my puzzle
+		  input.
+		 */
+		bag1Permutations.removeIf(bag1 -> bag1.size() > smallestBagSize);
 
 		long minQte = Long.MAX_VALUE;
 		for (List<Integer> bag : bag1Permutations) {
@@ -102,11 +97,6 @@ public class Puzzle extends BasePuzzle {
 			Collections.sort(bag);
 			Collections.reverse(bag);
 		}
-		Collections.sort(bags, new Comparator<List<Integer>>() {
-			@Override
-			public int compare(List<Integer> o1, List<Integer> o2) {
-				return o1.size() - o2.size();
-			}
-		});
+		bags.sort(Comparator.comparingInt(List::size));
 	}
 }

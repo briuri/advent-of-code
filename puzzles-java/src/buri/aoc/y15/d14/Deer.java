@@ -4,9 +4,9 @@ package buri.aoc.y15.d14;
  * @author Brian Uri!
  */
 public class Deer {
-	private int _speed;
-	private int _flyPeriod;
-	private int _restPeriod;
+	private final int _speed;
+	private final int _flyPeriod;
+	private final int _restPeriod;
 	private int _points;
 
 	/**
@@ -14,9 +14,9 @@ public class Deer {
 	 */
 	public Deer(String input) {
 		String[] tokens = input.split(" ");
-		_speed = Integer.valueOf(tokens[3]);
-		_flyPeriod = Integer.valueOf(tokens[6]);
-		_restPeriod = Integer.valueOf(tokens[13]);
+		_speed = Integer.parseInt(tokens[3]);
+		_flyPeriod = Integer.parseInt(tokens[6]);
+		_restPeriod = Integer.parseInt(tokens[13]);
 		_points = 0;
 	}
 

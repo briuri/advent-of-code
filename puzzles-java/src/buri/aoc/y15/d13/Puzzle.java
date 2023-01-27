@@ -40,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 			String[] tokens = line.split(" ");
 			String currentGuest = tokens[0];
 			String nextGuest = tokens[10].substring(0, tokens[10].length() - 1);
-			int value = Integer.valueOf(tokens[3]);
+			int value = Integer.parseInt(tokens[3]);
 			if (tokens[2].equals("lose")) {
 				value *= -1;
 			}

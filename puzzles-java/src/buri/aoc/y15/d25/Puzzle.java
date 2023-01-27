@@ -27,8 +27,8 @@ public class Puzzle extends BasePuzzle {
 	protected long runLong(Part part, List<String> input) {
 		int x = Integer.parseInt(input.get(0).split("row ")[1].split(",")[0]);
 		int y = Integer.parseInt(input.get(0).split("column ")[1].split("\\.")[0]);
-		Pair target = new Pair(x, y);
-		Pair pair = new Pair(1, 1);
+		Pair<Integer> target = new Pair<>(x, y);
+		Pair<Integer> pair = new Pair<>(1, 1);
 		long code = 20151125;
 		Set<String> visited = new HashSet<>();
 		while (!pair.equals(target)) {

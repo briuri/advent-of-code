@@ -30,27 +30,27 @@ public class Puzzle extends BasePuzzle {
 	private static final List<Triple<Integer>> ARMOR = new ArrayList<>(); // 0-1 armor
 	private static final List<Triple<Integer>> RINGS = new ArrayList<>(); // 0-2 rings
 	static {
-		WEAPONS.add(new Triple(8, 4, 0));
-		WEAPONS.add(new Triple(10, 5, 0));
-		WEAPONS.add(new Triple(25, 6, 0));
-		WEAPONS.add(new Triple(40, 7, 0));
-		WEAPONS.add(new Triple(74, 8, 0));
+		WEAPONS.add(new Triple<>(8, 4, 0));
+		WEAPONS.add(new Triple<>(10, 5, 0));
+		WEAPONS.add(new Triple<>(25, 6, 0));
+		WEAPONS.add(new Triple<>(40, 7, 0));
+		WEAPONS.add(new Triple<>(74, 8, 0));
 
-		ARMOR.add(new Triple(0, 0, 0));
-		ARMOR.add(new Triple(13, 0, 1));
-		ARMOR.add(new Triple(31, 0, 2));
-		ARMOR.add(new Triple(53, 0, 3));
-		ARMOR.add(new Triple(75, 0, 4));
-		ARMOR.add(new Triple(102, 0, 5));
+		ARMOR.add(new Triple<>(0, 0, 0));
+		ARMOR.add(new Triple<>(13, 0, 1));
+		ARMOR.add(new Triple<>(31, 0, 2));
+		ARMOR.add(new Triple<>(53, 0, 3));
+		ARMOR.add(new Triple<>(75, 0, 4));
+		ARMOR.add(new Triple<>(102, 0, 5));
 
-		RINGS.add(new Triple(0, 0, 0));
-		RINGS.add(new Triple(0, 0, 0));
-		RINGS.add(new Triple(25, 1, 0));
-		RINGS.add(new Triple(50, 2, 0));
-		RINGS.add(new Triple(100, 3, 0));
-		RINGS.add(new Triple(20, 0, 1));
-		RINGS.add(new Triple(40, 0, 2));
-		RINGS.add(new Triple(80, 0, 3));
+		RINGS.add(new Triple<>(0, 0, 0));
+		RINGS.add(new Triple<>(0, 0, 0));
+		RINGS.add(new Triple<>(25, 1, 0));
+		RINGS.add(new Triple<>(50, 2, 0));
+		RINGS.add(new Triple<>(100, 3, 0));
+		RINGS.add(new Triple<>(20, 0, 1));
+		RINGS.add(new Triple<>(40, 0, 2));
+		RINGS.add(new Triple<>(80, 0, 3));
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Puzzle extends BasePuzzle {
 	private static boolean playerWins(Unit player, Unit boss) {
 		Unit attacker = player;
 		Unit defender = boss;
-		boolean died = false;
+		boolean died;
 		while (true) {
 			died = defender.reduceHealth(attacker.getDamage());
 			if (died) {
@@ -113,7 +113,7 @@ public class Puzzle extends BasePuzzle {
 	}
 
 	/**
-	 * Returns all of the different ways to buy rings.
+	 * Returns all the different ways to buy rings.
 	 */
 	private static Set<List<Integer>> getRingPermutations() {
 		List<Integer> order = new ArrayList<>();

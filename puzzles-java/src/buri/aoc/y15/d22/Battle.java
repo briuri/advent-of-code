@@ -15,14 +15,14 @@ import java.util.Random;
  * @author Brian Uri!
  */
 public class Battle {
-	private List<Effect> _effects;
+	private final List<Effect> _effects;
 	private int _playerHealth = 50;
 	private int _playerMana = 500;
 	private int _playerManaUsed = 0;
 	private int _playerArmor = 0;
 	private int _bossHealth;
-	private int _bossAttack;
-	private Part _part;
+	private final int _bossAttack;
+	private final Part _part;
 
 	private static final Map<String, Integer> SPELLS = new HashMap<>();
 
@@ -34,7 +34,7 @@ public class Battle {
 		SPELLS.put("R", 229);
 	}
 
-	private static String[] ALL_SPELLS = new String[] { "M", "D", "S", "P", "R" };
+	private final static String[] ALL_SPELLS = new String[] { "M", "D", "S", "P", "R" };
 
 	/**
 	 * Constructor
@@ -50,21 +50,15 @@ public class Battle {
 	 * Randomizes a fight. Returns the mana cost of a win or a high number for a loss.
 	 */
 	public int run(int currentMinManaCost) {
-		List<String> spellsCast = new ArrayList<>();
 		boolean someoneDied = false;
 		while (!someoneDied) {
 
-			List<String> allowedSpells = new ArrayList(Arrays.asList(ALL_SPELLS));
+			List<String> allowedSpells = new ArrayList<>(Arrays.asList(ALL_SPELLS));
 			List<Type> allowedEffects = getAllowedEffects();
-			for (Iterator<String> iterator = allowedSpells.iterator(); iterator.hasNext();) {
-				String spell = iterator.next();
-				if ((SPELLS.get(spell) > getPlayerMana())
+			allowedSpells.removeIf(spell -> (SPELLS.get(spell) > getPlayerMana())
 					|| (spell.equals("S") && !allowedEffects.contains(Type.SHIELD))
 					|| (spell.equals("P") && !allowedEffects.contains(Type.POISON))
-					|| (spell.equals("R") && !allowedEffects.contains(Type.RECHARGE))) {
-					iterator.remove();
-				}
-			}
+					|| (spell.equals("R") && !allowedEffects.contains(Type.RECHARGE)));
 			// Short circuit if we're out of options or exceed a previous win.
 			if (allowedSpells.isEmpty() || getPlayerManaUsed() > currentMinManaCost) {
 				setPlayerHealth(0);
@@ -72,7 +66,6 @@ public class Battle {
 			}
 			int selection = new Random().nextInt(allowedSpells.size());
 			String spell = allowedSpells.get(selection);
-			spellsCast.add(spell);
 			someoneDied = runTurn(spell);
 		}
 		return (getPlayerHealth() > 0 ? getPlayerManaUsed() : Integer.MAX_VALUE);
@@ -139,7 +132,7 @@ public class Battle {
 	 * Returns a list of effect types that can be cast legally at this time.
 	 */
 	private List<Type> getAllowedEffects() {
-		List<Type> types = new ArrayList<Type>(Arrays.asList(Type.values()));
+		List<Type> types = new ArrayList<>(Arrays.asList(Type.values()));
 		for (Effect effect : getEffects()) {
 			if (!effect.isExpiring()) {
 				types.remove(effect.getType());
@@ -187,11 +180,9 @@ public class Battle {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("\tP[").append(getPlayerHealth()).append("hp, ").append(getPlayerArmor()).append("ac, ").append(
-			getPlayerMana()).append("mp] ");
-		builder.append("B[").append(getBossHealth()).append("hp]");
-		return (builder.toString());
+		return ("\tP[" + getPlayerHealth() + "hp, " + getPlayerArmor() + "ac, " +
+				getPlayerMana() + "mp] " +
+				"B[" + getBossHealth() + "hp]");
 	}
 
 	/**

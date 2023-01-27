@@ -9,9 +9,9 @@ public class Effect {
 		SHIELD, POISON, RECHARGE
 	}
 
-	private Type _type;
+	private final Type _type;
 	private int _ticksLeft;
-	private int _maxTicks;
+	private final int _maxTicks;
 
 	/**
 	 * Constructor

@@ -32,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * This year, how many houses receive at least one present?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		IntGrid grid = new IntGrid(new Pair(500, 500));
+		IntGrid grid = new IntGrid(new Pair<>(500, 500));
 		Pair<Integer> santa = grid.getCenterPosition();
 		Pair<Integer> robosanta = grid.getCenterPosition();
 		grid.set(santa, grid.get(santa) + 1);
