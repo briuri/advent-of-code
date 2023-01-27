@@ -14,10 +14,10 @@ public enum Group {
 	BRACE('{', '}', 1197, 3),
 	GREAT('<', '>', 25137, 4);
 
-	private char _open;
-	private char _close;
-	private int _corruptScore;
-	private int _incompleteScore;
+	private final char _open;
+	private final char _close;
+	private final int _corruptScore;
+	private final int _incompleteScore;
 
 	public static final Set<Character> ALL_OPEN = new HashSet<>();
 	static {
@@ -29,7 +29,7 @@ public enum Group {
 	/**
 	 * Constructor
 	 */
-	private Group(char open, char close, int corruptScore, int incompleteScore) {
+	Group(char open, char close, int corruptScore, int incompleteScore) {
 		_open = open;
 		_close = close;
 		_corruptScore = corruptScore;

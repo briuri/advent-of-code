@@ -16,7 +16,7 @@ test harness, colocated in the day's `Puzzle` class (this reduces the overhead o
 * **2018**: 00:40 (Java)
 * **2019**: 00:15 (Java)
 * **2020**: 00:25 (Java)
-* **2021**: 01:20 (Java)
+* **2021**: 01:25 (Java)
 * **2022**: 00:40 (Java)
 
 ## Leaderboard Visualization

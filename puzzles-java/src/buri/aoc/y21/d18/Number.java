@@ -24,7 +24,7 @@ public class Number {
 	 */
 	public Number(String line, Number parent) {
 		// Regular number
-		if (line.indexOf(",") == -1) {
+		if (!line.contains(",")) {
 			setValue(Integer.valueOf(line));
 			// The parent only applies to pairs. The parent pair of this regular number will have the true parent.
 			setParent(null);
@@ -86,10 +86,7 @@ public class Number {
 	private void reduce() {
 		boolean inReduce = true;
 		while (inReduce) {
-			inReduce = false;
-			while (explode()) {
-				inReduce = true;
-			}
+			while (explode()) {}
 			// As soon as a split happens, jump back to the beginning and look for explodes again.
 			inReduce = split();
 		}
@@ -122,10 +119,7 @@ public class Number {
 		if (getLeft().explode()) {
 			return true;
 		}
-		if (getRight().explode()) {
-			return true;
-		}
-		return false;
+		return getRight().explode();
 	}
 
 	/**
@@ -148,9 +142,7 @@ public class Number {
 			if (getLeft().split()) {
 				return true;
 			}
-			if (getRight().split()) {
-				return true;
-			}
+			return getRight().split();
 		}
 		return false;
 	}
@@ -195,29 +187,29 @@ public class Number {
 	 * Returns the index of the middle comma in a pair
 	 */
 	private static int getMiddleComma(String line) {
-		StringBuffer buffer = new StringBuffer(line);
-		CharFrequency freq = new CharFrequency(buffer.toString());
+		StringBuilder builder = new StringBuilder(line);
+		CharFrequency freq = new CharFrequency(builder.toString());
 		// Reduce the line down to the topmost pair.
 		while (freq.getFrequencyFor('[') > 1) {
-			for (int i = 1; i < buffer.length(); i++) {
-				char value = buffer.charAt(i);
+			for (int i = 1; i < builder.length(); i++) {
+				char value = builder.charAt(i);
 				if (value == '[') {
 					int closingIndex = getMatchingClosingIndex(line, i);
 					for (int j = i; j < closingIndex + 1; j++) {
-						buffer.replace(j, j + 1, " ");
+						builder.replace(j, j + 1, " ");
 					}
 				}
 			}
-			freq = new CharFrequency(buffer.toString());
+			freq = new CharFrequency(builder.toString());
 		}
-		return (buffer.indexOf(","));
+		return (builder.indexOf(","));
 	}
 
 	/**
 	 * Returns the index of a closing bracket that matches the opening one at the index
 	 */
 	private static int getMatchingClosingIndex(String line, int openIndex) {
-		Stack stack = new Stack();
+		Stack<Character> stack = new Stack<>();
 		for (int i = openIndex + 1; i < line.length(); i++) {
 			char value = line.charAt(i);
 			if (value == '[') {

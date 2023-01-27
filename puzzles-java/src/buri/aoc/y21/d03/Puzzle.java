@@ -37,20 +37,20 @@ public class Puzzle extends BasePuzzle {
 		final int LENGTH = input.get(0).length();
 		if (part == Part.ONE) {
 			CharFrequency[] freqs = getFrequencies(input);
-			StringBuffer gammaBuffer = new StringBuffer();
-			StringBuffer epsilonBuffer = new StringBuffer();
+			StringBuilder gammaBuilder = new StringBuilder();
+			StringBuilder epsilonBuilder = new StringBuilder();
 			for (int i = 0; i < LENGTH; i++) {
 				if (freqs[i].getFrequencyFor('1') > freqs[i].getFrequencyFor('0')) {
-					gammaBuffer.append('1');
-					epsilonBuffer.append('0');
+					gammaBuilder.append('1');
+					epsilonBuilder.append('0');
 				}
 				else {
-					gammaBuffer.append('0');
-					epsilonBuffer.append('1');
+					gammaBuilder.append('0');
+					epsilonBuilder.append('1');
 				}
 			}
-			int gamma = Integer.parseInt(gammaBuffer.toString(), 2);
-			int epsilon = Integer.parseInt(epsilonBuffer.toString(), 2);
+			int gamma = Integer.parseInt(gammaBuilder.toString(), 2);
+			int epsilon = Integer.parseInt(epsilonBuilder.toString(), 2);
 			return (gamma * epsilon);
 		}
 

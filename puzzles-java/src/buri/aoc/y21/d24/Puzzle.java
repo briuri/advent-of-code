@@ -54,7 +54,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	private static Long getZForDigit(int w, int digitIndexOneBased, Long zPrevious) {
 		int x = (int) (zPrevious % 26) + STEP_6_AMOUNTS[digitIndexOneBased - 1];
-		Long z = zPrevious / STEP_5_AMOUNTS[digitIndexOneBased - 1];
+		long z = zPrevious / STEP_5_AMOUNTS[digitIndexOneBased - 1];
 		if (w != x) {
 			z = z * 26 + (w + STEP_16_AMOUNTS[digitIndexOneBased - 1]);
 		}

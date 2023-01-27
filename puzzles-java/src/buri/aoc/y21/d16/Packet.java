@@ -9,11 +9,11 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Packet {
-	private long _version;
-	private long _type;
+	private final long _version;
+	private final long _type;
 	private long _value;
-	private long _length;
-	private List<Packet> _subpackets = new ArrayList<>();
+	private final long _length;
+	private final List<Packet> _subpackets = new ArrayList<>();
 
 	private static final int SUM = 0;
 	private static final int PRODUCT = 1;
@@ -36,10 +36,10 @@ public class Packet {
 
 		// Unpack value or subpackets.
 		if (getType() == LITERAL) {
-			StringBuffer literal = new StringBuffer();
+			StringBuilder literal = new StringBuilder();
 			String leading = raw.substring(i, i + 1);
 			while (true) {
-				literal.append(raw.substring(i + 1, i + 5));
+				literal.append(raw, i + 1, i + 5);
 				i += 5;
 				if (leading.equals("0")) {
 					break;
@@ -141,13 +141,13 @@ public class Packet {
 	 * Helper method to convert a hex character into binary.
 	 */
 	public static String hexToBin(Character hex) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		String binary = Integer.toBinaryString(Integer.parseInt(Character.toString(hex), 16));
 		for (int i = 0; i < 4 - binary.length(); i++) {
-			buffer.append("0");
+			builder.append("0");
 		}
-		buffer.append(binary);
-		return (buffer.toString());
+		builder.append(binary);
+		return (builder.toString());
 	}
 
 	/**

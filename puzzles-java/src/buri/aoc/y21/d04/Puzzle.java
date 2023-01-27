@@ -36,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		List<Integer> drawnNumbers = new ArrayList<>();
-		List<Board> boards = new ArrayList();
+		List<Board> boards = new ArrayList<>();
 		for (int i = 0; i < input.size(); i++) {
 			if (i == 0) {
 				drawnNumbers = PuzzleMath.toInts(Arrays.asList(input.get(0).split(",")));
@@ -62,7 +62,7 @@ public class Puzzle extends BasePuzzle {
 				if (board.isWin()) {
 					iter.remove();
 					if (part == Part.ONE || (part == Part.TWO && boards.size() == 0)) {
-						return (board.getUnmarkedSum() * number);
+						return ((long) board.getUnmarkedSum() * number);
 					}
 				}
 			}

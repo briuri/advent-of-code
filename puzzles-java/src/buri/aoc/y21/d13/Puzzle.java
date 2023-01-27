@@ -46,7 +46,7 @@ public class Puzzle extends BasePuzzle {
 				continue;
 			}
 			if (!atFolds) {
-				dots.add(new Pair(line, Integer.class));
+				dots.add(new Pair<>(line, Integer.class));
 			}
 			else {
 				folds.add(line);
@@ -55,13 +55,13 @@ public class Puzzle extends BasePuzzle {
 
 		for (String fold : folds) {
 			String[] tokens = fold.split("along ")[1].split("=");
-			fold(dots, tokens[0], Integer.valueOf(tokens[1]));
+			fold(dots, tokens[0], Integer.parseInt(tokens[1]));
 			// Quit after one fold in part one.
 			if (part == Part.ONE) {
 				return ("" + dots.size());
 			}
 		}
-		CharGrid grid = new CharGrid(new Pair<Integer>(40, 6));
+		CharGrid grid = new CharGrid(new Pair<>(40, 6));
 		for (Pair<Integer> dot : dots) {
 			grid.set(dot, '■');
 		}

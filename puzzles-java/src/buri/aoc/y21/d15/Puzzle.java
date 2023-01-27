@@ -43,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 
 		// Tracks the adjacent points to explore next
 		List<PointRisk> frontier = new ArrayList<>();
-		frontier.add(new PointRisk(new Pair<Integer>(0, 0), 0));
+		frontier.add(new PointRisk(new Pair<>(0, 0), 0));
 
 		while (true) {
 			// Evaluate in ascending order of risk so far to search map in order of most promising entries.

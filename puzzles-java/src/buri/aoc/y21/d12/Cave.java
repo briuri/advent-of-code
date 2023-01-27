@@ -9,8 +9,8 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Cave {
-	private String _name;
-	private Set<Cave> _neighbors;
+	private final String _name;
+	private final Set<Cave> _neighbors;
 
 	/**
 	 * Constructor

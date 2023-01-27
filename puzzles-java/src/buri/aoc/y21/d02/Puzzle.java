@@ -42,36 +42,40 @@ public class Puzzle extends BasePuzzle {
 	 * What do you get if you multiply your final horizontal position by your final depth?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		Triple<Integer> position = new Triple(0, 0, 0);
+		Triple<Integer> position = new Triple<>(0, 0, 0);
 		for (String line : input) {
 			String[] tokens = line.split(" ");
 			String command = tokens[0];
-			int x = Integer.valueOf(tokens[1]);
+			int x = Integer.parseInt(tokens[1]);
 
 			if (part == Part.ONE) {
-				if (command.equals("forward")) {
-					position.setX(position.getX() + x);
-				}
-				else if (command.equals("up")) {
-					position.setY(position.getY() - x);
-				}
-				else if (command.equals("down")) {
-					position.setY(position.getY() + x);
+				switch (command) {
+					case "forward":
+						position.setX(position.getX() + x);
+						break;
+					case "up":
+						position.setY(position.getY() - x);
+						break;
+					case "down":
+						position.setY(position.getY() + x);
+						break;
 				}
 			}
 			else {
-				if (command.equals("forward")) {
-					position.setY(position.getY() + position.getZ() * x);
-					position.setX(position.getX() + x);
-				}
-				else if (command.equals("up")) {
-					position.setZ(position.getZ() - x);
-				}
-				else if (command.equals("down")) {
-					position.setZ(position.getZ() + x);
+				switch (command) {
+					case "forward":
+						position.setY(position.getY() + position.getZ() * x);
+						position.setX(position.getX() + x);
+						break;
+					case "up":
+						position.setZ(position.getZ() - x);
+						break;
+					case "down":
+						position.setZ(position.getZ() + x);
+						break;
 				}
 			}
 		}
-		return (position.getX() * position.getY());
+		return ((long) position.getX() * position.getY());
 	}
 }

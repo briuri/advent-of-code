@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class ALU {
-	private List<String> _input;
+	private final List<String> _input;
 	private Map<String, String> _memory;
 
 	/**

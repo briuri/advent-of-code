@@ -41,36 +41,36 @@ public class State extends CharGrid implements Comparable<State> {
 	}
 	private static final List<Pair<Integer>> HALL = new ArrayList<>();
 	static {
-		HALL.add(new Pair(1, 1));
-		HALL.add(new Pair(2, 1));
-		HALL.add(new Pair(4, 1));
-		HALL.add(new Pair(6, 1));
-		HALL.add(new Pair(8, 1));
-		HALL.add(new Pair(10, 1));
-		HALL.add(new Pair(11, 1));
+		HALL.add(new Pair<>(1, 1));
+		HALL.add(new Pair<>(2, 1));
+		HALL.add(new Pair<>(4, 1));
+		HALL.add(new Pair<>(6, 1));
+		HALL.add(new Pair<>(8, 1));
+		HALL.add(new Pair<>(10, 1));
+		HALL.add(new Pair<>(11, 1));
 	}
 	private static final Map<Character, List<Pair<Integer>>> ROOMS = new HashMap<>();
 	static {
 		ArrayList<Pair<Integer>> roomA = new ArrayList<>();
-		roomA.add(new Pair(3, 2));
-		roomA.add(new Pair(3, 3));
-		roomA.add(new Pair(3, 4));
-		roomA.add(new Pair(3, 5));
+		roomA.add(new Pair<>(3, 2));
+		roomA.add(new Pair<>(3, 3));
+		roomA.add(new Pair<>(3, 4));
+		roomA.add(new Pair<>(3, 5));
 		ArrayList<Pair<Integer>> roomB = new ArrayList<>();
-		roomB.add(new Pair(5, 2));
-		roomB.add(new Pair(5, 3));
-		roomB.add(new Pair(5, 4));
-		roomB.add(new Pair(5, 5));
+		roomB.add(new Pair<>(5, 2));
+		roomB.add(new Pair<>(5, 3));
+		roomB.add(new Pair<>(5, 4));
+		roomB.add(new Pair<>(5, 5));
 		ArrayList<Pair<Integer>> roomC = new ArrayList<>();
-		roomC.add(new Pair(7, 2));
-		roomC.add(new Pair(7, 3));
-		roomC.add(new Pair(7, 4));
-		roomC.add(new Pair(7, 5));
+		roomC.add(new Pair<>(7, 2));
+		roomC.add(new Pair<>(7, 3));
+		roomC.add(new Pair<>(7, 4));
+		roomC.add(new Pair<>(7, 5));
 		ArrayList<Pair<Integer>> roomD = new ArrayList<>();
-		roomD.add(new Pair(9, 2));
-		roomD.add(new Pair(9, 3));
-		roomD.add(new Pair(9, 4));
-		roomD.add(new Pair(9, 5));
+		roomD.add(new Pair<>(9, 2));
+		roomD.add(new Pair<>(9, 3));
+		roomD.add(new Pair<>(9, 4));
+		roomD.add(new Pair<>(9, 5));
 		ROOMS.put(A, roomA);
 		ROOMS.put(B, roomB);
 		ROOMS.put(C, roomC);
@@ -81,14 +81,14 @@ public class State extends CharGrid implements Comparable<State> {
 	 * Constructor
 	 */
 	public State(List<String> input) {
-		this(input, 0L, 0L);
+		this(input, 0L);
 	}
 
 	/**
 	 * Constructor
 	 */
-	public State(List<String> input, Long cost, Long diffCost) {
-		super(new Pair(input.get(0).length(), input.size()));
+	public State(List<String> input, Long cost) {
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, input.get(y).charAt(x));
@@ -101,7 +101,7 @@ public class State extends CharGrid implements Comparable<State> {
 	 * Copy constructor
 	 */
 	private State(State state) {
-		super(new Pair(state.getWidth(), state.getHeight()));
+		super(new Pair<>(state.getWidth(), state.getHeight()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, state.get(x, y));
@@ -190,8 +190,8 @@ public class State extends CharGrid implements Comparable<State> {
 			}
 		}
 		else {
-			Pair<Integer> left = new Pair(amphipod.getX() - 1, 1);
-			Pair<Integer> right = new Pair(amphipod.getX() + 1, 1);
+			Pair<Integer> left = new Pair<>(amphipod.getX() - 1, 1);
+			Pair<Integer> right = new Pair<>(amphipod.getX() + 1, 1);
 			if (isClear(amphipod, left)) {
 				destinations.add(left);
 			}
@@ -276,7 +276,7 @@ public class State extends CharGrid implements Comparable<State> {
 	 * Returns the number of room squares that are a WALL (all rooms convert to all WALLs when finished).
 	 */
 	public Integer getEndCount() {
-		Integer count = 0;
+		int count = 0;
 		for (Character label : ROOMS.keySet()) {
 			for (Pair<Integer> room : ROOMS.get(label)) {
 				if (get(room) == WALL) {

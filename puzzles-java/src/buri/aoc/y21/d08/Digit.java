@@ -37,7 +37,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Digit {
-	private char[] _segments = new char[7];
+	private final char[] _segments = new char[7];
 
 	/**
 	 * Constructor connects wires to correct segments so digits can be parsed.

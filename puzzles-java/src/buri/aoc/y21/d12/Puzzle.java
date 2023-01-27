@@ -16,7 +16,8 @@ import java.util.Set;
  *
  * @author Brian Uri!
  */
-public class Puzzle extends BasePuzzle {	@Test
+public class Puzzle extends BasePuzzle {
+	@Test
 	public void testPart1() {
 		assertRun(10L, 1, false);
 		assertRun(19L, 2, false);
@@ -41,21 +42,20 @@ public class Puzzle extends BasePuzzle {	@Test
 	protected long runLong(Part part, List<String> input) {
 		Map<String, Cave> caves = new HashMap<>();
 		for (String line : input) {
-			String tokens[] = line.split("-");
+			String[] tokens = line.split("-");
 			addCave(caves, tokens[0]);
 			addCave(caves, tokens[1]);
 			caves.get(tokens[0]).addNeighbor(caves.get(tokens[1]));
 			caves.get(tokens[1]).addNeighbor(caves.get(tokens[0]));
 		}
 
-		int totalPaths = explore(part, caves, caves.get("start"), new ArrayList<>());
-		return (totalPaths);
+		return (explore(part, caves.get("start"), new ArrayList<>()));
 	}
 
 	/**
 	 * Recursively counts the number of valid paths from a position to the end.
 	 */
-	private static int explore(Part part, Map<String, Cave> caves, Cave start, List<Cave> visitedSmallCaves) {
+	private static int explore(Part part, Cave start, List<Cave> visitedSmallCaves) {
 		if (start.getName().equals("end")) {
 			return (1);
 		}
@@ -68,7 +68,7 @@ public class Puzzle extends BasePuzzle {	@Test
 			// In part one, no small cave can be visited more than one time.
 			if (part == Part.ONE) {
 				if (!visitedSmallCaves.contains(neighbor)) {
-					totalPaths += explore(part, caves, neighbor, new ArrayList<>(visitedSmallCaves));
+					totalPaths += explore(part, neighbor, new ArrayList<>(visitedSmallCaves));
 				}
 			}
 			// In part two, 1 small cave can be visited twice.
@@ -76,7 +76,7 @@ public class Puzzle extends BasePuzzle {	@Test
 				// If any cave has already been visited twice, the set will be smaller than the list.
 				Set<Cave> noDuplicates = new HashSet<>(visitedSmallCaves);
 				if (!visitedSmallCaves.contains(neighbor) || (noDuplicates.size() == visitedSmallCaves.size())) {
-					totalPaths += explore(part, caves, neighbor, new ArrayList<>(visitedSmallCaves));
+					totalPaths += explore(part, neighbor, new ArrayList<>(visitedSmallCaves));
 				}
 			}
 		}

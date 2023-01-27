@@ -15,7 +15,7 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class HeightMap extends IntGrid {
-	private List<Pair<Integer>> _lowestPoints = new ArrayList<>();
+	private final List<Pair<Integer>> _lowestPoints = new ArrayList<>();
 	private int _risk = 0;
 
 	private static final int HIGHEST = 9;
@@ -24,7 +24,7 @@ public class HeightMap extends IntGrid {
 	 * Constructor
 	 */
 	public HeightMap(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, Character.getNumericValue(input.get(y).charAt(x)));
@@ -33,7 +33,7 @@ public class HeightMap extends IntGrid {
 
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
-				Pair<Integer> point = new Pair(x, y);
+				Pair<Integer> point = new Pair<>(x, y);
 				int testValue = get(point);
 				boolean isLowest = true;
 				for (Pair<Integer> adj : point.getAdjacent()) {
@@ -61,7 +61,7 @@ public class HeightMap extends IntGrid {
 		}
 		Collections.sort(basinSizes);
 		Collections.reverse(basinSizes);
-		return (basinSizes.get(0) * basinSizes.get(1) * basinSizes.get(2));
+		return ((long) basinSizes.get(0) * basinSizes.get(1) * basinSizes.get(2));
 	}
 
 	/**

@@ -29,7 +29,7 @@ public class Puzzle extends BasePuzzle {
 		Map<Pair<Integer>, Character> grid = new HashMap<>();
 		for (int y = 0; y < input.size(); y++) {
 			for (int x = 0; x < input.get(0).length(); x++) {
-				grid.put(new Pair<Integer>(x, y), input.get(y).charAt(x));
+				grid.put(new Pair<>(x, y), input.get(y).charAt(x));
 			}
 		}
 		int maxX = -1;
@@ -45,11 +45,11 @@ public class Puzzle extends BasePuzzle {
 			Map<Pair<Integer>, Character> nextGrid = new HashMap<>();
 			for (int y = 0; y <= maxY; y++) {
 				for (int x = 0; x <= maxX; x++) {
-					Pair<Integer> previous = new Pair<Integer>(x, y);
+					Pair<Integer> previous = new Pair<>(x, y);
 					Character value = grid.get(previous);
 					if (value == '>') {
 						int nextX = (x + 1) % (maxX + 1);
-						Pair<Integer> next = new Pair<Integer>(nextX, y);
+						Pair<Integer> next = new Pair<>(nextX, y);
 						if (grid.get(next) == '.') {
 							changes++;
 							nextGrid.put(previous, '.');
@@ -61,11 +61,11 @@ public class Puzzle extends BasePuzzle {
 			grid.putAll(nextGrid);
 			for (int y = 0; y <= maxY; y++) {
 				for (int x = 0; x <= maxX; x++) {
-					Pair<Integer> previous = new Pair<Integer>(x, y);
+					Pair<Integer> previous = new Pair<>(x, y);
 					Character value = grid.get(previous);
 					if (value == 'v') {
 						int nextY = (y + 1) % (maxY + 1);
-						Pair<Integer> next = new Pair<Integer>(x, nextY);
+						Pair<Integer> next = new Pair<>(x, nextY);
 						if (grid.get(next) == '.') {
 							changes++;
 							nextGrid.put(previous, '.');

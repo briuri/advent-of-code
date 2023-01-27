@@ -45,11 +45,11 @@ public class Puzzle extends BasePuzzle {
 			}
 			else {
 				Digit digit = new Digit(input);
-				StringBuffer buffer = new StringBuffer();
+				StringBuilder builder = new StringBuilder();
 				for (String out : output) {
-					buffer.append(digit.parse(out));
+					builder.append(digit.parse(out));
 				}
-				sum += Integer.valueOf(buffer.toString());
+				sum += Integer.parseInt(builder.toString());
 			}
 		}
 		return (sum);

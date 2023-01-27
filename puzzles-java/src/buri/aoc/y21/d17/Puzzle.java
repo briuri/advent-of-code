@@ -35,17 +35,17 @@ public class Puzzle extends BasePuzzle {
 		String[] tokens = input.get(0).split(": ")[1].split(", ");
 		String[] x = tokens[0].substring(2).split("\\.\\.");
 		String[] y = tokens[1].substring(2).split("\\.\\.");
-		int targetMinX = Integer.valueOf(x[0]);
-		int targetMaxX = Integer.valueOf(x[1]);
-		int targetMinY = Integer.valueOf(y[0]);
-		int targetMaxY = Integer.valueOf(y[1]);
+		int targetMinX = Integer.parseInt(x[0]);
+		int targetMaxX = Integer.parseInt(x[1]);
+		int targetMinY = Integer.parseInt(y[0]);
+		int targetMaxY = Integer.parseInt(y[1]);
 
 		long maxY = Long.MIN_VALUE;
 		long successes = 0;
 		for (int xV = 1; xV <= targetMaxX; xV++) {
 			for (int yV = targetMinY; yV < (targetMinY * -1); yV++) {
-				Pair<Integer> probe = new Pair<Integer>(0, 0);
-				Pair<Integer> velocity = new Pair<Integer>(xV, yV);
+				Pair<Integer> probe = new Pair<>(0, 0);
+				Pair<Integer> velocity = new Pair<>(xV, yV);
 				long localMaxY = Long.MIN_VALUE;
 				while (true) {
 					probe.setX(probe.getX() + velocity.getX());

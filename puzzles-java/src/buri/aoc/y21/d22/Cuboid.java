@@ -11,13 +11,13 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Cuboid {
-	private int _minX;
-	private int _maxX;
-	private int _minY;
-	private int _maxY;
-	private int _minZ;
-	private int _maxZ;
-	private boolean _on;
+	private final int _minX;
+	private final int _maxX;
+	private final int _minY;
+	private final int _maxY;
+	private final int _minZ;
+	private final int _maxZ;
+	private final boolean _on;
 
 	/**
 	 * Constructor
@@ -26,14 +26,14 @@ public class Cuboid {
 		String[] tokens = line.split(" ");
 		String[] coords = tokens[1].split(",");
 		String[] xCoords = coords[0].substring(2).split("\\.\\.");
-		_minX = Integer.valueOf(xCoords[0]);
-		_maxX = Integer.valueOf(xCoords[1]);
+		_minX = Integer.parseInt(xCoords[0]);
+		_maxX = Integer.parseInt(xCoords[1]);
 		String[] yCoords = coords[1].substring(2).split("\\.\\.");
-		_minY = Integer.valueOf(yCoords[0]);
-		_maxY = Integer.valueOf(yCoords[1]);
+		_minY = Integer.parseInt(yCoords[0]);
+		_maxY = Integer.parseInt(yCoords[1]);
 		String[] zCoords = coords[2].substring(2).split("\\.\\.");
-		_minZ = Integer.valueOf(zCoords[0]);
-		_maxZ = Integer.valueOf(zCoords[1]);
+		_minZ = Integer.parseInt(zCoords[0]);
+		_maxZ = Integer.parseInt(zCoords[1]);
 		_on = tokens[0].equals("on");
 	}
 

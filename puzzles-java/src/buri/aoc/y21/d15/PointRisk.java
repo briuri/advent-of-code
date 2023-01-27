@@ -8,8 +8,8 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class PointRisk implements Comparable<PointRisk> {
-	private Pair<Integer> _point;
-	private Integer _riskSoFar;
+	private final Pair<Integer> _point;
+	private final Integer _riskSoFar;
 
 	/**
 	 * Constructor

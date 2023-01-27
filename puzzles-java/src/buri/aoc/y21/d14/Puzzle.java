@@ -84,8 +84,8 @@ public class Puzzle extends BasePuzzle {
 		Map<String, Long> newPairCounts = new HashMap<>();
 		for (String pair : pairCounts.keySet()) {
 			String insert = rules.get(pair);
-			String newPair1 = pair.substring(0, 1) + insert;
-			String newPair2 = insert + pair.substring(1, 2);
+			String newPair1 = pair.charAt(0) + insert;
+			String newPair2 = insert + pair.charAt(1);
 			newPairCounts.put(newPair1, newPairCounts.getOrDefault(newPair1, 0L) + pairCounts.get(pair));
 			newPairCounts.put(newPair2, newPairCounts.getOrDefault(newPair2, 0L) + pairCounts.get(pair));
 		}

@@ -11,10 +11,10 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Scanner {
-	private String _id;
+	private final String _id;
 	private Triple<Integer> _location;
 	private List<Triple<Integer>> _beacons;
-	List<List<Triple<Integer>>> _permutations = null;
+	List<List<Triple<Integer>>> _permutations;
 
 	/**
 	 * Constructor
@@ -27,126 +27,126 @@ public class Scanner {
 		// 8 X-Axis
 		List<Triple<Integer>> newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX() * -1, beacon.getY() * -1, beacon.getZ()));
+			newBeacons.add(new Triple<>(beacon.getX() * -1, beacon.getY() * -1, beacon.getZ()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX() * -1, beacon.getZ() * -1, beacon.getY() * -1));
+			newBeacons.add(new Triple<>(beacon.getX() * -1, beacon.getZ() * -1, beacon.getY() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX() * -1, beacon.getZ(), beacon.getY()));
+			newBeacons.add(new Triple<>(beacon.getX() * -1, beacon.getZ(), beacon.getY()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX() * -1, beacon.getY(), beacon.getZ() * -1));
+			newBeacons.add(new Triple<>(beacon.getX() * -1, beacon.getY(), beacon.getZ() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX(), beacon.getY() * -1, beacon.getZ() * -1));
+			newBeacons.add(new Triple<>(beacon.getX(), beacon.getY() * -1, beacon.getZ() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX(), beacon.getZ() * -1, beacon.getY()));
+			newBeacons.add(new Triple<>(beacon.getX(), beacon.getZ() * -1, beacon.getY()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX(), beacon.getZ(), beacon.getY() * -1));
+			newBeacons.add(new Triple<>(beacon.getX(), beacon.getZ(), beacon.getY() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getX(), beacon.getY(), beacon.getZ()));
+			newBeacons.add(new Triple<>(beacon.getX(), beacon.getY(), beacon.getZ()));
 		}
 		_permutations.add(newBeacons);
 
 		// 8 Y-Axis
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY() * -1, beacon.getX() * -1, beacon.getZ() * -1));
+			newBeacons.add(new Triple<>(beacon.getY() * -1, beacon.getX() * -1, beacon.getZ() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY() * -1, beacon.getZ() * -1, beacon.getX()));
+			newBeacons.add(new Triple<>(beacon.getY() * -1, beacon.getZ() * -1, beacon.getX()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY() * -1, beacon.getZ(), beacon.getX() * -1));
+			newBeacons.add(new Triple<>(beacon.getY() * -1, beacon.getZ(), beacon.getX() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY() * -1, beacon.getX(), beacon.getZ()));
+			newBeacons.add(new Triple<>(beacon.getY() * -1, beacon.getX(), beacon.getZ()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY(), beacon.getX() * -1, beacon.getZ()));
+			newBeacons.add(new Triple<>(beacon.getY(), beacon.getX() * -1, beacon.getZ()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY(), beacon.getZ() * -1, beacon.getX() * -1));
+			newBeacons.add(new Triple<>(beacon.getY(), beacon.getZ() * -1, beacon.getX() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY(), beacon.getZ(), beacon.getX()));
+			newBeacons.add(new Triple<>(beacon.getY(), beacon.getZ(), beacon.getX()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getY(), beacon.getX(), beacon.getZ() * -1));
+			newBeacons.add(new Triple<>(beacon.getY(), beacon.getX(), beacon.getZ() * -1));
 		}
 		_permutations.add(newBeacons);
 
 		// 8 Z-Axis
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ() * -1, beacon.getX() * -1, beacon.getY()));
+			newBeacons.add(new Triple<>(beacon.getZ() * -1, beacon.getX() * -1, beacon.getY()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ() * -1, beacon.getY() * -1, beacon.getX() * -1));
+			newBeacons.add(new Triple<>(beacon.getZ() * -1, beacon.getY() * -1, beacon.getX() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ() * -1, beacon.getY(), beacon.getX()));
+			newBeacons.add(new Triple<>(beacon.getZ() * -1, beacon.getY(), beacon.getX()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ() * -1, beacon.getX(), beacon.getY() * -1));
+			newBeacons.add(new Triple<>(beacon.getZ() * -1, beacon.getX(), beacon.getY() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ(), beacon.getX() * -1, beacon.getY() * -1));
+			newBeacons.add(new Triple<>(beacon.getZ(), beacon.getX() * -1, beacon.getY() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ(), beacon.getY() * -1, beacon.getX()));
+			newBeacons.add(new Triple<>(beacon.getZ(), beacon.getY() * -1, beacon.getX()));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ(), beacon.getY(), beacon.getX() * -1));
+			newBeacons.add(new Triple<>(beacon.getZ(), beacon.getY(), beacon.getX() * -1));
 		}
 		_permutations.add(newBeacons);
 		newBeacons = new ArrayList<>();
 		for (Triple<Integer> beacon : getBeacons()) {
-			newBeacons.add(new Triple<Integer>(beacon.getZ(), beacon.getX(), beacon.getY()));
+			newBeacons.add(new Triple<>(beacon.getZ(), beacon.getX(), beacon.getY()));
 		}
 		_permutations.add(newBeacons);
 	}
@@ -172,7 +172,7 @@ public class Scanner {
 					}
 					// If a match is found, update the test scanner to permanently be offset and store exact location.
 					if (overlaps >= 12) {
-						testScanner.setLocation(new Triple<Integer>(diffX, diffY, diffZ));
+						testScanner.setLocation(new Triple<>(diffX, diffY, diffZ));
 						testScanner.setBeacons(offsetTestBeacons);
 						return (true);
 					}
@@ -191,7 +191,7 @@ public class Scanner {
 			int newX = beacon.getX() - diffX;
 			int newY = beacon.getY() - diffY;
 			int newZ = beacon.getZ() - diffZ;
-			offsetBeacons.add(new Triple<Integer>(newX, newY, newZ));
+			offsetBeacons.add(new Triple<>(newX, newY, newZ));
 		}
 		return (offsetBeacons);
 	}

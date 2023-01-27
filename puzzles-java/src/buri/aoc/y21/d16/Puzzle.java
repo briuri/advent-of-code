@@ -29,11 +29,11 @@ public class Puzzle extends BasePuzzle {
 	 * What do you get if you evaluate the expression represented by your hexadecimal-encoded BITS transmission?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (char hex : input.get(0).toCharArray()) {
-			buffer.append(Packet.hexToBin(hex));
+			builder.append(Packet.hexToBin(hex));
 		}
-		Packet packet = new Packet(buffer.toString(), 0);
+		Packet packet = new Packet(builder.toString(), 0);
 		return (part == Part.ONE ? packet.getVersionSum() : packet.getResult());
 	}
 }

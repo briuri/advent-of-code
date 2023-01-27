@@ -17,7 +17,7 @@ public class Grid extends IntGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, Character.getNumericValue(input.get(y).charAt(x)));
@@ -54,7 +54,7 @@ public class Grid extends IntGrid {
 						flashedThisTurn[x][y] = true;
 
 						// This increases the energy level of all adjacent octopuses by 1.
-						Pair<Integer> point = new Pair(x, y);
+						Pair<Integer> point = new Pair<>(x, y);
 						List<Pair<Integer>> adjacent = point.getAdjacent(true);
 						for (Pair<Integer> adj : adjacent) {
 							if (adj.getX() >= 0 && adj.getX() < getWidth() && adj.getY() >= 0 && adj.getY() < getHeight()) {

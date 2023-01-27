@@ -45,7 +45,7 @@ public class Puzzle extends BasePuzzle {
 			for (int x = 0; x < input.get(0).length(); x++) {
 				char value = input.get(y).charAt(x);
 				// Convert character representation into 1s and 0s.
-				image.put(new Pair(x, y), (value == LIT ? 1 : 0));
+				image.put(new Pair<>(x, y), (value == LIT ? 1 : 0));
 			}
 		}
 
@@ -78,7 +78,7 @@ public class Puzzle extends BasePuzzle {
 			Map<Pair<Integer>, Integer> enhancedImage = new HashMap<>();
 			for (int y = minY - padding; y < maxY + padding; y++) {
 				for (int x = minX - padding; x < maxX + padding; x++) {
-					Pair<Integer> point = new Pair<Integer>(x, y);
+					Pair<Integer> point = new Pair<>(x, y);
 					char newValue = enhancePoint(image, algorithm, point, step);
 					enhancedImage.put(point, (newValue == LIT ? 1 : 0));
 				}
@@ -102,17 +102,17 @@ public class Puzzle extends BasePuzzle {
 		// When 0th is '#', everything outside the area of interest is lit during odd steps (0-indexed).
 		int defaultValue = (algorithm.charAt(0) == LIT && step % 2 == 1 ? 1 : 0);
 
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX() - 1, point.getY() - 1), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX(), point.getY() - 1), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX() + 1, point.getY() - 1), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX() - 1, point.getY()), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX(), point.getY()), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX() + 1, point.getY()), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX() - 1, point.getY() + 1), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX(), point.getY() + 1), defaultValue));
-		buffer.append(image.getOrDefault(new Pair<Integer>(point.getX() + 1, point.getY() + 1), defaultValue));
-		int algorithmIndex = Integer.parseInt(buffer.toString(), 2);
+		StringBuilder builder = new StringBuilder();
+		builder.append(image.getOrDefault(new Pair<>(point.getX() - 1, point.getY() - 1), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX(), point.getY() - 1), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX() + 1, point.getY() - 1), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX() - 1, point.getY()), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX(), point.getY()), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX() + 1, point.getY()), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX() - 1, point.getY() + 1), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX(), point.getY() + 1), defaultValue));
+		builder.append(image.getOrDefault(new Pair<>(point.getX() + 1, point.getY() + 1), defaultValue));
+		int algorithmIndex = Integer.parseInt(builder.toString(), 2);
 
 		return (algorithm.charAt(algorithmIndex));
 	}

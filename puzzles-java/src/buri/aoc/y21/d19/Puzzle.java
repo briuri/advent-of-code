@@ -44,10 +44,10 @@ public class Puzzle extends BasePuzzle {
 				while (i < input.size() && input.get(i).length() > 0) {
 					String beacon = input.get(i);
 					String[] tokens = beacon.split(",");
-					int x = Integer.valueOf(tokens[0]);
-					int y = Integer.valueOf(tokens[1]);
-					int z = Integer.valueOf(tokens[2]);
-					beacons.add(new Triple<Integer>(x, y, z));
+					int x = Integer.parseInt(tokens[0]);
+					int y = Integer.parseInt(tokens[1]);
+					int z = Integer.parseInt(tokens[2]);
+					beacons.add(new Triple<>(x, y, z));
 					i++;
 				}
 				scanners.add(new Scanner(id, beacons));
@@ -55,7 +55,7 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Use Scanner 0 as the baseline.
-		scanners.get(0).setLocation(new Triple<Integer>(0, 0, 0));
+		scanners.get(0).setLocation(new Triple<>(0, 0, 0));
 		List<Scanner> frontier = new ArrayList<>();
 		frontier.add(scanners.get(0));
 		while (!frontier.isEmpty()) {

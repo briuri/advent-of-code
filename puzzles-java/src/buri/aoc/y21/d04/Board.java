@@ -8,7 +8,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Board {
-	private int[][] _board = new int[SIZE][SIZE];
+	private final int[][] _board = new int[SIZE][SIZE];
 
 	public static final int SIZE = 5;
 	private static final int MARKED = -1;

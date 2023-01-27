@@ -11,9 +11,9 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Line {
-	private Pair<Integer> _start;
-	private Pair<Integer> _end;
-	private Set<Pair<Integer>> _points;
+	private final Pair<Integer> _start;
+	private final Pair<Integer> _end;
+	private final Set<Pair<Integer>> _points;
 
 	/**
 	 * Constructor

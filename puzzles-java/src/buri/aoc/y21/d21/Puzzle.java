@@ -46,13 +46,13 @@ public class Puzzle extends BasePuzzle {
 				start1 = (start1 + die.roll() + die.roll() + die.roll() - 1) % 10 + 1;
 				score1 += start1;
 				if (score1 >= 1000) {
-					return (score2 * die.getRollCount());
+					return ((long) score2 * die.getRollCount());
 				}
 
 				start2 = (start2 + die.roll() + die.roll() + die.roll() - 1) % 10 + 1;
 				score2 += start2;
 				if (score2 >= 1000) {
-					return (score2 * die.getRollCount());
+					return ((long) score2 * die.getRollCount());
 				}
 			}
 		}
