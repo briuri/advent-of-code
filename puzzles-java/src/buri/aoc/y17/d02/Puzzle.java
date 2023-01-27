@@ -2,6 +2,7 @@ package buri.aoc.y17.d02;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 	protected long runLong(Part part, List<String> input) {
 		List<List<Integer>> spreadsheet = new ArrayList<>();
 		for (String line : input) {
-			List<Integer> row = convertStringsToInts(Arrays.asList(line.split("\t")));
+			List<Integer> row = PuzzleMath.toInts(Arrays.asList(line.split("\t")));
 			Collections.sort(row);
 			spreadsheet.add(row);
 		}
@@ -47,7 +48,7 @@ public class Puzzle extends BasePuzzle {
 		for (List<Integer> row : spreadsheet) {
 			checksums.add((part == Part.ONE) ? getRowDifference(row) : getRowQuotient(row));
 		}
-		return (getIntSum(checksums));
+		return (PuzzleMath.getIntSum(checksums));
 	}
 
 	/**

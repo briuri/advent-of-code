@@ -2,6 +2,7 @@ package buri.aoc.y20.d23;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -92,8 +93,8 @@ public class Puzzle extends BasePuzzle {
 			return (buffer.toString());
 		}
 		Cup next = cups.get(1).getNext();
-		BigInteger factor1 = toBigInt(next.getValue());
-		BigInteger factor2 = toBigInt(next.getNext().getValue());
+		BigInteger factor1 = PuzzleMath.toBigInt(next.getValue());
+		BigInteger factor2 = PuzzleMath.toBigInt(next.getNext().getValue());
 		return (factor1.multiply(factor2).toString());
 	}
 

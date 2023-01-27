@@ -3,6 +3,7 @@ package buri.aoc.y22.d20;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayDeque;
@@ -38,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 
 		// Store the data in a deque and include original index number.
 		ArrayDeque<Pair<Long>> list = new ArrayDeque<>();
-		List<Long> values = convertStringsToLongs(input);
+		List<Long> values = PuzzleMath.toLongs(input);
 		Pair<Long> zero = null;
 		for (int i = 0; i < values.size(); i++) {
 			values.set(i, values.get(i) * DECRYPTION_KEY);

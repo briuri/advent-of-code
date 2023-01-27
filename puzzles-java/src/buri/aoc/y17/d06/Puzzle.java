@@ -2,6 +2,7 @@ package buri.aoc.y17.d06;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -35,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		String[] rawIntegers = input.get(0).split("\t");
-		List<Integer> banks = convertStringsToInts(Arrays.asList(rawIntegers));
+		List<Integer> banks = PuzzleMath.toInts(Arrays.asList(rawIntegers));
 
 		boolean hitLoop = false;
 		int attempts = 0;

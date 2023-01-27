@@ -3,6 +3,7 @@ package buri.aoc.y21.d20;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class Puzzle extends BasePuzzle {
 		image = enhanceImage(image, algorithm, maxSteps);
 
 		// Since # is represented as 1, the sum of all values will be the number of lit pixels.
-		return (getIntSum(new ArrayList<>(image.values())));
+		return (PuzzleMath.getIntSum(new ArrayList<>(image.values())));
 	}
 
 	/**

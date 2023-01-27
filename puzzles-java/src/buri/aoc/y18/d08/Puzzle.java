@@ -2,6 +2,7 @@ package buri.aoc.y18.d08;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the value of the root node?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Integer> data = convertStringsToInts(Arrays.asList(input.get(0).split(" ")));
+		List<Integer> data = PuzzleMath.toInts(Arrays.asList(input.get(0).split(" ")));
 
 		List<Node> nodes = new ArrayList<>();
 		addNode(data, nodes, 0);

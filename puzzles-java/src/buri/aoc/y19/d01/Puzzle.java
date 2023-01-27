@@ -2,6 +2,7 @@ package buri.aoc.y19.d01;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 * the mass of the added fuel?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Integer> values = convertStringsToInts(input);
+		List<Integer> values = PuzzleMath.toInts(input);
 		int sum = 0;
 		for (Integer mass : values) {
 			sum += getFuel(part, mass);

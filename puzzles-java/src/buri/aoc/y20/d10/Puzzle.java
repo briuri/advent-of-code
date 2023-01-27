@@ -2,6 +2,7 @@ package buri.aoc.y20.d10;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -37,7 +38,7 @@ public class Puzzle extends BasePuzzle {
 	 * device?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Integer> adapters = convertStringsToInts(input);
+		List<Integer> adapters = PuzzleMath.toInts(input);
 		Collections.sort(adapters);
 
 		int charge = 0;

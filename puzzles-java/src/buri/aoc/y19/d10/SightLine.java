@@ -1,6 +1,7 @@
 package buri.aoc.y19.d10;
 
 import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.PuzzleMath;
 
 /**
  * Model of a sight line from a monitoring station to an asteroid. Contains a pair representing the slope of the sight
@@ -18,7 +19,7 @@ public class SightLine implements Comparable<SightLine> {
 	public SightLine(Pair<Integer> station, Pair<Integer> asteroid) {
 		int dx = asteroid.getX() - station.getX();
 		int dy = asteroid.getY() - station.getY();
-		long gcd = new Puzzle().getGCD(dx, dy);
+		long gcd = PuzzleMath.getGCD(dx, dy);
 		if (gcd < 0) {
 			gcd = gcd * -1;
 		}

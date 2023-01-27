@@ -2,6 +2,7 @@ package buri.aoc.y21.d14;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -73,7 +74,7 @@ public class Puzzle extends BasePuzzle {
 		elementCounts.put(lastElement, elementCounts.get(lastElement) + 1);
 
 		// Each count is double what it should be, so divide by 2 after doing the math.
-		return ((getMax(elementCounts).getValue() - getMin(elementCounts).getValue()) / 2);
+		return ((PuzzleMath.getMax(elementCounts).getValue() - PuzzleMath.getMin(elementCounts).getValue()) / 2);
 	}
 
 	/**

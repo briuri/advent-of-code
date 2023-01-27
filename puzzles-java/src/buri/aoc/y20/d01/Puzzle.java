@@ -2,6 +2,7 @@ package buri.aoc.y20.d01;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 * In your expense report, what is the product of the three entries that sum to 2020?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Integer> values = convertStringsToInts(input);
+		List<Integer> values = PuzzleMath.toInts(input);
 		final int target = 2020;
 		for (int i = 0; i < input.size(); i++) {
 			int val1 = values.get(i);

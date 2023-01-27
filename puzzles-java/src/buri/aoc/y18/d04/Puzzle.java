@@ -2,6 +2,7 @@ package buri.aoc.y18.d04;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class Puzzle extends BasePuzzle {
 			}
 
 			// Work backwards from the max sleep value to the id of the guard who slept that much.
-			Map.Entry<Integer, Integer> maxEntry = getMax(totalSleep);
+			Map.Entry<Integer, Integer> maxEntry = PuzzleMath.getMax(totalSleep);
 			int id = maxEntry.getKey();
 			int minuteMostSpentAsleep = sleepSchedules.get(id).getMaxMinute();
 			return (id * minuteMostSpentAsleep);

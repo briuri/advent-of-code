@@ -2,6 +2,7 @@ package buri.aoc.y20.d25;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -19,8 +20,8 @@ public class Puzzle extends BasePuzzle {
 		assertRun(10548634L, 0, true);
 	}
 
-	private static final BigInteger STARTING_VALUE = toBigInt(7);
-	private static final BigInteger MODULUS = toBigInt(20201227);
+	private static final BigInteger STARTING_VALUE = PuzzleMath.toBigInt(7);
+	private static final BigInteger MODULUS = PuzzleMath.toBigInt(20201227);
 
 	/**
 	 * Part 1:
@@ -49,9 +50,9 @@ public class Puzzle extends BasePuzzle {
 
 		// Search in reverse from upper bound to save time (added post-solve to reduce test suite run time).
 		for (long loopSize = upperBound; loopSize > 0; loopSize--) {
-			BigInteger exponent = toBigInt(loopSize);
+			BigInteger exponent = PuzzleMath.toBigInt(loopSize);
 			if (STARTING_VALUE.modPow(exponent, MODULUS).longValue() == doorPki) {
-				BigInteger base = toBigInt(cardPki);
+				BigInteger base = PuzzleMath.toBigInt(cardPki);
 				return (base.modPow(exponent, MODULUS).longValue());
 			}
 		}

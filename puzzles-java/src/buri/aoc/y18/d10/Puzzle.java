@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -97,8 +98,8 @@ public class Puzzle extends BasePuzzle {
 			minY = Math.min(minY, p.getY());
 			maxY = Math.max(maxY, p.getY());
 		}
-		BigInteger xLength = toBigInt(maxX - minX);
-		BigInteger yLength = toBigInt(maxY - minY);
+		BigInteger xLength = PuzzleMath.toBigInt(maxX - minX);
+		BigInteger yLength = PuzzleMath.toBigInt(maxY - minY);
 		return xLength.multiply(yLength);
 	}
 

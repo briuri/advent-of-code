@@ -3,6 +3,7 @@ package buri.aoc.y20.d09;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.Permutations;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class Puzzle extends BasePuzzle {
 	protected long runLong(Part part, List<String> input) {
 		// Example has size 5, real input has 25.
 		int preambleSize = (input.size() > 20 ? 25 : 5);
-		List<Long> values = convertStringsToLongs(input);
+		List<Long> values = PuzzleMath.toLongs(input);
 		long target = 0;
 		for (int i = preambleSize; i < input.size(); i++) {
 			target = values.get(i);

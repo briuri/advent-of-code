@@ -2,6 +2,7 @@ package buri.aoc.y21.d04;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Puzzle extends BasePuzzle {
 		List<Board> boards = new ArrayList();
 		for (int i = 0; i < input.size(); i++) {
 			if (i == 0) {
-				drawnNumbers = convertStringsToInts(Arrays.asList(input.get(0).split(",")));
+				drawnNumbers = PuzzleMath.toInts(Arrays.asList(input.get(0).split(",")));
 			}
 			// Skip board separator lines
 			else if (input.get(i).length() != 0) {

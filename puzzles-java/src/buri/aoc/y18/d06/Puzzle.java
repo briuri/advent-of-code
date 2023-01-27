@@ -3,6 +3,7 @@ package buri.aoc.y18.d06;
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class Puzzle extends BasePuzzle {
 					}
 
 					// Get the smallest MD to record in the grid.
-					Map.Entry<Pair, Long> minEntry = getMin(currentSpotDistances);
+					Map.Entry<Pair, Long> minEntry = PuzzleMath.getMin(currentSpotDistances);
 					// Ignore any smallest MDs shared by multiple locations.
 					if (Collections.frequency(currentSpotDistances.values(), minEntry.getValue()) == 1) {
 						Pair nearestPair = minEntry.getKey();
@@ -83,7 +84,7 @@ public class Puzzle extends BasePuzzle {
 			}
 
 			// Finally, return the max number of minimumMDs owned by an input location.
-			Map.Entry<Pair, Integer> maxEntry = getMax(minimumDistances);
+			Map.Entry<Pair, Integer> maxEntry = PuzzleMath.getMax(minimumDistances);
 			return (maxEntry.getValue());
 		}
 

@@ -2,6 +2,7 @@ package buri.aoc.y18.d01;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -33,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * device reaches twice?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Integer> values = convertStringsToInts(input);
+		List<Integer> values = PuzzleMath.toInts(input);
 		Set<Integer> repeats = new HashSet<>();
 		int sum = 0;
 		while (true) {

@@ -2,6 +2,7 @@ package buri.aoc.y21.d07;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		String[] stringInts = input.get(0).split(",");
-		List<Integer> values = convertStringsToInts(Arrays.asList(stringInts));
+		List<Integer> values = PuzzleMath.toInts(Arrays.asList(stringInts));
 
 		int minFuel = Integer.MAX_VALUE;
 		for (int i = 0; i <= Collections.max(values); i++) {

@@ -94,6 +94,8 @@ public class Puzzle extends BasePuzzle {
 	 * Entry point to reuse this code on Day 14.
 	 */
 	public String getKnotHash(String value) {
-		return runString(Part.TWO, asList(value));
+		List<String> input = new ArrayList<>();
+		input.add(value);
+		return runString(Part.TWO, input);
 	}
 }

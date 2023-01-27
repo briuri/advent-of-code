@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
 import buri.aoc.common.data.tuple.Pair;
 import buri.aoc.common.data.tuple.Quad;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -92,7 +93,7 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Part 1: Find the rectangle of elves and count empty spaces.
-		Quad<Integer> bounds = getBounds(elves);
+		Quad<Integer> bounds = PuzzleMath.getBounds(elves);
 		long emptySpaces = 0;
 		for (int y = bounds.getZ(); y <= bounds.getT(); y++) {
 			for (int x = bounds.getX(); x <= bounds.getY(); x++) {

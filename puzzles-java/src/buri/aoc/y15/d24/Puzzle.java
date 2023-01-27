@@ -2,6 +2,7 @@ package buri.aoc.y15.d24;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Puzzle extends BasePuzzle {
 			weights.add(Integer.valueOf(line));
 		}
 		int division = part == Part.ONE ? 3 : 4;
-		int targetWeight = getIntSum(weights) / division;
+		int targetWeight = PuzzleMath.getIntSum(weights) / division;
 
 		// Get the smallest possible First Bag.
 		List<List<Integer>> bag1Permutations = getPermutations(weights, targetWeight);

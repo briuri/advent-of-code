@@ -2,6 +2,7 @@ package buri.aoc.y19.d12;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class Puzzle extends BasePuzzle {
 			adjustMoons(moons);
 			steps++;
 		}
-		return (getLCM(getLCM(repeatX, repeatY), repeatZ));
+		return (PuzzleMath.getLCM(PuzzleMath.getLCM(repeatX, repeatY), repeatZ));
 	}
 
 	/**

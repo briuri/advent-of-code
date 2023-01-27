@@ -2,6 +2,7 @@ package buri.aoc.y20.d13;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class Puzzle extends BasePuzzle {
 				int next = bus * (earliest / bus + 1);
 				earliestBusTimes.put(bus, next);
 			}
-			Map.Entry<Integer, Integer> min = getMin(earliestBusTimes);
+			Map.Entry<Integer, Integer> min = PuzzleMath.getMin(earliestBusTimes);
 			return (min.getKey() * (min.getValue() - earliest));
 		}
 

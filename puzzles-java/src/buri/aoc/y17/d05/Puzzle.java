@@ -2,6 +2,7 @@ package buri.aoc.y17.d05;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * How many steps does it take to reach the exit?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Integer> jumps = convertStringsToInts(input);
+		List<Integer> jumps = PuzzleMath.toInts(input);
 
 		int numSteps = 0;
 		int currentIndex = 0;

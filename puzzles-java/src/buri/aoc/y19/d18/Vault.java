@@ -5,6 +5,7 @@ import buri.aoc.common.data.path.Path;
 import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
+import buri.aoc.common.PuzzleMath;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -163,7 +164,7 @@ public class Vault extends CharGrid {
 				int interimSteps = route.getSteps() + explore(stepCache, newKeys, end);
 				possibleSteps.put(end, interimSteps);
 			}
-			Map.Entry<Character, Integer> minimum = new Puzzle().getMin(possibleSteps);
+			Map.Entry<Character, Integer> minimum = PuzzleMath.getMin(possibleSteps);
 			steps = minimum.getValue();
 		}
 		stepCache.put(cacheKey, steps);

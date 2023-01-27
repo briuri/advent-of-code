@@ -2,6 +2,7 @@ package buri.aoc.y17.d01;
 
 import buri.aoc.common.BasePuzzle;
 import buri.aoc.common.Part;
+import buri.aoc.common.PuzzleMath;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is the solution when matching to the digit halfway around the circular list?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		return (getIntSum(getMatchingDigits(part, input.get(0))));
+		return (PuzzleMath.getIntSum(getMatchingDigits(part, input.get(0))));
 	}
 
 	/**
