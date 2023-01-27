@@ -14,7 +14,7 @@ public class Fabric extends IntGrid {
 	 * Creates a new square grid with the specified width/length.
 	 */
 	public Fabric(int size) {
-		super(new Pair(size, size));
+		super(new Pair<>(size, size));
 	}
 
 	/**

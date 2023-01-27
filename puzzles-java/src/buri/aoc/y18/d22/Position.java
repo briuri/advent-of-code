@@ -8,7 +8,7 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Position extends Pair<Integer> {
-	private char _item;
+	private final char _item;
 
 	/**
 	 * Constructor

@@ -8,15 +8,15 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Group {
-	private int _number;
-	private boolean _isImmuneSystem;
+	private final int _number;
+	private final boolean _isImmuneSystem;
 	private int _size;
-	private int _health;
-	private int _attack;
-	private AttackType _attackType;
-	private int _initiative;
-	private Set<AttackType> _weaknesses;
-	private Set<AttackType> _immunities;
+	private final int _health;
+	private final int _attack;
+	private final AttackType _attackType;
+	private final int _initiative;
+	private final Set<AttackType> _weaknesses;
+	private final Set<AttackType> _immunities;
 	private Group _target;
 	private boolean _targeted;
 
@@ -73,21 +73,21 @@ public class Group {
 		_isImmuneSystem = isImmuneSystem;
 		String[] tokens = input.split(" ");
 		String attack = input.split("an attack that does ")[1];
-		_size = Integer.valueOf(tokens[0]);
-		_health = Integer.valueOf(tokens[4]);
-		_attack = Integer.valueOf(attack.split(" ")[0]) + boost;
+		_size = Integer.parseInt(tokens[0]);
+		_health = Integer.parseInt(tokens[4]);
+		_attack = Integer.parseInt(attack.split(" ")[0]) + boost;
 		_attackType = getTypeFor(attack.split(" ")[1]);
-		_initiative = Integer.valueOf(input.split(" at initiative ")[1]);
+		_initiative = Integer.parseInt(input.split(" at initiative ")[1]);
 		_weaknesses = new HashSet<>();
 		_immunities = new HashSet<>();
-		if (input.indexOf(WEAK_TOKEN) != -1) {
+		if (input.contains(WEAK_TOKEN)) {
 			String[] weaknesses = input.substring(input.indexOf(WEAK_TOKEN) + WEAK_TOKEN.length()).split(
 				"\\)")[0].split(";")[0].split(", ");
 			for (String weakness : weaknesses) {
 				_weaknesses.add(getTypeFor(weakness));
 			}
 		}
-		if (input.indexOf(IMMUNE_TOKEN) != -1) {
+		if (input.contains(IMMUNE_TOKEN)) {
 			String[] immunities = input.substring(input.indexOf(IMMUNE_TOKEN) + IMMUNE_TOKEN.length()).split(
 				"\\)")[0].split(";")[0].split(", ");
 			for (String immunity : immunities) {

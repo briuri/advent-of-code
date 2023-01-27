@@ -79,7 +79,7 @@ public class Puzzle extends BasePuzzle {
 	 * Assumes strings are equal length.
 	 */
 	public static String getCommonLetters(String id1, String id2) {
-		StringBuffer common = new StringBuffer();
+		StringBuilder common = new StringBuilder();
 		for (int i = 0; i < id1.length(); i++) {
 			char testChar = id1.charAt(i);
 			if (testChar == id2.charAt(i)) {

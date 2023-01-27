@@ -20,9 +20,9 @@ public class Position extends Pair<Integer> {
 		super(data, Integer.class);
 		_originalX = getX();
 		_originalY = getY();
-		String tokens[] = data.split(",");
-		_velocityX = Integer.valueOf(tokens[2]);
-		_velocityY = Integer.valueOf(tokens[3]);
+		String[] tokens = data.split(",");
+		_velocityX = Integer.parseInt(tokens[2]);
+		_velocityY = Integer.parseInt(tokens[3]);
 	}
 
 	/**

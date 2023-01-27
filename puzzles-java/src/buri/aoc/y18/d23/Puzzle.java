@@ -93,8 +93,8 @@ public class Puzzle extends BasePuzzle {
 	 */
 	public static long getShortestDistance(List<Bot> bots) {
 		// Get the general area.
-		Triple<Long> min = new Triple(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
-		Triple<Long> max = new Triple(Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE);
+		Triple<Long> min = new Triple<>(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
+		Triple<Long> max = new Triple<>(Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE);
 		for (Bot bot : bots) {
 			min.setX(Math.min(min.getX(), bot.getPosition().getX()));
 			min.setY(Math.min(min.getY(), bot.getPosition().getY()));
@@ -124,7 +124,7 @@ public class Puzzle extends BasePuzzle {
 		long dx = Math.max(1, (max.getX() - min.getX()) / searchRatio);
 		long dy = Math.max(1, (max.getY() - min.getY()) / searchRatio);
 		long dz = Math.max(1, (max.getZ() - min.getZ()) / searchRatio);
-		Triple<Long> origin = new Triple(0L, 0L, 0L);
+		Triple<Long> origin = new Triple<>(0L, 0L, 0L);
 		Triple<Long> positionWithMaxBots = null;
 		int maxBotsInRange = 0;
 		for (long z = min.getZ(); z < max.getZ() + 1; z += dz) {
@@ -132,7 +132,7 @@ public class Puzzle extends BasePuzzle {
 				for (long x = min.getX(); x < max.getX() + 1; x += dx) {
 
 					// Count up bots in range of this position.
-					Triple sampledTriple = new Triple(x, y, z);
+					Triple<Long> sampledTriple = new Triple<>(x, y, z);
 					int sampledMaxBots = 0;
 					for (Bot bot : bots) {
 						if (bot.inRange(sampledTriple)) {

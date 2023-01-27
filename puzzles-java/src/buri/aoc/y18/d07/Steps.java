@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Steps {
-	private Map<String, Step> _steps;
+	private final Map<String, Step> _steps;
 
 	/**
 	 * Builds a graph from input strings

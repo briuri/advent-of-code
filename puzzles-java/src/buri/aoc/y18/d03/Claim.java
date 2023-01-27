@@ -7,11 +7,11 @@ package buri.aoc.y18.d03;
  */
 public class Claim {
 
-	private int _id;
-	private int _x;
-	private int _y;
-	private int _width;
-	private int _height;
+	private final int _id;
+	private final int _x;
+	private final int _y;
+	private final int _width;
+	private final int _height;
 
 	/**
 	 * Constructor
@@ -23,11 +23,11 @@ public class Claim {
 		String[] coords = tokens[2].substring(0, tokens[2].length() - 1).split(",");
 		String[] size = tokens[3].split("x");
 
-		_id = Integer.valueOf(tokens[0].substring(1, tokens[0].length()));
-		_x = Integer.valueOf(coords[0]);
-		_y = Integer.valueOf(coords[1]);
-		_width = Integer.valueOf(size[0]);
-		_height = Integer.valueOf(size[1]);
+		_id = Integer.parseInt(tokens[0].substring(1));
+		_x = Integer.parseInt(coords[0]);
+		_y = Integer.parseInt(coords[1]);
+		_width = Integer.parseInt(size[0]);
+		_height = Integer.parseInt(size[1]);
 	}
 
 	/**

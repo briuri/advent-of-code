@@ -8,16 +8,16 @@ import buri.aoc.common.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Bot {
-	private Triple<Long> _position;
-	private long _radius;
+	private final Triple<Long> _position;
+	private final long _radius;
 
 	/**
 	 * Constructor
 	 */
 	public Bot(String input) {
 		String[] tokens = input.split(",");
-		_position = new Triple(Long.valueOf(tokens[0]), Long.valueOf(tokens[1]), Long.valueOf(tokens[2]));
-		_radius = Long.valueOf(tokens[3]);
+		_position = new Triple<>(Long.valueOf(tokens[0]), Long.valueOf(tokens[1]), Long.valueOf(tokens[2]));
+		_radius = Long.parseLong(tokens[3]);
 	}
 
 	@Override

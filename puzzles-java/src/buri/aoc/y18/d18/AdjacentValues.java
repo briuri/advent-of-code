@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class AdjacentValues {
 
-	private Map<Character, Integer> _values;
+	private final Map<Character, Integer> _values;
 
 	/**
 	 * Constructor

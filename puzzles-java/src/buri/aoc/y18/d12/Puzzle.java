@@ -41,7 +41,6 @@ public class Puzzle extends BasePuzzle {
 
 		// Part TWO
 		// Visual inspection: After 125 iterations, sums are just 109 greater than the last.
-		long sum = pots.getGrowthSum() + (109 * (50000000000L - pots.getGeneration()));
-		return (sum);
+		return (pots.getGrowthSum() + (109 * (50000000000L - pots.getGeneration())));
 	}
 }

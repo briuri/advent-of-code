@@ -50,8 +50,8 @@ public class Puzzle extends BasePuzzle {
 
 		// Part TWO
 		Registers registers = new Registers();
-		for (int i = 0; i < input.size(); i++) {
-			registers.runIntCode(input.get(i).split(" "));
+		for (String s : input) {
+			registers.runIntCode(s.split(" "));
 		}
 		return (registers.get(Registers.REGISTER, 0));
 	}

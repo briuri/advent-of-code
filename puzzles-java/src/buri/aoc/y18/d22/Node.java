@@ -6,8 +6,8 @@ package buri.aoc.y18.d22;
  * @author Brian Uri!
  */
 public class Node implements Comparable<Node> {
-	private Position _position;
-	private int _costSoFar;
+	private final Position _position;
+	private final int _costSoFar;
 
 	/**
 	 * Constructor

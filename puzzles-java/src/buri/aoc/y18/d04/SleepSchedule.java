@@ -13,7 +13,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class SleepSchedule {
-	private List<Integer> _schedule;
+	private final List<Integer> _schedule;
 
 	/**
 	 * Constructor

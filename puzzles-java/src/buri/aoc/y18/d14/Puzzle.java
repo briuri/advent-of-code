@@ -42,11 +42,11 @@ public class Puzzle extends BasePuzzle {
 	protected String runString(Part part, List<String> input) {
 		String line = input.get(0);
 		final int outputLength = 10;
-		final int part1Iterations = Integer.valueOf(line);
+		final int part1Iterations = Integer.parseInt(line);
 
 		int first = 0;
 		int second = 1;
-		List<Integer> list = new ArrayList<Integer>();
+		List<Integer> list = new ArrayList<>();
 		list.add(3);
 		list.add(7);
 
@@ -77,10 +77,10 @@ public class Puzzle extends BasePuzzle {
 	 * Converts a list of integers into a string of digits. Assumes single digit integers.
 	 */
 	private static String toString(List<Integer> list) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Integer value : list) {
-			buffer.append(value);
+			builder.append(value);
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

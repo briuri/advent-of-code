@@ -15,9 +15,9 @@ import java.util.Date;
  */
 public class Observation implements Comparable {
 
-	private Date _date;
-	private Integer _minute;
-	private String _observation;
+	private final Date _date;
+	private final Integer _minute;
+	private final String _observation;
 
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -30,7 +30,7 @@ public class Observation implements Comparable {
 	 */
 	public Observation(String input) {
 		String[] tokens = input.split("] ");
-		String rawDate = tokens[0].substring(1, tokens[0].length());
+		String rawDate = tokens[0].substring(1);
 		try {
 			_date = FORMAT.parse(rawDate);
 		}
@@ -46,9 +46,9 @@ public class Observation implements Comparable {
 	 * Returns the id of the guard in this input, or -1 if none is listed.
 	 */
 	public Integer getId() {
-		Integer index = getObservation().indexOf("#");
+		int index = getObservation().indexOf("#");
 		if (index != -1) {
-			Integer nextIndex = getObservation().indexOf(" ", index);
+			int nextIndex = getObservation().indexOf(" ", index);
 			return (Integer.valueOf(getObservation().substring(index + 1, nextIndex)));
 		}
 		return (-1);

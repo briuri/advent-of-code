@@ -18,7 +18,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Tracks extends CharGrid {
-	private List<Cart> _carts = new ArrayList<>();
+	private final List<Cart> _carts = new ArrayList<>();
 	private String _firstCollision = null;
 	private int _iteration = 0;
 
@@ -26,7 +26,7 @@ public class Tracks extends CharGrid {
 	 * Constructor
 	 */
 	public Tracks(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
@@ -35,7 +35,7 @@ public class Tracks extends CharGrid {
 
 				// Create carts and reveal the tracks underneath them.
 				if (Direction.getDirectionFor(icon) != null) {
-					getCarts().add(new Cart(new Pair(x, y), icon));
+					getCarts().add(new Cart(new Pair<>(x, y), icon));
 					switch (icon) {
 						case '<':
 						case '>':
@@ -69,10 +69,10 @@ public class Tracks extends CharGrid {
 			char trackUnderCart = get(cart.getPosition());
 			cart.turn(trackUnderCart);
 
-			/**
-			 * Collisions must be checked immediately. I originally failed by only checking after every cart had moved.
-			 * In a case where 3 carts arrive at the same spot, the correct way would leave 1 standing, while the wrong
-			 * way would remove them all.
+			/*
+			  Collisions must be checked immediately. I originally failed by only checking after every cart had moved.
+			  In a case where 3 carts arrive at the same spot, the correct way would leave 1 standing, while the wrong
+			  way would remove them all.
 			 */
 			for (Cart otherCart : getCarts()) {
 				if (cart != otherCart && cart.getPosition().equals(otherCart.getPosition())) {

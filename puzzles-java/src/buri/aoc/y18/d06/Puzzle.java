@@ -40,9 +40,9 @@ public class Puzzle extends BasePuzzle {
 	 * less than 10000?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		List<Pair> data = new ArrayList<>();
+		List<Pair<Integer>> data = new ArrayList<>();
 		for (String line : input) {
-			data.add(new Pair(line, Integer.class));
+			data.add(new Pair<>(line, Integer.class));
 		}
 
 		if (part == Part.ONE) {
@@ -53,7 +53,7 @@ public class Puzzle extends BasePuzzle {
 			Map<Pair, Integer> minimumDistances = new HashMap<>();
 			for (int x = 0; x < gridLength; x++) {
 				for (int y = 0; y < gridLength; y++) {
-					Pair<Integer> currentSpot = new Pair(x, y);
+					Pair<Integer> currentSpot = new Pair<>(x, y);
 
 					// Calculate all MDs between input locations and this current spot.
 					Map<Pair, Long> currentSpotDistances = new HashMap<>();
@@ -95,7 +95,7 @@ public class Puzzle extends BasePuzzle {
 		for (int y = 0; y < gridLength; y++) {
 			for (int x = 0; x < gridLength; x++) {
 
-				Pair currentSpot = new Pair(x, y);
+				Pair currentSpot = new Pair<>(x, y);
 				// Calculate the sum of all MDs to the current spot.
 				int mdSum = 0;
 				for (Pair position : data) {
@@ -113,7 +113,7 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Calculates a suitable square grid size, based on largest position coordinate.
 	 */
-	private static int getGridLength(List<Pair> input) {
+	private static int getGridLength(List<Pair<Integer>> input) {
 		int gridLength = 0;
 		for (Pair<Integer> position : input) {
 			gridLength = Math.max(gridLength, position.getX());

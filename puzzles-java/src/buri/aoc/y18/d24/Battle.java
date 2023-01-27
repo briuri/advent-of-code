@@ -1,7 +1,6 @@
 package buri.aoc.y18.d24;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +10,8 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Battle {
-	private List<Group> _immuneSystem;
-	private List<Group> _infection;
+	private final List<Group> _immuneSystem;
+	private final List<Group> _infection;
 
 	public enum Outcome {
 		STALEMATE, IMMUNE_WINS, IMMUNE_LOSES
@@ -27,16 +26,16 @@ public class Battle {
 
 		boolean isImmune = true;
 		int groupNumber = 1;
-		for (int i = 0; i < input.size(); i++) {
-			if (input.get(i).startsWith("Immune") || input.get(i).startsWith("Infection")) {
+		for (String s : input) {
+			if (s.startsWith("Immune") || s.startsWith("Infection")) {
 				continue;
 			}
-			if (input.get(i).length() == 0) {
+			if (s.length() == 0) {
 				isImmune = false;
 				groupNumber = 1;
 				continue;
 			}
-			Group group = new Group(groupNumber, isImmune, (isImmune ? boost : 0), input.get(i));
+			Group group = new Group(groupNumber, isImmune, (isImmune ? boost : 0), s);
 			groupNumber++;
 			if (isImmune) {
 				getImmuneSystem().add(group);
@@ -58,13 +57,13 @@ public class Battle {
 			allGroups.addAll(getInfection());
 
 			// Target Selection
-			Collections.sort(allGroups, Group.SELECTION_ORDER);
+			allGroups.sort(Group.SELECTION_ORDER);
 			for (Group group : allGroups) {
 				group.setTarget(getBestTargetFor(group));
 			}
 
 			// Attack
-			Collections.sort(allGroups, Group.ATTACK_ORDER);
+			allGroups.sort(Group.ATTACK_ORDER);
 			int totalKills = 0;
 			for (Group group : allGroups) {
 				totalKills += group.attack();
@@ -94,7 +93,7 @@ public class Battle {
 	 * Target Selection:
 	 * - Each group attempts to choose 1 target.
 	 * - Target is enemy group which it would deal MOST damage to (after weaknesses / immunities). Group size ignored.
-	 * - In ties with equal damage, pick group with largest effective power, then highest initiative.
+	 * - In ties with equal damage, pick group with the largest effective power, then highest initiative.
 	 * - If it cannot deal any damage to any group, no target is chosen.
 	 * - Defending groups can only be targeted by 1 attacker.
 	 * At the end of the target selection phase, each group has selected zero or one groups to attack, and each group is
@@ -123,7 +122,7 @@ public class Battle {
 		}
 
 		// Sort remaining choices by descending effective power then initiative.
-		Collections.sort(enemies, Group.DEFENDER_ORDER);
+		enemies.sort(Group.DEFENDER_ORDER);
 
 		// Don't select anyone if no damage can be done, or no enemies are available for selection.
 		return ((maxDamage == 0 || enemies.isEmpty()) ? null : enemies.get(0));

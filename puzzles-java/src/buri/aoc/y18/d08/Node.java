@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class Node {
 
-	private List<Node> _children;
-	private List<Integer> _metadata;
+	private final List<Node> _children;
+	private final List<Integer> _metadata;
 
 	/**
 	 * Constructor (object is not complete until children are added)

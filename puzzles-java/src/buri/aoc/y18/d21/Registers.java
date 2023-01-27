@@ -28,7 +28,7 @@ public class Registers extends IndexedRegisters {
 			String code = getCodes().get(getIp());
 			set(getIpRegister(), getIp());
 			runStringCode(code.split(" "));
-			setIp((int) get(Registers.REGISTER, getIpRegister()) + 1);
+			setIp(get(Registers.REGISTER, getIpRegister()) + 1);
 
 			if (getIp() == 28) {
 				return (get(Registers.REGISTER, 3));

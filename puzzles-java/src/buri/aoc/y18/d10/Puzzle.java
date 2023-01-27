@@ -73,7 +73,7 @@ public class Puzzle extends BasePuzzle {
 				position.offset(offset);
 				maxX = Math.max(maxX, position.getX());
 			}
-			CharGrid grid = new CharGrid(new Pair(maxX + 1, 10));
+			CharGrid grid = new CharGrid(new Pair<>(maxX + 1, 10));
 			for (Position position : positions) {
 				grid.set(position, '■');
 			}

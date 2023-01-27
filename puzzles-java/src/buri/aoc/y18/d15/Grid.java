@@ -8,7 +8,6 @@ import buri.aoc.common.data.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +19,8 @@ import java.util.Map;
  */
 public class Grid extends CharGrid {
 	private boolean _elfDied;
-	private List<Unit> _elves;
-	private List<Unit> _goblins;
+	private final List<Unit> _elves;
+	private final List<Unit> _goblins;
 
 	private static final char OPEN = '.';
 
@@ -29,13 +28,8 @@ public class Grid extends CharGrid {
 		@Override
 		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
-			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Pair<Integer> position = iterator.next();
-				// Remove any that are already filled up.
-				if (get(position) != OPEN) {
-					iterator.remove();
-				}
-			}
+			// Remove any that are already filled up.
+			nextSteps.removeIf(position -> get(position) != OPEN);
 			return (nextSteps);
 		}
 	};
@@ -44,7 +38,7 @@ public class Grid extends CharGrid {
 	 * Constructor
 	 */
 	public Grid(List<String> input, int elfAttackPower) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		_elfDied = false;
 		_elves = new ArrayList<>();
 		_goblins = new ArrayList<>();
@@ -52,10 +46,10 @@ public class Grid extends CharGrid {
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y).trim();
 			for (int x = 0; x < line.length(); x++) {
-				Character type = line.charAt(x);
+				char type = line.charAt(x);
 				set(x, y, type);
 				if (type == Unit.ELF || type == Unit.GOBLIN) {
-					Unit unit = new Unit(type, new Pair(x, y));
+					Unit unit = new Unit(type, new Pair<>(x, y));
 					if (unit.isElf()) {
 						getElves().add(unit);
 						unit.setAttackPower(elfAttackPower);
@@ -117,7 +111,7 @@ public class Grid extends CharGrid {
 					set(weakest.getPosition(), OPEN);
 					if (weakest.isElf()) {
 						getElves().remove(weakest);
-						setElfDied(true);
+						killElf();
 					}
 					else {
 						getGoblins().remove(weakest);
@@ -215,8 +209,8 @@ public class Grid extends CharGrid {
 	/**
 	 * Accessor for the flag denoting whether a single elf died.
 	 */
-	private void setElfDied(boolean elfDied) {
-		_elfDied = elfDied;
+	private void killElf() {
+		_elfDied = true;
 	}
 
 	/**

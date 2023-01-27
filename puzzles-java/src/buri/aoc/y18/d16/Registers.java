@@ -23,7 +23,7 @@ public class Registers extends IndexedRegisters {
 		super(4);
 		String[] tokens = values.split(",");
 		for (int i = 0; i < tokens.length; i++) {
-			set(i, Integer.valueOf(tokens[i].trim()));
+			set(i, Integer.parseInt(tokens[i].trim()));
 		}
 	}
 
@@ -60,13 +60,6 @@ public class Registers extends IndexedRegisters {
 			}
 		}
 		if (matches == 1) {
-			/**
-			 * To map numbers to the actual text codes, I ran this tryCode() method and printed out the codes with just
-			 * 1 match. I then removed that match from the pool of possible codes to test (causing instructions with 2
-			 * matches to now have 1, and so forth) and iteratively reran until I had all the codes.
-			 *
-			 * I was then able to write runCode() and finally refactored tryCode() to use runCode().
-			 */
 		}
 		return (matches);
 	}

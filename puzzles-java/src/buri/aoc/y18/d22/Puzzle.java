@@ -31,7 +31,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		int depth = Integer.parseInt(input.get(0).split(": ")[1]);
-		Pair target = new Pair(input.get(1).split(": ")[1], Integer.class);
+		Pair<Integer> target = new Pair<>(input.get(1).split(": ")[1], Integer.class);
 		Maze maze = new Maze(depth, target);
 		return (part == Part.ONE ? maze.getRiskLevel() : maze.getMinutes());
 	}

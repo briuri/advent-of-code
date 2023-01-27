@@ -6,8 +6,8 @@ package buri.aoc.y18.d12;
  * @author Brian Uri!
  */
 public class State {
-	private String _pattern;
-	private boolean _result;
+	private final String _pattern;
+	private final boolean _result;
 
 	/**
 	 * Constructor

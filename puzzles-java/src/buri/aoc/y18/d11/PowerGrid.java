@@ -10,13 +10,13 @@ import buri.aoc.common.data.tuple.Pair;
  */
 public class PowerGrid extends IntGrid {
 
-	private int _serial;
+	private final int _serial;
 
 	/**
 	 * Constructor. Initializes all power levels.
 	 */
 	public PowerGrid(int size, int serial) {
-		super(new Pair(size, size));
+		super(new Pair<>(size, size));
 		_serial = serial;
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
@@ -28,7 +28,7 @@ public class PowerGrid extends IntGrid {
 				}
 				else {
 					String stringPower = String.valueOf(power);
-					Character hundreds = stringPower.charAt(stringPower.length() - 3);
+					char hundreds = stringPower.charAt(stringPower.length() - 3);
 					power = Character.getNumericValue(hundreds);
 				}
 				power = power - 5;
@@ -44,7 +44,7 @@ public class PowerGrid extends IntGrid {
 		PowerGrid grid = new PowerGrid(getWidth() - (squareSumSize - 1), 0);
 		for (int y = 0; y < grid.getHeight(); y++) {
 			for (int x = 0; x < grid.getWidth(); x++) {
-				Pair<Integer> upperLeft = new Pair(x, y);
+				Pair<Integer> upperLeft = new Pair<>(x, y);
 				grid.set(upperLeft, getSquareSum(upperLeft, squareSumSize));
 			}
 		}
@@ -53,7 +53,7 @@ public class PowerGrid extends IntGrid {
 		long maxValue = Long.MIN_VALUE;
 		for (int y = 0; y < grid.getHeight(); y++) {
 			for (int x = 0; x < grid.getWidth(); x++) {
-				Pair<Integer> position = new Pair(x, y);
+				Pair<Integer> position = new Pair<>(x, y);
 				long value = grid.get(position);
 				if (value > maxValue) {
 					maxValue = value;

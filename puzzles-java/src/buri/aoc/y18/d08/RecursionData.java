@@ -9,8 +9,8 @@ package buri.aoc.y18.d08;
  */
 public class RecursionData {
 
-	private int _nextIndex = -1;
-	private Node _generatedNode;
+	private final int _nextIndex;
+	private final Node _generatedNode;
 
 	/**
 	 * Constructor

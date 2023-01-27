@@ -8,7 +8,7 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Unit implements Comparable<Unit> {
-	private char _type;
+	private final char _type;
 	private Pair<Integer> _position;
 	private int _health;
 	private int _attackPower;
@@ -80,7 +80,7 @@ public class Unit implements Comparable<Unit> {
 	/**
 	 * Accessor for the position
 	 */
-	public void setPosition(Pair position) {
+	public void setPosition(Pair<Integer> position) {
 		_position = position;
 	}
 

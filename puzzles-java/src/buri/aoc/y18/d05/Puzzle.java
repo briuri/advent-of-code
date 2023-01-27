@@ -49,7 +49,7 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Try removing each unit and reacting the polymer.
-		Integer minSize = Integer.MAX_VALUE;
+		int minSize = Integer.MAX_VALUE;
 		for (Character polymer : uniques) {
 			String regexp = String.format("[%c%c]", polymer, Character.toUpperCase(polymer));
 			int size = reactPolymer(newPolymer.replaceAll(regexp, "")).length();
@@ -62,7 +62,7 @@ public class Puzzle extends BasePuzzle {
 	 * Parses the polymer, removing units of opposite polarity.
 	 */
 	private static String reactPolymer(String input) {
-		StringBuffer polymer = new StringBuffer(input);
+		StringBuilder polymer = new StringBuilder(input);
 		for (int i = 0; i < polymer.length() - 1; /* no default increment */) {
 			char first = polymer.charAt(i);
 			char second = polymer.charAt(i + 1);

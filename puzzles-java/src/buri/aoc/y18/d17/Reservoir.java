@@ -19,7 +19,7 @@ public class Reservoir extends CharGrid {
 	private int _reachableTiles = 0;
 	private int _waterTiles = 0;
 
-	private static final Pair SPRING_POS = new Pair(500, 0);
+	private static final Pair<Integer> SPRING_POS = new Pair<>(500, 0);
 	private static final char SAND = '.';
 	private static final char SPRING = '+';
 	private static final char CLAY = '#';
@@ -30,7 +30,7 @@ public class Reservoir extends CharGrid {
 	 * Constructor
 	 */
 	public Reservoir(List<String> input) {
-		super(new Pair(1860, 1860));
+		super(new Pair<>(1860, 1860));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, SAND);
@@ -45,14 +45,14 @@ public class Reservoir extends CharGrid {
 			int minY = 0;
 			int maxY = 0;
 			for (String token : tokens) {
-				String[] data = token.substring(token.indexOf("=") + 1, token.length()).split("\\.\\.");
+				String[] data = token.substring(token.indexOf("=") + 1).split("\\.\\.");
 				if (token.startsWith("x=")) {
-					minX = Integer.valueOf(data[0]);
-					maxX = (data.length == 2 ? Integer.valueOf(data[1]) : minX);
+					minX = Integer.parseInt(data[0]);
+					maxX = (data.length == 2 ? Integer.parseInt(data[1]) : minX);
 				}
 				else {
-					minY = Integer.valueOf(data[0]);
-					maxY = (data.length == 2 ? Integer.valueOf(data[1]) : minY);
+					minY = Integer.parseInt(data[0]);
+					maxY = (data.length == 2 ? Integer.parseInt(data[1]) : minY);
 					_minBoundsY = Math.min(minY, _minBoundsY);
 					_maxBoundsY = Math.max(maxY, _maxBoundsY);
 				}
@@ -68,7 +68,7 @@ public class Reservoir extends CharGrid {
 	/**
 	 * Simulates water flowing from the spring until no additional tiles are reached.
 	 *
-	 * Optimized by keeping track of spill points in a single iteration so we don't recursively reflow area that was
+	 * Optimized by keeping track of spill points in a single iteration, so we don't recursively reflow area that was
 	 * already traversed. This cut running time down from 10 minutes to less than 1 second.
 	 *
 	 * Part 1:
@@ -79,7 +79,7 @@ public class Reservoir extends CharGrid {
 	 */
 	public int flow(Part part) {
 		int reachableTiles = 0;
-		Set<Pair> visitedSpillPoints = new HashSet<Pair>();
+		Set<Pair> visitedSpillPoints = new HashSet<>();
 		while (true) {
 			flowDown(SPRING_POS, visitedSpillPoints);
 			int newReachableTiles = getReachableTiles() + getWaterTiles();
@@ -115,11 +115,11 @@ public class Reservoir extends CharGrid {
 				fillAcross(bottom);
 			}
 			else {
-				Pair leftSpillPoint = flowAcross(bottom, true);
+				Pair<Integer> leftSpillPoint = flowAcross(bottom, true);
 				if (leftSpillPoint != null) {
 					flowDown(leftSpillPoint, visitedSpillpoints);
 				}
-				Pair rightSpillPoint = flowAcross(bottom, false);
+				Pair<Integer> rightSpillPoint = flowAcross(bottom, false);
 				if (rightSpillPoint != null) {
 					flowDown(rightSpillPoint, visitedSpillpoints);
 				}
@@ -130,7 +130,7 @@ public class Reservoir extends CharGrid {
 	/**
 	 * Flows water left until it hits CLAY or a hole in the CLAY to flow down from. Returns the spill point.
 	 */
-	private Pair flowAcross(Pair<Integer> start, boolean goLeft) {
+	private Pair<Integer> flowAcross(Pair<Integer> start, boolean goLeft) {
 		if (goLeft) {
 			for (int x = start.getX(); x >= 0; x--) {
 				if (get(x, start.getY()) == CLAY) {
@@ -139,7 +139,7 @@ public class Reservoir extends CharGrid {
 				set(x, (int) start.getY(), REACHABLE);
 				char valueBelow = get(x, start.getY() + 1);
 				if (valueBelow != CLAY && valueBelow != WATER) {
-					return (new Pair(x, start.getY()));
+					return (new Pair<>(x, start.getY()));
 				}
 			}
 		}
@@ -151,7 +151,7 @@ public class Reservoir extends CharGrid {
 				set(x, (int) start.getY(), REACHABLE);
 				char valueBelow = get(x, start.getY() + 1);
 				if (valueBelow != CLAY && valueBelow != WATER) {
-					return (new Pair(x, start.getY()));
+					return (new Pair<>(x, start.getY()));
 				}
 			}
 		}
@@ -187,7 +187,7 @@ public class Reservoir extends CharGrid {
 				break;
 			}
 		}
-		return (new Pair(top.getX(), y - 1));
+		return (new Pair<>(top.getX(), y - 1));
 	}
 
 	/**
@@ -239,7 +239,7 @@ public class Reservoir extends CharGrid {
 	/**
 	 * Sets a value on the grid.
 	 *
-	 * Also maintains a running count of REACHABLE or WATER tiles so we don't have to do a full array traversal every
+	 * Also maintains a running count of REACHABLE or WATER tiles, so we don't have to do a full array traversal every
 	 * iteration.
 	 */
 	private void set(int x, int y, char value) {

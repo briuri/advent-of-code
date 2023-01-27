@@ -11,10 +11,10 @@ import java.util.List;
  */
 public class Step implements Comparable<Step> {
 
-	private String _name;
-	private List<String> _previous;
-	private List<String> _next;
-	private int _baseTime;
+	private final String _name;
+	private final List<String> _previous;
+	private final List<String> _next;
+	private final int _baseTime;
 	private int _startedAt;
 
 	/**

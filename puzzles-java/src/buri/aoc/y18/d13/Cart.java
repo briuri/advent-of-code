@@ -9,7 +9,7 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Cart implements Comparable<Cart> {
-	private Pair<Integer> _position;
+	private final Pair<Integer> _position;
 	private Direction _direction;
 	private int _intersectionCount;
 

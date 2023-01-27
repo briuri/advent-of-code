@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class Pots {
 	private int _generation;
-	private boolean[] _pots;
-	private List<State> _states;
+	private final boolean[] _pots;
+	private final List<State> _states;
 
 	/**
 	 * Constructor
@@ -71,29 +71,29 @@ public class Pots {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getGeneration()).append(": ");
+		StringBuilder builder = new StringBuilder();
+		builder.append(getGeneration()).append(": ");
 		for (int i = 0; i < getPots().length; i++) {
 			String value = toOutput(getPots()[i]);
 			if (toPuzzleIndex(i) == 0) {
-				buffer.append("(").append(value).append(")");
+				builder.append("(").append(value).append(")");
 			}
 			else {
-				buffer.append(" ").append(value).append(" ");
+				builder.append(" ").append(value).append(" ");
 			}
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**
 	 * Creates a matchable pattern for the plants around some index, used to compare to the different growth patterns.
 	 */
 	private String getPattern(int trueIndex) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = trueIndex - 2; i < trueIndex + 3; i++) {
-			buffer.append(toOutput(getPots()[i]));
+			builder.append(toOutput(getPots()[i]));
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

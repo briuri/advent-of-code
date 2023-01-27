@@ -47,7 +47,7 @@ public class Puzzle extends BasePuzzle {
 	    		grid.set(x, y, value);
 			}
 		}
-		Quad<Integer> max = new Quad(0, 0, 0, 0);	// x, y, blockSize, power
+		Quad<Integer> max = new Quad<>(0, 0, 0, 0);	// x, y, blockSize, power
 		for (int blockSize = 1; blockSize < size; blockSize++) {
 			for (int y = 0; y < size - blockSize; y++) {
 				for (int x = 0; x < size - blockSize; x++) {
@@ -55,7 +55,7 @@ public class Puzzle extends BasePuzzle {
 					int value = grid.get(x, y) + grid.get(x + blockSize, y + blockSize)
 						- grid.get(x, y + blockSize) - grid.get(x + blockSize, y);
 					if (value > max.getT()) {
-						max = new Quad(x + 1, y + 1, blockSize, value);
+						max = new Quad<>(x + 1, y + 1, blockSize, value);
 					}
 				}
 		    }

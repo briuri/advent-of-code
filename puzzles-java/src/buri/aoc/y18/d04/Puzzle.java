@@ -57,7 +57,7 @@ public class Puzzle extends BasePuzzle {
 			Map.Entry<Integer, Integer> maxEntry = PuzzleMath.getMax(totalSleep);
 			int id = maxEntry.getKey();
 			int minuteMostSpentAsleep = sleepSchedules.get(id).getMaxMinute();
-			return (id * minuteMostSpentAsleep);
+			return ((long) id * minuteMostSpentAsleep);
 		}
 
 		// Part TWO
@@ -76,7 +76,7 @@ public class Puzzle extends BasePuzzle {
 		// Look up which minute that was by id.
 		for (Integer id : maxSleep.keySet()) {
 			if (maxSleep.get(id) == max) {
-				return (id * maxMinute.get(id));
+				return ((long) id * maxMinute.get(id));
 			}
 		}
 		throw new RuntimeException("Could not get the minute based on the max amount of sleep.");
@@ -89,7 +89,7 @@ public class Puzzle extends BasePuzzle {
 		Map<Integer, SleepSchedule> schedules = new HashMap<>();
 		int currentGuard = 0;
 		int sleepMinute = -1;
-		int wakeMinute = -1;
+		int wakeMinute;
 		for (Observation observation : input) {
 			if (observation.isOnDuty()) {
 				// Guard has changed since previous id observation.

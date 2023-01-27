@@ -35,7 +35,7 @@ public class Puzzle extends BasePuzzle {
 		List<Quad> stars = new ArrayList<>();
 		for (String line : input) {
 			String[] tokens = line.trim().split(",");
-			stars.add(new Quad(Integer.valueOf(tokens[0]), Integer.valueOf(tokens[1]), Integer.valueOf(tokens[2]),
+			stars.add(new Quad<>(Integer.valueOf(tokens[0]), Integer.valueOf(tokens[1]), Integer.valueOf(tokens[2]),
 				Integer.valueOf(tokens[3])));
 		}
 

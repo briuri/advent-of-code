@@ -20,7 +20,7 @@ public class Acreage extends CharGrid {
 	 * Constructor
 	 */
 	public Acreage(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < getHeight(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < getWidth(); x++) {
@@ -46,7 +46,7 @@ public class Acreage extends CharGrid {
 			}
 			System.arraycopy(updatedGrid, 0, getGrid(), 0, getWidth());
 
-			// Keep records of old grid changes so we can detect cycles.
+			// Keep records of old grid changes, so we can detect cycles.
 			String output = toString();
 			int index = outputs.indexOf(output);
 			// We found a cycle, so we can extrapolate ahead to the desired minutes.

@@ -81,11 +81,11 @@ public class Puzzle extends BasePuzzle {
 			}
 		}
 		// Generate the final path through the graph.
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (String stepName : finishedStepNames) {
-			buffer.append(stepName);
+			builder.append(stepName);
 		}
-		return (part == Part.ONE ? buffer.toString() : String.valueOf(time));
+		return (part == Part.ONE ? builder.toString() : String.valueOf(time));
 	}
 
 	/**

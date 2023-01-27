@@ -6,7 +6,6 @@ import buri.aoc.common.data.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -18,9 +17,9 @@ import java.util.Queue;
  * @author Brian Uri!
  */
 public class Maze extends CharGrid {
-	private int _depth;
-	private Position _target;
-	private int[][] _erosionLevels;
+	private final int _depth;
+	private final Position _target;
+	private final int[][] _erosionLevels;
 
 	private static final char ROCKY = '.';
 	private static final char WET = '=';
@@ -50,13 +49,8 @@ public class Maze extends CharGrid {
 			if (current.getY() < getHeight() - 1) {
 				nextSteps.add(new Position(current.getX(), current.getY() + 1, current.getItem()));
 			}
-			for (Iterator<Position> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Position position = iterator.next();
-				// Remove any incompatible item / terrain matches.
-				if (!isItemAllowed(position.getItem(), position)) {
-					iterator.remove();
-				}
-			}
+			// Remove any incompatible item / terrain matches.
+			nextSteps.removeIf(position -> !isItemAllowed(position.getItem(), position));
 			return (nextSteps);
 		}
 	};
@@ -65,7 +59,7 @@ public class Maze extends CharGrid {
 	 * Constructor
 	 */
 	public Maze(int depth, Pair<Integer> target) {
-		super(new Pair(Math.max(target.getX(), target.getY() + 10), Math.max(target.getX(), target.getY() + 10)));
+		super(new Pair<>(Math.max(target.getX(), target.getY() + 10), Math.max(target.getX(), target.getY() + 10)));
 		_depth = depth;
 		_target = new Position(target.getX(), target.getY(), TORCH);
 		_erosionLevels = new int[getWidth()][getHeight()];
