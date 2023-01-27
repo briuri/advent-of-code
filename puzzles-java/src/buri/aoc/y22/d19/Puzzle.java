@@ -150,7 +150,7 @@ public class Puzzle extends BasePuzzle {
 		if (part == Part.ONE) {
 			long qualitySum = 0;
 			for (int id : maxGeodes.keySet()) {
-				qualitySum += (id * maxGeodes.get(id));
+				qualitySum += ((long) id * maxGeodes.get(id));
 			}
 			return (qualitySum);
 		}

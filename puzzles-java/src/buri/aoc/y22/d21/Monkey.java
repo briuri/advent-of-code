@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @author Brian Uri!
  */
 public class Monkey {
-	private String _name;
+	private final String _name;
 	private String _operation;
 
 	public static final Pattern ALPHABET = Pattern.compile("\\p{Alpha}");
@@ -39,17 +39,19 @@ public class Monkey {
 			String[] tokens = getOperation().split(" ");
 			long left = Long.parseLong(tokens[0]);
 			long right = Long.parseLong(tokens[2]);
-			if (tokens[1].equals("+")) {
-				_operation = String.valueOf(left + right);
-			}
-			else if (tokens[1].equals("-")) {
-				_operation = String.valueOf(left - right);
-			}
-			else if (tokens[1].equals("*")) {
-				_operation = String.valueOf(left * right);
-			}
-			else if (tokens[1].equals("/")) {
-				_operation = String.valueOf(left / right);
+			switch (tokens[1]) {
+				case "+":
+					_operation = String.valueOf(left + right);
+					break;
+				case "-":
+					_operation = String.valueOf(left - right);
+					break;
+				case "*":
+					_operation = String.valueOf(left * right);
+					break;
+				case "/":
+					_operation = String.valueOf(left / right);
+					break;
 			}
 		}
 	}

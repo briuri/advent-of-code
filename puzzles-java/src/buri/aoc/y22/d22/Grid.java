@@ -114,7 +114,7 @@ public class Grid extends CharGrid {
 		if (getPosition().getFacing() == Direction.UP) {
 			facingScore = 3;
 		}
-		return (1000 * (getPosition().getPoint().getY() + 1) + 4 * (getPosition().getPoint().getX() + 1) + facingScore);
+		return (1000L * (getPosition().getPoint().getY() + 1) + 4L * (getPosition().getPoint().getX() + 1) + facingScore);
 	}
 
 	/**

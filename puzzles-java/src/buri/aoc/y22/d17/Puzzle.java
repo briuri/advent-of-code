@@ -103,7 +103,7 @@ public class Puzzle extends BasePuzzle {
 	protected static String getSnapshot(Set<Pair<Long>> restingRocks, long maxHeight) {
 		StringBuilder builder = new StringBuilder();
 		for (long y = maxHeight; y > maxHeight - SNAPSHOT_HEIGHT; y--) {
-			for (int x = 0; x < 7; x++) {
+			for (long x = 0; x < 7; x++) {
 				if (restingRocks.contains(new Pair<>(x, y))) {
 					builder.append('#');
 				}

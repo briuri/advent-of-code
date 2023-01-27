@@ -88,9 +88,6 @@ public class Puzzle extends BasePuzzle {
 			// Otherwise go to next round.
 			elves = newElves;
 		}
-		if (part == Part.TWO) {
-			throw new RuntimeException("Didn't reach a round where no elf moved.");
-		}
 
 		// Part 1: Find the rectangle of elves and count empty spaces.
 		Quad<Integer> bounds = PuzzleMath.getBounds(elves);

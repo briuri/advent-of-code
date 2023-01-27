@@ -156,7 +156,7 @@ public class Puzzle extends BasePuzzle {
 			boolean outOfRangeOfAllSensors = true;
 			for (Pair<Long> sensor : sensorDistances.keySet()) {
 				long distance = sensorDistances.get(sensor);
-				outOfRangeOfAllSensors = outOfRangeOfAllSensors && (sensor.getManhattanDistance(test) > distance);
+				outOfRangeOfAllSensors = sensor.getManhattanDistance(test) > distance;
 				if (!outOfRangeOfAllSensors) {
 					break;
 				}

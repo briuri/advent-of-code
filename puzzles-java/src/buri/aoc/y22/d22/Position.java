@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Position {
 
-	private Pair<Integer> _point;
+	private final Pair<Integer> _point;
 	private Direction _facing;
 
 	/**

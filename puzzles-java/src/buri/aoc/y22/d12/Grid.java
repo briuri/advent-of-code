@@ -9,7 +9,6 @@ import buri.aoc.common.data.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +26,8 @@ public class Grid extends CharGrid {
 		@Override
 		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
-			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Pair<Integer> position = iterator.next();
-				// Remove neighbors that are too high.
-				if (!isInBounds(position) || getHeight(get(position)) > getHeight(get(current)) + 1) {
-					iterator.remove();
-				}
-			}
+			// Remove neighbors that are too high.
+			nextSteps.removeIf(position -> !isInBounds(position) || getHeight(get(position)) > getHeight(get(current)) + 1);
 			return (nextSteps);
 		}
 	};

@@ -105,13 +105,7 @@ public class Puzzle extends BasePuzzle {
 
 		// If both values are integers, the lower integer should come first. No decision if both are equal.
 		if (left.isNumber() && right.isNumber()) {
-			if (left.asInt() < right.asInt()) {
-				return IN_ORDER;
-			}
-			if (left.asInt() > right.asInt()) {
-				return NOT_IN_ORDER;
-			}
-			return NO_DECISION;
+			return Integer.compare(left.asInt(), right.asInt());
 		}
 
 		// If both values are lists, compare the first value of each list, then the second value, and so on.
