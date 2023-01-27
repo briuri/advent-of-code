@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/advent-of-code.iml" filepath="$PROJECT_DIR$/advent-of-code.iml" />
       <module fileurl="file://$PROJECT_DIR$/puzzles-java/puzzles-java.iml" filepath="$PROJECT_DIR$/puzzles-java/puzzles-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/puzzles-kotlin/puzzles-kotlin.iml" filepath="$PROJECT_DIR$/puzzles-kotlin/puzzles-kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/viz-java/viz-java.iml" filepath="$PROJECT_DIR$/viz-java/viz-java.iml" />
     </modules>
   </component>
