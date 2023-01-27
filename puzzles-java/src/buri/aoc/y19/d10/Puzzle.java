@@ -41,13 +41,13 @@ public class Puzzle extends BasePuzzle {
 	 * asteroid that will be; what do you get if you multiply its X coordinate by 100 and then add its Y coordinate?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		Set<Pair> asteroids = new HashSet<>();
+		Set<Pair<Integer>> asteroids = new HashSet<>();
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
 				char icon = line.charAt(x);
 				if (icon == '#') {
-					asteroids.add(new Pair(x, y));
+					asteroids.add(new Pair<>(x, y));
 				}
 			}
 		}
@@ -55,7 +55,7 @@ public class Puzzle extends BasePuzzle {
 		// Find best asteroid for monitoring station.
 		Pair<Integer> station = null;
 		Set<SightLine> sightLines = null;
-		for (Pair asteroid : asteroids) {
+		for (Pair<Integer> asteroid : asteroids) {
 			Set<SightLine> currentSightLines = getSightLines(asteroids, asteroid);
 			if (sightLines == null || currentSightLines.size() > sightLines.size()) {
 				station = asteroid;
@@ -87,9 +87,9 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Calculates number of asteroids seen using unique slopes to block asteroids farther away.
 	 */
-	protected static Set<SightLine> getSightLines(Set<Pair> asteroids, Pair station) {
+	protected static Set<SightLine> getSightLines(Set<Pair<Integer>> asteroids, Pair<Integer> station) {
 		Set<SightLine> sightLines = new HashSet<>();
-		for (Pair asteroid : asteroids) {
+		for (Pair<Integer> asteroid : asteroids) {
 			if (!asteroid.equals(station)) {
 				sightLines.add(new SightLine(station, asteroid));
 			}

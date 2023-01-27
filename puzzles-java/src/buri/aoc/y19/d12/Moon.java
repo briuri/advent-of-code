@@ -8,10 +8,10 @@ import buri.aoc.common.data.tuple.Triple;
  * @author Brian Uri!
  */
 public class Moon {
-	private Triple<Integer> _position;
-	private Triple<Integer> _velocity;
+	private final Triple<Integer> _position;
+	private final Triple<Integer> _velocity;
 
-	private static final Triple<Integer> ORIGIN = new Triple(0, 0, 0);
+	private static final Triple<Integer> ORIGIN = new Triple<>(0, 0, 0);
 
 	/**
 	 * Constructor
@@ -23,8 +23,8 @@ public class Moon {
 		String x = tokens[0].split("=")[1];
 		String y = tokens[1].split("=")[1];
 		String z = tokens[2].split("=")[1].split(">")[0];
-		_position = new Triple(Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(z));
-		_velocity = new Triple(0, 0, 0);
+		_position = new Triple<>(Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(z));
+		_velocity = new Triple<>(0, 0, 0);
 	}
 
 	/**

@@ -6,8 +6,8 @@ package buri.aoc.y19.d14;
  * @author Brian Uri!
  */
 public class Chemical {
-	private String _name;
-	private int _amount;
+	private final String _name;
+	private final int _amount;
 
 	/**
 	 * Constructor
@@ -15,7 +15,7 @@ public class Chemical {
 	public Chemical(String input) {
 		String[] tokens = input.split(" ");
 		_name = tokens[1];
-		_amount = Integer.valueOf(tokens[0]);
+		_amount = Integer.parseInt(tokens[0]);
 	}
 
 	@Override

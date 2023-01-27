@@ -68,7 +68,7 @@ public class Puzzle extends BasePuzzle {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
 				if (line.charAt(x) == BUG) {
-					bugs.add(new Triple(x, y, 0));
+					bugs.add(new Triple<>(x, y, 0));
 				}
 			}
 		}
@@ -83,7 +83,7 @@ public class Puzzle extends BasePuzzle {
 		int power = 0;
 		for (int y = 0; y < SIZE; y++) {
 			for (int x = 0; x < SIZE; x++) {
-				Triple possibleBug = new Triple(x, y, 0);
+				Triple possibleBug = new Triple<>(x, y, 0);
 				if (bugs.contains(possibleBug)) {
 					total = total.add(BigInteger.valueOf(2).pow(power));
 				}
@@ -112,7 +112,7 @@ public class Puzzle extends BasePuzzle {
 					if (part == Part.TWO && x == 2 && y == 2) {
 						continue;
 					}
-					Triple<Integer> tile = new Triple(x, y, z);
+					Triple<Integer> tile = new Triple<>(x, y, z);
 					if (becomesBug(part, bugs, tile)) {
 						nextBugs.add(tile);
 					}
@@ -132,60 +132,60 @@ public class Puzzle extends BasePuzzle {
 		boolean isBug = bugs.contains(tile);
 
 		List<Triple<Integer>> neighbors = new ArrayList<>();
-		neighbors.add(new Triple(tile.getX(), tile.getY() - 1, tile.getZ()));
-		neighbors.add(new Triple(tile.getX(), tile.getY() + 1, tile.getZ()));
-		neighbors.add(new Triple(tile.getX() - 1, tile.getY(), tile.getZ()));
-		neighbors.add(new Triple(tile.getX() + 1, tile.getY(), tile.getZ()));
+		neighbors.add(new Triple<>(tile.getX(), tile.getY() - 1, tile.getZ()));
+		neighbors.add(new Triple<>(tile.getX(), tile.getY() + 1, tile.getZ()));
+		neighbors.add(new Triple<>(tile.getX() - 1, tile.getY(), tile.getZ()));
+		neighbors.add(new Triple<>(tile.getX() + 1, tile.getY(), tile.getZ()));
 
 		// Handle nested neighbors.
 		if (part == Part.TWO) {
 			List<Triple<Integer>> newNeighbors = new ArrayList<>();
 			for (Triple<Integer> neighbor : neighbors) {
 				boolean isInner = (neighbor.getX() == 2 && neighbor.getY() == 2);
-				long outerZ = neighbor.getZ() - 1;
-				long innerZ = neighbor.getZ() + 1;
+				int outerZ = neighbor.getZ() - 1;
+				int innerZ = neighbor.getZ() + 1;
 
 				// Outer Edges
 				if (neighbor.getY() < 0) {
-					newNeighbors.add(new Triple(2, 1, outerZ));
+					newNeighbors.add(new Triple<>(2, 1, outerZ));
 				}
 				else if (neighbor.getY() == SIZE) {
-					newNeighbors.add(new Triple(2, 3, outerZ));
+					newNeighbors.add(new Triple<>(2, 3, outerZ));
 				}
 				else if (neighbor.getX() < 0) {
-					newNeighbors.add(new Triple(1, 2, outerZ));
+					newNeighbors.add(new Triple<>(1, 2, outerZ));
 				}
 				else if (neighbor.getX() == SIZE) {
-					newNeighbors.add(new Triple(3, 2, outerZ));
+					newNeighbors.add(new Triple<>(3, 2, outerZ));
 				}
 				// Inner Edges
 				else if (isInner && tile.getX() == 1) {
-					newNeighbors.add(new Triple(0, 0, innerZ));
-					newNeighbors.add(new Triple(0, 1, innerZ));
-					newNeighbors.add(new Triple(0, 2, innerZ));
-					newNeighbors.add(new Triple(0, 3, innerZ));
-					newNeighbors.add(new Triple(0, 4, innerZ));
+					newNeighbors.add(new Triple<>(0, 0, innerZ));
+					newNeighbors.add(new Triple<>(0, 1, innerZ));
+					newNeighbors.add(new Triple<>(0, 2, innerZ));
+					newNeighbors.add(new Triple<>(0, 3, innerZ));
+					newNeighbors.add(new Triple<>(0, 4, innerZ));
 				}
 				else if (isInner && tile.getX() == 3) {
-					newNeighbors.add(new Triple(4, 0, innerZ));
-					newNeighbors.add(new Triple(4, 1, innerZ));
-					newNeighbors.add(new Triple(4, 2, innerZ));
-					newNeighbors.add(new Triple(4, 3, innerZ));
-					newNeighbors.add(new Triple(4, 4, innerZ));
+					newNeighbors.add(new Triple<>(4, 0, innerZ));
+					newNeighbors.add(new Triple<>(4, 1, innerZ));
+					newNeighbors.add(new Triple<>(4, 2, innerZ));
+					newNeighbors.add(new Triple<>(4, 3, innerZ));
+					newNeighbors.add(new Triple<>(4, 4, innerZ));
 				}
 				else if (isInner && tile.getY() == 1) {
-					newNeighbors.add(new Triple(0, 0, innerZ));
-					newNeighbors.add(new Triple(1, 0, innerZ));
-					newNeighbors.add(new Triple(2, 0, innerZ));
-					newNeighbors.add(new Triple(3, 0, innerZ));
-					newNeighbors.add(new Triple(4, 0, innerZ));
+					newNeighbors.add(new Triple<>(0, 0, innerZ));
+					newNeighbors.add(new Triple<>(1, 0, innerZ));
+					newNeighbors.add(new Triple<>(2, 0, innerZ));
+					newNeighbors.add(new Triple<>(3, 0, innerZ));
+					newNeighbors.add(new Triple<>(4, 0, innerZ));
 				}
 				else if (isInner && tile.getY() == 3) {
-					newNeighbors.add(new Triple(0, 4, innerZ));
-					newNeighbors.add(new Triple(1, 4, innerZ));
-					newNeighbors.add(new Triple(2, 4, innerZ));
-					newNeighbors.add(new Triple(3, 4, innerZ));
-					newNeighbors.add(new Triple(4, 4, innerZ));
+					newNeighbors.add(new Triple<>(0, 4, innerZ));
+					newNeighbors.add(new Triple<>(1, 4, innerZ));
+					newNeighbors.add(new Triple<>(2, 4, innerZ));
+					newNeighbors.add(new Triple<>(3, 4, innerZ));
+					newNeighbors.add(new Triple<>(4, 4, innerZ));
 				}
 				// Regular Edges
 				else {

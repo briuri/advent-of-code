@@ -58,14 +58,14 @@ public class Puzzle extends BasePuzzle {
 		for (String line : input) {
 			String[] tokens = line.split(" ");
 			if (tokens[0].equals("cut")) {
-				deck.cut(Integer.valueOf(tokens[1]));
+				deck.cut(Integer.parseInt(tokens[1]));
 			}
 			else if (tokens[0].equals("deal") && tokens[1].equals("into")) {
 				deck.dealIntoNewStack();
 			}
 			// deal with increment
 			else {
-				deck.dealWithIncrement(Integer.valueOf(tokens[3]));
+				deck.dealWithIncrement(Integer.parseInt(tokens[3]));
 			}
 		}
 		if (part == Part.ONE) {

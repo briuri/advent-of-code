@@ -20,7 +20,7 @@ public class Triple<T extends Number> extends BaseTuple implements Comparable<Tr
 	 * Returns a copy of this triple.
 	 */
 	public Triple copy() {
-		return (new Triple(getX(), getY(), getZ()));
+		return (new Triple<>(getX(), getY(), getZ()));
 	}
 
 	/**

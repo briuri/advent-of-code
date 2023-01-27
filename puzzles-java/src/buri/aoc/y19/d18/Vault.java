@@ -1,17 +1,16 @@
 package buri.aoc.y19.d18;
 
+import buri.aoc.common.PuzzleMath;
 import buri.aoc.common.data.grid.CharGrid;
 import buri.aoc.common.data.path.Path;
 import buri.aoc.common.data.path.Pathfinder;
 import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
-import buri.aoc.common.PuzzleMath;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,10 +21,9 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Vault extends CharGrid {
-	private Map<Character, Pair> _starts;
-	private Map<Character, Pair> _keys;
-	private Map<Character, Pair> _doors;
-	private Set<Route> _routes;
+	private final Map<Character, Pair<Integer>> _starts;
+	private final Map<Character, Pair<Integer>> _keys;
+	private final Set<Route> _routes;
 
 	private static final char WALL = '#';
 	private static final char START = '@';
@@ -34,13 +32,8 @@ public class Vault extends CharGrid {
 		@Override
 		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
-			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Pair<Integer> position = iterator.next();
-				// Remove any that are walls.
-				if (get(position) == WALL) {
-					iterator.remove();
-				}
-			}
+			// Remove any that are walls.
+			nextSteps.removeIf(position -> get(position) == WALL);
 			return (nextSteps);
 		}
 	};
@@ -49,9 +42,8 @@ public class Vault extends CharGrid {
 	 * Constructor
 	 */
 	public Vault(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		_starts = new HashMap<>();
-		_doors = new HashMap<>();
 		_keys = new HashMap<>();
 
 		// Build vault map
@@ -59,7 +51,7 @@ public class Vault extends CharGrid {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
 				Character tile = line.charAt(x);
-				Pair position = new Pair(x, y);
+				Pair<Integer> position = new Pair<>(x, y);
 				// Use numbers 0-3 instead of @ for starting points.
 				if (tile == START) {
 					tile = Character.forDigit(getStarts().size(), 10);
@@ -67,9 +59,6 @@ public class Vault extends CharGrid {
 				}
 				else if (isKey(tile)) {
 					_keys.put(tile, position);
-				}
-				else if (isDoor(tile)) {
-					_doors.put(tile, position);
 				}
 				set(position, tile);
 			}
@@ -114,9 +103,9 @@ public class Vault extends CharGrid {
 		if (paths.isEmpty()) {
 			return (null);
 		}
-		Path path = paths.get(0);
+		Path<Pair<Integer>> path = paths.get(0);
 		Route route = new Route(startChar, endChar, path.getLength());
-		for (Pair position : (List<Pair>) path.getSteps()) {
+		for (Pair<Integer> position : path.getSteps()) {
 			Character tile = get(position);
 			if (isDoor(tile)) {
 				route.getDoors().add(tile);
@@ -237,24 +226,24 @@ public class Vault extends CharGrid {
 	private String toCacheKey(List<Character> acquiredKeys) {
 		List<Character> sortedKeys = new ArrayList<>(acquiredKeys);
 		Collections.sort(sortedKeys);
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Character key : sortedKeys) {
-			buffer.append(key);
+			builder.append(key);
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**
 	 * Accessor for the starting points
 	 */
-	private Map<Character, Pair> getStarts() {
+	private Map<Character, Pair<Integer>> getStarts() {
 		return _starts;
 	}
 
 	/**
 	 * Accessor for the keys
 	 */
-	private Map<Character, Pair> getKeys() {
+	private Map<Character, Pair<Integer>> getKeys() {
 		return _keys;
 	}
 

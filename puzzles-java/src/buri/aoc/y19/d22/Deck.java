@@ -13,7 +13,7 @@ import java.math.BigInteger;
  * @author Brian Uri!
  */
 public class Deck {
-	private BigInteger _size;
+	private final BigInteger _size;
 	private BigInteger _a;
 	private BigInteger _b;
 
@@ -95,8 +95,7 @@ public class Deck {
 	 * card = (a * position + b) % size
 	 */
 	private BigInteger getCardAtPosition(long position) {
-		BigInteger card = getA().multiply(toBigInt(position)).add(getB()).mod(getSize());
-		return (card);
+		return (getA().multiply(toBigInt(position)).add(getB()).mod(getSize()));
 	}
 
 	/**
@@ -109,15 +108,15 @@ public class Deck {
 	@Override
 	public String toString() {
 		if (getSize().longValue() < 11) {
-			StringBuffer buffer = new StringBuffer("[");
+			StringBuilder builder = new StringBuilder("[");
 			for (long position = 0; position < getSize().longValue(); position++) {
-				buffer.append(getCardAtPosition(position));
+				builder.append(getCardAtPosition(position));
 				if (position + 1 < getSize().longValue()) {
-					buffer.append(", ");
+					builder.append(", ");
 				}
 			}
-			buffer.append("]");
-			return (buffer.toString());
+			builder.append("]");
+			return (builder.toString());
 		}
 		return ("Deck(size=" + getSize() + " a=" + getA() + " b=" + getB());
 	}

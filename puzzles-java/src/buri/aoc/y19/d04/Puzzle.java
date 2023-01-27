@@ -81,6 +81,7 @@ public class Puzzle extends BasePuzzle {
 		for (int i = 1; i < password.length(); i++) {
 			if (password.charAt(i) == password.charAt(i - 1)) {
 				hasTwoAdjacent = true;
+				break;
 			}
 		}
 

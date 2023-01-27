@@ -59,7 +59,7 @@ public class Puzzle extends BasePuzzle {
 						if (part == Part.ONE) {
 							return (y);
 						}
-						nat = new Pair(x, y);
+						nat = new Pair<>(x, y);
 					}
 					else {
 						Computer receiver = computers.get(address);

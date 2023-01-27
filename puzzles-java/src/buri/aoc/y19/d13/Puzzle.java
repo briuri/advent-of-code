@@ -36,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * What is your score after the last block is broken?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		IntGrid grid = new IntGrid(new Pair(37, 37));
+		IntGrid grid = new IntGrid(new Pair<>(37, 37));
 		Computer computer = new Computer(input);
 		computer.run();
 		List<Long> outputs = computer.getOutputs();
@@ -55,8 +55,8 @@ public class Puzzle extends BasePuzzle {
 		computer = new Computer(input, 2L);
 		Pair<Integer> ball = null;
 		Pair<Integer> paddle = null;
-		while (true) {
-			long joystick = 0;
+		do {
+			long joystick;
 			if (ball == null || ball.getX() == paddle.getX()) {
 				joystick = 0;
 			}
@@ -80,18 +80,15 @@ public class Puzzle extends BasePuzzle {
 				}
 				else {
 					if (tile == PADDLE) {
-						paddle = new Pair(x, y);
+						paddle = new Pair<>(x, y);
 					}
 					else if (tile == BALL) {
-						ball = new Pair(x, y);
+						ball = new Pair<>(x, y);
 					}
 					grid.set(x, y, tile);
 				}
 			}
-			if (countBlocks(grid) == 0) {
-				break;
-			}
-		}
+		} while (countBlocks(grid) != 0);
 		return (score);
 	}
 

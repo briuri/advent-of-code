@@ -44,25 +44,22 @@ public class Puzzle extends BasePuzzle {
 		for (Long[] perm : permutations) {
 			// Initialize all amplifiers with phases.
 			List<Computer> amps = new ArrayList<>();
-			for (int i = 0; i < perm.length; i++) {
+			for (Long aLong : perm) {
 				Computer amp = new Computer(input);
-				amp.getInputs().add(perm[i]);
+				amp.getInputs().add(aLong);
 				amps.add(amp);
 			}
 
 			// Execute each amplifier until it halts (or waits for input in Part TWO).
 			// In Part ONE, this while loop only runs one time then all amps halt.
 			long output = 0;
-			while (true) {
+			do {
 				for (Computer amp : amps) {
 					amp.getInputs().add(output);
 					amp.run();
 					output = amp.getLastOutput();
 				}
-				if (!amps.get(amps.size() - 1).isWaiting()) {
-					break;
-				}
-			}
+			} while (amps.get(amps.size() - 1).isWaiting());
 			maxOutput = Math.max(output, maxOutput);
 		}
 		return (maxOutput);

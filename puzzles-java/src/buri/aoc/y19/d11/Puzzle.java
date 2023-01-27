@@ -40,7 +40,7 @@ public class Puzzle extends BasePuzzle {
 	 * hull?
 	 */
 	protected String runString(Part part, List<String> input) {
-		Pair<Integer> size = (part == Part.ONE ? new Pair(140, 128) : new Pair(85, 12));
+		Pair<Integer> size = (part == Part.ONE ? new Pair<>(140, 128) : new Pair<>(85, 12));
 		CharGrid hull = new CharGrid(size);
 		for (int y = 0; y < hull.getHeight(); y++) {
 			for (int x = 0; x < hull.getWidth(); x++) {
@@ -85,7 +85,7 @@ public class Puzzle extends BasePuzzle {
 			for (int x = 0; x < hull.getWidth(); x++) {
 				char value = hull.get(x, y);
 				if (value != DEFAULT_BLACK && firstPaint == null) {
-					firstPaint = new Pair(x, y);
+					firstPaint = new Pair<>(x, y);
 				}
 				if (value == BLACK) {
 					hull.set(x, y, DEFAULT_BLACK);
@@ -95,13 +95,13 @@ public class Puzzle extends BasePuzzle {
 				}
 			}
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int y = firstPaint.getY(); y < hull.getHeight(); y++) {
 			for (int x = firstPaint.getX(); x < hull.getWidth(); x++) {
-				buffer.append(hull.get(x, y));
+				builder.append(hull.get(x, y));
 			}
-			buffer.append("\n");
+			builder.append("\n");
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

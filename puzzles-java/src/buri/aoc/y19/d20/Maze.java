@@ -22,7 +22,7 @@ import java.util.Map;
 public class Maze extends CharGrid {
 	private Triple<Integer> _start;
 	private Triple<Integer> _end;
-	private Map<Character, Triple> _warpPoints;
+	private final Map<Character, Triple<Integer>> _warpPoints;
 
 	private static final char WALL = '#';
 	private static final char START = '@';
@@ -32,14 +32,14 @@ public class Maze extends CharGrid {
 	 * Constructor
 	 */
 	public Maze(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		_warpPoints = new HashMap<>();
 
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
 			for (int x = 0; x < line.length(); x++) {
-				Character tile = line.charAt(x);
-				Triple<Integer> position = new Triple(x, y, 0);
+				char tile = line.charAt(x);
+				Triple<Integer> position = new Triple<>(x, y, 0);
 				if (tile == START) {
 					_start = position;
 				}
@@ -50,7 +50,7 @@ public class Maze extends CharGrid {
 				else if (Character.isAlphabetic(tile) || Character.isDigit(tile)) {
 					getWarpPoints().put(tile, position);
 				}
-				set((int) position.getX(), (int) position.getY(), tile);
+				set(position.getX(), position.getY(), tile);
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class Maze extends CharGrid {
 	 * Returns true if on a teleport tile.
 	 */
 	private boolean isTeleport(Part part, Triple<Integer> current) {
-		Character tile = get((int) current.getX(), (int) current.getY());
+		Character tile = get(current.getX(), current.getY());
 		boolean isPossibleTP = (Character.isAlphabetic(tile) || Character.isDigit(tile));
 		if (part == Part.ONE || current.getZ() != 0) {
 			return (isPossibleTP);
@@ -84,7 +84,7 @@ public class Maze extends CharGrid {
 	 * Returns the target of the teleport tile.
 	 */
 	private Character getTarget(Character teleport) {
-		Character target;
+		char target;
 		if (Character.isDigit(teleport)) {
 			target = (teleport == '0' ? '1' : '0');
 		}
@@ -112,12 +112,12 @@ public class Maze extends CharGrid {
 	/**
 	 * Accessor for the warp points
 	 */
-	private Map<Character, Triple> getWarpPoints() {
+	private Map<Character, Triple<Integer>> getWarpPoints() {
 		return _warpPoints;
 	}
 
 	class WarpStepStrategy implements StepStrategy<Triple<Integer>> {
-		private Part _part;
+		private final Part _part;
 
 		/**
 		 * Constructor
@@ -129,10 +129,10 @@ public class Maze extends CharGrid {
 		@Override
 		public List<Triple<Integer>> getNextSteps(Triple<Integer> current) {
 			List<Triple<Integer>> nextSteps = new ArrayList<>();
-			nextSteps.add(new Triple(current.getX(), current.getY() - 1, current.getZ()));
-			nextSteps.add(new Triple(current.getX() - 1, current.getY(), current.getZ()));
-			nextSteps.add(new Triple(current.getX() + 1, current.getY(), current.getZ()));
-			nextSteps.add(new Triple(current.getX(), current.getY() + 1, current.getZ()));
+			nextSteps.add(new Triple<>(current.getX(), current.getY() - 1, current.getZ()));
+			nextSteps.add(new Triple<>(current.getX() - 1, current.getY(), current.getZ()));
+			nextSteps.add(new Triple<>(current.getX() + 1, current.getY(), current.getZ()));
+			nextSteps.add(new Triple<>(current.getX(), current.getY() + 1, current.getZ()));
 			for (Iterator<Triple<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
 				Triple<Integer> position = iterator.next();
 				Character tile = get(position.getX(), position.getY());
@@ -144,7 +144,7 @@ public class Maze extends CharGrid {
 			// Add a teleport. Don't go too deep, in hopes that the answer is a closer path.
 			if (isTeleport(getPart(), current) && current.getZ() < getWarpPoints().size()) {
 				Character tile = get(current.getX(), current.getY());
-				Triple target = getWarpPoints().get(getTarget(tile)).copy();
+				Triple<Integer> target = getWarpPoints().get(getTarget(tile)).copy();
 				if (getPart() == Part.TWO) {
 					if (Character.isLowerCase(tile) || tile == '0') {
 						target.setZ(current.getZ() + 1);

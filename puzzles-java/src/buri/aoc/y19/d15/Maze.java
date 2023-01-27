@@ -11,7 +11,6 @@ import buri.aoc.common.data.tuple.Pair;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +22,7 @@ import java.util.Set;
  */
 public class Maze extends CharGrid {
 
-	private Pair<Integer> _start;
+	private final Pair<Integer> _start;
 	private Pair<Integer> _end;
 
 	private static final char WALL = '■';
@@ -41,13 +40,8 @@ public class Maze extends CharGrid {
 		@Override
 		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
-			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Pair<Integer> position = iterator.next();
-				// Remove any that are walls.
-				if (get(position) == WALL) {
-					iterator.remove();
-				}
-			}
+			// Remove any that are walls.
+			nextSteps.removeIf(position -> get(position) == WALL);
 			return (nextSteps);
 		}
 	};
@@ -56,7 +50,7 @@ public class Maze extends CharGrid {
 	 * Constructor
 	 */
 	public Maze() {
-		super(new Pair(42, 42));
+		super(new Pair<>(42, 42));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				set(x, y, UNEXPLORED);
@@ -143,7 +137,7 @@ public class Maze extends CharGrid {
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				if (destinationTiles.contains(get(x, y))) {
-					destinations.add(new Pair(x, y));
+					destinations.add(new Pair<>(x, y));
 				}
 			}
 		}
@@ -209,7 +203,7 @@ public class Maze extends CharGrid {
 	/**
 	 * Accessor for the end
 	 */
-	private void setEnd(Pair end) {
+	private void setEnd(Pair<Integer> end) {
 		_end = end;
 	}
 }

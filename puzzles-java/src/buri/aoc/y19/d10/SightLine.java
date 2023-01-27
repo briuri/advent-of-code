@@ -10,8 +10,8 @@ import buri.aoc.common.PuzzleMath;
  * @author Brian Uri!
  */
 public class SightLine implements Comparable<SightLine> {
-	private Pair<Integer> _slope;
-	private Double _angle;
+	private final Pair<Integer> _slope;
+	private final Double _angle;
 
 	/**
 	 * Calculates a sight line between two points.
@@ -23,7 +23,7 @@ public class SightLine implements Comparable<SightLine> {
 		if (gcd < 0) {
 			gcd = gcd * -1;
 		}
-		_slope = new Pair((int) (dx / gcd), (int) (dy / gcd));
+		_slope = new Pair<>((int) (dx / gcd), (int) (dy / gcd));
 
 		// Subtract PI/2 to start facing up rather than right.
 		_angle = Math.atan2(getSlope().getX().doubleValue(), getSlope().getY().doubleValue()) - Math.PI / 2.0;
@@ -56,7 +56,7 @@ public class SightLine implements Comparable<SightLine> {
 	/**
 	 * Accessor for the slope
 	 */
-	public Pair getSlope() {
+	public Pair<Integer> getSlope() {
 		return _slope;
 	}
 

@@ -6,8 +6,8 @@ package buri.aoc.y19.d06;
  * @author Brian Uri!
  */
 public class Planet {
-	private String _name;
-	private String _parentName;
+	private final String _name;
+	private final String _parentName;
 	private Planet _parent;
 
 	/**

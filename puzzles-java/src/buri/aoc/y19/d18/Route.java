@@ -11,9 +11,9 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Route {
-	private Set<Character> _endpoints;
-	private int _steps;
-	private Set<Character> _doors;
+	private final Set<Character> _endpoints;
+	private final int _steps;
+	private final Set<Character> _doors;
 
 	/**
 	 * Constructor

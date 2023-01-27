@@ -58,7 +58,7 @@ public class Puzzle extends BasePuzzle {
 
 		List<Moon> moons = loadMoons(input);
 		int steps = 0;
-		StringBuffer state = new StringBuffer();
+		StringBuilder state = new StringBuilder();
 		while (true) {
 			if (repeatX == 0) {
 				state.delete(0, state.length());

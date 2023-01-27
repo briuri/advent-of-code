@@ -35,13 +35,13 @@ public class Puzzle extends BasePuzzle {
 			computer.getInputs().addAll(Computer.toAscii(command));
 		}
 		computer.run();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Long value : computer.getOutputs()) {
-			buffer.append((char) value.intValue());
+			builder.append((char) value.intValue());
 		}
 		// Only output the code at the end.
-		buffer.delete(0, buffer.indexOf("by typing ") + 10);
-		buffer.delete(buffer.indexOf(" "), buffer.length());
-		return (buffer.toString());
+		builder.delete(0, builder.indexOf("by typing ") + 10);
+		builder.delete(builder.indexOf(" "), builder.length());
+		return (builder.toString());
 	}
 }

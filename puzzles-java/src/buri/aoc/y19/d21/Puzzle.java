@@ -68,7 +68,7 @@ public class Puzzle extends BasePuzzle {
 		computer.run();
 		// Only build grid if springdroid failed.
 		if (computer.getOutputs().size() > 34) {
-			CharGrid grid = new CharGrid(new Pair(60, 60));
+			CharGrid grid = new CharGrid(new Pair<>(60, 60));
 			int x = 0;
 			int y = 0;
 			for (Long value : computer.getOutputs()) {

@@ -37,7 +37,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		final int gridSize = input.get(0).length() < 20 ? 20 : 16000;
-		CharGrid grid = new CharGrid(new Pair(gridSize, gridSize));
+		CharGrid grid = new CharGrid(new Pair<>(gridSize, gridSize));
 		final Pair<Integer> centralPort = grid.getCenterPosition();
 		Set<Pair> intersections = new HashSet<>();
 		char wireChar = 'A';
@@ -45,7 +45,7 @@ public class Puzzle extends BasePuzzle {
 			Pair<Integer> position = centralPort.copy();
 			for (String token : wirePath.split(",")) {
 				Direction direction = toDirection(token.charAt(0));
-				int length = Integer.valueOf(token.substring(1));
+				int length = Integer.parseInt(token.substring(1));
 				for (int i = 0; i < length; i++) {
 					position.move(direction);
 					char oldChar = grid.get(position);
@@ -103,7 +103,7 @@ public class Puzzle extends BasePuzzle {
 		Pair position = centralPort.copy();
 		for (String token : wirePath.split(",")) {
 			Direction direction = toDirection(token.charAt(0));
-			int length = Integer.valueOf(token.substring(1));
+			int length = Integer.parseInt(token.substring(1));
 			for (int i = 0; i < length; i++) {
 				steps++;
 				position.move(direction);

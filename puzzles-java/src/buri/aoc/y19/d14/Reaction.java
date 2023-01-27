@@ -10,8 +10,8 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Reaction {
-	private List<Chemical> _inputs;
-	private Chemical _output;
+	private final List<Chemical> _inputs;
+	private final Chemical _output;
 
 	/**
 	 * Constructor
@@ -29,17 +29,17 @@ public class Reaction {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Iterator<Chemical> iterator = getInputs().iterator(); iterator.hasNext();) {
-			Chemical chemical = (Chemical) iterator.next();
-			buffer.append(chemical);
+			Chemical chemical = iterator.next();
+			builder.append(chemical);
 			if (iterator.hasNext()) {
-				buffer.append(" + ");
+				builder.append(" + ");
 			}
 		}
-		buffer.append(" = ");
-		buffer.append(getOutput());
-		return (buffer.toString());
+		builder.append(" = ");
+		builder.append(getOutput());
+		return (builder.toString());
 	}
 
 	/**

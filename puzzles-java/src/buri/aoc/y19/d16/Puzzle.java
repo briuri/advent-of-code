@@ -34,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 	}
 	@Test
 	public void testPatternGeneration() {
-		List<Integer> pattern = new Puzzle().getPattern(0, 8);
+		List<Integer> pattern = getPattern(0, 8);
 		assertEquals(1, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(-1, (int) pattern.get(2));
@@ -43,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(-1, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(1, 8);
+		pattern = getPattern(1, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(1, (int) pattern.get(1));
 		assertEquals(1, (int) pattern.get(2));
@@ -52,7 +52,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(-1, (int) pattern.get(5));
 		assertEquals(-1, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(2, 8);
+		pattern = getPattern(2, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(1, (int) pattern.get(2));
@@ -61,7 +61,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(0, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(3, 8);
+		pattern = getPattern(3, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -70,7 +70,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(1, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(0, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(4, 8);
+		pattern = getPattern(4, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -79,7 +79,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(1, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(5, 8);
+		pattern = getPattern(5, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -88,7 +88,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(1, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(6, 8);
+		pattern = getPattern(6, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -97,7 +97,7 @@ public class Puzzle extends BasePuzzle {
 		assertEquals(0, (int) pattern.get(5));
 		assertEquals(1, (int) pattern.get(6));
 		assertEquals(1, (int) pattern.get(7));
-		pattern = new Puzzle().getPattern(7, 8);
+		pattern = getPattern(7, 8);
 		assertEquals(0, (int) pattern.get(0));
 		assertEquals(0, (int) pattern.get(1));
 		assertEquals(0, (int) pattern.get(2));
@@ -139,13 +139,13 @@ public class Puzzle extends BasePuzzle {
 					}
 					next.add(Math.abs(sum % 10));
 				}
-				current = new ArrayList(next);
+				current = new ArrayList<>(next);
 			}
 			return (toString(current.subList(0, 8)));
 		}
 
 		// Part TWO
-		int offset = Integer.valueOf(toString(values.subList(0, 7)));
+		int offset = Integer.parseInt(toString(values.subList(0, 7)));
 		for (int i = 0; i < 10000 - 1; i++) {
 			current.addAll(values);
 		}
@@ -166,7 +166,7 @@ public class Puzzle extends BasePuzzle {
 				partialSum += current.get(pos);
 				next.set(pos, Math.abs(partialSum % 10));
 			}
-			current = new ArrayList(next);
+			current = new ArrayList<>(next);
 		}
 		return (toString(current.subList(offset, offset + 8)));
 	}
@@ -197,10 +197,10 @@ public class Puzzle extends BasePuzzle {
 	 * Converts a list of 1-digit integers into a string.
 	 */
 	protected static String toString(List<Integer> numbers) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Integer number : numbers) {
-			buffer.append(number);
+			builder.append(number);
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

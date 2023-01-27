@@ -36,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 			long sum = 0;
 			for (long y = 0; y < 50; y++) {
 				for (long x = 0; x < 50; x++) {
-					long out = run(input, new Pair(x, y));
+					long out = run(input, new Pair<>(x, y));
 					sum += out;
 				}
 			}
@@ -51,15 +51,15 @@ public class Puzzle extends BasePuzzle {
 		while (true) {
 			// Skip ahead in current row to first tractor beam.
 			while (true) {
-				Pair<Long> lowerLeft = new Pair(x, y);
+				Pair<Long> lowerLeft = new Pair<>(x, y);
 				if (run(input, lowerLeft) == 1) {
 					break;
 				}
 				x += 1;
 			}
-			Pair<Long> lowerRight = new Pair(x + SIZE - 1, y);
-			Pair<Long> upperLeft = new Pair(x, y - SIZE + 1);
-			Pair<Long> upperRight = new Pair(x + SIZE - 1, y - SIZE + 1);
+			Pair<Long> lowerRight = new Pair<>(x + SIZE - 1, y);
+			Pair<Long> upperLeft = new Pair<>(x, y - SIZE + 1);
+			Pair<Long> upperRight = new Pair<>(x + SIZE - 1, y - SIZE + 1);
 			// Boolean short-circuit avoids unnecessary corner checks.
 			if (run(input, lowerRight) == 1 && run(input, upperLeft) == 1 && run(input, upperRight) == 1) {
 				return (upperLeft.getX() * 10000 + upperLeft.getY());

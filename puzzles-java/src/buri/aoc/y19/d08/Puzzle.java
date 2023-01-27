@@ -51,11 +51,11 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Load layers and reverse the order.
-		StringBuffer buffer = new StringBuffer(input.get(0));
+		StringBuilder builder = new StringBuilder(input.get(0));
 		List<String> layers = new ArrayList<>();
-		while (buffer.length() > 0) {
-			layers.add(buffer.substring(0, (width * height)));
-			buffer.delete(0, width * height);
+		while (builder.length() > 0) {
+			layers.add(builder.substring(0, (width * height)));
+			builder.delete(0, width * height);
 		}
 		Collections.reverse(layers);
 
@@ -81,7 +81,7 @@ public class Puzzle extends BasePuzzle {
 
 		// Part TWO
 		// Load the lowest layer into output buffer then mask with upper layers.
-		StringBuffer output = new StringBuffer(layers.get(0));
+		StringBuilder output = new StringBuilder(layers.get(0));
 		for (String layer : layers) {
 			for (int i = 0; i < layer.length(); i++) {
 				char value = layer.charAt(i);
