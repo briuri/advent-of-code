@@ -36,7 +36,7 @@ public class Permutations {
 		// After uniqueness is confirmed, convert to lists for ease of traversal.
 		Set<List<T>> pairs = new HashSet<>();
 		for (Set<T> pair : uniquePairs) {
-			pairs.add(new ArrayList(pair));
+			pairs.add(new ArrayList<>(pair));
 		}
 		return (pairs);
 	}
@@ -45,7 +45,7 @@ public class Permutations {
 	 * Returns all possible permutations of a list of objects.
 	 */
 	public static <T> List<T[]> getPermutations(T[] objects) {
-		final ArrayList<T[]> result = new ArrayList<T[]>();
+		final ArrayList<T[]> result = new ArrayList<>();
 		final int length = objects.length;
 		if (length == 0) {
 			return (result);

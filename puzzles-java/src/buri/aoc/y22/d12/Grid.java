@@ -90,7 +90,7 @@ public class Grid extends CharGrid {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(start, STEP_STRATEGY);
 		List<Pair<Integer>> destinations = new ArrayList<>();
 		destinations.add(destination);
-		List<Path> paths = Pathfinder.toPaths(start, destinations, cameFrom);
+		List<Path<Pair<Integer>>> paths = Pathfinder.toPaths(destinations, cameFrom);
 		// Some starts are blocked off from the end.
 		if (paths.isEmpty()) {
 			return (Integer.MAX_VALUE);

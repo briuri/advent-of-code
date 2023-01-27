@@ -74,7 +74,7 @@ public class Maze extends CharGrid {
 	public int getFewestCommands() {
 		Set<Character> destinationTiles = new HashSet<>();
 		destinationTiles.add(END);
-		List<Path> paths = getPaths(getStart(), destinationTiles);
+		List<Path<Pair<Integer>>> paths = getPaths(getStart(), destinationTiles);
 		return (paths.get(0).getLength());
 	}
 
@@ -85,7 +85,7 @@ public class Maze extends CharGrid {
 		Set<Character> destinationTiles = new HashSet<>();
 		destinationTiles.add(EXPLORED);
 		destinationTiles.add(START);
-		List<Path> paths = getPaths(getEnd(), destinationTiles);
+		List<Path<Pair<Integer>>> paths = getPaths(getEnd(), destinationTiles);
 		return (paths.get(0).getLength());
 	}
 
@@ -136,7 +136,7 @@ public class Maze extends CharGrid {
 	/**
 	 * Does a BFS determine path lengths.
 	 */
-	private List<Path> getPaths(Pair<Integer> start, Set<Character> destinationTiles) {
+	private List<Path<Pair<Integer>>> getPaths(Pair<Integer> start, Set<Character> destinationTiles) {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(start, STEP_STRATEGY);
 		// Get all locations.
 		List<Pair<Integer>> destinations = new ArrayList<>();
@@ -149,7 +149,7 @@ public class Maze extends CharGrid {
 		}
 
 		// Return all paths in descending order of length.
-		List<Path> paths = Pathfinder.toPaths(start, destinations, cameFrom);
+		List<Path<Pair<Integer>>> paths = Pathfinder.toPaths(destinations, cameFrom);
 		Collections.reverse(paths);
 		return (paths);
 	}

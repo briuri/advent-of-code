@@ -11,13 +11,13 @@ public enum Opcode {
 	ADD(1, 3), MULTIPLY(2, 3), SAVE(3, 1), OUTPUT(4, 1), JUMP_IF_TRUE(5, 2), JUMP_IF_FALSE(6, 2), LESS_THAN(7,
 		3), EQUALS(8, 3), RELATIVE_BASE_OFFSET(9, 1), HALT(99, 0);
 
-	private int _code;
-	private int _numParameters;
+	private final int _code;
+	private final int _numParameters;
 
 	/**
 	 * Constructor
 	 */
-	private Opcode(int code, int numParameters) {
+	Opcode(int code, int numParameters) {
 		_code = code;
 		_numParameters = numParameters;
 	}
@@ -28,7 +28,7 @@ public enum Opcode {
 	public static Opcode getOpcodeFor(String fullOpcode) {
 		// Handle classic opcodes with no parameter modes prefixed.
 		int codeStart = Math.max(0, fullOpcode.length() - 2);
-		int code = Integer.valueOf(fullOpcode.substring(codeStart));
+		int code = Integer.parseInt(fullOpcode.substring(codeStart));
 		for (Opcode opcode : Opcode.values()) {
 			if (code == opcode.getCode()) {
 				return (opcode);

@@ -11,7 +11,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class IndexedRegisters {
-	private int[] _registers;
+	private final int[] _registers;
 
 	// Associated instructions
 	private int _ip;
@@ -80,7 +80,7 @@ public class IndexedRegisters {
 			String code = getCodes().get(getIp());
 			set(getIpRegister(), getIp());
 			runStringCode(code.split(" "));
-			setIp((int) get(REGISTER, getIpRegister()) + 1);
+			setIp(get(REGISTER, getIpRegister()) + 1);
 		}
 	}
 
@@ -96,56 +96,58 @@ public class IndexedRegisters {
 				int address = i - 1;
 				String[] code = input.get(i).split(" ");
 				String opcode = code[0];
-				int a = Integer.valueOf(code[1]);
-				int b = Integer.valueOf(code[2]);
-				int c = Integer.valueOf(code[3]);
-				if (opcode.equals("addr")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] + reg[%d]", address, c, a, b));
-				}
-				else if (opcode.equals("addi")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] + %d", address, c, a, b));
-				}
-				else if (opcode.equals("mulr")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] * reg[%d]", address, c, a, b));
-				}
-				else if (opcode.equals("muli")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] * %d", address, c, a, b));
-				}
-				else if (opcode.equals("banr")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] & reg[%d]", address, c, a, b));
-				}
-				else if (opcode.equals("bani")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] & %d", address, c, a, b));
-				}
-				else if (opcode.equals("borr")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] | reg[%d]", address, c, a, b));
-				}
-				else if (opcode.equals("bori")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d] | %d", address, c, a, b));
-				}
-				else if (opcode.equals("setr")) {
-					System.out.println(String.format("%d\treg[%d] = reg[%d]", address, c, a));
-				}
-				else if (opcode.equals("seti")) {
-					System.out.println(String.format("%d\treg[%d] = %d", address, c, a));
-				}
-				else if (opcode.equals("gtir")) {
-					System.out.println(String.format("%d\treg[%d] = (%d > reg[%d] ? 1 : 0)", address, c, a, b));
-				}
-				else if (opcode.equals("gtri")) {
-					System.out.println(String.format("%d\treg[%d] = (reg[%d] > %d ? 1 : 0)", address, c, a, b));
-				}
-				else if (opcode.equals("gtrr")) {
-					System.out.println(String.format("%d\treg[%d] = (reg[%d] > reg[%d] ? 1 : 0)", address, c, a, b));
-				}
-				else if (opcode.equals("eqir")) {
-					System.out.println(String.format("%d\treg[%d] = (%d == reg[%d] ? 1 : 0)", address, c, a, b));
-				}
-				else if (opcode.equals("eqri")) {
-					System.out.println(String.format("%d\treg[%d] = (reg[%d] == %d ? 1 : 0)", address, c, a, b));
-				}
-				else if (opcode.equals("eqrr")) {
-					System.out.println(String.format("%d\treg[%d] = (reg[%d] == reg[%d] ? 1 : 0)", address, c, a, b));
+				int a = Integer.parseInt(code[1]);
+				int b = Integer.parseInt(code[2]);
+				int c = Integer.parseInt(code[3]);
+				switch (opcode) {
+					case "addr":
+						System.out.printf("%d\treg[%d] = reg[%d] + reg[%d]%n", address, c, a, b);
+						break;
+					case "addi":
+						System.out.printf("%d\treg[%d] = reg[%d] + %d%n", address, c, a, b);
+						break;
+					case "mulr":
+						System.out.printf("%d\treg[%d] = reg[%d] * reg[%d]%n", address, c, a, b);
+						break;
+					case "muli":
+						System.out.printf("%d\treg[%d] = reg[%d] * %d%n", address, c, a, b);
+						break;
+					case "banr":
+						System.out.printf("%d\treg[%d] = reg[%d] & reg[%d]%n", address, c, a, b);
+						break;
+					case "bani":
+						System.out.printf("%d\treg[%d] = reg[%d] & %d%n", address, c, a, b);
+						break;
+					case "borr":
+						System.out.printf("%d\treg[%d] = reg[%d] | reg[%d]%n", address, c, a, b);
+						break;
+					case "bori":
+						System.out.printf("%d\treg[%d] = reg[%d] | %d%n", address, c, a, b);
+						break;
+					case "setr":
+						System.out.printf("%d\treg[%d] = reg[%d]%n", address, c, a);
+						break;
+					case "seti":
+						System.out.printf("%d\treg[%d] = %d%n", address, c, a);
+						break;
+					case "gtir":
+						System.out.printf("%d\treg[%d] = (%d > reg[%d] ? 1 : 0)%n", address, c, a, b);
+						break;
+					case "gtri":
+						System.out.printf("%d\treg[%d] = (reg[%d] > %d ? 1 : 0)%n", address, c, a, b);
+						break;
+					case "gtrr":
+						System.out.printf("%d\treg[%d] = (reg[%d] > reg[%d] ? 1 : 0)%n", address, c, a, b);
+						break;
+					case "eqir":
+						System.out.printf("%d\treg[%d] = (%d == reg[%d] ? 1 : 0)%n", address, c, a, b);
+						break;
+					case "eqri":
+						System.out.printf("%d\treg[%d] = (reg[%d] == %d ? 1 : 0)%n", address, c, a, b);
+						break;
+					case "eqrr":
+						System.out.printf("%d\treg[%d] = (reg[%d] == reg[%d] ? 1 : 0)%n", address, c, a, b);
+						break;
 				}
 			}
 		}
@@ -155,10 +157,10 @@ public class IndexedRegisters {
 	 * Executes an actual instruction against the registers, based on data explored in Day 16.
 	 */
 	public void runIntCode(String[] code) {
-		int opcode = Integer.valueOf(code[0]);
-		int a = Integer.valueOf(code[1]);
-		int b = Integer.valueOf(code[2]);
-		int c = Integer.valueOf(code[3]);
+		int opcode = Integer.parseInt(code[0]);
+		int a = Integer.parseInt(code[1]);
+		int b = Integer.parseInt(code[2]);
+		int c = Integer.parseInt(code[3]);
 		if (opcode == 0) { // mulr
 			set(c, get(REGISTER, a) * get(REGISTER, b));
 		}
@@ -214,64 +216,66 @@ public class IndexedRegisters {
 	 */
 	public void runStringCode(String[] code) {
 		String opcode = code[0];
-		if (opcode.equals("mulr")) {
-			code[0] = String.valueOf(0);
-		}
-		else if (opcode.equals("eqri")) {
-			code[0] = String.valueOf(1);
-		}
-		else if (opcode.equals("setr")) {
-			code[0] = String.valueOf(2);
-		}
-		else if (opcode.equals("eqrr")) {
-			code[0] = String.valueOf(3);
-		}
-		else if (opcode.equals("gtrr")) {
-			code[0] = String.valueOf(4);
-		}
-		else if (opcode.equals("muli")) {
-			code[0] = String.valueOf(5);
-		}
-		else if (opcode.equals("borr")) {
-			code[0] = String.valueOf(6);
-		}
-		else if (opcode.equals("bani")) {
-			code[0] = String.valueOf(7);
-		}
-		else if (opcode.equals("addr")) {
-			code[0] = String.valueOf(8);
-		}
-		else if (opcode.equals("banr")) {
-			code[0] = String.valueOf(9);
-		}
-		else if (opcode.equals("eqir")) {
-			code[0] = String.valueOf(10);
-		}
-		else if (opcode.equals("gtir")) {
-			code[0] = String.valueOf(11);
-		}
-		else if (opcode.equals("addi")) {
-			code[0] = String.valueOf(12);
-		}
-		else if (opcode.equals("gtri")) {
-			code[0] = String.valueOf(13);
-		}
-		else if (opcode.equals("seti")) {
-			code[0] = String.valueOf(14);
-		}
-		else if (opcode.equals("bori")) {
-			code[0] = String.valueOf(15);
+		switch (opcode) {
+			case "mulr":
+				code[0] = String.valueOf(0);
+				break;
+			case "eqri":
+				code[0] = String.valueOf(1);
+				break;
+			case "setr":
+				code[0] = String.valueOf(2);
+				break;
+			case "eqrr":
+				code[0] = String.valueOf(3);
+				break;
+			case "gtrr":
+				code[0] = String.valueOf(4);
+				break;
+			case "muli":
+				code[0] = String.valueOf(5);
+				break;
+			case "borr":
+				code[0] = String.valueOf(6);
+				break;
+			case "bani":
+				code[0] = String.valueOf(7);
+				break;
+			case "addr":
+				code[0] = String.valueOf(8);
+				break;
+			case "banr":
+				code[0] = String.valueOf(9);
+				break;
+			case "eqir":
+				code[0] = String.valueOf(10);
+				break;
+			case "gtir":
+				code[0] = String.valueOf(11);
+				break;
+			case "addi":
+				code[0] = String.valueOf(12);
+				break;
+			case "gtri":
+				code[0] = String.valueOf(13);
+				break;
+			case "seti":
+				code[0] = String.valueOf(14);
+				break;
+			case "bori":
+				code[0] = String.valueOf(15);
+				break;
 		}
 		runIntCode(code);
 	}
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i : getRegisters()) {
-			buffer.append(i).append(" ");
+			builder.append(i).append(" ");
 		}
-		return (buffer.toString().trim());
+		return (builder.toString().trim());
 	}
 
 	/**

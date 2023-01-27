@@ -8,8 +8,8 @@ package buri.aoc.common.data.intcode;
  * @author Brian Uri!
  */
 public class Parameter {
-	private long _value;
-	private Mode _mode;
+	private final long _value;
+	private final Mode _mode;
 
 	/**
 	 * Constructor

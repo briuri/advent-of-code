@@ -6,11 +6,11 @@ import java.util.List;
 
 /**
  * Base class for integer- and long-based tuples.
- * 
+ *
  * @author Brian Uri!
  */
 public class BaseTuple<T extends Number> {
-	private List<T> _values;
+	private final List<T> _values;
 
 	/**
 	 * Constructor
@@ -61,14 +61,14 @@ public class BaseTuple<T extends Number> {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Iterator<T> iterator = getValues().iterator(); iterator.hasNext();) {
-			buffer.append(iterator.next());
+			builder.append(iterator.next());
 			if (iterator.hasNext()) {
-				buffer.append(",");
+				builder.append(",");
 			}
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

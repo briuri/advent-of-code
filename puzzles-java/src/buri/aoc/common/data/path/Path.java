@@ -16,12 +16,12 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Path<T extends BaseTuple> implements Comparable<Path<T>> {
-	private List<T> _steps = new ArrayList<>();
+	private final List<T> _steps = new ArrayList<>();
 
 	/**
 	 * Constructor
 	 */
-	public Path(T start, T destination, Map<T, T> cameFrom) {
+	public Path(T destination, Map<T, T> cameFrom) {
 		T current = destination;
 		while (current != null) {
 			getSteps().add(current);

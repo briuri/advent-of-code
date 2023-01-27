@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
  * @author Brian Uri!
  */
 public class MD5Hash {
-	private MessageDigest _digest;
+	private final MessageDigest _digest;
 
 	/**
 	 * Constructor

@@ -25,7 +25,7 @@ public class Pathfinder {
 		frontier.add(start);
 		Map<T, T> cameFrom = new HashMap<>();
 		cameFrom.put(start, null);
-		T current = null;
+		T current;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			for (T next : strategy.getNextSteps(current)) {
@@ -41,11 +41,11 @@ public class Pathfinder {
 	/**
 	 * Constructs all paths from the start to the destinations and returns them with the shortest paths first.
 	 */
-	public static <T extends BaseTuple> List<Path> toPaths(T start, List<T> destinations, Map<T, T> cameFrom) {
-		List<Path> paths = new ArrayList<>();
+	public static <T extends BaseTuple> List<Path<T>> toPaths(List<T> destinations, Map<T, T> cameFrom) {
+		List<Path<T>> paths = new ArrayList<>();
 		for (T destination : destinations) {
 			if (cameFrom.get(destination) != null) {
-				paths.add(new Path(start, destination, cameFrom));
+				paths.add(new Path<>(destination, cameFrom));
 			}
 		}
 		Collections.sort(paths);

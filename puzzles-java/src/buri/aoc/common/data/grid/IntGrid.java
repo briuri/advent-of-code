@@ -79,7 +79,7 @@ public class IntGrid extends AbstractGrid<Integer> {
 
 	@Override
 	protected String toOutput(Integer value) {
-		return (String.valueOf(value) + "\t");
+		return (value + "\t");
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class IntGrid extends AbstractGrid<Integer> {
 
 	@Override
 	protected void setGrid(Integer[][] grid) {
-		setSize(new Pair(grid.length, grid[0].length));
+		setSize(new Pair<>(grid.length, grid[0].length));
 		_grid = grid;
 	}
 }

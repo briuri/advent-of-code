@@ -14,8 +14,8 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class NamedRegisters {
-	private Map<String, Long> _registers;
-	private List<String> _instructions;
+	private final Map<String, Long> _registers;
+	private final List<String> _instructions;
 	private int _current = 0;
 
 	/**
@@ -23,7 +23,7 @@ public class NamedRegisters {
 	 */
 	protected NamedRegisters(List<String> instructions) {
 		_instructions = instructions;
-		_registers = new HashMap<String, Long>();
+		_registers = new HashMap<>();
 		setCurrent(0);
 	}
 

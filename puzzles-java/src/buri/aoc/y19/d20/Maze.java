@@ -63,7 +63,7 @@ public class Maze extends CharGrid {
 		Map<Triple<Integer>, Triple<Integer>> cameFrom = Pathfinder.breadthFirstSearch(getStart(), strategy);
 		List<Triple<Integer>> ends = new ArrayList<>();
 		ends.add(getEnd());
-		List<Path> paths = Pathfinder.toPaths(getStart(), ends, cameFrom);
+		List<Path<Triple<Integer>>> paths = Pathfinder.toPaths(ends, cameFrom);
 		return (paths.get(0).getLength());
 	}
 

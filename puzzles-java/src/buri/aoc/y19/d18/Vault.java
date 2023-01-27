@@ -110,7 +110,7 @@ public class Vault extends CharGrid {
 		possibleKeys.add(end);
 
 		// Exactly 1 path between keys in Part 1. Possibly 0 paths in Part 2.
-		List<Path> paths = Pathfinder.toPaths(start, possibleKeys, cameFrom);
+		List<Path<Pair<Integer>>> paths = Pathfinder.toPaths(possibleKeys, cameFrom);
 		if (paths.isEmpty()) {
 			return (null);
 		}

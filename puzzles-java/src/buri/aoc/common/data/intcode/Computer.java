@@ -11,9 +11,9 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Computer {
-	private List<Long> _memory;
-	private List<Long> _inputs;
-	private List<Long> _outputs;
+	private final List<Long> _memory;
+	private final List<Long> _inputs;
+	private final List<Long> _outputs;
 	private long _pointer;
 	private long _relativeBase;
 	private boolean _debug = false;
@@ -67,9 +67,9 @@ public class Computer {
 	public static List<Long> toAscii(String routine) {
 		List<Long> list = new ArrayList<>();
 		for (char value : routine.toCharArray()) {
-			list.add(Long.valueOf((int) value));
+			list.add((long) (int) value);
 		}
-		list.add(Long.valueOf((int) LINE_BREAK));
+		list.add((long) (int) LINE_BREAK);
 		return (list);
 	}
 
@@ -84,12 +84,12 @@ public class Computer {
 			int codeStart = Math.max(0, fullOpcode.length() - 2);
 
 			// Build parameter modes for parsing.
-			StringBuffer buffer = new StringBuffer();
-			buffer.append(fullOpcode.substring(0, codeStart)).reverse();
-			while (buffer.length() < opcode.getNumParameters()) {
-				buffer.append("0");
+			StringBuilder builder = new StringBuilder();
+			builder.append(fullOpcode, 0, codeStart).reverse();
+			while (builder.length() < opcode.getNumParameters()) {
+				builder.append("0");
 			}
-			String rawModes = buffer.toString();
+			String rawModes = builder.toString();
 
 			// Build parameters
 			Parameter[] params = new Parameter[opcode.getNumParameters()];
@@ -235,14 +235,14 @@ public class Computer {
 			return;
 		}
 		// Generate pointer, relative base, and raw instruction.
-		StringBuffer log = new StringBuffer();
+		StringBuilder log = new StringBuilder();
 		log.append(String.format("ip=%d, rB=%d", getPointer(), getRelativeBase()));
 		while (log.length() < 20) {
 			log.append(" ");
 		}
 		log.append(fullOpcode);
-		for (int i = 0; i < params.length; i++) {
-			log.append(",").append(params[i].getValue());
+		for (Parameter param : params) {
+			log.append(",").append(param.getValue());
 		}
 		while (log.length() < 50) {
 			log.append(" ");
@@ -327,7 +327,7 @@ public class Computer {
 		else {
 			log.append("No human-readable form assigned yet.");
 		}
-		System.out.println(log.toString());
+		System.out.println(log);
 	}
 
 	/**

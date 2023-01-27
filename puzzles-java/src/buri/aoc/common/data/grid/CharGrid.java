@@ -31,7 +31,7 @@ public class CharGrid extends AbstractGrid<Character> {
 
 	@Override
 	protected void setGrid(Character[][] grid) {
-		setSize(new Pair(grid.length, grid[0].length));
+		setSize(new Pair<>(grid.length, grid[0].length));
 		_grid = grid;
 	}
 }

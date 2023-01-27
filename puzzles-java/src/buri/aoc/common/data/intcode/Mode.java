@@ -10,12 +10,12 @@ package buri.aoc.common.data.intcode;
 public enum Mode {
 	POSITIONAL(0), IMMEDIATE(1), RELATIVE(2);
 
-	private int _code;
+	private final int _code;
 
 	/**
 	 * Constructor
 	 */
-	private Mode(int code) {
+	Mode(int code) {
 		_code = code;
 	}
 

@@ -64,7 +64,7 @@ public class Grid extends CharGrid {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(START_POSITION, STEP_STRATEGY);
 		List<Pair<Integer>> destinations = new ArrayList<>();
 		destinations.add(destination);
-		List<Path> paths = Pathfinder.toPaths(START_POSITION, destinations, cameFrom);
+		List<Path<Pair<Integer>>> paths = Pathfinder.toPaths(destinations, cameFrom);
 		// There will be 1 path returned, since only 1 destination was provided.
 		return (paths.get(0).getLength());
 	}
@@ -84,7 +84,7 @@ public class Grid extends CharGrid {
 				}
 			}
 		}
-		List<Path> paths = Pathfinder.toPaths(START_POSITION, destinations, cameFrom);
+		List<Path<Pair<Integer>>> paths = Pathfinder.toPaths(destinations, cameFrom);
 		int count = 0;
 		for (Path path : paths) {
 			if (path.getLength() <= steps) {

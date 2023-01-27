@@ -21,7 +21,7 @@ public class Pair<T extends Number> extends BaseTuple implements Comparable<Pair
 	 * String-based Constructor with format "x, y"
 	 */
 	public Pair(String data, Class<T> clazz) {
-		String tokens[] = data.split(",");
+		String[] tokens = data.split(",");
 		if (clazz.isAssignableFrom(Integer.class)) {
 			getValues().add((T) Integer.valueOf(tokens[0].trim()));
 			getValues().add((T) Integer.valueOf(tokens[1].trim()));

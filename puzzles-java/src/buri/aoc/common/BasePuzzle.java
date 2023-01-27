@@ -1,21 +1,13 @@
 package buri.aoc.common;
 
-import buri.aoc.common.data.tuple.Pair;
-import buri.aoc.common.data.tuple.Quad;
-
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -96,10 +88,7 @@ public abstract class BasePuzzle {
 	 * (testPartXPuzzle).
 	 */
 	protected String getIdentifier() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("### Year ").append(getYear()).append(" Day ");
-		builder.append(getDay()).append(" Part ").append(getPart()).append(" ###");
-		return (builder.toString());
+		return ("### Year " + getYear() + " Day " +	getDay() + " Part " + getPart() + " ###");
 	}
 
 	/**
@@ -118,8 +107,7 @@ public abstract class BasePuzzle {
 	 */
 	private String getYear() {
 		String packageName = this.getClass().getPackage().getName();
-		String year = packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d"));
-		return (year);
+		return (packageName.substring(packageName.indexOf("aoc.y") + 5, packageName.indexOf(".d")));
 	}
 
 	/**
@@ -127,8 +115,7 @@ public abstract class BasePuzzle {
 	 */
 	private String getDay() {
 		String packageName = this.getClass().getPackage().getName();
-		String day = packageName.substring(packageName.indexOf(".d") + 2);
-		return (day);
+		return (packageName.substring(packageName.indexOf(".d") + 2));
 	}
 
 	/**
@@ -136,14 +123,13 @@ public abstract class BasePuzzle {
 	 */
 	private String getPart() {
 		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-		String testName = null;
-		for (int i = 0; i < trace.length; i++) {
-			if (trace[i].getMethodName().contains("testPart")) {
-				testName = trace[i].getMethodName();
+		String testName = "";
+		for (StackTraceElement stackTraceElement : trace) {
+			if (stackTraceElement.getMethodName().contains("testPart")) {
+				testName = stackTraceElement.getMethodName();
 				break;
 			}
 		}
-		String part = testName.substring(testName.indexOf("Part") + 4);
-		return (part);
+		return (testName.substring(testName.indexOf("Part") + 4));
 	}
 }

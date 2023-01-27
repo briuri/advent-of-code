@@ -77,12 +77,12 @@ public enum Direction {
 
 	public abstract Direction turnRight();
 
-	private char _icon;
+	private final char _icon;
 
 	/**
 	 * Constructor
 	 */
-	private Direction(char icon) {
+	Direction(char icon) {
 		_icon = icon;
 	}
 

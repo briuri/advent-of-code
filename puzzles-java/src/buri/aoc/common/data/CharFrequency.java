@@ -1,8 +1,6 @@
 package buri.aoc.common.data;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +11,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class CharFrequency {
-	private Map<Character, Integer> _frequency;
+	private final Map<Character, Integer> _frequency;
 
 	/**
 	 * Constructor
@@ -36,9 +34,7 @@ public class CharFrequency {
 	 * Adds 1 to the count for a character.
 	 */
 	public void add(char value) {
-		if (getFrequency().get(value) == null) {
-			getFrequency().put(value, 0);
-		}
+		getFrequency().putIfAbsent(value, 0);
 		getFrequency().put(value, getFrequency().get(value) + 1);
 	}
 
@@ -53,7 +49,7 @@ public class CharFrequency {
 	 * Returns true if some character appears exactly this number of times.
 	 */
 	public boolean containsFrequency(int frequency) {
-		return (getFrequency().values().contains(frequency));
+		return (getFrequency().containsValue(frequency));
 	}
 
 	/**
@@ -61,11 +57,11 @@ public class CharFrequency {
 	 */
 	public String getHighestFrequencyChars(int num) {
 		List<Map.Entry<Character, Integer>> list = getDescendingFrequency();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < Math.min(num, list.size()); i++) {
-			buffer.append(list.get(i).getKey());
+			builder.append(list.get(i).getKey());
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**
@@ -89,15 +85,12 @@ public class CharFrequency {
 	 */
 	private List<Map.Entry<Character, Integer>> getDescendingFrequency() {
 		List<Map.Entry<Character, Integer>> list = new ArrayList<>(getFrequency().entrySet());
-		Collections.sort(list, new Comparator<Map.Entry<Character, Integer>>() {
-			@Override
-			public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {
-				int compare = o2.getValue() - o1.getValue();
-				if (compare == 0) {
-					compare = o1.getKey().compareTo(o2.getKey());
-				}
-				return (compare);
+		list.sort((o1, o2) -> {
+			int compare = o2.getValue() - o1.getValue();
+			if (compare == 0) {
+				compare = o1.getKey().compareTo(o2.getKey());
 			}
+			return (compare);
 		});
 		return (list);
 	}

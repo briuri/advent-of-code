@@ -205,7 +205,7 @@ public class RoomMap extends CharGrid {
 	/**
 	 * Does a BFS to find nearest rooms, then generates paths to those rooms in descending length order.
 	 */
-	private List<Path> getPaths() {
+	private List<Path<Pair<Integer>>> getPaths() {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(getStart(), STEP_STRATEGY);
 		// Get all known rooms.
 		List<Pair<Integer>> destinations = new ArrayList<>();
@@ -217,7 +217,7 @@ public class RoomMap extends CharGrid {
 			}
 		}
 		// Return all shortest paths in descending order of length.
-		List<Path> paths = Pathfinder.toPaths(getStart(), destinations, cameFrom);
+		List<Path<Pair<Integer>>> paths = Pathfinder.toPaths(destinations, cameFrom);
 		Collections.reverse(paths);
 		return (paths);
 	}

@@ -29,8 +29,8 @@ public abstract class AbstractGrid<T> {
 	/**
 	 * Returns the point nearest to the center of the grid.
 	 */
-	public Pair getCenterPosition() {
-		return (new Pair(getWidth() / 2, getHeight() / 2));
+	public Pair<Integer> getCenterPosition() {
+		return (new Pair<>(getWidth() / 2, getHeight() / 2));
 	}
 
 	/**
@@ -85,15 +85,15 @@ public abstract class AbstractGrid<T> {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
-				buffer.append(toOutput((T) get(x, y)));
+				builder.append(toOutput(get(x, y)));
 			}
-			buffer.append("\n");
+			builder.append("\n");
 		}
-		buffer.append("\n");
-		return (buffer.toString());
+		builder.append("\n");
+		return (builder.toString());
 	}
 
 	/**

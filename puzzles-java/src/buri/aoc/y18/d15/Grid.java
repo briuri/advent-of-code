@@ -94,10 +94,10 @@ public class Grid extends CharGrid {
 	 */
 	private void moveWith(Unit unit) {
 		if (!unit.isDead() && getAdjacentEnemies(unit).size() == 0) {
-			List<Path> paths = getShortestPathsFor(unit);
+			List<Path<Pair<Integer>>> paths = getShortestPathsFor(unit);
 			if (!paths.isEmpty()) {
 				set(unit.getPosition(), OPEN);
-				unit.setPosition(((List<Pair>) paths.get(0).getSteps()).get(1));
+				unit.setPosition(paths.get(0).getSteps().get(1));
 				set(unit.getPosition(), unit.getType());
 			}
 		}
@@ -195,14 +195,14 @@ public class Grid extends CharGrid {
 	/**
 	 * Returns the shortest paths to each of the possible enemy-adjacent destinations, using a breadth-first search.
 	 */
-	private List<Path> getShortestPathsFor(Unit unit) {
+	private List<Path<Pair<Integer>>> getShortestPathsFor(Unit unit) {
 		Map<Pair<Integer>, Pair<Integer>> cameFrom = Pathfinder.breadthFirstSearch(unit.getPosition(), STEP_STRATEGY);
 		// Get all open cells adjacent to enemies.
 		List<Pair<Integer>> destinations = new ArrayList<>();
 		for (Unit enemy : getEnemies(unit)) {
 			destinations.addAll(STEP_STRATEGY.getNextSteps(enemy.getPosition()));
 		}
-		return (Pathfinder.toPaths(unit.getPosition(), destinations, cameFrom));
+		return (Pathfinder.toPaths(destinations, cameFrom));
 	}
 
 	/**
