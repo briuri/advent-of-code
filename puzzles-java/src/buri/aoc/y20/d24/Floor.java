@@ -22,7 +22,7 @@ public class Floor {
 	 */
 	public Floor(List<String> input) {
 		setTiles(new HashMap<>());
-		Triple<Integer> start = new Triple<Integer>(0, 0, 0);
+		Triple<Integer> start = new Triple<>(0, 0, 0);
 		for (String directions : input) {
 			Triple<Integer> tile = getTile(directions, start);
 			if (!getTiles().containsKey(tile)) {
@@ -65,32 +65,34 @@ public class Floor {
 		int y = start.getY();
 		int z = start.getZ();
 		for (String step : steps) {
-			if (step.equals("nw")) {
-				z = z - 1;
-				y = y + 1;
-			}
-			else if (step.equals("ne")) {
-				x = x + 1;
-				z = z - 1;
-			}
-			else if (step.equals("e")) {
-				x = x + 1;
-				y = y - 1;
-			}
-			else if (step.equals("se")) {
-				z = z + 1;
-				y = y - 1;
-			}
-			else if (step.equals("sw")) {
-				x = x - 1;
-				z = z + 1;
-			}
-			else if (step.equals("w")) {
-				x = x - 1;
-				y = y + 1;
+			switch (step) {
+				case "nw":
+					z = z - 1;
+					y = y + 1;
+					break;
+				case "ne":
+					x = x + 1;
+					z = z - 1;
+					break;
+				case "e":
+					x = x + 1;
+					y = y - 1;
+					break;
+				case "se":
+					z = z + 1;
+					y = y - 1;
+					break;
+				case "sw":
+					x = x - 1;
+					z = z + 1;
+					break;
+				case "w":
+					x = x - 1;
+					y = y + 1;
+					break;
 			}
 		}
-		return (new Triple(x, y, z));
+		return (new Triple<>(x, y, z));
 	}
 
 	/**

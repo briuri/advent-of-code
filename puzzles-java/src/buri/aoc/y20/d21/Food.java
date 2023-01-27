@@ -10,8 +10,8 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Food {
-	private Set<String> _ingredients;
-	private Set<String> _allergens;
+	private final Set<String> _ingredients;
+	private final Set<String> _allergens;
 
 	/**
 	 * Constructor

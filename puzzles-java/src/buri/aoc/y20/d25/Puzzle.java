@@ -28,8 +28,8 @@ public class Puzzle extends BasePuzzle {
 	 * What encryption key is the handshake trying to establish?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		long cardPki = Long.valueOf(input.get(0));
-		long doorPki = Long.valueOf(input.get(1));
+		long cardPki = Long.parseLong(input.get(0));
+		long doorPki = Long.parseLong(input.get(1));
 		// Set a bounds based on the input data to speed up execution.
 		long upperBound = (cardPki == 5764801L ? 15L : 11900000L);
 

@@ -42,7 +42,7 @@ public class Puzzle extends BasePuzzle {
 	 * reached, how many seats end up occupied?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
+		CharGrid grid = new CharGrid(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < grid.getHeight(); y++) {
 			for (int x = 0; x < grid.getWidth(); x++) {
 				grid.set(x, y, input.get(y).charAt(x));
@@ -52,10 +52,10 @@ public class Puzzle extends BasePuzzle {
 		Set<String> states = new HashSet<>();
 		final int occupiedThreshold = (part == Part.ONE ? 4 : 5);
 		while (true) {
-			CharGrid next = new CharGrid(new Pair(grid.getWidth(), grid.getHeight()));
+			CharGrid next = new CharGrid(new Pair<>(grid.getWidth(), grid.getHeight()));
 			for (int y = 0; y < grid.getHeight(); y++) {
 				for (int x = 0; x < grid.getWidth(); x++) {
-					Pair<Integer> center = new Pair(x, y);
+					Pair<Integer> center = new Pair<>(x, y);
 					int adjacentFullSeats = countAdjacentOccupiedSeats(part, grid, center);
 					char value = grid.get(center);
 
@@ -119,17 +119,17 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Keeps pushing a point in some direction until it's off the grid or finds non-floor tiles.
 	 */
-	protected static Pair<Integer> findVisibleSeat(CharGrid grid, Pair center, Direction[] directions) {
+	protected static Pair<Integer> findVisibleSeat(CharGrid grid, Pair<Integer> center, Direction[] directions) {
 		Pair<Integer> adjacent = center.copy();
-		for (int i = 0; i < directions.length; i++) {
-			adjacent.move(directions[i]);
+		for (Direction direction : directions) {
+			adjacent.move(direction);
 		}
 
 		while (adjacent.getX() >= 0 && adjacent.getX() < grid.getWidth()
 			&& adjacent.getY() >= 0	&& adjacent.getY() < grid.getHeight()
 			&& grid.get(adjacent) == FLOOR) {
-			for (int i = 0; i < directions.length; i++) {
-				adjacent.move(directions[i]);
+			for (Direction direction : directions) {
+				adjacent.move(direction);
 			}
 		}
 		return (adjacent);

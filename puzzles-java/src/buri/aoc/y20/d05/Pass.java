@@ -6,8 +6,8 @@ package buri.aoc.y20.d05;
  * @author Brian Uri!
  */
 public class Pass {
-	private int _row;
-	private int _column;
+	private final int _row;
+	private final int _column;
 
 	/**
 	 * Constructor

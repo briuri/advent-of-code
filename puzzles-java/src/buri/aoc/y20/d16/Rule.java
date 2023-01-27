@@ -12,8 +12,8 @@ import java.util.Set;
  * @author Brian Uri!
  */
 public class Rule {
-	private String _name;
-	private Quad<Integer> _range;
+	private final String _name;
+	private final Quad<Integer> _range;
 
 	/**
 	 * Constructor
@@ -23,11 +23,11 @@ public class Rule {
 		String[] range = line.split(": ")[1].split(" or ");
 		String[] left = range[0].split("-");
 		String[] right = range[1].split("-");
-		int x = Integer.valueOf(left[0]);
-		int y = Integer.valueOf(left[1]);
-		int z = Integer.valueOf(right[0]);
-		int t = Integer.valueOf(right[1]);
-		_range = new Quad<Integer>(x, y, z, t);
+		int x = Integer.parseInt(left[0]);
+		int y = Integer.parseInt(left[1]);
+		int z = Integer.parseInt(right[0]);
+		int t = Integer.parseInt(right[1]);
+		_range = new Quad<>(x, y, z, t);
 	}
 
 	/**

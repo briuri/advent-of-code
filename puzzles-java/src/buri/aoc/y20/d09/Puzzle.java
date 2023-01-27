@@ -54,7 +54,7 @@ public class Puzzle extends BasePuzzle {
 		while (start > 0) {
 			long sum = 0;
 			for (int i = start; i >= start - preambleSize; i--) {
-				sum += values.get(i).longValue();
+				sum += values.get(i);
 				// Sum should have at least 2 addends.
 				if (sum == target && i != start) {
 					List<Long> range = new ArrayList<>();
@@ -78,7 +78,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected static boolean isSummable(List<Long> subList, long target) {
 		for (List<Long> pairs : Permutations.getPairPermutations(subList)) {
-			if (pairs.get(0).longValue() + pairs.get(1).longValue() == target) {
+			if (pairs.get(0) + pairs.get(1) == target) {
 				return (true);
 			}
 		}

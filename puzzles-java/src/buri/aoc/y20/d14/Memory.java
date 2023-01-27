@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Memory {
-	private Map<Long, Long> _memory;
+	private final Map<Long, Long> _memory;
 	private String _mask;
 
 	/**
@@ -61,19 +61,19 @@ public class Memory {
 	 * Part Two: [1,X] overwrites bit. [0] is ignored.
 	 */
 	protected String mask(Part part, Long value) {
-		StringBuffer buffer = new StringBuffer(Long.toBinaryString(value));
-		while (buffer.length() < getMask().length()) {
-			buffer.insert(0, "0");
+		StringBuilder builder = new StringBuilder(Long.toBinaryString(value));
+		while (builder.length() < getMask().length()) {
+			builder.insert(0, "0");
 		}
 
 		char ignoreBit = (part == Part.ONE ? 'X' : '0');
 		for (int i = 0; i < getMask().length(); i++) {
 			char maskBit = getMask().charAt(i);
 			if (maskBit != ignoreBit) {
-				buffer.setCharAt(i, maskBit);
+				builder.setCharAt(i, maskBit);
 			}
 		}
-		return (buffer.toString());
+		return (builder.toString());
 
 	}
 
@@ -90,7 +90,7 @@ public class Memory {
 				// Each time X is found, add 2 new addresses to the next list.
 				int floatingIndex = address.indexOf("X");
 				if (floatingIndex != -1) {
-					StringBuffer addressCopy = new StringBuffer(address);
+					StringBuilder addressCopy = new StringBuilder(address);
 					addressCopy.setCharAt(floatingIndex, '0');
 					next.add(addressCopy.toString());
 					addressCopy.setCharAt(floatingIndex, '1');

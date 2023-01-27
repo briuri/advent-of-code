@@ -27,14 +27,14 @@ public class Ticket {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Iterator<Integer> iter = getFields().iterator(); iter.hasNext();) {
-			buffer.append(iter.next());
+			builder.append(iter.next());
 			if (iter.hasNext()) {
-				buffer.append(",");
+				builder.append(",");
 			}
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

@@ -36,7 +36,7 @@ public class Puzzle extends BasePuzzle {
 	 * What do you get if you multiply together the number of trees encountered on each of the listed slopes?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		CharGrid grid = new CharGrid(new Pair(input.get(0).length(), input.size()));
+		CharGrid grid = new CharGrid(new Pair<>(input.get(0).length(), input.size()));
 		for (int y = 0; y < grid.getHeight(); y++) {
 			for (int x = 0; x < grid.getWidth(); x++) {
 				grid.set(x, y, input.get(y).charAt(x));

@@ -43,27 +43,27 @@ public class Puzzle extends BasePuzzle {
 	 * about order of precedence at this stage.
 	 */
 	protected static long simplify(Part part, String equation) {
-		StringBuffer buffer = new StringBuffer(equation);
+		StringBuilder builder = new StringBuilder(equation);
 
 		// Loop over the equation replacing parentheses until none are left.
-		while (buffer.indexOf(")") != -1) {
-			int right = buffer.indexOf(")");
-			int left = buffer.indexOf("(");
+		while (builder.indexOf(")") != -1) {
+			int right = builder.indexOf(")");
+			int left = builder.indexOf("(");
 
 			// Find innermost ( to the left of the ).
-			int nextLeft = buffer.indexOf("(", left + 1);
+			int nextLeft = builder.indexOf("(", left + 1);
 			while (nextLeft != -1 && nextLeft < right) {
 				left = nextLeft;
-				nextLeft = buffer.indexOf("(", left + 1);
+				nextLeft = builder.indexOf("(", left + 1);
 			}
 
 			// Replace the inner equation with its solution
-			String innerEquation = buffer.substring(left + 1, right);
-			buffer.replace(left, right + 1, solve(part, innerEquation).toString());
+			String innerEquation = builder.substring(left + 1, right);
+			builder.replace(left, right + 1, solve(part, innerEquation).toString());
 		}
 
 		// Finally, the entire equation can be solved without worrying about parentheses.
-		return (solve(part, buffer.toString()));
+		return (solve(part, builder.toString()));
 	}
 
 	/**
@@ -78,10 +78,10 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected static Long solveLR(String equation) {
 		String[] tokens = equation.split(" ");
-		Long result = Long.valueOf(tokens[0]);
+		long result = Long.parseLong(tokens[0]);
 		for (int i = 1; i < tokens.length; i++) {
 			if (tokens[i].equals("*") || tokens[i].equals("+")) {
-				long value = Long.valueOf(tokens[i + 1]);
+				long value = Long.parseLong(tokens[i + 1]);
 				if (tokens[i].equals("*")) {
 					result = result * value;
 				}
@@ -98,17 +98,17 @@ public class Puzzle extends BasePuzzle {
 	 * Solves a simple equation with no parentheses, addition first then multiplication.
 	 */
 	protected static Long solveAM(String equation) {
-		Long result = 1L;
+		long result = 1L;
 		// Use multiplication sign to break up equation into factors.
 		for (String innerEquation : equation.split(" \\* ")) {
 			long value;
 			// Factor is a simple addition equation that can be solved left-to-right.
-			if (innerEquation.indexOf("+") != -1) {
+			if (innerEquation.contains("+")) {
 				value = solveLR(innerEquation);
 			}
 			// Factor already in its simplest form.
 			else {
-				value = Long.valueOf(innerEquation);
+				value = Long.parseLong(innerEquation);
 			}
 			result = result * value;
 		}

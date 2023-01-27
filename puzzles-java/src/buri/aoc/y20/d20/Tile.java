@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class Tile {
 	private int _id;
-	private CharGrid _grid;
+	private final CharGrid _grid;
 	private Map<Direction, String> _cache;
 
 	public static final int TILE_SIZE = 10;
@@ -38,10 +38,10 @@ public class Tile {
 	 */
 	public Tile(Map<Pair<Integer>, Tile> imageBoard, Pair<Integer> minCorner, int numTiles) {
 		int imageSize = CROP_SIZE * numTiles;
-		_grid = new CharGrid(new Pair(imageSize, imageSize));
+		_grid = new CharGrid(new Pair<>(imageSize, imageSize));
 		for (int x = 0; x < numTiles; x++) {
 			for (int y = 0; y < numTiles; y++) {
-				Tile crop = imageBoard.get(new Pair(minCorner.getX() + x, minCorner.getY() + y)).crop();
+				Tile crop = imageBoard.get(new Pair<>(minCorner.getX() + x, minCorner.getY() + y)).crop();
 				for (int cropX = 0; cropX < CROP_SIZE; cropX++) {
 					for (int cropY = 0; cropY < CROP_SIZE; cropY++) {
 						int newX = x * CROP_SIZE + cropX;
@@ -85,7 +85,7 @@ public class Tile {
 	 * Crops a tile by removing borders (as a copy). Only intended for original size tiles.
 	 */
 	public Tile crop() {
-		CharGrid newGrid = new CharGrid(new Pair(CROP_SIZE, CROP_SIZE));
+		CharGrid newGrid = new CharGrid(new Pair<>(CROP_SIZE, CROP_SIZE));
 		for (int x = 1; x < TILE_SIZE - 1; x++) {
 			for (int y = 1; y < TILE_SIZE - 1; y++) {
 				newGrid.set(x - 1, y - 1, getGrid().get(x, y));
@@ -99,7 +99,7 @@ public class Tile {
 	 */
 	private Tile flip() {
 		int size = getGrid().getWidth();
-		CharGrid newGrid = new CharGrid(new Pair(size, size));
+		CharGrid newGrid = new CharGrid(new Pair<>(size, size));
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				newGrid.set(size - x - 1, y, getGrid().get(x, y));
@@ -113,7 +113,7 @@ public class Tile {
 	 */
 	private Tile rotate() {
 		int size = getGrid().getWidth();
-		CharGrid newGrid = new CharGrid(new Pair(size, size));
+		CharGrid newGrid = new CharGrid(new Pair<>(size, size));
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				newGrid.set(x, y, getGrid().get(size - y - 1, x));
@@ -128,28 +128,28 @@ public class Tile {
 	public String getBorder(Direction direction) {
 		if (!getCache().containsKey(direction)) {
 			int size = getGrid().getWidth();
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder builder = new StringBuilder();
 			if (direction == Direction.UP) {
 				for (int x = 0; x < size; x++) {
-					buffer.append(getGrid().get(x, 0));
+					builder.append(getGrid().get(x, 0));
 				}
 			}
 			else if (direction == Direction.RIGHT) {
 				for (int y = 0; y < size; y++) {
-					buffer.append(getGrid().get(size - 1, y));
+					builder.append(getGrid().get(size - 1, y));
 				}
 			}
 			else if (direction == Direction.DOWN) {
 				for (int x = 0; x < size; x++) {
-					buffer.append(getGrid().get(x, size - 1));
+					builder.append(getGrid().get(x, size - 1));
 				}
 			}
 			else if (direction == Direction.LEFT) {
 				for (int y = 0; y < size; y++) {
-					buffer.append(getGrid().get(0, y));
+					builder.append(getGrid().get(0, y));
 				}
 			}
-			getCache().put(direction, buffer.toString());
+			getCache().put(direction, builder.toString());
 		}
 		return (getCache().get(direction));
 	}

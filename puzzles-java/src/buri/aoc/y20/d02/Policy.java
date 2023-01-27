@@ -9,10 +9,10 @@ import buri.aoc.common.data.CharFrequency;
  * @author Brian Uri!
  */
 public class Policy {
-	private int _low;
-	private int _high;
-	private char _requiredChar;
-	private String _password;
+	private final int _low;
+	private final int _high;
+	private final char _requiredChar;
+	private final String _password;
 
 	/**
 	 * Constructor
@@ -21,8 +21,8 @@ public class Policy {
 	 */
 	public Policy(String input) {
 		String[] tokens = input.split(" ");
-		_low = Integer.valueOf(tokens[0].split("-")[0]);
-		_high = Integer.valueOf(tokens[0].split("-")[1]);
+		_low = Integer.parseInt(tokens[0].split("-")[0]);
+		_high = Integer.parseInt(tokens[0].split("-")[1]);
 		_requiredChar = tokens[1].charAt(0);
 		_password = tokens[2];
 	}

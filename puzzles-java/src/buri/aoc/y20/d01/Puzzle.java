@@ -42,7 +42,7 @@ public class Puzzle extends BasePuzzle {
 				}
 				int val2 = values.get(j);
 				if (part == Part.ONE && (val1 + val2) == target) {
-					return (val1 * val2);
+					return ((long) val1 * val2);
 				}
 				if (part == Part.TWO) {
 					for (int k = 0; k < input.size(); k++) {
@@ -51,7 +51,7 @@ public class Puzzle extends BasePuzzle {
 						}
 						int val3 = values.get(k);
 						if (val1 + val2 + val3 == target) {
-							return (val1 * val2 * val3);
+							return ((long) val1 * val2 * val3);
 						}
 					}
 				}

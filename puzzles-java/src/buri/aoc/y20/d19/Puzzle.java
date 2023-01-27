@@ -71,7 +71,7 @@ public class Puzzle extends BasePuzzle {
 	protected static String getPattern(Part part, Map<Integer, Rule> rules, Map<Integer, String> cache, int id) {
 		if (!cache.containsKey(id)) {
 			Rule rule = rules.get(id);
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder builder = new StringBuilder();
 
 			/*
 			 * In part two, intercept the written rule 8 with new logic.
@@ -83,7 +83,7 @@ public class Puzzle extends BasePuzzle {
 			 * In other words, "at least 1 instance of 42"
 			 */
 			if (part == Part.TWO && rule.getId() == 8) {
-				buffer.append("(").append(getPattern(part, rules, cache, 42)).append("+)");
+				builder.append("(").append(getPattern(part, rules, cache, 42)).append("+)");
 			}
 
 			/*
@@ -97,44 +97,44 @@ public class Puzzle extends BasePuzzle {
 			 * count of valid messages stabilized.
 			 */
 			else if (part == Part.TWO && rule.getId() == 11) {
-				buffer.append("(");
+				builder.append("(");
 				final int DEPTH = 6;
 				for (int i = 1; i < DEPTH; i++) {
 					if (i > 1) {
-						buffer.append('|');
+						builder.append('|');
 					}
-					buffer.append('(');
+					builder.append('(');
 					for (int n = 0; n < i; n++) {
-						buffer.append(getPattern(part, rules, cache, 42));
+						builder.append(getPattern(part, rules, cache, 42));
 					}
 					for (int n = 0; n < i; n++) {
-						buffer.append(getPattern(part, rules, cache, 31));
+						builder.append(getPattern(part, rules, cache, 31));
 					}
-					buffer.append(')');
+					builder.append(')');
 				}
-				buffer.append(')');
+				builder.append(')');
 			}
 
 			// Simplest form rule "a" or "b"
 			else if (rule.isSimple()) {
-				buffer.append(rule.getRule());
+				builder.append(rule.getRule());
 			}
 			// All other rules
 			else {
-				buffer.append("(");
+				builder.append("(");
 				for (String token : rule.getRule().split(" ")) {
 					if (token.equals("|")) {
-						buffer.append(token);
+						builder.append(token);
 					}
 					else {
-						buffer.append(getPattern(part, rules, cache, Integer.valueOf(token)));
+						builder.append(getPattern(part, rules, cache, Integer.parseInt(token)));
 					}
 				}
-				buffer.append(')');
+				builder.append(')');
 			}
 
 			// Save this in the cache for next time.
-			cache.put(id, buffer.toString());
+			cache.put(id, builder.toString());
 		}
 		return (cache.get(id));
 	}

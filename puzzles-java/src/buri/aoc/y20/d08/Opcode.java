@@ -8,12 +8,12 @@ package buri.aoc.y20.d08;
 public enum Opcode {
 	ACC("acc"), JMP("jmp"), NOP("nop");
 
-	private String _code;
+	private final String _code;
 
 	/**
 	 * Constructor
 	 */
-	private Opcode(String code) {
+	Opcode(String code) {
 		_code = code;
 	}
 

@@ -6,7 +6,7 @@ package buri.aoc.y20.d19;
  * @author Brian Uri!
  */
 public class Rule {
-	private int _id;
+	private final int _id;
 	private String _rule;
 
 	/**
@@ -14,8 +14,8 @@ public class Rule {
 	 */
 	public Rule(String line) {
 		String[] tokens = line.split(": ");
-		_id = Integer.valueOf(tokens[0]);
-		if (tokens[1].indexOf("\"") != -1) {
+		_id = Integer.parseInt(tokens[0]);
+		if (tokens[1].contains("\"")) {
 			tokens[1] = tokens[1].substring(1, 2);
 		}
 		setRule(tokens[1]);

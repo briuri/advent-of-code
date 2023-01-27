@@ -70,7 +70,7 @@ public class Puzzle extends BasePuzzle {
 		Map<String, Integer> namesToIndexes = new HashMap<>();
 		while (namesToIndexes.size() < mine.getSize()) {
 			for (Rule rule : rules) {
-				List<Integer> validFields = rule.getValidFields(tickets, new HashSet<Integer>(namesToIndexes.values()));
+				List<Integer> validFields = rule.getValidFields(tickets, new HashSet<>(namesToIndexes.values()));
 				if (validFields.size() == 1) {
 					namesToIndexes.put(rule.getName(), validFields.get(0));
 				}

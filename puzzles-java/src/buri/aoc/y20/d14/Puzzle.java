@@ -38,8 +38,8 @@ public class Puzzle extends BasePuzzle {
 				memory.setMask(line.split(" = ")[1]);
 			}
 			else {
-				Long address = Long.valueOf(line.split("\\[")[1].split("\\]")[0]);
-				Long value = Long.valueOf(line.split(" = ")[1]);
+				long address = Long.parseLong(line.split("\\[")[1].split("]")[0]);
+				long value = Long.parseLong(line.split(" = ")[1]);
 				memory.set(part, address, value);
 			}
 		}

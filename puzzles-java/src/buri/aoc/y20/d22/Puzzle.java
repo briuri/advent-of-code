@@ -52,7 +52,7 @@ public class Puzzle extends BasePuzzle {
 		ArrayDeque<Integer> winningDeck = playerOneWins ? deck1 : deck2;
 		long score = 0;
 		for (int i = 0; i < totalCards; i++) {
-			score += winningDeck.pop() * (totalCards - i);
+			score += (long) winningDeck.pop() * (totalCards - i);
 		}
 		return (score);
 	}
@@ -69,7 +69,7 @@ public class Puzzle extends BasePuzzle {
 		while (deck1.size() > 0 && deck2.size() > 0) {
 			// Keep track of previous states in part two.
 			if (part == Part.TWO) {
-				String snapshotKey = deck1.toString() + deck2.toString();
+				String snapshotKey = deck1 + deck2.toString();
 				if (snapshots.contains(snapshotKey)) {
 					return (true);
 				}

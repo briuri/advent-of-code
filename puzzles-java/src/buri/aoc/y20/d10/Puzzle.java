@@ -56,11 +56,11 @@ public class Puzzle extends BasePuzzle {
 		// Final voltage is 3 higher than the last adapter.
 		threeJolts++;
 		if (part == Part.ONE) {
-			return (oneJolt * threeJolts);
+			return ((long) oneJolt * threeJolts);
 		}
 
 		int max = oneJolt + 3 * threeJolts;
-		return (countPaths(adapters, 0, max, new HashMap<String, Long>()));
+		return (countPaths(adapters, 0, max, new HashMap<>()));
 	}
 
 	/**

@@ -34,10 +34,10 @@ public class Puzzle extends BasePuzzle {
 	 * How many cubes are left in the active state after the sixth cycle?
 	 */
 	protected long runLong(Part part, List<String> input) {
-		Set<Quad> activeCubes = new HashSet<>();
+		Set<Quad<Integer>> activeCubes = new HashSet<>();
 		for (int y = 0; y < input.size(); y++) {
 			for (int x = 0; x < input.get(0).length(); x++) {
-				Quad quad = new Quad(x, y, 0, 0);
+				Quad<Integer> quad = new Quad<>(x, y, 0, 0);
 				if (input.get(y).charAt(x) == '#') {
 					activeCubes.add(quad);
 				}
@@ -65,7 +65,7 @@ public class Puzzle extends BasePuzzle {
 				maxW = Math.max(maxW, cube.getT());
 			}
 
-			Set<Quad> nextActive = new HashSet<>();
+			Set<Quad<Integer>> nextActive = new HashSet<>();
 			// Check all nearby points, not just the ones already registered in the grid.
 			for (int x = minX - 1; x < maxX + 2; x++) {
 				for (int y = minY - 1; y < maxY + 2; y++) {
@@ -73,7 +73,7 @@ public class Puzzle extends BasePuzzle {
 						for (int w = minW - 1; w < maxW + 2; w++) {
 							// Don't explore w dimension in part one.
 							int wValue = (part == Part.ONE ? 0 : w);
-							Quad<Integer> cube = new Quad(x, y, z, wValue);
+							Quad<Integer> cube = new Quad<>(x, y, z, wValue);
 
 							// Count active neighbors
 							Set<Quad> activeNeighbors = new HashSet<>();
@@ -83,7 +83,7 @@ public class Puzzle extends BasePuzzle {
 										for (int dw = -1; dw < 2; dw++) {
 											// Don't explore w dimension in part one.
 											int wValueNeighbor = (part == Part.ONE ? 0 : w + dw);
-											Quad<Integer> neighbor = new Quad(x + dx, y + dy, z + dz, wValueNeighbor);
+											Quad<Integer> neighbor = new Quad<>(x + dx, y + dy, z + dz, wValueNeighbor);
 											// Skip self.
 											if (neighbor.equals(cube)) {
 												continue;
@@ -97,8 +97,7 @@ public class Puzzle extends BasePuzzle {
 							}
 							// Active stays active with 2 - 3 neighbors. Inactive becomes active with 3 neighbors.
 							boolean isCubeActive = activeCubes.contains(cube);
-							if ((isCubeActive && activeNeighbors.size() == 2 || activeNeighbors.size() == 3)
-								|| (!isCubeActive && activeNeighbors.size() == 3)) {
+							if (isCubeActive && activeNeighbors.size() == 2 || activeNeighbors.size() == 3) {
 								nextActive.add(cube);
 							}
 						}

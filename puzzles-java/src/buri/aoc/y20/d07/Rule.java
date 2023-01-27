@@ -9,8 +9,8 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class Rule {
-	private String _bagType;
-	private Map<String, Integer> _bagsInside;
+	private final String _bagType;
+	private final Map<String, Integer> _bagsInside;
 
 	/**
 	 * Constructor
@@ -24,7 +24,7 @@ public class Rule {
 		_bagsInside = new HashMap<>();
 		if (!tokens[1].startsWith("no")) {
 			for (String contents : tokens[1].split(", ")) {
-				int amount = Integer.valueOf(contents.split(" ")[0]);
+				int amount = Integer.parseInt(contents.split(" ")[0]);
 				String name = contents.split(" ")[1] + " " + contents.split(" ")[2];
 				getBagsInside().put(name, amount);
 			}
@@ -35,7 +35,7 @@ public class Rule {
 	 * Returns true if this rule can contain a bag of the specific type.
 	 */
 	public boolean canContain(String bagType) {
-		return (getBagsInside().keySet().contains(bagType));
+		return (getBagsInside().containsKey(bagType));
 	}
 
 	/**

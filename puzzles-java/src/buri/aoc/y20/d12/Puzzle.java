@@ -24,7 +24,7 @@ public class Puzzle extends BasePuzzle {
 		assertRun(71504L, 0, true);
 	}
 
-	private static final Pair<Integer> ORIGIN = new Pair(0, 0);
+	private static final Pair<Integer> ORIGIN = new Pair<>(0, 0);
 
 	/**
 	 * Part 1:
@@ -43,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 			int facing = 0; // 0 = E, 90 = N, 180 = W, 270 = S
 			for (String line : input) {
 				char command = line.charAt(0);
-				int distance = Integer.valueOf(line.substring(1));
+				int distance = Integer.parseInt(line.substring(1));
 				if (command == 'L' || command == 'R') {
 					int orientation = (command == 'R' ? -1 : 1);
 					facing = Math.floorMod(facing + (distance * orientation), 360);
@@ -77,10 +77,10 @@ public class Puzzle extends BasePuzzle {
 			// F: Move ship towards waypoint by the given value.
 			// NSEW: Move waypoint in that direction by the given value.
 
-			Pair<Integer> waypoint = new Pair(10, -1);
+			Pair<Integer> waypoint = new Pair<>(10, -1);
 			for (String line : input) {
 				char command = line.charAt(0);
-				int distance = Integer.valueOf(line.substring(1));
+				int distance = Integer.parseInt(line.substring(1));
 				if (command == 'L' || command == 'R') {
 					int xOrientation = (command == 'R' ? -1 : 1);
 					int yOrientation = (command == 'L' ? -1 : 1);

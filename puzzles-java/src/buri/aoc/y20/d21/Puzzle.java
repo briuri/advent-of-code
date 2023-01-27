@@ -118,11 +118,11 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Print alphabetically by allergen
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (String allergen : canonicalList.keySet()) {
-			buffer.append(canonicalList.get(allergen)).append(",");
+			builder.append(canonicalList.get(allergen)).append(",");
 		}
 		// Remove last comma
-		return (buffer.substring(0, buffer.length() - 1));
+		return (builder.substring(0, builder.length() - 1));
 	}
 }

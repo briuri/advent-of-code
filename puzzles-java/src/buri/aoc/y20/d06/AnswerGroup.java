@@ -12,8 +12,8 @@ import java.util.Map;
  * @author Brian Uri!
  */
 public class AnswerGroup {
-	private int _size;
-	private Map<Character, Integer> _counts;
+	private final int _size;
+	private final Map<Character, Integer> _counts;
 
 	/**
 	 * Constructor
@@ -24,9 +24,7 @@ public class AnswerGroup {
 		for (String line : chunk) {
 			for (int i = 0; i < line.length(); i++) {
 				char value = line.charAt(i);
-				if (getCounts().get(value) == null) {
-					getCounts().put(value, 0);
-				}
+				getCounts().putIfAbsent(value, 0);
 				getCounts().put(value, getCounts().get(value) + 1);
 			}
 		}

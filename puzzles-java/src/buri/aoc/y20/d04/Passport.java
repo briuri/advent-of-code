@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * @author Brian Uri!
  */
 public class Passport {
-	private Map<String, String> _fields;
+	private final Map<String, String> _fields;
 
 	private static final Set<String> EYE_COLOR = new HashSet<>();
 	static {
@@ -67,7 +67,7 @@ public class Passport {
 			// If cm, the number must be at least 150 and at most 193.
 			// If in, the number must be at least 59 and at most 76.
 			String hgt = getFields().get("hgt");
-			Integer height = Integer.valueOf(hgt.substring(0, hgt.length() - 2));
+			int height = Integer.parseInt(hgt.substring(0, hgt.length() - 2));
 			if (hgt.endsWith("cm")) {
 				isValid = isValid && (height >= 150 && height <= 193);
 			}
@@ -101,7 +101,7 @@ public class Passport {
 	private boolean isValidYearRange(String key, int minInclusive, int maxInclusive) {
 		boolean isValid;
 		try {
-			Integer value = Integer.valueOf(getFields().get(key));
+			int value = Integer.parseInt(getFields().get(key));
 			isValid = (value >= minInclusive && value <= maxInclusive);
 		}
 		catch (NumberFormatException e) {

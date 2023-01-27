@@ -79,10 +79,7 @@ public class Puzzle extends BasePuzzle {
 		Set<Integer> ips = new HashSet<>();
 		int ip = 0;
 		int value = 0;
-		while (true) {
-			if (ips.contains(ip) || ip >= input.size()) {
-				break;
-			}
+		while (!ips.contains(ip) && ip < input.size()) {
 			ips.add(ip);
 
 			Instruction i = input.get(ip);
@@ -90,10 +87,10 @@ public class Puzzle extends BasePuzzle {
 				value += i.getArgument();
 				ip++;
 			}
-			else if (i.getOpcode()  == Opcode.JMP) {
+			else if (i.getOpcode() == Opcode.JMP) {
 				ip = ip + i.getArgument();
 			}
-			else if (i.getOpcode()  == Opcode.NOP) {
+			else if (i.getOpcode() == Opcode.NOP) {
 				ip++;
 			}
 		}

@@ -49,14 +49,14 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		if (part == Part.ONE) {
-			int earliest = Integer.valueOf(input.get(0));
+			int earliest = Integer.parseInt(input.get(0));
 			Map<Integer, Integer> earliestBusTimes = new HashMap<>();
 			for (Integer bus : indexesToIds.values()) {
 				int next = bus * (earliest / bus + 1);
 				earliestBusTimes.put(bus, next);
 			}
 			Map.Entry<Integer, Integer> min = PuzzleMath.getMin(earliestBusTimes);
-			return (min.getKey() * (min.getValue() - earliest));
+			return ((long) min.getKey() * (min.getValue() - earliest));
 		}
 
 		// Naive approach

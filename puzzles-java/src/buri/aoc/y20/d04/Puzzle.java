@@ -33,14 +33,14 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		List<Passport> list = new ArrayList<>();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (String line : input) {
 			if (line.length() > 0) {
-				buffer.append(" ").append(line);
+				builder.append(" ").append(line);
 			}
 			else {
-				list.add(new Passport(buffer.toString()));
-				buffer.setLength(0);
+				list.add(new Passport(builder.toString()));
+				builder.setLength(0);
 			}
 		}
 

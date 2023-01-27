@@ -45,12 +45,12 @@ public class Puzzle extends BasePuzzle {
 	protected long runLong(Part part, List<String> input) {
 		List<Tile> tiles = new ArrayList<>();
 		for (int i = 0; i < input.size(); i++) {
-			if (input.get(i).indexOf("Tile") != -1) {
-				int id = Integer.valueOf(input.get(i).split(" ")[1].split(":")[0]);
+			if (input.get(i).contains("Tile")) {
+				int id = Integer.parseInt(input.get(i).split(" ")[1].split(":")[0]);
 				i++;
 
 				String nextLine = input.get(i);
-				CharGrid grid = new CharGrid(new Pair(Tile.TILE_SIZE, Tile.TILE_SIZE));
+				CharGrid grid = new CharGrid(new Pair<>(Tile.TILE_SIZE, Tile.TILE_SIZE));
 				int y = 0;
 				while (!nextLine.isEmpty()) {
 					for (int x = 0; x < Tile.TILE_SIZE; x++) {
@@ -78,7 +78,7 @@ public class Puzzle extends BasePuzzle {
 
 		// Assemble the image by starting with the first tile and finding its neighbors.
 		Map<Pair<Integer>, Tile> imageBoard = new HashMap<>();
-		Pair<Integer> center = new Pair(0, 0);
+		Pair<Integer> center = new Pair<>(0, 0);
 		imageBoard.put(center, start);
 		findNeighbors(imageBoard, permutations, start, center);
 
@@ -97,21 +97,21 @@ public class Puzzle extends BasePuzzle {
 		if (part == Part.ONE) {
 			// Multiply the corner values.
 			long product = 1L;
-			product *= imageBoard.get(new Pair(minX, minY)).getId();
-			product *= imageBoard.get(new Pair(maxX, minY)).getId();
-			product *= imageBoard.get(new Pair(minX, maxY)).getId();
-			product *= imageBoard.get(new Pair(maxX, maxY)).getId();
+			product *= imageBoard.get(new Pair<>(minX, minY)).getId();
+			product *= imageBoard.get(new Pair<>(maxX, minY)).getId();
+			product *= imageBoard.get(new Pair<>(minX, maxY)).getId();
+			product *= imageBoard.get(new Pair<>(maxX, maxY)).getId();
 			return (product);
 		}
 
 		// Create a new tile containing all of the cropped ones.
-		Tile stitchedTile = new Tile(imageBoard, new Pair(minX, minY), maxX - minX + 1);
+		Tile stitchedTile = new Tile(imageBoard, new Pair<>(minX, minY), maxX - minX + 1);
 
 		// Only one of the orientations will have monsters in it.
 		for (Tile permutation : stitchedTile.getPermutations()) {
 			int monsterCount = countMonsters(permutation);
 			if (monsterCount > 0) {
-				return (permutation.getGrid().count('#') - (monsterCount * MONSTER_SIZE));
+				return (permutation.getGrid().count('#') - ((long) monsterCount * MONSTER_SIZE));
 			}
 		}
 		throw new RuntimeException("Found no monsters.");

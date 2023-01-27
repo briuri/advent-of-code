@@ -44,7 +44,7 @@ public class Puzzle extends BasePuzzle {
 		Cup first = null;
 		Cup left = null;
 		for (int i = 0; i < input.get(0).length(); i++) {
-			Cup cup = new Cup(Integer.valueOf(String.valueOf(input.get(0).charAt(i))));
+			Cup cup = new Cup(Integer.parseInt(String.valueOf(input.get(0).charAt(i))));
 			addCup(cups, cup, left);
 			left = cup;
 			if (first == null) {
@@ -84,13 +84,13 @@ public class Puzzle extends BasePuzzle {
 			current = current.getNext();
 		}
 		if (part == Part.ONE) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder builder = new StringBuilder();
 			Cup next = cups.get(1).getNext();
 			while (next.getValue() != 1) {
-				buffer.append(next.getValue());
+				builder.append(next.getValue());
 				next = next.getNext();
 			}
-			return (buffer.toString());
+			return (builder.toString());
 		}
 		Cup next = cups.get(1).getNext();
 		BigInteger factor1 = PuzzleMath.toBigInt(next.getValue());

@@ -6,14 +6,14 @@ package buri.aoc.y20.d08;
  * @author Brian Uri!
  */
 public class Instruction {
-	private Opcode _opcode;
-	private int _argument;
+	private final Opcode _opcode;
+	private final int _argument;
 
 	/**
 	 * Constructor
 	 */
 	public Instruction(String line) {
-		this(line.split(" ")[0], Integer.valueOf(line.split(" ")[1]));
+		this(line.split(" ")[0], Integer.parseInt(line.split(" ")[1]));
 	}
 
 	/**
