@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
  */
 public class Puzzle {
 	private final String _title;
-	private List<String> _globalNames = new ArrayList<>();
+	private final List<String> _globalNames = new ArrayList<>();
 
 	/**
 	 * Constructor
@@ -22,8 +21,8 @@ public class Puzzle {
 	public Puzzle(ObjectNode puzzleNode) {
 		_title = puzzleNode.get("title").asText();
 		if (puzzleNode.get("globalNames") != null) {
-			for (Iterator<JsonNode> iterator = puzzleNode.get("globalNames").iterator(); iterator.hasNext();) {
-				_globalNames.add(iterator.next().asText());
+			for (JsonNode jsonNode : puzzleNode.get("globalNames")) {
+				_globalNames.add(jsonNode.asText());
 			}
 		}
 	}

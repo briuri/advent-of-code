@@ -67,6 +67,7 @@ public abstract class BaseLeaderboard {
 	 */
 	private void readPuzzleMetadata() {
 		JsonNode json = readJson("puzzles.json");
+		assert json != null;
 		for (String year : YEARS) {
 			List<Puzzle> puzzles = new ArrayList<>();
 			ArrayNode puzzleJson = (ArrayNode) json.get(year);
@@ -82,6 +83,7 @@ public abstract class BaseLeaderboard {
 	 */
 	private void readCompanyMetadata() {
 		JsonNode json = readJson("company.json");
+		assert json != null;
 		for (String year : YEARS) {
 			String divisionLabel = json.get("divisionLabel").get(year).asText();
 			String rules = json.get("rules").get(year).asText();
@@ -113,6 +115,7 @@ public abstract class BaseLeaderboard {
 		Map<String, Object> leaderboardJson;
 		try {
 			JsonNode json = readJson(year + ".json");
+			assert json != null;
 			leaderboardJson = mapper.readValue(json.get("members").toString(),
 				new TypeReference<Map<String, Object>>() {});
 
@@ -147,7 +150,7 @@ public abstract class BaseLeaderboard {
 				continue;
 			}
 			// For some reason, "Manuel \"DZ\" Dominguez" doesn't work as a key in the alternateNames map.
-			if (year.equals("2022") && name.indexOf("\"DZ\"") != -1) {
+			if (year.equals("2022") && name.contains("\"DZ\"")) {
 				name = "Manuel Dominguez";
 			}
 			Map<String, Object> puzzleData = (Map) member.get("completion_day_level");

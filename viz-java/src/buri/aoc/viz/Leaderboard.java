@@ -140,9 +140,9 @@ public class Leaderboard extends BaseLeaderboard {
 	}
 
 	/**
-	 * Looks up the alternate name of the player, if available, and also obfuscates name to deter robots.
+	 * Obfuscates name to deter robots.
 	 */
-	private String maskName(String year, String name) {
+	private String maskName(String name) {
 		StringBuilder builder = new StringBuilder(name);
 		int index = builder.indexOf(" ");
 		int maskPoint = 3;
@@ -237,7 +237,7 @@ public class Leaderboard extends BaseLeaderboard {
 			if (isIneligible) {
 				page.append("<span class=\"ineligible\" title=\"Not eligible for prizes\">");
 			}
-			page.append(maskName(year, player.getName()));
+			page.append(maskName(player.getName()));
 			if (!showAll) {
 				page.append(company.getDivisionFor(player.getName(), true));
 			}
@@ -303,7 +303,8 @@ public class Leaderboard extends BaseLeaderboard {
 
 			// Break overall scores into two columns for > Top 10.
 			if (numOverall > 10 && (i == (numOverall + 1) / 2 - 1)) {
-				page.append("</ol>\n</div>\n<div class=\"overall\">\n<ol start=\"").append(i + 2 - tieCount).append("\">\n");
+				page.append("</ol>\n</div>\n<div class=\"overall\">\n");
+				page.append("<ol start=\"").append(i + 2 - tieCount).append("\">\n");
 			}
 		}
 		page.append("</ol></div>\n<div class=\"clear\"></div>\n");
@@ -339,7 +340,8 @@ public class Leaderboard extends BaseLeaderboard {
 		}
 
 		StringBuilder page = getPage();
-		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numOverall).append(" Overall by ").append(company.getDivisionLabel()).append("</h2>\n");
+		page.append("\n\t<a name=\"division\"></a><h2>Top ").append(numOverall).append(" Overall by ");
+		page.append(company.getDivisionLabel()).append("</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<div id=\"chartDivisions\"></div>\n");
 		page.append("\t<script type=\"text/javascript\">\n");
@@ -497,7 +499,8 @@ public class Leaderboard extends BaseLeaderboard {
 	private void insertLatestDay(String year, PuzzleTimes puzzleTimes) {
 		StringBuilder page = getPage();
 		page.append("<div class=\"daily\">\n");
-		page.append("<span class=\"rankingsLink\"><a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
+		page.append("<span class=\"rankingsLink\">");
+		page.append("<a href=\"").append(CURRENT_YEAR).append("-top.html\">See Overall Rankings</a></span>");
 		page.append("\t<h2>Latest Puzzle</h2>\n");
 		page.append(readLastModified(year, CURRENT_YEAR));
 		page.append("\t<p><a href=\"javascript:void(0);\">\n");
@@ -508,13 +511,11 @@ public class Leaderboard extends BaseLeaderboard {
 		for (int i = TOTAL_PUZZLES - 1; i >= 0; i--) {
 			List<PuzzleTime> places = new ArrayList<>(puzzleTimes.getTimes(TimeType.TOTAL).get(i));
 			if (!places.isEmpty()) {
-				// Show console message for most recent total solve recorded on most recent day, and total number of stars.
+				// Show console message for most recent total solve on most recent day, and total number of stars.
 				PuzzleTime mostRecent = places.get(places.size() - 1);
-				StringBuilder alert = new StringBuilder();
-				alert.append("\t(").append(puzzleTimes.getStars()).append(" stars) - ");
-				alert.append("Day ").append(i + 1).append(": ").append(places.size()).append(".");
-				alert.append(PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true).replace("&nbsp;", " ")).append(" ");
-				alert.append(mostRecent.getName()).append("\n");
+				String time = PuzzleTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true);
+				String alert = "\t(" + puzzleTimes.getStars() + " stars) - " + "Day " + (i + 1) + ": " + places.size()
+						+ "." + time.replace("&nbsp;", " ") + " " + mostRecent.getName() + "\n";
 				System.out.println(alert);
 			}
 			places.addAll(puzzleTimes.getTimes(TimeType.ONE).get(i));
@@ -560,7 +561,8 @@ public class Leaderboard extends BaseLeaderboard {
 			insertSplitTime(record.getTime(TimeType.TWO), bestPart2);
 			page.append("</span>");
 			Long totalTime = record.getTime(TimeType.TOTAL);
-			page.append("<span class=\"dT\">").append(PuzzleTime.formatTime(totalTime, true)).append("</span>");
+			page.append("<span class=\"dT\">").append(PuzzleTime.formatTime(totalTime, true));
+			page.append("</span>");
 
 			// Show global indicator and player name
 			page.append("&nbsp;");
@@ -572,7 +574,7 @@ public class Leaderboard extends BaseLeaderboard {
 			else {
 				page.append("&nbsp;");
 			}
-			page.append(maskName(year, record.getName()));
+			page.append(maskName(record.getName()));
 
 			Long nextTime = (place + 1 < places.size() ? places.get(place + 1).getTime(TimeType.TOTAL) : null);
 			isNextTie = (totalTime != null && totalTime.equals(nextTime));
