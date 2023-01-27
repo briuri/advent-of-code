@@ -2,7 +2,7 @@ package buri.aoc.y16.d20;
 
 /**
  * Base class for an X-to-Y range (inclusive).
- * 
+ *
  * @author Brian Uri!
  */
 public class Range implements Comparable<Range> {
@@ -10,15 +10,10 @@ public class Range implements Comparable<Range> {
 	private Long _max;
 
 	/**
-	 * Base constructor
-	 */
-	protected Range() {}
-
-	/**
 	 * String-based Constructor with format "x-y"
 	 */
 	public Range(String data) {
-		String tokens[] = data.split("-");
+		String[] tokens = data.split("-");
 		_min = Long.valueOf(tokens[0]);
 		_max = Long.valueOf(tokens[1]);
 	}
@@ -56,15 +51,13 @@ public class Range implements Comparable<Range> {
 	@Override
 	public int hashCode() {
 		int result = Long.hashCode(getMin());
-		result = 7 * Long.hashCode(getMax());
+		result += 7 * Long.hashCode(getMax());
 		return (result);
 	}
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getMin()).append("-").append(getMax());
-		return (buffer.toString());
+		return (getMin() + "-" + getMax());
 	}
 
 	/**

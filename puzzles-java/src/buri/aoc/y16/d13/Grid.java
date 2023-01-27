@@ -7,7 +7,6 @@ import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,21 +21,16 @@ public class Grid extends CharGrid {
 	private static final char OPEN = '.';
 	private static final char START = 'O';
 
-	private static final Pair START_POSITION = new Pair(1, 1);
+	private static final Pair<Integer> START_POSITION = new Pair<>(1, 1);
 
 	private final StepStrategy<Pair<Integer>> STEP_STRATEGY = new StepStrategy<Pair<Integer>>() {
 		@Override
 		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
-			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Pair<Integer> position = iterator.next();
-				// Remove out of bounds or walls.
-				if (position.getX() < 0 || position.getX() >= getWidth()
+			// Remove out of bounds or walls.
+			nextSteps.removeIf(position -> position.getX() < 0 || position.getX() >= getWidth()
 					|| position.getY() < 0 || position.getY() >= getHeight()
-					|| get(position) == WALL) {
-					iterator.remove();
-				}
-			}
+					|| get(position) == WALL);
 			return (nextSteps);
 		}
 	};
@@ -45,7 +39,7 @@ public class Grid extends CharGrid {
 	 * Constructor
 	 */
 	public Grid(int magicNumber) {
-		super(new Pair(50, 50));
+		super(new Pair<>(50, 50));
 		for (int y = 0; y < getHeight(); y++) {
 			for (int x = 0; x < getWidth(); x++) {
 				int interim = (x * x) + (3 * x) + (2 * x * y) + y + (y * y) + magicNumber;
@@ -80,7 +74,7 @@ public class Grid extends CharGrid {
 			for (int x = 0; x < getWidth(); x++) {
 				char value = get(x, y);
 				if (value == OPEN) {
-					destinations.add(new Pair(x, y));
+					destinations.add(new Pair<>(x, y));
 				}
 			}
 		}

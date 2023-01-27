@@ -49,13 +49,13 @@ public class Puzzle extends BasePuzzle {
 				// Parse the marker.
 				int closeMarker = input.indexOf(")", openMarker);
 				String[] marker = input.substring(openMarker + 1, closeMarker).split("x");
-				int length = Integer.valueOf(marker[0]);
-				int times = Integer.valueOf(marker[1]);
+				int length = Integer.parseInt(marker[0]);
+				int times = Integer.parseInt(marker[1]);
 
 				// Calculate the length of the current segment.
 				totalLength += openMarker - current;
 				if (part == Part.ONE) {
-					totalLength += (length * times);
+					totalLength += ((long) length * times);
 				}
 				else {
 					String nestedInput = input.substring(closeMarker + 1, closeMarker + 1 + length);

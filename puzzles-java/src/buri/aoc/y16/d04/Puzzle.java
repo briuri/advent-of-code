@@ -70,7 +70,7 @@ public class Puzzle extends BasePuzzle {
 	private static int getSectorId(String room) {
 		int start = room.lastIndexOf('-') + 1;
 		int end = room.indexOf('[');
-		return Integer.valueOf(room.substring(start, end));
+		return Integer.parseInt(room.substring(start, end));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Puzzle extends BasePuzzle {
 	private static String decryptName(String room) {
 		String name = room.substring(0, room.lastIndexOf('-'));
 		int sectorId = getSectorId(room);
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (Character value : name.toCharArray()) {
 			if (value != '-') {
 				// a - z = 97 - 122
@@ -93,8 +93,8 @@ public class Puzzle extends BasePuzzle {
 				}
 				value = (char) next;
 			}
-			buffer.append(value);
+			builder.append(value);
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

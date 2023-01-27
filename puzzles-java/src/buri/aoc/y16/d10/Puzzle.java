@@ -43,17 +43,17 @@ public class Puzzle extends BasePuzzle {
 		for (String line : input) {
 			String[] tokens = line.split(" ");
 			if (tokens[0].equals("value")) {
-				int value = Integer.valueOf(tokens[1]);
-				int bot = Integer.valueOf(tokens[5]);
+				int value = Integer.parseInt(tokens[1]);
+				int bot = Integer.parseInt(tokens[5]);
 				bots.get(bot).addValue(value);
 			}
 			else if (tokens[0].equals("bot")) {
-				int bot = Integer.valueOf(tokens[1]);
-				int lowTarget = Integer.valueOf(tokens[6]);
+				int bot = Integer.parseInt(tokens[1]);
+				int lowTarget = Integer.parseInt(tokens[6]);
 				if (tokens[5].equals("output")) {
 					lowTarget = (lowTarget * -1) - 1;
 				}
-				int highTarget = Integer.valueOf(tokens[11]);
+				int highTarget = Integer.parseInt(tokens[11]);
 				if (tokens[10].equals("output")) {
 					highTarget = (highTarget * -1) - 1;
 				}
@@ -92,7 +92,7 @@ public class Puzzle extends BasePuzzle {
 		}
 
 		// Part TWO
-		return (output.get(0) * output.get(1) * output.get(2));
+		return ((long) output.get(0) * output.get(1) * output.get(2));
 	}
 
 	/**

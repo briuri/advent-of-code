@@ -31,25 +31,29 @@ public class Registers extends NamedRegisters {
 			String[] code = input.get(i).split(" ");
 			String opcode = code[0];
 
-			if (opcode.equals("cpy")) {
-				String registerOrValue = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
-				System.out.println(String.format("%d\treg[%s] = " + registerOrValue, i, code[2], code[1]));
-			}
-			else if (opcode.equals("out")) {
-				String registerOrValue = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
-				System.out.println(String.format("%d\ttransmit " + registerOrValue, i, code[1]));
-			}
-			else if (opcode.equals("inc")) {
-				System.out.println(String.format("%d\treg[%s] += 1", i, code[1]));
-			}
-			else if (opcode.equals("dec")) {
-				System.out.println(String.format("%d\treg[%s] -= 1", i, code[1]));
-			}
-			else if (opcode.equals("jnz")) {
-				String registerOrValueCondition = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
-				String registerOrValueJump = (code[2].matches(REGISTER) ? "reg[%s]" : "%s");
-				System.out.println(String.format("%d\tif (" + registerOrValueCondition + " != 0) then goto (%d + "
-					+ registerOrValueJump + ")", i, code[1], i, code[2]));
+			switch (opcode) {
+				case "cpy": {
+					String registerOrValue = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
+					System.out.printf("%d\treg[%s] = " + registerOrValue + "%n", i, code[2], code[1]);
+					break;
+				}
+				case "out": {
+					String registerOrValue = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
+					System.out.printf("%d\ttransmit " + registerOrValue + "%n", i, code[1]);
+					break;
+				}
+				case "inc":
+					System.out.printf("%d\treg[%s] += 1%n", i, code[1]);
+					break;
+				case "dec":
+					System.out.printf("%d\treg[%s] -= 1%n", i, code[1]);
+					break;
+				case "jnz":
+					String registerOrValueCondition = (code[1].matches(REGISTER) ? "reg[%s]" : "%s");
+					String registerOrValueJump = (code[2].matches(REGISTER) ? "reg[%s]" : "%s");
+					System.out.printf("%d\tif (" + registerOrValueCondition + " != 0) then goto (%d + "
+							+ registerOrValueJump + ")%n", i, code[1], i, code[2]);
+					break;
 			}
 		}
 	}
@@ -58,10 +62,7 @@ public class Registers extends NamedRegisters {
 	 * Processes all instructions.
 	 */
 	public void process() {
-		while (true) {
-			if (!isWithinInstructions()) {
-				break;
-			}
+		while (isWithinInstructions()) {
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
 			if (tokens[0].equals("cpy")) {
 				if (!tokens[2].matches("[a-d]")) {

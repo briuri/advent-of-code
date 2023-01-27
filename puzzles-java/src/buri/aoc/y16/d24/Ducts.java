@@ -8,7 +8,6 @@ import buri.aoc.common.data.path.StepStrategy;
 import buri.aoc.common.data.tuple.Pair;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ import java.util.Map;
  */
 public class Ducts extends CharGrid {
 
-	private Map<Integer, Pair> _destinations;
+	private final Map<Integer, Pair<Integer>> _destinations;
 
 	private static final char OPEN = '.';
 
@@ -27,15 +26,10 @@ public class Ducts extends CharGrid {
 		@Override
 		public List<Pair<Integer>> getNextSteps(Pair<Integer> current) {
 			List<Pair<Integer>> nextSteps = current.getAdjacent();
-			for (Iterator<Pair<Integer>> iterator = nextSteps.iterator(); iterator.hasNext();) {
-				Pair<Integer> position = iterator.next();
-				// Remove out of bounds or walls.
-				if (position.getX() < 0 || position.getX() >= getWidth()
+			// Remove out of bounds or walls.
+			nextSteps.removeIf(position -> position.getX() < 0 || position.getX() >= getWidth()
 					|| position.getY() < 0 || position.getY() >= getHeight()
-					|| get(position) != OPEN) {
-					iterator.remove();
-				}
-			}
+					|| get(position) != OPEN);
 			return (nextSteps);
 		}
 	};
@@ -44,7 +38,7 @@ public class Ducts extends CharGrid {
 	 * Constructor
 	 */
 	public Ducts(List<String> input) {
-		super(new Pair(input.get(0).length(), input.size()));
+		super(new Pair<>(input.get(0).length(), input.size()));
 		_destinations = new HashMap<>();
 		for (int y = 0; y < input.size(); y++) {
 			String line = input.get(y);
@@ -52,7 +46,7 @@ public class Ducts extends CharGrid {
 				char value = line.charAt(x);
 				if (value >= '0' && value <= '9') {
 					set(x, y, OPEN);
-					getDestinations().put(Character.getNumericValue(value), new Pair(x, y));
+					getDestinations().put(Character.getNumericValue(value), new Pair<>(x, y));
 				}
 				else {
 					set(x, y, value);
@@ -66,8 +60,8 @@ public class Ducts extends CharGrid {
 	 */
 	public int getFewestSteps(Part part) {
 		// Do all the traversal for path-building upfront.
-		Map<Pair, Map<Pair<Integer>, Pair<Integer>>> cameFroms = new HashMap<>();
-		for (Pair start : getDestinations().values()) {
+		Map<Pair<Integer>, Map<Pair<Integer>, Pair<Integer>>> cameFroms = new HashMap<>();
+		for (Pair<Integer> start : getDestinations().values()) {
 			cameFroms.put(start, Pathfinder.breadthFirstSearch(start, STEP_STRATEGY));
 		}
 
@@ -78,11 +72,7 @@ public class Ducts extends CharGrid {
 		}
 		List<Integer[]> permutations = Permutations.getPermutations(order);
 		// Remove any that don't start at 0.
-		for (Iterator<Integer[]> iterator = permutations.iterator(); iterator.hasNext();) {
-			if (iterator.next()[0] != 0) {
-				iterator.remove();
-			}
-		}
+		permutations.removeIf(integers -> integers[0] != 0);
 
 		// Compute path for all permutations that start at 0.
 		int shortestPath = Integer.MAX_VALUE;
@@ -121,7 +111,7 @@ public class Ducts extends CharGrid {
 	/**
 	 * Accessor for the destinations
 	 */
-	private Map<Integer, Pair> getDestinations() {
+	private Map<Integer, Pair<Integer>> getDestinations() {
 		return _destinations;
 	}
 }

@@ -32,11 +32,11 @@ public class Puzzle extends BasePuzzle {
 	 * What is the error-corrected version of the message being sent using the least frequent letters?
 	 */
 	protected String runString(Part part, List<String> input) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < input.get(0).length(); i++) {
-			buffer.append(getFrequencyChar(part, i, input));
+			builder.append(getFrequencyChar(part, i, input));
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

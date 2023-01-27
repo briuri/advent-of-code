@@ -43,7 +43,7 @@ public class Puzzle extends BasePuzzle {
 			process(letters, command, part == Part.TWO);
 		}
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (Character letter : letters) {
 			buffer.append(letter);
 		}
@@ -58,8 +58,8 @@ public class Puzzle extends BasePuzzle {
 		if (tokens[0].equals("swap")) {
 			// swap position X with position Y (symmetric)
 			if (tokens[1].equals("position")) {
-				int from = Integer.valueOf(tokens[2]);
-				int to = Integer.valueOf(tokens[5]);
+				int from = Integer.parseInt(tokens[2]);
+				int to = Integer.parseInt(tokens[5]);
 				char fromValue = letters.get(from);
 				char toValue = letters.get(to);
 				letters.set(from, toValue);
@@ -75,8 +75,8 @@ public class Puzzle extends BasePuzzle {
 		}
 		// reverse positions X through Y (symmetric)
 		else if (tokens[0].equals("reverse")) {
-			int from = Integer.valueOf(tokens[2]);
-			int to = Integer.valueOf(tokens[4]) + 1;
+			int from = Integer.parseInt(tokens[2]);
+			int to = Integer.parseInt(tokens[4]) + 1;
 			List<Character> subset = letters.subList(from, to);
 			Collections.reverse(subset);
 			for (int i = from; i < to; i++) {
@@ -112,7 +112,7 @@ public class Puzzle extends BasePuzzle {
 		}
 		// rotate left/right X steps (asymmetric)
 		else if (tokens[0].equals("rotate")) {
-			int rotation = Integer.valueOf(tokens[2]);
+			int rotation = Integer.parseInt(tokens[2]);
 			if (tokens[1].equals("left")) {
 				rotation = -1 * rotation;
 			}

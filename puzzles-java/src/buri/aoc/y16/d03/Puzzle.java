@@ -32,9 +32,9 @@ public class Puzzle extends BasePuzzle {
 		int possible = 0;
 		if (part == Part.ONE) {
 			for (String triangle : input) {
-				int a = Integer.valueOf(triangle.substring(0, 5).trim());
-				int b = Integer.valueOf(triangle.substring(5, 10).trim());
-				int c = Integer.valueOf(triangle.substring(10, triangle.length()).trim());
+				int a = Integer.parseInt(triangle.substring(0, 5).trim());
+				int b = Integer.parseInt(triangle.substring(5, 10).trim());
+				int c = Integer.parseInt(triangle.substring(10).trim());
 				if (isPossibleTriangle(a, b, c)) {
 					possible++;
 				}
@@ -43,9 +43,9 @@ public class Puzzle extends BasePuzzle {
 		else {
 			for (int i = 0; i < input.size(); i = i + 3) {
 				for (int j = 0; j < 3; j++) {
-					int a = Integer.valueOf(input.get(i).substring(5 * j, 5 * (j + 1)).trim());
-					int b = Integer.valueOf(input.get(i + 1).substring(5 * j, 5 * (j + 1)).trim());
-					int c = Integer.valueOf(input.get(i + 2).substring(5 * j, 5 * (j + 1)).trim());
+					int a = Integer.parseInt(input.get(i).substring(5 * j, 5 * (j + 1)).trim());
+					int b = Integer.parseInt(input.get(i + 1).substring(5 * j, 5 * (j + 1)).trim());
+					int c = Integer.parseInt(input.get(i + 2).substring(5 * j, 5 * (j + 1)).trim());
 					if (isPossibleTriangle(a, b, c)) {
 						possible++;
 					}

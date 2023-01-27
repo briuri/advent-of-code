@@ -47,7 +47,7 @@ public class Puzzle extends BasePuzzle {
 		Collections.sort(ranges);
 
 		if (part == Part.ONE) {
-			// Return first value outside of the lowest range
+			// Return first value outside the lowest range
 			return (ranges.get(0).getMax() + 1);
 		}
 

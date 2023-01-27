@@ -4,7 +4,7 @@ package buri.aoc.y16.d18;
  * @author Brian Uri!
  */
 public class Grid {
-	private Character[][] _grid;
+	private final Character[][] _grid;
 	private static final char TRAP = '^';
 	private static final char SAFE = '.';
 
@@ -22,7 +22,7 @@ public class Grid {
 	/**
 	 * Let's call these three tiles from the previous row the left, center, and right tiles, respectively. Then, a new
 	 * tile is a trap only in one of the following situations:
-	 * 
+	 *
 	 * - Its left and center tiles are traps, but its right tile is not.
 	 * - Its center and right tiles are traps, but its left tile is not.
 	 * - Only its left tile is a trap.
@@ -31,9 +31,9 @@ public class Grid {
 	private void fillRows() {
 		for (int y = 1; y < getGrid()[0].length; y++) {
 			for (int x = 0; x < getGrid().length; x++) {
-				boolean leftIsTrap = (x == 0 ? false : getGrid()[x - 1][y - 1] == TRAP);
+				boolean leftIsTrap = (x != 0 && getGrid()[x - 1][y - 1] == TRAP);
 				boolean centerIsTrap = (getGrid()[x][y - 1] == TRAP);
-				boolean rightIsTrap = (x == getGrid().length - 1 ? false : getGrid()[x + 1][y - 1] == TRAP);
+				boolean rightIsTrap = (x != getGrid().length - 1 && getGrid()[x + 1][y - 1] == TRAP);
 				boolean isTrap = (leftIsTrap && centerIsTrap && !rightIsTrap);
 				isTrap = isTrap || (!leftIsTrap && centerIsTrap && rightIsTrap);
 				isTrap = isTrap || (leftIsTrap && !centerIsTrap && !rightIsTrap);

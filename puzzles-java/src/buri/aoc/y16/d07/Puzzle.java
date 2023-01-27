@@ -45,8 +45,8 @@ public class Puzzle extends BasePuzzle {
 	 * Returns true if the rules for TLS are obeyed.
 	 */
 	public static boolean supportsTLS(String fullIP) {
-		List<String> supernets = new ArrayList<String>();
-		List<String> hypernets = new ArrayList<String>();
+		List<String> supernets = new ArrayList<>();
+		List<String> hypernets = new ArrayList<>();
 		chunkIP(fullIP, supernets, hypernets);
 		for (String hypernet : hypernets) {
 			if (hasABBA(hypernet)) {
@@ -65,8 +65,8 @@ public class Puzzle extends BasePuzzle {
 	 * Returns true if the rules for SSL are obeyed.
 	 */
 	public static boolean supportsSSL(String fullIP) {
-		List<String> supernets = new ArrayList<String>();
-		List<String> hypernets = new ArrayList<String>();
+		List<String> supernets = new ArrayList<>();
+		List<String> hypernets = new ArrayList<>();
 		chunkIP(fullIP, supernets, hypernets);
 		List<String> abas = getABAs(supernets);
 		for (String aba : abas) {
@@ -84,7 +84,7 @@ public class Puzzle extends BasePuzzle {
 		String[] partialSplit = fullIP.split("\\[");
 		supernets.add(partialSplit[0]);
 		for (int i = 1; i < partialSplit.length; i++) {
-			String[] fullSplit = partialSplit[i].split("\\]");
+			String[] fullSplit = partialSplit[i].split("]");
 			hypernets.add(fullSplit[0]);
 			supernets.add(fullSplit[1]);
 		}
@@ -95,7 +95,7 @@ public class Puzzle extends BasePuzzle {
 	 * by the reverse of that pair.
 	 */
 	private static boolean hasABBA(String string) {
-		StringBuffer back = new StringBuffer();
+		StringBuilder back = new StringBuilder();
 		for (int i = 0; i < string.length() - 3; i++) {
 			String front = string.substring(i, i + 2);
 			back.replace(0, 2, string.substring(i + 2, i + 4)).reverse();
@@ -110,9 +110,9 @@ public class Puzzle extends BasePuzzle {
 	 * Searches the supernets for all ABA patterns and returns a list of them.
 	 */
 	private static List<String> getABAs(List<String> supernets) {
-		List<String> abas = new ArrayList<String>();
+		List<String> abas = new ArrayList<>();
 		for (String supernet : supernets) {
-			StringBuffer back = new StringBuffer();
+			StringBuilder back = new StringBuilder();
 			for (int i = 0; i < supernet.length() - 2; i++) {
 				String front = supernet.substring(i, i + 2);
 				back.replace(0, 2, supernet.substring(i + 1, i + 3)).reverse();
@@ -128,7 +128,7 @@ public class Puzzle extends BasePuzzle {
 	 * Searches for the paired BAB pattern in all the hypernets and returns true if found.
 	 */
 	private static boolean hasBAB(List<String> hypernets, String aba) {
-		String bab = aba.substring(1, 3) + aba.substring(1, 2);
+		String bab = aba.substring(1, 3) + aba.charAt(1);
 		for (String hypernet : hypernets) {
 			if (hypernet.contains(bab)) {
 				return (true);

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Keypad extends IntGrid {
 
-	private Pair<Integer> _current;
+	private final Pair<Integer> _current;
 
 	/**
 	 * Constructor
@@ -21,7 +21,7 @@ public class Keypad extends IntGrid {
 	 * Models both layouts of keypad in a 7x7 grid (0 represents an edge). Both layouts start at the "5" button.
 	 */
 	public Keypad(Part part) {
-		super(new Pair(7, 7));
+		super(new Pair<>(7, 7));
 		if (part == Part.ONE) {
 			getGrid()[0] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
 			getGrid()[1] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
@@ -30,7 +30,7 @@ public class Keypad extends IntGrid {
 			getGrid()[4] = new Integer[] { 0, 0, 3, 6, 9, 0, 0 };
 			getGrid()[5] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
 			getGrid()[6] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
-			_current = new Pair(3, 3);
+			_current = new Pair<>(3, 3);
 		}
 		else {
 			getGrid()[0] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
@@ -40,7 +40,7 @@ public class Keypad extends IntGrid {
 			getGrid()[4] = new Integer[] { 0, 0, 4, 8, 12, 0, 0 };
 			getGrid()[5] = new Integer[] { 0, 0, 0, 9, 0, 0, 0 };
 			getGrid()[6] = new Integer[] { 0, 0, 0, 0, 0, 0, 0 };
-			_current = new Pair(1, 3);
+			_current = new Pair<>(1, 3);
 		}
 	}
 
@@ -49,7 +49,7 @@ public class Keypad extends IntGrid {
 	 * a button.
 	 */
 	public String getButtons(List<String> input) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (String line : input) {
 			for (char direction : line.toCharArray()) {
 				int x = getCurrent().getX();
@@ -77,9 +77,9 @@ public class Keypad extends IntGrid {
 				}
 			}
 			String hexString = Integer.toHexString(get(getCurrent()));
-			buffer.append(hexString.toUpperCase());
+			builder.append(hexString.toUpperCase());
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class Puzzle extends BasePuzzle {
 		String passcode = input.get(0);
 		Position start = new Position(0, 0, passcode);
 
-		// Generate breadth first mapping to find shortest paths to all points.
+		// Generate breadth first mapping to find the shortest paths to all points.
 		Map<Position, Position> cameFrom = Pathfinder.breadthFirstSearch(start, Position.STEP_STRATEGY);
 
 		if (part == Part.ONE) {

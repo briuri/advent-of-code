@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class State {
 
-	private String _state;
-	private int _pairs;
-	private int _currentFloor;
+	private final String _state;
+	private final int _pairs;
+	private final int _currentFloor;
 
 	/**
 	 * Constructor
@@ -56,7 +56,7 @@ public class State {
 		List<State> states = new ArrayList<>();
 		// Elevator can go up or down 1 floor.
 		for (Integer nextFloor : getNextElevatorFloors()) {
-			Character nextFloorChar = Character.forDigit(nextFloor, 10);
+			char nextFloorChar = Character.forDigit(nextFloor, 10);
 			List<Integer> generatorsNext = getGeneratorsOnFloor(nextFloor);
 			List<Integer> chipsNext = getChipsOnFloor(nextFloor);
 
@@ -84,7 +84,7 @@ public class State {
 
 			// Elevator can move 2 chips if they won't fry on next floor.
 			for (List<Integer> chipIds : Permutations.getPairPermutations(chipsHere)) {
-				if (areChipsAllowedNear(chipIds, generatorsNext, chipsNext)) {
+				if (areChipsAllowedNear(chipIds, generatorsNext)) {
 					StringBuilder builder = new StringBuilder(getState());
 					builder.setCharAt(0, nextFloorChar);
 					builder.setCharAt(toChipIndex(chipIds.get(0)), nextFloorChar);
@@ -105,7 +105,7 @@ public class State {
 
 			// Elevator can move 1 chip if it won't fry on next floor.
 			for (Integer chipId : chipsHere) {
-				if (isChipAllowedNear(chipId, generatorsNext, chipsNext)) {
+				if (isChipAllowedNear(chipId, generatorsNext)) {
 					StringBuilder builder = new StringBuilder(getState());
 					builder.setCharAt(0, nextFloorChar);
 					builder.setCharAt(toChipIndex(chipId), nextFloorChar);
@@ -170,10 +170,10 @@ public class State {
 	/**
 	 * Checks if a chip is allowed near generators.
 	 */
-	private static boolean isChipAllowedNear(int chipId, List<Integer> generatorsNext, List<Integer> chipsNext) {
+	private static boolean isChipAllowedNear(int chipId, List<Integer> generatorsNext) {
 		List<Integer> chipIds = new ArrayList<>();
 		chipIds.add(chipId);
-		return (areChipsAllowedNear(chipIds, generatorsNext, chipsNext));
+		return (areChipsAllowedNear(chipIds, generatorsNext));
 	}
 
 	/**
@@ -196,8 +196,7 @@ public class State {
 	 * Returns true when each new chip has a matching generator to protect it, or there are no generators. Returns false
 	 * otherwise.
 	 */
-	private static boolean areChipsAllowedNear(List<Integer> chipIds, List<Integer> generatorsNext,
-		List<Integer> chipsNext) {
+	private static boolean areChipsAllowedNear(List<Integer> chipIds, List<Integer> generatorsNext) {
 		boolean allowed = true;
 		for (Integer id : chipIds) {
 			allowed = allowed && generatorsNext.contains(id);

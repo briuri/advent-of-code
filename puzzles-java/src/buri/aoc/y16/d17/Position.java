@@ -14,7 +14,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Position extends Pair<Integer> {
-	private String _passcodeSoFar;
+	private final String _passcodeSoFar;
 
 	private static final MD5Hash HASHER = new MD5Hash();
 
@@ -99,9 +99,7 @@ public class Position extends Pair<Integer> {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getX()).append(",").append(getY()).append(" ").append(getPasscodeSoFar());
-		return (buffer.toString());
+		return (getX() + "," + getY() + " " + getPasscodeSoFar());
 	}
 
 	/**

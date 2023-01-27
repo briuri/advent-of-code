@@ -37,18 +37,18 @@ public class Puzzle extends BasePuzzle {
 	protected long runLong(Part part, List<String> input) {
 		// Set up the start and final states.
 		final State START_STATE = new State(input.get(0));
-		StringBuffer buffer = new StringBuffer("4");
+		StringBuilder builder = new StringBuilder("4");
 		for (int i = 0; i < START_STATE.getPairs(); i++) {
-			buffer.append("|44");
+			builder.append("|44");
 		}
-		final State FINAL_STATE = new State(buffer.toString());
+		final State FINAL_STATE = new State(builder.toString());
 
 		// Do a BFS to get to the final state.
 		Queue<State> frontier = new ArrayDeque<>();
 		frontier.add(START_STATE);
 		Map<State, State> cameFrom = new HashMap<>();
 		cameFrom.put(START_STATE, null);
-		State current = null;
+		State current;
 		while (!frontier.isEmpty()) {
 			current = frontier.remove();
 			if (current.equals(FINAL_STATE)) {

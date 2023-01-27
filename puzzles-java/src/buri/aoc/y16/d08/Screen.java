@@ -8,7 +8,7 @@ import java.util.List;
  * @author Brian Uri!
  */
 public class Screen {
-	private int[][] _grid;
+	private final int[][] _grid;
 
 	/**
 	 * Constructor
@@ -48,13 +48,13 @@ public class Screen {
 
 	/**
 	 * rect AxB
-	 * 
-	 * Turns on all of the pixels in a rectangle at the top-left of the screen which is A wide and B tall.
+	 *
+	 * Turns on all the pixels in a rectangle at the top-left of the screen which is A wide and B tall.
 	 */
 	private void runRect(String line) {
 		String[] dimensions = line.split(" ")[1].split("x");
-		int width = Integer.valueOf(dimensions[0]);
-		int height = Integer.valueOf(dimensions[1]);
+		int width = Integer.parseInt(dimensions[0]);
+		int height = Integer.parseInt(dimensions[1]);
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				getGrid()[x][y] = 1;
@@ -64,14 +64,14 @@ public class Screen {
 
 	/**
 	 * rotate row y=A by B
-	 * 
-	 * Shifts all of the pixels in row A (0 is the top row) right by B pixels. Pixels that would fall off the right end
+	 *
+	 * Shifts all the pixels in row A (0 is the top row) right by B pixels. Pixels that would fall off the right end
 	 * appear at the left end of the row.
 	 */
 	private void runRotateRow(String line) {
 		String[] parameters = line.split("=")[1].split(" by ");
-		int row = Integer.valueOf(parameters[0]);
-		int pixels = Integer.valueOf(parameters[1]);
+		int row = Integer.parseInt(parameters[0]);
+		int pixels = Integer.parseInt(parameters[1]);
 		Deque<Integer> circle = new ArrayDeque<>();
 		for (int x = 0; x < getGrid().length; x++) {
 			circle.add(getGrid()[x][row]);
@@ -86,13 +86,13 @@ public class Screen {
 
 	/**
 	 * rotate column x=A by B
-	 * shifts all of the pixels in column A (0 is the left column) down by B pixels. Pixels that would fall off the
+	 * shifts all the pixels in column A (0 is the left column) down by B pixels. Pixels that would fall off the
 	 * bottom appear at the top of the column.
 	 */
 	private void runRotateColumn(String line) {
 		String[] parameters = line.split("=")[1].split(" by ");
-		int column = Integer.valueOf(parameters[0]);
-		int pixels = Integer.valueOf(parameters[1]);
+		int column = Integer.parseInt(parameters[0]);
+		int pixels = Integer.parseInt(parameters[1]);
 		Deque<Integer> circle = new ArrayDeque<>();
 		for (int y = 0; y < getGrid()[0].length; y++) {
 			circle.add(getGrid()[column][y]);
@@ -110,15 +110,15 @@ public class Screen {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int y = 0; y < getGrid()[0].length; y++) {
 			for (int x = 0; x < getGrid().length; x++) {
-				buffer.append(toOutput(getGrid()[x][y]));
+				builder.append(toOutput(getGrid()[x][y]));
 			}
-			buffer.append("\n");
+			builder.append("\n");
 		}
-		buffer.append("\n");
-		return (buffer.toString());
+		builder.append("\n");
+		return (builder.toString());
 	}
 
 	/**

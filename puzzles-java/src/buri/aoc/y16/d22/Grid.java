@@ -13,7 +13,7 @@ public class Grid {
 
 	private int _maxX;
 	private int _maxY;
-	private Map<Pair, Node> _nodes;
+	private final Map<Pair, Node> _nodes;
 
 	/**
 	 * Constructor
@@ -50,27 +50,27 @@ public class Grid {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int y = 0; y <= getMaxY(); y++) {
 			for (int x = 0; x <= getMaxX(); x++) {
-				Pair id = new Pair(x, y);
+				Pair<Integer> id = new Pair<>(x, y);
 				Node node = getNodes().get(id);
 				if (node.getId().getX() == getMaxX() && node.getId().getY() == 0) {
-					buffer.append('G');
+					builder.append('G');
 				}
 				else if (node.getUsed() == 0) {
-					buffer.append('_');
+					builder.append('_');
 				}
 				else if (node.getTotal() > 100) {
-					buffer.append("#");
+					builder.append("#");
 				}
 				else {
-					buffer.append(".");
+					builder.append(".");
 				}
 			}
-			buffer.append("\n");
+			builder.append("\n");
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 
 	/**

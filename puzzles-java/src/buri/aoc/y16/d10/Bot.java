@@ -6,11 +6,11 @@ import java.util.List;
 
 /**
  * A single balance bot.
- * 
+ *
  * @author Brian Uri!
  */
 public class Bot {
-	private List<Integer> _values;
+	private final List<Integer> _values;
 	private String _valueSnapshot;
 	private Integer _lowTarget;
 	private Integer _highTarget;

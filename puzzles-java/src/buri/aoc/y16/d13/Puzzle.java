@@ -32,7 +32,7 @@ public class Puzzle extends BasePuzzle {
 	 */
 	protected long runLong(Part part, List<String> input) {
 		int magicNumber = Integer.parseInt(input.get(0));
-		Pair<Integer> destination = new Pair(31, 39);
+		Pair<Integer> destination = new Pair<>(31, 39);
 		Grid grid = new Grid(magicNumber);
 		if (part == Part.ONE) {
 			return (grid.getStepsTo(destination));

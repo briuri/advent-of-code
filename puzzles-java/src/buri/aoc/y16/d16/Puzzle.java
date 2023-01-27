@@ -48,16 +48,16 @@ public class Puzzle extends BasePuzzle {
 	 * - The resulting data is "a", then a single 0, then "b".
 	 */
 	public static String generateCurve(String input, int diskLength) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(input).append("0");
+		StringBuilder builder = new StringBuilder();
+		builder.append(input).append("0");
 		for (int i = input.length() - 1; i >= 0; i--) {
 			char value = input.charAt(i);
-			buffer.append(value == '1' ? '0' : '1');
+			builder.append(value == '1' ? '0' : '1');
 		}
-		if (buffer.length() < diskLength) {
-			return (generateCurve(buffer.toString(), diskLength));
+		if (builder.length() < diskLength) {
+			return (generateCurve(builder.toString(), diskLength));
 		}
-		return (buffer.substring(0, diskLength));
+		return (builder.substring(0, diskLength));
 	}
 
 	/**
@@ -71,15 +71,15 @@ public class Puzzle extends BasePuzzle {
 	 * even, repeat the process until you end up with a checksum with an odd length.
 	 */
 	public static String getChecksum(String input) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < input.length(); i = i + 2) {
 			int char1 = input.charAt(i);
 			int char2 = input.charAt(i + 1);
-			buffer.append(char1 == char2 ? '1' : '0');
+			builder.append(char1 == char2 ? '1' : '0');
 		}
-		if (buffer.length() % 2 == 0) {
-			return (getChecksum(buffer.toString()));
+		if (builder.length() % 2 == 0) {
+			return (getChecksum(builder.toString()));
 		}
-		return (buffer.toString());
+		return (builder.toString());
 	}
 }

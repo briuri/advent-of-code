@@ -5,9 +5,9 @@ package buri.aoc.y16.d15;
  */
 public class Disc {
 
-	private int _number;
-	private int _positions;
-	private int _start;
+	private final int _number;
+	private final int _positions;
+	private final int _start;
 
 	/**
 	 * Constructor
@@ -15,8 +15,8 @@ public class Disc {
 	public Disc(String input) {
 		String[] tokens = input.split(" ");
 		_number = Character.getNumericValue(tokens[1].charAt(1));
-		_positions = Integer.valueOf(tokens[3]);
-		_start = Integer.valueOf(tokens[11].replaceAll("\\.", ""));
+		_positions = Integer.parseInt(tokens[3]);
+		_start = Integer.parseInt(tokens[11].replaceAll("\\.", ""));
 	}
 
 	/**

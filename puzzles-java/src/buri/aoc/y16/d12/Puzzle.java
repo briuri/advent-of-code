@@ -32,11 +32,6 @@ public class Puzzle extends BasePuzzle {
 	protected long runLong(Part part, List<String> input) {
 		Registers registers = new Registers(part, input);
 		registers.process();
-		if (part == Part.ONE) {
-			return (registers.get("a"));
-		}
-
-		// Part TWO
 		return (registers.get("a"));
 	}
 }

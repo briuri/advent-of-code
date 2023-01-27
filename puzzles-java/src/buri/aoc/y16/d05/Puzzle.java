@@ -41,8 +41,8 @@ public class Puzzle extends BasePuzzle {
 
 		int iteration = 0;
 		// Represent password as 8 blanks, completed when all are filled in.
-		StringBuffer password = new StringBuffer("        ");
-		while (password.toString().indexOf(" ") != -1) {
+		StringBuilder password = new StringBuilder("        ");
+		while (password.toString().contains(" ")) {
 			String hash = hasher.getHash(input.get(0) + iteration);
 			if (hash.startsWith("00000")) {
 				if (part == Part.ONE) {
@@ -53,7 +53,7 @@ public class Puzzle extends BasePuzzle {
 					// Fill in specific characters in the password.
 					String possibleIndex = String.valueOf(hash.charAt(5));
 					if (possibleIndex.matches("[0-9]")) {
-						int index = Integer.valueOf(possibleIndex);
+						int index = Integer.parseInt(possibleIndex);
 						if (index < password.length() && password.charAt(index) == ' ') {
 							password.setCharAt(index, hash.charAt(6));
 						}

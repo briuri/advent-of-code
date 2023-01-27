@@ -29,10 +29,7 @@ public class Registers extends NamedRegisters {
 	 * Processes all instructions.
 	 */
 	public void process() {
-		while (true) {
-			if (!isWithinInstructions()) {
-				break;
-			}
+		while (isWithinInstructions()) {
 			String[] tokens = getInstructions().get(getCurrent()).split(" ");
 			if (tokens[0].equals("cpy")) {
 				long value = getRegisterOrValue(tokens[1]);
@@ -48,7 +45,7 @@ public class Registers extends NamedRegisters {
 			}
 			if (tokens[0].equals("jnz")) {
 				long condition = getRegisterOrValue(tokens[1]);
-				int jump = Integer.valueOf(tokens[2]);
+				int jump = Integer.parseInt(tokens[2]);
 				if (condition != 0) {
 					setCurrent(getCurrent() + jump);
 				}

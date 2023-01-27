@@ -6,10 +6,10 @@ import buri.aoc.common.data.tuple.Pair;
  * @author Brian Uri!
  */
 public class Node {
-	private Pair<Integer> _id;
-	private int _total;
-	private int _used;
-	private int _free;
+	private final Pair<Integer> _id;
+	private final int _total;
+	private final int _used;
+	private final int _free;
 
 	/**
 	 * Constructor
@@ -17,10 +17,10 @@ public class Node {
 	public Node(String input) {
 		String[] tokens = input.split(" ");
 		String[] id = tokens[0].split(",");
-		_id = new Pair(Integer.valueOf(id[0]), Integer.valueOf(id[1]));
-		_total = Integer.valueOf(tokens[1]);
-		_used = Integer.valueOf(tokens[2]);
-		_free = Integer.valueOf(tokens[3]);
+		_id = new Pair<>(Integer.valueOf(id[0]), Integer.valueOf(id[1]));
+		_total = Integer.parseInt(tokens[1]);
+		_used = Integer.parseInt(tokens[2]);
+		_free = Integer.parseInt(tokens[3]);
 	}
 
 	/**

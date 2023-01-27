@@ -46,29 +46,29 @@ public class Puzzle extends BasePuzzle {
 	/**
 	 * Step through each instruction and return the desired position based on which part we're doing.
 	 */
-	private static Pair followInstructions(Part part, List<String> input) {
+	private static Pair<Integer> followInstructions(Part part, List<String> input) {
 		// Start at the given coordinates and face North.
-		Pair<Integer> position = new Pair(0, 0);
+		Pair<Integer> position = new Pair<>(0, 0);
 		Direction direction = Direction.UP;
 
 		Set<Pair> visited = new HashSet<>();
 		visited.add(position);
 		for (String instruction : input) {
 			direction = (instruction.charAt(0) == 'L' ? direction.turnLeft() : direction.turnRight());
-			int distance = Integer.valueOf(instruction.substring(1));
+			int distance = Integer.parseInt(instruction.substring(1));
 			for (int i = 0; i < distance; i++) {
 				switch (direction) {
 					case UP:
-						position = new Pair(position.getX(), position.getY() + 1);
+						position = new Pair<>(position.getX(), position.getY() + 1);
 						break;
 					case RIGHT:
-						position = new Pair(position.getX() + 1, position.getY());
+						position = new Pair<>(position.getX() + 1, position.getY());
 						break;
 					case DOWN:
-						position = new Pair(position.getX(), position.getY() - 1);
+						position = new Pair<>(position.getX(), position.getY() - 1);
 						break;
 					default: // LEFT
-						position = new Pair(position.getX() - 1, position.getY());
+						position = new Pair<>(position.getX() - 1, position.getY());
 				}
 				if (part == Part.TWO && visited.contains(position)) {
 					return (position);
