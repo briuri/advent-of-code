@@ -32,7 +32,7 @@ class Puzzle : BasePuzzle() {
         }
         for (i in 1..time) {
             var currentMax = 0
-            var currentPositions = mutableMapOf<Reindeer, Int>()
+            val currentPositions = mutableMapOf<Reindeer, Int>()
             for (reindeer in scores.keys) {
                 val position = reindeer.getPosition(i)
                 currentPositions[reindeer] = position
