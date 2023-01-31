@@ -1,6 +1,7 @@
 package buri.aoc.y15.d06
 
 import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Grid
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test
@@ -24,7 +25,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val lights = Grid()
+        val lights = Grid(1000)
         for (line in input) {
             val tokens = line.split(" ")
             val first = tokens[tokens.lastIndex - 2].split(",").map { it.toInt() }
@@ -57,38 +58,5 @@ class Puzzle : BasePuzzle() {
             }
         }
         return lights.getSum()
-    }
-}
-
-/**
- * Helper class for grid navigation
- */
-class Grid {
-    private val size = 1000
-    private val grid = Array(size) { IntArray(size) }
-
-    /**
-     * Gets a value in the grid.
-     */
-    fun get(x: Int, y: Int): Int {
-        return (grid[x][y])
-    }
-
-    /**
-     * Sets a value in the grid.
-     */
-    fun set(x: Int, y: Int, value: Int) {
-        grid[x][y] = value
-    }
-
-    /**
-     * Sums all values in the grid.
-     */
-    fun getSum(): Int {
-        var sum = 0
-        for (x in 0 until size) {
-            sum += grid[x].sum()
-        }
-        return sum
     }
 }
