@@ -25,7 +25,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val lights = Grid(1000)
+        val lights = Grid(1000, 1000)
         for (line in input) {
             val tokens = line.split(" ")
             val first = tokens[tokens.lastIndex - 2].split(",").map { it.toInt() }
