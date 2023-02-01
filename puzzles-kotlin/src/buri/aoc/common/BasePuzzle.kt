@@ -32,7 +32,12 @@ abstract class BasePuzzle {
         if (toConsole) {
             toConsole(actual)
         }
-        assertEquals(expected, actual)
+        if (actual is Long && expected is Int) {
+            assertEquals(expected.toLong(), actual)
+        }
+        else {
+            assertEquals(expected, actual)
+        }
     }
 
     /**
