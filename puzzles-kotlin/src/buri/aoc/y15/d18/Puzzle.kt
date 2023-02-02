@@ -46,9 +46,9 @@ class Puzzle : BasePuzzle() {
                 for (x in 0 until grid.width) {
                     var onCount = 0
                     for (neighbor in grid.getNeighbors(x, y, true)) {
-                        onCount += grid.get(neighbor)
+                        onCount += grid.get(neighbor).toInt()
                     }
-                    val prev = grid.get(x, y)
+                    val prev = grid.get(x, y).toInt()
                     val next = if (part == Part.TWO && Pair(x, y) in corners) {
                         1
                     }

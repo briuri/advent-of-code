@@ -6,19 +6,19 @@ package buri.aoc.common
  * @author Brian Uri!
  */
 class Grid(val width: Int, val height: Int) {
-    private val grid = Array(width) { IntArray(height) }
+    private val grid = Array(width) { Array(height) { "0" } }
 
     /**
      * Gets a value in the grid.
      */
-    fun get(x: Int, y: Int): Int {
+    fun get(x: Int, y: Int): String {
         return (grid[x][y])
     }
 
     /**
      * Gets a value in the grid.
      */
-    fun get(pair: Pair<Int, Int>): Int {
+    fun get(pair: Pair<Int, Int>): String {
         return (grid[pair.first][pair.second])
     }
 
@@ -26,6 +26,13 @@ class Grid(val width: Int, val height: Int) {
      * Sets a value in the grid.
      */
     fun set(x: Int, y: Int, value: Int) {
+        set(x, y, value.toString())
+    }
+
+    /**
+     * Sets a value in the grid.
+     */
+    fun set(x: Int, y: Int, value: String) {
         grid[x][y] = value
     }
 
@@ -35,7 +42,7 @@ class Grid(val width: Int, val height: Int) {
     fun getSum(): Int {
         var sum = 0
         for (x in 0 until width) {
-            sum += grid[x].sum()
+            sum += grid[x].sumOf { it.toInt() }
         }
         return sum
     }
@@ -55,8 +62,22 @@ class Grid(val width: Int, val height: Int) {
             list.add(Pair(x - 1, y + 1))
             list.add(Pair(x + 1, y + 1))
         }
-        list.removeIf { pair -> pair.first < 0 || pair.first >= width || pair.second < 0 || pair.second >= height }
+        list.removeIf { pair -> !isInBounds(pair.first, pair.second) }
         return list
+    }
+
+    /**
+     * Return true if the point is in bounds.
+     */
+    fun isInBounds(point: Pair<Int, Int>): Boolean {
+        return isInBounds(point.first, point.second)
+    }
+
+    /**
+     * Return true if the point is in bounds.
+     */
+    fun isInBounds(x: Int, y: Int): Boolean {
+        return (x in 0 until width) && (y in 0 until height)
     }
 
     /**

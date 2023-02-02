@@ -35,7 +35,7 @@ class Puzzle : BasePuzzle() {
 
             for (x in xRange.first..xRange.second) {
                 for (y in yRange.first..yRange.second) {
-                    val value = lights.get(x, y)
+                    val value = lights.get(x, y).toInt()
                     if (part == ONE) {
                         if (tokens[1] == "on") {
                             lights.set(x, y, 1)
