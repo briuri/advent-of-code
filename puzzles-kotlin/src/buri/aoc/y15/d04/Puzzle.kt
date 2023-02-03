@@ -1,11 +1,10 @@
 package buri.aoc.y15.d04
 
 import buri.aoc.common.BasePuzzle
+import buri.aoc.common.MD5
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test
-import java.security.MessageDigest
-import javax.xml.bind.DatatypeConverter
 
 /**
  * Entry point for a daily puzzle
@@ -28,22 +27,14 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val target = if (part == ONE) "00000" else "000000"
+        val leadingZeroes = if (part == ONE) 5 else 6
         var answer = 0
         while (true) {
-            val hash = getHash(input[0] + answer.toString())
-            if (hash.startsWith(target)) {
+            val hash = MD5().getHash(input[0] + answer.toString(), leadingZeroes)
+            if (hash.isNotEmpty()) {
                 return answer
             }
             answer++
         }
-    }
-
-    /**
-     * Creates an MD5 hash of some string.
-     */
-    private fun getHash(input: String): String {
-        val bytes = MessageDigest.getInstance("MD5").digest(input.toByteArray())
-        return DatatypeConverter.printHexBinary(bytes)
     }
 }
