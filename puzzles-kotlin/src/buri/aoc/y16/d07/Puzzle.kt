@@ -29,10 +29,10 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var count = 0
         for (line in input) {
-            val supernets = line.replace("\\[[a-z]+\\]".toRegex(), " ").split(" ")
+            val supernets = line.replace("\\[[a-z]+]".toRegex(), " ").split(" ")
             val hypernets = line.replace("^[a-z]+\\[".toRegex(), "")
-                .replace("\\][a-z]+\\[".toRegex(), " ")
-                .replace("\\][a-z]+$".toRegex(), "").trim().split(" ")
+                .replace("][a-z]+\\[".toRegex(), " ")
+                .replace("][a-z]+$".toRegex(), "").trim().split(" ")
             if ((part == ONE && containsAbba(supernets) && !containsAbba(hypernets))
                 || part == TWO && containsBab(hypernets, getAbas(supernets))) {
                 count++
