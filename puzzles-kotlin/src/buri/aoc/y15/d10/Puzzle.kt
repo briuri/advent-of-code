@@ -26,15 +26,16 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var number = input[0]
         val times = if (part == ONE) 40 else 50
+        val buffer = StringBuilder()
         for (i in 0 until times) {
-            val buffer = StringBuilder()
-            var index = 0
-            while (index < number.length) {
-                val value = number[index]
+            buffer.clear()
+            var i = 0
+            while (i < number.length) {
+                val value = number[i]
                 var count = 1
-                index++
-                while (index < number.length && number[index]  == value) {
-                    index++
+                i++
+                while (i < number.length && value == number[i]) {
+                    i++
                     count++
                 }
                 buffer.append(count)

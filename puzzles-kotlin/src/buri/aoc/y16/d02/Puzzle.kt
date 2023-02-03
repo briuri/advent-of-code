@@ -3,6 +3,7 @@ package buri.aoc.y16.d02
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Grid
 import buri.aoc.common.Part
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -51,9 +52,9 @@ class Puzzle : BasePuzzle() {
         grid2.set(2, 3, "B")
         grid2.set(3, 3, "C")
         grid2.set(2, 4, "D")
-        val grid = if (part == Part.ONE) grid1 else grid2
+        val grid = if (part == ONE) grid1 else grid2
 
-        var position = if (part == Part.ONE) Pair(1, 1) else Pair(0, 2)
+        var key = if (part == ONE) Pair(1, 1) else Pair(0, 2)
         var code = ""
         for (line in input) {
             for (value in line) {
@@ -67,12 +68,12 @@ class Puzzle : BasePuzzle() {
                     'D' -> 1
                     else -> 0
                 }
-                val nextPosition = position.copy(first = position.first + dx, second = position.second + dy)
-                if (isInBounds(part, grid, nextPosition)) {
-                    position = nextPosition
+                val nextKey = key.copy(first = key.first + dx, second = key.second + dy)
+                if (isInBounds(part, grid, nextKey)) {
+                    key = nextKey
                 }
             }
-            code += grid.get(position)
+            code += grid.get(key)
         }
         return code
     }
@@ -81,6 +82,6 @@ class Puzzle : BasePuzzle() {
      * Checks if a point is in bounds, using different rules for Part 2.
      */
     private fun isInBounds(part: Part, grid: Grid, point: Pair<Int, Int>): Boolean {
-        return grid.isInBounds(point) && (part == Part.ONE || grid.get(point) != "0")
+        return grid.isInBounds(point) && (part == ONE || grid.get(point) != "0")
     }
 }

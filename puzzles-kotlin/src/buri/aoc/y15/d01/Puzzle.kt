@@ -28,8 +28,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var floor = 0
         for ((index, direction) in input[0].withIndex()) {
-            val increment = if (direction == '(') 1 else -1
-            floor += increment
+            floor += if (direction == '(') 1 else -1
             if (part == TWO && floor == -1) {
                 return (index + 1)
             }

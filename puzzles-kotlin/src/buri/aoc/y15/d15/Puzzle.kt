@@ -2,6 +2,7 @@ package buri.aoc.y15.d15
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -19,12 +20,11 @@ class Puzzle : BasePuzzle() {
         assertRun(117936, 0, true)
     }
 
-    private val totalProperties = 5
-
     /**
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
+        val totalProperties = 5
         val properties: MutableList<MutableList<Int>> = mutableListOf()
         for (i in 0 until totalProperties) {
             properties.add(mutableListOf())
@@ -54,7 +54,7 @@ class Puzzle : BasePuzzle() {
                             score *= getScore(properties[i], a, b, c, d)
                         }
                         val calories = getScore(properties[properties.lastIndex], a, b, c, d)
-                        if (part == Part.ONE || calories == 500) {
+                        if (part == ONE || calories == 500) {
                             maxScore = maxScore.coerceAtLeast(score)
                         }
                     }

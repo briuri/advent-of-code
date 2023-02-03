@@ -2,7 +2,6 @@ package buri.aoc.y15.d03
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -27,8 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val santas = mutableListOf<Pair<Int, Int>>()
-        santas.add(Pair(0, 0))
-        if (part == TWO) {  // Add robosanta
+        for (i in 0 until part.number) {
             santas.add(Pair(0, 0))
         }
         val visited = mutableSetOf<Pair<Int, Int>>()
@@ -40,15 +38,12 @@ class Puzzle : BasePuzzle() {
                 '<' -> {
                     activeSanta.copy(first = activeSanta.first - 1)
                 }
-
                 '>' -> {
                     activeSanta.copy(first = activeSanta.first + 1)
                 }
-
                 '^' -> {
                     activeSanta.copy(second = activeSanta.second - 1)
                 }
-
                 else -> {   // v
                     activeSanta.copy(second = activeSanta.second + 1)
                 }

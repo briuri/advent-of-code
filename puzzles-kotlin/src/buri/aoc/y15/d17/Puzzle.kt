@@ -2,6 +2,7 @@ package buri.aoc.y15.d17
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 
@@ -26,16 +27,16 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val rawContainers = mutableListOf<Int>()
+        val containers = mutableListOf<Int>()
         for (line in input) {
-            rawContainers.add(line.toInt())
+            containers.add(line.toInt())
         }
-        val containers = rawContainers.sorted().reversed()
+        containers.sorted().reversed()
 
         val end = if (input.size < 10) 25 else 150
         val frequency = mutableMapOf<Int, Int>()
         val combos = getCount(0, end, containers, 0, frequency)
-        if (part == Part.ONE) {
+        if (part == ONE) {
             return combos
         }
         return frequency[frequency.keys.min()]!!

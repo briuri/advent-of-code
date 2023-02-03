@@ -105,6 +105,6 @@ abstract class BasePuzzle {
 /**
  * Enumeration of puzzle parts
  */
-enum class Part {
-    ONE, TWO
+enum class Part(val number: Int) {
+    ONE(1), TWO(2)
 }

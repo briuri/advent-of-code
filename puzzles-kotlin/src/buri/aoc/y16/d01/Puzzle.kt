@@ -2,6 +2,8 @@ package buri.aoc.y16.d01
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.TWO
+import buri.aoc.y16.d01.Direction.*
 import org.junit.Test
 import kotlin.math.absoluteValue
 
@@ -27,11 +29,11 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val visited = mutableSetOf<Pair<Int, Int>>()
-        val position = Position(Pair(0, 0), Direction.NORTH)
+        val position = MutablePosition(Pair(0, 0), NORTH)
         for (command in input[0].split(", ")) {
             position.turn(command[0])
             for (i in 0 until command.drop(1).toInt()) {
-                if (part == Part.TWO && visited.contains(position.coords)) {
+                if (part == TWO && visited.contains(position.coords)) {
                     return position.getBlocks()
                 }
                 visited.add(position.coords)
@@ -42,17 +44,17 @@ class Puzzle : BasePuzzle() {
     }
 }
 enum class Direction { NORTH, EAST, SOUTH, WEST }
-data class Position(var coords: Pair<Int, Int>, var facing: Direction) {
+data class MutablePosition(var coords: Pair<Int, Int>, var facing: Direction) {
 
     /**
      * Move one square in the current direction.
      */
     fun move() {
         coords = when (facing) {
-            Direction.NORTH -> coords.copy(second = coords.second + 1)
-            Direction.EAST -> coords.copy(first = coords.first + 1)
-            Direction.SOUTH -> coords.copy(second = coords.second - 1)
-            Direction.WEST -> coords.copy(first = coords.first - 1)
+            NORTH -> coords.copy(second = coords.second + 1)
+            EAST -> coords.copy(first = coords.first + 1)
+            SOUTH -> coords.copy(second = coords.second - 1)
+            WEST -> coords.copy(first = coords.first - 1)
         }
     }
 
@@ -62,19 +64,19 @@ data class Position(var coords: Pair<Int, Int>, var facing: Direction) {
     fun turn(turn: Char) {
         if (turn == 'R') {
             facing = when (facing) {
-                Direction.NORTH -> Direction.EAST
-                Direction.EAST -> Direction.SOUTH
-                Direction.SOUTH -> Direction.WEST
-                Direction.WEST -> Direction.NORTH
+                NORTH -> EAST
+                EAST -> SOUTH
+                SOUTH -> WEST
+                WEST -> NORTH
             }
         }
         // L
         else {
             facing = when (facing) {
-                Direction.NORTH -> Direction.WEST
-                Direction.EAST -> Direction.NORTH
-                Direction.SOUTH -> Direction.EAST
-                Direction.WEST -> Direction.SOUTH
+                NORTH -> WEST
+                EAST -> NORTH
+                SOUTH -> EAST
+                WEST -> SOUTH
             }
         }
     }

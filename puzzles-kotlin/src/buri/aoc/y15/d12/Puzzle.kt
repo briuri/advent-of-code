@@ -2,6 +2,8 @@ package buri.aoc.y15.d12
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.ONE
+import buri.aoc.common.Part.TWO
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
@@ -39,9 +41,8 @@ class Puzzle : BasePuzzle() {
     private fun getSum(part: Part, node: JsonNode): Int {
         var sum = 0
         if (node.isArray) {
-            val arrayNode = node as ArrayNode
-            for (node in arrayNode) {
-                sum += getSum(part, node)
+            for (item in node as ArrayNode) {
+                sum += getSum(part, item)
             }
         }
         else if (node.isObject) {
@@ -53,9 +54,9 @@ class Puzzle : BasePuzzle() {
                     break
                 }
             }
-            for (node in objectNode) {
-                if (part == Part.ONE || (part == Part.TWO && !hasRed)) {
-                    sum += getSum(part, node)
+            for (item in objectNode) {
+                if (part == ONE || (part == TWO && !hasRed)) {
+                    sum += getSum(part, item)
                 }
             }
         }

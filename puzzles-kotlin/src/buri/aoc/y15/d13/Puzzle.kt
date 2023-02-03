@@ -2,6 +2,7 @@ package buri.aoc.y15.d13
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -25,7 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val happiness = mutableMapOf<String, Int>()
-        var people = mutableSetOf<String>()
+        val people = mutableSetOf<String>()
         for (line in input) {
             val tokens = line.split(" ")
             val name1 = tokens[0]
@@ -36,7 +37,7 @@ class Puzzle : BasePuzzle() {
             happiness[name1 + name2] = direction * amount
             people.add(name1)
         }
-        if (part == Part.TWO) {
+        if (part == TWO) {
             for (person in people) {
                 happiness[person + "Me"] = 0
                 happiness["Me" + person] = 0
@@ -44,14 +45,14 @@ class Puzzle : BasePuzzle() {
             people.add("Me")
         }
 
-        val permutations = generatePermutations(people.toList(), 0)
+        val seatingCharts = generatePermutations(people.toList(), 0)
         var maxHappiness = 0
-        for (seats in permutations) {
+        for (seats in seatingCharts) {
             var localHappiness = 0
-            for (index in seats.indices) {
-                val nextIndex = if (index == seats.lastIndex) 0 else (index + 1)
-                localHappiness += happiness[seats[index] + seats[nextIndex]]!!
-                localHappiness += happiness[seats[nextIndex] + seats[index]]!!
+            for (i in seats.indices) {
+                val nextIndex = if (i == seats.lastIndex) 0 else (i + 1)
+                localHappiness += happiness[seats[i] + seats[nextIndex]]!!
+                localHappiness += happiness[seats[nextIndex] + seats[i]]!!
             }
             maxHappiness = maxHappiness.coerceAtLeast(localHappiness)
         }

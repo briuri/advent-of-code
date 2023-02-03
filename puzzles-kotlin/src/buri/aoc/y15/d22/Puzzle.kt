@@ -2,6 +2,7 @@ package buri.aoc.y15.d22
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -27,7 +28,8 @@ class Puzzle : BasePuzzle() {
         val bossMaxHp = input[0].split(" ")[2].toInt()
         val bossDamage = input[1].split(" ")[1].toInt()
         var minMana = Int.MAX_VALUE
-        for (i in 0..50000) {
+        // Experimented with upper bound until I got a stable answer
+        for (i in 0..60000) {
             minMana = minMana.coerceAtMost(runBattle(part, bossMaxHp, bossDamage, minMana))
         }
         return minMana
@@ -54,7 +56,7 @@ class Puzzle : BasePuzzle() {
         var isMyTurn = true
         val activeEffects = mutableMapOf<String, Int>()
         while (true) {
-            if (part == Part.TWO && isMyTurn) {
+            if (part == TWO && isMyTurn) {
                 myHp -= 1
             }
 

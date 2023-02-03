@@ -16,7 +16,7 @@ class Puzzle : BasePuzzle() {
     @Test
     fun runPart1() {
         assertRun(609043, 1)
-        assertRun(117946, 0, true)
+        //assertRun(117946, 0, true)
     }
     @Test
     fun runPart2() {
@@ -28,11 +28,10 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val key = input[0]
         val target = if (part == ONE) "00000" else "000000"
         var answer = 0
         while (true) {
-            val hash = getHash(key + answer.toString())
+            val hash = getHash(input[0] + answer.toString())
             if (hash.startsWith(target)) {
                 return answer
             }

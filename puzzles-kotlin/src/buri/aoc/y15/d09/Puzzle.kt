@@ -38,9 +38,9 @@ class Puzzle : BasePuzzle() {
             uniquePlaces.add(places[1])
         }
 
-        val permutations = generatePermutations(uniquePlaces.toList(), 0)
+        val paths = generatePermutations(uniquePlaces.toList(), 0)
         val distances = mutableListOf<Int>()
-        for (path in permutations) {
+        for (path in paths) {
             var distance = 0
             for (i in 0 until path.lastIndex) {
                 distance += map[path[i] + path[i + 1]]!!

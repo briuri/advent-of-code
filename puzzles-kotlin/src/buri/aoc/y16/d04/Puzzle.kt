@@ -2,6 +2,7 @@ package buri.aoc.y16.d04
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -30,12 +31,15 @@ class Puzzle : BasePuzzle() {
             val name = line.substring(0, line.lastIndexOf("-"))
             val id = line.substring(line.lastIndexOf("-") + 1, line.indexOf("[")).toInt()
             val checksum = line.substring(line.indexOf("[") + 1, line.lastIndex)
+            // Ignore hyphens when counting frequencies
             for (value in name.filter { it.isLowerCase() }) {
                 frequencies.putIfAbsent(value, 0)
                 frequencies[value] = frequencies[value]!! + 1
             }
             var testChecksum = ""
+            // Max frequency will be at the beginning
             for (count in frequencies.values.distinct().sorted().reversed()) {
+                // When multiple letters have same frequency go in alphabetical order
                 for (key in frequencies.keys.sorted()) {
                     if (frequencies[key] == count) {
                         testChecksum += key
@@ -45,7 +49,7 @@ class Puzzle : BasePuzzle() {
             if (testChecksum.substring(0, 5) == checksum) {
                 realSum += id
                 val unencrypted = rotate(name, id)
-                if (part == Part.TWO && unencrypted == "northpole object storage") {
+                if (part == TWO && unencrypted == "northpole object storage") {
                     return id
                 }
             }

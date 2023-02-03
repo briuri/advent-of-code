@@ -35,18 +35,15 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        while (true) {
+        do {
             val wires = complexWires.filter { it.key !in simpleWires.keys }
-            if (wires.isEmpty()) {
-                break
-            }
             for (wire in wires) {
                 val answer = simplify(wire.value, simpleWires)
                 if (answer != null) {
                     simpleWires[wire.key] = answer
                 }
             }
-        }
+        } while (wires.isNotEmpty())
         return simpleWires["a"]!!
     }
 

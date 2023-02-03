@@ -24,7 +24,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        val nextCount = if (part == ONE) { 1 } else { 2 }
+        val nextCount = if (part == ONE) 1 else 2
         var count = 0
         var password = input[0]
         while (count < nextCount) {
@@ -41,14 +41,14 @@ class Puzzle : BasePuzzle() {
      */
     private fun increment(password: String): String {
         val builder = StringBuilder(password)
-        for (index in password.lastIndex downTo 0) {
-            val value = password[index]
+        for (i in password.lastIndex downTo 0) {
+            val value = password[i]
             if (value != 'z') {
-                builder[index] = value + 1
+                builder[i] = value + 1
                 break
             }
             else {
-                builder[index] = 'a'
+                builder[i] = 'a'
             }
         }
         return builder.toString()
@@ -58,8 +58,8 @@ class Puzzle : BasePuzzle() {
      * Searches for three consecutive letters, like abc
      */
     private fun hasStraight(password: String): Boolean {
-        for (index in 0..password.length - 3) {
-            if (password[index] == password[index + 1] - 1 && password[index] == password[index + 2] - 2) {
+        for (i in 0..password.length - 3) {
+            if (password[i] == password[i + 1] - 1 && password[i] == password[i + 2] - 2) {
                 return true
             }
         }
@@ -78,13 +78,13 @@ class Puzzle : BasePuzzle() {
      */
     private fun hasPairs(password: String): Boolean {
         var count = 0
-        var index = 0
-        while (index <= password.length - 2) {
-            if (password[index] == password[index + 1]) {
+        var i = 0
+        while (i <= password.length - 2) {
+            if (password[i] == password[i + 1]) {
                 count++
-                index++
+                i++
             }
-            index++
+            i++
         }
         return (count >= 2)
     }

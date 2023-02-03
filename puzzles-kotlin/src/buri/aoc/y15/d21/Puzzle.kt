@@ -2,6 +2,7 @@ package buri.aoc.y15.d21
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -71,24 +72,24 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == Part.ONE) minCost else maxCost
+        return if (part == ONE) minCost else maxCost
     }
 
     /**
      * Simulates a battle between two mobs. Returns true if I win.
      */
     private fun isBossDefeated(me: Mob, boss: Mob): Boolean {
-        var meHp = me.hp
+        var myHp = me.hp
         var bossHp = boss.hp
-        val meAttack = (me.damage - boss.armor).coerceAtLeast(1)
+        val myAttack = (me.damage - boss.armor).coerceAtLeast(1)
         val bossAttack = (boss.damage - me.armor).coerceAtLeast(1)
         while (true) {
-            bossHp -= meAttack
+            bossHp -= myAttack
             if (bossHp <= 0) {
                 return true
             }
-            meHp -= bossAttack
-            if (meHp <= 0) {
+            myHp -= bossAttack
+            if (myHp <= 0) {
                 return false
             }
         }

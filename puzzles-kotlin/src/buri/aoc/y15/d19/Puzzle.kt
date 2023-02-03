@@ -2,6 +2,7 @@ package buri.aoc.y15.d19
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -33,14 +34,13 @@ class Puzzle : BasePuzzle() {
             rules.add(Pair(tokens[0], tokens[1]))
         }
 
-        if (part == Part.ONE) {
+        if (part == ONE) {
             val uniqueChanges = mutableSetOf<String>()
             for (rule in rules) {
-                for (index in findOccurences(string, rule.first)) {
-                    val change = string.substring(0 until index) + rule.second + string.substring(
-                        index + rule.first.length,
-                        string.length
-                    )
+                for (i in findOccurences(string, rule.first)) {
+                    val change = string.substring(0 until i) +
+                            rule.second +
+                            string.substring(i + rule.first.length, string.length)
                     uniqueChanges.add(change)
                 }
             }
@@ -50,15 +50,15 @@ class Puzzle : BasePuzzle() {
         while (true) {
             var steps = 0
             var current = string
+            // Try random permutations.
             rules.shuffle()
             while (true) {
                 val previous = current
                 for (rule in rules) {
-                    for (index in findOccurences(current, rule.second)) {
-                        current = current.substring(0 until index) + rule.first + current.substring(
-                            index + rule.second.length,
-                            current.length
-                        )
+                    for (i in findOccurences(current, rule.second)) {
+                        current = current.substring(0 until i) +
+                                rule.first +
+                                current.substring(i + rule.second.length, current.length)
                         steps++
                     }
                 }
@@ -73,7 +73,7 @@ class Puzzle : BasePuzzle() {
     }
 
     /**
-     * Finds all occurrences of a token within a string.
+     * Finds all occurrences of a token within a string and returns in reverse order.
      */
     private fun findOccurences(string: String, token: String): List<Int> {
         val list = mutableListOf<Int>()

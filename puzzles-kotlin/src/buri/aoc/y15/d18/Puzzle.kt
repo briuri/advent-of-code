@@ -3,6 +3,7 @@ package buri.aoc.y15.d18
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Grid
 import buri.aoc.common.Part
+import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -34,6 +35,7 @@ class Puzzle : BasePuzzle() {
                 grid.set(x, y, onOff)
             }
         }
+
         val corners = mutableListOf<Pair<Int, Int>>()
         corners.add(Pair(0, 0))
         corners.add(Pair(grid.width - 1, 0))
@@ -49,7 +51,7 @@ class Puzzle : BasePuzzle() {
                         onCount += grid.get(neighbor).toInt()
                     }
                     val prev = grid.get(x, y).toInt()
-                    val next = if (part == Part.TWO && Pair(x, y) in corners) {
+                    val next = if (part == TWO && Pair(x, y) in corners) {
                         1
                     }
                     else if (prev == 1 && onCount != 2 && onCount != 3) {

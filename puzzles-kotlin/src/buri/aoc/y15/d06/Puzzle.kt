@@ -37,21 +37,19 @@ class Puzzle : BasePuzzle() {
                 for (y in yRange.first..yRange.second) {
                     val value = lights.get(x, y).toInt()
                     if (part == ONE) {
-                        if (tokens[1] == "on") {
-                            lights.set(x, y, 1)
-                        } else if (tokens[1] == "off") {
-                            lights.set(x, y, 0)
-                        } else {  // toggle
-                            val newValue = if (value == 0) 1 else 0
-                            lights.set(x, y, newValue)
+                        when (tokens[1]) {
+                            "on" -> lights.set(x, y, 1)
+                            "off" -> lights.set(x, y, 0)
+                            else -> {
+                                val newValue = if (value == 0) 1 else 0
+                                lights.set(x, y, newValue)
+                            }
                         }
                     } else {
-                        if (tokens[1] == "on") {
-                            lights.set(x, y, value + 1)
-                        } else if (tokens[1] == "off") {
-                            lights.set(x, y, (value - 1).coerceAtLeast(0))
-                        } else {  // toggle
-                            lights.set(x, y, value + 2)
+                        when (tokens[1]) {
+                            "on" -> lights.set(x, y, value + 1)
+                            "off" -> lights.set(x, y, (value - 1).coerceAtLeast(0))
+                            else -> lights.set(x, y, value + 2)
                         }
                     }
                 }

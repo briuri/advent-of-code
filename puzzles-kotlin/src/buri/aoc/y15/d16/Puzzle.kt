@@ -2,6 +2,7 @@ package buri.aoc.y15.d16
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -36,20 +37,21 @@ class Puzzle : BasePuzzle() {
         expected["perfumes"] = 1
 
         for (line in input) {
-            val index = line.split(": ")[0].split(" ")[1].toInt()
+            val id = line.split(": ")[0].split(" ")[1].toInt()
             val map = mutableMapOf<String, Int>()
-            for (token in line.substring(line.indexOf(":") + 2).split(", ")) {
-                val tokens = token.split(": ")
+            for (property in line.substring(line.indexOf(":") + 2).split(", ")) {
+                val tokens = property.split(": ")
                 map[tokens[0]] = tokens[1].toInt()
             }
+
             var isMatch = true
             for (pair in expected) {
                 if (!map.containsKey(pair.key)) {
                     continue
                 }
-                val condition = if (part == Part.TWO && (pair.key == "cats" || pair.key == "trees")) {
+                val condition = if (part == TWO && (pair.key == "cats" || pair.key == "trees")) {
                     map[pair.key]!! > pair.value
-                } else if (part == Part.TWO && (pair.key == "pomeranians" || pair.key == "goldfish")) {
+                } else if (part == TWO && (pair.key == "pomeranians" || pair.key == "goldfish")) {
                     map[pair.key]!! < pair.value
                 } else {
                     map[pair.key]!! == pair.value
@@ -57,7 +59,7 @@ class Puzzle : BasePuzzle() {
                 isMatch = isMatch && condition
             }
             if (isMatch) {
-                return index
+                return id
             }
         }
         return -1
