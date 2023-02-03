@@ -48,6 +48,19 @@ class Grid(val width: Int, val height: Int) {
     }
 
     /**
+     * Creates a copy of this grid.
+     */
+    fun copy(): Grid {
+        val copy = Grid(width, height)
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                copy.set(x, y, get(x, y))
+            }
+        }
+        return copy
+    }
+
+    /**
      * Returns all neighbors of a point.
      */
     fun getNeighbors(x: Int, y: Int, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {

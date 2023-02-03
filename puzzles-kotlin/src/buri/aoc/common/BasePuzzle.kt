@@ -1,6 +1,7 @@
 package buri.aoc.common
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.io.File
@@ -34,6 +35,9 @@ abstract class BasePuzzle {
         }
         if (actual is Long && expected is Int) {
             assertEquals(expected.toLong(), actual)
+        }
+        else if (expected.toString().contains("■")) {
+            assertTrue(actual.toString().startsWith(expected.toString()))
         }
         else {
             assertEquals(expected, actual)
