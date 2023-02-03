@@ -27,6 +27,10 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
+
+        for (line in input) {
+
+        }
         return -1
     }
 }
