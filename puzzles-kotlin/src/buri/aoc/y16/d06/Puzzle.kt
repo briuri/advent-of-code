@@ -37,12 +37,12 @@ class Puzzle : BasePuzzle() {
         var message = ""
         for (frequency in frequencies) {
             val minMax = if (part == ONE) frequency.values.max() else frequency.values.min()
-           for (letter in frequency.keys) {
-               if (frequency[letter] == minMax) {
-                   message += letter
-                   break
-               }
-           }
+            for (letter in frequency.keys) {
+                if (frequency[letter] == minMax) {
+                    message += letter
+                    break
+                }
+            }
         }
         return message
     }

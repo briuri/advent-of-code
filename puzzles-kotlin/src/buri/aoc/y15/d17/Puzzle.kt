@@ -27,11 +27,11 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val containers = mutableListOf<Int>()
+        val rawContainers = mutableListOf<Int>()
         for (line in input) {
-            containers.add(line.toInt())
+            rawContainers.add(line.toInt())
         }
-        containers.sorted().reversed()
+        val containers = rawContainers.sorted().reversed()
 
         val end = if (input.size < 10) 25 else 150
         val frequency = mutableMapOf<Int, Int>()
