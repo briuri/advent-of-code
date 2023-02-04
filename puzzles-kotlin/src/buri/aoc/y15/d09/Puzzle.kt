@@ -47,7 +47,7 @@ class Puzzle : BasePuzzle() {
             }
             distances.add(distance)
         }
-        return if (part == ONE) { distances.min() } else { distances.max() }
+        return if (part == ONE) distances.min() else distances.max()
     }
 
 }
