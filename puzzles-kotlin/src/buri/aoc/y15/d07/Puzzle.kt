@@ -37,10 +37,10 @@ class Puzzle : BasePuzzle() {
 
         do {
             val wires = complexWires.filter { it.key !in simpleWires.keys }
-            for (wire in wires) {
-                val answer = simplify(wire.value, simpleWires)
+            for ((wire, value) in wires) {
+                val answer = simplify(value, simpleWires)
                 if (answer != null) {
-                    simpleWires[wire.key] = answer
+                    simpleWires[wire] = answer
                 }
             }
         } while (wires.isNotEmpty())

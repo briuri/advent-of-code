@@ -61,11 +61,11 @@ class Puzzle : BasePuzzle() {
             }
 
             // Apply Effects
-            for (effect in activeEffects) {
-                val spell = spells[effect.key]!!
-                when (effect.key) {
+            for ((effect, duration) in activeEffects) {
+                val spell = spells[effect]!!
+                when (effect) {
                     "S" -> {
-                        myArmor = if (effect.value > 1) spell.meEffect else 0
+                        myArmor = if (duration > 1) spell.meEffect else 0
                     }
                     "P" -> {
                         bossHp -= spell.bossEffect
@@ -74,8 +74,8 @@ class Puzzle : BasePuzzle() {
                         myMana += spell.meEffect
                     }
                 }
-                val tick = activeEffects[effect.key]!! - 1
-                activeEffects[effect.key] = tick
+                val tick = activeEffects[effect]!! - 1
+                activeEffects[effect] = tick
             }
             activeEffects.entries.removeIf { it.value == 0 }
 
@@ -92,9 +92,9 @@ class Puzzle : BasePuzzle() {
                 myHp -= (bossDamage - myArmor).coerceAtLeast(1)
             } else {
                 val allowedSpells = mutableListOf<String>()
-                for (spell in spells) {
-                    if (!activeEffects.containsKey(spell.key) && spell.value.cost <= myMana) {
-                        allowedSpells.add(spell.key)
+                for ((name, spell) in spells) {
+                    if (!activeEffects.containsKey(name) && spell.cost <= myMana) {
+                        allowedSpells.add(name)
                     }
                 }
                 // Lose when we can't afford any spells.

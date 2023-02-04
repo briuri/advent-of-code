@@ -45,16 +45,16 @@ class Puzzle : BasePuzzle() {
             }
 
             var isMatch = true
-            for (pair in expected) {
-                if (!map.containsKey(pair.key)) {
+            for ((name, value) in expected) {
+                if (!map.containsKey(name)) {
                     continue
                 }
-                val condition = if (part == TWO && (pair.key == "cats" || pair.key == "trees")) {
-                    map[pair.key]!! > pair.value
-                } else if (part == TWO && (pair.key == "pomeranians" || pair.key == "goldfish")) {
-                    map[pair.key]!! < pair.value
+                val condition = if (part == TWO && (name == "cats" || name == "trees")) {
+                    map[name]!! > value
+                } else if (part == TWO && (name == "pomeranians" || name == "goldfish")) {
+                    map[name]!! < value
                 } else {
-                    map[pair.key]!! == pair.value
+                    map[name]!! == value
                 }
                 isMatch = isMatch && condition
             }
