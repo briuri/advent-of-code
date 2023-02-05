@@ -1,0 +1,12 @@
+1|11|12|12|33|33|11|11
+
+The first floor contains a thulium generator, a thulium-compatible microchip, a plutonium generator, and a strontium generator.
+The second floor contains a plutonium-compatible microchip and a strontium-compatible microchip.
+The third floor contains a promethium generator, a promethium-compatible microchip, a ruthenium generator, and a ruthenium-compatible microchip.
+The fourth floor contains nothing relevant.
+
+You notice some extra parts on the first floor that weren't listed on the record outside:
+    An elerium generator.
+    An elerium-compatible microchip.
+    A dilithium generator.
+    A dilithium-compatible microchip.
