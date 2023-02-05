@@ -12,17 +12,17 @@ under `/src/test/` when competing).
 
 ## Test Suite Run Time
 
-| Year     | Java  | Kotlin |
-|----------|-------|--------|
-| **2015** | 00:40 | 00:10  |
-| **2016** | 01:00 |        |
-| **2017** | 00:30 |        |
-| **2018** | 00:40 |        |
-| **2019** | 00:15 |        |
-| **2020** | 00:25 |        |
-| **2021** | 01:25 |        |
-| **2022** | 00:40 |        |
-
+| Year      | Java  | Kotlin |
+|-----------|-------|--------|
+| **2015**  | 00:30 | 00:10  |
+| **2016**  | 00:55 |        |
+| **2017**  | 00:30 |        |
+| **2018**  | 00:35 |        |
+| **2019**  | 00:15 |        |
+| **2020**  | 00:25 |        |
+| **2021**  | 01:40 |        |
+| **2022**  | 00:50 |        |
+| **Total** | 05:40 | 00:10  |
 ## Leaderboard Visualization
 
 In addition to puzzle solutions, this project also contains a simple visualization (under `viz-java/src`) of the 
