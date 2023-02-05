@@ -1,7 +1,6 @@
 package buri.aoc.common
 
 import java.security.MessageDigest
-import javax.xml.bind.DatatypeConverter
 
 /**
  * Utility class for MD5 hashes with a certain number of leading zeroes.
@@ -29,6 +28,11 @@ class MD5 {
                 return ""
             }
         }
-        return DatatypeConverter.printHexBinary(bytes)
+        val builder = StringBuilder()
+        for (b in bytes) {
+            builder.append(Character.forDigit(b.toInt() shr 4 and 0xF, 16))
+            builder.append(Character.forDigit(b.toInt() and 0xF, 16))
+        }
+        return builder.toString()
     }
 }
