@@ -27,7 +27,7 @@ class Puzzle : BasePuzzle() {
         var number = input[0]
         val times = if (part == ONE) 40 else 50
         val buffer = StringBuilder()
-        for (i in 0 until times) {
+        for (time in 0 until times) {
             buffer.clear()
             var i = 0
             while (i < number.length) {

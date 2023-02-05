@@ -60,8 +60,8 @@ class Puzzle : BasePuzzle() {
                     for (ring2 in rings) {
                         val cost = weapon.cost + armor.cost + ring1.cost + ring2.cost
                         val damage = weapon.damage + armor.damage + ring1.damage + ring2.damage
-                        val armor = weapon.armor + armor.armor + ring1.armor + ring2.armor
-                        val me = Mob(100, damage, armor)
+                        val localArmor = weapon.armor + armor.armor + ring1.armor + ring2.armor
+                        val me = Mob(100, damage, localArmor)
                         if (isBossDefeated(me, boss)) {
                             minCost = minCost.coerceAtMost(cost)
                         }
