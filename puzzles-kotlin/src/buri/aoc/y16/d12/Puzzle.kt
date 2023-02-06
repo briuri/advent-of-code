@@ -28,8 +28,9 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         // Reduce assembunny to Fibonacci algorithm
         if (part == TWO) {
-            val times = input[2].split(" ")[1].toInt() + input[5].split(" ")[1].toInt()
-            val offset = input[16].split(" ")[1].toInt() * input[17].split(" ")[1].toInt()
+            val getIntValue = { line: String -> line.split(" ")[1].toInt() }
+            val times = getIntValue(input[2]) + getIntValue(input[5])
+            val offset = getIntValue(input[16]) + getIntValue(input[17])
             var a = 1L
             var b = 1L
             for (i in 0 .. times) {
