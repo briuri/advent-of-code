@@ -27,10 +27,11 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
+        val md5 = MD5()
         val password = StringBuilder("########")
         var index = 0
         while (password.contains('#')) {
-            val hash = MD5().getHash(input[0] + index.toString(), 5)
+            val hash = md5.getHashWithLeadingZeroes(input[0] + index.toString(), 5)
             if (hash.isNotEmpty()) {
                 if (part == ONE) {
                     password[password.indexOf("#")] = hash[5]

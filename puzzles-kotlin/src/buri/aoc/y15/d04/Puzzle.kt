@@ -15,7 +15,7 @@ class Puzzle : BasePuzzle() {
     @Test
     fun runPart1() {
         assertRun(609043, 1)
-        //assertRun(117946, 0, true)
+        assertRun(117946, 0, true)
     }
     @Test
     fun runPart2() {
@@ -27,10 +27,11 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
+        val md5 = MD5()
         val leadingZeroes = if (part == ONE) 5 else 6
         var answer = 0
         while (true) {
-            val hash = MD5().getHash(input[0] + answer.toString(), leadingZeroes)
+            val hash = md5.getHashWithLeadingZeroes(input[0] + answer.toString(), leadingZeroes)
             if (hash.isNotEmpty()) {
                 return answer
             }

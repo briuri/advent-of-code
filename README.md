@@ -14,7 +14,7 @@ under `/src/test/` when competing).
 
 | Year      | Java  | Kotlin |
 |-----------|-------|--------|
-| **2015**  | 00:30 | 00:10  |
+| **2015**  | 00:30 | 00:15  |
 | **2016**  | 00:55 |        |
 | **2017**  | 00:30 |        |
 | **2018**  | 00:35 |        |
@@ -22,7 +22,7 @@ under `/src/test/` when competing).
 | **2020**  | 00:25 |        |
 | **2021**  | 01:40 |        |
 | **2022**  | 00:50 |        |
-| **Total** | 05:40 | 00:10  |
+| **Total** | 05:40 | 00:15  |
 ## Leaderboard Visualization
 
 In addition to puzzle solutions, this project also contains a simple visualization (under `viz-java/src`) of the 
