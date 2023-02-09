@@ -53,7 +53,7 @@ class Puzzle : BasePuzzle() {
             else {
                 "."
             }
-            grid.set(point, value)
+            grid[point] = value
         }
 //        grid.print()
         /*
