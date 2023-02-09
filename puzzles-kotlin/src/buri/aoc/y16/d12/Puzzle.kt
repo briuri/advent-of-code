@@ -41,7 +41,7 @@ class Puzzle : BasePuzzle() {
             return a + offset
         }
         val registers = Assembunny()
-        registers.process(input)
-        return registers["a"]!!
+        registers.process(input.toMutableList())
+        return registers["a"]
     }
 }
