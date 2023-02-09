@@ -2,7 +2,7 @@ package buri.aoc.common
 
 /**
  * Interpreter code for y16 Assembunny puzzles
- * (y16d12, y16d23)
+ * (y16d12, y16d23, y16d25)
  */
 class Assembunny {
     private val registers = mutableMapOf<String, Long>()
@@ -64,6 +64,10 @@ class Assembunny {
             else if (command[0] == "mul") {
                 registers[command[3]] = getValue(command[1]) * getValue(command[2])
                 pointer++
+            }
+            // y16d25: New out command
+            else if (command[0] == "out") {
+                println(getValue(command[1]))
             }
         }
     }
