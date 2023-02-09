@@ -11,42 +11,42 @@ class Grid(val width: Int, val height: Int) {
     /**
      * Gets a value in the grid.
      */
-    fun get(x: Int, y: Int): String {
+    operator fun get(x: Int, y: Int): String {
         return (grid[x][y])
     }
 
     /**
      * Gets a value in the grid.
      */
-    fun get(pair: Pair<Int, Int>): String {
+    operator fun get(pair: Pair<Int, Int>): String {
         return (grid[pair.first][pair.second])
     }
 
     /**
      * Sets a value in the grid.
      */
-    fun set(point: Pair<Int, Int>, value: Int) {
+    operator fun set(point: Pair<Int, Int>, value: Int) {
         set(point.first, point.second, value)
     }
 
     /**
      * Sets a value in the grid.
      */
-    fun set(point: Pair<Int, Int>, value: String) {
+    operator fun set(point: Pair<Int, Int>, value: String) {
         set(point.first, point.second, value)
     }
 
     /**
      * Sets a value in the grid.
      */
-    fun set(x: Int, y: Int, value: Int) {
+    operator fun set(x: Int, y: Int, value: Int) {
         set(x, y, value.toString())
     }
 
     /**
      * Sets a value in the grid.
      */
-    fun set(x: Int, y: Int, value: String) {
+    operator fun set(x: Int, y: Int, value: String) {
         grid[x][y] = value
     }
 
@@ -68,7 +68,7 @@ class Grid(val width: Int, val height: Int) {
         val copy = Grid(width, height)
         for (y in 0 until height) {
             for (x in 0 until width) {
-                copy.set(x, y, get(x, y))
+                copy[x, y] = get(x, y)
             }
         }
         return copy
@@ -103,7 +103,7 @@ class Grid(val width: Int, val height: Int) {
     /**
      * Return true if the point is in bounds.
      */
-    fun isInBounds(x: Int, y: Int): Boolean {
+    private fun isInBounds(x: Int, y: Int): Boolean {
         return (x in 0 until width) && (y in 0 until height)
     }
 

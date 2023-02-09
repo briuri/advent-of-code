@@ -35,21 +35,21 @@ class Puzzle : BasePuzzle() {
 
             for (x in xRange.first..xRange.second) {
                 for (y in yRange.first..yRange.second) {
-                    val value = lights.get(x, y).toInt()
+                    val value = lights[x, y].toInt()
                     if (part == ONE) {
                         when (tokens[1]) {
-                            "on" -> lights.set(x, y, 1)
-                            "off" -> lights.set(x, y, 0)
+                            "on" -> lights[x, y] = 1
+                            "off" -> lights[x, y] = 0
                             else -> {
                                 val newValue = if (value == 0) 1 else 0
-                                lights.set(x, y, newValue)
+                                lights[x, y] = newValue
                             }
                         }
                     } else {
                         when (tokens[1]) {
-                            "on" -> lights.set(x, y, value + 1)
-                            "off" -> lights.set(x, y, (value - 1).coerceAtLeast(0))
-                            else -> lights.set(x, y, value + 2)
+                            "on" -> lights[x, y] = value + 1
+                            "off" -> lights[x, y] = (value - 1).coerceAtLeast(0)
+                            else -> lights[x, y] = value + 2
                         }
                     }
                 }

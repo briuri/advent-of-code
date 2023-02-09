@@ -32,7 +32,7 @@ class Puzzle : BasePuzzle() {
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.withIndex()) {
                 val onOff = if (value == '#') 1 else 0
-                grid.set(x, y, onOff)
+                grid[x, y] = onOff
             }
         }
 
@@ -48,9 +48,9 @@ class Puzzle : BasePuzzle() {
                 for (x in 0 until grid.width) {
                     var onCount = 0
                     for (neighbor in grid.getNeighbors(x, y, true)) {
-                        onCount += grid.get(neighbor).toInt()
+                        onCount += grid[neighbor].toInt()
                     }
-                    val prev = grid.get(x, y).toInt()
+                    val prev = grid[x, y].toInt()
                     val next = if (part == TWO && Pair(x, y) in corners) {
                         1
                     }
@@ -63,7 +63,7 @@ class Puzzle : BasePuzzle() {
                     else {
                         prev
                     }
-                    nextGrid.set(x, y, next)
+                    nextGrid[x, y] = next
                 }
             }
             grid = nextGrid

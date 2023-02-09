@@ -33,7 +33,7 @@ class Puzzle : BasePuzzle() {
                 val h = line.split(" ")[1].split("x")[1].toInt()
                 for (y in 0 until h) {
                     for (x in 0 until w) {
-                        grid.set(x, y, 1)
+                        grid[x, y] = 1
                     }
                 }
             } else {
@@ -43,15 +43,15 @@ class Puzzle : BasePuzzle() {
                 for (i in 0 until amount) {
                     val nextGrid = grid.copy()
                     if (isRow) {
-                        nextGrid.set(0, which, grid.get(grid.width - 1, which))
+                        nextGrid[0, which] = grid[grid.width - 1, which]
                         for (x in (grid.width - 1) downTo 1) {
-                            nextGrid.set(x, which, grid.get(x - 1, which))
+                            nextGrid[x, which] = grid[x - 1, which]
                         }
                     }
                     else {
-                        nextGrid.set(which, 0, grid.get(which, grid.height - 1))
+                        nextGrid[which, 0] = grid[which, grid.height - 1]
                         for (y in (grid.height - 1) downTo 1) {
-                            nextGrid.set(which, y, grid.get(which, y - 1))
+                            nextGrid[which, y] = grid[which, y - 1]
                         }
                     }
                     grid = nextGrid
@@ -68,7 +68,7 @@ class Puzzle : BasePuzzle() {
         val builder = StringBuilder()
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
-                val value = if (grid.get(x, y) == "1") '■' else ' '
+                val value = if (grid[x, y] == "1") '■' else ' '
                 builder.append(value)
             }
             builder.append("\n")

@@ -28,30 +28,30 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): String {
         val grid1 = Grid(3, 3)
-        grid1.set(0, 0, "1")
-        grid1.set(1, 0, "2")
-        grid1.set(2, 0, "3")
-        grid1.set(0, 1, "4")
-        grid1.set(1, 1, "5")
-        grid1.set(2, 1, "6")
-        grid1.set(0, 2, "7")
-        grid1.set(1, 2, "8")
-        grid1.set(2, 2, "9")
+        grid1[0, 0] = "1"
+        grid1[1, 0] = "2"
+        grid1[2, 0] = "3"
+        grid1[0, 1] = "4"
+        grid1[1, 1] = "5"
+        grid1[2, 1] = "6"
+        grid1[0, 2] = "7"
+        grid1[1, 2] = "8"
+        grid1[2, 2] = "9"
 
         val grid2 = Grid(5, 5)
-        grid2.set(2, 0, "1")
-        grid2.set(1, 1, "2")
-        grid2.set(2, 1, "3")
-        grid2.set(3, 1, "4")
-        grid2.set(0, 2, "5")
-        grid2.set(1, 2, "6")
-        grid2.set(2, 2, "7")
-        grid2.set(3, 2, "8")
-        grid2.set(4, 2, "9")
-        grid2.set(1, 3, "A")
-        grid2.set(2, 3, "B")
-        grid2.set(3, 3, "C")
-        grid2.set(2, 4, "D")
+        grid2[2, 0] = "1"
+        grid2[1, 1] = "2"
+        grid2[2, 1] = "3"
+        grid2[3, 1] = "4"
+        grid2[0, 2] = "5"
+        grid2[1, 2] = "6"
+        grid2[2, 2] = "7"
+        grid2[3, 2] = "8"
+        grid2[4, 2] = "9"
+        grid2[1, 3] = "A"
+        grid2[2, 3] = "B"
+        grid2[3, 3] = "C"
+        grid2[2, 4] = "D"
         val grid = if (part == ONE) grid1 else grid2
 
         var key = if (part == ONE) Pair(1, 1) else Pair(0, 2)
@@ -73,7 +73,7 @@ class Puzzle : BasePuzzle() {
                     key = nextKey
                 }
             }
-            code += grid.get(key)
+            code += grid[key]
         }
         return code
     }
@@ -82,6 +82,6 @@ class Puzzle : BasePuzzle() {
      * Checks if a point is in bounds, using different rules for Part 2.
      */
     private fun isInBounds(part: Part, grid: Grid, point: Pair<Int, Int>): Boolean {
-        return grid.isInBounds(point) && (part == ONE || grid.get(point) != "0")
+        return grid.isInBounds(point) && (part == ONE || grid[point] != "0")
     }
 }
