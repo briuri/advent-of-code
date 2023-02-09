@@ -13,7 +13,7 @@ class MD5 {
     /**
      * Creates an MD5 hash of some string. Rehashes multiple times before converting to a lowercase
      * hex string.
-     * (y16d14)
+     * (y16d14, y16d17)
      */
     fun getMultipleHashes(input: String, extraHashes: Int = 0): String {
         var hash = digest.digest(input.toByteArray())

@@ -33,7 +33,6 @@ class Puzzle : BasePuzzle() {
         }
         val end = State(0, builder.toString())
 
-        // Do a BFS to get to the final state.
         val frontier = mutableListOf<State>()
         val visited = mutableSetOf<String>()
         frontier.add(start)
