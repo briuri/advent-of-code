@@ -25,6 +25,20 @@ class Grid(val width: Int, val height: Int) {
     /**
      * Sets a value in the grid.
      */
+    fun set(point: Pair<Int, Int>, value: Int) {
+        set(point.first, point.second, value)
+    }
+
+    /**
+     * Sets a value in the grid.
+     */
+    fun set(point: Pair<Int, Int>, value: String) {
+        set(point.first, point.second, value)
+    }
+
+    /**
+     * Sets a value in the grid.
+     */
     fun set(x: Int, y: Int, value: Int) {
         set(x, y, value.toString())
     }
