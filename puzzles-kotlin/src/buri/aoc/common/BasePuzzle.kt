@@ -5,6 +5,7 @@ import org.junit.Assert.assertTrue
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.io.File
+import java.io.FileNotFoundException
 import java.util.*
 
 /**
@@ -28,8 +29,14 @@ abstract class BasePuzzle {
         val part = if (getPart() == "1") Part.ONE else Part.TWO
 
         val path = "data/y$year/$day-$fileIndex.txt"
-        val input = File(path).readLines()
-        val actual = this.run(part, input)
+        var input: List<String>?
+        try {
+            input = File(path).readLines()
+        }
+        catch (e: FileNotFoundException) {
+            input = File("data/zNew/$day-$fileIndex.txt").readLines()
+        }
+        val actual = this.run(part, input!!)
         if (toConsole) {
             toConsole(actual)
         }
