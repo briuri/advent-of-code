@@ -77,6 +77,13 @@ class Grid(val width: Int, val height: Int) {
     /**
      * Returns all neighbors of a point.
      */
+    fun getNeighbors(current: Pair<Int, Int>, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
+        return getNeighbors(current.first, current.second, includeDiagonals)
+    }
+
+    /**
+     * Returns all neighbors of a point.
+     */
     fun getNeighbors(x: Int, y: Int, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
         val list = mutableListOf<Pair<Int, Int>>()
         list.add(Pair(x - 1, y))

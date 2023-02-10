@@ -34,16 +34,16 @@ class Puzzle : BasePuzzle() {
         val end = State(0, builder.toString())
 
         val frontier = mutableListOf<State>()
-        val visited = mutableSetOf<String>()
         frontier.add(start)
+        val visited = mutableSetOf<State>()
         var current: State?
         while (frontier.isNotEmpty()) {
             current = frontier.removeFirst()
-            visited.add(current.toString())
+            visited.add(current)
             if (current == end) {
                 return current.steps
             }
-            for (next in current.getNextStates().filter { !visited.contains(it.toString()) }) {
+            for (next in current.getNextStates().filter { !visited.contains(it) }) {
                 frontier.add(next)
             }
             frontier.sortByDescending { it.getSortOrder() }

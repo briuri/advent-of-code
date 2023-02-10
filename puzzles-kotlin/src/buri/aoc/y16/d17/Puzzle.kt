@@ -35,10 +35,8 @@ class Puzzle : BasePuzzle() {
         val end = Pair(3,3)
 
         val frontier = mutableListOf<Position>()
-        val visited = mutableSetOf<Position>()
         frontier.add(start)
-        visited.add(start)
-
+        val visited = mutableSetOf<Position>()
         var current: Position?
         while (frontier.isNotEmpty()) {
             current = frontier.removeFirst()

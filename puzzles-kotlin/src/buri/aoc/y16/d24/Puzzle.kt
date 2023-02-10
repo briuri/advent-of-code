@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Grid
 import buri.aoc.common.Part
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.Pathfinder
 import org.junit.Test
 
 /**
@@ -37,12 +38,17 @@ class Puzzle : BasePuzzle() {
             }
         }
 
+        // Use a pathfinder that avoids walls.
+        val pathfinder = Pathfinder { current ->
+            grid.getNeighbors(current).filter { grid[it] != "#" }
+        }
+
         // Compute all the interim steps upfront to save time.
         val steps = mutableMapOf<String, Int>()
         for (i in locations.keys) {
             for (j in locations.keys.filter { it != i }) {
                 if (steps["$i$j"] == null) {
-                    steps["$i$j"] = countSteps(grid, locations[i]!!, locations[j]!!)
+                    steps["$i$j"] = pathfinder.countSteps(locations[i]!!, locations[j]!!)
                     steps["$j$i"] = steps["$i$j"]!!
                 }
             }
@@ -62,34 +68,5 @@ class Puzzle : BasePuzzle() {
             minSteps = minSteps.coerceAtMost(pathSteps)
         }
         return minSteps
-    }
-
-    /**
-     * Counts the minimum number of steps to get from one point to another.
-     */
-    private fun countSteps(grid: Grid, start: Pair<Int, Int>, end: Pair<Int, Int>): Int {
-        val frontier = mutableListOf<Pair<Int, Int>>()
-        val stepsTo = mutableMapOf<Pair<Int, Int>, Int>()
-        frontier.add(start)
-        stepsTo[start] = 0
-        var current: Pair<Int, Int>?
-        while (frontier.isNotEmpty()) {
-            current = frontier.removeFirst()
-            if (current == end) {
-                break
-            }
-            for (next in getNeighbors(grid, current).filter { !stepsTo.containsKey(it) }) {
-                frontier.add(next)
-                stepsTo[next] = stepsTo[current]!! + 1
-            }
-        }
-        return stepsTo[end]!!
-    }
-
-    /**
-     * Finds valid neighbors for a point
-     */
-    private fun getNeighbors(grid: Grid, current: Pair<Int, Int>): List<Pair<Int, Int>> {
-        return grid.getNeighbors(current.first, current.second).filter { grid[it] != "#" }
     }
 }

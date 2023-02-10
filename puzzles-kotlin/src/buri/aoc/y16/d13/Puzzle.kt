@@ -3,6 +3,7 @@ package buri.aoc.y16.d13
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.Pathfinder
 import org.junit.Test
 
 /**
@@ -29,37 +30,28 @@ class Puzzle : BasePuzzle() {
         val start = Pair(1, 1)
         val end = Pair(input[1].split(",")[0].toInt(), input[1].split(",")[1].toInt())
 
-        val frontier = mutableListOf<Pair<Int, Int>>()
-        val stepsTo = mutableMapOf<Pair<Int, Int>, Int>()
-        frontier.add(start)
-        stepsTo[start] = 0
-        var current: Pair<Int, Int>?
-        while (frontier.isNotEmpty()) {
-            current = frontier.removeFirst()
-            if (current == end) {
-                break
-            }
-            for (next in getNeighbors(magicNumber, current).filter { !stepsTo.containsKey(it) }) {
-                frontier.add(next)
-                stepsTo[next] = stepsTo[current]!! + 1
-            }
+        // Use a pathfinder that uses the magicNumber to determine which spots are open.
+        val pathfinder = Pathfinder { current ->
+            getNeighbors(current).filter { isTraversable(magicNumber, it) }
         }
+
+        val steps = pathfinder.countSteps(start, end)
         if (part == ONE) {
-            return stepsTo[end]!!
+            return steps
         }
-        return stepsTo.filter { it.value <= 50 }.size
+        return pathfinder.stepsTo.filter { it.value <= 50 }.size
     }
 
     /**
      * Finds legal places to move from this spot.
      */
-    private fun getNeighbors(magicNumber: Int, current: Pair<Int, Int>): List<Pair<Int, Int>> {
+    private fun getNeighbors(current: Pair<Int, Int>): List<Pair<Int, Int>> {
         val list = mutableListOf<Pair<Int, Int>>()
         list.add(current.copy(first = current.first - 1))
         list.add(current.copy(first = current.first + 1))
         list.add(current.copy(second = current.second - 1))
         list.add(current.copy(second = current.second + 1))
-        return list.filter { isTraversable(magicNumber, it) }
+        return list
     }
 
     /**
