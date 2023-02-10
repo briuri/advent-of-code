@@ -17,8 +17,6 @@ class Puzzle : BasePuzzle() {
     }
     @Test
     fun runPart2() {
-        // hcedfgab
-        // hcebgfda
         assertRun("egcdahbf", 0, true)
     }
 
@@ -95,7 +93,7 @@ class Puzzle : BasePuzzle() {
                 var x = tokens[2].toInt()
                 var y = tokens[5].toInt()
                 if (isReverse) {
-                    x = y.also { y = x}
+                    x = y.also { y = x }
                 }
                 val value = builder[x]
                 builder.deleteCharAt(x)

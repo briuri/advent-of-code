@@ -83,8 +83,4 @@ class Puzzle : BasePuzzle() {
         return list
     }
 }
-data class Position(val point: Pair<Int, Int>, val path: String) {
-    override fun toString(): String {
-        return ("$point-$path")
-    }
-}
+data class Position(val point: Pair<Int, Int>, val path: String)

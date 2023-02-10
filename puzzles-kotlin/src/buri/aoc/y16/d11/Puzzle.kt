@@ -51,8 +51,7 @@ class Puzzle : BasePuzzle() {
         return -1
     }
 }
-
-class State(val steps: Int, private var state: String) {
+data class State(val steps: Int, private var state: String) {
     val totalPairs = (state.length - 1) / 3
     private val elevator = Character.getNumericValue(state[0])
 

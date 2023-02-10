@@ -34,13 +34,13 @@ class Puzzle : BasePuzzle() {
             position.turn(command[0])
             for (i in 0 until command.drop(1).toInt()) {
                 if (part == TWO && visited.contains(position.coords)) {
-                    return position.getBlocks()
+                    return position.getManhattanDistance()
                 }
                 visited.add(position.coords)
                 position.move()
             }
         }
-        return position.getBlocks()
+        return position.getManhattanDistance()
     }
 }
 enum class Direction { NORTH, EAST, SOUTH, WEST }
@@ -84,7 +84,7 @@ data class MutablePosition(var coords: Pair<Int, Int>, var facing: Direction) {
     /**
      * Get the Manhattan distance of this position from the origin.
      */
-    fun getBlocks(): Int {
+    fun getManhattanDistance(): Int {
         return coords.first.absoluteValue + coords.second.absoluteValue
     }
 }
