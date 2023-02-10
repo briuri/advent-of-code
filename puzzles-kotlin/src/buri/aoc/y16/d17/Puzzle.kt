@@ -65,7 +65,7 @@ class Puzzle : BasePuzzle() {
      * Finds valid places to go from here.
      */
     private fun getNeighbors(md5: MD5, salt: String, current: Position): List<Position> {
-        val hash = md5.getMultipleHashes(salt + current.path).substring(0, 4)
+        val hash = md5.getHash(salt + current.path).substring(0, 4)
         val list = mutableListOf<Position>()
         // Order: U D L R
         with (current) {

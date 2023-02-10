@@ -15,7 +15,7 @@ class MD5 {
      * hex string.
      * (y16d14, y16d17)
      */
-    fun getMultipleHashes(input: String, extraHashes: Int = 0): String {
+    fun getHash(input: String, extraHashes: Int = 0): String {
         var hash = digest.digest(input.toByteArray())
         for (i in 0 until extraHashes) {
            hash = reHash(hash)

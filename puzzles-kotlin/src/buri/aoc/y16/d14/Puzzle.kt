@@ -38,14 +38,14 @@ class Puzzle : BasePuzzle() {
         var keys = 0
         while (keys != 64) {
             if (hashes[index] == null) {
-                hashes[index] = md5.getMultipleHashes(salt + index, stretches)
+                hashes[index] = md5.getHash(salt + index, stretches)
             }
             val firstTriple = tripleRegEx.find(hashes[index]!!)
             if (firstTriple != null) {
                 val repeating = firstTriple.value[0]
                 for (quintIndex in index + 1 until index + 1000) {
                     if (hashes[quintIndex] == null) {
-                        hashes[quintIndex] = md5.getMultipleHashes(salt + quintIndex, stretches)
+                        hashes[quintIndex] = md5.getHash(salt + quintIndex, stretches)
                     }
                     val quintRegEx = "($repeating)\\1{4}".toRegex()
                     if (quintRegEx.containsMatchIn(hashes[quintIndex]!!)) {
