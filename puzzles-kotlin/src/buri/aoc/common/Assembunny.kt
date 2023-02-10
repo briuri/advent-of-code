@@ -3,6 +3,8 @@ package buri.aoc.common
 /**
  * Interpreter code for y16 Assembunny puzzles
  * (y16d12, y16d23, y16d25)
+ *
+ * @author Brian Uri!
  */
 class Assembunny(input: List<String>) {
     private val instructions: MutableList<String>

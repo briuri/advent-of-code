@@ -3,7 +3,7 @@ package buri.aoc.common
 import java.security.MessageDigest
 
 /**
- * Utility class for MD5 hashes with a certain number of leading zeroes.
+ * Utility class for MD5 hashes.
  *
  * @author Brian Uri!
  */
