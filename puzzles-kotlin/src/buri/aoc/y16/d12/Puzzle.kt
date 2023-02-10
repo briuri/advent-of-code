@@ -40,8 +40,8 @@ class Puzzle : BasePuzzle() {
             }
             return a + offset
         }
-        val registers = Assembunny()
-        registers.process(input.toMutableList())
+        val registers = Assembunny(input)
+        registers.run()
         return registers["a"]
     }
 }

@@ -25,9 +25,9 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val registers = Assembunny()
+        val registers = Assembunny(input)
         registers["a"] = if (part == ONE) 7L else 12L
-        registers.process(input.toMutableList())
+        registers.run()
         return registers["a"]
     }
 }
