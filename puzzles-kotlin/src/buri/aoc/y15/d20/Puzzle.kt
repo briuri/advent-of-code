@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
         val target = input[0].toInt()
         val presents = if (part == ONE) 10 else 11
         val upperBound = 710000 // Lowered this to speed up run time after getting the right answers
-        val houses = Array(upperBound) { _: Int -> 0 }
+        val houses = Array(upperBound) { 0 }
         for (elf in 1 until upperBound) {
              for (house in elf until upperBound step elf) {
                  if (part == TWO && house > elf * 50) {

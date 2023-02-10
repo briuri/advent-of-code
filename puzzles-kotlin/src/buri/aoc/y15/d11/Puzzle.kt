@@ -70,7 +70,7 @@ class Puzzle : BasePuzzle() {
      * Searches for forbidden letters
      */
     private fun isConfusing(password: String): Boolean {
-        return (password.contains('i') || password.contains('l') || password.contains('l'))
+        return password.any { it in "ilo" }
     }
 
     /**

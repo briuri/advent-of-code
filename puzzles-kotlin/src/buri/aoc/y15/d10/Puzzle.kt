@@ -38,8 +38,7 @@ class Puzzle : BasePuzzle() {
                     i++
                     count++
                 }
-                buffer.append(count)
-                buffer.append(value)
+                buffer.append(count).append(value)
             }
             number = buffer.toString()
         }

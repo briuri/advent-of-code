@@ -62,11 +62,9 @@ class Puzzle : BasePuzzle() {
                         steps++
                     }
                 }
-                if (current == "e") {
-                    return steps
-                }
-                if (previous == current) {
-                    break
+                when (current) {
+                    "e" -> return steps
+                    previous -> break
                 }
             }
         }

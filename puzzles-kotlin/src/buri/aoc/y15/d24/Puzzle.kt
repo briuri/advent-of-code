@@ -55,7 +55,7 @@ class Puzzle : BasePuzzle() {
                 val option = mutableListOf<Long>()
                 option.add(weights[i])
                 permutations.add(option)
-            } else if (weights[i] <= targetWeight) {
+            } else if (weights[i] < targetWeight) {
                 for (option in getPermutations(targetWeight - weights[i], weights.subList(i + 1, weights.size))) {
                     option.add(0, weights[i])
                     permutations.add(option)

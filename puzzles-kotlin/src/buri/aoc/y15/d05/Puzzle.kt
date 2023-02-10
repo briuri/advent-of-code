@@ -42,13 +42,7 @@ class Puzzle : BasePuzzle() {
      * Checks if a word has at least 3 vowels
      */
     private fun hasVowels(word: String): Boolean {
-        var count = 0
-        for (value in word) {
-            if (value in "aeiou") {
-                count++
-            }
-        }
-        return count >= 3
+        return word.filter { it in "aeiou" }.length >= 3
     }
 
     /**
