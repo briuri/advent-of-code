@@ -111,6 +111,13 @@ abstract class BasePuzzle {
         }
         return permutations
     }
+
+    /**
+     * Collapses multiple whitespace to a single whitespace.
+     */
+    fun collapseWhitespace(string: String): String {
+        return string.replace("\\s+".toRegex(), " ").trim()
+    }
 }
 
 /**

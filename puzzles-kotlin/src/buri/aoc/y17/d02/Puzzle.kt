@@ -29,7 +29,7 @@ class Puzzle : BasePuzzle() {
         var sum = 0
         var divisionSum = 0
         for (line in input) {
-            val tokens = line.replace("\\s+".toRegex(), " ").split(" ")
+            val tokens = collapseWhitespace(line).split(" ")
             val row = tokens.map { it.toInt() }.sorted()
             sum += row.max() - row.min()
 
