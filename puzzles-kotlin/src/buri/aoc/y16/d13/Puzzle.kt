@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import buri.aoc.common.Pathfinder
+import buri.aoc.common.getNeighbors
 import org.junit.Test
 
 /**
@@ -32,7 +33,7 @@ class Puzzle : BasePuzzle() {
 
         // Use a pathfinder that uses the magicNumber to determine which spots are open.
         val pathfinder = Pathfinder { current ->
-            getNeighbors(current).filter { isTraversable(magicNumber, it) }
+            current.getNeighbors(false).filter { isTraversable(magicNumber, it) }
         }
 
         val steps = pathfinder.countSteps(start, end)
@@ -40,18 +41,6 @@ class Puzzle : BasePuzzle() {
             return steps
         }
         return pathfinder.stepsTo.filter { it.value <= 50 }.size
-    }
-
-    /**
-     * Finds legal places to move from this spot.
-     */
-    private fun getNeighbors(current: Pair<Int, Int>): List<Pair<Int, Int>> {
-        val list = mutableListOf<Pair<Int, Int>>()
-        list.add(current.copy(first = current.first - 1))
-        list.add(current.copy(first = current.first + 1))
-        list.add(current.copy(second = current.second - 1))
-        list.add(current.copy(second = current.second + 1))
-        return list
     }
 
     /**

@@ -119,3 +119,21 @@ abstract class BasePuzzle {
 enum class Part(val number: Int) {
     ONE(1), TWO(2)
 }
+
+/**
+ * Extension function for getting neighbors of a point.
+ */
+fun Pair<Int, Int>.getNeighbors(includeDiagonals: Boolean = false): MutableList<Pair<Int, Int>> {
+    val list = mutableListOf<Pair<Int, Int>>()
+    list.add(Pair(this.first - 1, this.second))
+    list.add(Pair(this.first + 1, this.second))
+    list.add(Pair(this.first, this.second - 1))
+    list.add(Pair(this.first, this.second + 1))
+    if (includeDiagonals) {
+        list.add(Pair(this.first - 1, this.second - 1))
+        list.add(Pair(this.first + 1, this.second - 1))
+        list.add(Pair(this.first - 1, this.second + 1))
+        list.add(Pair(this.first + 1, this.second + 1))
+    }
+    return list
+}

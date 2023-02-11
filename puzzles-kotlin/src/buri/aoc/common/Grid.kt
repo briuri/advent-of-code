@@ -85,17 +85,7 @@ class Grid(val width: Int, val height: Int) {
      * Returns all neighbors of a point.
      */
     fun getNeighbors(x: Int, y: Int, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
-        val list = mutableListOf<Pair<Int, Int>>()
-        list.add(Pair(x - 1, y))
-        list.add(Pair(x + 1, y))
-        list.add(Pair(x, y - 1))
-        list.add(Pair(x, y + 1))
-        if (includeDiagonals) {
-            list.add(Pair(x - 1, y - 1))
-            list.add(Pair(x + 1, y - 1))
-            list.add(Pair(x - 1, y + 1))
-            list.add(Pair(x + 1, y + 1))
-        }
+        val list = Pair(x, y).getNeighbors(includeDiagonals)
         list.removeIf { pair -> !isInBounds(pair.first, pair.second) }
         return list
     }
