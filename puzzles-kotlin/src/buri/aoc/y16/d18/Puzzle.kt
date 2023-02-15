@@ -27,7 +27,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var rows = if (input[0].length < 20) 10 else 40
         if (part == TWO) {
-            rows = 400000
+            rows = 400_000
         }
 
         var row = input[0]

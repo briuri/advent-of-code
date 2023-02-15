@@ -30,7 +30,7 @@ class Puzzle : BasePuzzle() {
         val multiplesB = if (part == ONE) 1L else 8L
         val genA = Generator(input[0].split(" ")[4].toLong(), 16807L, multiplesA)
         val genB = Generator(input[1].split(" ")[4].toLong(), 48271L, multiplesB)
-        val times = if (part == ONE) 40000000 else 5000000
+        val times = if (part == ONE) 40_000_000 else 5_000_000
         var same = 0
         for (time in 0 until times) {
             if (genA.getNextLeastBits() == genB.getNextLeastBits()) {

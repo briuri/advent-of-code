@@ -27,7 +27,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         var order = "abcdefghijklmnop".toCharArray()
 
-        val numDances = if (part == ONE) 1 else 1000000000
+        val numDances = if (part == ONE) 1 else 1_000_000_000
         val visited = mutableListOf<String>()
         for (i in 0 until numDances) {
             for (command in input[0].split(",")) {
