@@ -14,9 +14,9 @@ data class MutablePosition(var coords: Pair<Int, Int>, var facing: Direction) {
      */
     fun move() {
         coords = when (facing) {
-            NORTH -> coords.copy(second = coords.second + 1)
+            NORTH -> coords.copy(second = coords.second - 1)
             EAST -> coords.copy(first = coords.first + 1)
-            SOUTH -> coords.copy(second = coords.second - 1)
+            SOUTH -> coords.copy(second = coords.second + 1)
             WEST -> coords.copy(first = coords.first - 1)
         }
     }

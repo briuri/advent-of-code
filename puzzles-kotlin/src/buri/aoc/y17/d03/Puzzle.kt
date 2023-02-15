@@ -69,7 +69,6 @@ class SpiralGrid {
         while (squares[current.coords]!! < threshold) {
             current.move()
             squares[current.coords] = getNeighborSum()
-            println(current.toString() + "=" + squares[current.coords])
             if (shouldTurnLeft()) {
                 current.turn('L')
             }
