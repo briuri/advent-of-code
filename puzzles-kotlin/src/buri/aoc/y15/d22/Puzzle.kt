@@ -29,7 +29,7 @@ class Puzzle : BasePuzzle() {
         val bossDamage = input[1].split(" ")[1].toInt()
         var minMana = Int.MAX_VALUE
         // Experimented with upper bound until I got a stable answer
-        for (i in 0..60_000) {
+        for (i in 0..70_000) {
             minMana = minMana.coerceAtMost(runBattle(part, bossMaxHp, bossDamage, minMana))
         }
         return minMana
