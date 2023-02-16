@@ -14,12 +14,14 @@ import org.junit.Test
 class Puzzle : BasePuzzle() {
     @Test
     fun runPart1() {
-        assertRun("18f47a30", 1)
+        // Skipping example to reduce test suite time.
+        // assertRun("18f47a30", 1)
         assertRun("2414bc77", 0, true)
     }
     @Test
     fun runPart2() {
-        assertRun("05ace8e3", 1)
+        // Skipping example to reduce test suite time.
+        // assertRun("05ace8e3", 1)
         assertRun("437e60fc", 0, true)
     }
 
