@@ -4,8 +4,8 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.getManhattanDistance
 import org.junit.Test
-import kotlin.math.absoluteValue
 
 /**
  * Entry point for a daily puzzle
@@ -37,14 +37,14 @@ class Puzzle : BasePuzzle() {
                 particlesAt.putIfAbsent(particle.position, mutableListOf())
                 particlesAt[particle.position]!!.add(particle)
             }
-            for (collision in particlesAt.values) {
-                if (collision.size > 1) {
+            if (part == TWO) {
+                for (collision in particlesAt.values. filter { it.size > 1 }) {
                     particles.removeAll(collision)
                 }
             }
         }
         if (part == ONE) {
-            return particles.sortedBy { it.getManhattanDistance() }[0].num
+            return particles.sortedBy { it.position.getManhattanDistance() }[0].num
         }
         return particles.size
     }
@@ -74,12 +74,5 @@ data class Particle(val num: Int, val input: String) {
         position = position.copy(first = position.first + velocity.first,
             second = position.second + velocity.second,
             third = position.third + velocity.third)
-    }
-
-    /**
-     * Returns the distance from origin.
-     */
-    fun getManhattanDistance(): Long {
-        return position.first.absoluteValue + position.second.absoluteValue + position.third.absoluteValue
     }
 }
