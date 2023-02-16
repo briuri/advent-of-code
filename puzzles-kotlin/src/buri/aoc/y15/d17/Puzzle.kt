@@ -5,7 +5,6 @@ import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test
 
-
 /**
  * Entry point for a daily puzzle
  *
@@ -17,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(4, 1)
         assertRun(654, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(3, 1)
@@ -28,34 +28,36 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val rawContainers = mutableListOf<Int>()
-        for (line in input) {
-            rawContainers.add(line.toInt())
-        }
+        rawContainers.addAll(input.map { it.toInt() })
         val containers = rawContainers.sorted().reversed()
 
         val end = if (input.size < 10) 25 else 150
         val frequency = mutableMapOf<Int, Int>()
         val combos = getCount(0, end, containers, 0, frequency)
-        if (part == ONE) {
-            return combos
-        }
-        return frequency[frequency.keys.min()]!!
+        return if (part == ONE) combos else frequency[frequency.keys.min()]!!
     }
 
     /**
      * Counts how many ways the provided numbers can be grouped to reach a sum.
      */
-    private fun getCount(start: Int, end: Int, containers: List<Int>, depth: Int, frequency: MutableMap<Int, Int>): Int {
+    private fun getCount(
+        start: Int,
+        end: Int,
+        containers: List<Int>,
+        depth: Int,
+        frequency: MutableMap<Int, Int>,
+    ): Int {
         var count = 0
         if (start == end) {
             frequency.putIfAbsent(depth, 0)
             frequency[depth] = frequency[depth]!! + 1
             count = 1
-        }
-        else if (start < end) {
+        } else if (start < end) {
             for (i in containers.indices) {
-                count += getCount(start + containers[i], end,
-                    containers.subList(i + 1, containers.size), depth + 1, frequency)
+                count += getCount(
+                    start + containers[i], end,
+                    containers.subList(i + 1, containers.size), depth + 1, frequency,
+                )
             }
         }
         return count

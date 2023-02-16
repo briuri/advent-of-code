@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(956, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(40149, 0, true)
@@ -82,11 +83,6 @@ class Puzzle : BasePuzzle() {
      * Tries to resolve a wire id to a number
      */
     private fun resolveValue(wire: String, simpleWires: MutableMap<String, Int>): Int? {
-        val value = if (wire.toIntOrNull() != null) {
-            wire.toInt()
-        } else {
-            simpleWires[wire]
-        }
-        return value
+        return if (wire.toIntOrNull() != null) wire.toInt() else simpleWires[wire]
     }
 }

@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(99, 1)
         assertRun(11266889531, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(44, 1)
@@ -27,9 +28,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val packages = mutableListOf<Long>()
-        for (line in input) {
-            packages.add(line.toLong())
-        }
+        packages.addAll(input.map { it.toLong() })
         packages.reverse()
         val compartments = if (part == ONE) 3 else 4
         val targetWeight = packages.sum() / compartments

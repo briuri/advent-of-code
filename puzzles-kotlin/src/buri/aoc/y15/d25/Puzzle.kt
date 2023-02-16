@@ -30,7 +30,7 @@ class Puzzle : BasePuzzle() {
         }
 
         var value = 20151125L
-        for (i in 2 .. index) {
+        for (i in 2..index) {
             value = (value * 252533L) % 33554393L
         }
         return value

@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(330, 1)
         assertRun(733, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(725, 0, true)
@@ -34,13 +35,13 @@ class Puzzle : BasePuzzle() {
             val amount = tokens[3].toInt()
             val name2 = tokens[tokens.lastIndex].dropLast(1)
 
-            happiness[name1 + name2] = direction * amount
+            happiness["$name1 $name2"] = direction * amount
             people.add(name1)
         }
         if (part == TWO) {
             for (person in people) {
-                happiness[person + "Me"] = 0
-                happiness["Me" + person] = 0
+                happiness["$person Me"] = 0
+                happiness["Me $person"] = 0
             }
             people.add("Me")
         }
@@ -51,8 +52,8 @@ class Puzzle : BasePuzzle() {
             var localHappiness = 0
             for (i in seats.indices) {
                 val nextIndex = if (i == seats.lastIndex) 0 else (i + 1)
-                localHappiness += happiness[seats[i] + seats[nextIndex]]!!
-                localHappiness += happiness[seats[nextIndex] + seats[i]]!!
+                localHappiness += happiness["${seats[i]} ${seats[nextIndex]}"]!!
+                localHappiness += happiness["${seats[nextIndex]} ${seats[i]}"]!!
             }
             maxHappiness = maxHappiness.coerceAtLeast(localHappiness)
         }

@@ -128,4 +128,5 @@ class Puzzle : BasePuzzle() {
         }
     }
 }
+
 data class Spell(val cost: Int, val duration: Int, val meEffect: Int, val bossEffect: Int)

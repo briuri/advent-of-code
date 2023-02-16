@@ -44,4 +44,5 @@ data class MutablePosition(var coords: Pair<Int, Int>, var facing: Direction) {
         }
     }
 }
+
 enum class Direction { NORTH, EAST, SOUTH, WEST }

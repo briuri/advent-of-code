@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(2640, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(1102, 0, true)
@@ -26,7 +27,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val endRace = 2503
         val scores = mutableMapOf<Reindeer, Int>()
-            for (line in input) {
+        for (line in input) {
             val tokens = line.split(" ")
             val reindeer = Reindeer(tokens[0], tokens[3].toInt(), tokens[6].toInt(), tokens[13].toInt())
             scores[reindeer] = 0
@@ -39,10 +40,8 @@ class Puzzle : BasePuzzle() {
                 currentPositions[reindeer] = position
                 currentMax = currentMax.coerceAtLeast(position)
             }
-            for (reindeer in scores.keys) {
-                if (currentPositions[reindeer] == currentMax) {
-                    scores[reindeer] = scores[reindeer]!! + 1
-                }
+            for (reindeer in scores.keys.filter { currentPositions[it] == currentMax }) {
+                scores[reindeer] = scores[reindeer]!! + 1
             }
             if (part == ONE && i == endRace) {
                 return currentMax
@@ -51,6 +50,7 @@ class Puzzle : BasePuzzle() {
         return scores.values.max()
     }
 }
+
 data class Reindeer(val name: String, val speed: Int, val flyTime: Int, val restTime: Int) {
     /**
      * Calculates the reindeer's position at some time.

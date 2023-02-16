@@ -31,7 +31,7 @@ class Puzzle : BasePuzzle() {
         val hashes = mutableListOf<String>()
         for (i in 0..127) {
             val newInput = mutableListOf<String>()
-            newInput.add(input[0] + "-" + i.toString())
+            newInput.add("${input[0]}-$i")
             hashes.add(toBinary(buri.aoc.y17.d10.Puzzle().run(TWO, newInput)))
         }
         if (part == ONE) {

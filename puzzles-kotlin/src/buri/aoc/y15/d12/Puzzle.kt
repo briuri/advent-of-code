@@ -21,6 +21,7 @@ class Puzzle : BasePuzzle() {
         assertRun(3, 1)
         assertRun(156366, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(4, 2)
@@ -44,8 +45,7 @@ class Puzzle : BasePuzzle() {
             for (item in node as ArrayNode) {
                 sum += getSum(part, item)
             }
-        }
-        else if (node.isObject) {
+        } else if (node.isObject) {
             val objectNode = node as ObjectNode
             var hasRed = false
             for (element in objectNode.elements()) {
@@ -59,8 +59,7 @@ class Puzzle : BasePuzzle() {
                     sum += getSum(part, item)
                 }
             }
-        }
-        else if (node.isNumber) {
+        } else if (node.isNumber) {
             sum += node.asInt()
         }
         return sum

@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(360154, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(5103798, 0, true)
@@ -26,9 +27,9 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var number = input[0]
         val times = if (part == ONE) 40 else 50
-        val buffer = StringBuilder()
+        val builder = StringBuilder()
         for (time in 0 until times) {
-            buffer.clear()
+            builder.clear()
             var i = 0
             while (i < number.length) {
                 val value = number[i]
@@ -38,9 +39,9 @@ class Puzzle : BasePuzzle() {
                     i++
                     count++
                 }
-                buffer.append(count).append(value)
+                builder.append(count).append(value)
             }
-            number = buffer.toString()
+            number = builder.toString()
         }
         return number.length
     }

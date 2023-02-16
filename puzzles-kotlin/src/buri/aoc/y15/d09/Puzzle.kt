@@ -5,7 +5,6 @@ import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test
 
-
 /**
  * Entry point for a daily puzzle
  *
@@ -17,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(605, 1)
         assertRun(251, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(982, 1)

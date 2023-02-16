@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(213, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(323, 0, true)

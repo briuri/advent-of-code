@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(170, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(247, 0, true)
@@ -48,19 +49,17 @@ class Puzzle : BasePuzzle() {
                     pointer += tokens[1].toInt()
                 }
                 "jie" -> {
-                    if (registers[tokens[1].dropLast(1)]!! % 2 == 0L) {
-                        pointer += tokens[2].toInt()
-                    }
-                    else {
-                        pointer++
+                    pointer += if (registers[tokens[1].dropLast(1)]!! % 2 == 0L) {
+                        tokens[2].toInt()
+                    } else {
+                        1
                     }
                 }
                 "jio" -> {
-                    if (registers[tokens[1].dropLast(1)]!! == 1L) {
-                        pointer += tokens[2].toInt()
-                    }
-                    else {
-                        pointer++
+                    pointer += if (registers[tokens[1].dropLast(1)]!! == 1L) {
+                        tokens[2].toInt()
+                    } else {
+                        1
                     }
                 }
             }

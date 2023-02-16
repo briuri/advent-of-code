@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(255, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(55, 0, true)
@@ -27,9 +28,9 @@ class Puzzle : BasePuzzle() {
         var count = 0
         for (word in input) {
             val niceCondition = if (part == ONE) {
-                hasVowels(word) && hasDoubleLetter(word) && !hasBadTokens(word)
+                word.hasVowels() && word.hasDoubleLetter() && !word.hasBadTokens()
             } else {
-                hasRepeatingPair(word) && hasInterruptedRepeat(word)
+                word.hasRepeatingPair() && word.hasInterruptedRepeat()
             }
             if (niceCondition) {
                 count++
@@ -41,16 +42,16 @@ class Puzzle : BasePuzzle() {
     /**
      * Checks if a word has at least 3 vowels
      */
-    private fun hasVowels(word: String): Boolean {
-        return word.filter { it in "aeiou" }.length >= 3
+    private fun String.hasVowels(): Boolean {
+        return this.filter { it in "aeiou" }.length >= 3
     }
 
     /**
      * Checks if there are any letters twice in a row
      */
-    private fun hasDoubleLetter(word: String): Boolean {
-        for (i in 0 until word.lastIndex) {
-            if (word[i] == word[i + 1]) {
+    private fun String.hasDoubleLetter(): Boolean {
+        for (i in 0 until this.lastIndex) {
+            if (this[i] == this[i + 1]) {
                 return true
             }
         }
@@ -60,18 +61,18 @@ class Puzzle : BasePuzzle() {
     /**
      * Checks if a word has any forbidden sequences
      */
-    private fun hasBadTokens(word: String): Boolean {
-        return word.contains("ab") || word.contains("cd")
-                || word.contains("pq") || word.contains("xy")
+    private fun String.hasBadTokens(): Boolean {
+        return this.contains("ab") || this.contains("cd")
+                || this.contains("pq") || this.contains("xy")
     }
 
     /**
      * Checks if a pair of two letters repeats without overlapping.
      */
-    private fun hasRepeatingPair(word: String): Boolean {
-        for (i in 0 until word.lastIndex) {
-            val token = word.substring(i, i + 2)
-            val index = word.indexOf(token, i + 2)
+    private fun String.hasRepeatingPair(): Boolean {
+        for (i in 0 until this.lastIndex) {
+            val token = this.substring(i, i + 2)
+            val index = this.indexOf(token, i + 2)
             if (index != -1) {
                 return true
             }
@@ -82,9 +83,9 @@ class Puzzle : BasePuzzle() {
     /**
      * Checks if a pair of two letters repeats with a single letter in the middle
      */
-    private fun hasInterruptedRepeat(word: String): Boolean {
-        for (i in 0 until word.lastIndex - 1) {
-            if (word[i] == word[i + 2]) {
+    private fun String.hasInterruptedRepeat(): Boolean {
+        for (i in 0 until this.lastIndex - 1) {
+            if (this[i] == this[i + 2]) {
                 return true
             }
         }

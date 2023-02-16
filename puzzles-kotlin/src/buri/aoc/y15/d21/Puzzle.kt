@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(91, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(158, 0, true)
@@ -23,12 +24,13 @@ class Puzzle : BasePuzzle() {
     private val weapons = mutableListOf<Item>()
     private val armors = mutableListOf<Item>()
     private val rings = mutableListOf<Item>()
+
     init {
-        weapons.add(Item(8,4, 0))
-        weapons.add(Item(10,5, 0))
-        weapons.add(Item(25,6, 0))
-        weapons.add(Item(40,7, 0))
-        weapons.add(Item(74,8, 0))
+        weapons.add(Item(8, 4, 0))
+        weapons.add(Item(10, 5, 0))
+        weapons.add(Item(25, 6, 0))
+        weapons.add(Item(40, 7, 0))
+        weapons.add(Item(74, 8, 0))
         armors.add(Item(0, 0, 0))
         armors.add(Item(13, 0, 1))
         armors.add(Item(31, 0, 2))
@@ -49,9 +51,11 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val boss = Mob(input[0].split(" ")[2].toInt(),
+        val boss = Mob(
+            input[0].split(" ")[2].toInt(),
             input[1].split(" ")[1].toInt(),
-            input[2].split(" ")[1].toInt())
+            input[2].split(" ")[1].toInt(),
+        )
         var minCost = Int.MAX_VALUE
         var maxCost = Int.MIN_VALUE
         for (weapon in weapons) {
@@ -59,13 +63,12 @@ class Puzzle : BasePuzzle() {
                 for (ring1 in rings) {
                     for (ring2 in rings) {
                         val cost = weapon.cost + armor.cost + ring1.cost + ring2.cost
-                        val damage = weapon.damage + armor.damage + ring1.damage + ring2.damage
-                        val localArmor = weapon.armor + armor.armor + ring1.armor + ring2.armor
-                        val me = Mob(100, damage, localArmor)
+                        val damageTotal = weapon.damage + armor.damage + ring1.damage + ring2.damage
+                        val armorTotal = weapon.armor + armor.armor + ring1.armor + ring2.armor
+                        val me = Mob(100, damageTotal, armorTotal)
                         if (isBossDefeated(me, boss)) {
                             minCost = minCost.coerceAtMost(cost)
-                        }
-                        else {
+                        } else {
                             maxCost = maxCost.coerceAtLeast(cost)
                         }
                     }
@@ -95,5 +98,6 @@ class Puzzle : BasePuzzle() {
         }
     }
 }
+
 data class Mob(val hp: Int, val damage: Int, val armor: Int)
 data class Item(val cost: Int, val damage: Int, val armor: Int)

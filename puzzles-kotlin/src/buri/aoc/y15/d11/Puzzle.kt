@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun("vzbxxyzz", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("vzcaabcc", 0, true)
@@ -28,8 +29,8 @@ class Puzzle : BasePuzzle() {
         var count = 0
         var password = input[0]
         while (count < nextCount) {
-            password = increment(password)
-            if (hasStraight(password) && !isConfusing(password) && hasPairs(password)) {
+            password = password.increment()
+            if (password.hasStraight() && !password.isConfusing() && password.hasPairs()) {
                 count++
             }
         }
@@ -39,15 +40,14 @@ class Puzzle : BasePuzzle() {
     /**
      * Increments the password
      */
-    private fun increment(password: String): String {
-        val builder = StringBuilder(password)
-        for (i in password.lastIndex downTo 0) {
-            val value = password[i]
+    private fun String.increment(): String {
+        val builder = StringBuilder(this)
+        for (i in this.lastIndex downTo 0) {
+            val value = this[i]
             if (value != 'z') {
                 builder[i] = value + 1
                 break
-            }
-            else {
+            } else {
                 builder[i] = 'a'
             }
         }
@@ -57,9 +57,9 @@ class Puzzle : BasePuzzle() {
     /**
      * Searches for three consecutive letters, like abc
      */
-    private fun hasStraight(password: String): Boolean {
-        for (i in 0..password.length - 3) {
-            if (password[i] == password[i + 1] - 1 && password[i] == password[i + 2] - 2) {
+    private fun String.hasStraight(): Boolean {
+        for (i in 0..this.length - 3) {
+            if (this[i] == this[i + 1] - 1 && this[i] == this[i + 2] - 2) {
                 return true
             }
         }
@@ -69,18 +69,18 @@ class Puzzle : BasePuzzle() {
     /**
      * Searches for forbidden letters
      */
-    private fun isConfusing(password: String): Boolean {
-        return password.any { it in "ilo" }
+    private fun String.isConfusing(): Boolean {
+        return this.any { it in "ilo" }
     }
 
     /**
      * Searches for repeated letters.
      */
-    private fun hasPairs(password: String): Boolean {
+    private fun String.hasPairs(): Boolean {
         var count = 0
         var i = 0
-        while (i <= password.length - 2) {
-            if (password[i] == password[i + 1]) {
+        while (i <= this.length - 2) {
+            if (this[i] == this[i + 1]) {
                 count++
                 i++
             }

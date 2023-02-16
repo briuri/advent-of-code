@@ -23,16 +23,13 @@ class Assembunny(input: List<String>) {
                     registers[command[2]] = resolve(command[1])
                 }
                 pointer++
-            }
-            else if (command[0] == "inc") {
+            } else if (command[0] == "inc") {
                 registers[command[1]] = registers[command[1]]!! + 1
                 pointer++
-            }
-            else if (command[0] == "dec") {
+            } else if (command[0] == "dec") {
                 registers[command[1]] = registers[command[1]]!! - 1
                 pointer++
-            }
-            else if (command[0] == "jnz") {
+            } else if (command[0] == "jnz") {
                 val offset = if (resolve(command[1]) == 0L) 1 else resolve(command[2]).toInt()
                 pointer += offset
             }

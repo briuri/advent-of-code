@@ -32,8 +32,7 @@ abstract class BasePuzzle {
         val path = "data/y$year/$day-$fileIndex.txt"
         val input = try {
             File(path).readLines()
-        }
-        catch (e: FileNotFoundException) {
+        } catch (e: FileNotFoundException) {
             File("data/zNew/$day-$fileIndex.txt").readLines()
         }
         val actual = this.run(part, input)
@@ -42,11 +41,9 @@ abstract class BasePuzzle {
         }
         if (actual is Long && expected is Int) {
             assertEquals(expected.toLong(), actual)
-        }
-        else if (expected.toString().contains("■")) {
+        } else if (expected.toString().contains("■")) {
             assertTrue(actual.toString().startsWith(expected.toString()))
-        }
-        else {
+        } else {
             assertEquals(expected, actual)
         }
     }

@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun(4, 1)
         assertRun(768, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(14, 1)
@@ -53,14 +54,11 @@ class Puzzle : BasePuzzle() {
                     val prev = grid[x, y].toInt()
                     val next = if (part == TWO && Pair(x, y) in corners) {
                         1
-                    }
-                    else if (prev == 1 && onCount != 2 && onCount != 3) {
+                    } else if (prev == 1 && onCount != 2 && onCount != 3) {
                         0
-                    }
-                    else if (prev == 0 && onCount == 3) {
+                    } else if (prev == 0 && onCount == 3) {
                         1
-                    }
-                    else {
+                    } else {
                         prev
                     }
                     nextGrid[x, y] = next
