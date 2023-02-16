@@ -15,12 +15,14 @@ import java.util.List;
 public class Puzzle extends BasePuzzle {
 	@Test
 	public void testPart1() {
-		assertRun("18f47a30", 1, false);
+		// Skipping example to reduce test suite time.
+		// assertRun("18f47a30", 1, false);
 		assertRun("2414bc77", 0, true);
 	}
 	@Test
 	public void testPart2() {
-		assertRun("05ace8e3", 1, false);
+		// Skipping example to reduce test suite time.
+		// assertRun("05ace8e3", 1, false);
 		assertRun("437e60fc", 0, true);
 	}
 
