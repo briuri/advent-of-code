@@ -3,6 +3,7 @@ package buri.aoc.y17.d06
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.collapseWhitespace
 import org.junit.Test
 
 /**
@@ -27,7 +28,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val banks = mutableListOf<Int>()
-        for (blocks in collapseWhitespace(input[0]).split(" ")) {
+        for (blocks in input[0].collapseWhitespace().split(" ")) {
             banks.add(blocks.toInt())
         }
 

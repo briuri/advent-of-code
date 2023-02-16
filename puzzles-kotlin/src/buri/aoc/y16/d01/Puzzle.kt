@@ -1,9 +1,6 @@
 package buri.aoc.y16.d01
 
-import buri.aoc.common.BasePuzzle
-import buri.aoc.common.Direction
-import buri.aoc.common.MutablePosition
-import buri.aoc.common.Part
+import buri.aoc.common.*
 import buri.aoc.common.Part.TWO
 import org.junit.Test
 
@@ -34,12 +31,12 @@ class Puzzle : BasePuzzle() {
             position.turn(command[0])
             for (i in 0 until command.drop(1).toInt()) {
                 if (part == TWO && visited.contains(position.coords)) {
-                    return position.getManhattanDistance()
+                    return position.coords.getManhattanDistance()
                 }
                 visited.add(position.coords)
                 position.move()
             }
         }
-        return position.getManhattanDistance()
+        return position.coords.getManhattanDistance()
     }
 }

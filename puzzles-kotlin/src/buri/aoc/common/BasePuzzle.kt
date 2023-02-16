@@ -7,6 +7,7 @@ import java.awt.datatransfer.StringSelection
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
+import kotlin.math.absoluteValue
 
 /**
  * Base class with shared functionality for all puzzles
@@ -29,14 +30,13 @@ abstract class BasePuzzle {
         val part = if (getPart() == "1") Part.ONE else Part.TWO
 
         val path = "data/y$year/$day-$fileIndex.txt"
-        var input: List<String>?
-        try {
-            input = File(path).readLines()
+        val input = try {
+            File(path).readLines()
         }
         catch (e: FileNotFoundException) {
-            input = File("data/zNew/$day-$fileIndex.txt").readLines()
+            File("data/zNew/$day-$fileIndex.txt").readLines()
         }
-        val actual = this.run(part, input!!)
+        val actual = this.run(part, input)
         if (toConsole) {
             toConsole(actual)
         }
@@ -104,19 +104,12 @@ abstract class BasePuzzle {
         if (index == input.lastIndex) {
             permutations.add(input.toList())
         }
-        for (i in index .. input.lastIndex) {
+        for (i in index..input.lastIndex) {
             Collections.swap(input, index, i)
             permutations.addAll(generatePermutations(input, index + 1))
             Collections.swap(input, i, index)
         }
         return permutations
-    }
-
-    /**
-     * Collapses multiple whitespace to a single whitespace.
-     */
-    fun collapseWhitespace(string: String): String {
-        return string.replace("\\s+".toRegex(), " ").trim()
     }
 }
 
@@ -143,4 +136,25 @@ fun Pair<Int, Int>.getNeighbors(includeDiagonals: Boolean = false): MutableList<
         list.add(Pair(this.first + 1, this.second + 1))
     }
     return list
+}
+
+/**
+ * Extension function for the Manhattan distance of a 2D point from the origin.
+ */
+fun Pair<Int, Int>.getManhattanDistance(): Int {
+    return this.first.absoluteValue + this.second.absoluteValue
+}
+
+/**
+ * Extension function for the Manhattan distance of a 3D point from the origin.
+ */
+fun Triple<Long, Long, Long>.getManhattanDistance(): Long {
+    return this.first.absoluteValue + this.second.absoluteValue + this.third.absoluteValue
+}
+
+/**
+ * Extension function for collapsing multiple whitespace to a single whitespace.
+ */
+fun String.collapseWhitespace(): String {
+    return this.replace("\\s+".toRegex(), " ").trim()
 }

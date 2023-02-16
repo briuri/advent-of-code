@@ -18,7 +18,7 @@ class MD5 {
     fun getHash(input: String, extraHashes: Int = 0): String {
         var hash = digest.digest(input.toByteArray())
         for (i in 0 until extraHashes) {
-           hash = reHash(hash)
+            hash = reHash(hash)
         }
         return toHex(hash)
     }

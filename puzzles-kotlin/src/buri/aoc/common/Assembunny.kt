@@ -7,16 +7,8 @@ package buri.aoc.common
  * @author Brian Uri!
  */
 class Assembunny(input: List<String>) {
-    private val instructions: MutableList<String>
-    private val registers = mutableMapOf<String, Long>()
-
-    init {
-        instructions = input.toMutableList()
-        registers["a"] = 0L
-        registers["b"] = 0L
-        registers["c"] = 0L
-        registers["d"] = 0L
-    }
+    private val instructions = input.toMutableList()
+    private val registers = mutableMapOf<String, Long>("a" to 0L, "b" to 0L, "c" to 0L, "d" to 0L)
 
     /**
      * Executes an assembunny program
@@ -41,12 +33,7 @@ class Assembunny(input: List<String>) {
                 pointer++
             }
             else if (command[0] == "jnz") {
-                val offset = if (resolve(command[1]) != 0L) {
-                    resolve(command[2]).toInt()
-                }
-                else {
-                    1
-                }
+                val offset = if (resolve(command[1]) == 0L) 1 else resolve(command[2]).toInt()
                 pointer += offset
             }
             // y16d23: New tgl command
@@ -56,10 +43,10 @@ class Assembunny(input: List<String>) {
                     val instruction = instructions[address].split(" ")
                     if (instruction.size == 2) {
                         val change = if (instruction[0] == "inc") "dec" else "inc"
-                        instructions[address] = "$change " + instruction[1]
+                        instructions[address] = "$change ${instruction[1]}"
                     } else if (instruction.size == 3) {
                         val change = if (instruction[0] == "jnz") "cpy" else "jnz"
-                        instructions[address] = "$change " + instruction[1] + " " + instruction[2]
+                        instructions[address] = "$change ${instruction[1]} ${instruction[2]}"
                     }
                 }
                 pointer++
@@ -80,12 +67,7 @@ class Assembunny(input: List<String>) {
      * Converts an instruction token into a value from a register or a plain numeric value.
      */
     private fun resolve(addressOrValue: String): Long {
-        return if (addressOrValue.toIntOrNull() == null) {
-            registers[addressOrValue]!!
-        }
-        else {
-            addressOrValue.toLong()
-        }
+        return if (addressOrValue.toIntOrNull() == null) get(addressOrValue) else addressOrValue.toLong()
     }
 
     /**
@@ -94,6 +76,7 @@ class Assembunny(input: List<String>) {
     operator fun get(name: String): Long {
         return registers[name]!!
     }
+
     /**
      * Enables array-like access to the registers
      */
