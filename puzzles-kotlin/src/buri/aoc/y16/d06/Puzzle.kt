@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun("easter", 1)
         assertRun("mlncjgdg", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("advent", 1)
@@ -34,16 +35,16 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        var message = ""
+        val message = StringBuilder()
         for (frequency in frequencies) {
             val minMax = if (part == ONE) frequency.values.max() else frequency.values.min()
             for (letter in frequency.keys) {
                 if (frequency[letter] == minMax) {
-                    message += letter
+                    message.append(letter)
                     break
                 }
             }
         }
-        return message
+        return message.toString()
     }
 }

@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(1514, 1)
         assertRun(137896, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(501, 0, true)
@@ -36,13 +37,14 @@ class Puzzle : BasePuzzle() {
                 frequencies.putIfAbsent(value, 0)
                 frequencies[value] = frequencies[value]!! + 1
             }
-            var testChecksum = ""
+
+            val testChecksum = StringBuilder()
             // Max frequency will be at the beginning
             for (count in frequencies.values.distinct().sorted().reversed()) {
                 // When multiple letters have same frequency go in alphabetical order
                 for (key in frequencies.keys.sorted()) {
                     if (frequencies[key] == count) {
-                        testChecksum += key
+                        testChecksum.append(key)
                     }
                 }
             }
@@ -66,8 +68,7 @@ class Puzzle : BasePuzzle() {
         for (i in name.indices) {
             if (name[i] == '-') {
                 next += ' '
-            }
-            else {
+            } else {
                 var value = name[i] + rotation
                 if (value > 'z') {
                     value -= 26

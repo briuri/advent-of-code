@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(57, 1)
         assertRun(120765, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(242394, 2)
@@ -26,11 +27,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        var size = 0L
-        for (line in input) {
-            size += getDecompressedLength(part, line)
-        }
-        return size
+        return input.sumOf { getDecompressedLength(part, it) }
     }
 
     /**
@@ -48,8 +45,7 @@ class Puzzle : BasePuzzle() {
             if (string[i] != '(') {
                 size++
                 i++
-            }
-            else {
+            } else {
                 val endMarker = string.indexOf(')', i)
                 val marker = string.substring(i + 1, endMarker).split("x")
                 val numChars = marker[0].toInt()

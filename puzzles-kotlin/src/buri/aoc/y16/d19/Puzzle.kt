@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(3, 1)
         assertRun(1842613, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(2, 1)
@@ -29,9 +30,7 @@ class Puzzle : BasePuzzle() {
         val numElves = input[0].toInt()
         if (part == ONE) {
             val elves = ArrayDeque<Int>()
-            for (i in 1..numElves) {
-                elves.add(i)
-            }
+            elves.addAll(1..numElves)
             while (elves.size > 1) {
                 elves.addLast(elves.removeFirst())
                 elves.removeFirst()
@@ -42,13 +41,10 @@ class Puzzle : BasePuzzle() {
         // Part TWO
         // Use two deques. The point between them is the elf across the circle.
         val elvesBefore = ArrayDeque<Int>()
+        elvesBefore.addAll(1..(numElves / 2))
         val elvesAfter = ArrayDeque<Int>()
-        for (i in 1 .. numElves / 2) {
-            elvesBefore.add(i)
-        }
-        for (i in numElves / 2 + 1 .. numElves) {
-            elvesAfter.add(i)
-        }
+        elvesAfter.addAll((numElves / 2 + 1)..numElves)
+
         while (elvesBefore.size + elvesAfter.size > 1) {
             if (elvesBefore.size > elvesAfter.size) {
                 elvesBefore.removeLast()

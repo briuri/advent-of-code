@@ -18,6 +18,7 @@ class Puzzle : BasePuzzle() {
         // assertRun("18f47a30", 1)
         assertRun("2414bc77", 0, true)
     }
+
     @Test
     fun runPart2() {
         // Skipping example to reduce test suite time.
@@ -45,6 +46,5 @@ class Puzzle : BasePuzzle() {
         }
         return password.toString().lowercase()
     }
-
 
 }

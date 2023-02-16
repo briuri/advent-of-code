@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(5, 1)
         assertRun(203660, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(2408135, 0, true)
@@ -38,17 +39,14 @@ class Puzzle : BasePuzzle() {
 
         var time = 0
         while (true) {
-            var open = true
-            for ((num, disc) in discs) {
-                open = open && (disc.getPositionAt(time + num) == 0)
-            }
-            if (open) {
+            if (discs.all { it.value.getPositionAt(time + it.key) == 0 }) {
                 return time
             }
             time++
         }
     }
 }
+
 data class Disc(val total: Int, val start: Int) {
     /**
      * Returns the position at the given time.

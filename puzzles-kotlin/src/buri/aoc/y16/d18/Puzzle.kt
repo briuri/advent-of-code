@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(38, 1)
         assertRun(1956, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(19995121, 0, true)
@@ -25,9 +26,10 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        var rows = if (input[0].length < 20) 10 else 40
-        if (part == TWO) {
-            rows = 400_000
+        val rows = when {
+            part == TWO -> 400_000
+            input[0].length < 20 -> 10
+            else -> 40
         }
 
         var row = input[0]

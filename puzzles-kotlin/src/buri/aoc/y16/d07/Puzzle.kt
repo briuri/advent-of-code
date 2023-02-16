@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun(2, 1)
         assertRun(118, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(3, 2)
@@ -34,7 +35,8 @@ class Puzzle : BasePuzzle() {
                 .replace("][a-z]+\\[".toRegex(), " ")
                 .replace("][a-z]+$".toRegex(), "").trim().split(" ")
             if ((part == ONE && containsAbba(supernets) && !containsAbba(hypernets))
-                || part == TWO && containsBab(hypernets, getAbas(supernets))) {
+                || part == TWO && containsBab(hypernets, getAbas(supernets))
+            ) {
                 count++
             }
         }

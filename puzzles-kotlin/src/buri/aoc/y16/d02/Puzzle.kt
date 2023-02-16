@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun("1985", 1)
         assertRun("74921", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("5DB3", 1)
@@ -52,10 +53,10 @@ class Puzzle : BasePuzzle() {
         grid2[2, 3] = "B"
         grid2[3, 3] = "C"
         grid2[2, 4] = "D"
-        val grid = if (part == ONE) grid1 else grid2
 
+        val grid = if (part == ONE) grid1 else grid2
+        val code = StringBuilder()
         var key = if (part == ONE) Pair(1, 1) else Pair(0, 2)
-        var code = ""
         for (line in input) {
             for (value in line) {
                 val dx = when (value) {
@@ -73,9 +74,9 @@ class Puzzle : BasePuzzle() {
                     key = nextKey
                 }
             }
-            code += grid[key]
+            code.append(grid[key])
         }
-        return code
+        return code.toString()
     }
 
     /**

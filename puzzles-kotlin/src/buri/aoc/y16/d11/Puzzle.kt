@@ -51,6 +51,7 @@ class Puzzle : BasePuzzle() {
         return -1
     }
 }
+
 data class State(val steps: Int, private var state: String) {
     val totalPairs = (state.length - 1) / 3
     private val elevator = Character.getNumericValue(state[0])
@@ -74,7 +75,7 @@ data class State(val steps: Int, private var state: String) {
      * Determines what other states we can reach from where we are.
      */
     fun getNextStates(): List<State> {
-        val generatorsHere = getItemsOn(elevator, true)
+        val gensHere = getItemsOn(elevator, true)
         val chipsHere = getItemsOn(elevator, false)
         val nextStates = mutableListOf<State>()
 
@@ -92,19 +93,19 @@ data class State(val steps: Int, private var state: String) {
             val nextChips = getItemsOn(nextFloor, false)
             val nextSteps = steps + 1
 
-            // Elevator can move matching pair (generator+chip) at any time.
-            for (generatorId in generatorsHere.filter { chipsHere.contains(it) }) {
+            // Elevator can move matching pair (gen+chip) at any time.
+            for (genId in gensHere.filter { chipsHere.contains(it) }) {
                 val builder = toBuilder(nextFloorChar)
-                builder.setCharAt(toIndex(generatorId, true), nextFloorChar)
-                builder.setCharAt(toIndex(generatorId, false), nextFloorChar)
+                builder.setCharAt(toIndex(genId, true), nextFloorChar)
+                builder.setCharAt(toIndex(genId, false), nextFloorChar)
                 nextStates.add(State(nextSteps, builder.toString()))
             }
 
-            // Elevator can move 2 generators if they won't fry things on next floor.
-            for (generatorIds in getPairPermutations(generatorsHere).filter { isGenAllowedNear(it, nextGens, nextChips) }) {
+            // Elevator can move 2 gens if they won't fry things on next floor.
+            for (genIds in getPairPermutations(gensHere).filter {isGenAllowedNear(it, nextGens, nextChips) }) {
                 val builder = toBuilder(nextFloorChar)
-                builder.setCharAt(toIndex(generatorIds[0], true), nextFloorChar)
-                builder.setCharAt(toIndex(generatorIds[1], true), nextFloorChar)
+                builder.setCharAt(toIndex(genIds[0], true), nextFloorChar)
+                builder.setCharAt(toIndex(genIds[1], true), nextFloorChar)
                 nextStates.add(State(nextSteps, builder.toString()))
             }
 
@@ -116,10 +117,10 @@ data class State(val steps: Int, private var state: String) {
                 nextStates.add(State(nextSteps, builder.toString()))
             }
 
-            // Elevator can move 1 generator if it won't fry things on next floor.
-            for (generatorId in generatorsHere.filter { isGenAllowedNear(mutableListOf(it), nextGens, nextChips) }) {
+            // Elevator can move 1 gen if it won't fry things on next floor.
+            for (genId in gensHere.filter { isGenAllowedNear(mutableListOf(it), nextGens, nextChips) }) {
                 val builder = toBuilder(nextFloorChar)
-                builder.setCharAt(toIndex(generatorId, true), nextFloorChar)
+                builder.setCharAt(toIndex(genId, true), nextFloorChar)
                 nextStates.add(State(nextSteps, builder.toString()))
             }
 
@@ -138,7 +139,7 @@ data class State(val steps: Int, private var state: String) {
      */
     fun getSortOrder(): Int {
         var score = 0
-        for (i in 1 .. state.lastIndex) {
+        for (i in 1..state.lastIndex) {
             if (state[i] in "1234") {
                 score += state[i].digitToInt()
             }
@@ -189,10 +190,10 @@ data class State(val steps: Int, private var state: String) {
     /**
      * Returns true if generators are allowed near chips.
      */
-    private fun isGenAllowedNear(generatorIds: List<Int>, nextGens: List<Int>, nextChips: List<Int>): Boolean {
+    private fun isGenAllowedNear(genIds: List<Int>, nextGens: List<Int>, nextChips: List<Int>): Boolean {
         var allowed = true
         for (chipId in nextChips) {
-            allowed = allowed && (generatorIds.contains(chipId) || nextGens.contains(chipId))
+            allowed = allowed && (genIds.contains(chipId) || nextGens.contains(chipId))
         }
         return allowed
     }

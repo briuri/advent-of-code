@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun("128", 0, true)
     }
+
     @Test
     fun runPart2() {
         // EOARGPHYAO
@@ -47,8 +48,7 @@ class Puzzle : BasePuzzle() {
                         for (x in (grid.width - 1) downTo 1) {
                             nextGrid[x, which] = grid[x - 1, which]
                         }
-                    }
-                    else {
+                    } else {
                         nextGrid[which, 0] = grid[which, grid.height - 1]
                         for (y in (grid.height - 1) downTo 1) {
                             nextGrid[which, y] = grid[which, y - 1]
@@ -58,17 +58,17 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) grid.getSum().toString() else printLetters(grid)
+        return if (part == ONE) grid.getSum().toString() else grid.printLetters()
     }
 
     /**
      * Uses a block symbol to show letters.
      */
-    private fun printLetters(grid: Grid): String {
+    private fun Grid.printLetters(): String {
         val builder = StringBuilder()
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
-                val value = if (grid[x, y] == "1") '■' else ' '
+        for (y in 0 until this.height) {
+            for (x in 0 until this.width) {
+                val value = if (this[x, y] == "1") '■' else ' '
                 builder.append(value)
             }
             builder.append("\n")

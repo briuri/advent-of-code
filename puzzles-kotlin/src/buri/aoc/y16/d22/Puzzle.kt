@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(872, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(211, 0, true)
@@ -43,14 +44,11 @@ class Puzzle : BasePuzzle() {
             val point = getNodeLocation(node)
             val value = if (getUsed(node) == 0) {
                 "_"
-            }
-            else if (point.first == highestNode.first && point.second == 0) {
+            } else if (point.first == highestNode.first && point.second == 0) {
                 "G"
-            }
-            else if (getUsed(node) > 100) {
+            } else if (getUsed(node) > 100) {
                 "#"
-            }
-            else {
+            } else {
                 "."
             }
             grid[point] = value

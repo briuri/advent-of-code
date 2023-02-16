@@ -18,6 +18,7 @@ class Puzzle : BasePuzzle() {
         // assertRun(22728, 1)
         assertRun(15168, 0, true)
     }
+
     @Test
     fun runPart2() {
         // Skipping example to reduce test suite time.

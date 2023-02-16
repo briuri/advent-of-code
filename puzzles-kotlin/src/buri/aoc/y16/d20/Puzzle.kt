@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(19449262, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(119, 0, true)
@@ -38,8 +39,7 @@ class Puzzle : BasePuzzle() {
         for (range in ranges) {
             if (range.contains(current)) {
                 current = range.last + 1
-            }
-            else if (current < range.first) {
+            } else if (current < range.first) {
                 validRanges.add(LongRange(current, range.first - 1))
                 current = range.last + 1
             }
@@ -48,9 +48,11 @@ class Puzzle : BasePuzzle() {
             validRanges.add(LongRange(current, maxIP))
         }
         validRanges.sortBy { it.first }
-        if (part == ONE) {
-            return validRanges[0].first
+        return if (part == ONE) {
+            validRanges[0].first
         }
-        return validRanges.sumOf { it.last - it.first + 1 }
+        else {
+            validRanges.sumOf { it.last - it.first + 1 }
+        }
     }
 }

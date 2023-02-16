@@ -18,6 +18,7 @@ class Puzzle : BasePuzzle() {
         assertRun(11, 1)
         assertRun(92, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(124, 0, true)
@@ -37,10 +38,11 @@ class Puzzle : BasePuzzle() {
         }
 
         val steps = pathfinder.countSteps(start, end)
-        if (part == ONE) {
-            return steps
+        return if (part == ONE) {
+            steps
+        } else {
+            pathfinder.stepsTo.filter { it.value <= 50 }.size
         }
-        return pathfinder.stepsTo.filter { it.value <= 50 }.size
     }
 
     /**

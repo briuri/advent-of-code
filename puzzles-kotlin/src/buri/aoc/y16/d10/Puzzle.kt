@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(56, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(7847, 0, true)
@@ -44,19 +45,20 @@ class Puzzle : BasePuzzle() {
                     if (part == ONE && bot.chips.min() == 17 && bot.chips.max() == 61) {
                         return id
                     }
+
                     if (bot.isLowBot) {
                         bots[bot.lowTo]!!.chips.add(bot.chips.min())
-                    }
-                    else if (bot.lowTo in 0..2) {
+                    } else if (bot.lowTo in 0..2) {
                         // Only save the 3 outputs we care about for part 2.
                         outputs.add(bot.chips.min())
                     }
+
                     if (bot.isHighBot) {
                         bots[bot.highTo]!!.chips.add(bot.chips.max())
-                    }
-                    else if (bot.highTo in 0 .. 2) {
+                    } else if (bot.highTo in 0..2) {
                         outputs.add(bot.chips.max())
                     }
+
                     bot.chips.clear()
                 }
                 if (part == TWO && outputs.size == 3) {
@@ -66,4 +68,11 @@ class Puzzle : BasePuzzle() {
         }
     }
 }
-data class Bot(val chips: MutableList<Int>, val isLowBot: Boolean, val lowTo: Int, val isHighBot: Boolean, val highTo: Int)
+
+data class Bot(
+    val chips: MutableList<Int>,
+    val isLowBot: Boolean,
+    val lowTo: Int,
+    val isHighBot: Boolean,
+    val highTo: Int
+)

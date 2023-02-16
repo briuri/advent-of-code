@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun("DDUDRLRRUDRD", 1)
         assertRun("DDURRLRRDD", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("492", 1)
@@ -31,8 +32,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         val md5 = MD5()
         val salt = input[0]
-        val start = Position(Pair(0,0), "")
-        val end = Pair(3,3)
+        val start = Position(Pair(0, 0), "")
+        val end = Pair(3, 3)
 
         val frontier = mutableListOf<Position>()
         frontier.add(start)
@@ -44,8 +45,7 @@ class Puzzle : BasePuzzle() {
             if (current.point == end) {
                 if (part == ONE) {
                     return visited.filter { it.point == end }[0].path
-                }
-                else {
+                } else {
                     continue
                 }
             }
@@ -66,7 +66,7 @@ class Puzzle : BasePuzzle() {
         val hash = md5.getHash(salt + current.path).substring(0, 4)
         val list = mutableListOf<Position>()
         // Order: U D L R
-        with (current) {
+        with(current) {
             if (hash[0] in openDoors && point.second != 0) {
                 list.add(Position(point.copy(second = point.second - 1), path + "U"))
             }
@@ -83,4 +83,5 @@ class Puzzle : BasePuzzle() {
         return list
     }
 }
+
 data class Position(val point: Pair<Int, Int>, val path: String)

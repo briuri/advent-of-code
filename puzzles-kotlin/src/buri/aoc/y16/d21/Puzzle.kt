@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun("aefgbcdh", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("egcdahbf", 0, true)
@@ -25,8 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): String {
         val isReverse = (part == TWO)
-        val password = if (isReverse) "fbgdceah" else "abcdefgh"
-        val builder = StringBuilder(password)
+        val builder = StringBuilder(if (isReverse) "fbgdceah" else "abcdefgh")
         val partInput = if (isReverse) input.reversed() else input
         for (line in partInput) {
             val tokens = line.split(" ")
@@ -37,15 +37,13 @@ class Puzzle : BasePuzzle() {
                 val value = builder[x]
                 builder[x] = builder[y]
                 builder[y] = value
-            }
-            else if (line.startsWith("swap letter")) {
+            } else if (line.startsWith("swap letter")) {
                 val x = builder.indexOf(tokens[2])
                 val y = builder.indexOf(tokens[5])
                 val value = builder[x]
                 builder[x] = builder[y]
                 builder[y] = value
-            }
-            else if (line.startsWith("reverse")) {
+            } else if (line.startsWith("reverse")) {
                 val x = tokens[2].toInt()
                 val y = tokens[4].toInt()
                 val value = builder.substring(x..y)
@@ -54,7 +52,7 @@ class Puzzle : BasePuzzle() {
             // Assymmetric operations
             else if (line.startsWith("rotate")) {
                 var x: Int
-                if (tokens[1] ==  "based") {
+                if (tokens[1] == "based") {
                     /*
                           abcdefgh
                         0 habcdefg 7
@@ -69,12 +67,10 @@ class Puzzle : BasePuzzle() {
                     x = builder.indexOf(tokens[6])
                     if (isReverse) {
                         x = "77261504"[x].digitToInt()
-                    }
-                    else {
+                    } else {
                         x += if (x >= 4) 2 else 1
                     }
-                }
-                else {
+                } else {
                     x = tokens[2].toInt()
                     if (tokens[1] == "left") {
                         x = builder.length - x
@@ -88,8 +84,7 @@ class Puzzle : BasePuzzle() {
                     builder.delete(builder.lastIndex, builder.length)
                     builder.insert(0, value)
                 }
-            }
-            else if (line.startsWith("move")) {
+            } else if (line.startsWith("move")) {
                 var x = tokens[2].toInt()
                 var y = tokens[5].toInt()
                 if (isReverse) {

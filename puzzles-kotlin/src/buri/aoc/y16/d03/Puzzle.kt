@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(1032, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(1838, 0, true)
@@ -46,12 +47,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        var possible = 0
-        for (triangle in triangles) {
-            if (triangle[0] + triangle[1] > triangle[2]) {
-                possible++
-            }
-        }
-        return possible
+        return triangles.filter { it[0] + it[1] > it[2] }.size
     }
 }

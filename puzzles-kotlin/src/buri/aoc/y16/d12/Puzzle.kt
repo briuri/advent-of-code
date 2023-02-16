@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun(42, 1)
         assertRun(318020, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(9227674, 0, true)
@@ -33,7 +34,7 @@ class Puzzle : BasePuzzle() {
             val offset = getIntValue(input[16]) * getIntValue(input[17])
             var a = 1L
             var b = 1L
-            for (i in 0 .. times) {
+            for (i in 0..times) {
                 val sum = a + b
                 a = b
                 b = sum
