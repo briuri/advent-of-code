@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun("tknk", 1)
         assertRun("uownj", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("60", 1)
@@ -55,6 +56,7 @@ class Puzzle : BasePuzzle() {
         return ((current.weight + delta).toString())
     }
 }
+
 data class Disc(val name: String, val weight: Int) {
     val children = mutableListOf<Disc>()
     var parent: Disc? = null

@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun("gkmndaholjbfcepi", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("abihnfkojcmegldp", 0, true)
@@ -34,7 +35,8 @@ class Puzzle : BasePuzzle() {
                 val tokens = command.drop(1).split("/")
                 if (command[0] == 's') {
                     val start = order.size - tokens[0].toInt()
-                    order = order.sliceArray(start until order.size) + order.sliceArray(0 until start)
+                    order = order.sliceArray(start until order.size) +
+                            order.sliceArray(0 until start)
                 } else {
                     val aIndex = if (command[0] == 'x') tokens[0].toInt() else order.indexOf(tokens[0][0])
                     val bIndex = if (command[0] == 'x') tokens[1].toInt() else order.indexOf(tokens[1][0])

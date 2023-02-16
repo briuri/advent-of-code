@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun(4, 1)
         assertRun(7071, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(3, 2)
@@ -45,6 +46,7 @@ class Puzzle : BasePuzzle() {
         return programB.sendCount
     }
 }
+
 class Registers(pStart: Long, private val instructions: List<String>) {
     private val registers = mutableMapOf<String, Long>()
     private val sentMessages = mutableListOf<Long>()
@@ -69,20 +71,15 @@ class Registers(pStart: Long, private val instructions: List<String>) {
             if (command[0] == "snd") {
                 sentMessages.add(resolve(command[1]))
                 sendCount++
-            }
-            else if (command[0] == "set") {
+            } else if (command[0] == "set") {
                 registers[command[1]] = resolve(command[2])
-            }
-            else if (command[0] == "add") {
+            } else if (command[0] == "add") {
                 registers[command[1]] = resolve(command[1]) + resolve(command[2])
-            }
-            else if (command[0] == "mul") {
+            } else if (command[0] == "mul") {
                 registers[command[1]] = resolve(command[1]) * resolve(command[2])
-            }
-            else if (command[0] == "mod") {
+            } else if (command[0] == "mod") {
                 registers[command[1]] = resolve(command[1]) % resolve(command[2])
-            }
-            else if (command[0] == "rcv") {
+            } else if (command[0] == "rcv") {
                 // In part ONE, quit the first time this command works.
                 if (part == ONE && resolve(command[1]) != 0L) {
                     break
@@ -94,8 +91,7 @@ class Registers(pStart: Long, private val instructions: List<String>) {
                     }
                     registers[command[1]] = sender!!.getNextMessage()
                 }
-            }
-            else if (command[0] == "jgz" && resolve(command[1]) > 0) {
+            } else if (command[0] == "jgz" && resolve(command[1]) > 0) {
                 offset = resolve(command[2]).toInt()
             }
             pointer += offset
@@ -109,8 +105,7 @@ class Registers(pStart: Long, private val instructions: List<String>) {
         return if (addressOrValue.toIntOrNull() == null) {
             registers.putIfAbsent(addressOrValue, 0L)
             return registers[addressOrValue]!!
-        }
-        else {
+        } else {
             addressOrValue.toLong()
         }
     }

@@ -14,6 +14,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(552, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(330785, 0, true)
@@ -57,6 +58,7 @@ class Puzzle : BasePuzzle() {
         return SpiralGrid().firstGreaterThan(num)
     }
 }
+
 class SpiralGrid {
     private val squares = mutableMapOf<Pair<Int, Int>, Int>()
     private var current = MutablePosition(Pair(0, 0), Direction.EAST)
@@ -83,7 +85,7 @@ class SpiralGrid {
         val list = current.coords.getNeighbors(true)
         var sum = 0
         for (point in list) {
-            sum+= squares[point] ?: 0
+            sum += squares[point] ?: 0
         }
         return sum
     }

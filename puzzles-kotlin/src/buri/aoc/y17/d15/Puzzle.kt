@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(588, 1)
         assertRun(626, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(309, 1)
@@ -40,6 +41,7 @@ class Puzzle : BasePuzzle() {
         return same
     }
 }
+
 class Generator(private var current: Long, private val factor: Long, private val multiples: Long) {
 
     /**

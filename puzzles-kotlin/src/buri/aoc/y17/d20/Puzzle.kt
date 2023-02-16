@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(170, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(571, 0, true)
@@ -38,7 +39,7 @@ class Puzzle : BasePuzzle() {
                 particlesAt[particle.position]!!.add(particle)
             }
             if (part == TWO) {
-                for (collision in particlesAt.values. filter { it.size > 1 }) {
+                for (collision in particlesAt.values.filter { it.size > 1 }) {
                     particles.removeAll(collision)
                 }
             }
@@ -49,18 +50,20 @@ class Puzzle : BasePuzzle() {
         return particles.size
     }
 }
+
 data class Particle(val num: Int, val input: String) {
     var position: Triple<Long, Long, Long>
     private var velocity: Triple<Long, Long, Long>
     private var acceleration: Triple<Long, Long, Long>
+
     init {
-        val pStart = input.split("p=<")[1].split(">")[0].split(",").map { it.toLong() }
+        val pStart = input.extractTriple("p")
         position = Triple(pStart[0], pStart[1], pStart[2])
 
-        val vStart = input.split("v=<")[1].split(">")[0].split(",").map { it.toLong() }
+        val vStart = input.extractTriple("v")
         velocity = Triple(vStart[0], vStart[1], vStart[2])
 
-        val aStart = input.split("a=<")[1].split(">")[0].split(",").map { it.toLong() }
+        val aStart = input.extractTriple("a")
         acceleration = Triple(aStart[0], aStart[1], aStart[2])
     }
 
@@ -68,11 +71,22 @@ data class Particle(val num: Int, val input: String) {
      * Updates particle position and velocity.
      */
     fun tick() {
-        velocity = velocity.copy(first = velocity.first + acceleration.first,
+        velocity = velocity.copy(
+            first = velocity.first + acceleration.first,
             second = velocity.second + acceleration.second,
-            third = velocity.third + acceleration.third)
-        position = position.copy(first = position.first + velocity.first,
+            third = velocity.third + acceleration.third
+        )
+        position = position.copy(
+            first = position.first + velocity.first,
             second = position.second + velocity.second,
-            third = position.third + velocity.third)
+            third = position.third + velocity.third
+        )
+    }
+
+    /**
+     * Helper function to grab the 3 coordinates from an input.
+     */
+    private fun String.extractTriple(name: String): List<Long> {
+        return this.split("$name=<")[1].split(">")[0].split(",").map { it.toLong() }
     }
 }

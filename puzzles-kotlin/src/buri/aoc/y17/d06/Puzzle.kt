@@ -17,6 +17,7 @@ class Puzzle : BasePuzzle() {
         assertRun(5, 1)
         assertRun(7864, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(4, 1)
@@ -56,8 +57,7 @@ class Puzzle : BasePuzzle() {
                     steps = 0
                     visited.clear()
                     findingCycle = true
-                }
-                else {
+                } else {
                     return steps
                 }
             }

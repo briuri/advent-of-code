@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(16827, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(7298, 0, true)
@@ -41,15 +42,13 @@ class Puzzle : BasePuzzle() {
             // Handle beginning/end of garbage
             else if (value == '<' && !inGarbage) {
                 stack.push(value)
-            }
-            else if (value == '>') {
+            } else if (value == '>') {
                 stack.pop()
             }
             // Handle beginning/end of groups
             else if (value == '{' && !inGarbage) {
                 stack.push(value)
-            }
-            else if (value == '}' && !inGarbage) {
+            } else if (value == '}' && !inGarbage) {
                 score += stack.size
                 stack.pop()
             }

@@ -15,18 +15,19 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(6061, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(6696, 0, true)
     }
 
     private val registers = mutableMapOf<String, Long>()
-    private var maxAnytime = 0L
 
     /**
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
+        var maxAnytime = 0L
         for (line in input) {
             val tokens = line.split(" ")
             if (isConditionTrue(tokens)) {
@@ -48,23 +49,14 @@ class Puzzle : BasePuzzle() {
     private fun isConditionTrue(tokens: List<String>): Boolean {
         val value1 = getValue(tokens[4])
         val value2 = tokens[6].toLong()
-        if (tokens[5] == "<") {
-            return value1 < value2
+        return when (tokens[5]) {
+            "<" -> value1 < value2
+            ">" -> value1 > value2
+            "==" -> value1 == value2
+            "!=" -> value1 != value2
+            "<=" -> value1 <= value2
+            else -> value1 >= value2
         }
-        else if (tokens[5] == ">") {
-            return value1 > value2
-        }
-        else if (tokens[5] == "==") {
-            return value1 == value2
-        }
-        else if (tokens[5] == "!=") {
-            return value1 != value2
-        }
-        else if (tokens[5] == "<=") {
-            return value1 <= value2
-        }
-        // >=
-        return value1 >= value2
     }
 
     /**

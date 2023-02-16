@@ -3,7 +3,6 @@ package buri.aoc.y17.d17
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -16,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(1306, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(20430489, 0, true)
@@ -47,8 +47,10 @@ class Puzzle : BasePuzzle() {
         return afterZero
     }
 }
+
 data class Spinlock(private val steps: Int) {
     private val lock = ArrayDeque<Int>()
+
     init {
         lock.addFirst(0)
     }

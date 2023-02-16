@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun(1175, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(1166, 0, true)
@@ -29,8 +30,7 @@ class Puzzle : BasePuzzle() {
         for (i in sequence.indices) {
             val next = if (part == ONE) {
                 if (i == sequence.lastIndex) 0 else i + 1
-            }
-            else {
+            } else {
                 (i + (sequence.length / 2)) % sequence.length
             }
             if (sequence[i] == sequence[next]) {

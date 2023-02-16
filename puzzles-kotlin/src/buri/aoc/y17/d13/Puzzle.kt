@@ -16,6 +16,7 @@ class Puzzle : BasePuzzle() {
         assertRun(24, 1)
         assertRun(2604, 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun(10, 1)
@@ -38,11 +39,12 @@ class Puzzle : BasePuzzle() {
 
         var delay = 0
         while (scanners.any { it.isAtTop(it.depth + delay) }) {
-             delay++
+            delay++
         }
         return delay
     }
 }
+
 data class Scanner(val depth: Int, val range: Int) {
     /**
      * Returns true if the scanner is at the top of its layer at this time.

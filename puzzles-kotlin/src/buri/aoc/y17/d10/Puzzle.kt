@@ -15,6 +15,7 @@ class Puzzle : BasePuzzle() {
     fun runPart1() {
         assertRun("2928", 0, true)
     }
+
     @Test
     fun runPart2() {
         assertRun("0c2f794b2eb555f7830766bf8fb65a16", 0, true)
@@ -31,8 +32,7 @@ class Puzzle : BasePuzzle() {
         }
         val lengths = if (part == ONE) {
             input[0].split(",").map { it.toInt() }
-        }
-        else {
+        } else {
             input[0].map { it.code } + listOf(17, 31, 73, 47, 23)
         }
         val numRounds = if (part == ONE) 1 else 64
