@@ -2,6 +2,7 @@ package buri.aoc.template
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Part.*
 import org.junit.Test
 
 /**
