@@ -37,10 +37,10 @@ class Puzzle : BasePuzzle() {
             rules[grid.copy(CLOCKWISE_90).toPattern()] = tokens[1]
             rules[grid.copy(CLOCKWISE_180).toPattern()] = tokens[1]
             rules[grid.copy(CLOCKWISE_270).toPattern()] = tokens[1]
-            rules[grid.copy(MIRROR_HORIZONTAL).toPattern()] = tokens[1]
-            rules[grid.copy(MIRROR_HORIZONTAL).copy(CLOCKWISE_90).toPattern()] = tokens[1]
-            rules[grid.copy(MIRROR_HORIZONTAL).copy(CLOCKWISE_180).toPattern()] = tokens[1]
-            rules[grid.copy(MIRROR_HORIZONTAL).copy(CLOCKWISE_270).toPattern()] = tokens[1]
+            rules[grid.copy(MIRROR_H).toPattern()] = tokens[1]
+            rules[grid.copy(MIRROR_H).copy(CLOCKWISE_90).toPattern()] = tokens[1]
+            rules[grid.copy(MIRROR_H).copy(CLOCKWISE_180).toPattern()] = tokens[1]
+            rules[grid.copy(MIRROR_H).copy(CLOCKWISE_270).toPattern()] = tokens[1]
         }
 
         var grid = toGrid(".#./..#/###")
@@ -60,15 +60,7 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        var countOn = 0
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
-                if (grid[x, y] == "#") {
-                    countOn++
-                }
-            }
-        }
-        return countOn
+        return grid.count("#")
     }
 
     /**

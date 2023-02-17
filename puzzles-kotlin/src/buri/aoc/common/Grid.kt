@@ -23,6 +23,17 @@ class Grid(val width: Int, val height: Int) {
     }
 
     /**
+     * Counts occurrences of some string.
+     */
+    fun count(value: String): Int {
+        var sum = 0
+        for (x in 0 until width) {
+            sum += grid[x].filter { it == value }.size
+        }
+        return sum
+    }
+
+    /**
      * Creates a copy of this grid.
      */
     fun copy(orientation: Orientation = ORIGINAL): Grid {
@@ -36,8 +47,8 @@ class Grid(val width: Int, val height: Int) {
                     CLOCKWISE_90 -> Pair(height - y - 1, x)
                     CLOCKWISE_180 -> Pair(width - x - 1, height - y - 1)
                     CLOCKWISE_270 -> Pair(y, width - x - 1)
-                    MIRROR_HORIZONTAL -> Pair(width - x - 1, y)
-                    MIRROR_VERTICAL -> Pair(x, height - y - 1)
+                    MIRROR_H -> Pair(width - x - 1, y)
+                    MIRROR_V -> Pair(x, height - y - 1)
                     else -> Pair(x, y)
                 }
                 copy[point] = get(x, y)
@@ -144,4 +155,4 @@ class Grid(val width: Int, val height: Int) {
     }
 }
 
-enum class Orientation { ORIGINAL, CLOCKWISE_90, CLOCKWISE_180, CLOCKWISE_270, MIRROR_HORIZONTAL, MIRROR_VERTICAL }
+enum class Orientation { ORIGINAL, CLOCKWISE_90, CLOCKWISE_180, CLOCKWISE_270, MIRROR_H, MIRROR_V }
