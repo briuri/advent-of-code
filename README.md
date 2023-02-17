@@ -22,7 +22,7 @@ under `/src/test/` when competing).
 | **2020**  | 00:25 |        |
 | **2021**  | 01:40 |        |
 | **2022**  | 00:50 |        |
-| **Total** | 05:40 | 01:10  |
+| **Total** | 05:30 | 00:55  |
 
 ## Leaderboard Visualization
 
