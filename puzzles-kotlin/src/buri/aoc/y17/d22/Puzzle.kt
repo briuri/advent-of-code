@@ -54,8 +54,7 @@ class Puzzle : BasePuzzle() {
                     if (part == ONE) {
                         nodes[virus.coords] = State.INFECTED
                         count++
-                    }
-                    else {
+                    } else {
                         nodes[virus.coords] = State.WEAK
                     }
                 }
@@ -73,4 +72,5 @@ class Puzzle : BasePuzzle() {
         return count
     }
 }
+
 enum class State { CLEAN, WEAK, INFECTED, FLAGGED }
