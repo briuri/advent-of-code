@@ -1,5 +1,7 @@
 package buri.aoc.common
 
+import buri.aoc.common.Orientation.*
+
 /**
  * Helper class for grid navigation
  *
@@ -64,11 +66,22 @@ class Grid(val width: Int, val height: Int) {
     /**
      * Creates a copy of this grid.
      */
-    fun copy(): Grid {
-        val copy = Grid(width, height)
+    fun copy(orientation: Orientation = ORIGINAL): Grid {
+        val copy = when (orientation) {
+            CLOCKWISE_90, CLOCKWISE_270 -> Grid(height, width)
+            else -> Grid(width, height)
+        }
         for (y in 0 until height) {
             for (x in 0 until width) {
-                copy[x, y] = get(x, y)
+                val point = when (orientation) {
+                    CLOCKWISE_90 -> Pair(height - y - 1, x)
+                    CLOCKWISE_180 -> Pair(width - x - 1, height - y - 1)
+                    CLOCKWISE_270 -> Pair(y, width - x - 1)
+                    MIRROR_HORIZONTAL -> Pair(width - x - 1, y)
+                    MIRROR_VERTICAL -> Pair(x, height - y - 1)
+                    else -> Pair(x, y)
+                }
+                copy[point] = get(x, y)
             }
         }
         return copy
@@ -116,3 +129,5 @@ class Grid(val width: Int, val height: Int) {
         }
     }
 }
+
+enum class Orientation { ORIGINAL, CLOCKWISE_90, CLOCKWISE_180, CLOCKWISE_270, MIRROR_HORIZONTAL, MIRROR_VERTICAL }
