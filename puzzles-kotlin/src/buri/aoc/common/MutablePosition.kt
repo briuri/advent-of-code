@@ -24,23 +24,36 @@ data class MutablePosition(var coords: Pair<Int, Int>, var facing: Direction) {
     /**
      * Change the facing on this position
      */
-    fun turn(turn: Char) {
-        if (turn == 'R') {
-            facing = when (facing) {
-                NORTH -> EAST
-                EAST -> SOUTH
-                SOUTH -> WEST
-                WEST -> NORTH
-            }
+    fun turnLeft() {
+        facing = when (facing) {
+            NORTH -> WEST
+            EAST -> NORTH
+            SOUTH -> EAST
+            WEST -> SOUTH
         }
-        // L
-        else {
-            facing = when (facing) {
-                NORTH -> WEST
-                EAST -> NORTH
-                SOUTH -> EAST
-                WEST -> SOUTH
-            }
+    }
+
+    /**
+     * Change the facing on this position
+     */
+    fun turnRight() {
+        facing = when (facing) {
+            NORTH -> EAST
+            EAST -> SOUTH
+            SOUTH -> WEST
+            WEST -> NORTH
+        }
+    }
+
+    /**
+     * Change the facing on this position
+     */
+    fun turnAround() {
+        facing = when (facing) {
+            NORTH -> SOUTH
+            EAST -> WEST
+            SOUTH -> NORTH
+            WEST -> EAST
         }
     }
 }

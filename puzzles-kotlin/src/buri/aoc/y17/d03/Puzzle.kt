@@ -72,7 +72,7 @@ class SpiralGrid {
             current.move()
             squares[current.coords] = getNeighborSum()
             if (shouldTurnLeft()) {
-                current.turn('L')
+                current.turnLeft()
             }
         }
         return squares[current.coords]!!
@@ -95,7 +95,7 @@ class SpiralGrid {
      */
     private fun shouldTurnLeft(): Boolean {
         val test = current.copy()
-        test.turn('L')
+        test.turnLeft()
         test.move()
         return (squares[test.coords] == null)
     }

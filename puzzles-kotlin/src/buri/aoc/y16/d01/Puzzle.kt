@@ -29,7 +29,11 @@ class Puzzle : BasePuzzle() {
         val visited = mutableSetOf<Pair<Int, Int>>()
         val position = MutablePosition(Pair(0, 0), Direction.NORTH)
         for (command in input[0].split(", ")) {
-            position.turn(command[0])
+            if (command[0] == 'L') {
+                position.turnLeft()
+            } else {
+                position.turnRight()
+            }
             for (i in 0 until command.drop(1).toInt()) {
                 if (part == TWO && visited.contains(position.coords)) {
                     return position.coords.getManhattanDistance()
