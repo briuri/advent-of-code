@@ -53,7 +53,7 @@ class Puzzle : BasePuzzle() {
             }
             grid[point] = value
         }
-//        grid.print()
+//        println(grid)
         /*
         Initial State
         ...............................G
