@@ -2,7 +2,7 @@ package buri.aoc.y18.d04
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.*
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -57,10 +57,12 @@ class Puzzle : BasePuzzle() {
         return record.id * record.getSleepiestMinute().first
     }
 }
+
 data class Record(val id: Int) {
     private val sleepMinutes = mutableMapOf<Int, Int>()
+
     init {
-        repeat (60) {
+        repeat(60) {
             sleepMinutes[it] = 0
         }
     }

@@ -34,7 +34,7 @@ class Puzzle : BasePuzzle() {
 
         val ticker = mutableMapOf<Int, Int>()
         var cursor = 0
-        repeat (steps) {
+        repeat(steps) {
             ticker.putIfAbsent(cursor, 0)
             val current = ticker[cursor]!!
             val state = states[nextStateName]!!
@@ -51,6 +51,7 @@ data class State(private val input: List<String>) {
     val write = mutableMapOf<Int, Int>()
     val move = mutableMapOf<Int, Int>()
     val next = mutableMapOf<Int, String>()
+
     init {
         write[0] = input[1].split("value ")[1].dropLast(1).toInt()
         write[1] = input[5].split("value ")[1].dropLast(1).toInt()

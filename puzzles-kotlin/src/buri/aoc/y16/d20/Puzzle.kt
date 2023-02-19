@@ -50,8 +50,7 @@ class Puzzle : BasePuzzle() {
         validRanges.sortBy { it.first }
         return if (part == ONE) {
             validRanges[0].first
-        }
-        else {
+        } else {
             validRanges.sumOf { it.last - it.first + 1 }
         }
     }

@@ -2,7 +2,7 @@ package buri.aoc.y18.d06
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.*
+import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import buri.aoc.common.getManhattanDistance
 import org.junit.Test
@@ -52,8 +52,7 @@ class Puzzle : BasePuzzle() {
                         regionSizes.putIfAbsent(closest, 0)
                         regionSizes[closest] = regionSizes[closest]!! + 1
                     }
-                }
-                else {
+                } else {
                     val point = Pair(x, y)
                     val distances = getDistanceSum(points, point)
                     distanceSums[point] = distances

@@ -102,7 +102,7 @@ data class State(val steps: Int, private var state: String) {
             }
 
             // Elevator can move 2 gens if they won't fry things on next floor.
-            for (genIds in getPairPermutations(gensHere).filter {isGenAllowedNear(it, nextGens, nextChips) }) {
+            for (genIds in getPairPermutations(gensHere).filter { isGenAllowedNear(it, nextGens, nextChips) }) {
                 val builder = toBuilder(nextFloorChar)
                 builder.setCharAt(toIndex(genIds[0], true), nextFloorChar)
                 builder.setCharAt(toIndex(genIds[1], true), nextFloorChar)

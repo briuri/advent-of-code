@@ -2,7 +2,7 @@ package buri.aoc.y18.d03
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.*
+import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -43,22 +43,19 @@ class Puzzle : BasePuzzle() {
                     val point = Pair(x, y)
                     if (fabric[point] == -1) {
                         overlaps.add(id)
-                    }
-                    else if (fabric[point] != null) {
+                    } else if (fabric[point] != null) {
                         overlaps.add(fabric[point]!!)
                         overlaps.add(id)
                         fabric[point] = -1
-                    }
-                    else {
+                    } else {
                         fabric[point] = id
                     }
                 }
             }
         }
         return if (part == ONE) {
-            fabric.values.filter { it == -1}.size
-        }
-        else {
+            fabric.values.filter { it == -1 }.size
+        } else {
             ids.filter { it !in overlaps }[0]
         }
     }

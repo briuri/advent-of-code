@@ -2,7 +2,7 @@ package buri.aoc.y18.d02
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.*
+import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -59,6 +59,4 @@ class Puzzle : BasePuzzle() {
         }
         return ""
     }
-
-
 }
