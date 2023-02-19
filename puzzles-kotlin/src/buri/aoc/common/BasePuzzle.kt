@@ -138,15 +138,17 @@ fun Pair<Int, Int>.getNeighbors(includeDiagonals: Boolean = false): MutableList<
 /**
  * Extension function for the Manhattan distance of a 2D point from the origin.
  */
-fun Pair<Int, Int>.getManhattanDistance(): Int {
-    return this.first.absoluteValue + this.second.absoluteValue
+fun Pair<Int, Int>.getManhattanDistance(target: Pair<Int, Int> = Pair(0, 0)): Int {
+    return (this.first - target.first).absoluteValue + (this.second - target.second).absoluteValue
 }
 
 /**
  * Extension function for the Manhattan distance of a 3D point from the origin.
  */
-fun Triple<Long, Long, Long>.getManhattanDistance(): Long {
-    return this.first.absoluteValue + this.second.absoluteValue + this.third.absoluteValue
+fun Triple<Long, Long, Long>.getManhattanDistance(target: Triple<Long, Long, Long> = Triple(0L, 0L, 0L)): Long {
+    return (this.first - target.first).absoluteValue +
+            (this.second - target.second).absoluteValue +
+            (this.third - target.third).absoluteValue
 }
 
 /**
