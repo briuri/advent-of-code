@@ -3,7 +3,7 @@ package buri.aoc.y17.d06
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.TWO
-import buri.aoc.common.collapseWhitespace
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -29,9 +29,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val banks = mutableListOf<Int>()
-        for (blocks in input[0].collapseWhitespace().split(" ")) {
-            banks.add(blocks.toInt())
-        }
+        banks.addAll(input[0].extractInts())
 
         val visited = mutableSetOf<String>()
         var steps = 0

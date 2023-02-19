@@ -3,6 +3,7 @@ package buri.aoc.y16.d15
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -28,9 +29,10 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val discs = mutableMapOf<Int, Disc>()
         for (line in input) {
-            val num = line[6].digitToInt()
-            val total = line.split(" ")[3].toInt()
-            val start = line.split(" ")[11].dropLast(1).toInt()
+            val numbers = line.extractInts()
+            val num = numbers[0]
+            val total = numbers[1]
+            val start = numbers[3]
             discs[num] = Disc(total, start)
         }
         if (part == TWO) {

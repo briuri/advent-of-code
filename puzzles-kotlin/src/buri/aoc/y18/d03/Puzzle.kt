@@ -3,6 +3,7 @@ package buri.aoc.y18.d03
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.*
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -31,14 +32,12 @@ class Puzzle : BasePuzzle() {
         val ids = mutableSetOf<Int>()
         val overlaps = mutableSetOf<Int>()
         for (line in input) {
-            val tokens = line.split(" ")
-            val id = tokens[0].drop(1).toInt()
-            val rawStart = tokens[2].dropLast(1).split(",")
-            val start = Pair(rawStart[0].toInt(), rawStart[1].toInt())
-            val rawDims = tokens[3].split("x")
-            val dims = Pair(rawDims[0].toInt(), rawDims[1].toInt())
-
+            val numbers = line.extractInts()
+            val id = numbers[0]
+            val start = Pair(numbers[1], numbers[2])
+            val dims = Pair(numbers[3], numbers[4])
             ids.add(id)
+
             for (y in start.second until start.second + dims.second) {
                 for (x in start.first until start.first + dims.first) {
                     val point = Pair(x, y)

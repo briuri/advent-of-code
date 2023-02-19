@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Grid
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -28,17 +29,16 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val lights = Grid(1000, 1000)
         for (line in input) {
-            val tokens = line.split(" ")
-            val first = tokens[tokens.lastIndex - 2].split(",").map { it.toInt() }
-            val last = tokens[tokens.lastIndex].split(",").map { it.toInt() }
-            val xRange = Pair(first[0], last[0])
-            val yRange = Pair(first[1], last[1])
+            val numbers = line.extractInts()
+            val onOff = line.split(" ")[1]
+            val xRange = Pair(numbers[0], numbers[2])
+            val yRange = Pair(numbers[1], numbers[3])
 
             for (x in xRange.first..xRange.second) {
                 for (y in yRange.first..yRange.second) {
                     val value = lights[x, y].toInt()
                     if (part == ONE) {
-                        when (tokens[1]) {
+                        when (onOff) {
                             "on" -> lights[x, y] = 1
                             "off" -> lights[x, y] = 0
                             else -> {
@@ -47,7 +47,7 @@ class Puzzle : BasePuzzle() {
                             }
                         }
                     } else {
-                        when (tokens[1]) {
+                        when (onOff) {
                             "on" -> lights[x, y] = value + 1
                             "off" -> lights[x, y] = (value - 1).coerceAtLeast(0)
                             else -> lights[x, y] = value + 2

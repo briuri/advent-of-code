@@ -152,8 +152,9 @@ fun Triple<Long, Long, Long>.getManhattanDistance(target: Triple<Long, Long, Lon
 }
 
 /**
- * Extension function for collapsing multiple whitespace to a single whitespace.
+ * Extension function for extracting the numbers out of a line of input.
  */
-fun String.collapseWhitespace(): String {
-    return this.replace("\\s+".toRegex(), " ").trim()
+fun String.extractInts(): List<Int> {
+    val string = this.replace("[^0-9\\-]".toRegex(), " ").replace("\\s+".toRegex(), " ").trim()
+    return (string.split(" ").map { it.toInt() })
 }

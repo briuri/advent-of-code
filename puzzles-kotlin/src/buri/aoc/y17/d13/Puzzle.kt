@@ -3,6 +3,7 @@ package buri.aoc.y17.d13
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -29,8 +30,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val scanners = mutableSetOf<Scanner>()
         for (line in input) {
-            val tokens = line.split(": ")
-            scanners.add(Scanner(tokens[0].toInt(), tokens[1].toInt()))
+            val numbers = line.extractInts()
+            scanners.add(Scanner(numbers[0], numbers[1]))
         }
 
         if (part == ONE) {

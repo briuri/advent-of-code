@@ -3,6 +3,7 @@ package buri.aoc.y15.d14
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -29,7 +30,8 @@ class Puzzle : BasePuzzle() {
         val scores = mutableMapOf<Reindeer, Int>()
         for (line in input) {
             val tokens = line.split(" ")
-            val reindeer = Reindeer(tokens[0], tokens[3].toInt(), tokens[6].toInt(), tokens[13].toInt())
+            val numbers = line.extractInts()
+            val reindeer = Reindeer(tokens[0], numbers[0], numbers[1], numbers[2])
             scores[reindeer] = 0
         }
         for (i in 1..endRace) {

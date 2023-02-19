@@ -3,6 +3,7 @@ package buri.aoc.y17.d10
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -31,7 +32,7 @@ class Puzzle : BasePuzzle() {
             circle.add(i)
         }
         val lengths = if (part == ONE) {
-            input[0].split(",").map { it.toInt() }
+            input[0].extractInts()
         } else {
             input[0].map { it.code } + listOf(17, 31, 73, 47, 23)
         }

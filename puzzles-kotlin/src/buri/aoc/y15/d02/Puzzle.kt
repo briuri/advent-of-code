@@ -3,6 +3,7 @@ package buri.aoc.y15.d02
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -29,7 +30,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var total = 0
         for (line in input) {
-            val sides = line.split("x").map { it.toInt() }.sorted()
+            val sides = line.extractInts().sorted()
             val paper = if (part == ONE) {
                 (3 * sides[0] * sides[1]) + (2 * sides[1] * sides[2]) + (2 * sides[2] * sides[0])
             } else {

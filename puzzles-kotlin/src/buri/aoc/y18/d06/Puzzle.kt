@@ -3,6 +3,7 @@ package buri.aoc.y18.d06
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.*
+import buri.aoc.common.extractInts
 import buri.aoc.common.getManhattanDistance
 import org.junit.Test
 
@@ -33,13 +34,12 @@ class Puzzle : BasePuzzle() {
         var minY = Int.MAX_VALUE
         var maxY = Int.MIN_VALUE
         for (line in input) {
-            val x = line.split(", ")[0].toInt()
-            val y = line.split(", ")[1].toInt()
-            minX = minX.coerceAtMost(x)
-            maxX = maxX.coerceAtLeast(x)
-            minY = minY.coerceAtMost(y)
-            maxY = maxY.coerceAtLeast(y)
-            points.add(Pair(x, y))
+            val numbers = line.extractInts()
+            minX = minX.coerceAtMost(numbers[0])
+            maxX = maxX.coerceAtLeast(numbers[0])
+            minY = minY.coerceAtMost(numbers[1])
+            maxY = maxY.coerceAtLeast(numbers[1])
+            points.add(Pair(numbers[0], numbers[1]))
         }
 
         val regionSizes = mutableMapOf<Pair<Int, Int>, Int>()

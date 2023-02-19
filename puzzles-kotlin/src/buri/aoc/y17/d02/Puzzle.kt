@@ -3,7 +3,7 @@ package buri.aoc.y17.d02
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
-import buri.aoc.common.collapseWhitespace
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -31,8 +31,7 @@ class Puzzle : BasePuzzle() {
         var sum = 0
         var divisionSum = 0
         for (line in input) {
-            val tokens = line.collapseWhitespace().split(" ")
-            val row = tokens.map { it.toInt() }.sorted()
+            val row = line.extractInts().sorted()
             sum += row.max() - row.min()
 
             for (num1 in row.reversed()) {

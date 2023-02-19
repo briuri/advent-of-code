@@ -3,6 +3,7 @@ package buri.aoc.y17.d24
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -32,8 +33,8 @@ class Puzzle : BasePuzzle() {
         sizeToStrength.clear()
         val components = mutableListOf<Component>()
         for (line in input) {
-            val tokens = line.split("/")
-            components.add(Component(tokens[0].toInt(), tokens[1].toInt()))
+            val numbers = line.extractInts()
+            components.add(Component(numbers[0], numbers[1]))
         }
         val maxStrength = getStrength(0, 0, 0, components)
         return if (part == ONE) maxStrength else sizeToStrength[sizeToStrength.keys.max()]!!
