@@ -46,14 +46,14 @@ class Puzzle : BasePuzzle() {
 
         for (line1 in input) {
             for (line2 in input.filter { it != line1 }) {
-                val builder = StringBuilder()
+                val sharedChars = StringBuilder()
                 for (i in line1.indices) {
                     if (line1[i] == line2[i]) {
-                        builder.append(line1[i])
+                        sharedChars.append(line1[i])
                     }
                 }
-                if (builder.length == line1.length - 1) {
-                    return builder.toString()
+                if (sharedChars.length == line1.length - 1) {
+                    return sharedChars.toString()
                 }
             }
         }

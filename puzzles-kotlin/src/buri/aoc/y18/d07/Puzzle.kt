@@ -26,6 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
+        // Part ONE is a special case of Part TWO, with 1 worker and no job durations.
         val workers = if (part == ONE) 1 else 5
         val jobs = mutableSetOf<Job>()
 
@@ -50,7 +51,7 @@ class Puzzle : BasePuzzle() {
 }
 
 data class Graph(val input: List<String>) {
-    private val vertices = mutableListOf<Pair<Char, Char>>()
+    private val vertices = mutableSetOf<Pair<Char, Char>>()
     private val nodes = mutableSetOf<Char>()
     private val starts = mutableListOf<Char>()
 
@@ -63,7 +64,9 @@ data class Graph(val input: List<String>) {
             parents.add(tokens[1])
             children.add(tokens[7])
         }
+        // Store all unique node names.
         nodes.addAll(vertices.map { it.toList() }.reduce { acc, list -> acc + list })
+        // Store all nodes that have no prerequisites.
         starts.addAll(parents.filter { it !in children }.sorted())
     }
 

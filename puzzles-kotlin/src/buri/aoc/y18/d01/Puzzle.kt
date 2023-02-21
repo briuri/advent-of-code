@@ -30,6 +30,7 @@ class Puzzle : BasePuzzle() {
         }
         val visited = mutableSetOf<Int>()
         var current = 0
+        // Continuously loop over input, since cycle may not occur in first run.
         while (true) {
             for (frequency in input.map { it.toInt() }) {
                 visited.add(current)

@@ -34,7 +34,8 @@ class Puzzle : BasePuzzle() {
         var minLength = Int.MAX_VALUE
         for (value in reduced.lowercase().toSet()) {
             val regexp = String.format("[%c%c]", value, value.uppercaseChar()).toRegex()
-            minLength = minLength.coerceAtMost(reduce(reduced.replace(regexp, "")).length)
+            val currentLength = reduce(reduced.replace(regexp, "")).length
+            minLength = minLength.coerceAtMost(currentLength)
         }
         return minLength
     }

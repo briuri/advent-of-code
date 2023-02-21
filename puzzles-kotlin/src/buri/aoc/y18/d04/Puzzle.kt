@@ -3,6 +3,7 @@ package buri.aoc.y18.d04
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -33,12 +34,12 @@ class Puzzle : BasePuzzle() {
         var i = 0
         while (i in sortedInput.indices) {
             if (sortedInput[i].contains("Guard #")) {
-                val id = sortedInput[i].split("Guard #")[1].split(" ")[0].toInt()
+                val id = sortedInput[i].drop(15).extractInts()[1]
                 records.putIfAbsent(id, Record(id))
                 i++
                 while (i in sortedInput.indices && !sortedInput[i].contains("Guard #")) {
-                    val start = sortedInput[i].split("00:")[1].split("]")[0].toInt()
-                    val end = sortedInput[i + 1].split("00:")[1].split("]")[0].toInt()
+                    val start = sortedInput[i].drop(15).extractInts()[0]
+                    val end = sortedInput[i + 1].drop(15).extractInts()[0]
                     records[id]!!.addSleep(start, end)
                     i += 2
                 }
@@ -87,6 +88,6 @@ data class Record(val id: Int) {
      * Finds the minute with the most sleep.
      */
     fun getSleepiestMinute(): Pair<Int, Int> {
-        return sleepMinutes.toList().sortedByDescending { it.second }[0]
+        return sleepMinutes.toList().maxByOrNull { it.second }!!
     }
 }

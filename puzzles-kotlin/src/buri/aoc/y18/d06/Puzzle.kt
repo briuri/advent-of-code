@@ -35,6 +35,7 @@ class Puzzle : BasePuzzle() {
         var maxY = Int.MIN_VALUE
         for (line in input) {
             val numbers = line.extractInts()
+            // Calculate the rectangular bounds of all points
             minX = minX.coerceAtMost(numbers[0])
             maxX = maxX.coerceAtLeast(numbers[0])
             minY = minY.coerceAtMost(numbers[1])
@@ -49,21 +50,22 @@ class Puzzle : BasePuzzle() {
                 if (part == ONE) {
                     val closest = getClosest(points, Pair(x, y))
                     if (closest != null) {
+                        // Update the size of the region "owned" by the closest point.
                         regionSizes.putIfAbsent(closest, 0)
                         regionSizes[closest] = regionSizes[closest]!! + 1
                     }
                 } else {
-                    val point = Pair(x, y)
-                    val distances = getDistanceSum(points, point)
-                    distanceSums[point] = distances
+                    val target = Pair(x, y)
+                    // Store the sum of all MDs to the target point.
+                    distanceSums[target] = points.sumOf { it.getManhattanDistance(target) }
                 }
             }
         }
-        if (part == ONE) {
-            return regionSizes.toList().maxByOrNull { it.second }!!.second
+        return if (part == ONE) {
+            regionSizes.maxByOrNull { it.value }!!.value
+        } else {
+            distanceSums.filter { it.value < 10000 }.size
         }
-        return distanceSums.filter { it.value < 10000 }.size
-
     }
 
     /**
@@ -76,14 +78,7 @@ class Puzzle : BasePuzzle() {
             mds.putIfAbsent(md, mutableListOf())
             mds[md]!!.add(point)
         }
-        val closest = mds.toList().minByOrNull { it.first }!!.second
+        val closest = mds.minByOrNull { it.key }!!.value
         return if (closest.size == 1) closest.first() else null
-    }
-
-    /**
-     * Returns the sum of all distances to a target.
-     */
-    private fun getDistanceSum(points: Set<Pair<Int, Int>>, target: Pair<Int, Int>): Int {
-        return points.sumOf { it.getManhattanDistance(target) }
     }
 }
