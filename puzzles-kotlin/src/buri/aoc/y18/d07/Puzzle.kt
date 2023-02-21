@@ -33,6 +33,7 @@ class Puzzle : BasePuzzle() {
         val visited = mutableListOf<Char>()
         var time = 0
         while (!graph.isComplete(visited)) {
+            // Mark all nodes in jobs that finish on this tick as visited.
             visited.addAll(jobs.filter { it.end <= time }.map { it.node })
             jobs.removeIf { it.end <= time }
 
@@ -57,10 +58,10 @@ data class Graph(val input: List<String>) {
         val parents = mutableSetOf<Char>()
         val children = mutableSetOf<Char>()
         for (line in input) {
-            val tokens = line.split(" ")
-            vertices.add(Pair(tokens[1][0], tokens[7][0]))
-            parents.add(tokens[1][0])
-            children.add(tokens[7][0])
+            val tokens = line.split(" ").map { it[0] }
+            vertices.add(Pair(tokens[1], tokens[7]))
+            parents.add(tokens[1])
+            children.add(tokens[7])
         }
         nodes.addAll(vertices.map { it.toList() }.reduce { acc, list -> acc + list })
         starts.addAll(parents.filter { it !in children }.sorted())
@@ -77,9 +78,12 @@ data class Graph(val input: List<String>) {
      * Determines which nodes can be visited next, based on what has already been visited.
      */
     fun getNext(visited: List<Char>, inProgress: List<Char>): List<Char> {
+        val unavailable = visited + inProgress
         val next = mutableSetOf<Char>()
-        next.addAll(starts.filter { it !in visited && it !in inProgress })
-        for (node in nodes.filter { it !in visited && it !in inProgress  }) {
+        // Start with unvisited nodes that have no prequisites.
+        next.addAll(starts.filter { it !in unavailable })
+        for (node in nodes.filter { it !in unavailable }) {
+            // Add nodes whose prerequisites have all been met.
             if (vertices.filter { it.second == node }.all { it.first in visited }) {
                 next.add(node)
             }
