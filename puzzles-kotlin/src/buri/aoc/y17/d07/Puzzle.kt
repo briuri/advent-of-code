@@ -31,7 +31,7 @@ class Puzzle : BasePuzzle() {
         val discs = mutableMapOf<String, Disc>()
         for (line in input) {
             val name = line.split(" ")[0]
-            discs[name] = Disc(name, line.extractInts()[0])
+            discs[name] = Disc(name, line.extractInts(false)[0])
         }
         for (line in input.filter { it.contains(" -> ") }) {
             val parent = line.split(" ")[0]

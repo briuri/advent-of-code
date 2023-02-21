@@ -154,7 +154,8 @@ fun Triple<Long, Long, Long>.getManhattanDistance(target: Triple<Long, Long, Lon
 /**
  * Extension function for extracting the numbers out of a line of input.
  */
-fun String.extractInts(): List<Int> {
-    val string = this.replace("[^0-9\\-]".toRegex(), " ").replace("\\s+".toRegex(), " ").trim()
+fun String.extractInts(allowNegative: Boolean = true): List<Int> {
+    val pattern = if (allowNegative) "[^0-9\\-]" else "[^0-9]"
+    val string = this.replace(pattern.toRegex(), " ").replace("\\s+".toRegex(), " ").trim()
     return (string.split(" ").map { it.toInt() })
 }

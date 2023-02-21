@@ -54,8 +54,8 @@ data class State(private val input: List<String>) {
     val next = mutableMapOf<Int, String>()
 
     init {
-        write[0] = input[1].extractInts()[0]
-        write[1] = input[5].extractInts()[0]
+        write[0] = input[1].extractInts(false)[0]
+        write[1] = input[5].extractInts(false)[0]
         move[0] = toOffset(input[2].split("the ")[1].dropLast(1))
         move[1] = toOffset(input[6].split("the ")[1].dropLast(1))
         next[0] = input[3].split("state ")[1].dropLast(1)
