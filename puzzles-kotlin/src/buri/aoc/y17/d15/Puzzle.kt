@@ -30,7 +30,6 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val multiplesA = if (part == ONE) 1L else 4L
         val multiplesB = if (part == ONE) 1L else 8L
-        val numbers = input[0].extractInts()
         val genA = Generator(input[0].extractInts()[0].toLong(), 16807L, multiplesA)
         val genB = Generator(input[1].extractInts()[0].toLong(), 48271L, multiplesB)
         val times = if (part == ONE) 40_000_000 else 5_000_000

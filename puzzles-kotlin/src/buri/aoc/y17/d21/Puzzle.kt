@@ -1,8 +1,8 @@
 package buri.aoc.y17.d21
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.Grid
-import buri.aoc.common.Orientation.*
+import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Orientation.*
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test

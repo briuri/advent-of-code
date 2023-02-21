@@ -1,7 +1,7 @@
 package buri.aoc.y16.d24
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.Grid
+import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
 import buri.aoc.common.Part.TWO
 import buri.aoc.common.Pathfinder

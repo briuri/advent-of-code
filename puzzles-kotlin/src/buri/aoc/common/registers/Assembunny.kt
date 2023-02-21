@@ -1,4 +1,4 @@
-package buri.aoc.common
+package buri.aoc.common.registers
 
 /**
  * Interpreter code for y16 Assembunny puzzles

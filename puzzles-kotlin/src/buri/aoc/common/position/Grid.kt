@@ -1,6 +1,7 @@
-package buri.aoc.common
+package buri.aoc.common.position
 
-import buri.aoc.common.Orientation.*
+import buri.aoc.common.getNeighbors
+import buri.aoc.common.position.Orientation.*
 import java.lang.StringBuilder
 
 /**

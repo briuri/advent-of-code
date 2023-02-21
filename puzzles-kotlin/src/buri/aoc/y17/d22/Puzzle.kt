@@ -1,8 +1,8 @@
 package buri.aoc.y17.d22
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.Direction.NORTH
-import buri.aoc.common.MutablePosition
+import buri.aoc.common.position.Direction.NORTH
+import buri.aoc.common.position.MutablePosition
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test

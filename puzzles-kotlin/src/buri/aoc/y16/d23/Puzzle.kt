@@ -1,6 +1,6 @@
 package buri.aoc.y16.d23
 
-import buri.aoc.common.Assembunny
+import buri.aoc.common.registers.Assembunny
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE

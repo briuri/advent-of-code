@@ -2,6 +2,8 @@ package buri.aoc.y16.d01
 
 import buri.aoc.common.*
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.position.Direction
+import buri.aoc.common.position.MutablePosition
 import org.junit.Test
 
 /**

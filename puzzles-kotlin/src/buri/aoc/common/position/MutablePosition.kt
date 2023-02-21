@@ -1,6 +1,6 @@
-package buri.aoc.common
+package buri.aoc.common.position
 
-import buri.aoc.common.Direction.*
+import buri.aoc.common.position.Direction.*
 
 /**
  * Helper class for a 2D point and directional facing.
