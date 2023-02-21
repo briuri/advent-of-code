@@ -23,4 +23,11 @@ data class Bounds(val points: Set<Pair<Int, Int>>) {
         x = minX..maxX
         y = minY..maxY
     }
+
+    /**
+     * Returns the area of the rectangle.
+     */
+    fun getArea(): Long {
+        return (x.last - x.first).toLong() * (y.last - y.first).toLong()
+    }
 }
