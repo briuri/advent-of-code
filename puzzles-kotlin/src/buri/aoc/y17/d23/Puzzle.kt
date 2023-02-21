@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
+import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
 import kotlin.math.sqrt
 
@@ -27,26 +28,26 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val registers = mutableMapOf<String, Int>()
+        val registers = NamedRegisters()
         if (part == ONE) {
             for (name in 'a'..'h') {
-                registers[name.toString()] = 0
+                registers[name.toString()] = 0L
             }
             var mulCount = 0
             var pointer = 0
             while (pointer in input.indices) {
                 val command = input[pointer].split(" ")
                 var offset = 1
-                val y = resolve(registers, command[2])
+                val y = registers.resolve(command[2])
                 if (command[0] == "set") {
                     registers[command[1]] = y
                 } else if (command[0] == "sub") {
-                    registers[command[1]] = registers[command[1]]!! - y
+                    registers.subtract(command[1], y)
                 } else if (command[0] == "mul") {
-                    registers[command[1]] = registers[command[1]]!! * y
+                    registers.multiply(command[1], y)
                     mulCount++
-                } else if (resolve(registers, command[1]) != 0) { //jnz
-                    offset = y
+                } else if (registers.resolve(command[1]) != 0L) { //jnz
+                    offset = y.toInt()
                 }
                 pointer += offset
             }
@@ -65,18 +66,6 @@ class Puzzle : BasePuzzle() {
             }
         }
         return h
-    }
-
-    /**
-     * Converts an instruction token into a value from a register or a plain numeric value.
-     */
-    private fun resolve(registers: MutableMap<String, Int>, addressOrValue: String): Int {
-        return if (addressOrValue.toIntOrNull() == null) {
-            registers.putIfAbsent(addressOrValue, 0)
-            return registers[addressOrValue]!!
-        } else {
-            addressOrValue.toInt()
-        }
     }
 
     /**

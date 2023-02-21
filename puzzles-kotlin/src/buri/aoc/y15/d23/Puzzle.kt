@@ -3,6 +3,7 @@ package buri.aoc.y15.d23
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
 
 /**
@@ -25,7 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val registers = mutableMapOf<String, Long>()
+        val registers = NamedRegisters()
         registers["a"] = if (part == ONE) 0 else 1
         registers["b"] = 0
 
@@ -34,29 +35,29 @@ class Puzzle : BasePuzzle() {
             val tokens = input[pointer].split(" ")
             when (tokens[0]) {
                 "hlf" -> {
-                    registers[tokens[1]] = registers[tokens[1]]!! / 2
+                    registers.divide(tokens[1], 2)
                     pointer++
                 }
                 "tpl" -> {
-                    registers[tokens[1]] = registers[tokens[1]]!! * 3
+                    registers.multiply(tokens[1], 3)
                     pointer++
                 }
                 "inc" -> {
-                    registers[tokens[1]] = registers[tokens[1]]!! + 1
+                    registers.add(tokens[1], 1)
                     pointer++
                 }
                 "jmp" -> {
                     pointer += tokens[1].toInt()
                 }
                 "jie" -> {
-                    pointer += if (registers[tokens[1].dropLast(1)]!! % 2 == 0L) {
+                    pointer += if (registers[tokens[1].dropLast(1)] % 2 == 0L) {
                         tokens[2].toInt()
                     } else {
                         1
                     }
                 }
                 "jio" -> {
-                    pointer += if (registers[tokens[1].dropLast(1)]!! == 1L) {
+                    pointer += if (registers[tokens[1].dropLast(1)] == 1L) {
                         tokens[2].toInt()
                     } else {
                         1
@@ -64,6 +65,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return registers["b"]!!
+        return registers["b"]
     }
 }

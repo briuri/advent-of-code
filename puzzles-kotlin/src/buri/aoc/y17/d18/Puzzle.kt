@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
 
 /**
@@ -28,12 +29,12 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val programA = Registers(0L, input)
+        val programA = IORegisters(0L, input)
         if (part == ONE) {
             programA.run(part)
             return programA.getLastMessage()
         }
-        val programB = Registers(1L, input)
+        val programB = IORegisters(1L, input)
         programA.sender = programB
         programB.sender = programA
         var isDeadlocked: Boolean
@@ -47,11 +48,11 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-class Registers(pStart: Long, private val instructions: List<String>) {
-    private val registers = mutableMapOf<String, Long>()
+class IORegisters(pStart: Long, private val instructions: List<String>) {
+    private val registers = NamedRegisters()
     private val sentMessages = mutableListOf<Long>()
 
-    var sender: Registers? = null
+    var sender: IORegisters? = null
     var sendCount = 0
     var isReceiving = false
     private var pointer = 0
@@ -69,19 +70,19 @@ class Registers(pStart: Long, private val instructions: List<String>) {
             val command = instructions[pointer].split(" ")
             var offset = 1
             if (command[0] == "snd") {
-                sentMessages.add(resolve(command[1]))
+                sentMessages.add(registers.resolve(command[1]))
                 sendCount++
             } else if (command[0] == "set") {
-                registers[command[1]] = resolve(command[2])
+                registers[command[1]] = registers.resolve(command[2])
             } else if (command[0] == "add") {
-                registers[command[1]] = resolve(command[1]) + resolve(command[2])
+                registers.add(command[1], registers.resolve(command[2]))
             } else if (command[0] == "mul") {
-                registers[command[1]] = resolve(command[1]) * resolve(command[2])
+                registers.multiply(command[1], registers.resolve(command[2]))
             } else if (command[0] == "mod") {
-                registers[command[1]] = resolve(command[1]) % resolve(command[2])
+                registers.mod(command[1], registers.resolve(command[2]))
             } else if (command[0] == "rcv") {
                 // In part ONE, quit the first time this command works.
-                if (part == ONE && resolve(command[1]) != 0L) {
+                if (part == ONE && registers.resolve(command[1]) != 0L) {
                     break
                 }
                 if (part == TWO) {
@@ -91,22 +92,10 @@ class Registers(pStart: Long, private val instructions: List<String>) {
                     }
                     registers[command[1]] = sender!!.getNextMessage()
                 }
-            } else if (command[0] == "jgz" && resolve(command[1]) > 0) {
-                offset = resolve(command[2]).toInt()
+            } else if (command[0] == "jgz" && registers.resolve(command[1]) > 0) {
+                offset = registers.resolve(command[2]).toInt()
             }
             pointer += offset
-        }
-    }
-
-    /**
-     * Converts an instruction token into a value from a register or a plain numeric value.
-     */
-    private fun resolve(addressOrValue: String): Long {
-        return if (addressOrValue.toIntOrNull() == null) {
-            registers.putIfAbsent(addressOrValue, 0L)
-            return registers[addressOrValue]!!
-        } else {
-            addressOrValue.toLong()
         }
     }
 
