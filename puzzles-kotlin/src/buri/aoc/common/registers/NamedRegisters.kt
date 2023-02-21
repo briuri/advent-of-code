@@ -2,7 +2,12 @@ package buri.aoc.common.registers
 
 /**
  * Code for various puzzles where values are stored in registers with String names.
+ *
+ * Used directly in:
  * (y15d23, y17d08, y17d18, y17d23)
+ *
+ * Used in Assembunny for:
+ * (y16d12, y16d23, y16d25)
  *
  * @author Brian Uri!
  */
