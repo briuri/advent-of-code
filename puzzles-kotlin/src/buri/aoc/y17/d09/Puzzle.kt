@@ -4,7 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test
-import java.util.*
+import kotlin.collections.ArrayDeque
 
 /**
  * Entry point for a daily puzzle
@@ -26,14 +26,14 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        // Stack will only hold valid {} <> chars.
-        val stack = Stack<Char>()
+        // Stack will only hold valid { < chars.
+        val groupOpeners = ArrayDeque<Char>()
         var score = 0
         var garbageCount = 0
         var i = 0
         while (i in input[0].indices) {
             val value = input[0][i]
-            val inGarbage = stack.isNotEmpty() && stack.peek() == '<'
+            val inGarbage = groupOpeners.isNotEmpty() && groupOpeners.first() == '<'
 
             // Handle cancellation
             if (value == '!') {
@@ -41,16 +41,16 @@ class Puzzle : BasePuzzle() {
             }
             // Handle beginning/end of garbage
             else if (value == '<' && !inGarbage) {
-                stack.push(value)
+                groupOpeners.addFirst(value)
             } else if (value == '>') {
-                stack.pop()
+                groupOpeners.removeFirst()
             }
             // Handle beginning/end of groups
             else if (value == '{' && !inGarbage) {
-                stack.push(value)
+                groupOpeners.addFirst(value)
             } else if (value == '}' && !inGarbage) {
-                score += stack.size
-                stack.pop()
+                score += groupOpeners.size
+                groupOpeners.removeFirst()
             }
             // Count any other characters while we are in garbage
             else if (inGarbage) {
