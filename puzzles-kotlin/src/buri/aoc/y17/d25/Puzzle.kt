@@ -2,6 +2,7 @@ package buri.aoc.y17.d25
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -37,8 +38,8 @@ class Puzzle : BasePuzzle() {
         repeat(steps) {
             ticker.putIfAbsent(cursor, 0)
             val current = ticker[cursor]!!
-            val state = states[nextStateName]!!
 
+            val state = states[nextStateName]!!
             ticker[cursor] = state.write[current]!!
             cursor += state.move[current]!!
             nextStateName = state.next[current]!!
@@ -53,8 +54,8 @@ data class State(private val input: List<String>) {
     val next = mutableMapOf<Int, String>()
 
     init {
-        write[0] = input[1].split("value ")[1].dropLast(1).toInt()
-        write[1] = input[5].split("value ")[1].dropLast(1).toInt()
+        write[0] = input[1].extractInts()[0]
+        write[1] = input[5].extractInts()[0]
         move[0] = toOffset(input[2].split("the ")[1].dropLast(1))
         move[1] = toOffset(input[6].split("the ")[1].dropLast(1))
         next[0] = input[3].split("state ")[1].dropLast(1)

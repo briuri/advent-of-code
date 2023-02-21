@@ -3,6 +3,7 @@ package buri.aoc.y17.d07
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
+import buri.aoc.common.extractInts
 import org.junit.Test
 
 /**
@@ -29,8 +30,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         val discs = mutableMapOf<String, Disc>()
         for (line in input) {
-            val tokens = line.split(" ")
-            discs[tokens[0]] = Disc(tokens[0], tokens[1].drop(1).dropLast(1).toInt())
+            val name = line.split(" ")[0]
+            discs[name] = Disc(name, line.extractInts()[0])
         }
         for (line in input.filter { it.contains(" -> ") }) {
             val parent = line.split(" ")[0]
@@ -39,7 +40,7 @@ class Puzzle : BasePuzzle() {
                 discs[parent]!!.add(discs[child]!!)
             }
         }
-        val root = discs.values.filter { it.parent == null }[0]
+        val root = discs.values.first { it.parent == null }
         if (part == ONE) {
             return root.name
         }
@@ -65,14 +66,14 @@ data class Disc(val name: String, val weight: Int) {
      * Returns the 1 child with a different weight, or null if all children weigh the same or there are no children.
      */
     fun getImbalancedChild(): Disc? {
-        val weightDistribution = mutableMapOf<Int, MutableList<Disc>>()
+        val weightToDisc = mutableMapOf<Int, MutableList<Disc>>()
         for (child in children) {
             val childTotalWeight = child.getTotalWeight()
-            weightDistribution.putIfAbsent(childTotalWeight, mutableListOf())
-            weightDistribution[childTotalWeight]!!.add(child)
+            weightToDisc.putIfAbsent(childTotalWeight, mutableListOf())
+            weightToDisc[childTotalWeight]!!.add(child)
         }
-        if (weightDistribution.size > 1) {
-            for ((_, value) in weightDistribution) {
+        if (weightToDisc.size > 1) {
+            for ((_, value) in weightToDisc) {
                 if (value.size == 1) {
                     return value[0]
                 }

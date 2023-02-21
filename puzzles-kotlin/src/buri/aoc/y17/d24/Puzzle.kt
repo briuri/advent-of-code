@@ -24,31 +24,36 @@ class Puzzle : BasePuzzle() {
         assertRun(1824, 0, true)
     }
 
-    private val sizeToStrength = mutableMapOf<Int, Int>()
-
     /**
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        sizeToStrength.clear()
+        val sizeToStrength = mutableMapOf<Int, Int>()
         val components = mutableListOf<Component>()
         for (line in input) {
             val numbers = line.extractInts()
             components.add(Component(numbers[0], numbers[1]))
         }
-        val maxStrength = getStrength(0, 0, 0, components)
+        val maxStrength = getStrength(sizeToStrength, 0, 0, 0, components)
         return if (part == ONE) maxStrength else sizeToStrength[sizeToStrength.keys.max()]!!
     }
 
     /**
      * Recursively calculates possible strength values to find the max.
      */
-    private fun getStrength(length: Int, strength: Int, neededPort: Int, components: List<Component>): Int {
+    private fun getStrength(
+        sizeToStrength: MutableMap<Int, Int>,
+        length: Int,
+        strength: Int,
+        neededPort: Int,
+        components: List<Component>
+    ): Int {
         var maxStrength = strength
         for (component in components.filter { it.fits(neededPort) }) {
             val otherPort = if (component.portA != neededPort) component.portA else component.portB
-            val nextStrength = getStrength(length + 1, strength + component.getStrength(), otherPort,
-                components.filter { it != component })
+            val nextStrength = getStrength(sizeToStrength,
+                length + 1, strength + component.getStrength(),
+                otherPort, components.filter { it != component })
             maxStrength = maxStrength.coerceAtLeast(nextStrength)
         }
         if (maxStrength == strength) { // No longer bridges found.

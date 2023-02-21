@@ -4,7 +4,6 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import org.junit.Test
-import kotlin.collections.ArrayDeque
 
 /**
  * Entry point for a daily puzzle

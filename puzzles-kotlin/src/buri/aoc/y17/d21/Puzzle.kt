@@ -45,6 +45,7 @@ class Puzzle : BasePuzzle() {
 
         var grid = toGrid(".#./..#/###")
         repeat(if (part == ONE) 5 else 18) {
+            // Convert each starter chunk into a new grid based on the applicable rule.
             val chunks = grid.toChunks().map { rules[it.toPattern()]!! }.map { toGrid(it) }
             val chunksPerSide = sqrt(chunks.size.toDouble()).toInt()
             val newWidth = chunks[0].width * chunksPerSide
@@ -89,15 +90,15 @@ class Puzzle : BasePuzzle() {
      */
     private fun Grid.toChunks(): List<Grid> {
         assert(this.width == this.height)
-        val list = mutableListOf<Grid>()
+        val chunks = mutableListOf<Grid>()
         val size = if (this.width % 2 == 0) 2 else 3
-        val chunks = this.width / size
-        for (yChunk in 0 until chunks) {
-            for (xChunk in 0 until chunks) {
+        val numChunks = this.width / size
+        for (yChunk in 0 until numChunks) {
+            for (xChunk in 0 until numChunks) {
                 val start = Pair(xChunk * size, yChunk * size)
-                list.add(this.getSubGrid(start, size, size))
+                chunks.add(this.getSubGrid(start, size, size))
             }
         }
-        return list
+        return chunks
     }
 }

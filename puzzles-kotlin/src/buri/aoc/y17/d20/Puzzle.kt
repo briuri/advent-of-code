@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.ONE
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.extractInts
 import buri.aoc.common.getManhattanDistance
 import org.junit.Test
 
@@ -33,19 +34,19 @@ class Puzzle : BasePuzzle() {
         }
         repeat(1000) {
             particles.forEach { it.tick() }
-            val particlesAt = mutableMapOf<Triple<Long, Long, Long>, MutableList<Particle>>()
-            for (particle in particles) {
-                particlesAt.putIfAbsent(particle.position, mutableListOf())
-                particlesAt[particle.position]!!.add(particle)
-            }
             if (part == TWO) {
+                val particlesAt = mutableMapOf<Triple<Long, Long, Long>, MutableList<Particle>>()
+                for (particle in particles) {
+                    particlesAt.putIfAbsent(particle.position, mutableListOf())
+                    particlesAt[particle.position]!!.add(particle)
+                }
                 for (collision in particlesAt.values.filter { it.size > 1 }) {
                     particles.removeAll(collision)
                 }
             }
         }
         if (part == ONE) {
-            return particles.sortedBy { it.position.getManhattanDistance() }[0].num
+            return particles.minByOrNull { it.position.getManhattanDistance() }!!.num
         }
         return particles.size
     }
@@ -57,14 +58,10 @@ data class Particle(val num: Int, val input: String) {
     private var acceleration: Triple<Long, Long, Long>
 
     init {
-        val pStart = input.extractTriple("p")
-        position = Triple(pStart[0], pStart[1], pStart[2])
-
-        val vStart = input.extractTriple("v")
-        velocity = Triple(vStart[0], vStart[1], vStart[2])
-
-        val aStart = input.extractTriple("a")
-        acceleration = Triple(aStart[0], aStart[1], aStart[2])
+        val numbers = input.extractInts().map { it.toLong() }
+        position = Triple(numbers[0], numbers[1], numbers[2])
+        velocity = Triple(numbers[3], numbers[4], numbers[5])
+        acceleration = Triple(numbers[6], numbers[7], numbers[8])
     }
 
     /**
@@ -81,12 +78,5 @@ data class Particle(val num: Int, val input: String) {
             second = position.second + velocity.second,
             third = position.third + velocity.third
         )
-    }
-
-    /**
-     * Helper function to grab the 3 coordinates from an input.
-     */
-    private fun String.extractTriple(name: String): List<Long> {
-        return this.split("$name=<")[1].split(">")[0].split(",").map { it.toLong() }
     }
 }

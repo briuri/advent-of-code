@@ -35,6 +35,7 @@ class Puzzle : BasePuzzle() {
         }
 
         if (part == ONE) {
+            // Returns the sum of severity scores for each scanner at the top.
             return scanners.filter { it.isAtTop(it.depth) }.sumOf { it.getSeverity() }
         }
 
