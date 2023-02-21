@@ -50,7 +50,7 @@ class Puzzle : BasePuzzle() {
             steps++
 
             // In part two, reset the states and find the next cycle.
-            if (visited.contains(banks.toString())) {
+            if (banks.toString() in visited) {
                 if (part == TWO && !findingCycle) {
                     steps = 0
                     visited.clear()

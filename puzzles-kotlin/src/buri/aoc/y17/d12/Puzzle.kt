@@ -35,7 +35,7 @@ class Puzzle : BasePuzzle() {
             var current: Int?
             while (frontier.isNotEmpty()) {
                 current = frontier.removeFirst()
-                if (!visited.contains(current)) {
+                if (current !in visited) {
                     visited.add(current)
                     val next = input[current].split(" <-> ")[1].split(", ")
                     frontier.addAll(next.map { it.toInt() })
@@ -48,7 +48,7 @@ class Puzzle : BasePuzzle() {
             groupCount++
 
             // Cycle through input to the next unconnected program.
-            while (visited.contains(testProgram)) {
+            while (testProgram in visited) {
                 testProgram++
             }
         }

@@ -74,7 +74,7 @@ data class Graph(val input: List<String>) {
      * Returns true if the graph is totally visited.
      */
     fun isComplete(visited: List<Char>): Boolean {
-        return nodes.all { visited.contains(it) }
+        return nodes.all { it in visited }
     }
 
     /**

@@ -49,7 +49,7 @@ class Puzzle : BasePuzzle() {
                     continue
                 }
             }
-            for (next in getNeighbors(md5, salt, current).filter { !visited.contains(it) }) {
+            for (next in getNeighbors(md5, salt, current).filter { it !in visited }) {
                 frontier.add(next)
             }
         }

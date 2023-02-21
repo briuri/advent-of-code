@@ -43,7 +43,7 @@ class Puzzle : BasePuzzle() {
             if (current == end) {
                 return current.steps
             }
-            for (next in current.getNextStates().filter { !visited.contains(it) }) {
+            for (next in current.getNextStates().filter { it !in visited }) {
                 frontier.add(next)
             }
             frontier.sortByDescending { it.getSortOrder() }
@@ -94,7 +94,7 @@ data class State(val steps: Int, private var state: String) {
             val nextSteps = steps + 1
 
             // Elevator can move matching pair (gen+chip) at any time.
-            for (genId in gensHere.filter { chipsHere.contains(it) }) {
+            for (genId in gensHere.filter { it in chipsHere }) {
                 val builder = toBuilder(nextFloorChar)
                 builder.setCharAt(toIndex(genId, true), nextFloorChar)
                 builder.setCharAt(toIndex(genId, false), nextFloorChar)
@@ -193,7 +193,7 @@ data class State(val steps: Int, private var state: String) {
     private fun isGenAllowedNear(genIds: List<Int>, nextGens: List<Int>, nextChips: List<Int>): Boolean {
         var allowed = true
         for (chipId in nextChips) {
-            allowed = allowed && (genIds.contains(chipId) || nextGens.contains(chipId))
+            allowed = allowed && (chipId in genIds || chipId in nextGens)
         }
         return allowed
     }
@@ -204,7 +204,7 @@ data class State(val steps: Int, private var state: String) {
     private fun isChipAllowedNear(chipIds: List<Int>, nextGens: List<Int>): Boolean {
         var allowed = true
         for (id in chipIds) {
-            allowed = allowed && nextGens.contains(id)
+            allowed = allowed && (id in nextGens)
         }
         allowed = allowed || nextGens.isEmpty()
         return allowed

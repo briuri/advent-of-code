@@ -37,7 +37,7 @@ class Puzzle : BasePuzzle() {
                 position.turnRight()
             }
             for (i in 0 until command.drop(1).toInt()) {
-                if (part == TWO && visited.contains(position.coords)) {
+                if (part == TWO && position.coords in visited) {
                     return position.coords.getManhattanDistance()
                 }
                 visited.add(position.coords)

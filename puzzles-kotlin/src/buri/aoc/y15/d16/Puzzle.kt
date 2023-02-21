@@ -47,7 +47,7 @@ class Puzzle : BasePuzzle() {
 
             var isMatch = true
             for ((name, value) in expected) {
-                if (!map.containsKey(name)) {
+                if (name !in map) {
                     continue
                 }
                 val condition = if (part == TWO && (name == "cats" || name == "trees")) {

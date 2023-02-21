@@ -48,7 +48,7 @@ class Puzzle : BasePuzzle() {
 
             // Search for a repeated state then extrapolate up to 1 billion
             val snapshot = order.joinToString("")
-            if (part == TWO && visited.contains(snapshot)) {
+            if (part == TWO && snapshot in visited) {
                 return visited[(numDances % visited.size) - 1]
             }
             visited.add(snapshot)

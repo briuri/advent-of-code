@@ -37,7 +37,7 @@ class Puzzle : BasePuzzle() {
         val validRanges = mutableListOf<LongRange>()
         var current = minIP
         for (range in ranges) {
-            if (range.contains(current)) {
+            if (current in range) {
                 current = range.last + 1
             } else if (current < range.first) {
                 validRanges.add(LongRange(current, range.first - 1))
