@@ -46,7 +46,7 @@ class Puzzle : BasePuzzle() {
         }
 
         if (part.isOne()) {
-            return getLargest(grid, 3).first.toBareString()
+            return getLargest(grid, 3).first.toBareString().dropLast(2)
         }
 
         val largestBySize = mutableSetOf<Pair<Triple<Int, Int, Int>, Int>>()
