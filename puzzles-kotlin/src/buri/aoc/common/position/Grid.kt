@@ -2,7 +2,6 @@ package buri.aoc.common.position
 
 import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Orientation.*
-import java.lang.StringBuilder
 
 /**
  * Helper class for grid navigation

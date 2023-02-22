@@ -11,7 +11,7 @@ package buri.aoc.common.registers
  *
  * @author Brian Uri!
  */
-class NamedRegisters() {
+class NamedRegisters {
     private val registers = mutableMapOf<String, Long>()
 
     /**

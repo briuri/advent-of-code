@@ -1,7 +1,5 @@
 package buri.aoc.common.registers
 
-import javax.naming.Name
-
 /**
  * Interpreter code for y16 Assembunny puzzles
  * (y16d12, y16d23, y16d25)
