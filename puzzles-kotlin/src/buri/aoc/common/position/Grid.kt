@@ -145,10 +145,17 @@ class Grid(val width: Int, val height: Int) {
     }
 
     override fun toString(): String {
+        return toString("")
+    }
+
+    /**
+     * Adds space between values in the grid output.
+     */
+    private fun toString(separator: String = "\t"): String {
         val builder = StringBuilder()
         for (y in 0 until height) {
             for (x in 0 until width) {
-                builder.append(get(x, y))
+                builder.append(get(x, y)).append(separator)
             }
             builder.append("\n")
         }
