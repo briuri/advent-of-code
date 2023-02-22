@@ -66,16 +66,18 @@ abstract class BasePuzzle {
      * Extracts the puzzle year from the package name
      */
     private fun getYear(): String {
-        val name = this.javaClass.name
-        return name.substring(name.indexOf(".y") + 2, name.indexOf(".d"))
+        with(this.javaClass) {
+            return name.substring(name.indexOf(".y") + 2, name.indexOf(".d"))
+        }
     }
 
     /**
      * Extracts the puzzle day from the package name
      */
     private fun getDay(): String {
-        val name = this.javaClass.name
-        return name.substring(name.indexOf(".d") + 2, name.indexOf(".Puzzle"))
+        with(this.javaClass) {
+            return name.substring(name.indexOf(".d") + 2, name.indexOf(".Puzzle"))
+        }
     }
 
     /**

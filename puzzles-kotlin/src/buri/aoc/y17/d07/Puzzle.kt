@@ -46,13 +46,13 @@ class Puzzle : BasePuzzle() {
 
         // Find the disc that contains all balanced children.
         var current = root
-        while (current.getImbalancedChild() != null) {
-            current = current.getImbalancedChild()!!
+        while (current.imbalancedChild != null) {
+            current = current.imbalancedChild!!
         }
 
         // Check any sibling of this disc to see what the weight should be.
-        val targetWeight = current.parent!!.children.filter { it != current }[0].getTotalWeight()
-        val delta = targetWeight - current.getTotalWeight()
+        val targetWeight = current.parent!!.children.filter { it != current }[0].totalWeight
+        val delta = targetWeight - current.totalWeight
         return ((current.weight + delta).toString())
     }
 }
@@ -60,33 +60,25 @@ class Puzzle : BasePuzzle() {
 data class Disc(val name: String, val weight: Int) {
     val children = mutableListOf<Disc>()
     var parent: Disc? = null
-
-    /**
-     * Returns the 1 child with a different weight, or null if all children weigh the same or there are no children.
-     */
-    fun getImbalancedChild(): Disc? {
-        val weightToDisc = mutableMapOf<Int, MutableList<Disc>>()
-        for (child in children) {
-            val childTotalWeight = child.getTotalWeight()
-            weightToDisc.putIfAbsent(childTotalWeight, mutableListOf())
-            weightToDisc[childTotalWeight]!!.add(child)
-        }
-        if (weightToDisc.size > 1) {
-            for ((_, value) in weightToDisc) {
-                if (value.size == 1) {
-                    return value[0]
+    val totalWeight: Int
+        get() = weight + children.sumOf { it.totalWeight }
+    val imbalancedChild: Disc?
+        get() {
+            val weightToDisc = mutableMapOf<Int, MutableList<Disc>>()
+            for (child in children) {
+                val childTotalWeight = child.totalWeight
+                weightToDisc.putIfAbsent(childTotalWeight, mutableListOf())
+                weightToDisc[childTotalWeight]!!.add(child)
+            }
+            if (weightToDisc.size > 1) {
+                for ((_, value) in weightToDisc) {
+                    if (value.size == 1) {
+                        return value[0]
+                    }
                 }
             }
+            return null
         }
-        return null
-    }
-
-    /**
-     * Recursively calculates weight
-     */
-    fun getTotalWeight(): Int {
-        return weight + children.sumOf { it.getTotalWeight() }
-    }
 
     /**
      * Adds a child disc

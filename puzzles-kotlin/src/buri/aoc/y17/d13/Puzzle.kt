@@ -35,7 +35,7 @@ class Puzzle : BasePuzzle() {
 
         if (part.isOne()) {
             // Returns the sum of severity scores for each scanner at the top.
-            return scanners.filter { it.isAtTop(it.depth) }.sumOf { it.getSeverity() }
+            return scanners.filter { it.isAtTop(it.depth) }.sumOf { it.severity }
         }
 
         var delay = 0
@@ -47,6 +47,9 @@ class Puzzle : BasePuzzle() {
 }
 
 data class Scanner(val depth: Int, val range: Int) {
+    val severity: Int
+        get() = depth * range
+
     /**
      * Returns true if the scanner is at the top of its layer at this time.
      *
@@ -58,12 +61,5 @@ data class Scanner(val depth: Int, val range: Int) {
      */
     fun isAtTop(time: Int): Boolean {
         return (time % ((range * 2) - 2) == 0)
-    }
-
-    /**
-     * Returns the severity score of getting caught.
-     */
-    fun getSeverity(): Int {
-        return depth * range
     }
 }

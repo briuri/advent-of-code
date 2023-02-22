@@ -55,7 +55,7 @@ class Puzzle : BasePuzzle() {
                 // Turn cart if needed.
                 when (grid[cart.coords]) {
                     "+" -> {
-                        when (cart.getNextTurn()) {
+                        when (cart.nextTurn) {
                             0 -> cart.turnLeft()
                             2 -> cart.turnRight()
                             // else go straight
@@ -84,7 +84,15 @@ class Puzzle : BasePuzzle() {
 
 class Cart(start: Pair<Int, Int>, facing: Direction) {
     private var turnHistory = 0
-
+    val nextTurn: Int
+        get() {
+            val next = turnHistory
+            turnHistory++
+            if (turnHistory == 3) {
+                turnHistory = 0
+            }
+            return next
+        }
     val position = MutablePosition(start, facing)
 
     // Pass-throughs
@@ -96,16 +104,4 @@ class Cart(start: Pair<Int, Int>, facing: Direction) {
     fun move() = position.move()
     fun turnLeft() = position.turnLeft()
     fun turnRight() = position.turnRight()
-
-    /**
-     * Returns 0, 1, or 2 to control which direction is turned next.
-     */
-    fun getNextTurn(): Int {
-        val next = turnHistory
-        turnHistory++
-        if (turnHistory == 3) {
-            turnHistory = 0
-        }
-        return next
-    }
 }

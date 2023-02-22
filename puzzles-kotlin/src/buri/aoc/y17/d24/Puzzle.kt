@@ -51,7 +51,7 @@ class Puzzle : BasePuzzle() {
         for (component in components.filter { it.fits(neededPort) }) {
             val otherPort = if (component.portA != neededPort) component.portA else component.portB
             val nextStrength = getStrength(sizeToStrength,
-                length + 1, strength + component.getStrength(),
+                length + 1, strength + component.strength,
                 otherPort, components.filter { it != component })
             maxStrength = maxStrength.coerceAtLeast(nextStrength)
         }
@@ -64,17 +64,13 @@ class Puzzle : BasePuzzle() {
 }
 
 data class Component(val portA: Int, val portB: Int) {
+    val strength: Int
+        get() = portA + portB
+
     /**
      * Returns true if this component has a specific port.
      */
     fun fits(port: Int): Boolean {
         return (portA == port || portB == port)
-    }
-
-    /**
-     * Returns the strength of this component.
-     */
-    fun getStrength(): Int {
-        return (portA + portB)
     }
 }

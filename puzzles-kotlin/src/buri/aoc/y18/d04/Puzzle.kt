@@ -45,21 +45,25 @@ class Puzzle : BasePuzzle() {
             }
         }
         if (part.isOne()) {
-            val record = records.values.maxByOrNull { it.getTotalSleep() }!!
-            return record.id * record.getSleepiestMinute().first
+            val record = records.values.maxByOrNull { it.totalSleep }!!
+            return record.id * record.sleepiestMinute.first
         }
 
         val maxTimes = mutableMapOf<Int, Record>()
         for (record in records.values) {
-            maxTimes[record.getSleepiestMinute().second] = record
+            maxTimes[record.sleepiestMinute.second] = record
         }
         val record = maxTimes.toList().maxByOrNull { it.first }!!.second
-        return record.id * record.getSleepiestMinute().first
+        return record.id * record.sleepiestMinute.first
     }
 }
 
 data class Record(val id: Int) {
     private val sleepMinutes = mutableMapOf<Int, Int>()
+    val totalSleep: Int
+        get() = sleepMinutes.values.sum()
+    val sleepiestMinute: Pair<Int, Int>
+        get() = sleepMinutes.toList().maxByOrNull { it.second }!!
 
     init {
         repeat(60) {
@@ -74,19 +78,5 @@ data class Record(val id: Int) {
         for (i in asleep until awake) {
             sleepMinutes[i] = sleepMinutes[i]!! + 1
         }
-    }
-
-    /**
-     * Counts how many total minutes are spent asleep.
-     */
-    fun getTotalSleep(): Int {
-        return sleepMinutes.values.sum()
-    }
-
-    /**
-     * Finds the minute with the most sleep.
-     */
-    fun getSleepiestMinute(): Pair<Int, Int> {
-        return sleepMinutes.toList().maxByOrNull { it.second }!!
     }
 }

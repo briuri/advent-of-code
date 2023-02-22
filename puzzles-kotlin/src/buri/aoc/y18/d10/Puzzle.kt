@@ -35,11 +35,11 @@ class Puzzle : BasePuzzle() {
             stars.add(Star(line))
         }
 
-        var lastArea = Bounds(stars.getPositions()).getArea()
+        var lastArea = Bounds(stars.getPositions()).area
         var ticks = 0
         while (true) {
             stars.forEach { it.tick() }
-            val nextArea = Bounds(stars.getPositions()).getArea()
+            val nextArea = Bounds(stars.getPositions()).area
             // When area starts growing again, go 1 step back.
             if (nextArea > lastArea) {
                 stars.forEach { it.tick(true) }

@@ -55,6 +55,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return lights.getSum()
+        return lights.sum
     }
 }

@@ -29,7 +29,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val numbers = input[0].extractInts()
         val root = getNode(numbers)
-        return if (part.isOne()) root.getMetadataSum() else root.getValue()
+        return if (part.isOne()) root.metadataSum else root.getValue()
     }
 
     /**
@@ -41,7 +41,7 @@ class Puzzle : BasePuzzle() {
         for (i in 0 until node.numChildren) {
             val child = getNode(nodeBody)
             node.addChild(child)
-            nodeBody = nodeBody.subList(child.getLength(), nodeBody.size)
+            nodeBody = nodeBody.subList(child.length, nodeBody.size)
         }
         node.addMetadata(nodeBody.subList(0, node.numMetadata))
         return node
@@ -51,27 +51,17 @@ class Puzzle : BasePuzzle() {
 data class Node(val numChildren: Int, val numMetadata: Int) {
     private val children = mutableListOf<Node>()
     private val metadata = mutableListOf<Int>()
-
-    /**
-     * Returns the length of this node
-     */
-    fun getLength(): Int {
-        return 2 + children.sumOf { it.getLength() } + metadata.size
-    }
-
-    /**
-     * Returns the sum of all metadata entries.
-     */
-    fun getMetadataSum(): Int {
-        return metadata.sum() + children.sumOf { it.getMetadataSum() }
-    }
+    val length: Int
+        get() = 2 + children.sumOf { it.length } + metadata.size
+    val metadataSum: Int
+        get() = metadata.sum() + children.sumOf { it.metadataSum }
 
     /**
      * Returns the value of a node.
      */
     fun getValue(): Int {
         return if (numChildren == 0) {
-            getMetadataSum()
+            metadataSum
         } else {
             // Convert metadata entries to 0-based then pick the ones that are valid children.
             val indices = metadata.map { it - 1 }.filter { children.size > it }

@@ -30,7 +30,7 @@ class Puzzle : BasePuzzle() {
         val programA = IORegisters(0L, input)
         if (part.isOne()) {
             programA.run(part)
-            return programA.getLastMessage()
+            return programA.lastMessage
         }
         val programB = IORegisters(1L, input)
         programA.sender = programB
@@ -49,6 +49,10 @@ class Puzzle : BasePuzzle() {
 class IORegisters(pStart: Long, private val instructions: List<String>) {
     private val registers = NamedRegisters()
     private val sentMessages = mutableListOf<Long>()
+    private val nextMessage: Long
+        get() = sentMessages.removeFirst()
+    val lastMessage: Long
+        get() = sentMessages.removeLast()
 
     var sender: IORegisters? = null
     var sendCount = 0
@@ -88,7 +92,7 @@ class IORegisters(pStart: Long, private val instructions: List<String>) {
                         isReceiving = true
                         break
                     }
-                    registers[command[1]] = sender!!.getNextMessage()
+                    registers[command[1]] = sender!!.nextMessage
                 }
             } else if (command[0] == "jgz" && registers.resolve(command[1]) > 0) {
                 offset = registers.resolve(command[2]).toInt()
@@ -102,19 +106,5 @@ class IORegisters(pStart: Long, private val instructions: List<String>) {
      */
     fun hasMessages(): Boolean {
         return sentMessages.isNotEmpty()
-    }
-
-    /**
-     * Grabs a value from the outgoing message queue.
-     */
-    private fun getNextMessage(): Long {
-        return sentMessages.removeFirst()
-    }
-
-    /**
-     * Grabs a value from the outgoing message queue.
-     */
-    fun getLastMessage(): Long {
-        return sentMessages.removeLast()
     }
 }

@@ -65,6 +65,6 @@ class Puzzle : BasePuzzle() {
             }
             grid = nextGrid
         }
-        return grid.getSum()
+        return grid.sum
     }
 }

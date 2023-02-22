@@ -65,6 +65,15 @@ class Puzzle : BasePuzzle() {
 class SpiralGrid {
     private val squares = mutableMapOf<Pair<Int, Int>, Int>()
     private var current = MutablePosition(Pair(0, 0), Direction.EAST)
+    private val neighborSum: Int
+        get() {
+            val list = current.coords.getNeighbors(true)
+            var sum = 0
+            for (point in list) {
+                sum += squares[point] ?: 0
+            }
+            return sum
+        }
 
     /**
      * Fills in the grid until we reach the target threshold.
@@ -73,24 +82,12 @@ class SpiralGrid {
         squares[current.coords] = 1
         while (squares[current.coords]!! < threshold) {
             current.move()
-            squares[current.coords] = getNeighborSum()
+            squares[current.coords] = neighborSum
             if (shouldTurnLeft()) {
                 current.turnLeft()
             }
         }
         return squares[current.coords]!!
-    }
-
-    /**
-     * Sums any populated squares around this square.
-     */
-    private fun getNeighborSum(): Int {
-        val list = current.coords.getNeighbors(true)
-        var sum = 0
-        for (point in list) {
-            sum += squares[point] ?: 0
-        }
-        return sum
     }
 
     /**

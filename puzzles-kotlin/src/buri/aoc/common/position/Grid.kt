@@ -10,17 +10,14 @@ import buri.aoc.common.position.Orientation.*
  */
 class Grid(val width: Int, val height: Int) {
     private val grid = Array(width) { Array(height) { "0" } }
-
-    /**
-     * Sums all values in the grid.
-     */
-    fun getSum(): Int {
-        var sum = 0
-        for (x in 0 until width) {
-            sum += grid[x].sumOf { it.toInt() }
+    val sum: Int
+        get() {
+            var sum = 0
+            for (x in 0 until width) {
+                sum += grid[x].sumOf { it.toInt() }
+            }
+            return sum
         }
-        return sum
-    }
 
     /**
      * Counts occurrences of some string.

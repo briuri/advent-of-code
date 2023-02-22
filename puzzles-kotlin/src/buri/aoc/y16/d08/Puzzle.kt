@@ -57,7 +57,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part.isOne()) grid.getSum().toString() else grid.printLetters()
+        return if (part.isOne()) grid.sum.toString() else grid.printLetters()
     }
 
     /**
