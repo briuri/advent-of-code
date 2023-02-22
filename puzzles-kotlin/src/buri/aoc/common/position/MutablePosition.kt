@@ -58,4 +58,15 @@ data class MutablePosition(var coords: Pair<Int, Int>, var facing: Direction) {
     }
 }
 
-enum class Direction { NORTH, EAST, SOUTH, WEST }
+enum class Direction(val icon: Char) {
+    NORTH('^'), EAST('>'), SOUTH('v'), WEST('<');
+
+    /**
+     * Returns a direction matching the given icon.
+     */
+    companion object {
+        infix fun from(value: Char): Direction {
+            return values().first { it.icon == value }
+        }
+    }
+}
