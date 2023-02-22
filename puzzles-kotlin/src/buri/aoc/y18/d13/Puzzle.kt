@@ -6,6 +6,7 @@ import buri.aoc.common.position.Direction
 import buri.aoc.common.position.Direction.*
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.toBareString
 import org.junit.Test
 
 /**
@@ -47,7 +48,7 @@ class Puzzle : BasePuzzle() {
                 // If this cart has moved on top of another cart
                 if (carts.any { it != cart && it.coords == cart.coords }) {
                     if (part.isOne()) {
-                        return (cart.getPositionString())
+                        return (cart.coords.toBareString())
                     }
                     carts.removeIf { it.coords == cart.coords }
                 }
@@ -75,47 +76,26 @@ class Puzzle : BasePuzzle() {
                 }
             }
             if (part.isTwo() && carts.size == 1) {
-                return carts.first().getPositionString()
+                return carts.first().coords.toBareString()
             }
         }
     }
 }
 
 class Cart(start: Pair<Int, Int>, facing: Direction) {
+    private var turnHistory = 0
+
     val position = MutablePosition(start, facing)
+
+    // Pass-throughs
     val coords: Pair<Int, Int>
         get() = position.coords
     val facing: Direction
         get() = position.facing
-    private var turnHistory = 0
 
-    /**
-     * Returns the position in the format needed to solve the puzzle.
-     */
-    fun getPositionString(): String {
-        return "${position.coords.first},${position.coords.second}"
-    }
-
-    /**
-     * Passthrough to MutablePosition
-     */
-    fun move() {
-        position.move()
-    }
-
-    /**
-     * Passthrough to MutablePosition
-     */
-    fun turnLeft() {
-        position.turnLeft()
-    }
-
-    /**
-     * Passthrough to MutablePosition
-     */
-    fun turnRight() {
-        position.turnRight()
-    }
+    fun move() = position.move()
+    fun turnLeft() = position.turnLeft()
+    fun turnRight() = position.turnRight()
 
     /**
      * Returns 0, 1, or 2 to control which direction is turned next.

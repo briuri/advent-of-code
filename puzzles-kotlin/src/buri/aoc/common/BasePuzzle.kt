@@ -166,6 +166,16 @@ fun Triple<Long, Long, Long>.getManhattanDistance(target: Triple<Long, Long, Lon
 }
 
 /**
+ * Simplify output of Pairs
+ */
+fun Pair<Number, Number>.toBareString(): String = "$first,$second"
+
+/**
+ * Simplify output of Triples
+ */
+fun Triple<Number, Number, Number>.toBareString(): String = "$first,$second,$third"
+
+/**
  * Extension function for extracting the numbers out of a line of input.
  */
 fun String.extractInts(allowNegative: Boolean = true): List<Int> {

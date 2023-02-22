@@ -3,6 +3,7 @@ package buri.aoc.y18.d11
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
+import buri.aoc.common.toBareString
 import org.junit.Test
 
 /**
@@ -45,8 +46,7 @@ class Puzzle : BasePuzzle() {
         }
 
         if (part.isOne()) {
-            val point = getLargest(grid, 3).first
-            return "${point.first},${point.second}"
+            return getLargest(grid, 3).first.toBareString()
         }
 
         val largestBySize = mutableSetOf<Pair<Triple<Int, Int, Int>, Int>>()
@@ -54,7 +54,7 @@ class Puzzle : BasePuzzle() {
             largestBySize.add(getLargest(grid, i))
         }
         val largest = largestBySize.maxBy { it.second }.first
-        return "${largest.first},${largest.second},${largest.third}"
+        return largest.toBareString()
     }
 
     /**
