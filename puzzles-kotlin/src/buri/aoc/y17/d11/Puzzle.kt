@@ -2,7 +2,6 @@ package buri.aoc.y17.d11
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.getManhattanDistance
 import org.junit.Test
 
@@ -40,6 +39,6 @@ class Puzzle : BasePuzzle() {
             }
             maxDistance = maxDistance.coerceAtLeast(point.getManhattanDistance() / 2)
         }
-        return if (part == ONE) (point.getManhattanDistance() / 2) else maxDistance
+        return if (part.isOne()) (point.getManhattanDistance() / 2) else maxDistance
     }
 }

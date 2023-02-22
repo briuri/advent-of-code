@@ -2,8 +2,6 @@ package buri.aoc.template
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -30,9 +28,6 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
 
         for (line in input) {
-
-        }
-        if (part == ONE || part == TWO) {
 
         }
         return -1

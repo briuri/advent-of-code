@@ -114,7 +114,21 @@ abstract class BasePuzzle {
  * Enumeration of puzzle parts
  */
 enum class Part(val number: Int) {
-    ONE(1), TWO(2)
+    ONE(1), TWO(2);
+
+    /**
+     * Returns true if this is Part ONE.
+     */
+    fun isOne(): Boolean {
+        return (number == 1)
+    }
+
+    /**
+     * Returns true if this is Part TWO.
+     */
+    fun isTwo(): Boolean {
+        return (number == 2)
+    }
 }
 
 /**

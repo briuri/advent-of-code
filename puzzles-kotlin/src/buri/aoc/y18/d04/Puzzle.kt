@@ -2,7 +2,6 @@ package buri.aoc.y18.d04
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -45,7 +44,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        if (part == ONE) {
+        if (part.isOne()) {
             val record = records.values.maxByOrNull { it.getTotalSleep() }!!
             return record.id * record.getSleepiestMinute().first
         }

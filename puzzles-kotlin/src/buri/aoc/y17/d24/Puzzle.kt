@@ -2,7 +2,6 @@ package buri.aoc.y17.d24
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -35,7 +34,7 @@ class Puzzle : BasePuzzle() {
             components.add(Component(numbers[0], numbers[1]))
         }
         val maxStrength = getStrength(sizeToStrength, 0, 0, 0, components)
-        return if (part == ONE) maxStrength else sizeToStrength[sizeToStrength.keys.max()]!!
+        return if (part.isOne()) maxStrength else sizeToStrength[sizeToStrength.keys.max()]!!
     }
 
     /**

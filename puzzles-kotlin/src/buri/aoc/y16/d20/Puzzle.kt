@@ -2,7 +2,6 @@ package buri.aoc.y16.d20
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -48,7 +47,7 @@ class Puzzle : BasePuzzle() {
             validRanges.add(LongRange(current, maxIP))
         }
         validRanges.sortBy { it.first }
-        return if (part == ONE) {
+        return if (part.isOne()) {
             validRanges[0].first
         } else {
             validRanges.sumOf { it.last - it.first + 1 }

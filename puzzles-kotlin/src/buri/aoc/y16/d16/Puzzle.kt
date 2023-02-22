@@ -2,7 +2,6 @@ package buri.aoc.y16.d16
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        val diskSpace = if (part == ONE) 272 else 35651584
+        val diskSpace = if (part.isOne()) 272 else 35651584
         var a = input[0].toCharArray()
         while (a.size < diskSpace) {
             val b = a.reversed().map { if (it == '0') '1' else '0' }

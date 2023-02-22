@@ -1,10 +1,9 @@
 package buri.aoc.y17.d21
 
 import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Orientation.*
-import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 import kotlin.math.sqrt
 
@@ -44,7 +43,7 @@ class Puzzle : BasePuzzle() {
         }
 
         var grid = toGrid(".#./..#/###")
-        repeat(if (part == ONE) 5 else 18) {
+        repeat(if (part.isOne()) 5 else 18) {
             // Convert each starter chunk into a new grid based on the applicable rule.
             val chunks = grid.toChunks().map { rules[it.toPattern()]!! }.map { toGrid(it) }
             val chunksPerSide = sqrt(chunks.size.toDouble()).toInt()

@@ -2,7 +2,6 @@ package buri.aoc.y17.d07
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -41,7 +40,7 @@ class Puzzle : BasePuzzle() {
             }
         }
         val root = discs.values.first { it.parent == null }
-        if (part == ONE) {
+        if (part.isOne()) {
             return root.name
         }
 

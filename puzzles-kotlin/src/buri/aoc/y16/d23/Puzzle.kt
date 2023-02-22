@@ -1,9 +1,8 @@
 package buri.aoc.y16.d23
 
-import buri.aoc.common.registers.Assembunny
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
+import buri.aoc.common.registers.Assembunny
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val registers = Assembunny(input)
-        registers["a"] = if (part == ONE) 7L else 12L
+        registers["a"] = if (part.isOne()) 7L else 12L
         registers.run()
         return registers["a"]
     }

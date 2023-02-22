@@ -2,7 +2,6 @@ package buri.aoc.y16.d19
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -28,7 +27,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val numElves = input[0].toInt()
-        if (part == ONE) {
+        if (part.isOne()) {
             val elves = ArrayDeque<Int>()
             elves.addAll(1..numElves)
             while (elves.size > 1) {

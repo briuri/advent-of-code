@@ -2,7 +2,6 @@ package buri.aoc.y17.d04
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -29,7 +28,7 @@ class Puzzle : BasePuzzle() {
         var valid = 0
         for (line in input) {
             var list = line.split(" ")
-            if (part == TWO) {
+            if (part.isTwo()) {
                 list = list.map { it.toCharArray().sorted().joinToString() }
             }
             if (list.size == list.toSet().size) {

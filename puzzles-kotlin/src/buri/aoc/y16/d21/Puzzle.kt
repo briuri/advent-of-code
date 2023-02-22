@@ -2,7 +2,6 @@ package buri.aoc.y16.d21
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        val isReverse = (part == TWO)
+        val isReverse = (part.isTwo())
         val builder = StringBuilder(if (isReverse) "fbgdceah" else "abcdefgh")
         val partInput = if (isReverse) input.reversed() else input
         for (line in partInput) {

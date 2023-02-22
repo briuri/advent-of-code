@@ -2,7 +2,6 @@ package buri.aoc.y15.d05
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         var count = 0
         for (word in input) {
-            val niceCondition = if (part == ONE) {
+            val niceCondition = if (part.isOne()) {
                 word.hasVowels() && word.hasDoubleLetter() && !word.hasBadTokens()
             } else {
                 word.hasRepeatingPair() && word.hasInterruptedRepeat()

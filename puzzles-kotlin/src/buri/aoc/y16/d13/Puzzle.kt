@@ -2,7 +2,6 @@ package buri.aoc.y16.d13
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.Pathfinder
 import buri.aoc.common.getNeighbors
 import org.junit.Test
@@ -38,7 +37,7 @@ class Puzzle : BasePuzzle() {
         }
 
         val steps = pathfinder.countSteps(start, end)
-        return if (part == ONE) {
+        return if (part.isOne()) {
             steps
         } else {
             pathfinder.stepsTo.filter { it.value <= 50 }.size

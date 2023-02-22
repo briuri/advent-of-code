@@ -2,8 +2,6 @@ package buri.aoc.y16.d10
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -42,7 +40,7 @@ class Puzzle : BasePuzzle() {
         while (true) {
             for ((id, bot) in bots) {
                 if (bot.chips.size == 2) {
-                    if (part == ONE && bot.chips.min() == 17 && bot.chips.max() == 61) {
+                    if (part.isOne() && bot.chips.min() == 17 && bot.chips.max() == 61) {
                         return id
                     }
 
@@ -61,7 +59,7 @@ class Puzzle : BasePuzzle() {
 
                     bot.chips.clear()
                 }
-                if (part == TWO && outputs.size == 3) {
+                if (part.isTwo() && outputs.size == 3) {
                     return outputs.reduce { acc, i -> acc * i }
                 }
             }

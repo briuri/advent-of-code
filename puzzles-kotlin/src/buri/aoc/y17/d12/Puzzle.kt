@@ -2,7 +2,6 @@ package buri.aoc.y17.d12
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -42,7 +41,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
             // In part ONE, quit after group 0 is accounted for.
-            if (part == ONE) {
+            if (part.isOne()) {
                 return visited.size
             }
             groupCount++

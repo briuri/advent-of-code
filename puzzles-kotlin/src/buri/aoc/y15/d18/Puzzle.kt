@@ -1,9 +1,8 @@
 package buri.aoc.y15.d18
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -52,7 +51,7 @@ class Puzzle : BasePuzzle() {
                         onCount += grid[neighbor].toInt()
                     }
                     val prev = grid[x, y].toInt()
-                    val next = if (part == TWO && Pair(x, y) in corners) {
+                    val next = if (part.isTwo() && Pair(x, y) in corners) {
                         1
                     } else if (prev == 1 && onCount != 2 && onCount != 3) {
                         0

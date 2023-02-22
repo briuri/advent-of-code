@@ -2,7 +2,6 @@ package buri.aoc.y17.d13
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -34,7 +33,7 @@ class Puzzle : BasePuzzle() {
             scanners.add(Scanner(numbers[0], numbers[1]))
         }
 
-        if (part == ONE) {
+        if (part.isOne()) {
             // Returns the sum of severity scores for each scanner at the top.
             return scanners.filter { it.isAtTop(it.depth) }.sumOf { it.getSeverity() }
         }

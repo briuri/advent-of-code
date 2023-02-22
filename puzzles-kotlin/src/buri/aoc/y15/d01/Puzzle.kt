@@ -2,7 +2,6 @@ package buri.aoc.y15.d01
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -30,7 +29,7 @@ class Puzzle : BasePuzzle() {
         var floor = 0
         for ((index, direction) in input[0].withIndex()) {
             floor += if (direction == '(') 1 else -1
-            if (part == TWO && floor == -1) {
+            if (part.isTwo() && floor == -1) {
                 return (index + 1)
             }
         }

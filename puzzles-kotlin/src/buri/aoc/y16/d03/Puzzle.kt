@@ -2,7 +2,6 @@ package buri.aoc.y16.d03
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -32,7 +31,7 @@ class Puzzle : BasePuzzle() {
         val triangle3 = mutableListOf<Int>()
         for (line in input) {
             val sides = line.extractInts()
-            if (part == ONE) {
+            if (part.isOne()) {
                 triangles.add(sides.sorted())
             } else {
                 triangle1.add(sides[0])

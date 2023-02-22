@@ -1,7 +1,8 @@
 package buri.aoc.y17.d03
 
-import buri.aoc.common.*
-import buri.aoc.common.Part.ONE
+import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
+import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Direction
 import buri.aoc.common.position.MutablePosition
 import org.junit.Test
@@ -27,7 +28,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val num = input[0].toInt()
-        if (part == ONE) {
+        if (part.isOne()) {
             // Each ring's lower right value is a square of an odd number.
             var maxInRingRoot = 3
             while (true) {

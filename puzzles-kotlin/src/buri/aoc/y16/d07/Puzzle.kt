@@ -2,8 +2,6 @@ package buri.aoc.y16.d07
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -34,8 +32,8 @@ class Puzzle : BasePuzzle() {
             val hypernets = line.replace("^[a-z]+\\[".toRegex(), "")
                 .replace("][a-z]+\\[".toRegex(), " ")
                 .replace("][a-z]+$".toRegex(), "").trim().split(" ")
-            if ((part == ONE && containsAbba(supernets) && !containsAbba(hypernets))
-                || part == TWO && containsBab(hypernets, getAbas(supernets))
+            if ((part.isOne() && containsAbba(supernets) && !containsAbba(hypernets))
+                || part.isTwo() && containsBab(hypernets, getAbas(supernets))
             ) {
                 count++
             }

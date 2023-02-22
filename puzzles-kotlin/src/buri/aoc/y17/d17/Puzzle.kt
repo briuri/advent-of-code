@@ -2,7 +2,6 @@ package buri.aoc.y17.d17
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -26,7 +25,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val steps = input[0].toInt()
-        if (part == ONE) {
+        if (part.isOne()) {
             val spinlock = Spinlock(steps)
             repeat(2017) {
                 spinlock.spin()

@@ -2,7 +2,6 @@ package buri.aoc.y18.d06
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import buri.aoc.common.getManhattanDistance
 import buri.aoc.common.position.Bounds
@@ -40,7 +39,7 @@ class Puzzle : BasePuzzle() {
         val distanceSums = mutableMapOf<Pair<Int, Int>, Int>()
         for (y in bounds.y) {
             for (x in bounds.x) {
-                if (part == ONE) {
+                if (part.isOne()) {
                     val closest = getClosest(points, Pair(x, y))
                     if (closest != null) {
                         // Update the size of the region "owned" by the closest point.
@@ -54,7 +53,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) {
+        return if (part.isOne()) {
             regionSizes.maxByOrNull { it.value }!!.value
         } else {
             distanceSums.filter { it.value < 10000 }.size

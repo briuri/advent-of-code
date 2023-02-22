@@ -2,7 +2,6 @@ package buri.aoc.y15.d13
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -38,7 +37,7 @@ class Puzzle : BasePuzzle() {
             happiness["$name1 $name2"] = direction * amount
             people.add(name1)
         }
-        if (part == TWO) {
+        if (part.isTwo()) {
             for (person in people) {
                 happiness["$person Me"] = 0
                 happiness["Me $person"] = 0

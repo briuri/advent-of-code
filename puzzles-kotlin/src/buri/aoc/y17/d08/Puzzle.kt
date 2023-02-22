@@ -2,7 +2,6 @@ package buri.aoc.y17.d08
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
 
@@ -40,7 +39,7 @@ class Puzzle : BasePuzzle() {
                 maxAnytime = maxAnytime.coerceAtLeast(value + amount)
             }
         }
-        return if (part == ONE) registers.max() else maxAnytime
+        return if (part.isOne()) registers.max() else maxAnytime
     }
 
     /**

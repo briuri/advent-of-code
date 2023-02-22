@@ -2,7 +2,6 @@ package buri.aoc.y17.d02
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -42,6 +41,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) sum else divisionSum
+        return if (part.isOne()) sum else divisionSum
     }
 }

@@ -2,7 +2,6 @@ package buri.aoc.y16.d04
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -51,7 +50,7 @@ class Puzzle : BasePuzzle() {
             if (testChecksum.substring(0, 5) == checksum) {
                 realSum += id
                 val unencrypted = rotate(name, id)
-                if (part == TWO && unencrypted == "northpole object storage") {
+                if (part.isTwo() && unencrypted == "northpole object storage") {
                     return id
                 }
             }

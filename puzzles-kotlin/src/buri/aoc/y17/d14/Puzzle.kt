@@ -1,10 +1,9 @@
 package buri.aoc.y17.d14
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.Part.TWO
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -35,7 +34,7 @@ class Puzzle : BasePuzzle() {
             newInput.add("${input[0]}-$i")
             hashes.add(toBinary(buri.aoc.y17.d10.Puzzle().run(TWO, newInput)))
         }
-        if (part == ONE) {
+        if (part.isOne()) {
             var sum = 0
             for (hash in hashes) {
                 sum += hash.toCharArray().sumOf { it.digitToInt() }

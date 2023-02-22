@@ -2,8 +2,6 @@ package buri.aoc.y15.d12
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
@@ -55,7 +53,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
             for (item in objectNode) {
-                if (part == ONE || (part == TWO && !hasRed)) {
+                if (part.isOne() || (part.isTwo() && !hasRed)) {
                     sum += getSum(part, item)
                 }
             }

@@ -1,9 +1,8 @@
 package buri.aoc.y16.d08
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -58,7 +57,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) grid.getSum().toString() else grid.printLetters()
+        return if (part.isOne()) grid.getSum().toString() else grid.printLetters()
     }
 
     /**

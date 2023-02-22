@@ -2,7 +2,6 @@ package buri.aoc.y15.d17
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -34,7 +33,7 @@ class Puzzle : BasePuzzle() {
         val end = if (input.size < 10) 25 else 150
         val frequency = mutableMapOf<Int, Int>()
         val combos = getCount(0, end, containers, 0, frequency)
-        return if (part == ONE) combos else frequency[frequency.keys.min()]!!
+        return if (part.isOne()) combos else frequency[frequency.keys.min()]!!
     }
 
     /**

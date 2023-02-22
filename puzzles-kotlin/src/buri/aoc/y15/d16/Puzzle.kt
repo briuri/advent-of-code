@@ -2,7 +2,6 @@ package buri.aoc.y15.d16
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -50,9 +49,9 @@ class Puzzle : BasePuzzle() {
                 if (name !in map) {
                     continue
                 }
-                val condition = if (part == TWO && (name == "cats" || name == "trees")) {
+                val condition = if (part.isTwo() && (name == "cats" || name == "trees")) {
                     map[name]!! > value
-                } else if (part == TWO && (name == "pomeranians" || name == "goldfish")) {
+                } else if (part.isTwo() && (name == "pomeranians" || name == "goldfish")) {
                     map[name]!! < value
                 } else {
                     map[name]!! == value

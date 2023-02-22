@@ -2,7 +2,6 @@ package buri.aoc.y17.d05
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -32,7 +31,7 @@ class Puzzle : BasePuzzle() {
         val instructions = input.map { it.toInt() }.toMutableList()
         while (pointer in instructions.indices) {
             val pointerOffset = instructions[pointer]
-            instructions[pointer] += if (part == ONE || pointerOffset < 3) 1 else -1
+            instructions[pointer] += if (part.isOne() || pointerOffset < 3) 1 else -1
             pointer += pointerOffset
             steps++
         }

@@ -2,7 +2,6 @@ package buri.aoc.y17.d09
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -57,6 +56,6 @@ class Puzzle : BasePuzzle() {
             }
             i++
         }
-        return if (part == ONE) score else garbageCount
+        return if (part.isOne()) score else garbageCount
     }
 }

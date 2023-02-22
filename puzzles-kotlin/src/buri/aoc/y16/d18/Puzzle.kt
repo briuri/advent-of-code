@@ -2,7 +2,6 @@ package buri.aoc.y16.d18
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val rows = when {
-            part == TWO -> 400_000
+            part.isTwo() -> 400_000
             input[0].length < 20 -> 10
             else -> 40
         }

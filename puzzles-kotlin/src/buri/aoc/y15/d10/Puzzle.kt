@@ -2,7 +2,6 @@ package buri.aoc.y15.d10
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -26,7 +25,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         var number = input[0]
-        val times = if (part == ONE) 40 else 50
+        val times = if (part.isOne()) 40 else 50
         val builder = StringBuilder()
         for (time in 0 until times) {
             builder.clear()

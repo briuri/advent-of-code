@@ -1,10 +1,9 @@
 package buri.aoc.y16.d24
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import buri.aoc.common.Pathfinder
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -63,7 +62,7 @@ class Puzzle : BasePuzzle() {
             for (i in 0 until path.lastIndex) {
                 pathSteps += steps[path[i].toString() + path[i + 1].toString()]!!
             }
-            if (part == TWO) {
+            if (part.isTwo()) {
                 pathSteps += steps[path[path.lastIndex].toString() + "0"]!!
             }
             minSteps = minSteps.coerceAtMost(pathSteps)

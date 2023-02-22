@@ -2,7 +2,6 @@ package buri.aoc.y18.d12
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -37,7 +36,7 @@ class Puzzle : BasePuzzle() {
             val tokens = line.split(" => ")
             rules[tokens[0]] = (tokens[1] == "#")
         }
-        val times = if (part == ONE) 20L else 94L
+        val times = if (part.isOne()) 20L else 94L
         for (time in 0 until times) {
             val minPlant = plants.min() - 2
             val maxPlant = plants.max() + 2
@@ -50,7 +49,7 @@ class Puzzle : BasePuzzle() {
             }
             plants = newPlants
         }
-        return if (part == ONE) {
+        return if (part.isOne()) {
             plants.sum()
         } else {
             // After 93 iterations, the growth is linear, up by 22 plants each generation.

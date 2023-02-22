@@ -2,7 +2,6 @@ package buri.aoc.y16.d09
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -54,7 +53,7 @@ class Puzzle : BasePuzzle() {
                 // Calculate decompression.
                 i = endMarker + 1
                 val repeated = string.substring(i, i + numChars)
-                val repeatedSize = if (part == ONE) repeated.length.toLong() else getDecompressedLength(part, repeated)
+                val repeatedSize = if (part.isOne()) repeated.length.toLong() else getDecompressedLength(part, repeated)
                 size += repeatedSize * times
                 i += repeated.length
             }

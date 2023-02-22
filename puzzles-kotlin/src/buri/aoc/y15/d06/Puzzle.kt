@@ -1,10 +1,9 @@
 package buri.aoc.y15.d06
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -37,7 +36,7 @@ class Puzzle : BasePuzzle() {
             for (x in xRange.first..xRange.second) {
                 for (y in yRange.first..yRange.second) {
                     val value = lights[x, y].toInt()
-                    if (part == ONE) {
+                    if (part.isOne()) {
                         when (onOff) {
                             "on" -> lights[x, y] = 1
                             "off" -> lights[x, y] = 0

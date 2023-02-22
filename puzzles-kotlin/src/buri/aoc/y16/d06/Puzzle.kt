@@ -2,7 +2,6 @@ package buri.aoc.y16.d06
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -37,7 +36,7 @@ class Puzzle : BasePuzzle() {
 
         val message = StringBuilder()
         for (frequency in frequencies) {
-            val minMax = if (part == ONE) frequency.values.max() else frequency.values.min()
+            val minMax = if (part.isOne()) frequency.values.max() else frequency.values.min()
             for (letter in frequency.keys) {
                 if (frequency[letter] == minMax) {
                     message.append(letter)

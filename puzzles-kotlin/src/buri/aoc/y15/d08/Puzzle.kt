@@ -2,7 +2,6 @@ package buri.aoc.y15.d08
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -42,7 +41,7 @@ class Puzzle : BasePuzzle() {
             string = "#$string#"
             encodeSize += string.length
         }
-        if (part == ONE) {
+        if (part.isOne()) {
             return originalSize - decodeSize
         }
         return encodeSize - originalSize

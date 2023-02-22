@@ -2,7 +2,6 @@ package buri.aoc.y15.d24
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -30,7 +29,7 @@ class Puzzle : BasePuzzle() {
         val packages = mutableListOf<Long>()
         packages.addAll(input.map { it.toLong() })
         packages.reverse()
-        val compartments = if (part == ONE) 3 else 4
+        val compartments = if (part.isOne()) 3 else 4
         val targetWeight = packages.sum() / compartments
 
         val options = getPermutations(targetWeight, packages).sortedWith(compareBy { it.size })

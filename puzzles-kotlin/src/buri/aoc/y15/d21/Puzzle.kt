@@ -2,7 +2,6 @@ package buri.aoc.y15.d21
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -75,7 +74,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) minCost else maxCost
+        return if (part.isOne()) minCost else maxCost
     }
 
     /**

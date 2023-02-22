@@ -2,7 +2,6 @@ package buri.aoc.y18.d02
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        if (part == ONE) {
+        if (part.isOne()) {
             var twoCount = 0
             var threeCount = 0
             for (line in input) {

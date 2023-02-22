@@ -2,7 +2,6 @@ package buri.aoc.y18.d01
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        if (part == ONE) {
+        if (part.isOne()) {
             return input.sumOf { it.toInt() }
         }
         val visited = mutableSetOf<Int>()

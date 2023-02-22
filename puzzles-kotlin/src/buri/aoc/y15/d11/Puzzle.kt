@@ -2,7 +2,6 @@ package buri.aoc.y15.d11
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -25,7 +24,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        val nextCount = if (part == ONE) 1 else 2
+        val nextCount = if (part.isOne()) 1 else 2
         var count = 0
         var password = input[0]
         while (count < nextCount) {

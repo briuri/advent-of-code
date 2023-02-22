@@ -2,7 +2,6 @@ package buri.aoc.y16.d15
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -35,7 +34,7 @@ class Puzzle : BasePuzzle() {
             val start = numbers[3]
             discs[num] = Disc(total, start)
         }
-        if (part == TWO) {
+        if (part.isTwo()) {
             discs[discs.keys.max() + 1] = Disc(11, 0)
         }
 

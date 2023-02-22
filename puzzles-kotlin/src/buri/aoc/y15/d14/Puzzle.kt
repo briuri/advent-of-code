@@ -2,7 +2,6 @@ package buri.aoc.y15.d14
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -45,7 +44,7 @@ class Puzzle : BasePuzzle() {
             for (reindeer in scores.keys.filter { currentPositions[it] == currentMax }) {
                 scores[reindeer] = scores[reindeer]!! + 1
             }
-            if (part == ONE && i == endRace) {
+            if (part.isOne() && i == endRace) {
                 return currentMax
             }
         }

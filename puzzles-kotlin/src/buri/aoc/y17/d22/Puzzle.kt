@@ -1,10 +1,9 @@
 package buri.aoc.y17.d22
 
 import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
 import buri.aoc.common.position.Direction.NORTH
 import buri.aoc.common.position.MutablePosition
-import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -41,7 +40,7 @@ class Puzzle : BasePuzzle() {
 
         val virus = MutablePosition(Pair(input[0].length / 2, input.size / 2), NORTH)
         var count = 0
-        repeat(if (part == ONE) 10_000 else 10_000_000) {
+        repeat(if (part.isOne()) 10_000 else 10_000_000) {
             nodes.putIfAbsent(virus.coords, State.CLEAN)
             when (nodes[virus.coords]!!) {
                 State.CLEAN -> virus.turnLeft()
@@ -51,7 +50,7 @@ class Puzzle : BasePuzzle() {
             }
             when (nodes[virus.coords]!!) {
                 State.CLEAN -> {
-                    if (part == ONE) {
+                    if (part.isOne()) {
                         nodes[virus.coords] = State.INFECTED
                         count++
                     } else {
@@ -63,7 +62,7 @@ class Puzzle : BasePuzzle() {
                     count++
                 }
                 State.INFECTED -> {
-                    nodes[virus.coords] = if (part == ONE) State.CLEAN else State.FLAGGED
+                    nodes[virus.coords] = if (part.isOne()) State.CLEAN else State.FLAGGED
                 }
                 State.FLAGGED -> nodes[virus.coords] = State.CLEAN
             }

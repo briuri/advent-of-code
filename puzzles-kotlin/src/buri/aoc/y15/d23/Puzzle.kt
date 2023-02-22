@@ -2,7 +2,6 @@ package buri.aoc.y15.d23
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
 
@@ -27,7 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val registers = NamedRegisters()
-        registers["a"] = if (part == ONE) 0 else 1
+        registers["a"] = if (part.isOne()) 0 else 1
         registers["b"] = 0
 
         var pointer = 0

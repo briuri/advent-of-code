@@ -2,8 +2,6 @@ package buri.aoc.y17.d20
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import buri.aoc.common.extractInts
 import buri.aoc.common.getManhattanDistance
 import org.junit.Test
@@ -34,7 +32,7 @@ class Puzzle : BasePuzzle() {
         }
         repeat(1000) {
             particles.forEach { it.tick() }
-            if (part == TWO) {
+            if (part.isTwo()) {
                 val particlesAt = mutableMapOf<Triple<Long, Long, Long>, MutableList<Particle>>()
                 for (particle in particles) {
                     particlesAt.putIfAbsent(particle.position, mutableListOf())
@@ -45,7 +43,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        if (part == ONE) {
+        if (part.isOne()) {
             return particles.minByOrNull { it.position.getManhattanDistance() }!!.num
         }
         return particles.size

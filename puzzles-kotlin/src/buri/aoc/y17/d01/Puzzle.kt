@@ -2,7 +2,6 @@ package buri.aoc.y17.d01
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -28,7 +27,7 @@ class Puzzle : BasePuzzle() {
         var sum = 0
         val sequence = input[0]
         for (i in sequence.indices) {
-            val next = if (part == ONE) {
+            val next = if (part.isOne()) {
                 if (i == sequence.lastIndex) 0 else i + 1
             } else {
                 (i + (sequence.length / 2)) % sequence.length

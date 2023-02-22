@@ -2,7 +2,6 @@ package buri.aoc.y18.d03
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -54,7 +53,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) {
+        return if (part.isOne()) {
             fabric.values.filter { it == -1 }.size
         } else {
             ids.filter { it !in overlaps }[0]

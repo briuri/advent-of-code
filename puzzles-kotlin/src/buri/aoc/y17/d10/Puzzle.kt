@@ -2,7 +2,6 @@ package buri.aoc.y17.d10
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -31,12 +30,12 @@ class Puzzle : BasePuzzle() {
         for (i in 0 until size) {
             circle.add(i)
         }
-        val lengths = if (part == ONE) {
+        val lengths = if (part.isOne()) {
             input[0].extractInts()
         } else {
             input[0].map { it.code } + listOf(17, 31, 73, 47, 23)
         }
-        val numRounds = if (part == ONE) 1 else 64
+        val numRounds = if (part.isOne()) 1 else 64
 
         var current = 0
         var skipSize = 0
@@ -63,7 +62,7 @@ class Puzzle : BasePuzzle() {
         for (i in 0 until current % size) {
             circle.addFirst(circle.removeLast())
         }
-        if (part == ONE) {
+        if (part.isOne()) {
             return (circle.removeFirst() * circle.removeFirst()).toString()
         }
 

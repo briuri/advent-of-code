@@ -1,9 +1,8 @@
 package buri.aoc.y16.d12
 
-import buri.aoc.common.registers.Assembunny
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
+import buri.aoc.common.registers.Assembunny
 import org.junit.Test
 
 /**
@@ -28,7 +27,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         // Reduce assembunny to Fibonacci algorithm
-        if (part == TWO) {
+        if (part.isTwo()) {
             val getIntValue = { line: String -> line.split(" ")[1].toInt() }
             val times = getIntValue(input[2]) + getIntValue(input[5])
             val offset = getIntValue(input[16]) * getIntValue(input[17])

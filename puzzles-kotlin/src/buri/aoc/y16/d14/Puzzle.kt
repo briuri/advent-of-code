@@ -3,7 +3,6 @@ package buri.aoc.y16.d14
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.MD5
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -34,7 +33,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val md5 = MD5()
         val salt = input[0]
-        val stretches = if (part == ONE) 0 else 2016
+        val stretches = if (part.isOne()) 0 else 2016
 
         val hashes = mutableMapOf<Int, String>()
         var index = 0

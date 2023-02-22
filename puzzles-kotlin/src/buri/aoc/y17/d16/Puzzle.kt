@@ -2,8 +2,6 @@ package buri.aoc.y17.d16
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -28,7 +26,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         var order = "abcdefghijklmnop".toCharArray()
 
-        val numDances = if (part == ONE) 1 else 1_000_000_000
+        val numDances = if (part.isOne()) 1 else 1_000_000_000
         val visited = mutableListOf<String>()
         for (i in 0 until numDances) {
             for (command in input[0].split(",")) {
@@ -48,7 +46,7 @@ class Puzzle : BasePuzzle() {
 
             // Search for a repeated state then extrapolate up to 1 billion
             val snapshot = order.joinToString("")
-            if (part == TWO && snapshot in visited) {
+            if (part.isTwo() && snapshot in visited) {
                 return visited[(numDances % visited.size) - 1]
             }
             visited.add(snapshot)

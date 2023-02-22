@@ -3,7 +3,6 @@ package buri.aoc.y16.d05
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.MD5
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -36,7 +35,7 @@ class Puzzle : BasePuzzle() {
         while (password.contains('#')) {
             val hash = md5.getHashWithLeadingZeroes(input[0] + index.toString(), 5)
             if (hash.isNotEmpty()) {
-                if (part == ONE) {
+                if (part.isOne()) {
                     password[password.indexOf("#")] = hash[5]
                 } else if (hash[5] in "01234567" && password[hash[5].digitToInt()] == '#') {
                     password[hash[5].digitToInt()] = hash[6]

@@ -2,7 +2,6 @@ package buri.aoc.y18.d09
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -29,7 +28,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val numbers = input[0].extractInts()
         val numPlayers = numbers[0]
-        val maxValue = if (part == ONE) numbers[1] else (numbers[1] * 100)
+        val maxValue = if (part.isOne()) numbers[1] else (numbers[1] * 100)
 
         val scores = mutableMapOf<Int, Long>()
         for (i in 0..numPlayers) {
@@ -43,14 +42,13 @@ class Puzzle : BasePuzzle() {
         while (marbleValue <= maxValue) {
             if (marbleValue % 23 == 0) {
                 // Rotate 7 CCW and remove marble for score.
-                repeat (7) {
+                repeat(7) {
                     circle.addFirst(circle.removeLast())
                 }
                 scores[currentPlayer] = scores[currentPlayer]!! + marbleValue + circle.removeFirst()
-            }
-            else {
+            } else {
                 // Rotate 2 CW.
-                repeat (2) {
+                repeat(2) {
                     circle.addLast(circle.removeFirst())
                 }
                 circle.addFirst(marbleValue)

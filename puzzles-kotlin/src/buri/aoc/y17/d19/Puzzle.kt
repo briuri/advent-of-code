@@ -1,10 +1,9 @@
 package buri.aoc.y17.d19
 
 import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
 import buri.aoc.common.position.Direction.*
 import buri.aoc.common.position.MutablePosition
-import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -55,6 +54,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part == ONE) path.toString() else steps.toString()
+        return if (part.isOne()) path.toString() else steps.toString()
     }
 }

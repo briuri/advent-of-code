@@ -3,7 +3,6 @@ package buri.aoc.y16.d17
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.MD5
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -43,7 +42,7 @@ class Puzzle : BasePuzzle() {
             current = frontier.removeFirst()
             visited.add(current)
             if (current.point == end) {
-                if (part == ONE) {
+                if (part.isOne()) {
                     return visited.filter { it.point == end }[0].path
                 } else {
                     continue

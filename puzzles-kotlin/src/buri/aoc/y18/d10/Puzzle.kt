@@ -2,8 +2,6 @@ package buri.aoc.y18.d10
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import buri.aoc.common.extractInts
 import buri.aoc.common.position.Bounds
 import buri.aoc.common.position.Grid
@@ -50,7 +48,7 @@ class Puzzle : BasePuzzle() {
             lastArea = nextArea
             ticks++
         }
-        return if (part == ONE) toGrid(stars).toString() else ticks.toString()
+        return if (part.isOne()) toGrid(stars).toString() else ticks.toString()
     }
 
     /**

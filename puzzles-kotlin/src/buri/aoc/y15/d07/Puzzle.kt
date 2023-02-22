@@ -2,7 +2,6 @@ package buri.aoc.y15.d07
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -29,7 +28,7 @@ class Puzzle : BasePuzzle() {
         val complexWires = mutableMapOf<String, String>()
         for (line in input) {
             val tokens = line.split(" -> ")
-            complexWires[tokens[1]] = if (part == TWO && tokens[1] == "b") {
+            complexWires[tokens[1]] = if (part.isTwo() && tokens[1] == "b") {
                 "956"
             } else {
                 tokens[0]

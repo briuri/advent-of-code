@@ -2,7 +2,6 @@ package buri.aoc.y17.d06
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -51,7 +50,7 @@ class Puzzle : BasePuzzle() {
 
             // In part two, reset the states and find the next cycle.
             if (banks.toString() in visited) {
-                if (part == TWO && !findingCycle) {
+                if (part.isTwo() && !findingCycle) {
                     steps = 0
                     visited.clear()
                     findingCycle = true

@@ -2,7 +2,6 @@ package buri.aoc.y15.d22
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.TWO
 import org.junit.Test
 
 /**
@@ -56,7 +55,7 @@ class Puzzle : BasePuzzle() {
         var isMyTurn = true
         val activeEffects = mutableMapOf<String, Int>()
         while (true) {
-            if (part == TWO && isMyTurn) {
+            if (part.isTwo() && isMyTurn) {
                 myHp -= 1
             }
 

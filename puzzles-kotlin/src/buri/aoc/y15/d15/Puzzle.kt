@@ -2,7 +2,6 @@ package buri.aoc.y15.d15
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -55,7 +54,7 @@ class Puzzle : BasePuzzle() {
                             score *= getScore(properties[i], a, b, c, d)
                         }
                         val calories = getScore(properties[properties.lastIndex], a, b, c, d)
-                        if (part == ONE || calories == 500) {
+                        if (part.isOne() || calories == 500) {
                             maxScore = maxScore.coerceAtLeast(score)
                         }
                     }

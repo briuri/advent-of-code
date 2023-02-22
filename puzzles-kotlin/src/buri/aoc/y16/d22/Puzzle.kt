@@ -1,9 +1,8 @@
 package buri.aoc.y16.d22
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val nodes = input.filter { it.startsWith("/dev") }
-        if (part == ONE) {
+        if (part.isOne()) {
             var count = 0
             for (nodeA in nodes) {
                 for (nodeB in nodes.filter { it != nodeA }) {

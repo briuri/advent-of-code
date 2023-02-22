@@ -2,8 +2,6 @@ package buri.aoc.y17.d18
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
-import buri.aoc.common.Part.TWO
 import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
 
@@ -30,7 +28,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val programA = IORegisters(0L, input)
-        if (part == ONE) {
+        if (part.isOne()) {
             programA.run(part)
             return programA.getLastMessage()
         }
@@ -82,10 +80,10 @@ class IORegisters(pStart: Long, private val instructions: List<String>) {
                 registers.mod(command[1], registers.resolve(command[2]))
             } else if (command[0] == "rcv") {
                 // In part ONE, quit the first time this command works.
-                if (part == ONE && registers.resolve(command[1]) != 0L) {
+                if (part.isOne() && registers.resolve(command[1]) != 0L) {
                     break
                 }
-                if (part == TWO) {
+                if (part.isTwo()) {
                     if (!sender!!.hasMessages()) {
                         isReceiving = true
                         break

@@ -2,7 +2,6 @@ package buri.aoc.y18.d07
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -27,7 +26,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): String {
         // Part ONE is a special case of Part TWO, with 1 worker and no job durations.
-        val workers = if (part == ONE) 1 else 5
+        val workers = if (part.isOne()) 1 else 5
         val jobs = mutableSetOf<Job>()
 
         val graph = Graph(input)
@@ -41,12 +40,12 @@ class Puzzle : BasePuzzle() {
             val next = graph.getNext(visited, jobs.map { it.node }).toMutableList()
             while (jobs.size < workers && next.isNotEmpty()) {
                 val node = next.removeAt(0)
-                val end = if (part == ONE) 0 else (time + node.code - 4) // 60 + alphabet position = ASCII - 4
+                val end = if (part.isOne()) 0 else (time + node.code - 4) // 60 + alphabet position = ASCII - 4
                 jobs.add(Job(node, end))
             }
             time++
         }
-        return if (part == ONE) visited.joinToString("") else (time - 1).toString()
+        return if (part.isOne()) visited.joinToString("") else (time - 1).toString()
     }
 }
 

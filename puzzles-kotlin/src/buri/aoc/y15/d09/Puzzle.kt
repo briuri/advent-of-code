@@ -2,7 +2,6 @@ package buri.aoc.y15.d09
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import org.junit.Test
 
 /**
@@ -47,7 +46,7 @@ class Puzzle : BasePuzzle() {
             }
             distances.add(distance)
         }
-        return if (part == ONE) distances.min() else distances.max()
+        return if (part.isOne()) distances.min() else distances.max()
     }
 
 }

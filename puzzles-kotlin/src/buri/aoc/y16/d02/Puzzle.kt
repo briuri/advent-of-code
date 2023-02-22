@@ -1,9 +1,8 @@
 package buri.aoc.y16.d02
 
 import buri.aoc.common.BasePuzzle
-import buri.aoc.common.position.Grid
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
+import buri.aoc.common.position.Grid
 import org.junit.Test
 
 /**
@@ -54,9 +53,9 @@ class Puzzle : BasePuzzle() {
         grid2[3, 3] = "C"
         grid2[2, 4] = "D"
 
-        val grid = if (part == ONE) grid1 else grid2
+        val grid = if (part.isOne()) grid1 else grid2
         val code = StringBuilder()
-        var key = if (part == ONE) Pair(1, 1) else Pair(0, 2)
+        var key = if (part.isOne()) Pair(1, 1) else Pair(0, 2)
         for (line in input) {
             for (value in line) {
                 val dx = when (value) {
@@ -83,6 +82,6 @@ class Puzzle : BasePuzzle() {
      * Checks if a point is in bounds, using different rules for Part 2.
      */
     private fun isInBounds(part: Part, grid: Grid, point: Pair<Int, Int>): Boolean {
-        return grid.isInBounds(point) && (part == ONE || grid[point] != "0")
+        return grid.isInBounds(point) && (part.isOne() || grid[point] != "0")
     }
 }

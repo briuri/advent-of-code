@@ -2,7 +2,6 @@ package buri.aoc.y18.d08
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Part.ONE
 import buri.aoc.common.extractInts
 import org.junit.Test
 
@@ -30,7 +29,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val numbers = input[0].extractInts()
         val root = getNode(numbers)
-        return if (part == ONE) root.getMetadataSum() else root.getValue()
+        return if (part.isOne()) root.getMetadataSum() else root.getValue()
     }
 
     /**
