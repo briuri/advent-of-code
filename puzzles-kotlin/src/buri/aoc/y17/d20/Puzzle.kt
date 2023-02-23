@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val particles = mutableListOf<Particle>()
         for ((index, line) in input.withIndex()) {
-            particles.add(Particle(index, line))
+            particles.add(Particle(index, line.extractInts().map { it.toLong() }))
         }
         repeat(1000) {
             particles.forEach { it.tick() }
@@ -50,13 +50,12 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class Particle(val num: Int, val input: String) {
+class Particle(val num: Int, numbers: List<Long>) {
     var position: Triple<Long, Long, Long>
     private var velocity: Triple<Long, Long, Long>
     private var acceleration: Triple<Long, Long, Long>
 
     init {
-        val numbers = input.extractInts().map { it.toLong() }
         position = Triple(numbers[0], numbers[1], numbers[2])
         velocity = Triple(numbers[3], numbers[4], numbers[5])
         acceleration = Triple(numbers[6], numbers[7], numbers[8])

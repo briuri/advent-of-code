@@ -49,7 +49,7 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class Graph(val input: List<String>) {
+class Graph(input: List<String>) {
     private val vertices = mutableSetOf<Pair<Char, Char>>()
     private val nodes = mutableSetOf<Char>()
     private val starts = mutableListOf<Char>()

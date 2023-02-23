@@ -48,7 +48,7 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class Node(val numChildren: Int, val numMetadata: Int) {
+class Node(val numChildren: Int, val numMetadata: Int) {
     private val children = mutableListOf<Node>()
     private val metadata = mutableListOf<Int>()
     val length: Int

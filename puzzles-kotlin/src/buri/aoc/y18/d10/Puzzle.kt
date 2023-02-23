@@ -32,7 +32,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         val stars = mutableSetOf<Star>()
         for (line in input) {
-            stars.add(Star(line))
+            stars.add(Star(line.extractInts()))
         }
 
         var lastArea = Bounds(stars.getPositions()).area
@@ -82,12 +82,11 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class Star(val input: String) {
+class Star(numbers: List<Int>) {
     var position: Pair<Int, Int>
     private var velocity: Pair<Int, Int>
 
     init {
-        val numbers = input.extractInts()
         position = Pair(numbers[0], numbers[1])
         velocity = Pair(numbers[2], numbers[3])
     }

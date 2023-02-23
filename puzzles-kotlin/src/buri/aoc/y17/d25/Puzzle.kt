@@ -48,7 +48,7 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class State(private val input: List<String>) {
+class State(input: List<String>) {
     val write = mutableMapOf<Int, Int>()
     val move = mutableMapOf<Int, Int>()
     val next = mutableMapOf<Int, String>()
@@ -67,9 +67,5 @@ data class State(private val input: List<String>) {
      */
     private fun toOffset(direction: String): Int {
         return if (direction == "right") 1 else -1
-    }
-
-    override fun toString(): String {
-        return "write=$write move=$move next=$next"
     }
 }

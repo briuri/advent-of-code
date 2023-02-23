@@ -5,7 +5,7 @@ package buri.aoc.common.position
  *
  * @author Brian Uri!
  */
-data class Bounds(val points: Set<Pair<Int, Int>>) {
+class Bounds(private val points: Set<Pair<Int, Int>>) {
     val x: IntRange
     val y: IntRange
     val area: Long

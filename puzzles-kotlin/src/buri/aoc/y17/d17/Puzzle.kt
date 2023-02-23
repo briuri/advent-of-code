@@ -47,7 +47,7 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class Spinlock(private val steps: Int) {
+class Spinlock(private val steps: Int) {
     private val lock = ArrayDeque<Int>()
 
     init {

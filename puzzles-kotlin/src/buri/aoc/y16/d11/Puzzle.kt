@@ -52,19 +52,20 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-data class State(val steps: Int, private var state: String) {
-    val totalPairs = (state.length - 1) / 3
-    private val elevator = Character.getNumericValue(state[0])
+class State(val steps: Int, unsortedState: String) {
+    val totalPairs = (unsortedState.length - 1) / 3
+    val state: String
+    private val elevator = Character.getNumericValue(unsortedState[0])
 
     init {
         val pairs = mutableListOf<String>()
         for (i in 0 until totalPairs) {
-            pairs.add(state.substring(toIndex(i, true), toIndex(i, false) + 1))
+            pairs.add(unsortedState.substring(toIndex(i, true), toIndex(i, false) + 1))
         }
         // Sort pairs to reduce the number of unique states reached.
         pairs.sort()
         val builder = StringBuilder()
-        builder.append(state[0])
+        builder.append(unsortedState[0])
         for (pair in pairs) {
             builder.append('|').append(pair)
         }
