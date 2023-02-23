@@ -52,7 +52,5 @@ data class Disc(val total: Int, val start: Int) {
     /**
      * Returns the position at the given time.
      */
-    fun getPositionAt(time: Int): Int {
-        return (start + time) % total
-    }
+    fun getPositionAt(time: Int): Int = (start + time) % total
 }

@@ -59,7 +59,5 @@ data class Scanner(val depth: Int, val range: Int) {
      * 4: 0 6 12
      * 5: 0 8 16
      */
-    fun isAtTop(time: Int): Boolean {
-        return (time % ((range * 2) - 2) == 0)
-    }
+    fun isAtTop(time: Int): Boolean = (time % ((range * 2) - 2) == 0)
 }

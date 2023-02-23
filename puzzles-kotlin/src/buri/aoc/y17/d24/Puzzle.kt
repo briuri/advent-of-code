@@ -70,7 +70,5 @@ data class Component(val portA: Int, val portB: Int) {
     /**
      * Returns true if this component has a specific port.
      */
-    fun fits(port: Int): Boolean {
-        return (portA == port || portB == port)
-    }
+    fun fits(port: Int): Boolean = (portA == port || portB == port)
 }

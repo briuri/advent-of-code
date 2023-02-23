@@ -77,9 +77,7 @@ class Puzzle : BasePuzzle() {
     /**
      * Converts a set of stars into a set of positions.
      */
-    private fun MutableSet<Star>.getPositions(): Set<Pair<Int, Int>> {
-        return this.map { it.position }.toSet()
-    }
+    private fun MutableSet<Star>.getPositions(): Set<Pair<Int, Int>> = this.map { it.position }.toSet()
 }
 
 class Star(numbers: List<Int>) {
@@ -108,7 +106,5 @@ class Star(numbers: List<Int>) {
         }
     }
 
-    override fun toString(): String {
-        return position.toString()
-    }
+    override fun toString(): String = position.toString()
 }

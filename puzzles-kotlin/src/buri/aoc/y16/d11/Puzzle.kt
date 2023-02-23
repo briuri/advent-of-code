@@ -219,15 +219,7 @@ class State(val steps: Int, unsortedState: String) {
         return offset + id * 3
     }
 
-    override fun toString(): String {
-        return state
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return (state == (other as State).state)
-    }
-
-    override fun hashCode(): Int {
-        return state.hashCode()
-    }
+    override fun toString(): String = state
+    override fun equals(other: Any?): Boolean = (state == (other as State).state)
+    override fun hashCode(): Int = state.hashCode()
 }

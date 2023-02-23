@@ -24,9 +24,7 @@ class NamedRegisters {
     /**
      * Returns the max value in any register.
      */
-    fun max(): Long {
-        return registers.values.max()
-    }
+    fun max(): Long = registers.values.max()
 
     /**
      * Adds a value to the current value in a register.

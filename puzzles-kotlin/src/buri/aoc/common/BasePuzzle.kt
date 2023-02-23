@@ -121,16 +121,12 @@ enum class Part(val number: Int) {
     /**
      * Returns true if this is Part ONE.
      */
-    fun isOne(): Boolean {
-        return (number == 1)
-    }
+    fun isOne(): Boolean = (number == 1)
 
     /**
      * Returns true if this is Part TWO.
      */
-    fun isTwo(): Boolean {
-        return (number == 2)
-    }
+    fun isTwo(): Boolean = (number == 2)
 }
 
 /**

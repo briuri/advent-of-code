@@ -59,7 +59,5 @@ class Puzzle : BasePuzzle() {
     /**
      * Counts the number of safe spots in a row.
      */
-    private fun getSafeCount(row: String): Int {
-        return row.filter { it == '.' }.length
-    }
+    private fun getSafeCount(row: String): Int = row.filter { it == '.' }.length
 }

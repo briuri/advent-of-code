@@ -72,9 +72,7 @@ class Graph(input: List<String>) {
     /**
      * Returns true if the graph is totally visited.
      */
-    fun isComplete(visited: List<Char>): Boolean {
-        return nodes.all { it in visited }
-    }
+    fun isComplete(visited: List<Char>): Boolean = nodes.all { it in visited }
 
     /**
      * Determines which nodes can be visited next, based on what has already been visited.

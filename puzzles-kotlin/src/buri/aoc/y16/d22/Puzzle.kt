@@ -109,14 +109,10 @@ class Puzzle : BasePuzzle() {
     /**
      * Extracts the used space on a node.
      */
-    private fun getUsed(line: String): Int {
-        return line.substring(28, 33).trim().toInt()
-    }
+    private fun getUsed(line: String): Int = line.substring(28, 33).trim().toInt()
 
     /**
      * Extracts the available space on a node.
      */
-    private fun getAvailable(line: String): Int {
-        return line.substring(34, 40).trim().toInt()
-    }
+    private fun getAvailable(line: String): Int = line.substring(34, 40).trim().toInt()
 }

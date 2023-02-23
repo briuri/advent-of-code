@@ -69,9 +69,7 @@ class Assembunny(input: List<String>) {
     /**
      * Enables array-like access to the registers
      */
-    operator fun get(name: String): Long {
-        return registers[name]
-    }
+    operator fun get(name: String): Long = registers[name]
 
     /**
      * Enables array-like access to the registers

@@ -65,7 +65,5 @@ class State(input: List<String>) {
     /**
      * Converts right or left to 1 or -1.
      */
-    private fun toOffset(direction: String): Int {
-        return if (direction == "right") 1 else -1
-    }
+    private fun toOffset(direction: String): Int = if (direction == "right") 1 else -1
 }

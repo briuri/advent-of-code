@@ -104,7 +104,5 @@ class IORegisters(pStart: Long, private val instructions: List<String>) {
     /**
      * Returns true if this register set has messages ready to send.
      */
-    fun hasMessages(): Boolean {
-        return sentMessages.isNotEmpty()
-    }
+    fun hasMessages(): Boolean = sentMessages.isNotEmpty()
 }
