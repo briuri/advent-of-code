@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val steps = if (input.size < 10) 4 else 100
-        var grid = Grid(input.size, input[0].length)
+        var grid = Grid(input.size, input[0].length, 0)
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.withIndex()) {
                 val onOff = if (value == '#') 1 else 0
@@ -43,14 +43,14 @@ class Puzzle : BasePuzzle() {
         corners.add(Pair(grid.width - 1, grid.height - 1))
 
         for (i in 0 until steps) {
-            val nextGrid = Grid(input.size, input[0].length)
+            val nextGrid = Grid(input.size, input[0].length, 0)
             for (y in 0 until grid.height) {
                 for (x in 0 until grid.width) {
                     var onCount = 0
                     for (neighbor in grid.getNeighbors(x, y, true)) {
-                        onCount += grid[neighbor].toInt()
+                        onCount += grid[neighbor]
                     }
-                    val prev = grid[x, y].toInt()
+                    val prev = grid[x, y]
                     val next = if (part.isTwo() && Pair(x, y) in corners) {
                         1
                     } else if (prev == 1 && onCount != 2 && onCount != 3) {
@@ -65,6 +65,6 @@ class Puzzle : BasePuzzle() {
             }
             grid = nextGrid
         }
-        return grid.sum
+        return grid.sum()
     }
 }

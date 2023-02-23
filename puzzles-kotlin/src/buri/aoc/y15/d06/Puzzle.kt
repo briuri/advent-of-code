@@ -26,7 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val lights = Grid(1000, 1000)
+        val lights = Grid(1000, 1000, 0)
         for (line in input) {
             val numbers = line.extractInts()
             val onOff = line.split(" ")[1]
@@ -35,7 +35,7 @@ class Puzzle : BasePuzzle() {
 
             for (x in xRange.first..xRange.second) {
                 for (y in yRange.first..yRange.second) {
-                    val value = lights[x, y].toInt()
+                    val value = lights[x, y]
                     if (part.isOne()) {
                         when (onOff) {
                             "on" -> lights[x, y] = 1
@@ -55,6 +55,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return lights.sum
+        return lights.sum()
     }
 }

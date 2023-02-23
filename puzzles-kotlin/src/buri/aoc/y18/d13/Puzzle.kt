@@ -31,11 +31,11 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        val grid = Grid(input.maxOf { it.length }, input.size)
+        val grid = Grid(input.maxOf { it.length }, input.size, ' ')
         val carts = mutableListOf<Cart>()
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.padEnd(grid.width, ' ').withIndex()) {
-                grid[x, y] = value.toString()
+                grid[x, y] = value
                 if (value in Direction.values().map { it.icon }) {
                     carts.add(Cart(Pair(x, y), Direction.from(value)))
                 }
@@ -54,20 +54,20 @@ class Puzzle : BasePuzzle() {
                 }
                 // Turn cart if needed.
                 when (grid[cart.coords]) {
-                    "+" -> {
+                    '+' -> {
                         when (cart.nextTurn) {
                             0 -> cart.turnLeft()
                             2 -> cart.turnRight()
                             // else go straight
                         }
                     }
-                    "/" -> {
+                    '/' -> {
                         when (cart.facing) {
                             NORTH, SOUTH -> cart.turnRight()
                             WEST, EAST -> cart.turnLeft()
                         }
                     }
-                    "\\" -> {
+                    '\\' -> {
                         when (cart.facing) {
                             NORTH, SOUTH -> cart.turnLeft()
                             WEST, EAST -> cart.turnRight()

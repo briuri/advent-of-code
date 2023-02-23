@@ -26,7 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        var grid = Grid(50, 6)
+        var grid = Grid(50, 6, 0)
         for (line in input) {
             if (line.startsWith("rect")) {
                 val w = line.split(" ")[1].split("x")[0].toInt()
@@ -57,21 +57,21 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return if (part.isOne()) grid.sum.toString() else grid.printLetters()
+        return if (part.isOne()) grid.sum().toString() else grid.printLetters()
     }
 
     /**
      * Uses a block symbol to show letters.
      */
-    private fun Grid.printLetters(): String {
-        val builder = StringBuilder()
+    private fun Grid<Int>.printLetters(): String {
+        val output = StringBuilder()
         for (y in 0 until this.height) {
             for (x in 0 until this.width) {
-                val value = if (this[x, y] == "1") '■' else ' '
-                builder.append(value)
+                val value = if (this[x, y] == 1) '■' else ' '
+                output.append(value)
             }
-            builder.append("\n")
+            output.append("\n")
         }
-        return builder.toString()
+        return output.toString()
     }
 }

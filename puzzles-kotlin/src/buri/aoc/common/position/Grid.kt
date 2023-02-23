@@ -4,39 +4,44 @@ import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Orientation.*
 
 /**
- * Helper class for grid navigation
+ * Helper class for grid navigation. Can hold Ints or Chars.
  *
  * @author Brian Uri!
  */
-class Grid(val width: Int, val height: Int) {
-    private val grid = Array(width) { Array(height) { "0" } }
-    val sum: Int
-        get() {
-            var sum = 0
-            for (x in 0 until width) {
-                sum += grid[x].sumOf { it.toInt() }
-            }
-            return sum
+class Grid<T>(val width: Int, val height: Int, private val defaultValue: T) {
+    private val grid = MutableList(width * height) { defaultValue }
+
+    init {
+        if (defaultValue !is Int && defaultValue !is Char) {
+            throw IllegalArgumentException("Only Int and Chars can be stored in grids.")
         }
+    }
 
     /**
-     * Counts occurrences of some string.
+     * Sums all actual numbers in the grid.
      */
-    fun count(value: String): Int {
+    fun sum(): Int {
         var sum = 0
-        for (x in 0 until width) {
-            sum += grid[x].filter { it == value }.size
+        for (value in grid.filter { it is Int }) {
+            sum += value as Int
         }
         return sum
     }
 
     /**
+     * Counts occurrences of some value.
+     */
+    fun count(value: T): Int {
+        return grid.filter { it == value }.size
+    }
+
+    /**
      * Creates a copy of this grid.
      */
-    fun copy(orientation: Orientation = ORIGINAL): Grid {
+    fun copy(orientation: Orientation = ORIGINAL): Grid<T> {
         val copy = when (orientation) {
-            CLOCKWISE_90, CLOCKWISE_270 -> Grid(height, width)
-            else -> Grid(width, height)
+            CLOCKWISE_90, CLOCKWISE_270 -> Grid(height, width, defaultValue)
+            else -> Grid(width, height, defaultValue)
         }
         for (y in 0 until height) {
             for (x in 0 until width) {
@@ -57,22 +62,15 @@ class Grid(val width: Int, val height: Int) {
     /**
      * Returns a smaller grid from inside this grid.
      */
-    fun getSubGrid(start: Pair<Int, Int>, newWidth: Int, newHeight: Int): Grid {
+    fun getSubGrid(start: Pair<Int, Int>, newWidth: Int, newHeight: Int): Grid<T> {
         assert(isInBounds(start) && newWidth <= width && newHeight <= height)
-        val grid = Grid(newWidth, newHeight)
+        val grid = Grid(newWidth, newHeight, defaultValue)
         for (y in start.second until start.second + newHeight) {
             for (x in start.first until start.first + newWidth) {
                 grid[x - start.first, y - start.second] = get(x, y)
             }
         }
         return grid
-    }
-
-    /**
-     * Returns all neighbors of a point in bounds of the grid.
-     */
-    fun getNeighbors(current: Pair<Int, Int>, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
-        return getNeighbors(current.first, current.second, includeDiagonals)
     }
 
     /**
@@ -85,10 +83,10 @@ class Grid(val width: Int, val height: Int) {
     }
 
     /**
-     * Return true if the point is in bounds.
+     * Returns all neighbors of a point in bounds of the grid.
      */
-    fun isInBounds(point: Pair<Int, Int>): Boolean {
-        return isInBounds(point.first, point.second)
+    fun getNeighbors(current: Pair<Int, Int>, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
+        return getNeighbors(current.first, current.second, includeDiagonals)
     }
 
     /**
@@ -99,63 +97,48 @@ class Grid(val width: Int, val height: Int) {
     }
 
     /**
-     * Gets a value in the grid.
+     * Return true if the point is in bounds.
      */
-    operator fun get(x: Int, y: Int): String {
-        return (grid[x][y])
+    fun isInBounds(point: Pair<Int, Int>): Boolean {
+        return isInBounds(point.first, point.second)
     }
 
     /**
      * Gets a value in the grid.
      */
-    operator fun get(pair: Pair<Int, Int>): String {
-        return (grid[pair.first][pair.second])
-    }
+    operator fun get(x: Int, y: Int): T = grid[toIndex(x, y)]
+    operator fun get(pair: Pair<Int, Int>): T = get(pair.first, pair.second)
 
     /**
      * Sets a value in the grid.
      */
-    operator fun set(point: Pair<Int, Int>, value: Int) {
-        set(point.first, point.second, value)
+    operator fun set(x: Int, y: Int, value: T) {
+        grid[toIndex(x, y)] = value
     }
+
+    operator fun set(point: Pair<Int, Int>, value: T) = set(point.first, point.second, value)
 
     /**
-     * Sets a value in the grid.
+     * Converts a 2D coordinate into a 1D index.
      */
-    operator fun set(point: Pair<Int, Int>, value: String) {
-        set(point.first, point.second, value)
-    }
+    private fun toIndex(x: Int, y: Int): Int = y * width + x
 
     /**
-     * Sets a value in the grid.
+     * Adds space between numeric values in the grid output.
      */
-    operator fun set(x: Int, y: Int, value: Int) {
-        set(x, y, value.toString())
-    }
-
-    /**
-     * Sets a value in the grid.
-     */
-    operator fun set(x: Int, y: Int, value: String) {
-        grid[x][y] = value
-    }
-
     override fun toString(): String {
-        return toString("")
-    }
-
-    /**
-     * Adds space between values in the grid output.
-     */
-    fun toString(separator: String = "\t"): String {
-        val builder = StringBuilder()
+        val output = StringBuilder()
         for (y in 0 until height) {
             for (x in 0 until width) {
-                builder.append(get(x, y)).append(separator)
+                val value = get(x, y)
+                output.append(get(x, y))
+                if (value is Int) {
+                    output.append("\t")
+                }
             }
-            builder.append("\n")
+            output.append("\n")
         }
-        return builder.toString()
+        return output.toString()
     }
 }
 

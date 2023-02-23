@@ -54,7 +54,7 @@ class Puzzle : BasePuzzle() {
     /**
      * Converts the stars into a grid.
      */
-    private fun toGrid(stars: MutableSet<Star>): Grid {
+    private fun toGrid(stars: MutableSet<Star>): Grid<Char> {
         // Offset stars for grid rendering.
         val bounds = Bounds(stars.getPositions())
         stars.forEach {
@@ -65,10 +65,10 @@ class Puzzle : BasePuzzle() {
         }
         val width = stars.maxOf { it.position.first } + 1
         val height = stars.maxOf { it.position.second } + 1
-        val grid = Grid(width, height)
+        val grid = Grid(width, height, ' ')
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
-                grid[x, y] = if (Pair(x, y) in stars.getPositions()) "■" else " "
+                grid[x, y] = if (Pair(x, y) in stars.getPositions()) '■' else ' '
             }
         }
         return grid

@@ -27,11 +27,11 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid(input[0].length, input.size)
+        val grid = Grid(input[0].length, input.size, '#')
         val locations = mutableMapOf<Int, Pair<Int, Int>>()
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.withIndex()) {
-                grid[x, y] = value.toString()
+                grid[x, y] = value
                 if (value !in "#.") {
                     locations[value.digitToInt()] = Pair(x, y)
                 }
@@ -40,7 +40,7 @@ class Puzzle : BasePuzzle() {
 
         // Use a pathfinder that avoids walls.
         val pathfinder = Pathfinder { current ->
-            grid.getNeighbors(current).filter { grid[it] != "#" }
+            grid.getNeighbors(current).filter { grid[it] != '#' }
         }
 
         // Compute all the interim steps upfront to save time.

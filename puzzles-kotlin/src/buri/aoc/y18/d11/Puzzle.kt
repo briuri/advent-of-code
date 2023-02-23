@@ -32,15 +32,15 @@ class Puzzle : BasePuzzle() {
         val serial = input[0].toInt()
 
         // https://en.wikipedia.org/wiki/Summed-area_table
-        val grid = Grid(size, size)
+        val grid = Grid(size, size, 0)
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
                 val rackId = x + 10
                 val power = ((rackId * y + serial) * rackId).toString()
                 val lr = power[power.length - 3].digitToInt() - 5
-                val ur = if (y > 0) grid[x, y - 1].toInt() else 0
-                val ll = if (x > 0) grid[x - 1, y].toInt() else 0
-                val ul = if (x > 0 && y > 0) grid[x - 1, y - 1].toInt() else 0
+                val ur = if (y > 0) grid[x, y - 1] else 0
+                val ll = if (x > 0) grid[x - 1, y] else 0
+                val ul = if (x > 0 && y > 0) grid[x - 1, y - 1] else 0
                 grid[x, y] = lr + ur + ll - ul
             }
         }
@@ -60,14 +60,14 @@ class Puzzle : BasePuzzle() {
     /**
      * Returns the location and power of the cell with the given size with the most power.
      */
-    private fun getLargest(grid: Grid, size: Int): Pair<Triple<Int, Int, Int>, Int> {
+    private fun getLargest(grid: Grid<Int>, size: Int): Pair<Triple<Int, Int, Int>, Int> {
         val powerSums = mutableMapOf<Triple<Int, Int, Int>, Int>()
         for (y in (size - 1) until grid.height) {
             for (x in (size - 1) until grid.width) {
-                val lr = grid[x, y].toInt()
-                val ur = if (y >= size) grid[x, y - size].toInt() else 0
-                val ll = if (x >= size) grid[x - size, y].toInt() else 0
-                val ul = if (x >= size && y >= size) grid[x - size, y - size].toInt() else 0
+                val lr = grid[x, y]
+                val ur = if (y >= size) grid[x, y - size] else 0
+                val ll = if (x >= size) grid[x - size, y] else 0
+                val ul = if (x >= size && y >= size) grid[x - size, y - size] else 0
                 powerSums[Triple(x - (size - 1), y - (size - 1), size)] = lr + ul - ll - ur
             }
         }

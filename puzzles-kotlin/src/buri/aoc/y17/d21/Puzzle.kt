@@ -48,7 +48,7 @@ class Puzzle : BasePuzzle() {
             val chunks = grid.toChunks().map { rules[it.toPattern()]!! }.map { toGrid(it) }
             val chunksPerSide = sqrt(chunks.size.toDouble()).toInt()
             val newWidth = chunks[0].width * chunksPerSide
-            grid = Grid(newWidth, newWidth)
+            grid = Grid(newWidth, newWidth, ' ')
             for ((index, chunk) in chunks.withIndex()) {
                 val xOffset = chunk.width * (index % chunksPerSide)
                 val yOffset = chunk.height * (index / chunksPerSide)
@@ -60,18 +60,18 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        return grid.count("#")
+        return grid.count('#')
     }
 
     /**
      * Converts a slash pattern into a grid.
      */
-    private fun toGrid(pattern: String): Grid {
+    private fun toGrid(pattern: String): Grid<Char> {
         val input = pattern.split("/")
-        val grid = Grid(pattern.indexOf("/"), input.size)
+        val grid = Grid(pattern.indexOf("/"), input.size, ' ')
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
-                grid[x, y] = input[y][x].toString()
+                grid[x, y] = input[y][x]
             }
         }
         return grid
@@ -80,16 +80,16 @@ class Puzzle : BasePuzzle() {
     /**
      * Compresses a grid into the slash format.
      */
-    private fun Grid.toPattern(): String {
+    private fun Grid<Char>.toPattern(): String {
         return this.toString().replace("\n", "/").dropLast(1)
     }
 
     /**
      * Chunks a grid into smaller patterns. Assumes square grids.
      */
-    private fun Grid.toChunks(): List<Grid> {
+    private fun Grid<Char>.toChunks(): List<Grid<Char>> {
         assert(this.width == this.height)
-        val chunks = mutableListOf<Grid>()
+        val chunks = mutableListOf<Grid<Char>>()
         val size = if (this.width % 2 == 0) 2 else 3
         val numChunks = this.width / size
         for (yChunk in 0 until numChunks) {

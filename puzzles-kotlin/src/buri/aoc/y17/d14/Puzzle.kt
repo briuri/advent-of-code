@@ -42,17 +42,17 @@ class Puzzle : BasePuzzle() {
             return sum
         }
 
-        val grid = Grid(128, 128)
+        val grid = Grid(128, 128, ' ')
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
-                grid[x, y] = hashes[y][x].toString()
+                grid[x, y] = hashes[y][x]
             }
         }
 
         var regions = 0
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
-                if (grid[x, y] == "1") {
+                if (grid[x, y] == '1') {
                     regions++
                     eraseRegion(grid, Pair(x, y))
                 }
@@ -75,9 +75,9 @@ class Puzzle : BasePuzzle() {
     /**
      * Erases all connected areas of a region.
      */
-    private fun eraseRegion(grid: Grid, point: Pair<Int, Int>) {
-        grid[point] = "0"
-        for (neighbor in grid.getNeighbors(point).filter { grid[it] == "1" }) {
+    private fun eraseRegion(grid: Grid<Char>, point: Pair<Int, Int>) {
+        grid[point] = '0'
+        for (neighbor in grid.getNeighbors(point).filter { grid[it] == '1' }) {
             eraseRegion(grid, neighbor)
         }
     }

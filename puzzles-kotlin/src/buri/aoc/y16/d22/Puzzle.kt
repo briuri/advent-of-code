@@ -38,17 +38,17 @@ class Puzzle : BasePuzzle() {
             return count
         }
         val highestNode = getNodeLocation(nodes[nodes.lastIndex])
-        val grid = Grid(highestNode.first + 1, highestNode.second + 1)
+        val grid = Grid(highestNode.first + 1, highestNode.second + 1, '.')
         for (node in nodes) {
             val point = getNodeLocation(node)
             val value = if (getUsed(node) == 0) {
-                "_"
+                '_'
             } else if (point.first == highestNode.first && point.second == 0) {
-                "G"
+                'G'
             } else if (getUsed(node) > 100) {
-                "#"
+                '#'
             } else {
-                "."
+                '.'
             }
             grid[point] = value
         }
