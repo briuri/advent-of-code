@@ -39,9 +39,10 @@ class Puzzle : BasePuzzle() {
                 if (part.isOne() && recipes.size == (recipesNeeded + 10)) {
                     return recipes.subList(recipesNeeded, recipesNeeded + 10).joinToString("")
                 }
-                if (part.isTwo() && recipes.size >= input[0].length) {
-                    if (recipes.subList(recipes.size - scoresNeeded.size, recipes.size) == scoresNeeded) {
-                        return (recipes.size - input[0].length).toString()
+                if (part.isTwo() && recipes.size >= scoresNeeded.size) {
+                    val leftIndex = recipes.size - scoresNeeded.size
+                    if (recipes.subList(leftIndex, recipes.size) == scoresNeeded) {
+                        return leftIndex.toString()
                     }
                 }
             }
