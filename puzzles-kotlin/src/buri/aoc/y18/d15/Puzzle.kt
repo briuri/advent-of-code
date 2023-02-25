@@ -77,13 +77,13 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
             mobs.add(mob.copy())
         }
 
+        // Use a pathfinder that avoids walls and other mobs.
+        val pathfinder = Pathfinder { current ->
+            current.getNeighbors(false).filter { isTraversable(map, mobs, it) }
+        }
+
         var round = 0
         while (true) {
-            // Use a pathfinder that avoids walls and other mobs.
-            val pathfinder = Pathfinder { current ->
-                current.getNeighbors(false).filter { isTraversable(map, mobs, it) }
-            }
-
             // Take turns in reading order.
             for (mob in mobs.sortedWith(compareBy({ it.position.second }, { it.position.first }))) {
                 // Skip mobs that died this round (stale reference).
@@ -92,7 +92,6 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                 }
                 // Identify targets.
                 val allTargetMobs = mobs.filter { it.isElf != mob.isElf }
-                val allTargetMobPositions = allTargetMobs.map { it.position }
                 // Combat ends when no target remains.
                 if (allTargetMobs.isEmpty()) {
                     return round * mobs.sumOf { it.hp }
@@ -101,43 +100,34 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                 // MOVE
 
                 // Only move if not already in range of a target.
+                val allTargetMobPositions = allTargetMobs.map { it.position }
                 if (mob.position.getNeighbors().none { it in allTargetMobPositions }) {
-                    // Identify adjacent open squares next to each target.
-                    val openSquares = mutableListOf<Pair<Int, Int>>()
-                    for (squares in allTargetMobs.map { it.position.getNeighbors(false) }) {
-                        // Add all squares that are not walls or other mobs.
-                        openSquares.addAll(squares.filter { isTraversable(map, mobs, it) })
-                    }
+                    // Pre-load steps from mob to every reachable open square.
+                    val mobToTargetStepMap = pathfinder.exploreFrom(mob.position)
 
-                    // Find shortest paths from mob's nearest squares to target's nearest squares.
-                    val startToEndStepMap = pathfinder.exploreFrom(mob.position)
-                    val stepsToEnds = mutableMapOf<Int, MutableList<Pair<Int, Int>>>()
-                    for (end in openSquares) {
-                        val steps = startToEndStepMap.countSteps(mob.position, end)
-                        if (steps != -1) {
-                            stepsToEnds.putIfAbsent(steps, mutableListOf())
-                            stepsToEnds[steps]!!.add(end)
-                        }
+                    // Add any reachable, adjacent, open squares next to each target.
+                    val targetSquares = mutableListOf<Pair<Int, Int>>()
+                    for (squares in allTargetMobs.map { it.position.getNeighbors(false) }) {
+                        targetSquares.addAll(squares.filter { it in mobToTargetStepMap.keys })
                     }
                     // If there are no reachable open squares, end turn.
-                    if (stepsToEnds.isEmpty()) {
+                    if (targetSquares.isEmpty()) {
                         continue
                     }
 
+                    // Find shortest paths from mob to target's nearest squares.
+                    val mobToTargetPaths = countSteps(mobToTargetStepMap, mob.position, targetSquares)
                     // Pick the target destination that is nearest in reading order.
-                    val end = getBestInReadingOrder(stepsToEnds)
-                    val endToNextStepMap = pathfinder.exploreFrom(end)
-                    // Pick the next step with the shortest path to the destination, breaking ties with reading order.
-                    val stepsToStarts = mutableMapOf<Int, MutableList<Pair<Int, Int>>>()
-                    for (start in mob.position.getNeighbors().filter { isTraversable(map, mobs, it) }) {
-                        val steps = endToNextStepMap.countSteps(end, start)
-                        if (steps != -1) {
-                            stepsToStarts.putIfAbsent(steps, mutableListOf())
-                            stepsToStarts[steps]!!.add(start)
-                        }
-                    }
-                    val next = getBestInReadingOrder(stepsToStarts)
-                    mob.position = next
+                    val target = getBestInReadingOrder(mobToTargetPaths)
+
+                    // Pre-load steps from target back to every reachable open square.
+                    val targetToMobStepMap = pathfinder.exploreFrom(target)
+
+                    // Find shortest path from target square back to mob's adjacent squares.
+                    val mobSquares = mob.position.getNeighbors().filter { isTraversable(map, mobs, it) }
+                    val targetToMobPaths = countSteps(targetToMobStepMap, target, mobSquares)
+                    // Pick the next step with the shortest path, breaking ties with reading order.
+                    mob.position = getBestInReadingOrder(targetToMobPaths)
                 }
 
                 // ATTACK
@@ -148,6 +138,7 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                 if (targets.isEmpty()) {
                     continue
                 }
+
                 // Pick the target with the fewest hit points (use reading order for ties).
                 val target =
                     targets.sortedWith(compareBy({ it.hp }, { it.position.second }, { it.position.first })).first()
@@ -159,10 +150,29 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                         return -1
                     }
                 }
+                // Drop this mob from future rounds (still need to check this round!)
                 mobs.removeIf { it.isDead() }
             }
             round++
         }
+    }
+
+    /**
+     * Stores the path lengths from a start to multiple ends using the "came from" map.
+     */
+    private fun countSteps(
+        stepMap: Map<Pair<Int, Int>, Pair<Int, Int>?>,
+        start: Pair<Int, Int>, ends: List<Pair<Int, Int>>
+    ): MutableMap<Int, MutableList<Pair<Int, Int>>> {
+        val paths = mutableMapOf<Int, MutableList<Pair<Int, Int>>>()
+        for (end in ends) {
+            val steps = stepMap.countSteps(start, end)
+            if (steps != -1) {
+                paths.putIfAbsent(steps, mutableListOf())
+                paths[steps]!!.add(end)
+            }
+        }
+        return paths
     }
 
     /**
@@ -188,9 +198,4 @@ data class Mob(val start: Pair<Int, Int>, val isElf: Boolean) {
      * Returns true if the HP is 0 or less.
      */
     fun isDead(): Boolean = (hp <= 0)
-
-    override fun toString(): String {
-        val symbol = if (isElf) 'E' else 'G'
-        return "$symbol[$position / $hp]"
-    }
 }
