@@ -90,9 +90,8 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                 if (mob.isDead()) {
                     continue
                 }
-                // Identify targets.
+                // Identify targets. Combat ends when no target remains.
                 val allTargetMobs = mobs.filter { it.isElf != mob.isElf }
-                // Combat ends when no target remains.
                 if (allTargetMobs.isEmpty()) {
                     return round * mobs.sumOf { it.hp }
                 }
@@ -101,40 +100,37 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
 
                 // Only move if not already in range of a target.
                 val allTargetMobPositions = allTargetMobs.map { it.position }
-                if (mob.position.getNeighbors().none { it in allTargetMobPositions }) {
+                val mobNeighbors = mob.position.getNeighbors()
+                if (mobNeighbors.none { it in allTargetMobPositions }) {
                     // Pre-load steps from mob to every reachable open square.
                     val mobToTargetStepMap = pathfinder.exploreFrom(mob.position)
 
-                    // Add any reachable, adjacent, open squares next to each target.
+                    // Add any reachable, adjacent, open squares next to each target. End turn if there are none.
                     val targetSquares = mutableListOf<Pair<Int, Int>>()
                     for (squares in allTargetMobs.map { it.position.getNeighbors(false) }) {
                         targetSquares.addAll(squares.filter { it in mobToTargetStepMap.keys })
                     }
-                    // If there are no reachable open squares, end turn.
                     if (targetSquares.isEmpty()) {
                         continue
                     }
 
-                    // Find shortest paths from mob to target's nearest squares.
+                    // Find shortest paths from mob to target's nearest squares. Break ties with reading order.
                     val mobToTargetPaths = countSteps(mobToTargetStepMap, mob.position, targetSquares)
-                    // Pick the target destination that is nearest in reading order.
                     val target = getBestInReadingOrder(mobToTargetPaths)
 
                     // Pre-load steps from target back to every reachable open square.
                     val targetToMobStepMap = pathfinder.exploreFrom(target)
 
-                    // Find shortest path from target square back to mob's adjacent squares.
-                    val mobSquares = mob.position.getNeighbors().filter { isTraversable(map, mobs, it) }
+                    // Find shortest paths from target back to mob's adjacent squares. Break ties with reading order.
+                    val mobSquares = mobNeighbors.filter { isTraversable(map, mobs, it) }
                     val targetToMobPaths = countSteps(targetToMobStepMap, target, mobSquares)
-                    // Pick the next step with the shortest path, breaking ties with reading order.
                     mob.position = getBestInReadingOrder(targetToMobPaths)
                 }
 
                 // ATTACK
 
-                // Find all targets in range.
+                // Find all targets in range. End turn if none are in range.
                 val targets = mobs.filter { it.isElf != mob.isElf && it.position in mob.position.getNeighbors() }
-                // If there are no targets, end turn.
                 if (targets.isEmpty()) {
                     continue
                 }
