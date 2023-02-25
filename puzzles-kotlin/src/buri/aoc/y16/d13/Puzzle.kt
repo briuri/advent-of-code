@@ -1,9 +1,6 @@
 package buri.aoc.y16.d13
 
-import buri.aoc.common.BasePuzzle
-import buri.aoc.common.Part
-import buri.aoc.common.Pathfinder
-import buri.aoc.common.getNeighbors
+import buri.aoc.common.*
 import org.junit.Test
 
 /**
@@ -36,11 +33,11 @@ class Puzzle : BasePuzzle() {
             current.getNeighbors(false).filter { isTraversable(magicNumber, it) }
         }
 
-        val steps = pathfinder.countSteps(start, end)
+        val stepMap = pathfinder.exploreFrom(start)
         return if (part.isOne()) {
-            steps
+            stepMap.countSteps(start, end)
         } else {
-            pathfinder.stepsTo.filter { it.value <= 50 }.size
+            stepMap.keys.filter { stepMap.countSteps(start, it) <= 50 }.size
         }
     }
 

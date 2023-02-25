@@ -6,35 +6,10 @@ package buri.aoc.common
  * @author Brian Uri!
  */
 class Pathfinder(val stepStrategy: (Pair<Int, Int>) -> List<Pair<Int, Int>>) {
-    val stepsTo = mutableMapOf<Pair<Int, Int>, Int>()
 
     /**
-     * Returns the smallest number of steps between two points using a breadth-first search, or
-     * -1 if there is no path.
-     */
-    fun countSteps(start: Pair<Int, Int>, end: Pair<Int, Int>): Int {
-        val frontier = ArrayDeque<Pair<Int, Int>>()
-        frontier.add(start)
-
-        stepsTo.clear()
-        stepsTo[start] = 0
-
-        var current: Pair<Int, Int>?
-        while (frontier.isNotEmpty()) {
-            current = frontier.removeFirst()
-            if (current == end) {
-                break
-            }
-            for (next in stepStrategy(current).filter { !stepsTo.containsKey(it) }) {
-                frontier.add(next)
-                stepsTo[next] = stepsTo[current]!! + 1
-            }
-        }
-        return stepsTo[end] ?: -1
-    }
-
-    /**
-     * Returns a "came from" map showing all the reachable spaces from a particular space.
+     * Returns a "came from" map showing all the reachable spaces from a particular space. The entry for the
+     * starting position start will have a null value.
      */
     fun exploreFrom(start: Pair<Int, Int>): Map<Pair<Int, Int>, Pair<Int, Int>?> {
         val frontier = ArrayDeque<Pair<Int, Int>>()
@@ -56,7 +31,7 @@ class Pathfinder(val stepStrategy: (Pair<Int, Int>) -> List<Pair<Int, Int>>) {
 }
 
 /**
- * Extension function to count the steps in a "came from" map.
+ * Extension function to count the steps in a "came from" map. Returns -1 if there is no path between the points.
  */
 fun Map<Pair<Int, Int>, Pair<Int, Int>?>.countSteps(start: Pair<Int, Int>, end: Pair<Int, Int>): Int {
     if (start == end) {

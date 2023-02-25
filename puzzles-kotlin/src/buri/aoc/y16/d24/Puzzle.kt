@@ -3,6 +3,7 @@ package buri.aoc.y16.d24
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Pathfinder
+import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
 import org.junit.Test
 
@@ -46,9 +47,10 @@ class Puzzle : BasePuzzle() {
         // Compute all the interim steps upfront to save time.
         val steps = mutableMapOf<String, Int>()
         for (i in locations.keys) {
+            val stepMap = pathfinder.exploreFrom(locations[i]!!)
             for (j in locations.keys.filter { it != i }) {
                 if (steps["$i$j"] == null) {
-                    steps["$i$j"] = pathfinder.countSteps(locations[i]!!, locations[j]!!)
+                    steps["$i$j"] = stepMap.countSteps(locations[i]!!, locations[j]!!)
                     steps["$j$i"] = steps["$i$j"]!!
                 }
             }
