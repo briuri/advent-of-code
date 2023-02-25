@@ -5,7 +5,6 @@ import buri.aoc.common.Part
 import buri.aoc.common.extractInts
 import buri.aoc.common.registers.NamedRegisters
 import org.junit.Test
-import org.junit.jupiter.api.Named
 
 /**
  * Entry point for a daily puzzle
