@@ -65,28 +65,28 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        var waterTotal = 0
+        var previousWaterCount = 0
         while (true) {
             grid.flowDown(mutableSetOf(), Pair(500, 0))
-            val newWaterTotal = grid.count('~')
             // Stop flowing when no new standing water appears.
-            if (waterTotal == newWaterTotal) {
+            if (previousWaterCount == grid.waterCount) {
                 break
             }
-            waterTotal = newWaterTotal
+            previousWaterCount = grid.waterCount
         }
         // Only count squares in between minY and maxY.
         val countGrid = grid.getSubGrid(Pair(0, minY), grid.width, grid.height - minY)
         return if (part.isOne()) {
-            waterTotal + countGrid.count('|')
+            previousWaterCount + countGrid.count('|')
         } else {
-            waterTotal
+            previousWaterCount
         }
 
     }
 }
 
 class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
+    var waterCount = 0
 
     /**
      * Returns the first point below some other point that is not water or clay. Marks interim points as reachable.
@@ -155,6 +155,7 @@ class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
             for (x in (leftWallX + 1) until rightWallX) {
                 this[x, bottomY] = '~'
             }
+            waterCount += (rightWallX - (leftWallX + 1))
         }
         // Mark this row as reachable until we hit new flow down points.
         else {
