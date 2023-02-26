@@ -8,7 +8,7 @@ import buri.aoc.common.position.Orientation.*
  *
  * @author Brian Uri!
  */
-class Grid<T>(val width: Int, val height: Int, private val defaultValue: T) {
+open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T) {
     private val grid = MutableList(width * height) { defaultValue }
 
     init {
@@ -92,21 +92,21 @@ class Grid<T>(val width: Int, val height: Int, private val defaultValue: T) {
     /**
      * Return true if the point is in bounds.
      */
-    private fun isInBounds(x: Int, y: Int): Boolean {
+    fun isInBounds(x: Int, y: Int): Boolean {
         return (x in 0 until width) && (y in 0 until height)
     }
-
-    /**
-     * Return true if the point is in bounds.
-     */
-    fun isInBounds(point: Pair<Int, Int>): Boolean {
-        return isInBounds(point.first, point.second)
-    }
+    fun isInBounds(point: Pair<Int, Int>): Boolean = isInBounds(point.first, point.second)
 
     /**
      * Gets a value in the grid.
      */
-    operator fun get(x: Int, y: Int): T = grid[toIndex(x, y)]
+    operator fun get(x: Int, y: Int): T {
+        val index = toIndex(x, y)
+        if (index !in grid.indices) {
+            throw IndexOutOfBoundsException("($x,$y) is out of bounds.")
+        }
+        return grid[toIndex(x, y)]
+    }
     operator fun get(pair: Pair<Int, Int>): T = get(pair.first, pair.second)
 
     /**
