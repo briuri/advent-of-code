@@ -41,23 +41,21 @@ class Puzzle : BasePuzzle() {
             for ((x, value) in line.withIndex()) {
                 if (value in "EG") {
                     mobs.add(Mob(Pair(x, y), value == 'E'))
-                    map[x, y] = '.'
-                } else {
-                    map[x, y] = value
                 }
+                map[x, y] = value
             }
         }
 
         if (part.isOne()) {
-            val battle = Simulation(map, 3)
-            return battle.run(part, mobs)
+            val battle = Simulation(3)
+            return battle.run(part, map, mobs)
         }
 
         var attack = 4
         var outcome: Int
         do {
-            val battle = Simulation(map, attack)
-            outcome = battle.run(part, mobs)
+            val battle = Simulation(attack)
+            outcome = battle.run(part, map, mobs)
             attack++
         } while (battle.elvesDied)
         return outcome
@@ -65,13 +63,14 @@ class Puzzle : BasePuzzle() {
 
 }
 
-class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
+class Simulation(private val elfAttack: Int) {
     var elvesDied = false
 
     /**
      * Runs a simulation of a goblin/elf battle.
      */
-    fun run(part: Part, rawMobs: List<Mob>): Int {
+    fun run(part: Part, rawMap: Grid<Char>, rawMobs: List<Mob>): Int {
+        val map = rawMap.copy()
         val mobs = mutableListOf<Mob>()
         for (mob in rawMobs) {
             mobs.add(mob.copy())
@@ -79,7 +78,7 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
 
         // Use a pathfinder that avoids walls and other mobs.
         val pathfinder = Pathfinder { current ->
-            current.getNeighbors(false).filter { isTraversable(map, mobs, it) }
+            current.getNeighbors(false).filter { map[it] !in "#EG" }
         }
 
         var round = 0
@@ -99,9 +98,8 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                 // MOVE
 
                 // Only move if not already in range of a target.
-                val allTargetMobPositions = allTargetMobs.map { it.position }
                 val mobNeighbors = mob.position.getNeighbors()
-                if (mobNeighbors.none { it in allTargetMobPositions }) {
+                if (mobNeighbors.none { map[it] == mob.enemySymbol }) {
                     // Pre-load steps from mob to every reachable open square.
                     val mobToTargetStepMap = pathfinder.exploreFrom(mob.position)
 
@@ -122,9 +120,11 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                     val targetToMobStepMap = pathfinder.exploreFrom(target)
 
                     // Find shortest paths from target back to mob's adjacent squares. Break ties with reading order.
-                    val mobSquares = mobNeighbors.filter { isTraversable(map, mobs, it) }
+                    val mobSquares = mobNeighbors.filter { map[it] !in "#EG" }
                     val targetToMobPaths = countSteps(targetToMobStepMap, target, mobSquares)
+                    map[mob.position] = '.'
                     mob.position = getBestInReadingOrder(targetToMobPaths)
+                    map[mob.position] = mob.symbol
                 }
 
                 // ATTACK
@@ -139,15 +139,17 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
                 val target =
                     targets.sortedWith(compareBy({ it.hp }, { it.position.second }, { it.position.first })).first()
                 target.hp -= if (mob.isElf) elfAttack else 3
-                if (target.isElf && target.isDead()) {
-                    elvesDied = true
-                    // Save time by not simulating the rest of the battle.
-                    if (part.isTwo()) {
-                        return -1
+                if (target.isDead()) {
+                    map[target.position] = '.'
+                    mobs.remove(target)     // Still need to check for this mob in this round in case of stale ref.
+                    if (target.isElf) {
+                        elvesDied = true
+                        // Save time by not simulating the rest of the battle.
+                        if (part.isTwo()) {
+                            return -1
+                        }
                     }
                 }
-                // Drop this mob from future rounds (still need to check this round!)
-                mobs.removeIf { it.isDead() }
             }
             round++
         }
@@ -177,21 +179,22 @@ class Simulation(private val map: Grid<Char>, private val elfAttack: Int) {
     private fun getBestInReadingOrder(map: Map<Int, MutableList<Pair<Int, Int>>>): Pair<Int, Int> {
         return map[map.keys.min()]!!.sortedWith(compareBy({ it.second }, { it.first })).first()
     }
-
-    /**
-     * Returns true if a square is open space with no mobs in it.
-     */
-    private fun isTraversable(map: Grid<Char>, mobs: MutableList<Mob>, point: Pair<Int, Int>): Boolean {
-        return (map[point] != '#' && point !in mobs.map { it.position })
-    }
 }
 
 data class Mob(val start: Pair<Int, Int>, val isElf: Boolean) {
     var position = start
     var hp = 200
+    val symbol: Char
+        get() = if (isElf) 'E' else 'G'
+    val enemySymbol: Char
+        get() = if (isElf) 'G' else 'E'
 
     /**
      * Returns true if the HP is 0 or less.
      */
     fun isDead(): Boolean = (hp <= 0)
+
+    override fun toString(): String {
+        return "$symbol($position,$hp)"
+    }
 }
