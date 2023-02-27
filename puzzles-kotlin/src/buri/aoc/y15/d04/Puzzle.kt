@@ -13,13 +13,15 @@ import org.junit.Test
 class Puzzle : BasePuzzle() {
     @Test
     fun runPart1() {
-        assertRun(609043, 1)
+        // Skipping example to reduce test suite time.
+        // assertRun(609043, 1)
         assertRun(117946, 0, true)
     }
 
     @Test
     fun runPart2() {
-        assertRun(6742839, 1)
+        // Skipping example to reduce test suite time.
+        // assertRun(6742839, 1)
         assertRun(3938038, 0, true)
     }
 
