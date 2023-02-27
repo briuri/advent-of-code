@@ -3,7 +3,7 @@ package buri.aoc.y18.d16
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
-import buri.aoc.common.registers.NamedRegisters
+import buri.aoc.common.registers.IndexedRegisters
 import org.junit.Test
 
 /**
@@ -26,7 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        var registers = NamedRegisters()
+        var registers = IndexedRegisters()
         val opcodes = setOf(
             "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti",
             "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr"
@@ -57,19 +57,19 @@ class Puzzle : BasePuzzle() {
 
         // With all opcodes deciphered, run the program.
         index += 2
-        registers = NamedRegisters()
+        registers = IndexedRegisters()
         while (index in input.indices) {
             val inputs = input[index].split(" ")
-            run(registers, assignedCodes[inputs[0].toInt()]!!, inputs)
+            registers.run(assignedCodes[inputs[0].toInt()]!!, inputs)
             index++
         }
-        return registers["0"]
+        return registers[0]
     }
 
     /**
      * Returns the opcodes this sample works for.
      */
-    private fun getCodesFor(registers: NamedRegisters, opcodes: List<String>, sample: List<String>): List<String> {
+    private fun getCodesFor(registers: IndexedRegisters, opcodes: List<String>, sample: List<String>): List<String> {
         val initial = sample[0].extractInts()
         val inputs = sample[1].split(" ")
         val expected = sample[2].extractInts().map { it.toLong() }
@@ -77,44 +77,17 @@ class Puzzle : BasePuzzle() {
         val matchingCodes = mutableListOf<String>()
         for (code in opcodes) {
             for (i in initial.indices) {
-                registers[i.toString()] = initial[i].toLong()
+                registers[i] = initial[i].toLong()
             }
-            run(registers, code, inputs)
+            registers.run(code, inputs)
             val actual = mutableListOf<Long>()
             for (i in expected.indices) {
-                actual.add(registers[i.toString()])
+                actual.add(registers[i])
             }
             if (actual == expected) {
                 matchingCodes.add(code)
             }
         }
         return matchingCodes
-    }
-
-    /**
-     * Runs a command using the provided input numbers.
-     */
-    private fun run(registers: NamedRegisters, code: String, inputs: List<String>) {
-        val a = inputs[1]
-        val b = inputs[2]
-        val c = inputs[3]
-        when (code) {
-            "addr" -> registers[c] = registers[a] + registers[b]
-            "addi" -> registers[c] = registers[a] + b.toLong()
-            "mulr" -> registers[c] = registers[a] * registers[b]
-            "muli" -> registers[c] = registers[a] * b.toLong()
-            "banr" -> registers[c] = registers[a] and registers[b]
-            "bani" -> registers[c] = registers[a] and b.toLong()
-            "borr" -> registers[c] = registers[a] or registers[b]
-            "bori" -> registers[c] = registers[a] or b.toLong()
-            "setr" -> registers[c] = registers[a]
-            "seti" -> registers[c] = a.toLong()
-            "gtir" -> registers[c] = if (a.toLong() > registers[b]) 1 else 0
-            "gtri" -> registers[c] = if (registers[a] > b.toLong()) 1 else 0
-            "gtrr" -> registers[c] = if (registers[a] > registers[b]) 1 else 0
-            "eqir" -> registers[c] = if (a.toLong() == registers[b]) 1 else 0
-            "eqri" -> registers[c] = if (registers[a] == b.toLong()) 1 else 0
-            "eqrr" -> registers[c] = if (registers[a] == registers[b]) 1 else 0
-        }
     }
 }
