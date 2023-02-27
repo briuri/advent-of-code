@@ -75,10 +75,7 @@ class Puzzle : BasePuzzle() {
      * Returns the counts of all characters in the surrounding squares.
      */
     private fun Grid<Char>.getSurrounding(x: Int, y: Int): Map<Char, Int> {
-        val map = mutableMapOf<Char, Int>()
-        map['.'] = 0
-        map['|'] = 0
-        map['#'] = 0
+        val map = mutableMapOf('.' to 0, '|' to 0, '#' to 0)
         for (neighbor in Pair(x, y).getNeighbors(true).filter { this.isInBounds(it) }) {
             val value = this[neighbor]
             map[value] = map[value]!! + 1
