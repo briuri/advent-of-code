@@ -75,4 +75,8 @@ class NamedRegisters {
     operator fun set(name: String, value: Long) {
         registers[name] = value
     }
+
+    override fun toString(): String {
+        return registers.toString()
+    }
 }

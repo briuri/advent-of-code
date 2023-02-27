@@ -49,4 +49,8 @@ class IndexedRegisters {
     operator fun set(name: Int, value: Long) {
         registers[name.toString()] = value
     }
+
+    override fun toString(): String {
+        return registers.toString()
+    }
 }
