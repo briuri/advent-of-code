@@ -3,6 +3,7 @@ package buri.aoc.y17.d22
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Direction.NORTH
+import buri.aoc.common.position.Grid
 import buri.aoc.common.position.MutablePosition
 import org.junit.Test
 
@@ -20,8 +21,7 @@ class Puzzle : BasePuzzle() {
 
     @Test
     fun runPart2() {
-        // Skipping example to reduce test suite time.
-        // assertRun(2511944, 1)
+        assertRun(2511944, 1)
         assertRun(2511776, 0, true)
     }
 
@@ -29,42 +29,43 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val nodes = mutableMapOf<Pair<Int, Int>, State>()
+        // Using a grid and offsetting so we stay in the grid is faster than using a map of points to states.
+        val gridOffset = 225
+        val grid = Grid(400, 440, State.CLEAN.icon)
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.withIndex()) {
                 if (value == '#') {
-                    nodes[Pair(x, y)] = State.INFECTED
+                    grid[x + gridOffset, y + gridOffset] = State.INFECTED.icon
                 }
             }
         }
 
-        val virus = MutablePosition(Pair(input[0].length / 2, input.size / 2), NORTH)
+        val virus = MutablePosition(Pair(input[0].length / 2 + gridOffset, input.size / 2 + gridOffset), NORTH)
         var count = 0
         repeat(if (part.isOne()) 10_000 else 10_000_000) {
-            nodes.putIfAbsent(virus.coords, State.CLEAN)
-            when (nodes[virus.coords]!!) {
-                State.CLEAN -> virus.turnLeft()
-                State.WEAK -> {}
-                State.INFECTED -> virus.turnRight()
-                State.FLAGGED -> virus.turnAround()
+            when (grid[virus.coords]) {
+                State.CLEAN.icon -> virus.turnLeft()
+                State.WEAK.icon -> {}
+                State.INFECTED.icon -> virus.turnRight()
+                State.FLAGGED.icon -> virus.turnAround()
             }
-            when (nodes[virus.coords]!!) {
-                State.CLEAN -> {
+            when (grid[virus.coords]) {
+                State.CLEAN.icon -> {
                     if (part.isOne()) {
-                        nodes[virus.coords] = State.INFECTED
+                        grid[virus.coords] = State.INFECTED.icon
                         count++
                     } else {
-                        nodes[virus.coords] = State.WEAK
+                        grid[virus.coords] = State.WEAK.icon
                     }
                 }
-                State.WEAK -> {
-                    nodes[virus.coords] = State.INFECTED
+                State.WEAK.icon -> {
+                    grid[virus.coords] = State.INFECTED.icon
                     count++
                 }
-                State.INFECTED -> {
-                    nodes[virus.coords] = if (part.isOne()) State.CLEAN else State.FLAGGED
+                State.INFECTED.icon -> {
+                    grid[virus.coords] = if (part.isOne()) State.CLEAN.icon else State.FLAGGED.icon
                 }
-                State.FLAGGED -> nodes[virus.coords] = State.CLEAN
+                State.FLAGGED.icon -> grid[virus.coords] = State.CLEAN.icon
             }
             virus.move()
         }
@@ -72,4 +73,4 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-enum class State { CLEAN, WEAK, INFECTED, FLAGGED }
+enum class State(val icon: Char) { CLEAN('.'), WEAK('W'), INFECTED('#'), FLAGGED('F') }
