@@ -25,7 +25,15 @@ class Puzzle : BasePuzzle() {
         assertRun(20864, 0, true)
     }
 
-    private val tripleRegEx = "([a-f0-9])\\1{2}".toRegex()
+    private val tripleRegex = "([a-f0-9])\\1{2}".toRegex()
+    private val quintRegexs = mutableMapOf<Char, Regex>()
+
+    // Create a pattern for each possible hex digit.
+    init {
+        for (value in "0123456789abcdef") {
+            quintRegexs[value] = "($value)\\1{4}".toRegex()
+        }
+    }
 
     /**
      * Executes a part of the puzzle using the specified input file.
@@ -39,18 +47,12 @@ class Puzzle : BasePuzzle() {
         var index = 0
         var keys = 0
         while (keys != 64) {
-            if (hashes[index] == null) {
-                hashes[index] = md5.getHash(salt + index, stretches)
-            }
-            val firstTriple = tripleRegEx.find(hashes[index]!!)
+            loadHash(hashes, md5, salt, index, stretches)
+            val firstTriple = tripleRegex.find(hashes[index]!!)
             if (firstTriple != null) {
-                val repeating = firstTriple.value[0]
                 for (quintIndex in index + 1 until index + 1000) {
-                    if (hashes[quintIndex] == null) {
-                        hashes[quintIndex] = md5.getHash(salt + quintIndex, stretches)
-                    }
-                    val quintRegEx = "($repeating)\\1{4}".toRegex()
-                    if (quintRegEx.containsMatchIn(hashes[quintIndex]!!)) {
+                    loadHash(hashes, md5, salt, quintIndex, stretches)
+                    if (quintRegexs[firstTriple.value[0]]!!.containsMatchIn(hashes[quintIndex]!!)) {
                         keys++
                         break
                     }
@@ -59,5 +61,14 @@ class Puzzle : BasePuzzle() {
             index++
         }
         return index - 1
+    }
+
+    /**
+     * Loads a hash into the cache if not already there.
+     */
+    private fun loadHash(hashes: MutableMap<Int, String>, md5: MD5, salt: String, index: Int, stretches: Int) {
+        if (hashes[index] == null) {
+            hashes[index] = md5.getHash(salt + index, stretches)
+        }
     }
 }
