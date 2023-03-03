@@ -95,18 +95,13 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     fun isInBounds(x: Int, y: Int): Boolean {
         return (x in 0 until width) && (y in 0 until height)
     }
+
     fun isInBounds(point: Pair<Int, Int>): Boolean = isInBounds(point.first, point.second)
 
     /**
      * Gets a value in the grid.
      */
-    operator fun get(x: Int, y: Int): T {
-        val index = toIndex(x, y)
-        if (index !in grid.indices) {
-            throw IndexOutOfBoundsException("($x,$y) is out of bounds.")
-        }
-        return grid[toIndex(x, y)]
-    }
+    operator fun get(x: Int, y: Int): T = grid[toIndex(x, y)]
     operator fun get(pair: Pair<Int, Int>): T = get(pair.first, pair.second)
 
     /**
@@ -121,7 +116,13 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     /**
      * Converts a 2D coordinate into a 1D index.
      */
-    private fun toIndex(x: Int, y: Int): Int = y * width + x
+    private fun toIndex(x: Int, y: Int): Int {
+        val index = y * width + x
+        if (index !in grid.indices) {
+            throw IndexOutOfBoundsException("($x,$y) is out of bounds.")
+        }
+        return index
+    }
 
     /**
      * Adds space between numeric values in the grid output.
