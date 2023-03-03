@@ -28,6 +28,8 @@ class Pathfinder(val stepStrategy: (Pair<Int, Int>) -> List<Pair<Int, Int>>) {
         }
         return cameFrom
     }
+    fun exploreFrom(startX: Int, startY: Int): Map<Pair<Int, Int>, Pair<Int, Int>?> = exploreFrom(Pair(startX, startY))
+
 }
 
 /**
