@@ -1,9 +1,11 @@
 package buri.aoc.y18.d22
 
-import buri.aoc.common.*
+import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
+import buri.aoc.common.extractInts
+import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Grid
 import org.junit.Test
-import kotlin.math.min
 
 /**
  * Entry point for a daily puzzle
@@ -36,63 +38,54 @@ class Puzzle : BasePuzzle() {
 
         // Previous states mapped to the fewest number of minutes to get there.
         val visited = mutableMapOf<Triple<Int, Int, Tool>, Int>()
-        val frontier = mutableListOf<Position>()
-        frontier.add(Position(cave.mouth.first, cave.mouth.second, Tool.TORCH, 0))
+        val frontier = mutableListOf<State>()
+        frontier.add(cave.mouth)
 
-        var current: Position?
+        var current: State?
         while (frontier.isNotEmpty()) {
             current = frontier.removeFirst()
 
             // Consider moves with the same tool.
-            val point = Pair(current.x, current.y)
-            for (neighbor in point.getNeighbors(false).filter { cave.isInBounds(it) }) {
+            val moves = mutableSetOf<State>()
+            val neighbors = Pair(current.x, current.y).getNeighbors(false).filter { cave.isInBounds(it) }
+            for (next in neighbors) {
                 // Only consider moves to terrain compatible with this tool.
-                val x = neighbor.first
-                val y = neighbor.second
-                if (cave.getType(x, y) != current.tool.invalidType) {
-                    val next = current.copy(x = x, y = y, minutesSoFar = current.minutesSoFar + 1)
-                    if (visited[next.position] == null || visited[next.position]!! > next.minutesSoFar) {
-                        frontier.add(next)
-                        visited[next.position] = next.minutesSoFar
-                    }
+                if (cave.getType(next.first, next.second) != current.tool.invalidType) {
+                    moves.add(State(next.first, next.second, current.tool, current.minutes + 1))
                 }
             }
-
             // Consider swapping tools and staying here.
             for (tool in Tool.values()) {
                 val type = cave.getType(current.x, current.y)
                 if (tool != current.tool && tool.invalidType != type) {
-                    val next = current.copy(tool = tool, minutesSoFar = current.minutesSoFar + 7)
-                    if (visited[next.position] == null || visited[next.position]!! > next.minutesSoFar) {
-                        frontier.add(next)
-                        visited[next.position] = next.minutesSoFar
-                    }
+                    moves.add(current.copy(tool = tool, minutes = current.minutes + 7))
+                    break
                 }
             }
-            frontier.sortBy { it.getSortOrder(current, target) }
+
+            // Add moves if we haven't been there at a lower cost before.
+            for (move in moves) {
+                if (visited[move.position] == null || visited[move.position]!! > move.minutes) {
+                    frontier.add(move)
+                    visited[move.position] = move.minutes
+                }
+            }
+            // Explore lower cost paths first.
+            frontier.sortBy { it.minutes }
         }
         return visited[target]!!
     }
 }
 
-enum class Type(val risk: Int) { ROCKY(0), WET(1), NARROW(2) }
-
 enum class Tool(val invalidType: Int) { NONE(0), TORCH(1), CLIMB(2) }
 
-data class Position(val x: Int, val y: Int, val tool: Tool, val minutesSoFar: Int) {
+data class State(val x: Int, val y: Int, val tool: Tool, val minutes: Int) {
     val position = Triple(x, y, tool)
-
-    /**
-     * Returns a score favoring lower minutes.
-     */
-    fun getSortOrder(current: Position, target: Triple<Int, Int, Tool>): Int {
-        return minutesSoFar
-    }
 }
 
 class Cave(private val depth: Int, val target: Triple<Int, Int, Tool>) :
     Grid<Int>(target.first + 39, target.second + 39, 0) {
-    val mouth = Triple(0, 0, Tool.TORCH)
+    val mouth = State(0, 0, Tool.TORCH, 0)
 
     init {
         for (y in 0 until height) {
@@ -107,7 +100,7 @@ class Cave(private val depth: Int, val target: Triple<Int, Int, Tool>) :
      */
     private fun getErosionLevelFor(x: Int, y: Int): Int {
         val point = Triple(x, y, Tool.TORCH)
-        val geoIndex = if (point == mouth || point == target) {
+        val geoIndex = if (point == mouth.position || point == target) {
             0
         } else if (y == 0) {
             x * 16807
@@ -130,8 +123,8 @@ class Cave(private val depth: Int, val target: Triple<Int, Int, Tool>) :
      */
     fun getRiskSum(): Int {
         var sum = 0
-        for (y in 0 until target.second + 1) {
-            for (x in 0 until target.first + 1) {
+        for (y in 0..target.second) {
+            for (x in 0..target.first) {
                 sum += getRisk(x, y)
             }
         }
