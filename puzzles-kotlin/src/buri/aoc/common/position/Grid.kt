@@ -32,7 +32,7 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
      * Counts occurrences of some value.
      */
     fun count(value: T): Int {
-        return grid.filter { it == value }.size
+        return grid.count { it == value }
     }
 
     /**

@@ -47,6 +47,6 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return triangles.filter { it[0] + it[1] > it[2] }.size
+        return triangles.count { it[0] + it[1] > it[2] }
     }
 }

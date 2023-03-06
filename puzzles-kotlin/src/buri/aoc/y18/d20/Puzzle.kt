@@ -48,7 +48,7 @@ class Puzzle : BasePuzzle() {
         return if (part.isOne()) {
             steps.maxOf { it.value }
         } else {
-            steps.filter { it.value >= 1000 }.size
+            steps.count { it.value >= 1000 }
         }
     }
 }
