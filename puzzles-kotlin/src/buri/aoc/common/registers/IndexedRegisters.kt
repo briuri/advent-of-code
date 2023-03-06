@@ -2,7 +2,7 @@ package buri.aoc.common.registers
 
 /**
  * Interpreter code for y18 assembly puzzles
- * (y18d16, y18d19)
+ * (y18d16, y18d19, y18d21)
  *
  * @author Brian Uri!
  */
