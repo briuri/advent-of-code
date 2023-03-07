@@ -32,7 +32,7 @@ class Puzzle : BasePuzzle() {
         val compartments = if (part.isOne()) 3 else 4
         val targetWeight = packages.sum() / compartments
 
-        val options = getPermutations(targetWeight, packages).sortedWith(compareBy { it.size })
+        val options = getPermutations(targetWeight, packages).sortedBy { it.size }
         val minSize = options[0].size
         var minQE = Long.MAX_VALUE
         for (option in options) {

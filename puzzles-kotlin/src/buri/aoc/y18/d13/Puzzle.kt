@@ -27,6 +27,14 @@ class Puzzle : BasePuzzle() {
         assertRun("136,8", 0, true)
     }
 
+    private val readingOrder = Comparator { c1: Cart, c2: Cart ->
+        var compare = c1.coords.second.compareTo(c2.coords.second)
+        if (compare == 0) {
+            compare = c1.coords.first.compareTo(c2.coords.first)
+        }
+        compare
+    }
+
     /**
      * Executes a part of the puzzle using the specified input file.
      */
@@ -43,7 +51,7 @@ class Puzzle : BasePuzzle() {
         }
 
         while (true) {
-            for (cart in carts.sortedWith(compareBy({ it.coords.second }, { it.coords.first }))) {
+            for (cart in carts.sortedWith(readingOrder)) {
                 cart.move()
                 // If this cart has moved on top of another cart
                 if (carts.any { it != cart && it.coords == cart.coords }) {

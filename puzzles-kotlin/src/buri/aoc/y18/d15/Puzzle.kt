@@ -66,6 +66,26 @@ class Puzzle : BasePuzzle() {
 class Simulation(private val elfAttack: Int) {
     var elvesDied = false
 
+    private val readingOrder = Comparator { p1: Pair<Int, Int>, p2: Pair<Int, Int> ->
+        var compare = p1.second.compareTo(p2.second)
+        if (compare == 0) {
+            compare = p1.first.compareTo(p2.first)
+        }
+        compare
+    }
+
+    private val mobReadingOrder = Comparator { m1: Mob, m2: Mob ->
+        readingOrder.compare(m1.position, m2.position)
+    }
+
+    private val targetOrder = Comparator { m1: Mob, m2: Mob ->
+        var compare = m1.hp.compareTo(m2.hp)
+        if (compare == 0) {
+            compare = readingOrder.compare(m1.position, m2.position)
+        }
+        compare
+    }
+
     /**
      * Runs a simulation of a goblin/elf battle.
      */
@@ -83,8 +103,7 @@ class Simulation(private val elfAttack: Int) {
 
         var round = 0
         while (true) {
-            // Take turns in reading order.
-            for (mob in mobs.sortedWith(compareBy({ it.position.second }, { it.position.first }))) {
+            for (mob in mobs.sortedWith(mobReadingOrder)) {
                 // Skip mobs that died this round (stale reference).
                 if (mob.isDead()) {
                     continue
@@ -136,8 +155,7 @@ class Simulation(private val elfAttack: Int) {
                 }
 
                 // Pick the target with the fewest hit points (use reading order for ties).
-                val target =
-                    targets.sortedWith(compareBy({ it.hp }, { it.position.second }, { it.position.first })).first()
+                val target = targets.sortedWith(targetOrder).first()
                 target.hp -= if (mob.isElf) elfAttack else 3
                 if (target.isDead()) {
                     map[target.position] = '.'
@@ -177,7 +195,7 @@ class Simulation(private val elfAttack: Int) {
      * Returns the point with the shortest distance, breaking ties with reading order.
      */
     private fun getBestInReadingOrder(map: Map<Int, MutableList<Pair<Int, Int>>>): Pair<Int, Int> {
-        return map[map.keys.min()]!!.sortedWith(compareBy({ it.second }, { it.first })).first()
+        return map[map.keys.min()]!!.sortedWith(readingOrder).first()
     }
 }
 
