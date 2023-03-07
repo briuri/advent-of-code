@@ -5,6 +5,7 @@ import buri.aoc.common.Part
 import buri.aoc.common.Pathfinder
 import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -29,12 +30,12 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val grid = Grid(input[0].length, input.size, '#')
-        val locations = mutableMapOf<Int, Pair<Int, Int>>()
+        val locations = mutableMapOf<Int, Point2D<Int>>()
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.withIndex()) {
                 grid[x, y] = value
                 if (value !in "#.") {
-                    locations[value.digitToInt()] = Pair(x, y)
+                    locations[value.digitToInt()] = Point2D(x, y)
                 }
             }
         }

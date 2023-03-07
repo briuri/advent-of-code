@@ -5,6 +5,7 @@ import buri.aoc.common.Part
 import buri.aoc.common.extractInts
 import buri.aoc.common.position.Bounds
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -59,16 +60,16 @@ class Puzzle : BasePuzzle() {
         val bounds = Bounds(stars.getPositions())
         stars.forEach {
             it.position = it.position.copy(
-                first = it.position.first - bounds.x.first,
-                second = it.position.second - bounds.y.first
+                x = it.position.x - bounds.x.first,
+                y = it.position.y - bounds.y.first
             )
         }
-        val width = stars.maxOf { it.position.first } + 1
-        val height = stars.maxOf { it.position.second } + 1
+        val width = stars.maxOf { it.position.x } + 1
+        val height = stars.maxOf { it.position.y } + 1
         val grid = Grid(width, height, ' ')
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
-                grid[x, y] = if (Pair(x, y) in stars.getPositions()) '■' else ' '
+                grid[x, y] = if (Point2D(x, y) in stars.getPositions()) '■' else ' '
             }
         }
         return grid
@@ -77,16 +78,16 @@ class Puzzle : BasePuzzle() {
     /**
      * Converts a set of stars into a set of positions.
      */
-    private fun MutableSet<Star>.getPositions(): Set<Pair<Int, Int>> = this.map { it.position }.toSet()
+    private fun MutableSet<Star>.getPositions(): Set<Point2D<Int>> = this.map { it.position }.toSet()
 }
 
 class Star(numbers: List<Int>) {
-    var position: Pair<Int, Int>
-    private var velocity: Pair<Int, Int>
+    var position: Point2D<Int>
+    private var velocity: Point2D<Int>
 
     init {
-        position = Pair(numbers[0], numbers[1])
-        velocity = Pair(numbers[2], numbers[3])
+        position = Point2D(numbers[0], numbers[1])
+        velocity = Point2D(numbers[2], numbers[3])
     }
 
     /**
@@ -95,13 +96,13 @@ class Star(numbers: List<Int>) {
     fun tick(inReverse: Boolean = false) {
         position = if (inReverse) {
             position.copy(
-                first = position.first - velocity.first,
-                second = position.second - velocity.second,
+                x = position.x - velocity.x,
+                y = position.y - velocity.y,
             )
         } else {
             position.copy(
-                first = position.first + velocity.first,
-                second = position.second + velocity.second,
+                x = position.x + velocity.x,
+                y = position.y + velocity.y,
             )
         }
     }

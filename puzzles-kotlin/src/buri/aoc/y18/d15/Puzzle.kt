@@ -1,7 +1,12 @@
 package buri.aoc.y18.d15
 
-import buri.aoc.common.*
+import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
+import buri.aoc.common.Pathfinder
+import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
+import buri.aoc.common.position.getNeighbors
 import org.junit.Test
 
 /**
@@ -40,7 +45,7 @@ class Puzzle : BasePuzzle() {
         for ((y, line) in input.withIndex()) {
             for ((x, value) in line.withIndex()) {
                 if (value in "EG") {
-                    mobs.add(Mob(Pair(x, y), value == 'E'))
+                    mobs.add(Mob(Point2D(x, y), value == 'E'))
                 }
                 map[x, y] = value
             }
@@ -66,22 +71,10 @@ class Puzzle : BasePuzzle() {
 class Simulation(private val elfAttack: Int) {
     var elvesDied = false
 
-    private val readingOrder = Comparator { p1: Pair<Int, Int>, p2: Pair<Int, Int> ->
-        var compare = p1.second.compareTo(p2.second)
-        if (compare == 0) {
-            compare = p1.first.compareTo(p2.first)
-        }
-        compare
-    }
-
-    private val mobReadingOrder = Comparator { m1: Mob, m2: Mob ->
-        readingOrder.compare(m1.position, m2.position)
-    }
-
     private val targetOrder = Comparator { m1: Mob, m2: Mob ->
         var compare = m1.hp.compareTo(m2.hp)
         if (compare == 0) {
-            compare = readingOrder.compare(m1.position, m2.position)
+            compare = m1.position.compareTo(m2.position)
         }
         compare
     }
@@ -103,7 +96,7 @@ class Simulation(private val elfAttack: Int) {
 
         var round = 0
         while (true) {
-            for (mob in mobs.sortedWith(mobReadingOrder)) {
+            for (mob in mobs.sortedBy { it.position }) {
                 // Skip mobs that died this round (stale reference).
                 if (mob.isDead()) {
                     continue
@@ -123,7 +116,7 @@ class Simulation(private val elfAttack: Int) {
                     val mobToTargetStepMap = pathfinder.exploreFrom(mob.position)
 
                     // Add any reachable, adjacent, open squares next to each target. End turn if there are none.
-                    val targetSquares = mutableListOf<Pair<Int, Int>>()
+                    val targetSquares = mutableListOf<Point2D<Int>>()
                     for (squares in allTargetMobs.map { it.position.getNeighbors(false) }) {
                         targetSquares.addAll(squares.filter { it in mobToTargetStepMap.keys })
                     }
@@ -177,10 +170,10 @@ class Simulation(private val elfAttack: Int) {
      * Stores the path lengths from a start to multiple ends using the "came from" map.
      */
     private fun countSteps(
-        stepMap: Map<Pair<Int, Int>, Pair<Int, Int>?>,
-        start: Pair<Int, Int>, ends: List<Pair<Int, Int>>
-    ): MutableMap<Int, MutableList<Pair<Int, Int>>> {
-        val paths = mutableMapOf<Int, MutableList<Pair<Int, Int>>>()
+        stepMap: Map<Point2D<Int>, Point2D<Int>?>,
+        start: Point2D<Int>, ends: List<Point2D<Int>>
+    ): MutableMap<Int, MutableList<Point2D<Int>>> {
+        val paths = mutableMapOf<Int, MutableList<Point2D<Int>>>()
         for (end in ends) {
             val steps = stepMap.countSteps(start, end)
             if (steps != -1) {
@@ -194,12 +187,12 @@ class Simulation(private val elfAttack: Int) {
     /**
      * Returns the point with the shortest distance, breaking ties with reading order.
      */
-    private fun getBestInReadingOrder(map: Map<Int, MutableList<Pair<Int, Int>>>): Pair<Int, Int> {
-        return map[map.keys.min()]!!.sortedWith(readingOrder).first()
+    private fun getBestInReadingOrder(map: Map<Int, MutableList<Point2D<Int>>>): Point2D<Int> {
+        return map[map.keys.min()]!!.minOf { it }
     }
 }
 
-data class Mob(val start: Pair<Int, Int>, val isElf: Boolean) {
+data class Mob(val start: Point2D<Int>, val isElf: Boolean) {
     var position = start
     var hp = 200
     val symbol: Char

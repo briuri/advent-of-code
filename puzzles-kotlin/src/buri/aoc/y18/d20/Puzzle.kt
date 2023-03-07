@@ -5,6 +5,7 @@ import buri.aoc.common.Part
 import buri.aoc.common.Pathfinder
 import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -30,15 +31,15 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val map = Map(210, 210)
         val fullPath = input[0].drop(1).dropLast(1)
-        map.explore(mutableSetOf(), map.start.first, map.start.second, fullPath)
+        map.explore(mutableSetOf(), map.start.x, map.start.y, fullPath)
 
         // Use a pathfinder that avoids walls.
         val pathfinder = Pathfinder { current ->
             map.getNeighbors(current).filter { map[it] != '#' }
         }
 
-        val cameFrom = pathfinder.exploreFrom(map.start.first, map.start.second)
-        val steps = mutableMapOf<Pair<Int, Int>, Int>()
+        val cameFrom = pathfinder.exploreFrom(map.start.x, map.start.y)
+        val steps = mutableMapOf<Point2D<Int>, Int>()
         // Rooms are any square that isn't a door or wall.
         for (room in cameFrom.keys.filter { map[it] == '.' }) {
             // Each movement is 2 steps to account for the door.
@@ -54,7 +55,7 @@ class Puzzle : BasePuzzle() {
 }
 
 class Map(width: Int, height: Int) : Grid<Char>(width, height, '#') {
-    val start = Pair(width / 2, height / 2)
+    val start = Point2D(width / 2, height / 2)
 
     init {
         set(start, '.')

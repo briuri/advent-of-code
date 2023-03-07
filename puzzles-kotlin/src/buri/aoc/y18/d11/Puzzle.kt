@@ -3,7 +3,7 @@ package buri.aoc.y18.d11
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
-import buri.aoc.common.toBareString
+import buri.aoc.common.position.Point3D
 import org.junit.Test
 
 /**
@@ -46,29 +46,29 @@ class Puzzle : BasePuzzle() {
         }
 
         if (part.isOne()) {
-            return getLargest(grid, 3).first.toBareString().dropLast(2)
+            return getLargest(grid, 3).first.toString().dropLast(2)
         }
 
-        val largestBySize = mutableSetOf<Pair<Triple<Int, Int, Int>, Int>>()
+        val largestBySize = mutableSetOf<Pair<Point3D<Int>, Int>>()
         for (i in 2 until 17) { // Lowered upper bound after I got the right answer.
             largestBySize.add(getLargest(grid, i))
         }
         val largest = largestBySize.maxBy { it.second }.first
-        return largest.toBareString()
+        return largest.toString()
     }
 
     /**
      * Returns the location and power of the cell with the given size with the most power.
      */
-    private fun getLargest(grid: Grid<Int>, size: Int): Pair<Triple<Int, Int, Int>, Int> {
-        val powerSums = mutableMapOf<Triple<Int, Int, Int>, Int>()
+    private fun getLargest(grid: Grid<Int>, size: Int): Pair<Point3D<Int>, Int> {
+        val powerSums = mutableMapOf<Point3D<Int>, Int>()
         for (y in (size - 1) until grid.height) {
             for (x in (size - 1) until grid.width) {
                 val lr = grid[x, y]
                 val ur = if (y >= size) grid[x, y - size] else 0
                 val ll = if (x >= size) grid[x - size, y] else 0
                 val ul = if (x >= size && y >= size) grid[x - size, y - size] else 0
-                powerSums[Triple(x - (size - 1), y - (size - 1), size)] = lr + ul - ll - ur
+                powerSums[Point3D(x - (size - 1), y - (size - 1), size)] = lr + ul - ll - ur
             }
         }
         return powerSums.maxBy { it.value }.toPair()

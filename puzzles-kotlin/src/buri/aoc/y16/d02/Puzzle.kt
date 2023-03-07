@@ -3,6 +3,7 @@ package buri.aoc.y16.d02
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -55,7 +56,7 @@ class Puzzle : BasePuzzle() {
 
         val grid = if (part.isOne()) grid1 else grid2
         val code = StringBuilder()
-        var key = if (part.isOne()) Pair(1, 1) else Pair(0, 2)
+        var key = if (part.isOne()) Point2D(1, 1) else Point2D(0, 2)
         for (line in input) {
             for (value in line) {
                 val dx = when (value) {
@@ -68,7 +69,7 @@ class Puzzle : BasePuzzle() {
                     'D' -> 1
                     else -> 0
                 }
-                val nextKey = key.copy(first = key.first + dx, second = key.second + dy)
+                val nextKey = key.copy(x = key.x + dx, y = key.y + dy)
                 if (isInBounds(part, grid, nextKey)) {
                     key = nextKey
                 }
@@ -81,7 +82,7 @@ class Puzzle : BasePuzzle() {
     /**
      * Checks if a point is in bounds, using different rules for Part 2.
      */
-    private fun isInBounds(part: Part, grid: Grid<Char>, point: Pair<Int, Int>): Boolean {
+    private fun isInBounds(part: Part, grid: Grid<Char>, point: Point2D<Int>): Boolean {
         return grid.isInBounds(point) && (part.isOne() || grid[point] != '0')
     }
 }

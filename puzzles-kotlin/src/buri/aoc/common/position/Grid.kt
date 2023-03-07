@@ -1,6 +1,5 @@
 package buri.aoc.common.position
 
-import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Orientation.*
 
 /**
@@ -46,12 +45,12 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
         for (y in 0 until height) {
             for (x in 0 until width) {
                 val point = when (orientation) {
-                    CLOCKWISE_90 -> Pair(height - y - 1, x)
-                    CLOCKWISE_180 -> Pair(width - x - 1, height - y - 1)
-                    CLOCKWISE_270 -> Pair(y, width - x - 1)
-                    MIRROR_H -> Pair(width - x - 1, y)
-                    MIRROR_V -> Pair(x, height - y - 1)
-                    else -> Pair(x, y)
+                    CLOCKWISE_90 -> Point2D(height - y - 1, x)
+                    CLOCKWISE_180 -> Point2D(width - x - 1, height - y - 1)
+                    CLOCKWISE_270 -> Point2D(y, width - x - 1)
+                    MIRROR_H -> Point2D(width - x - 1, y)
+                    MIRROR_V -> Point2D(x, height - y - 1)
+                    else -> Point2D(x, y)
                 }
                 copy[point] = get(x, y)
             }
@@ -62,12 +61,12 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     /**
      * Returns a smaller grid from inside this grid.
      */
-    fun getSubGrid(start: Pair<Int, Int>, newWidth: Int, newHeight: Int): Grid<T> {
+    fun getSubGrid(start: Point2D<Int>, newWidth: Int, newHeight: Int): Grid<T> {
         assert(isInBounds(start) && newWidth <= width && newHeight <= height)
         val grid = Grid(newWidth, newHeight, defaultValue)
-        for (y in start.second until start.second + newHeight) {
-            for (x in start.first until start.first + newWidth) {
-                grid[x - start.first, y - start.second] = get(x, y)
+        for (y in start.y until start.y + newHeight) {
+            for (x in start.x until start.x + newWidth) {
+                grid[x - start.x, y - start.y] = get(x, y)
             }
         }
         return grid
@@ -76,17 +75,10 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     /**
      * Returns all neighbors of a point in bounds of the grid.
      */
-    fun getNeighbors(x: Int, y: Int, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
-        val list = Pair(x, y).getNeighbors(includeDiagonals)
-        list.removeIf { pair -> !isInBounds(pair.first, pair.second) }
+    fun getNeighbors(current: Point2D<Int>, includeDiagonals: Boolean = false): List<Point2D<Int>> {
+        val list = current.getNeighbors(includeDiagonals)
+        list.removeIf { pair -> !isInBounds(pair.x, pair.y) }
         return list
-    }
-
-    /**
-     * Returns all neighbors of a point in bounds of the grid.
-     */
-    fun getNeighbors(current: Pair<Int, Int>, includeDiagonals: Boolean = false): List<Pair<Int, Int>> {
-        return getNeighbors(current.first, current.second, includeDiagonals)
     }
 
     /**
@@ -96,13 +88,13 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
         return (x in 0 until width) && (y in 0 until height)
     }
 
-    fun isInBounds(point: Pair<Int, Int>): Boolean = isInBounds(point.first, point.second)
+    fun isInBounds(point: Point2D<Int>): Boolean = isInBounds(point.x, point.y)
 
     /**
      * Gets a value in the grid.
      */
     operator fun get(x: Int, y: Int): T = grid[toIndex(x, y)]
-    operator fun get(pair: Pair<Int, Int>): T = get(pair.first, pair.second)
+    operator fun get(pair: Point2D<Int>): T = get(pair.x, pair.y)
 
     /**
      * Sets a value in the grid.
@@ -111,7 +103,7 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
         grid[toIndex(x, y)] = value
     }
 
-    operator fun set(point: Pair<Int, Int>, value: T) = set(point.first, point.second, value)
+    operator fun set(point: Point2D<Int>, value: T) = set(point.x, point.y, value)
 
     /**
      * Converts a 2D coordinate into a 1D index.

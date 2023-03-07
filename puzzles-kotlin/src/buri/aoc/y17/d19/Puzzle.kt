@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Direction.*
 import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -34,12 +35,12 @@ class Puzzle : BasePuzzle() {
 
         val path = StringBuilder()
         var steps = 0
-        val point = MutablePosition(Pair(map[0].indexOf('|'), 0), SOUTH)
+        val point = MutablePosition(Point2D(map[0].indexOf('|'), 0), SOUTH)
         while (true) {
             point.move()
             steps++
-            val x = point.coords.first
-            val y = point.coords.second
+            val x = point.coords.x
+            val y = point.coords.y
             if (x !in 0 until width || y !in 0 until height || map[y][x] == ' ') {
                 break
             }

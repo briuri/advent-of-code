@@ -6,7 +6,7 @@ import buri.aoc.common.position.Direction
 import buri.aoc.common.position.Direction.*
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.MutablePosition
-import buri.aoc.common.toBareString
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -27,14 +27,6 @@ class Puzzle : BasePuzzle() {
         assertRun("136,8", 0, true)
     }
 
-    private val readingOrder = Comparator { c1: Cart, c2: Cart ->
-        var compare = c1.coords.second.compareTo(c2.coords.second)
-        if (compare == 0) {
-            compare = c1.coords.first.compareTo(c2.coords.first)
-        }
-        compare
-    }
-
     /**
      * Executes a part of the puzzle using the specified input file.
      */
@@ -45,18 +37,18 @@ class Puzzle : BasePuzzle() {
             for ((x, value) in line.padEnd(grid.width, ' ').withIndex()) {
                 grid[x, y] = value
                 if (value in Direction.values().map { it.icon }) {
-                    carts.add(Cart(Pair(x, y), Direction.from(value)))
+                    carts.add(Cart(Point2D(x, y), Direction.from(value)))
                 }
             }
         }
 
         while (true) {
-            for (cart in carts.sortedWith(readingOrder)) {
+            for (cart in carts.sortedBy { it.coords }) {
                 cart.move()
                 // If this cart has moved on top of another cart
                 if (carts.any { it != cart && it.coords == cart.coords }) {
                     if (part.isOne()) {
-                        return (cart.coords.toBareString())
+                        return (cart.coords.toString())
                     }
                     carts.removeIf { it.coords == cart.coords }
                 }
@@ -84,13 +76,13 @@ class Puzzle : BasePuzzle() {
                 }
             }
             if (part.isTwo() && carts.size == 1) {
-                return carts.first().coords.toBareString()
+                return carts.first().coords.toString()
             }
         }
     }
 }
 
-class Cart(start: Pair<Int, Int>, facing: Direction) {
+class Cart(start: Point2D<Int>, facing: Direction) {
     private var turnHistory = 0
     val nextTurn: Int
         get() {
@@ -104,7 +96,7 @@ class Cart(start: Pair<Int, Int>, facing: Direction) {
     val position = MutablePosition(start, facing)
 
     // Pass-throughs
-    val coords: Pair<Int, Int>
+    val coords: Point2D<Int>
         get() = position.coords
     val facing: Direction
         get() = position.facing

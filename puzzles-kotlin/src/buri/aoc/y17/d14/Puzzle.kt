@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.Part.TWO
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -54,7 +55,7 @@ class Puzzle : BasePuzzle() {
             for (x in 0 until grid.width) {
                 if (grid[x, y] == '1') {
                     regions++
-                    eraseRegion(grid, Pair(x, y))
+                    eraseRegion(grid, Point2D(x, y))
                 }
             }
         }
@@ -75,7 +76,7 @@ class Puzzle : BasePuzzle() {
     /**
      * Erases all connected areas of a region.
      */
-    private fun eraseRegion(grid: Grid<Char>, point: Pair<Int, Int>) {
+    private fun eraseRegion(grid: Grid<Char>, point: Point2D<Int>) {
         grid[point] = '0'
         for (neighbor in grid.getNeighbors(point).filter { grid[it] == '1' }) {
             eraseRegion(grid, neighbor)

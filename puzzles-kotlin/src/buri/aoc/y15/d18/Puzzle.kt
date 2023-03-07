@@ -3,6 +3,7 @@ package buri.aoc.y15.d18
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -36,22 +37,23 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        val corners = mutableListOf<Pair<Int, Int>>()
-        corners.add(Pair(0, 0))
-        corners.add(Pair(grid.width - 1, 0))
-        corners.add(Pair(0, grid.height - 1))
-        corners.add(Pair(grid.width - 1, grid.height - 1))
+        val corners = mutableListOf<Point2D<Int>>()
+        corners.add(Point2D(0, 0))
+        corners.add(Point2D(grid.width - 1, 0))
+        corners.add(Point2D(0, grid.height - 1))
+        corners.add(Point2D(grid.width - 1, grid.height - 1))
 
         for (i in 0 until steps) {
             val nextGrid = Grid(input.size, input[0].length, 0)
             for (y in 0 until grid.height) {
                 for (x in 0 until grid.width) {
+                    val point = Point2D(x, y)
                     var onCount = 0
-                    for (neighbor in grid.getNeighbors(x, y, true)) {
+                    for (neighbor in grid.getNeighbors(point, true)) {
                         onCount += grid[neighbor]
                     }
-                    val prev = grid[x, y]
-                    val next = if (part.isTwo() && Pair(x, y) in corners) {
+                    val prev = grid[point]
+                    val next = if (part.isTwo() && Point2D(x, y) in corners) {
                         1
                     } else if (prev == 1 && onCount != 2 && onCount != 3) {
                         0

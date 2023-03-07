@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Orientation.*
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 import kotlin.math.sqrt
 
@@ -94,7 +95,7 @@ class Puzzle : BasePuzzle() {
         val numChunks = this.width / size
         for (yChunk in 0 until numChunks) {
             for (xChunk in 0 until numChunks) {
-                val start = Pair(xChunk * size, yChunk * size)
+                val start = Point2D(xChunk * size, yChunk * size)
                 chunks.add(this.getSubGrid(start, size, size))
             }
         }

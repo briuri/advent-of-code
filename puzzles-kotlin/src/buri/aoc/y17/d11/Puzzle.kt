@@ -2,7 +2,7 @@ package buri.aoc.y17.d11
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.getManhattanDistance
+import buri.aoc.common.position.Point3D
 import org.junit.Test
 
 /**
@@ -25,20 +25,21 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        var point = Triple(0L, 0L, 0L)
-        var maxDistance = 0L
+        val origin = Point3D(0, 0, 0)
+        var point = origin
+        var maxDistance = 0
         for (direction in input[0].split(",")) {
             // https://www.redblobgames.com/grids/hexagons/#coordinates-cube
             point = when (direction) {
-                "n" -> point.copy(second = point.second - 1, third = point.third + 1)
-                "ne" -> point.copy(first = point.first + 1, second = point.second - 1)
-                "se" -> point.copy(first = point.first + 1, third = point.third - 1)
-                "s" -> point.copy(second = point.second + 1, third = point.third - 1)
-                "sw" -> point.copy(first = point.first - 1, second = point.second + 1)
-                else -> point.copy(first = point.first - 1, third = point.third + 1)
+                "n" -> point.copy(y = point.y - 1, z = point.z + 1)
+                "ne" -> point.copy(x = point.x + 1, y = point.y - 1)
+                "se" -> point.copy(x = point.x + 1, z = point.z - 1)
+                "s" -> point.copy(y = point.y + 1, z = point.z - 1)
+                "sw" -> point.copy(x = point.x - 1, y = point.y + 1)
+                else -> point.copy(x = point.x - 1, z = point.z + 1)
             }
-            maxDistance = maxDistance.coerceAtLeast(point.getManhattanDistance() / 2)
+            maxDistance = maxDistance.coerceAtLeast(point.getManhattanDistance(origin) / 2)
         }
-        return if (part.isOne()) (point.getManhattanDistance() / 2) else maxDistance
+        return if (part.isOne()) (point.getManhattanDistance(origin) / 2) else maxDistance
     }
 }

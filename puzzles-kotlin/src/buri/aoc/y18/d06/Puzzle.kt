@@ -3,8 +3,8 @@ package buri.aoc.y18.d06
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
-import buri.aoc.common.getManhattanDistance
 import buri.aoc.common.position.Bounds
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -28,26 +28,26 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val points = mutableSetOf<Pair<Int, Int>>()
+        val points = mutableSetOf<Point2D<Int>>()
         for (line in input) {
             val numbers = line.extractInts()
-            points.add(Pair(numbers[0], numbers[1]))
+            points.add(Point2D(numbers[0], numbers[1]))
         }
         val bounds = Bounds(points)
 
-        val regionSizes = mutableMapOf<Pair<Int, Int>, Int>()
-        val distanceSums = mutableMapOf<Pair<Int, Int>, Int>()
+        val regionSizes = mutableMapOf<Point2D<Int>, Int>()
+        val distanceSums = mutableMapOf<Point2D<Int>, Int>()
         for (y in bounds.y) {
             for (x in bounds.x) {
                 if (part.isOne()) {
-                    val closest = getClosest(points, Pair(x, y))
+                    val closest = getClosest(points, Point2D(x, y))
                     if (closest != null) {
                         // Update the size of the region "owned" by the closest point.
                         regionSizes.putIfAbsent(closest, 0)
                         regionSizes[closest] = regionSizes[closest]!! + 1
                     }
                 } else {
-                    val target = Pair(x, y)
+                    val target = Point2D(x, y)
                     // Store the sum of all MDs to the target point.
                     distanceSums[target] = points.sumOf { it.getManhattanDistance(target) }
                 }
@@ -63,8 +63,8 @@ class Puzzle : BasePuzzle() {
     /**
      * Returns the closest point to a target, or null if there are multiple.
      */
-    private fun getClosest(points: Set<Pair<Int, Int>>, target: Pair<Int, Int>): Pair<Int, Int>? {
-        val mds = mutableMapOf<Int, MutableList<Pair<Int, Int>>>()
+    private fun getClosest(points: Set<Point2D<Int>>, target: Point2D<Int>): Point2D<Int>? {
+        val mds = mutableMapOf<Int, MutableList<Point2D<Int>>>()
         for (point in points) {
             val md = point.getManhattanDistance(target)
             mds.putIfAbsent(md, mutableListOf())

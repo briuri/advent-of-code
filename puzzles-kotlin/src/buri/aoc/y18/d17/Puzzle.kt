@@ -4,6 +4,7 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -67,7 +68,7 @@ class Puzzle : BasePuzzle() {
 
         var previousWaterCount = 0
         while (true) {
-            grid.flowDown(mutableSetOf(), Pair(500, 0))
+            grid.flowDown(mutableSetOf(), Point2D(500, 0))
             // Stop flowing when no new standing water appears.
             if (previousWaterCount == grid.waterCount) {
                 break
@@ -75,7 +76,7 @@ class Puzzle : BasePuzzle() {
             previousWaterCount = grid.waterCount
         }
         // Only count squares in between minY and maxY.
-        val countGrid = grid.getSubGrid(Pair(0, minY), grid.width, grid.height - minY)
+        val countGrid = grid.getSubGrid(Point2D(0, minY), grid.width, grid.height - minY)
         return if (part.isOne()) {
             previousWaterCount + countGrid.count('|')
         } else {
@@ -91,11 +92,11 @@ class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
     /**
      * Returns the first point below some other point that is not water or clay. Marks interim points as reachable.
      */
-    fun flowDown(visitedFlowDowns: MutableSet<Pair<Int, Int>>, top: Pair<Int, Int>) {
+    fun flowDown(visitedFlowDowns: MutableSet<Point2D<Int>>, top: Point2D<Int>) {
         visitedFlowDowns.add(top)
         val bottomY = getFirstOpenY(top)
         if (bottomY < height - 1) {
-            val flowDowns = fillRow(top.first, bottomY).filter { it !in visitedFlowDowns }
+            val flowDowns = fillRow(top.x, bottomY).filter { it !in visitedFlowDowns }
             for (flowDown in flowDowns) {
                 flowDown(visitedFlowDowns, flowDown)
             }
@@ -105,9 +106,9 @@ class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
     /**
      * Returns the first point below some other point that is not water or clay. Marks interim points as reachable.
      */
-    private fun getFirstOpenY(top: Pair<Int, Int>): Int {
-        val x = top.first
-        var y = top.second + 1
+    private fun getFirstOpenY(top: Point2D<Int>): Int {
+        val x = top.x
+        var y = top.y + 1
         while (isInBounds(x, y) && get(x, y) in ".|") {
             set(x, y, '|')
             y++
@@ -118,7 +119,7 @@ class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
     /**
      * If the point's row is enclosed, fill with water and return an empty list. Otherwise return nearby flow down points.
      */
-    private fun fillRow(bottomX: Int, bottomY: Int): List<Pair<Int, Int>> {
+    private fun fillRow(bottomX: Int, bottomY: Int): List<Point2D<Int>> {
         // Check for floors
         val floorY = bottomY + 1
         var leftFloorX = bottomX
@@ -150,7 +151,7 @@ class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
             }
         }
 
-        val flowDowns = mutableListOf<Pair<Int, Int>>()
+        val flowDowns = mutableListOf<Point2D<Int>>()
         if (hasLeftWall && hasRightWall) {
             for (x in (leftWallX + 1) until rightWallX) {
                 this[x, bottomY] = '~'
@@ -165,10 +166,10 @@ class SandGrid(width: Int, height: Int) : Grid<Char>(width, height, '.') {
                 this[x, bottomY] = '|'
             }
             if (!hasLeftWall) {
-                flowDowns.add(Pair(leftFloorX - 1, bottomY))
+                flowDowns.add(Point2D(leftFloorX - 1, bottomY))
             }
             if (!hasRightWall) {
-                flowDowns.add(Pair(rightFloorX + 1, bottomY))
+                flowDowns.add(Point2D(rightFloorX + 1, bottomY))
             }
         }
         return flowDowns

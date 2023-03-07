@@ -30,11 +30,11 @@ class Puzzle : BasePuzzle() {
         for (line in input) {
             val numbers = line.extractInts()
             val onOff = line.split(" ")[1]
-            val xRange = Pair(numbers[0], numbers[2])
-            val yRange = Pair(numbers[1], numbers[3])
+            val xRange = numbers[0]..numbers[2]
+            val yRange = numbers[1]..numbers[3]
 
-            for (x in xRange.first..xRange.second) {
-                for (y in yRange.first..yRange.second) {
+            for (x in xRange) {
+                for (y in yRange) {
                     val value = lights[x, y]
                     if (part.isOne()) {
                         when (onOff) {

@@ -2,9 +2,10 @@ package buri.aoc.y17.d03
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Direction
 import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.position.Point2D
+import buri.aoc.common.position.getNeighbors
 import org.junit.Test
 
 /**
@@ -63,8 +64,8 @@ class Puzzle : BasePuzzle() {
 }
 
 class SpiralGrid {
-    private val squares = mutableMapOf<Pair<Int, Int>, Int>()
-    private var current = MutablePosition(Pair(0, 0), Direction.EAST)
+    private val squares = mutableMapOf<Point2D<Int>, Int>()
+    private var current = MutablePosition(Point2D(0, 0), Direction.EAST)
     private val neighborSum: Int
         get() {
             val list = current.coords.getNeighbors(true)

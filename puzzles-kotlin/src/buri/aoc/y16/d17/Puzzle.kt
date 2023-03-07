@@ -3,6 +3,7 @@ package buri.aoc.y16.d17
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.MD5
 import buri.aoc.common.Part
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -31,8 +32,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         val md5 = MD5()
         val salt = input[0]
-        val start = Position(Pair(0, 0), "")
-        val end = Pair(3, 3)
+        val start = Position(Point2D(0, 0), "")
+        val end = Point2D(3, 3)
 
         val frontier = mutableListOf<Position>()
         frontier.add(start)
@@ -66,21 +67,21 @@ class Puzzle : BasePuzzle() {
         val list = mutableListOf<Position>()
         // Order: U D L R
         with(current) {
-            if (hash[0] in openDoors && point.second != 0) {
-                list.add(Position(point.copy(second = point.second - 1), path + "U"))
+            if (hash[0] in openDoors && point.y != 0) {
+                list.add(Position(point.copy(y = point.y - 1), path + "U"))
             }
-            if (hash[1] in openDoors && point.second != 3) {
-                list.add(Position(point.copy(second = point.second + 1), path + "D"))
+            if (hash[1] in openDoors && point.y != 3) {
+                list.add(Position(point.copy(y = point.y + 1), path + "D"))
             }
-            if (hash[2] in openDoors && point.first != 0) {
-                list.add(Position(point.copy(first = point.first - 1), path + "L"))
+            if (hash[2] in openDoors && point.x != 0) {
+                list.add(Position(point.copy(x = point.x - 1), path + "L"))
             }
-            if (hash[3] in openDoors && point.first != 3) {
-                list.add(Position(point.copy(first = point.first + 1), path + "R"))
+            if (hash[3] in openDoors && point.x != 3) {
+                list.add(Position(point.copy(x = point.x + 1), path + "R"))
             }
         }
         return list
     }
 }
 
-data class Position(val point: Pair<Int, Int>, val path: String)
+data class Position(val point: Point2D<Int>, val path: String)

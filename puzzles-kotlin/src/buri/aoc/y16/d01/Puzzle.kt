@@ -2,9 +2,9 @@ package buri.aoc.y16.d01
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.getManhattanDistance
 import buri.aoc.common.position.Direction
 import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -29,8 +29,9 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val visited = mutableSetOf<Pair<Int, Int>>()
-        val position = MutablePosition(Pair(0, 0), Direction.NORTH)
+        val origin = Point2D(0, 0)
+        val visited = mutableSetOf<Point2D<Int>>()
+        val position = MutablePosition(origin, Direction.NORTH)
         for (command in input[0].split(", ")) {
             if (command[0] == 'L') {
                 position.turnLeft()
@@ -39,12 +40,12 @@ class Puzzle : BasePuzzle() {
             }
             for (i in 0 until command.drop(1).toInt()) {
                 if (part.isTwo() && position.coords in visited) {
-                    return position.coords.getManhattanDistance()
+                    return position.coords.getManhattanDistance(origin)
                 }
                 visited.add(position.coords)
                 position.move()
             }
         }
-        return position.coords.getManhattanDistance()
+        return position.coords.getManhattanDistance(origin)
     }
 }

@@ -7,7 +7,6 @@ import java.awt.datatransfer.StringSelection
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
-import kotlin.math.absoluteValue
 
 /**
  * Base class with shared functionality for all puzzles
@@ -128,56 +127,6 @@ enum class Part(val number: Int) {
      */
     fun isTwo(): Boolean = (number == 2)
 }
-
-/**
- * Extension function for getting neighbors of a point in reading order.
- */
-fun Pair<Int, Int>.getNeighbors(includeDiagonals: Boolean = false): MutableList<Pair<Int, Int>> {
-    val list = mutableListOf<Pair<Int, Int>>()
-    if (includeDiagonals) {
-        list.add(Pair(this.first - 1, this.second - 1))
-    }
-    list.add(Pair(this.first, this.second - 1))
-    if (includeDiagonals) {
-        list.add(Pair(this.first + 1, this.second - 1))
-    }
-    list.add(Pair(this.first - 1, this.second))
-    list.add(Pair(this.first + 1, this.second))
-    if (includeDiagonals) {
-        list.add(Pair(this.first - 1, this.second + 1))
-    }
-    list.add(Pair(this.first, this.second + 1))
-    if (includeDiagonals) {
-        list.add(Pair(this.first + 1, this.second + 1))
-    }
-    return list
-}
-
-/**
- * Extension function for the Manhattan distance of a 2D point from the origin.
- */
-fun Pair<Int, Int>.getManhattanDistance(target: Pair<Int, Int> = Pair(0, 0)): Int {
-    return (this.first - target.first).absoluteValue + (this.second - target.second).absoluteValue
-}
-
-/**
- * Extension function for the Manhattan distance of a 3D point from the origin.
- */
-fun Triple<Long, Long, Long>.getManhattanDistance(target: Triple<Long, Long, Long> = Triple(0L, 0L, 0L)): Long {
-    return (this.first - target.first).absoluteValue +
-            (this.second - target.second).absoluteValue +
-            (this.third - target.third).absoluteValue
-}
-
-/**
- * Simplify output of Pairs
- */
-fun Pair<Number, Number>.toBareString(): String = "$first,$second"
-
-/**
- * Simplify output of Triples
- */
-fun Triple<Number, Number, Number>.toBareString(): String = "$first,$second,$third"
 
 /**
  * Extension function for extracting the numbers out of a line of input.

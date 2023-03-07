@@ -3,8 +3,9 @@ package buri.aoc.y18.d22
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
-import buri.aoc.common.getNeighbors
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
+import buri.aoc.common.position.getNeighbors
 import org.junit.Test
 
 /**
@@ -47,11 +48,11 @@ class Puzzle : BasePuzzle() {
 
             // Consider moves with the same tool.
             val moves = mutableSetOf<State>()
-            val neighbors = Pair(current.x, current.y).getNeighbors(false).filter { cave.isInBounds(it) }
+            val neighbors = Point2D(current.x, current.y).getNeighbors(false).filter { cave.isInBounds(it) }
             for (next in neighbors) {
                 // Only consider moves to terrain compatible with this tool.
-                if (cave.getType(next.first, next.second) != current.tool.invalidType) {
-                    moves.add(State(next.first, next.second, current.tool, current.minutes + 1))
+                if (cave.getType(next.x, next.y) != current.tool.invalidType) {
+                    moves.add(State(next.x, next.y, current.tool, current.minutes + 1))
                 }
             }
             // Consider swapping tools and staying here.

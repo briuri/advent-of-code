@@ -3,6 +3,7 @@ package buri.aoc.y18.d03
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -27,7 +28,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val fabric = mutableMapOf<Pair<Int, Int>, Int>()
+        val fabric = mutableMapOf<Point2D<Int>, Int>()
         val ids = mutableSetOf<Int>()
         val overlaps = mutableSetOf<Int>()
         for (line in input) {
@@ -39,7 +40,7 @@ class Puzzle : BasePuzzle() {
             val yBounds = numbers[2] until numbers[2] + numbers[4]
             for (y in yBounds) {
                 for (x in xBounds) {
-                    val point = Pair(x, y)
+                    val point = Point2D(x, y)
                     // Overlaps marked with -1.
                     if (fabric[point] == -1) {
                         overlaps.add(id)

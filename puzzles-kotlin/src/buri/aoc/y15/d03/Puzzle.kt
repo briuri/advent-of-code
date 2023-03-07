@@ -2,6 +2,7 @@ package buri.aoc.y15.d03
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -26,27 +27,27 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val santas = mutableListOf<Pair<Int, Int>>()
+        val santas = mutableListOf<Point2D<Int>>()
         for (i in 0 until part.number) {
-            santas.add(Pair(0, 0))
+            santas.add(Point2D(0, 0))
         }
-        val visited = mutableSetOf<Pair<Int, Int>>()
+        val visited = mutableSetOf<Point2D<Int>>()
         visited.add(santas[0])
 
         for (direction in input[0]) {
             val activeSanta = santas.removeAt(0)
             val movedSanta = when (direction) {
                 '<' -> {
-                    activeSanta.copy(first = activeSanta.first - 1)
+                    activeSanta.copy(x = activeSanta.x - 1)
                 }
                 '>' -> {
-                    activeSanta.copy(first = activeSanta.first + 1)
+                    activeSanta.copy(x = activeSanta.x + 1)
                 }
                 '^' -> {
-                    activeSanta.copy(second = activeSanta.second - 1)
+                    activeSanta.copy(y = activeSanta.y - 1)
                 }
                 else -> {   // v
-                    activeSanta.copy(second = activeSanta.second + 1)
+                    activeSanta.copy(y = activeSanta.y + 1)
                 }
             }
             visited.add(movedSanta)

@@ -5,6 +5,7 @@ import buri.aoc.common.Part
 import buri.aoc.common.position.Direction.NORTH
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -40,7 +41,7 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        val virus = MutablePosition(Pair(input[0].length / 2 + gridOffset, input.size / 2 + gridOffset), NORTH)
+        val virus = MutablePosition(Point2D(input[0].length / 2 + gridOffset, input.size / 2 + gridOffset), NORTH)
         var count = 0
         repeat(if (part.isOne()) 10_000 else 10_000_000) {
             when (grid[virus.coords]) {

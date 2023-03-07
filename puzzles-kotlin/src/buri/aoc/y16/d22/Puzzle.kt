@@ -3,6 +3,7 @@ package buri.aoc.y16.d22
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 
 /**
@@ -38,12 +39,12 @@ class Puzzle : BasePuzzle() {
             return count
         }
         val highestNode = getNodeLocation(nodes[nodes.lastIndex])
-        val grid = Grid(highestNode.first + 1, highestNode.second + 1, '.')
+        val grid = Grid(highestNode.x + 1, highestNode.y + 1, '.')
         for (node in nodes) {
             val point = getNodeLocation(node)
             val value = if (getUsed(node) == 0) {
                 '_'
-            } else if (point.first == highestNode.first && point.second == 0) {
+            } else if (point.x == highestNode.x && point.y == 0) {
                 'G'
             } else if (getUsed(node) > 100) {
                 '#'
@@ -99,11 +100,11 @@ class Puzzle : BasePuzzle() {
     /**
      * Extracts the x,y position of the node.
      */
-    private fun getNodeLocation(line: String): Pair<Int, Int> {
+    private fun getNodeLocation(line: String): Point2D<Int> {
         val dimensions = line.split(" ")[0].split("-x")[1]
         val x = dimensions.split("-y")[0].toInt()
         val y = dimensions.split("-y")[1].toInt()
-        return Pair(x, y)
+        return Point2D(x, y)
     }
 
     /**
