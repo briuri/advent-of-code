@@ -48,8 +48,7 @@ class Puzzle : BasePuzzle() {
 
             // Consider moves with the same tool.
             val moves = mutableSetOf<State>()
-            val neighbors = Point2D(current.x, current.y).getNeighbors(false).filter { cave.isInBounds(it) }
-            for (next in neighbors) {
+            for (next in cave.getNeighbors(Point2D(current.x, current.y), false)) {
                 // Only consider moves to terrain compatible with this tool.
                 if (cave.getType(next.x, next.y) != current.tool.invalidType) {
                     moves.add(State(next.x, next.y, current.tool, current.minutes + 1))

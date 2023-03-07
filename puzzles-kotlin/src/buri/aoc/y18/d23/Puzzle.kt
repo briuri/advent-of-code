@@ -30,7 +30,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val bots = mutableListOf<Bot>()
         for (line in input) {
-            bots.add(Bot(line.extractInts().map { it.toLong() }))
+            bots.add(Bot(line.extractInts()))
         }
         val strongest = bots.maxByOrNull { it.range }!!
         if (part.isOne()) {
@@ -45,7 +45,7 @@ class Puzzle : BasePuzzle() {
         var maxZ = bots.maxOfOrNull { it.position.z }!!
 
         // Controls the sampling chunks.
-        val origin = Point3D(0L, 0L, 0L)
+        val origin = Point3D(0, 0, 0)
         val searchRatio = 3
         // Example is so small that it doesn't need different rules at full zoom.
         val fullZoomResizeRatio = if (bots.size < 20) 1 else 10000
@@ -61,7 +61,7 @@ class Puzzle : BasePuzzle() {
             val dz = ((maxZ - minZ) / searchRatio).coerceAtLeast(1)
 
             // Take samples.
-            var bestPosition: Point3D<Long>? = null
+            var bestPosition: Point3D<Int>? = null
             var bestBotsInRange = 0
             for (z in minZ..maxZ step dz) {
                 for (y in minY..maxY step dy) {
@@ -97,7 +97,7 @@ class Puzzle : BasePuzzle() {
             }
 
             // Adjust min / max to zoom into the best volume. Broaden a bit at end so we don't fixate on local maxes.
-            val resizeRatio = if (dx == 1L && dy == 1L && dz == 1L) fullZoomResizeRatio else 1
+            val resizeRatio = if (dx == 1 && dy == 1 && dz == 1) fullZoomResizeRatio else 1
             minX = bestPosition.x - (resizeRatio * dx)
             maxX = bestPosition.x + (resizeRatio * dx)
             minY = bestPosition.y - (resizeRatio * dy)
@@ -109,14 +109,14 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-class Bot(numbers: List<Long>) {
+class Bot(numbers: List<Int>) {
     val position = Point3D(numbers[0], numbers[1], numbers[2])
     val range = numbers[3]
 
     /**
      * Returns true if some point is in range of this bot.
      */
-    fun hasInRange(testPosition: Point3D<Long>): Boolean {
+    fun hasInRange(testPosition: Point3D<Int>): Boolean {
         return (position.getManhattanDistance(testPosition) <= range)
     }
 

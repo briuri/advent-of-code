@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
             unused.add(Point4D(numbers[0], numbers[1], numbers[2], numbers[3]))
         }
 
-        val constellations = mutableListOf<MutableSet<Point4D<Int>>>()
+        var count = 0
         while (unused.isNotEmpty()) {
             // Start a constellation with the next quad.
             val constellation = mutableSetOf<Point4D<Int>>()
@@ -46,8 +46,8 @@ class Puzzle : BasePuzzle() {
             } while (oldSize != newSize)
             // Save the finished constellation.
             unused.removeAll { it in constellation }
-            constellations.add(constellation)
+            count++
         }
-        return constellations.size
+        return count
     }
 }

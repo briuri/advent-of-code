@@ -4,7 +4,6 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
-import buri.aoc.common.position.getNeighbors
 import org.junit.Test
 
 /**
@@ -77,7 +76,7 @@ class Puzzle : BasePuzzle() {
      */
     private fun Grid<Char>.getSurrounding(x: Int, y: Int): Map<Char, Int> {
         val map = mutableMapOf('.' to 0, '|' to 0, '#' to 0)
-        for (neighbor in Point2D(x, y).getNeighbors(true).filter { this.isInBounds(it) }) {
+        for (neighbor in this.getNeighbors(Point2D(x, y), true)) {
             val value = this[neighbor]
             map[value] = map[value]!! + 1
         }

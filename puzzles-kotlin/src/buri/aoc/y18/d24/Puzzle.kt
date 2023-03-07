@@ -50,8 +50,7 @@ class Puzzle : BasePuzzle() {
         }
 
         if (part.isOne()) {
-            val outcome = battle(mobs, 0)!!
-            return outcome.second
+            return battle(mobs, 0)!!.second
         }
 
         // Raised starting value after finding the correct answer.
@@ -83,7 +82,7 @@ class Puzzle : BasePuzzle() {
             val selections = mutableMapOf<Group, Group>()
             for (mob in mobs.sortedWith(targetSelectOrder)) {
                 // Possible targets are any enemy not already targeted
-                val targets = mobs.filter { it.isInfection != mob.isInfection && it !in selections.values }
+                val targets = mobs.filter { it.isEnemy(mob) && it !in selections.values }
                 // Best target is one taking most damage, with ties by effectivePower then initiative.
                 val bestTarget = targets.sortedWith(targetSelectOrder).maxByOrNull { it.damageFrom(mob) }
                 // Only attack if damage can be done.
@@ -165,6 +164,11 @@ data class Group(val isInfection: Boolean, val data: String) {
     private fun toList(data: String, prefix: String): List<String> {
         return data.split(prefix)[1].split(", ")
     }
+
+    /**
+     * Returns true if the specified group is an enemy of this one.
+     */
+    fun isEnemy(group: Group): Boolean = group.isInfection != isInfection
 
     /**
      * Returns the amount of damage that would be received from the attacker (does not actually attack).
