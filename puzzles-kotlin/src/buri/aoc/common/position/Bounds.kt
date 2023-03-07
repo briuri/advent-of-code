@@ -1,1 +1,0 @@
-package buri.aoc.common.position

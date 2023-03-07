@@ -11,7 +11,7 @@ import kotlin.math.absoluteValue
 /**
  * Base Class
  */
-abstract class BaseTuple<T>() {
+abstract class BaseTuple<T> {
 
     /**
      * Enforce type restrictions (only Ints and Longs).
