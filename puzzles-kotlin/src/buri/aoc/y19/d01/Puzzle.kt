@@ -29,8 +29,7 @@ class Puzzle : BasePuzzle() {
             var fuel = mass / 3 - 2
             if (part.isOne()) {
                 sum += fuel
-            }
-            else {
+            } else {
                 while (fuel > 0) {
                     sum += fuel
                     fuel = fuel / 3 - 2
