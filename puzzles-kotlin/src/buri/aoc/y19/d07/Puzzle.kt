@@ -30,15 +30,15 @@ class Puzzle : BasePuzzle() {
         val phaseSettings = if (part.isOne()) listOf(0, 1, 2, 3, 4) else listOf(5, 6, 7, 8, 9)
         val numAmps = phaseSettings.size
 
-        var bestOutput = 0
+        var bestOutput = 0L
         for (phases in generatePermutations(phaseSettings)) {
             val computers = mutableListOf<Computer>()
             for (i in 0 until numAmps) {
                 computers.add(Computer(instructions))
-                computers[i].inputs.add(phases[i])
+                computers[i].inputs.add(phases[i].toLong())
             }
 
-            var interimOutput = 0
+            var interimOutput = 0L
             do {
                 for (computer in computers) {
                     computer.inputs.add(interimOutput)
