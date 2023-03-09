@@ -97,7 +97,7 @@ abstract class BasePuzzle {
     /**
      * Generates every permutation for a list of objects.
      */
-    fun <T> generatePermutations(input: List<T>, index: Int): MutableList<List<T>> {
+    fun <T> generatePermutations(input: List<T>, index: Int = 0): MutableList<List<T>> {
         val permutations = mutableListOf<List<T>>()
         if (index == input.lastIndex) {
             permutations.add(input.toList())

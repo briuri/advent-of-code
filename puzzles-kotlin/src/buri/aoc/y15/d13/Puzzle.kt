@@ -45,7 +45,7 @@ class Puzzle : BasePuzzle() {
             people.add("Me")
         }
 
-        val seatingCharts = generatePermutations(people.toList(), 0)
+        val seatingCharts = generatePermutations(people.toList())
         var maxHappiness = 0
         for (seats in seatingCharts) {
             var localHappiness = 0

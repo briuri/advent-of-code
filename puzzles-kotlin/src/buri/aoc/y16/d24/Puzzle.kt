@@ -60,7 +60,7 @@ class Puzzle : BasePuzzle() {
         // Now add different legs together.
         val locationOrder = List(locations.keys.max() + 1) { it }
         var minSteps = Int.MAX_VALUE
-        for (path in generatePermutations(locationOrder, 0).filter { it[0] == 0 }) {
+        for (path in generatePermutations(locationOrder).filter { it[0] == 0 }) {
             var pathSteps = 0
             for (i in 0 until path.lastIndex) {
                 pathSteps += steps[path[i].toString() + path[i + 1].toString()]!!
