@@ -2,30 +2,44 @@ package buri.aoc.common.registers
 
 /**
  * Computer for IntCode problems
- * (y19d02,y19d05)
+ * (y19d02, y19d05, y19d07)
  *
  * @author Brian Uri!
  */
 class Computer(private val instructions: List<Int>, private val debug: Boolean = false) {
-    private val inputs = mutableListOf<Int>()
+    val inputs = mutableListOf<Int>()
     val outputs = mutableListOf<Int>()
 
-    /**
-     * Runs the IntCode
-     */
-    fun run(noun: Int? = null, verb: Int? = null, rawInputs: List<Int> = listOf()): Int {
-        inputs.clear()
-        inputs.addAll(rawInputs)
-        outputs.clear()
-        val code = instructions.toMutableList()
-        if (noun != null) {
-            code[1] = noun
-        }
-        if (verb != null) {
-            code[2] = verb
-        }
+    private var ip = 0
+    private var code = mutableListOf<Int>()
+    val halted
+        get() = (code[ip] == 99)
 
-        var ip = 0
+    init {
+        reset()
+    }
+
+    /**
+     * Starts the program over.
+     */
+    fun reset() {
+        ip = 0
+        code = instructions.toMutableList()
+        outputs.clear()
+    }
+
+    /**
+     * Sets the noun and verb positions.
+     */
+    fun setNounVerb(noun: Int, verb: Int) {
+        code[1] = noun
+        code[2] = verb
+    }
+
+    /**
+     * Runs the IntCode. May suspend temporarily if it needs input.
+     */
+    fun run(): Int {
         while (code[ip] != 99) {
             val c = Command(code[ip])
             val p = code.subList(ip + 1, ip + 1 + c.numParams)
@@ -34,7 +48,14 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
             when (c.opcode) {
                 ADD -> code[p[2]] = code.resolve(p[0], c.mode0) + code.resolve(p[1], c.mode1)
                 MUL -> code[p[2]] = code.resolve(p[0], c.mode0) * code.resolve(p[1], c.mode1)
-                IN -> code[p[0]] = inputs.removeFirst()
+                IN -> {
+                    if (inputs.isEmpty()) {
+                        ip -= c.numParams + 1
+                        break
+                    } else {
+                        code[p[0]] = inputs.removeFirst()
+                    }
+                }
                 OUT -> outputs.add(code.resolve(p[0], c.mode0))
                 JIT -> if (code.resolve(p[0], c.mode0) != 0) {
                     ip = code.resolve(p[1], c.mode1)
