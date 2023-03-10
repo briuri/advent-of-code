@@ -83,7 +83,8 @@ class SlopeMap(asteroids: List<Point2D<Int>>, private val site: Point2D<Int>) {
         for (key in map.keys.sortedDescending()) {
             sortedValues.add(map[key]!!)
         }
-        return (sortedValues[count - 1].first())
+        // If there are multiple possibilities, it's the one closest to the site.
+        return (sortedValues[count - 1].minBy { site.getManhattanDistance(it) })
     }
 
     /**
