@@ -9,19 +9,20 @@ package buri.aoc.common.registers
 class Computer(private val instructions: List<Int>, private val debug: Boolean = false) {
     val inputs = mutableListOf<Long>()
     val outputs = mutableListOf<Long>()
+    val halted
+        get() = (memory[ip] == 99L)
 
     private var ip = 0
     private var rb = 0
     private var memory = mutableListOf<Long>()
-    val halted
-        get() = (memory[ip] == 99L)
+
 
     init {
         reset()
     }
 
     /**
-     * Starts the program over.
+     * Restarts this computer.
      */
     fun reset() {
         ip = 0
@@ -43,120 +44,17 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
      */
     fun run(): Long {
         while (!halted) {
-            val maxParams = (ip + 4).coerceAtMost(memory.lastIndex)
-            val c = Command(memory[ip].toInt(), memory.subList(ip + 1, maxParams))
-            debug(c)
+            val c = Command(memory[ip].toInt(), memory.subList(ip + 1, (ip + 4).coerceAtMost(memory.lastIndex)))
+            if (debug) {
+                println(toString())
+            }
             ip += c.numParams + 1
-            when (c.opcode) {
-                ADD -> set(c.params[2], resolve(c.params[0]) + resolve(c.params[1]))
-                MUL -> set(c.params[2], resolve(c.params[0]) * resolve(c.params[1]))
-                IN -> {
-                    if (inputs.isEmpty()) {
-                        ip -= c.numParams + 1
-                        break
-                    } else {
-                        set(c.params[0], inputs.removeFirst())
-                    }
-                }
-                OUT -> outputs.add(resolve(c.params[0]))
-                JIT -> if (resolve(c.params[0]) != 0L) {
-                    ip = resolve(c.params[1]).toInt()
-                }
-                JIF -> if (resolve(c.params[0]) == 0L) {
-                    ip = resolve(c.params[1]).toInt()
-                }
-                LT -> set(c.params[2], if (resolve(c.params[0]) < resolve(c.params[1])) 1 else 0)
-                EQ -> set(c.params[2], if (resolve(c.params[0]) == resolve(c.params[1])) 1 else 0)
-                RBO -> rb += resolve(c.params[0]).toInt()
+            val isWaiting = c.run()
+            if (isWaiting) {
+                break
             }
         }
         return memory[0]
-    }
-
-    /**
-     * Prints some output if debug mode is enabled.
-     */
-    private fun debug(c: Command) {
-        if (debug) {
-            print("ip=$ip c=(${memory[ip]},${c.params.joinToString(",")}) ► ")
-            val p0 = debugResolve(c.params[0])
-            val p0Resolved = debugResolve(c.params[0], true)
-            val p1 = if (c.numParams > 1) {
-                debugResolve(c.params[1])
-            } else {
-                "?"
-            }
-            val p1Resolved = if (c.numParams > 1) {
-                debugResolve(c.params[1], true)
-            } else {
-                "?"
-            }
-            val p2 = if (c.numParams > 2) {
-                debugResolve(c.params[2])
-            } else {
-                "?"
-            }
-            when (c.opcode) {
-                ADD, MUL -> {
-                    val op = if (c.opcode == ADD) "+" else "*"
-                    print("$p2 = $p0 $op $p1 ► $p0Resolved $op $p1Resolved")
-                }
-                IN -> {
-                    print("$p0 = ${inputs[0]}")
-                }
-                OUT -> {
-                    print("out = $p0 ► out = $p0Resolved")
-                }
-                JIT, JIF -> {
-                    val op = if (c.opcode == JIT) "!=" else "=="
-                    print("if ($p0 $op 0) ip = $p1 ► if ($p0Resolved $op 0) ip = $p1Resolved")
-                }
-                LT, EQ -> {
-                    val op = if (c.opcode == LT) "<" else "=="
-                    print("$p2 = if ($p0 $op $p1) 1 else 0 ► if ($p0Resolved $op $p1Resolved) 1 else 0")
-                }
-                RBO -> {
-                    print("rb += $p0 ► $p0Resolved")
-                }
-            }
-            println()
-        }
-    }
-
-    /**
-     * Returns a value or the value at that address, depending on the mode.
-     */
-    private fun resolve(param: Param): Long {
-        return when (param.mode) {
-            0 -> get(param.asAddress())
-            1 -> param.value
-            else -> get(rb + param.asAddress())
-        }
-    }
-
-    /**
-     * Creates debug output for an address or value, depending on the mode.
-     */
-    private fun debugResolve(param: Param, resolveAddress: Boolean = false): String {
-        return when (param.mode) {
-            0 -> {
-                if (resolveAddress) {
-                    "${resolve(param)}"
-                } else {
-                    "[$param.value]"
-                }
-            }
-            1 -> {
-                "$param"
-            }
-            else -> {
-                if (resolveAddress) {
-                    "${resolve(param)}"
-                } else {
-                    "[rb + $param]"
-                }
-            }
-        }
     }
 
     /**
@@ -195,34 +93,148 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
             memory.add(0L)
         }
     }
-}
 
-class Command(rawCommand: Int, rawParams: List<Long>) {
-    val opcode = rawCommand % 100
-    val params = mutableListOf<Param>()
-    val numParams: Int
-        get() = when (opcode) {
-            IN, OUT, RBO -> 1
-            JIT, JIF -> 2
-            else -> 3
+    inner class Command(rawCommand: Int, rawParams: List<Long>) {
+        private val opcode = rawCommand % 100
+        private val params = mutableListOf<Param>()
+        val numParams: Int
+            get() = when (opcode) {
+                IN, OUT, RBO -> 1
+                JIT, JIF -> 2
+                else -> 3
+            }
+
+        init {
+            val fullCommand = rawCommand.toString().padStart(5, '0')
+            for (i in 0 until numParams) {
+                params.add(Param(rawParams[i], fullCommand[2 - i].digitToInt()))
+            }
         }
 
-    init {
-        val fullCommand = rawCommand.toString().padStart(5, '0')
-        for (i in 0 until numParams) {
-            params.add(Param(rawParams[i], fullCommand[2 - i].digitToInt()))
+        /**
+         * Executes this command. Returns true if we're paused for input waiting.
+         */
+        fun run(): Boolean {
+            when (opcode) {
+                ADD -> set(params[2], params[0].resolve() + params[1].resolve())
+                MUL -> set(params[2], params[0].resolve() * params[1].resolve())
+                IN -> {
+                    if (inputs.isEmpty()) {
+                        ip -= numParams + 1
+                        return true
+                    } else {
+                        set(params[0], inputs.removeFirst())
+                    }
+                }
+                OUT -> outputs.add(params[0].resolve())
+                JIT -> if (params[0].resolve() != 0L) {
+                    ip = params[1].resolve().toInt()
+                }
+                JIF -> if (params[0].resolve() == 0L) {
+                    ip = params[1].resolve().toInt()
+                }
+                LT -> set(params[2], if (params[0].resolve() < params[1].resolve()) 1 else 0)
+                EQ -> set(params[2], if (params[0].resolve() == params[1].resolve()) 1 else 0)
+                RBO -> rb += params[0].resolve().toInt()
+            }
+            return false
+        }
+
+        /**
+         * Prints some output if debug mode is enabled.
+         */
+        override fun toString(): String {
+            val output = StringBuilder("ip=$ip c=(${memory[ip]},${params.joinToString(",")}) ► ")
+            val p0 = debugResolve(params[0])
+            val p0Resolved = debugResolve(params[0], true)
+            val p1 = if (numParams > 1) {
+                debugResolve(params[1])
+            } else {
+                "?"
+            }
+            val p1Resolved = if (numParams > 1) {
+                debugResolve(params[1], true)
+            } else {
+                "?"
+            }
+            val p2 = if (numParams > 2) {
+                debugResolve(params[2])
+            } else {
+                "?"
+            }
+            when (opcode) {
+                ADD, MUL -> {
+                    val op = if (opcode == ADD) "+" else "*"
+                    output.append("$p2 = $p0 $op $p1 ► $p0Resolved $op $p1Resolved")
+                }
+                IN -> {
+                    output.append("$p0 = ${inputs[0]}")
+                }
+                OUT -> {
+                    output.append("out = $p0 ► out = $p0Resolved")
+                }
+                JIT, JIF -> {
+                    val op = if (opcode == JIT) "!=" else "=="
+                    output.append("if ($p0 $op 0) ip = $p1 ► if ($p0Resolved $op 0) ip = $p1Resolved")
+                }
+                LT, EQ -> {
+                    val op = if (opcode == LT) "<" else "=="
+                    output.append("$p2 = if ($p0 $op $p1) 1 else 0 ► if ($p0Resolved $op $p1Resolved) 1 else 0")
+                }
+                RBO -> {
+                    output.append("rb += $p0 ► $p0Resolved")
+                }
+            }
+            output.append("\n")
+            return (output.toString())
+        }
+
+        /**
+         * Creates debug output for an address or value, depending on the mode.
+         */
+        private fun debugResolve(param: Param, resolveAddress: Boolean = false): String {
+            return when (param.mode) {
+                0 -> {
+                    if (resolveAddress) {
+                        "${param.resolve()}"
+                    } else {
+                        "[$param.value]"
+                    }
+                }
+                1 -> {
+                    "$param"
+                }
+                else -> {
+                    if (resolveAddress) {
+                        "${param.resolve()}"
+                    } else {
+                        "[rb + $param]"
+                    }
+                }
+            }
         }
     }
-}
 
-class Param(val value: Long, val mode: Int) {
+    inner class Param(val value: Long, val mode: Int) {
 
-    /**
-     * Returns this param's value as an int address.
-     */
-    fun asAddress(): Int = value.toInt()
+        /**
+         * Returns a value or the value at that address, depending on the mode.
+         */
+        fun resolve(): Long {
+            return when (mode) {
+                0 -> get(asAddress())
+                1 -> value
+                else -> get(rb + asAddress())
+            }
+        }
 
-    override fun toString(): String = value.toString()
+        /**
+         * Returns this param's value as an int address.
+         */
+        fun asAddress(): Int = value.toInt()
+
+        override fun toString(): String = value.toString()
+    }
 }
 
 const val ADD = 1
