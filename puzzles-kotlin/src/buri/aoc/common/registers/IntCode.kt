@@ -34,8 +34,8 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
      * Sets the noun and verb positions.
      */
     fun setNounVerb(noun: Long, verb: Long) {
-        setMemory(1L, 0, noun)
-        setMemory(2L, 0, verb)
+        set(Param(1, 0), noun)
+        set(Param(2, 0), verb)
     }
 
     /**
@@ -43,31 +43,31 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
      */
     fun run(): Long {
         while (!halted) {
-            val c = Command(memory[ip].toInt())
-            val p = memory.subList(ip + 1, ip + 1 + c.numParams)
-            debug(memory, ip, c, p)
+            val maxParams = (ip + 4).coerceAtMost(memory.lastIndex)
+            val c = Command(memory[ip].toInt(), memory.subList(ip + 1, maxParams))
+            debug(c)
             ip += c.numParams + 1
             when (c.opcode) {
-                ADD -> setMemory(p[2], c.mode2, resolve(p[0], c.mode0) + resolve(p[1], c.mode1))
-                MUL -> setMemory(p[2], c.mode2, resolve(p[0], c.mode0) * resolve(p[1], c.mode1))
+                ADD -> set(c.params[2], resolve(c.params[0]) + resolve(c.params[1]))
+                MUL -> set(c.params[2], resolve(c.params[0]) * resolve(c.params[1]))
                 IN -> {
                     if (inputs.isEmpty()) {
                         ip -= c.numParams + 1
                         break
                     } else {
-                        setMemory(p[0], c.mode0, inputs.removeFirst())
+                        set(c.params[0], inputs.removeFirst())
                     }
                 }
-                OUT -> outputs.add(resolve(p[0], c.mode0))
-                JIT -> if (resolve(p[0], c.mode0) != 0L) {
-                    ip = resolve(p[1], c.mode1).toInt()
+                OUT -> outputs.add(resolve(c.params[0]))
+                JIT -> if (resolve(c.params[0]) != 0L) {
+                    ip = resolve(c.params[1]).toInt()
                 }
-                JIF -> if (resolve(p[0], c.mode0) == 0L) {
-                    ip = resolve(p[1], c.mode1).toInt()
+                JIF -> if (resolve(c.params[0]) == 0L) {
+                    ip = resolve(c.params[1]).toInt()
                 }
-                LT -> setMemory(p[2], c.mode2, if (resolve(p[0], c.mode0) < resolve(p[1], c.mode1)) 1 else 0)
-                EQ -> setMemory(p[2], c.mode2, if (resolve(p[0], c.mode0) == resolve(p[1], c.mode1)) 1 else 0)
-                RBO -> rb += resolve(p[0], c.mode0).toInt()
+                LT -> set(c.params[2], if (resolve(c.params[0]) < resolve(c.params[1])) 1 else 0)
+                EQ -> set(c.params[2], if (resolve(c.params[0]) == resolve(c.params[1])) 1 else 0)
+                RBO -> rb += resolve(c.params[0]).toInt()
             }
         }
         return memory[0]
@@ -76,23 +76,23 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
     /**
      * Prints some output if debug mode is enabled.
      */
-    private fun debug(code: MutableList<Long>, ip: Int, c: Command, p: List<Long>) {
+    private fun debug(c: Command) {
         if (debug) {
-            print("ip=$ip c=(${code[ip]},${p.joinToString(",")}) ► ")
-            val p0 = debugResolve(p[0], c.mode0)
-            val p0Resolved = debugResolve(p[0], c.mode0, true)
+            print("ip=$ip c=(${memory[ip]},${c.params.joinToString(",")}) ► ")
+            val p0 = debugResolve(c.params[0])
+            val p0Resolved = debugResolve(c.params[0], true)
             val p1 = if (c.numParams > 1) {
-                debugResolve(p[1], c.mode1)
+                debugResolve(c.params[1])
             } else {
                 "?"
             }
             val p1Resolved = if (c.numParams > 1) {
-                debugResolve(p[1], c.mode1, true)
+                debugResolve(c.params[1], true)
             } else {
                 "?"
             }
             val p2 = if (c.numParams > 2) {
-                debugResolve(p[2], c.mode2)
+                debugResolve(c.params[2])
             } else {
                 "?"
             }
@@ -126,24 +126,24 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
     /**
      * Returns a value or the value at that address, depending on the mode.
      */
-    private fun resolve(param: Long, mode: Int): Long {
-        return when (mode) {
-            0 -> getMemory(param)
-            1 -> param
-            else -> getMemory(rb + param)
+    private fun resolve(param: Param): Long {
+        return when (param.mode) {
+            0 -> get(param.asAddress())
+            1 -> param.value
+            else -> get(rb + param.asAddress())
         }
     }
 
     /**
      * Creates debug output for an address or value, depending on the mode.
      */
-    private fun debugResolve(param: Long, mode: Int, resolveAddress: Boolean = false): String {
-        return when (mode) {
+    private fun debugResolve(param: Param, resolveAddress: Boolean = false): String {
+        return when (param.mode) {
             0 -> {
                 if (resolveAddress) {
-                    "${resolve(param, mode)}"
+                    "${resolve(param)}"
                 } else {
-                    "[$param]"
+                    "[$param.value]"
                 }
             }
             1 -> {
@@ -151,7 +151,7 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
             }
             else -> {
                 if (resolveAddress) {
-                    "${resolve(param, mode)}"
+                    "${resolve(param)}"
                 } else {
                     "[rb + $param]"
                 }
@@ -162,22 +162,28 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
     /**
      * Gets a value.
      */
-    private fun getMemory(address: Long): Long {
-        addMemory(address.toInt())
-        return memory[address.toInt()]
+    private fun get(address: Int): Long {
+        addMemory(address)
+        return memory[address]
     }
 
     /**
      * Sets a value.
      */
-    private fun setMemory(address: Long, mode: Int, value: Long) {
-        if (mode == 0) {
-            addMemory(address.toInt())
-            memory[address.toInt()] = value
-        }
-        else if (mode == 2) {
-            addMemory(rb + address.toInt())
-            memory[rb + address.toInt()] = value
+    private fun set(param: Param, value: Long) {
+        when (param.mode) {
+            0 -> {
+                addMemory(param.asAddress())
+                memory[param.asAddress()] = value
+            }
+            1 -> {
+                throw IllegalArgumentException("Cannot store a value in a value.")
+            }
+            else -> {
+                val address = rb + param.asAddress()
+                addMemory(address)
+                memory[address] = value
+            }
         }
     }
 
@@ -191,11 +197,9 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
     }
 }
 
-class Command(rawCommand: Int) {
+class Command(rawCommand: Int, rawParams: List<Long>) {
     val opcode = rawCommand % 100
-    val mode0: Int
-    val mode1: Int
-    val mode2: Int
+    val params = mutableListOf<Param>()
     val numParams: Int
         get() = when (opcode) {
             IN, OUT, RBO -> 1
@@ -205,10 +209,20 @@ class Command(rawCommand: Int) {
 
     init {
         val fullCommand = rawCommand.toString().padStart(5, '0')
-        mode0 = fullCommand[2].digitToInt()
-        mode1 = fullCommand[1].digitToInt()
-        mode2 = fullCommand[0].digitToInt()
+        for (i in 0 until numParams) {
+            params.add(Param(rawParams[i], fullCommand[2 - i].digitToInt()))
+        }
     }
+}
+
+class Param(val value: Long, val mode: Int) {
+
+    /**
+     * Returns this param's value as an int address.
+     */
+    fun asAddress(): Int = value.toInt()
+
+    override fun toString(): String = value.toString()
 }
 
 const val ADD = 1
