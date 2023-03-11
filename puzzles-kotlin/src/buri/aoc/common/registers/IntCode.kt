@@ -2,11 +2,11 @@ package buri.aoc.common.registers
 
 /**
  * Computer for IntCode problems
- * (y19d02, y19d05, y19d07, y19d09)
+ * (y19d02, y19d05, y19d07, y19d09, y19d11)
  *
  * @author Brian Uri!
  */
-class Computer(private val instructions: List<Int>, private val debug: Boolean = false) {
+class Computer(private val instructions: List<Long>, private val debug: Boolean = false) {
     val inputs = mutableListOf<Long>()
     val outputs = mutableListOf<Long>()
     val halted
@@ -27,7 +27,7 @@ class Computer(private val instructions: List<Int>, private val debug: Boolean =
     fun reset() {
         ip = 0
         rb = 0
-        memory = instructions.map { it.toLong() }.toMutableList()
+        memory = instructions.toMutableList()
         outputs.clear()
     }
 

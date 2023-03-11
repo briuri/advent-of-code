@@ -2,7 +2,7 @@ package buri.aoc.y19.d02
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractInts
+import buri.aoc.common.extractLongs
 import buri.aoc.common.registers.Computer
 import org.junit.Test
 
@@ -26,7 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val computer = Computer(input[0].extractInts())
+        val computer = Computer(input[0].extractLongs())
         if (part.isOne()) {
             computer.setNounVerb(12, 2)
             return computer.run()
