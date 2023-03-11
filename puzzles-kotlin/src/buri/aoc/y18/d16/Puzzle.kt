@@ -3,6 +3,7 @@ package buri.aoc.y18.d16
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import buri.aoc.common.extractLongs
 import buri.aoc.common.registers.IndexedRegisters
 import org.junit.Test
 
@@ -72,7 +73,7 @@ class Puzzle : BasePuzzle() {
     private fun getCodesFor(registers: IndexedRegisters, opcodes: List<String>, sample: List<String>): List<String> {
         val initial = sample[0].extractInts()
         val inputs = sample[1].split(" ")
-        val expected = sample[2].extractInts().map { it.toLong() }
+        val expected = sample[2].extractLongs()
 
         val matchingCodes = mutableListOf<String>()
         for (code in opcodes) {

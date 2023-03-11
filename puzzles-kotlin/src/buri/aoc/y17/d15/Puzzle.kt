@@ -2,7 +2,7 @@ package buri.aoc.y17.d15
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractInts
+import buri.aoc.common.extractLongs
 import org.junit.Test
 
 /**
@@ -29,8 +29,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val multiplesA = if (part.isOne()) 1L else 4L
         val multiplesB = if (part.isOne()) 1L else 8L
-        val genA = Generator(input[0].extractInts()[0].toLong(), 16807L, multiplesA)
-        val genB = Generator(input[1].extractInts()[0].toLong(), 48271L, multiplesB)
+        val genA = Generator(input[0].extractLongs()[0], 16807L, multiplesA)
+        val genB = Generator(input[1].extractLongs()[0], 48271L, multiplesB)
         val times = if (part.isOne()) 40_000_000 else 5_000_000
         var same = 0
         for (time in 0 until times) {

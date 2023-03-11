@@ -131,8 +131,12 @@ enum class Part(val number: Int) {
 /**
  * Extension function for extracting the numbers out of a line of input.
  */
-fun String.extractInts(allowNegative: Boolean = true): List<Int> {
+fun String.extractLongs(allowNegative: Boolean = true): List<Long> {
     val pattern = if (allowNegative) "[^0-9\\-]" else "[^0-9]"
     val string = this.replace(pattern.toRegex(), " ").replace("\\s+".toRegex(), " ").trim()
-    return (string.split(" ").map { it.toInt() })
+    return (string.split(" ").map { it.toLong() })
+}
+
+fun String.extractInts(allowNegative: Boolean = true): List<Int> {
+    return this.extractLongs(allowNegative).map { it.toInt() }
 }

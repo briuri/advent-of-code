@@ -2,7 +2,7 @@ package buri.aoc.y17.d20
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractInts
+import buri.aoc.common.extractLongs
 import buri.aoc.common.position.Point3D
 import org.junit.Test
 
@@ -29,7 +29,7 @@ class Puzzle : BasePuzzle() {
         val origin = Point3D(0L, 0L, 0L)
         val particles = mutableListOf<Particle>()
         for ((index, line) in input.withIndex()) {
-            particles.add(Particle(index, line.extractInts().map { it.toLong() }))
+            particles.add(Particle(index, line.extractLongs()))
         }
         repeat(1000) {
             particles.forEach { it.tick() }
