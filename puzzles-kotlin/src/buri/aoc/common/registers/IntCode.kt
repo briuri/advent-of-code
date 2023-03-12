@@ -31,11 +31,10 @@ class Computer(private val instructions: List<Long>, private val debug: Boolean 
     }
 
     /**
-     * Sets the noun and verb positions.
+     * External call to set a value at specific address.
      */
-    fun setNounVerb(noun: Long, verb: Long) {
-        set(Param(1, 0), noun)
-        set(Param(2, 0), verb)
+    fun set(address: Int, value: Long) {
+        set(Param(address.toLong(), 0), value)
     }
 
     /**

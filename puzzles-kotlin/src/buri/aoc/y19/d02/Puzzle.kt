@@ -28,13 +28,15 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val computer = Computer(input[0].extractLongs())
         if (part.isOne()) {
-            computer.setNounVerb(12, 2)
+            computer.set(1, 12)
+            computer.set(2, 2)
             return computer.run()
         }
         for (noun in 0L..99L) {
             for (verb in 0L..99L) {
                 computer.reset()
-                computer.setNounVerb(noun, verb)
+                computer.set(1, noun)
+                computer.set(2, verb)
                 if (computer.run() == 19690720L) {
                     return (100 * noun + verb)
                 }
