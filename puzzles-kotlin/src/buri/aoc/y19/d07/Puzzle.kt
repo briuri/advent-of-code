@@ -35,15 +35,15 @@ class Puzzle : BasePuzzle() {
             val computers = mutableListOf<Computer>()
             for (i in 0 until numAmps) {
                 computers.add(Computer(instructions))
-                computers[i].inputs.add(phases[i].toLong())
+                computers[i].input(phases[i].toLong())
             }
 
             var interimOutput = 0L
             do {
                 for (computer in computers) {
-                    computer.inputs.add(interimOutput)
+                    computer.input(interimOutput)
                     computer.run()
-                    interimOutput = computer.outputs.removeLast()
+                    interimOutput = computer.output(true)
                 }
             } while (!computers.last().halted)
             bestOutput = bestOutput.coerceAtLeast(interimOutput)

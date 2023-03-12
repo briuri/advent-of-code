@@ -38,10 +38,10 @@ class Puzzle : BasePuzzle() {
         val computer = Computer(input[0].extractLongs())
         while (!computer.halted) {
             val color = painted.getOrDefault(position.coords, 0)
-            computer.inputs.add(color.toLong())
+            computer.input(color.toLong())
             computer.run()
-            painted[position.coords] = computer.outputs.removeFirst().toInt()
-            if (computer.outputs.removeFirst().toInt() == 0) {
+            painted[position.coords] = computer.output().toInt()
+            if (computer.output().toInt() == 0) {
                 position.turnLeft()
             } else {
                 position.turnRight()

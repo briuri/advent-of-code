@@ -27,8 +27,8 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val computer = Computer(input[0].extractLongs())
-        computer.inputs.add(if (part.isOne()) 1L else 2L)
+        computer.input(if (part.isOne()) 1L else 2L)
         computer.run()
-        return computer.outputs.last()
+        return computer.output(true)
     }
 }

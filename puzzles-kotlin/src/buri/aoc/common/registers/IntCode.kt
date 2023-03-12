@@ -2,20 +2,19 @@ package buri.aoc.common.registers
 
 /**
  * Computer for IntCode problems
- * (y19d02, y19d05, y19d07, y19d09, y19d11)
+ * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13)
  *
  * @author Brian Uri!
  */
 class Computer(private val instructions: List<Long>, private val debug: Boolean = false) {
-    val inputs = mutableListOf<Long>()
-    val outputs = mutableListOf<Long>()
+    private val inputs = mutableListOf<Long>()
+    private val outputs = mutableListOf<Long>()
     val halted
         get() = (memory[ip] == 99L)
 
     private var ip = 0
     private var rb = 0
     private var memory = mutableListOf<Long>()
-
 
     init {
         reset()
@@ -38,6 +37,23 @@ class Computer(private val instructions: List<Long>, private val debug: Boolean 
         set(Param(1, 0), noun)
         set(Param(2, 0), verb)
     }
+
+    /**
+     * Adds a number to the input
+     */
+    fun input(value: Long) {
+        inputs.add(value)
+    }
+
+    /**
+     * Returns true if there are outputs available.
+     */
+    fun hasOutput(): Boolean = outputs.isNotEmpty()
+
+    /**
+     * Removes outputs in sequential order.
+     */
+    fun output(reverse: Boolean = false): Long = if (reverse) outputs.removeLast() else outputs.removeFirst()
 
     /**
      * Runs the IntCode. May suspend temporarily if it needs input.
