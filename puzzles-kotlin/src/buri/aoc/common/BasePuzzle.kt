@@ -109,6 +109,21 @@ abstract class BasePuzzle {
         }
         return permutations
     }
+
+    /**
+     * Returns the least common multiple of two numbers
+     */
+    fun getLCM(a: Long, b: Long): Long {
+        val highValue = a.coerceAtLeast(b)
+        var lcm = highValue
+        while (true) {
+            if ((lcm % a == 0L) && (lcm % b == 0L)) {
+                break
+            }
+            lcm += highValue
+        }
+        return lcm
+    }
 }
 
 /**
