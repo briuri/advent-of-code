@@ -63,14 +63,14 @@ class Puzzle : BasePuzzle() {
             }
 
             // Follow the ball with the paddle.
-            val input = if (paddleX == ballX) {
+            val command = if (paddleX == ballX) {
                 0L
             } else if (paddleX > ballX) {
                 -1L
             } else {
                 1L
             }
-            computer.input(input)
+            computer.input(command)
         }
 
         return if (part.isOne()) grid.count('#') else score
