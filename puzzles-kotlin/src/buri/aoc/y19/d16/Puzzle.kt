@@ -3,8 +3,6 @@ package buri.aoc.y19.d16
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import org.junit.Test
-import java.util.*
-import kotlin.collections.ArrayDeque
 import kotlin.math.absoluteValue
 
 /**

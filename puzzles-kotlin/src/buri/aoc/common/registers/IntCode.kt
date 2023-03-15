@@ -2,7 +2,7 @@ package buri.aoc.common.registers
 
 /**
  * Computer for IntCode problems
- * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13)
+ * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17)
  *
  * @author Brian Uri!
  */
@@ -42,6 +42,15 @@ class Computer(private val instructions: List<Long>, private val debug: Boolean 
      */
     fun input(value: Long) {
         inputs.add(value)
+    }
+
+    /**
+     * Converts a string to ASCII and adds it as input.
+     */
+    fun input(string: String) {
+        for (value in string) {
+            input(value.code.toLong())
+        }
     }
 
     /**
