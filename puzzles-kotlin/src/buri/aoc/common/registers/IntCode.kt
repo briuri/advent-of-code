@@ -2,7 +2,7 @@ package buri.aoc.common.registers
 
 /**
  * Computer for IntCode problems
- * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17)
+ * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17, y19d19)
  *
  * @author Brian Uri!
  */
