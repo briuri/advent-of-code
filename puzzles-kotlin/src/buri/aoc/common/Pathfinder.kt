@@ -7,7 +7,7 @@ import buri.aoc.common.position.Point2D
  *
  * @author Brian Uri!
  */
-class Pathfinder2D(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
+class Pathfinder(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
 
     /**
      * Returns a "came from" map showing all the reachable spaces from a particular space. The entry for the
@@ -32,18 +32,17 @@ class Pathfinder2D(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
     }
 
     fun exploreFrom(startX: Int, startY: Int): Map<Point2D<Int>, Point2D<Int>?> = exploreFrom(Point2D(startX, startY))
-
 }
 
 /**
  * Extension function to count the steps in a "came from" map. Returns -1 if there is no path between the points.
  */
-fun Map<Point2D<Int>, Point2D<Int>?>.countSteps(start: Point2D<Int>, end: Point2D<Int>): Int {
+fun <T> Map<T, T?>.countSteps(start: T, end: T): Int {
     if (start == end) {
         return 0
     }
     var steps = 0
-    var current: Point2D<Int>? = end
+    var current: T? = end
     while (current != null) {
         steps++
         current = this[current]

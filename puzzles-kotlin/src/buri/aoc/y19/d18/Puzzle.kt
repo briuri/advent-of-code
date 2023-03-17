@@ -2,7 +2,7 @@ package buri.aoc.y19.d18
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Pathfinder2D
+import buri.aoc.common.Pathfinder
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
 import buri.aoc.common.position.getNeighbors
@@ -54,7 +54,7 @@ class Puzzle : BasePuzzle() {
         }
 
         // Use a pathfinder that avoids walls.
-        val pathfinder = Pathfinder2D { current ->
+        val pathfinder = Pathfinder { current ->
             current.getNeighbors().filter { grid[it] != '#' }
         }
 
