@@ -2,7 +2,7 @@ package buri.aoc.y18.d15
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Pathfinder
+import buri.aoc.common.Pathfinder2D
 import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
@@ -90,7 +90,7 @@ class Simulation(private val elfAttack: Int) {
         }
 
         // Use a pathfinder that avoids walls and other mobs.
-        val pathfinder = Pathfinder { current ->
+        val pathfinder = Pathfinder2D { current ->
             current.getNeighbors(false).filter { map[it] !in "#EG" }
         }
 

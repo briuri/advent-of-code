@@ -7,7 +7,7 @@ import buri.aoc.common.position.Point2D
  *
  * @author Brian Uri!
  */
-class Pathfinder(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
+class Pathfinder2D(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
 
     /**
      * Returns a "came from" map showing all the reachable spaces from a particular space. The entry for the

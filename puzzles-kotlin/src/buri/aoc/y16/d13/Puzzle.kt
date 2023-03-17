@@ -2,7 +2,7 @@ package buri.aoc.y16.d13
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.Pathfinder
+import buri.aoc.common.Pathfinder2D
 import buri.aoc.common.countSteps
 import buri.aoc.common.position.Point2D
 import buri.aoc.common.position.getNeighbors
@@ -34,7 +34,7 @@ class Puzzle : BasePuzzle() {
         val end = Point2D(input[1].split(",")[0].toInt(), input[1].split(",")[1].toInt())
 
         // Use a pathfinder that uses the magicNumber to determine which spots are open.
-        val pathfinder = Pathfinder { current ->
+        val pathfinder = Pathfinder2D { current ->
             current.getNeighbors(false).filter { isTraversable(magicNumber, it) }
         }
 
