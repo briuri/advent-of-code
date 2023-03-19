@@ -2,7 +2,7 @@ package buri.aoc.common.registers
 
 /**
  * Computer for IntCode problems
- * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17, y19d19, y19d21)
+ * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17, y19d19, y19d21, y19d23)
  *
  * @author Brian Uri!
  */
@@ -52,6 +52,11 @@ class Computer(private val instructions: List<Long>, private val debug: Boolean 
             input(value.code.toLong())
         }
     }
+
+    /**
+     * Returns true if there are inputs available.
+     */
+    fun hasInput(): Boolean = inputs.isNotEmpty()
 
     /**
      * Returns true if there are outputs available.
