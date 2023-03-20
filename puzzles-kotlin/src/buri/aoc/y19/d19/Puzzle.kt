@@ -65,6 +65,7 @@ class Puzzle : BasePuzzle() {
         this.run()
         return (this.output() == 1L)
     }
+
     private fun Computer.inBeam(point: Point2D<Int>): Boolean = inBeam(point.x, point.y)
 
     /**

@@ -1,6 +1,9 @@
 package buri.aoc.y19.d20
 
-import buri.aoc.common.*
+import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
+import buri.aoc.common.Pathfinder
+import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
 import buri.aoc.common.position.Point3D

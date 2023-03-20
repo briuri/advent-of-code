@@ -2,9 +2,11 @@ package buri.aoc.y19.d11
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractInts
 import buri.aoc.common.extractLongs
-import buri.aoc.common.position.*
+import buri.aoc.common.position.Direction
+import buri.aoc.common.position.Grid
+import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.position.Point2D
 import buri.aoc.common.registers.Computer
 import org.junit.Test
 

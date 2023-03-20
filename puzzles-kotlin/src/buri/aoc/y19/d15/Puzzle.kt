@@ -1,7 +1,8 @@
 package buri.aoc.y19.d15
 
 import buri.aoc.common.*
-import buri.aoc.common.position.*
+import buri.aoc.common.position.Grid
+import buri.aoc.common.position.Point2D
 import buri.aoc.common.registers.Computer
 import org.junit.Test
 

@@ -5,7 +5,6 @@ import buri.aoc.common.Part
 import buri.aoc.common.extractInts
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
-import buri.aoc.common.position.getNeighbors
 import org.junit.Test
 
 /**

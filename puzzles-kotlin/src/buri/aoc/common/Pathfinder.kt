@@ -1,7 +1,5 @@
 package buri.aoc.common
 
-import buri.aoc.common.position.Point2D
-
 /**
  * Search utility for finding paths between points.
  *
