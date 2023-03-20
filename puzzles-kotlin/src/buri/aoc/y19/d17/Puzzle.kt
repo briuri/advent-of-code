@@ -48,7 +48,8 @@ class Puzzle : BasePuzzle() {
             }
 
             // Find scaffolds with all 4 neighbors also scaffolds and sum their point products.
-            return scaffolds.filter { it.getNeighbors().all { near -> near in scaffolds } }.sumOf { it.x * it.y }
+            val intersections = scaffolds.filter { it.getNeighbors().all { near -> near in scaffolds } }
+            return intersections.sumOf { it.x * it.y }
         }
 
         // Based on visual inspection of the grid (after which I refactored Part I to just use a set).
