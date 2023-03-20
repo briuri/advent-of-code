@@ -34,7 +34,7 @@ class Puzzle : BasePuzzle() {
         val end = Point2D(input[1].split(",")[0].toInt(), input[1].split(",")[1].toInt())
 
         // Use a pathfinder that uses the magicNumber to determine which spots are open.
-        val pathfinder = Pathfinder { current ->
+        val pathfinder = Pathfinder<Point2D<Int>> { current ->
             current.getNeighbors(false).filter { isTraversable(magicNumber, it) }
         }
 

@@ -34,7 +34,7 @@ class Puzzle : BasePuzzle() {
         map.explore(mutableSetOf(), map.start.x, map.start.y, fullPath)
 
         // Use a pathfinder that avoids walls.
-        val pathfinder = Pathfinder { current ->
+        val pathfinder = Pathfinder<Point2D<Int>> { current ->
             map.getNeighbors(current).filter { map[it] != '#' }
         }
 

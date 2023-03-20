@@ -90,7 +90,7 @@ class Simulation(private val elfAttack: Int) {
         }
 
         // Use a pathfinder that avoids walls and other mobs.
-        val pathfinder = Pathfinder { current ->
+        val pathfinder = Pathfinder<Point2D<Int>> { current ->
             current.getNeighbors(false).filter { map[it] !in "#EG" }
         }
 

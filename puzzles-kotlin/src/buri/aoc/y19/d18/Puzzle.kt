@@ -54,7 +54,7 @@ class Puzzle : BasePuzzle() {
         }
 
         // Use a pathfinder that avoids walls.
-        val pathfinder = Pathfinder { current ->
+        val pathfinder = Pathfinder<Point2D<Int>> { current ->
             current.getNeighbors().filter { grid[it] != '#' }
         }
 

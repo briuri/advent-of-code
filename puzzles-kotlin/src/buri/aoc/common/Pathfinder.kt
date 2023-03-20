@@ -5,22 +5,24 @@ import buri.aoc.common.position.Point2D
 /**
  * Search utility for finding paths between points.
  *
+ * T is a Point2D<Int> or a Point3D<Int>.
+ *
  * @author Brian Uri!
  */
-class Pathfinder(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
+class Pathfinder<T>(val stepStrategy: (T) -> List<T>) {
 
     /**
      * Returns a "came from" map showing all the reachable spaces from a particular space. The entry for the
      * starting position start will have a null value.
      */
-    fun exploreFrom(start: Point2D<Int>): Map<Point2D<Int>, Point2D<Int>?> {
-        val frontier = ArrayDeque<Point2D<Int>>()
+    fun exploreFrom(start: T): Map<T, T?> {
+        val frontier = ArrayDeque<T>()
         frontier.add(start)
 
-        val cameFrom = mutableMapOf<Point2D<Int>, Point2D<Int>?>()
+        val cameFrom = mutableMapOf<T, T?>()
         cameFrom[start] = null
 
-        var current: Point2D<Int>?
+        var current: T?
         while (frontier.isNotEmpty()) {
             current = frontier.removeFirst()
             for (next in stepStrategy(current).filter { !cameFrom.containsKey(it) }) {
