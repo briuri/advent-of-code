@@ -168,6 +168,30 @@ data class Point3D<T>(val x: T, val y: T, val z: T) : BaseTuple<T>(), Comparable
 }
 
 /**
+ * Gets neighbors of an Int point in reading order, in a single z plane.
+ */
+fun Point3D<Int>.getNeighbors(includeDiagonals: Boolean = false): MutableList<Point3D<Int>> {
+    val list = mutableListOf<Point3D<Int>>()
+    if (includeDiagonals) {
+        list.add(Point3D(x - 1, y - 1, this.z))
+    }
+    list.add(Point3D(x, y - 1, this.z))
+    if (includeDiagonals) {
+        list.add(Point3D(x + 1, y - 1, this.z))
+    }
+    list.add(Point3D(x - 1, y, this.z))
+    list.add(Point3D(x + 1, y, this.z))
+    if (includeDiagonals) {
+        list.add(Point3D(x - 1, y + 1, this.z))
+    }
+    list.add(Point3D(x, y + 1, this.z))
+    if (includeDiagonals) {
+        list.add(Point3D(x + 1, y + 1, this.z))
+    }
+    return list
+}
+
+/**
  * 4D Points
  */
 data class Point4D<T>(val x: T, val y: T, val z: T, val t: T) : BaseTuple<T>(), Comparable<Point4D<T>> {
