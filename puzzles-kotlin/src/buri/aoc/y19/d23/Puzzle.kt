@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val computers = mutableListOf<Computer>()
         repeat(50) {
-            val computer = Computer(input[0].extractLongs())
+            val computer = Computer(input)
             computer.input(it.toLong())
             computers.add(computer)
         }

@@ -2,7 +2,6 @@ package buri.aoc.y19.d11
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractLongs
 import buri.aoc.common.position.Direction
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.MutablePosition
@@ -37,7 +36,7 @@ class Puzzle : BasePuzzle() {
             painted[position.coords] = 1
         }
 
-        val computer = Computer(input[0].extractLongs())
+        val computer = Computer(input)
         while (!computer.halted) {
             val color = painted.getOrDefault(position.coords, 0)
             computer.input(color.toLong())

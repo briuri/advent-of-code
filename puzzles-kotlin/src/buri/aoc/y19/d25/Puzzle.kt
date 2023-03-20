@@ -21,7 +21,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): String {
-        val computer = Computer(input[0].extractLongs())
+        val computer = Computer(input)
         // Originally, I set up commands to bring all items to last room.
         // Then I automated picking up different subsets of items until I found the correct 4.
         // Finally, I pared the commands back to just the ones needed as a walkthrough.

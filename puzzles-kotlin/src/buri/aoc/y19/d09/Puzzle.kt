@@ -2,7 +2,6 @@ package buri.aoc.y19.d09
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractLongs
 import buri.aoc.common.registers.Computer
 import org.junit.Test
 
@@ -26,7 +25,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val computer = Computer(input[0].extractLongs())
+        val computer = Computer(input)
         computer.input(if (part.isOne()) 1L else 2L)
         computer.run()
         return computer.output(true)

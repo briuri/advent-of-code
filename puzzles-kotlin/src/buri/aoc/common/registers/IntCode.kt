@@ -1,12 +1,14 @@
 package buri.aoc.common.registers
 
+import buri.aoc.common.extractLongs
+
 /**
  * Computer for IntCode problems
- * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17, y19d19, y19d21, y19d23)
+ * (y19d02, y19d05, y19d07, y19d09, y19d11, y19d13, y9d15, y19d17, y19d19, y19d21, y19d23, y19d25)
  *
  * @author Brian Uri!
  */
-class Computer(private val instructions: List<Long>, private val debug: Boolean = false) {
+class Computer(private val instructions: List<String>, private val debug: Boolean = false) {
     private val inputs = mutableListOf<Long>()
     private val outputs = mutableListOf<Long>()
     val halted
@@ -26,7 +28,7 @@ class Computer(private val instructions: List<Long>, private val debug: Boolean 
     fun reset() {
         ip = 0
         rb = 0
-        memory = instructions.toMutableList()
+        memory = instructions[0].extractLongs().toMutableList()
         outputs.clear()
     }
 

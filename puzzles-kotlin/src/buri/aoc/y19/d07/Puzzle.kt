@@ -2,7 +2,6 @@ package buri.aoc.y19.d07
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractLongs
 import buri.aoc.common.registers.Computer
 import org.junit.Test
 
@@ -26,7 +25,6 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val instructions = input[0].extractLongs()
         val phaseSettings = if (part.isOne()) listOf(0, 1, 2, 3, 4) else listOf(5, 6, 7, 8, 9)
         val numAmps = phaseSettings.size
 
@@ -34,7 +32,7 @@ class Puzzle : BasePuzzle() {
         for (phases in generatePermutations(phaseSettings)) {
             val computers = mutableListOf<Computer>()
             for (i in 0 until numAmps) {
-                computers.add(Computer(instructions))
+                computers.add(Computer(input))
                 computers[i].input(phases[i].toLong())
             }
 

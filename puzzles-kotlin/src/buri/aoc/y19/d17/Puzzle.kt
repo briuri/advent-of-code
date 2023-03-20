@@ -2,7 +2,6 @@ package buri.aoc.y19.d17
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractLongs
 import buri.aoc.common.position.Point2D
 import buri.aoc.common.position.getNeighbors
 import buri.aoc.common.registers.Computer
@@ -28,7 +27,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val computer = Computer(input[0].extractLongs())
+        val computer = Computer(input)
 
         val scaffolds = mutableSetOf<Point2D<Int>>()
         if (part.isOne()) {

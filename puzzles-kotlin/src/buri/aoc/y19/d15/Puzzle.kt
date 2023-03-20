@@ -1,6 +1,9 @@
 package buri.aoc.y19.d15
 
-import buri.aoc.common.*
+import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
+import buri.aoc.common.Pathfinder
+import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
 import buri.aoc.common.registers.Computer
@@ -30,7 +33,7 @@ class Puzzle : BasePuzzle() {
         val start = Point2D(grid.width / 2, grid.height / 2)
         grid[start] = 'o'
 
-        val computer = Computer(input[0].extractLongs())
+        val computer = Computer(input)
         explore(computer, grid, start)
         var end: Point2D<Int> = grid.filter { it == 'X'}.first()
 
