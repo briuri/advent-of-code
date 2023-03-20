@@ -2,7 +2,6 @@ package buri.aoc.y19.d23
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.extractLongs
 import buri.aoc.common.registers.Computer
 import org.junit.Test
 
