@@ -56,7 +56,7 @@ class Puzzle : BasePuzzle() {
         return if (part.isOne()) {
             regionSizes.maxByOrNull { it.value }!!.value
         } else {
-            distanceSums.filter { it.value < 10000 }.size
+            distanceSums.count { it.value < 10000 }
         }
     }
 

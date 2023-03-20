@@ -51,7 +51,7 @@ class Puzzle : BasePuzzle() {
         }
 
         // Check any sibling of this disc to see what the weight should be.
-        val targetWeight = current.parent!!.children.filter { it != current }[0].totalWeight
+        val targetWeight = current.parent!!.children.first { it != current }.totalWeight
         val delta = targetWeight - current.totalWeight
         return ((current.weight + delta).toString())
     }

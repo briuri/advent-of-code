@@ -55,9 +55,9 @@ class Puzzle : BasePuzzle() {
             }
         }
         return if (part.isOne()) {
-            fabric.values.filter { it == -1 }.size
+            fabric.values.count { it == -1 }
         } else {
-            ids.filter { it !in overlaps }[0]
+            ids.first { it !in overlaps }
         }
     }
 }

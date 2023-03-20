@@ -44,7 +44,7 @@ class Puzzle : BasePuzzle() {
             visited.add(current)
             if (current.point == end) {
                 if (part.isOne()) {
-                    return visited.filter { it.point == end }[0].path
+                    return visited.first { it.point == end }.path
                 } else {
                     continue
                 }

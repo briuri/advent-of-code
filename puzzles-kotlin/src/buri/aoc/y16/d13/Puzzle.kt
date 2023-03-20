@@ -42,7 +42,7 @@ class Puzzle : BasePuzzle() {
         return if (part.isOne()) {
             stepMap.countSteps(start, end)
         } else {
-            stepMap.keys.filter { stepMap.countSteps(start, it) <= 50 }.size
+            stepMap.keys.count { stepMap.countSteps(start, it) <= 50 }
         }
     }
 
