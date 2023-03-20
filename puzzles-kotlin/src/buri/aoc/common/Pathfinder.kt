@@ -30,8 +30,6 @@ class Pathfinder(val stepStrategy: (Point2D<Int>) -> List<Point2D<Int>>) {
         }
         return cameFrom
     }
-
-    fun exploreFrom(startX: Int, startY: Int): Map<Point2D<Int>, Point2D<Int>?> = exploreFrom(Point2D(startX, startY))
 }
 
 /**

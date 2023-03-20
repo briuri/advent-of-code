@@ -38,7 +38,7 @@ class Puzzle : BasePuzzle() {
             map.getNeighbors(current).filter { map[it] != '#' }
         }
 
-        val cameFrom = pathfinder.exploreFrom(map.start.x, map.start.y)
+        val cameFrom = pathfinder.exploreFrom(map.start)
         val steps = mutableMapOf<Point2D<Int>, Int>()
         // Rooms are any square that isn't a door or wall.
         for (room in cameFrom.keys.filter { map[it] == '.' }) {
