@@ -29,12 +29,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val gridHistory = mutableListOf<String>()
         val resourceHistory = mutableListOf<Int>()
-        var grid = Grid(input[0].length, input.size, '.')
-        for ((y, line) in input.withIndex()) {
-            for ((x, value) in line.withIndex()) {
-                grid[x, y] = value
-            }
-        }
+        var grid = Grid.fromInput(input, '.')
+
         val minutes = if (part.isOne()) 10 else 1_000_000_000
         for (i in 0 until minutes) {
             val newGrid = grid.copy()

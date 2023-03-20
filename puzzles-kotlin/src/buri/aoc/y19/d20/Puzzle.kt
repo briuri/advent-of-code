@@ -30,16 +30,12 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid(input[0].length, input.size, '#')
+        val grid = Grid.fromInput(input, '#')
         val letters = mutableMapOf<Char, MutableList<Point2D<Int>>>()
-        for ((y, line) in input.withIndex()) {
-            for ((x, value) in line.withIndex()) {
-                grid[x, y] = value
-                if (value.isLetterOrDigit()) {
-                    letters.putIfAbsent(value, mutableListOf())
-                    letters[value]!!.add(Point2D(x, y))
-                }
-            }
+        for (point in grid.filter { it.isLetterOrDigit() }) {
+            val value = grid[point]
+            letters.putIfAbsent(value, mutableListOf())
+            letters[value]!!.add(point)
         }
 
         // Resolve ports

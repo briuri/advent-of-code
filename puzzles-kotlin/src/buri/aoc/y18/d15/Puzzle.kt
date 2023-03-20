@@ -41,14 +41,9 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val mobs = mutableListOf<Mob>()
-        val map = Grid(input[0].length, input.size, '#')
-        for ((y, line) in input.withIndex()) {
-            for ((x, value) in line.withIndex()) {
-                if (value in "EG") {
-                    mobs.add(Mob(Point2D(x, y), value == 'E'))
-                }
-                map[x, y] = value
-            }
+        val map = Grid.fromInput(input, '#')
+        for (point in map.filter { it in "EG" }) {
+            mobs.add(Mob(point, map[point] == 'E'))
         }
 
         if (part.isOne()) {

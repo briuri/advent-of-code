@@ -32,14 +32,7 @@ class Puzzle : BasePuzzle() {
 
         val computer = Computer(input[0].extractLongs())
         explore(computer, grid, start)
-        var end: Point2D<Int> = start
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
-                if (grid[x, y] == 'X') {
-                    end = Point2D(x, y)
-                }
-            }
-        }
+        var end: Point2D<Int> = grid.filter { it == 'X'}.first()
 
         // Use a pathfinder that avoids walls.
         val pathfinder = Pathfinder<Point2D<Int>> { current ->

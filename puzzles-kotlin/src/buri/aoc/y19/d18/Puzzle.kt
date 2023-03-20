@@ -30,25 +30,22 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid(input[0].length, input.size, '#')
+        val grid = Grid.fromInput(input, '#')
         val robotStarterKeys = mutableMapOf<Char, MutableList<Char>>()
         val keys = mutableMapOf<Char, Point2D<Int>>()
         val doors = mutableMapOf<Char, Point2D<Int>>()
-        for ((y, line) in input.withIndex()) {
-            for ((x, value) in line.withIndex()) {
-                grid[x, y] = value
-                val point = Point2D(x, y)
-                if (value.isDigit()) {
-                    robotStarterKeys[value] = mutableListOf()
-                    // Temporarily store starts so we can generate routes from them.
+        for (point in grid.filter { it.isLetterOrDigit() }) {
+            val value = grid[point]
+            if (value.isDigit()) {
+                robotStarterKeys[value] = mutableListOf()
+                // Temporarily store starts so we can generate routes from them.
+                keys[value] = point
+            }
+            if (value.isLetter()) {
+                if (value.isLowerCase()) {
                     keys[value] = point
-                }
-                if (value.isLetter()) {
-                    if (value.isLowerCase()) {
-                        keys[value] = point
-                    } else {
-                        doors[value] = point
-                    }
+                } else {
+                    doors[value] = point
                 }
             }
         }
