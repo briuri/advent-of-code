@@ -46,6 +46,7 @@ class Puzzle : BasePuzzle() {
             while ((timestamp + bus.position) % bus.id != 0L) {
                 timestamp += increment
             }
+            // Go up an amount that works for all buses so far.
             increment *= bus.id
         }
         return timestamp
