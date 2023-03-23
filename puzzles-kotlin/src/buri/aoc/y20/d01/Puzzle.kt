@@ -36,7 +36,7 @@ class Puzzle : BasePuzzle() {
         }
         for (a in numbers) {
             for (b in numbers.filter { it != a }) {
-                for (c in numbers.filter { it != a && it != b}) {
+                for (c in numbers.filter { it != a && it != b }) {
                     if (a + b + c == 2020) {
                         return a * b * c
                     }
