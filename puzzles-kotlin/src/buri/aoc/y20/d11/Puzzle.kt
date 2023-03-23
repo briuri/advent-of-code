@@ -75,6 +75,6 @@ class Puzzle : BasePuzzle() {
             }
             neighbors = newNeighbors
         }
-        return neighbors.count { grid[it] == '#'}
+        return neighbors.count { grid[it] == '#' }
     }
 }
