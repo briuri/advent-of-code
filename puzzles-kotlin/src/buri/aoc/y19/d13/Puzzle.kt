@@ -72,6 +72,6 @@ class Puzzle : BasePuzzle() {
             computer.input(command)
         }
 
-        return if (part.isOne()) grid.count('#') else score
+        return if (part.isOne()) grid.count { it == '#' } else score
     }
 }

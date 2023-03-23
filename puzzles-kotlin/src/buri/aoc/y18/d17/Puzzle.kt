@@ -78,7 +78,7 @@ class Puzzle : BasePuzzle() {
         // Only count squares in between minY and maxY.
         val countGrid = grid.getSubGrid(Point2D(0, minY), grid.width, grid.height - minY)
         return if (part.isOne()) {
-            previousWaterCount + countGrid.count('|')
+            previousWaterCount + countGrid.count { it == '|' }
         } else {
             previousWaterCount
         }

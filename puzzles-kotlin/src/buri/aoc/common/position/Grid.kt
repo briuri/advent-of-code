@@ -30,7 +30,7 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     /**
      * Returns all points in the grid that contain some value.
      */
-    public fun filter(predicate: (T) -> Boolean): List<Point2D<Int>> {
+    fun filter(predicate: (T) -> Boolean): List<Point2D<Int>> {
         val list = mutableListOf<Point2D<Int>>()
         for (y in 0 until height) {
             for (x in 0 until width) {
@@ -45,8 +45,8 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     /**
      * Counts occurrences of some value.
      */
-    fun count(value: T): Int {
-        return grid.count { it == value }
+    fun count(predicate: (T) -> Boolean): Int {
+        return grid.count(predicate)
     }
 
     /**

@@ -61,7 +61,7 @@ class Puzzle : BasePuzzle() {
             }
         }
 
-        return grid.count('#')
+        return grid.count { it == '#' }
     }
 
     /**

@@ -62,7 +62,7 @@ class Puzzle : BasePuzzle() {
                 return resourceHistory[futureIndex]
             }
             gridHistory.add(state)
-            resourceHistory.add(grid.count('|') * grid.count('#'))
+            resourceHistory.add(grid.count { it == '|' } * grid.count { it == '#' })
         }
         return resourceHistory.last()
     }
