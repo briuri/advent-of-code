@@ -35,7 +35,7 @@ class Puzzle : BasePuzzle() {
 
         val computer = Computer(input)
         explore(computer, grid, start)
-        var end: Point2D<Int> = grid.filter { it == 'X' }.first()
+        val end: Point2D<Int> = grid.filter { it == 'X' }.first()
 
         // Use a pathfinder that avoids walls.
         val pathfinder = Pathfinder<Point2D<Int>> { current ->

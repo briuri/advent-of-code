@@ -40,7 +40,7 @@ class Puzzle : BasePuzzle() {
                     particlesAt[particle.position]!!.add(particle)
                 }
                 for (collision in particlesAt.values.filter { it.size > 1 }) {
-                    particles.removeAll(collision)
+                    particles.removeAll(collision.toSet())
                 }
             }
         }
