@@ -3,7 +3,6 @@ package buri.aoc.y19.d24
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Point3D
-import buri.aoc.common.position.get2DNeighbors
 import org.junit.Test
 import kotlin.math.pow
 
@@ -99,7 +98,11 @@ class Puzzle : BasePuzzle() {
      * Returns true if a point becomes a bug on the next iteration.
      */
     private fun Point3D<Int>.becomesBug(part: Part, bugs: Set<Point3D<Int>>): Boolean {
-        var neighbors = this.get2DNeighbors()
+        var neighbors = mutableListOf<Point3D<Int>>()
+        neighbors.add(Point3D(x, y - 1, z))
+        neighbors.add(Point3D(x - 1, y, z))
+        neighbors.add(Point3D(x + 1, y, z))
+        neighbors.add(Point3D(x, y + 1, z))
         if (part.isTwo()) {
             val newNeighbors = mutableListOf<Point3D<Int>>()
             for (neighbor in neighbors) {
