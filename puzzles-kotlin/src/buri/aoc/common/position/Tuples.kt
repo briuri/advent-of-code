@@ -86,7 +86,7 @@ data class Point2D<T>(val x: T, val y: T) : BaseTuple<T>(), Comparable<Point2D<T
  *
  * @author Brian Uri!
  */
-class Bounds(points: Set<Point2D<Int>>) {
+class Bounds2D(points: Set<Point2D<Int>>) {
     val x: IntRange
     val y: IntRange
     val area: Long

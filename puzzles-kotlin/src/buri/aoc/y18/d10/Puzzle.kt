@@ -3,7 +3,7 @@ package buri.aoc.y18.d10
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
-import buri.aoc.common.position.Bounds
+import buri.aoc.common.position.Bounds2D
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
 import org.junit.Test
@@ -36,11 +36,11 @@ class Puzzle : BasePuzzle() {
             stars.add(Star(line.extractInts()))
         }
 
-        var lastArea = Bounds(stars.getPositions()).area
+        var lastArea = Bounds2D(stars.getPositions()).area
         var ticks = 0
         while (true) {
             stars.forEach { it.tick() }
-            val nextArea = Bounds(stars.getPositions()).area
+            val nextArea = Bounds2D(stars.getPositions()).area
             // When area starts growing again, go 1 step back.
             if (nextArea > lastArea) {
                 stars.forEach { it.tick(true) }
@@ -57,7 +57,7 @@ class Puzzle : BasePuzzle() {
      */
     private fun toGrid(stars: MutableSet<Star>): Grid<Char> {
         // Offset stars for grid rendering.
-        val bounds = Bounds(stars.getPositions())
+        val bounds = Bounds2D(stars.getPositions())
         stars.forEach {
             it.position = it.position.copy(
                 x = it.position.x - bounds.x.first,

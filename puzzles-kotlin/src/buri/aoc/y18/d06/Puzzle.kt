@@ -3,7 +3,7 @@ package buri.aoc.y18.d06
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
-import buri.aoc.common.position.Bounds
+import buri.aoc.common.position.Bounds2D
 import buri.aoc.common.position.Point2D
 import org.junit.Test
 
@@ -33,7 +33,7 @@ class Puzzle : BasePuzzle() {
             val numbers = line.extractInts()
             points.add(Point2D(numbers[0], numbers[1]))
         }
-        val bounds = Bounds(points)
+        val bounds = Bounds2D(points)
 
         val regionSizes = mutableMapOf<Point2D<Int>, Int>()
         val distanceSums = mutableMapOf<Point2D<Int>, Int>()
