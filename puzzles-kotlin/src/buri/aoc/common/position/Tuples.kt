@@ -93,43 +93,39 @@ class Bounds2D(points: Set<Point2D<Int>>) {
         get() = (x.last - x.first).toLong() * (y.last - y.first).toLong()
 
     init {
-        var minX = Int.MAX_VALUE
-        var maxX = Int.MIN_VALUE
-        var minY = Int.MAX_VALUE
-        var maxY = Int.MIN_VALUE
-        for (point in points) {
-            minX = minX.coerceAtMost(point.x)
-            maxX = maxX.coerceAtLeast(point.x)
-            minY = minY.coerceAtMost(point.y)
-            maxY = maxY.coerceAtLeast(point.y)
-        }
+        val minX = points.minOf { it.x }
+        val maxX = points.maxOf { it.x }
+        val minY = points.minOf { it.y }
+        val maxY = points.maxOf { it.y }
         x = minX..maxX
         y = minY..maxY
     }
+
+    override fun toString(): String = "x=$x,y=$y"
 }
 
 /**
- * Gets neighbors of an Int point in reading order.
+ * Gets neighbors of an Int point in reading order. Can be toggled for diagonally adjacent spots.
  */
 fun Point2D<Int>.getNeighbors(includeDiagonals: Boolean = false): MutableList<Point2D<Int>> {
-    val list = mutableListOf<Point2D<Int>>()
+    val neighbors = mutableListOf<Point2D<Int>>()
     if (includeDiagonals) {
-        list.add(Point2D(x - 1, y - 1))
+        neighbors.add(Point2D(x - 1, y - 1))
     }
-    list.add(Point2D(x, y - 1))
+    neighbors.add(Point2D(x, y - 1))
     if (includeDiagonals) {
-        list.add(Point2D(x + 1, y - 1))
+        neighbors.add(Point2D(x + 1, y - 1))
     }
-    list.add(Point2D(x - 1, y))
-    list.add(Point2D(x + 1, y))
+    neighbors.add(Point2D(x - 1, y))
+    neighbors.add(Point2D(x + 1, y))
     if (includeDiagonals) {
-        list.add(Point2D(x - 1, y + 1))
+        neighbors.add(Point2D(x - 1, y + 1))
     }
-    list.add(Point2D(x, y + 1))
+    neighbors.add(Point2D(x, y + 1))
     if (includeDiagonals) {
-        list.add(Point2D(x + 1, y + 1))
+        neighbors.add(Point2D(x + 1, y + 1))
     }
-    return list
+    return neighbors
 }
 
 /**
@@ -168,27 +164,34 @@ data class Point3D<T>(val x: T, val y: T, val z: T) : BaseTuple<T>(), Comparable
 }
 
 /**
- * Gets neighbors of an Int point in reading order, in a single z plane.
+ * The rectangular bounds for a set of Int points.
+ *
+ * @author Brian Uri!
  */
-fun Point3D<Int>.get2DNeighbors(includeDiagonals: Boolean = false): MutableList<Point3D<Int>> {
-    val list = mutableListOf<Point3D<Int>>()
-    if (includeDiagonals) {
-        list.add(Point3D(x - 1, y - 1, this.z))
+class Bounds3D(points: Set<Point3D<Int>>) {
+    val x = (points.minOf { it.x })..(points.maxOf { it.x })
+    val y = (points.minOf { it.y })..(points.maxOf { it.y })
+    val z = (points.minOf { it.z })..(points.maxOf { it.z })
+
+    override fun toString(): String = "x=$x,y=$y,z=$z"
+}
+
+/**
+ * Gets all neighbors of an Int point (9 above, 8 around, and 9 below).
+ */
+fun Point3D<Int>.getNeighbors(): MutableList<Point3D<Int>> {
+    val neighbors = mutableListOf<Point3D<Int>>()
+    for (dz in -1..1) {
+        for (dy in -1..1) {
+            for (dx in -1..1) {
+                val point = Point3D(x + dx, y + dy, z + dz)
+                if (point != this) {
+                    neighbors.add(point)
+                }
+            }
+        }
     }
-    list.add(Point3D(x, y - 1, this.z))
-    if (includeDiagonals) {
-        list.add(Point3D(x + 1, y - 1, this.z))
-    }
-    list.add(Point3D(x - 1, y, this.z))
-    list.add(Point3D(x + 1, y, this.z))
-    if (includeDiagonals) {
-        list.add(Point3D(x - 1, y + 1, this.z))
-    }
-    list.add(Point3D(x, y + 1, this.z))
-    if (includeDiagonals) {
-        list.add(Point3D(x + 1, y + 1, this.z))
-    }
-    return list
+    return neighbors
 }
 
 /**
@@ -227,4 +230,38 @@ data class Point4D<T>(val x: T, val y: T, val z: T, val t: T) : BaseTuple<T>(), 
     override fun toString(): String {
         return "$x,$y,$z,$t"
     }
+}
+
+/**
+ * The rectangular bounds for a set of Int points.
+ *
+ * @author Brian Uri!
+ */
+class Bounds4D(points: Set<Point4D<Int>>) {
+    val x = (points.minOf { it.x })..(points.maxOf { it.x })
+    val y = (points.minOf { it.y })..(points.maxOf { it.y })
+    val z = (points.minOf { it.z })..(points.maxOf { it.z })
+    val t = (points.minOf { it.t })..(points.maxOf { it.t })
+
+    override fun toString(): String = "x=$x,y=$y,z=$z,t=$t"
+}
+
+/**
+ * Gets all neighbors of an Int point (80 total).
+ */
+fun Point4D<Int>.getNeighbors(): MutableList<Point4D<Int>> {
+    val neighbors = mutableListOf<Point4D<Int>>()
+    for (dt in -1..1) {
+        for (dz in -1..1) {
+            for (dy in -1..1) {
+                for (dx in -1..1) {
+                    val point = Point4D(x + dx, y + dy, z + dz, t + dt)
+                    if (point != this) {
+                        neighbors.add(point)
+                    }
+                }
+            }
+        }
+    }
+    return neighbors
 }
