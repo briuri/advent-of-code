@@ -29,8 +29,8 @@ class Puzzle : BasePuzzle() {
             val tokens = line.split(" ")
             val rawNumbers = tokens[0].split("-")
             val range = rawNumbers[0].toInt()..rawNumbers[1].toInt()
-            val pos1 = rawNumbers[0].toInt() - 1
-            val pos2 = rawNumbers[1].toInt() - 1
+            val position1 = rawNumbers[0].toInt() - 1
+            val position2 = rawNumbers[1].toInt() - 1
             val letter = tokens[1].dropLast(1).first()
             val password = tokens[2]
 
@@ -39,7 +39,7 @@ class Puzzle : BasePuzzle() {
                     valid++
                 }
             } else {
-                if ((password[pos1] == letter && password[pos2] != letter) || (password[pos1] != letter && password[pos2] == letter)) {
+                if ((password[position1] == letter && password[position2] != letter) || (password[position1] != letter && password[position2] == letter)) {
                     valid++
                 }
             }

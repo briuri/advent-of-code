@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
         var valid = 0
         var i = 0
         val data = mutableListOf<String>()
-        while (true) {
+        while (i <= input.lastIndex) {
             if (input[i].isEmpty()) {
                 if (Passport(data).isValid(part)) {
                     valid++
@@ -38,13 +38,10 @@ class Puzzle : BasePuzzle() {
                 data.addAll(input[i].split(" "))
             }
             i++
-            // One more passport in the queue that doesn't end with a blank line.
-            if (i > input.lastIndex) {
-                if (Passport(data).isValid(part)) {
-                    valid++
-                }
-                break
-            }
+        }
+        // One more passport in the queue that doesn't end with a blank line.
+        if (Passport(data).isValid(part)) {
+            valid++
         }
         return valid
     }

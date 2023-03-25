@@ -61,11 +61,7 @@ class Bag(val name: String) {
      * Returns true of this bag can contain some other bag at any depth.
      */
     fun canCarry(name: String): Boolean {
-        var canCarry = (name in children.map { it.key.name })
-        for (child in children.keys) {
-            canCarry = canCarry || child.canCarry(name)
-        }
-        return canCarry
+        return (name in children.map { it.key.name }) || children.keys.any { it.canCarry(name) }
     }
 
     /**

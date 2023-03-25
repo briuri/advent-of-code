@@ -33,8 +33,8 @@ class Puzzle : BasePuzzle() {
         if (part.isOne()) {
             return seats.max()
         }
-        seats.sort()
 
+        seats.sort()
         for (i in 1 until seats.size) {
             if (seats[i] - 1 != seats[i - 1]) {
                 return seats[i] - 1

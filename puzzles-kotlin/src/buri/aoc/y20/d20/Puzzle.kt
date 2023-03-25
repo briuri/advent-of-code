@@ -40,7 +40,8 @@ class Puzzle : BasePuzzle() {
             if (input[i].startsWith("Tile ")) {
                 val id = input[i].extractLongs()[0]
                 val size = input[i + 1].length
-                remainingTiles.add(Tile(id, Grid.fromInput(input.subList(i + 1, i + 1 + size), ' ')))
+                val gridInput = input.subList(i + 1, i + 1 + size)
+                remainingTiles.add(Tile(id, Grid.fromInput(gridInput, ' ')))
                 i += size + 2
             }
         }
@@ -106,10 +107,8 @@ class Puzzle : BasePuzzle() {
             tile.grid = fullGrid.getSubGrid(subGridStart, fullGrid.width - 2, fullGrid.height - 2)
         }
 
-        // Stitch tiles together into one big one.
-        val stitchedTile = stitchTiles(image, bounds)
-
         // Only 1 permutation will have monsters.
+        val stitchedTile = stitchTiles(image, bounds)
         for (permutation in stitchedTile.permutations) {
             val monsterCount = countMonsters(permutation)
             if (monsterCount > 0) {
@@ -185,7 +184,6 @@ class Tile(val id: Long, var grid: Grid<Char>) {
         permutations.add(copy.copy(Orientation.CLOCKWISE_90))
         permutations.add(copy.copy(Orientation.CLOCKWISE_180))
         permutations.add(copy.copy(Orientation.CLOCKWISE_270))
-
     }
 
     /**

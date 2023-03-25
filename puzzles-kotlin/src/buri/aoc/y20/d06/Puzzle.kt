@@ -28,7 +28,7 @@ class Puzzle : BasePuzzle() {
 
         var i = 0
         val data = mutableListOf<String>()
-        while (true) {
+        while (i <= input.lastIndex) {
             if (input[i].isEmpty()) {
                 groups.add(Group(data))
                 data.clear()
@@ -36,12 +36,9 @@ class Puzzle : BasePuzzle() {
                 data.add(input[i])
             }
             i++
-            // One more group in the queue that doesn't end with a blank line.
-            if (i > input.lastIndex) {
-                groups.add(Group(data))
-                break
-            }
         }
+        // One more group in the queue that doesn't end with a blank line.
+        groups.add(Group(data))
 
         return if (part.isOne()) {
             groups.sumOf { it.getAnyYesCounts() }

@@ -30,6 +30,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val limit = if (part.isOne()) 4 else 5
         var grid = Grid.fromInput(input, ' ')
+
         val visited = mutableSetOf<String>()
         while (grid.toString() !in visited) {
             visited.add(grid.toString())

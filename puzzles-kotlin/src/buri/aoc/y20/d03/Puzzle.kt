@@ -48,7 +48,6 @@ class Puzzle : BasePuzzle() {
                     count++
                 }
             }
-            println("$delta=$count")
             treeProduct *= count
         }
         return treeProduct
