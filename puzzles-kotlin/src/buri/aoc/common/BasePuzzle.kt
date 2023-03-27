@@ -6,6 +6,7 @@ import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.io.File
 import java.io.FileNotFoundException
+import java.math.BigInteger
 import java.util.*
 
 /**
@@ -155,3 +156,8 @@ fun String.extractLongs(allowNegative: Boolean = true): List<Long> {
 fun String.extractInts(allowNegative: Boolean = true): List<Int> {
     return this.extractLongs(allowNegative).map { it.toInt() }
 }
+
+/**
+ * Extension function for building Java BigIntegers
+ */
+fun Long.toBigInt(): BigInteger = BigInteger.valueOf(this)

@@ -2,6 +2,7 @@ package buri.aoc.y19.d22
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.toBigInt
 import org.junit.Test
 import java.math.BigInteger
 
@@ -50,7 +51,7 @@ class Puzzle : BasePuzzle() {
 class Deck(rawSize: Long) {
     private var a: BigInteger = BigInteger.ONE
     private var b: BigInteger = BigInteger.ZERO
-    private val size = BigInteger.valueOf(rawSize)
+    private val size = rawSize.toBigInt()
 
     /**
      * Cuts the deck
@@ -69,7 +70,7 @@ class Deck(rawSize: Long) {
      */
     fun dealIntoNewStack() {
         b = getCardAtPosition(-1L)
-        a *= BigInteger.valueOf(-1L)
+        a *= (-1L).toBigInt()
     }
 
     /**
@@ -78,7 +79,7 @@ class Deck(rawSize: Long) {
      * a /= increment
      */
     fun dealWithIncrement(increment: Long) {
-        a *= BigInteger.valueOf(increment).modInverse(size)
+        a *= increment.toBigInt().modInverse(size)
     }
 
     /**
@@ -99,8 +100,8 @@ class Deck(rawSize: Long) {
      * Returns the card at some position after the deck has been shuffled some number of times.
      */
     fun getCardAtPosition(position: Long, shuffles: Long): Long {
-        val q = BigInteger.valueOf(position)
-        val t = BigInteger.valueOf(shuffles)
+        val q = position.toBigInt()
+        val t = shuffles.toBigInt()
 
         // Powers:
         // 1: a * q + b
@@ -121,6 +122,6 @@ class Deck(rawSize: Long) {
      * card = (a * position + b) % size
      */
     private fun getCardAtPosition(position: Long): BigInteger {
-        return (a * BigInteger.valueOf(position) + b).mod(size)
+        return (a * position.toBigInt() + b).mod(size)
     }
 }
