@@ -23,6 +23,8 @@ class Puzzle : BasePuzzle() {
         assertRun(4059, 0, true)
     }
 
+    private val neighborCache = mutableMapOf<Point3D<Int>, List<Point3D<Int>>>()
+
     /**
      * Executes a part of the puzzle using the specified input file.
      */
@@ -32,6 +34,7 @@ class Puzzle : BasePuzzle() {
             var x = 0
             var y = 0
             var z = 0
+
             var i = 0
             while (i in line.indices) {
                 var command: String?
@@ -71,11 +74,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
             val point = Point3D(x, y, z)
-            if (point in tiles) {
-                tiles[point] = 0
-            } else {
-                tiles[point] = 1
-            }
+            tiles[point] = if (point in tiles) 0 else 1
         }
 
         if (part.isTwo()) {
@@ -108,13 +107,16 @@ class Puzzle : BasePuzzle() {
      * Returns the 6 neighbors of some point.
      */
     private fun getNeighbors(tile: Point3D<Int>): List<Point3D<Int>> {
-        val list = mutableListOf<Point3D<Int>>()
-        list.add(tile.copy(y = tile.y - 1, z = tile.z + 1))
-        list.add(tile.copy(x = tile.x + 1, y = tile.y - 1))
-        list.add(tile.copy(x = tile.x + 1, z = tile.z - 1))
-        list.add(tile.copy(y = tile.y + 1, z = tile.z - 1))
-        list.add(tile.copy(x = tile.x - 1, y = tile.y + 1))
-        list.add(tile.copy(x = tile.x - 1, z = tile.z + 1))
-        return list
+        if (neighborCache[tile] == null) {
+            val list = mutableListOf<Point3D<Int>>()
+            list.add(tile.copy(y = tile.y - 1, z = tile.z + 1))
+            list.add(tile.copy(x = tile.x + 1, y = tile.y - 1))
+            list.add(tile.copy(x = tile.x + 1, z = tile.z - 1))
+            list.add(tile.copy(y = tile.y + 1, z = tile.z - 1))
+            list.add(tile.copy(x = tile.x - 1, y = tile.y + 1))
+            list.add(tile.copy(x = tile.x - 1, z = tile.z + 1))
+            neighborCache[tile] = list
+        }
+        return neighborCache[tile]!!
     }
 }
