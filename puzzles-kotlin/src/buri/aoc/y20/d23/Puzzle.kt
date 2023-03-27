@@ -45,14 +45,14 @@ class Puzzle : BasePuzzle() {
             nextCups[rawCups[index] - indexOffset] = nextCup
         }
         if (part.isTwo()) {
-            for (cup in rawCups.size + 1 .. totalCups) {
+            for (cup in rawCups.size + 1..totalCups) {
                 nextCups[cup - indexOffset] = if (cup == totalCups) rawCups[0] else (cup + 1)
             }
         }
 
         var current = rawCups[0]
         val times = if (part.isOne()) 100 else 10_000_000
-        repeat (times) {
+        repeat(times) {
             current = move(current, nextCups)
         }
 
