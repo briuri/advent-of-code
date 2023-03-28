@@ -1,5 +1,6 @@
 package buri.aoc.common.position
 
+import buri.aoc.common.extractInts
 import buri.aoc.common.position.Orientation.*
 
 /**
@@ -150,6 +151,19 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     }
 
     companion object {
+        /**
+         * Builds a grid from a number-based input.
+         */
+        fun fromInput(input: List<String>, defaultValue: Int): Grid<Int> {
+            val width = input[0].extractInts().size
+            val grid = Grid(width, input.size, defaultValue)
+            for ((y, line) in input.withIndex()) {
+                for ((x, value) in line.extractInts().withIndex()) {
+                    grid[x, y] = value
+                }
+            }
+            return grid
+        }
         /**
          * Builds a grid from a character-based input.
          */
