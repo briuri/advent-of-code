@@ -155,15 +155,23 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
          * Builds a grid from a number-based input.
          */
         fun fromInput(input: List<String>, defaultValue: Int): Grid<Int> {
-            val width = input[0].extractInts().size
+            val hasSpaces = input[0].contains(" ")
+            val width = if (hasSpaces) input[0].extractInts().size else input[0].length
             val grid = Grid(width, input.size, defaultValue)
             for ((y, line) in input.withIndex()) {
-                for ((x, value) in line.extractInts().withIndex()) {
-                    grid[x, y] = value
+                if (hasSpaces) {
+                    for ((x, value) in line.extractInts().withIndex()) {
+                        grid[x, y] = value
+                    }
+                } else {
+                    for ((x, value) in line.withIndex()) {
+                        grid[x, y] = value.digitToInt()
+                    }
                 }
             }
             return grid
         }
+
         /**
          * Builds a grid from a character-based input.
          */

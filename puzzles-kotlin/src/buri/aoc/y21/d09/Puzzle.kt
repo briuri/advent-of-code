@@ -30,23 +30,23 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid.fromInput(input, '0')
+        val grid = Grid.fromInput(input, 0)
         val lowPoints = mutableListOf<Point2D<Int>>()
         for (y in 0 until grid.height) {
             for (x in 0 until grid.width) {
                 val point = Point2D(x, y)
-                if (grid.getNeighbors(point).all { grid[it].digitToInt() > grid[point].digitToInt() }) {
+                if (grid.getNeighbors(point).all { grid[it] > grid[point] }) {
                     lowPoints.add(point)
                 }
             }
         }
 
         if (part.isOne()) {
-            return lowPoints.sumOf { grid[it].digitToInt() + 1 }
+            return lowPoints.sumOf { grid[it] + 1 }
         }
 
         val pathfinder = Pathfinder<Point2D<Int>> { current ->
-            grid.getNeighbors(current).filter { grid[it] != '9' }
+            grid.getNeighbors(current).filter { grid[it] != 9 }
         }
         val sizes = mutableListOf<Int>()
         for (point in lowPoints) {
