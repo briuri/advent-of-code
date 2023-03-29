@@ -33,14 +33,13 @@ class Puzzle : BasePuzzle() {
         val maxBound = numbers[numbers.size * 3 / 4]
 
         var minFuel = Int.MAX_VALUE
-        for (move in minBound .. maxBound) {
+        for (move in minBound..maxBound) {
             var fuel = 0
             for (number in numbers) {
                 val distance = (number - move).absoluteValue
                 if (part.isOne()) {
                     fuel += distance
-                }
-                else {
+                } else {
                     for (i in 1..distance) {
                         fuel += i
                     }
