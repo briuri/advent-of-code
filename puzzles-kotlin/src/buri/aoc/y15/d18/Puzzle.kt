@@ -45,8 +45,8 @@ class Puzzle : BasePuzzle() {
 
         for (i in 0 until steps) {
             val nextGrid = Grid(input.size, input[0].length, 0)
-            for (y in 0 until grid.height) {
-                for (x in 0 until grid.width) {
+            for (y in grid.yRange) {
+                for (x in grid.xRange) {
                     val point = Point2D(x, y)
                     var onCount = 0
                     for (neighbor in grid.getNeighbors(point, true)) {

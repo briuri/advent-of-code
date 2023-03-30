@@ -43,8 +43,8 @@ class Puzzle : BasePuzzle() {
             }
         }
         val grid = Grid(width, height, ' ')
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 val index = y * grid.width + x
                 if (image[index] == '1') {
                     grid[x, y] = '■'

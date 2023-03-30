@@ -26,7 +26,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid.fromInput(input, '.')
+        val grid = Grid.fromCharInput(input)
         val deltas = mutableListOf<Point2D<Int>>()
         deltas.add(Point2D(3, 1))
         if (part.isTwo()) {

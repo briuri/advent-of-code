@@ -44,15 +44,15 @@ class Puzzle : BasePuzzle() {
         }
 
         val grid = Grid(128, 128, ' ')
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 grid[x, y] = hashes[y][x]
             }
         }
 
         var regions = 0
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 if (grid[x, y] == '1') {
                     regions++
                     eraseRegion(grid, Point2D(x, y))

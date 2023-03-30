@@ -41,7 +41,7 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val mobs = mutableListOf<Mob>()
-        val map = Grid.fromInput(input, '#')
+        val map = Grid.fromCharInput(input)
         for (point in map.filter { it in "EG" }) {
             mobs.add(Mob(point, map[point] == 'E'))
         }

@@ -29,7 +29,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid.fromInput(input, '#')
+        val grid = Grid.fromCharInput(input)
         val locations = mutableMapOf<Int, Point2D<Int>>()
         for (point in grid.filter { it !in "#." }) {
             locations[grid[point].digitToInt()] = point

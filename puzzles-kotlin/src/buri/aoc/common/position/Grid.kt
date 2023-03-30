@@ -10,6 +10,8 @@ import buri.aoc.common.position.Orientation.*
  */
 open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T) {
     private val grid = MutableList(width * height) { defaultValue }
+    val xRange = 0 until width
+    val yRange = 0 until height
 
     init {
         if (defaultValue !is Int && defaultValue !is Char) {
@@ -33,8 +35,8 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
      */
     fun filter(predicate: (T) -> Boolean): List<Point2D<Int>> {
         val list = mutableListOf<Point2D<Int>>()
-        for (y in 0 until height) {
-            for (x in 0 until width) {
+        for (y in yRange) {
+            for (x in xRange) {
                 if (predicate.invoke(get(x, y))) {
                     list.add(Point2D(x, y))
                 }
@@ -58,8 +60,8 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
             CLOCKWISE_90, CLOCKWISE_270 -> Grid(height, width, defaultValue)
             else -> Grid(width, height, defaultValue)
         }
-        for (y in 0 until height) {
-            for (x in 0 until width) {
+        for (y in yRange) {
+            for (x in xRange) {
                 val point = when (orientation) {
                     CLOCKWISE_90 -> Point2D(height - y - 1, x)
                     CLOCKWISE_180 -> Point2D(width - x - 1, height - y - 1)
@@ -101,7 +103,7 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
      * Return true if the point is in bounds.
      */
     fun isInBounds(x: Int, y: Int): Boolean {
-        return (x in 0 until width) && (y in 0 until height)
+        return (x in xRange) && (y in yRange)
     }
 
     fun isInBounds(point: Point2D<Int>): Boolean = isInBounds(point.x, point.y)
@@ -127,7 +129,7 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
     private fun toIndex(x: Int, y: Int): Int {
         val index = y * width + x
         if (index !in grid.indices) {
-            throw IndexOutOfBoundsException("($x,$y) is out of bounds.")
+            throw IndexOutOfBoundsException("($x,$y) is out of bounds ($xRange,$yRange).")
         }
         return index
     }
@@ -137,8 +139,8 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
      */
     override fun toString(): String {
         val output = StringBuilder()
-        for (y in 0 until height) {
-            for (x in 0 until width) {
+        for (y in yRange) {
+            for (x in xRange) {
                 val value = get(x, y)
                 output.append(get(x, y))
                 if (value is Int) {
@@ -154,10 +156,10 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
         /**
          * Builds a grid from a number-based input.
          */
-        fun fromInput(input: List<String>, defaultValue: Int): Grid<Int> {
+        fun fromIntInput(input: List<String>): Grid<Int> {
             val hasSpaces = input[0].contains(" ")
             val width = if (hasSpaces) input[0].extractInts().size else input[0].length
-            val grid = Grid(width, input.size, defaultValue)
+            val grid = Grid(width, input.size, 0)
             for ((y, line) in input.withIndex()) {
                 if (hasSpaces) {
                     for ((x, value) in line.extractInts().withIndex()) {
@@ -175,8 +177,8 @@ open class Grid<T>(val width: Int, val height: Int, private val defaultValue: T)
         /**
          * Builds a grid from a character-based input.
          */
-        fun fromInput(input: List<String>, defaultValue: Char): Grid<Char> {
-            val grid = Grid(input[0].length, input.size, defaultValue)
+        fun fromCharInput(input: List<String>): Grid<Char> {
+            val grid = Grid(input[0].length, input.size, '?')
             for ((y, line) in input.withIndex()) {
                 for ((x, value) in line.withIndex()) {
                     grid[x, y] = value

@@ -67,8 +67,8 @@ class Puzzle : BasePuzzle() {
         val width = stars.maxOf { it.position.x } + 1
         val height = stars.maxOf { it.position.y } + 1
         val grid = Grid(width, height, ' ')
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 grid[x, y] = if (Point2D(x, y) in stars.getPositions()) '■' else ' '
             }
         }

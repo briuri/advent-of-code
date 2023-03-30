@@ -41,7 +41,7 @@ class Puzzle : BasePuzzle() {
                 val id = input[i].extractLongs()[0]
                 val size = input[i + 1].length
                 val gridInput = input.subList(i + 1, i + 1 + size)
-                remainingTiles.add(Tile(id, Grid.fromInput(gridInput, ' ')))
+                remainingTiles.add(Tile(id, Grid.fromCharInput(gridInput)))
                 i += size + 2
             }
         }
@@ -193,22 +193,22 @@ class Tile(val id: Long, var grid: Grid<Char>) {
         var connects = true
         when (direction) {
             NORTH -> {
-                for (x in 0 until grid.width) {
+                for (x in grid.xRange) {
                     connects = connects && (grid[x, 0] == permutation[x, permutation.height - 1])
                 }
             }
             SOUTH -> {
-                for (x in 0 until grid.width) {
+                for (x in grid.xRange) {
                     connects = connects && (grid[x, grid.height - 1] == permutation[x, 0])
                 }
             }
             WEST -> {
-                for (y in 0 until grid.height) {
+                for (y in grid.yRange) {
                     connects = connects && (grid[0, y] == permutation[grid.width - 1, y])
                 }
             }
             EAST -> {
-                for (y in 0 until grid.height) {
+                for (y in grid.yRange) {
                     connects = connects && (grid[grid.width - 1, y] == permutation[0, y])
                 }
             }

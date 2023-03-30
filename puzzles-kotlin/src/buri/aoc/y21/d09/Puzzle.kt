@@ -29,10 +29,10 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid.fromInput(input, 0)
+        val grid = Grid.fromIntInput(input)
         val lowPoints = mutableListOf<Point2D<Int>>()
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 val point = Point2D(x, y)
                 if (grid.getNeighbors(point).all { grid[it] > grid[point] }) {
                     lowPoints.add(point)

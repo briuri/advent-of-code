@@ -70,8 +70,8 @@ class Puzzle : BasePuzzle() {
     private fun toGrid(pattern: String): Grid<Char> {
         val input = pattern.split("/")
         val grid = Grid(pattern.indexOf("/"), input.size, ' ')
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 grid[x, y] = input[y][x]
             }
         }

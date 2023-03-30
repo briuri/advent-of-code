@@ -54,7 +54,7 @@ class Puzzle : BasePuzzle() {
 }
 
 class Board(data: List<String>) {
-    val grid = Grid.fromInput(data, 0)
+    val grid = Grid.fromIntInput(data)
     private val size = data[0].extractInts().size
 
     /**

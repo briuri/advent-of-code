@@ -29,14 +29,14 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         val limit = if (part.isOne()) 4 else 5
-        var grid = Grid.fromInput(input, ' ')
+        var grid = Grid.fromCharInput(input)
 
         val visited = mutableSetOf<String>()
         while (grid.toString() !in visited) {
             visited.add(grid.toString())
             val newGrid = grid.copy()
-            for (y in 0 until grid.height) {
-                for (x in 0 until grid.width) {
+            for (y in grid.yRange) {
+                for (x in grid.xRange) {
                     val point = Point2D(x, y)
                     val occupiedNeighbors = countOccupiedNeighbors(part, grid, point)
                     when (grid[point]) {

@@ -33,8 +33,8 @@ class Puzzle : BasePuzzle() {
 
         // https://en.wikipedia.org/wiki/Summed-area_table
         val grid = Grid(size, size, 0)
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 val rackId = x + 10
                 val power = ((rackId * y + serial) * rackId).toString()
                 val lr = power[power.length - 3].digitToInt() - 5

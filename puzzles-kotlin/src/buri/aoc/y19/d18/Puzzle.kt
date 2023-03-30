@@ -30,7 +30,7 @@ class Puzzle : BasePuzzle() {
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
-        val grid = Grid.fromInput(input, '#')
+        val grid = Grid.fromCharInput(input)
         val robotStarterKeys = mutableMapOf<Char, MutableList<Char>>()
         val keys = mutableMapOf<Char, Point2D<Int>>()
         val doors = mutableMapOf<Char, Point2D<Int>>()

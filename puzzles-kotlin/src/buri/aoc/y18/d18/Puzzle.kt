@@ -29,13 +29,13 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val gridHistory = mutableListOf<String>()
         val resourceHistory = mutableListOf<Int>()
-        var grid = Grid.fromInput(input, '.')
+        var grid = Grid.fromCharInput(input)
 
         val minutes = if (part.isOne()) 10 else 1_000_000_000
         for (i in 0 until minutes) {
             val newGrid = grid.copy()
-            for (y in 0 until grid.height) {
-                for (x in 0 until grid.width) {
+            for (y in grid.yRange) {
+                for (x in grid.xRange) {
                     val value = grid[x, y]
                     val neighbors = grid.getSurrounding(x, y)
                     when (value) {
