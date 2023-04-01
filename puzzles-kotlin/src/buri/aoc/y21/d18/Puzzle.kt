@@ -33,20 +33,35 @@ class Puzzle : BasePuzzle() {
      */
     override fun run(part: Part, input: List<String>): Number {
         if (part.isOne()) {
-            var data = input[0]
-            for (line in input.drop(1)) {
-                data = "[$data,$line]".reduce()
+            var equation = input[0]
+            for (addend in input.drop(1)) {
+                equation = "[$equation,$addend]".reduce()
             }
-            return data.magnitude()
+            return equation.magnitude()
         }
 
         var maxMagnitude = 0L
-        for (line1 in input) {
-            for (line2 in input.filter { it != line1 }) {
-                maxMagnitude = maxMagnitude.coerceAtLeast("[$line1,$line2]".reduce().magnitude())
+        for (addend1 in input) {
+            for (addend2 in input.filter { it != addend1 }) {
+                maxMagnitude = maxMagnitude.coerceAtLeast("[$addend1,$addend2]".reduce().magnitude())
             }
         }
         return maxMagnitude
+    }
+
+    /**
+     * Reduces all magnitudes and returns the last one.
+     */
+    private fun String.magnitude(): Long {
+        var reduced = this
+        var pairMatch = simplePairPattern.find(reduced)
+        while (pairMatch != null) {
+            val numbers = reduced.substring(pairMatch.range).extractLongs()
+            val localMagnitude = 3 * numbers[0] + 2 * numbers[1]
+            reduced = reduced.replace(pairMatch, localMagnitude)
+            pairMatch = simplePairPattern.find(reduced)
+        }
+        return reduced.toLong()
     }
 
     /**
@@ -84,6 +99,7 @@ class Puzzle : BasePuzzle() {
                 depth--
             }
             if (depth == 4) {
+                // Find a pair needed to explode before the depth decreases again.
                 val nextClosing = reduced.indexOf("]", i + 1)
                 val pairMatch = simplePairPattern.find(reduced, i + 1)
                 if (pairMatch != null && nextClosing in pairMatch.range) {
@@ -93,11 +109,11 @@ class Puzzle : BasePuzzle() {
                     val rightMatch = literalPattern.find(reduced, pairMatch.range.last + 1)
                     if (rightMatch != null) {
                         val right = numbers[1] + reduced.substring(rightMatch.range).toLong()
-                        reduced = reduced.replaceRange(rightMatch.range, right.toString())
+                        reduced = reduced.replace(rightMatch, right)
                     }
 
                     // Replace the original pair with 0.
-                    reduced = reduced.replaceRange(pairMatch.range, "0")
+                    reduced = reduced.replace(pairMatch, 0L)
 
                     // Find number to left of pair and add left value.
                     var leftMatch = literalPattern.find(reduced.substring(0, pairMatch.range.first))
@@ -106,12 +122,12 @@ class Puzzle : BasePuzzle() {
                             leftMatch = leftMatch.next()
                         }
                         val left = numbers[0] + reduced.substring(leftMatch.range).toLong()
-                        reduced = reduced.replaceRange(leftMatch.range, left.toString())
+                        reduced = reduced.replace(leftMatch, left)
                     }
 
                     // Clean up.
                     while (true) {
-                        val cleaned = reduced.removeOrphans()
+                        val cleaned = reduced.cleanup()
                         if (reduced == cleaned) {
                             break
                         }
@@ -129,13 +145,11 @@ class Puzzle : BasePuzzle() {
      */
     private fun String.split(): String {
         var reduced = this
-        for (number in reduced.extractLongs()) {
-            if (number >= 10) {
-                val left = number / 2
-                val right = number / 2 + (if (number % 2 == 0L) 0 else 1)
-                reduced = reduced.replaceFirst(number.toString(), "[$left,$right]")
-                break
-            }
+        val number = reduced.extractLongs().firstOrNull { it >= 10 }
+        if (number != null) {
+            val left = number / 2
+            val right = number / 2 + (if (number % 2 == 0L) 0 else 1)
+            reduced = reduced.replaceFirst(number.toString(), "[$left,$right]")
         }
         return reduced
     }
@@ -143,40 +157,26 @@ class Puzzle : BasePuzzle() {
     /**
      * Removes any orphaned numbers or commas / braces.
      */
-    private fun String.removeOrphans(): String {
+    private fun String.cleanup(): String {
         var reduced = this
         reduced = reduced.replace("[]", "")
         reduced = reduced.replace(",]", "]")
         reduced = reduced.replace("[,", "[")
 
-        val orphans = mutableListOf<MatchResult>()
-        var orphanMatch = orphanOnePattern.find(reduced)
-        if (orphanMatch != null) {
-            orphans.add(orphanMatch)
-        }
-        orphanMatch = orphanNonePattern.find(reduced)
-        if (orphanMatch != null) {
-            orphans.add(orphanMatch)
-        }
-        for (match in orphans) {
+        val orphans = mutableListOf<MatchResult?>()
+        orphans.add(orphanOnePattern.find(reduced))
+        orphans.add(orphanNonePattern.find(reduced))
+        for (match in orphans.filterNotNull()) {
             val orphan = reduced.substring(match.range).extractLongs()[0]
-            reduced = reduced.replaceRange(match.range, orphan.toString())
+            reduced = reduced.replace(match, orphan)
         }
         return reduced
     }
 
     /**
-     * Reduces all magnitudes and returns the last one.
+     * Simplifies a matched value to be a simple number and returns the modified string.
      */
-    private fun String.magnitude(): Long {
-        var reduced = this
-        var pairMatch = simplePairPattern.find(reduced)
-        while (pairMatch != null) {
-            val numbers = reduced.substring(pairMatch.range).extractLongs()
-            val localMagnitude = 3 * numbers[0] + 2 * numbers[1]
-            reduced = reduced.replaceRange(pairMatch.range, localMagnitude.toString())
-            pairMatch = simplePairPattern.find(reduced)
-        }
-        return reduced.toLong()
+    private fun String.replace(match: MatchResult, value: Long): String {
+        return this.replaceRange(match.range, value.toString())
     }
 }
