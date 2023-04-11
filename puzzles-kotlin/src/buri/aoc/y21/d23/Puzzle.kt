@@ -4,7 +4,6 @@ import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.position.Point2D
 import org.junit.Test
-import kotlin.math.absoluteValue
 
 /**
  * Entry point for a daily puzzle
@@ -31,18 +30,17 @@ class Puzzle : BasePuzzle() {
         val lowestCosts = mutableMapOf<String, Long>()
         var lowestEnd = Long.MAX_VALUE
 
-        val firstState = State(input[0], 0L)
-        val frontier = mutableListOf<State>()
-        frontier.add(0, firstState)
+        val firstState = State(input[0])
+        val frontier = ArrayDeque<State>()
+        frontier.addFirst(firstState)
         while (frontier.isNotEmpty()) {
             val current = frontier.removeFirst()
             for (next in current.getNextStates()) {
                 if (next.cost < lowestCosts.getOrDefault(next.toString(), Long.MAX_VALUE)) {
                     if (next.isFinished()) {
-                        println("\t\tFinished: $current ${current.cost} to $next ${next.cost}")
                         lowestEnd = lowestEnd.coerceAtMost(next.cost)
                     } else if (next.cost < lowestEnd) {
-                        frontier.add(next)
+                        frontier.addFirst(next)
                     }
                     lowestCosts[next.toString()] = next.cost
                 }
@@ -56,12 +54,12 @@ const val EMPTY = '.'
 const val INVALID = '_'
 val COSTS = mapOf('A' to 1, 'B' to 10, 'C' to 100, 'D' to 1000)
 
-class State(data: String, var cost: Long) : Comparable<State> {
+class State(data: String, val cost: Long = 0L) {
     private val hall: Hall
     private val rooms = mutableMapOf<Char, Room>()
 
     init {
-        val tokens = data.split(" ").dropLast(1)
+        val tokens = data.split(" ")
         hall = Hall(tokens[0])
         for (token in tokens.drop(1)) {
             rooms[token[0]] = Room(token)
@@ -73,46 +71,49 @@ class State(data: String, var cost: Long) : Comparable<State> {
      */
     fun getNextStates(): List<State> {
         val nextStates = mutableListOf<State>()
-        for ((pod, value) in getMovablePods()) {
-            val room = rooms[value]!!
-            val roomSpace = room.getDeepestEmpty()
-            // Move from hall to final room.
-            if (pod.y == 1 && roomSpace != null && (room.xIndex - pod.x).absoluteValue == 1) {
-                nextStates.add(buildNextState(pod, roomSpace, value))
-            } else {
-                for (hallSpace in hall.getNearestSpaces(pod)) {
+        // Moving a hall pod into its room is always the best option.
+        val hallPods = hall.getPods()
+        val occupiedHallSpaces = hallPods.map { it.first }
+        for ((pod, value) in hallPods) {
+            val roomSpace = rooms[value]!!.getDeepestEmpty()
+            if (roomSpace != null) {
+                var isHallClear = true
+                if (roomSpace.x < pod.x) {
+                    for (x in roomSpace.x + 1 until pod.x) {
+                        isHallClear = isHallClear && (Point2D(x, 1) !in occupiedHallSpaces)
+                    }
+                } else {
+                    for (x in pod.x + 1 until roomSpace.x) {
+                        isHallClear = isHallClear && (Point2D(x, 1) !in occupiedHallSpaces)
+                    }
+                }
+                if (isHallClear) {
+                    nextStates.add(buildNextState(pod, roomSpace, value))
+                    break
+                }
+            }
+        }
+        // Only consider moving pods into hall if no pods can move into rooms.
+        if (nextStates.isEmpty()) {
+            val pods = mutableListOf<Pair<Point2D<Int>, Char>?>()
+            pods.addAll(rooms.values.map { it.getShallowestPod() })
+            for ((pod, value) in pods.filterNotNull()) {
+                for (hallSpace in hall.getSpaces(pod)) {
                     nextStates.add(buildNextState(pod, hallSpace, value))
                 }
             }
         }
-        return nextStates.sorted()
+        return nextStates
     }
 
     /**
      * Builds a next state.
      */
     private fun buildNextState(pod: Point2D<Int>, space: Point2D<Int>, value: Char): State {
-        val distance = pod.getManhattanDistance(space)
-        val next = copy()
+        val next = State(toString(), cost + pod.getManhattanDistance(space) * COSTS[value]!!)
         next[pod] = EMPTY
         next[space] = value
-        next.cost = next.cost + distance * COSTS[value]!!
         return next
-    }
-
-    /**
-     * Returns candidates for movement.
-     */
-    private fun getMovablePods(): List<Pair<Point2D<Int>, Char>> {
-        val pods = mutableListOf<Pair<Point2D<Int>, Char>>()
-        pods.addAll(hall.getPods())
-        for (room in rooms.values) {
-            val pod = room.getShallowestPod()
-            if (pod != null) {
-                pods.add(pod)
-            }
-        }
-        return pods
     }
 
     /**
@@ -128,38 +129,17 @@ class State(data: String, var cost: Long) : Comparable<State> {
     }
 
     /**
-     * Makes an exact copy.
-     */
-    fun copy(): State {
-        return State(toString(), cost)
-    }
-
-    /**
      * Returns true if every room is finished.
      */
     fun isFinished(): Boolean {
         return rooms.values.all { it.isFinished() }
     }
 
-    /**
-     * Calculates progress towards finish.
-     */
-    private fun getProgress(): Int = rooms.values.sumOf { it.getProgress() }
-
-    override fun compareTo(other: State): Int {
-        var compare = -1 * getProgress().compareTo(other.getProgress())
-        if (compare == 0) {
-            compare = cost.compareTo(other.cost)
-        }
-        return compare
-    }
-
     override fun toString(): String {
-        val output = StringBuilder("$hall ")
+        val output = StringBuilder("$hall")
         for (room in rooms.values) {
-            output.append("$room ")
+            output.append(" $room")
         }
-        output.append(getProgress())
         return output.toString()
     }
 }
@@ -178,7 +158,7 @@ class Hall(data: String) {
     }
 
     /**
-     * Returns a list of any pods in the hallway (may be empty).
+     * Returns a list of any pods in the hallway (may be empty). Ds are first in the list.
      */
     fun getPods(): List<Pair<Point2D<Int>, Char>> {
         val pods = mutableListOf<Pair<Point2D<Int>, Char>>()
@@ -187,31 +167,31 @@ class Hall(data: String) {
                 pods.add(Pair(Point2D(index + 1, 1), type))
             }
         }
-        return pods
+        return pods.sortedByDescending { it.second }
     }
 
     /**
-     * Returns a list of the (max 2) nearest empty hallway spots, or an empty list if all near spots are full.
+     * Returns a list of the reachable empty hallway spots, or an empty list if all near spots are full.
      */
-    fun getNearestSpaces(space: Point2D<Int>): List<Point2D<Int>> {
+    fun getSpaces(space: Point2D<Int>): List<Point2D<Int>> {
         val nearest = mutableListOf<Point2D<Int>>()
-        if (space.x > 1) {
-            var left = space.x - 1
-            if (spaces[left - 1] == INVALID) {
-                left--
-            }
+        var left = space.x - 1
+        while (left > 0) {
             if (spaces[left - 1] == EMPTY) {
                 nearest.add(Point2D(left, 1))
+            } else if (spaces[left - 1] != INVALID) {
+                break
             }
+            left--
         }
-        if (space.x < 11) {
-            var right = space.x + 1
-            if (spaces[right - 1] == INVALID) {
-                right++
-            }
+        var right = space.x + 1
+        while (right < 12) {
             if (spaces[right - 1] == EMPTY) {
                 nearest.add(Point2D(right, 1))
+            } else if (spaces[right - 1] != INVALID) {
+                break
             }
+            right++
         }
         return nearest
     }
@@ -268,7 +248,7 @@ class Room(data: String) {
     /**
      * Returns a count of how many spaces are finished.
      */
-    fun getProgress(): Int {
+    private fun getProgress(): Int {
         var count = 0
         for (i in spaces.lastIndex downTo 0) {
             if (spaces[i] == type) {
