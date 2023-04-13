@@ -7,7 +7,15 @@ import buri.aoc.common.position.Direction.*
  *
  * @author Brian Uri!
  */
-data class MutablePosition(var coords: Point2D<Int>, var facing: Direction) {
+data class MutablePosition(var coords: Point2D<Int>, var facing: Direction = NORTH) {
+
+    /**
+     * Adjusts facing and moves in that direction.
+     */
+    fun move(direction: Direction) {
+        facing = direction
+        move()
+    }
 
     /**
      * Move one square in the current direction.
