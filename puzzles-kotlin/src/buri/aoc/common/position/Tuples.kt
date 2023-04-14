@@ -1,5 +1,6 @@
 package buri.aoc.common.position
 
+import buri.aoc.common.extractInts
 import kotlin.math.absoluteValue
 
 /**
