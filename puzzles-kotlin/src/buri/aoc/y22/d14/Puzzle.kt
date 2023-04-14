@@ -45,7 +45,7 @@ class Puzzle : BasePuzzle() {
             val end = Point2D(source.x + (yMax + 2), yMax + 2)
             addRock(grid, start, end)
         }
-        yMax = yMax + 2
+        yMax += 2
 
         while (true) {
             val newSand = dropFrom(grid, yMax, source)
