@@ -32,8 +32,10 @@ class Puzzle : BasePuzzle() {
         for (line in input) {
             val points = line.split(" -> ")
             for (i in 0 until points.lastIndex) {
-                val start = Point2D(points[i].split(",")[0].toInt(), points[i].split(",")[1].toInt())
-                val end = Point2D(points[i + 1].split(",")[0].toInt(), points[i + 1].split(",")[1].toInt())
+                val rawStart = points[i].split(",").map { it.toInt() }
+                val start = Point2D(rawStart[0], rawStart[1])
+                val rawEnd = points[i + 1].split(",").map { it.toInt() }
+                val end = Point2D(rawEnd[0], rawEnd[1])
                 addRock(grid, start, end)
             }
         }
@@ -47,11 +49,9 @@ class Puzzle : BasePuzzle() {
         }
         yMax += 2
 
-        while (true) {
-            val newSand = dropFrom(grid, yMax, source)
-            if (!newSand) {
-                break
-            }
+        var hasNewSand = true
+        while (hasNewSand) {
+            hasNewSand = dropFrom(grid, yMax, source)
         }
         return grid.values.count { it == 'o' }
     }
