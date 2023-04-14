@@ -46,8 +46,8 @@ class Puzzle : BasePuzzle() {
             val start = Point2D(source.x - (yMax + 2), yMax + 2)
             val end = Point2D(source.x + (yMax + 2), yMax + 2)
             addRock(grid, start, end)
+            yMax += 2
         }
-        yMax += 2
 
         var hasNewSand = true
         while (hasNewSand) {
