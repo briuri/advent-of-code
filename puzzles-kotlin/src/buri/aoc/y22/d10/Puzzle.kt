@@ -21,7 +21,7 @@ class Puzzle : BasePuzzle() {
     fun runPart2() {
         assertRun("■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■  ■■", 1)
         // EKRHEPUZ
-        assertRun("■■■■ ■  ■ ■  ■ ■  ■ ■■■■ ■     ■■  ■■", 0, true)
+        assertRun("■■■■ ■  ■ ■■■  ■  ■ ■■■■ ■■■  ■  ■ ■■■■", 0, true)
     }
 
     private val signalCycles = listOf(20, 60, 100, 140, 180, 220)
@@ -32,7 +32,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): String {
         var x = 1
         var cycle = 0
-        var signals = mutableMapOf<Int, Int>()
+        val signals = mutableMapOf<Int, Int>()
         for (line in input) {
             if (line.startsWith("noop")) {
                 cycle++
