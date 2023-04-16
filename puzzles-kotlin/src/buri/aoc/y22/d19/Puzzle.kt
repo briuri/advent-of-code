@@ -63,12 +63,11 @@ class Puzzle : BasePuzzle() {
                         maxGeodes[print.id] = bestMax.coerceAtLeast(state.geode)
                         continue
                     }
-                    val nextFrontierSize = nextFrontier.size
+                    val beforeSize = nextFrontier.size
 
                     // Part 1 and 2 Optimization: Don't build geode robot on the last turn.
                     if (state.canAfford(print.geodeRobot) && state.minute != minutes) {
-                        val nextState = State(state.toString())
-                        nextState.collect(maxCosts)
+                        val nextState = state.next(maxCosts)
                         nextState.spend(GEODE, print.geodeRobot)
                         nextFrontier.add(nextState)
                         // Part 1 and 2 Optimization: Ignore all other moves when making a geode robot.
@@ -79,30 +78,25 @@ class Puzzle : BasePuzzle() {
                     // Don't build more robots than the max materials we can spend.
                     if (state.minute + 1 < minutes) {
                         if (state.canAfford(print.obsidianRobot) && state.obsidianRobots < maxCosts.cost(OBSIDIAN)) {
-                            val nextState = State(state.toString())
-                            nextState.collect(maxCosts)
+                            val nextState = state.next(maxCosts)
                             nextState.spend(OBSIDIAN, print.obsidianRobot)
                             nextFrontier.add(nextState)
                         }
                         if (state.canAfford(print.clayRobot) && state.clayRobots < maxCosts.cost(CLAY)) {
-                            val nextState = State(state.toString())
-                            nextState.collect(maxCosts)
+                            val nextState = state.next(maxCosts)
                             nextState.spend(CLAY, print.clayRobot)
                             nextFrontier.add(nextState)
                         }
                         if (state.canAfford(print.oreRobot) && state.oreRobots < maxCosts.cost(ORE)) {
-                            val nextState = State(state.toString())
-                            nextState.collect(maxCosts)
+                            val nextState = state.next(maxCosts)
                             nextState.spend(ORE, print.oreRobot)
                             nextFrontier.add(nextState)
                         }
                     }
 
                     // Part 2 Optimization (doesn't work in Part 1): Only build nothing if no robots can be built.
-                    if (part.isOne() || nextFrontierSize == nextFrontier.size) {
-                        val nextState = State(state.toString())
-                        nextState.collect(maxCosts)
-                        nextFrontier.add(nextState)
+                    if (part.isOne() || beforeSize == nextFrontier.size) {
+                        nextFrontier.add(state.next(maxCosts))
                     }
                 }
                 frontier = nextFrontier
@@ -150,6 +144,15 @@ class State(data: String) {
     }
 
     /**
+     * Returns the next state after collecting materials.
+     */
+    fun next(maxCosts: Cost): State {
+        val next = State(toString())
+        next.collect(maxCosts)
+        return next
+    }
+
+    /**
      * Returns true if we can afford a robot.
      */
     fun canAfford(robot: Cost): Boolean {
@@ -159,7 +162,7 @@ class State(data: String) {
     /**
      * Increments materials and minute.
      */
-    fun collect(maxCosts: Cost) {
+    private fun collect(maxCosts: Cost) {
         minute++
         if (ore <= maxCosts.cost(ORE)) {
             changeAmount(ORE, oreRobots)

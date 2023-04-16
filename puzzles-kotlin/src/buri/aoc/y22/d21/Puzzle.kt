@@ -38,30 +38,22 @@ class Puzzle : BasePuzzle() {
 
         val remaining = mutableListOf<Monkey>()
         remaining.addAll(monkeys.values)
-        while (true) {
-            val originalSize = remaining.size
-            val processed = mutableSetOf<Monkey>()
-            for (monkey in remaining) {
-                if (isNumber(monkey.operation)) {
-                    for (changeMonkey in monkeys.values) {
-                        changeMonkey.reduce(monkey)
-                    }
-                    processed.add(monkey)
+        do {
+            val beforeSize = remaining.size
+            for (monkey in remaining.filter { isNumber(it.operation) }) {
+                for (changeMonkey in monkeys.values) {
+                    changeMonkey.reduce(monkey)
                 }
+                remaining.remove(monkey)
             }
-            remaining.removeAll(processed)
+        } while (beforeSize != remaining.size)
 
-            // No change
-            if (originalSize == remaining.size) {
-                break
-            }
-        }
-
+        val root = monkeys["root"]!!
         if (part.isOne()) {
-            return monkeys["root"]!!.operation.toLong()
+            return root.operation.toLong()
         }
 
-        var tokens = monkeys["root"]!!.operation.split(" = ")
+        var tokens = root.operation.split(" = ")
         var name = if (isNumber(tokens[0])) tokens[1] else tokens[0]
         var targetValue = if (isNumber(tokens[0])) tokens[0].toLong() else tokens[1].toLong()
 
@@ -92,11 +84,10 @@ class Puzzle : BasePuzzle() {
     }
 }
 
-val alphaPattern = "\\p{Alpha}".toRegex()
-
 class Monkey(part: Part, data: String) {
     val name: String
     var operation: String
+    private val alphaPattern = "\\p{Alpha}".toRegex()
 
     init {
         val tokens = data.split(": ")
@@ -118,12 +109,13 @@ class Monkey(part: Part, data: String) {
             val tokens = operation.split(" ")
             val left = tokens[0].toLong()
             val right = tokens[2].toLong()
-            when (tokens[1]) {
-                "+" -> operation = (left + right).toString()
-                "-" -> operation = (left - right).toString()
-                "*" -> operation = (left * right).toString()
-                "/" -> operation = (left / right).toString()
+            val result = when (tokens[1]) {
+                "+" -> left + right
+                "-" -> left - right
+                "*" -> left * right
+                else -> left / right
             }
+            operation = result.toString()
         }
     }
 

@@ -48,13 +48,10 @@ class Puzzle : BasePuzzle() {
         }
 
         val innerSpaces = mutableSetOf<Point3D<Int>>()
-        for (space in allSpaces) {
-            if (space !in innerSpaces) {
-                val reachable = mutableSetOf<Point3D<Int>>()
-                val bounded = explore(cubes, reachable, space)
-                if (bounded) {
-                    innerSpaces.addAll(reachable)
-                }
+        for (space in allSpaces.filter { it !in innerSpaces }) {
+            val reachable = mutableSetOf<Point3D<Int>>()
+            if (explore(cubes, reachable, space)) {
+                innerSpaces.addAll(reachable)
             }
         }
 
@@ -62,7 +59,6 @@ class Puzzle : BasePuzzle() {
         for (space in innerSpaces) {
             innerSides += (6 - getNeighbors(space).filter { it !in cubes }.size)
         }
-
         return allSides - innerSides
     }
 

@@ -38,11 +38,8 @@ class Puzzle : BasePuzzle() {
             }
 
             tunnels[name] = mutableListOf()
-            val tokens = if (line.contains("tunnels")) {
-                line.split(" to valves ")[1].split(", ")
-            } else {
-                line.split(" to valve ")[1].split(", ")
-            }
+            val separator = if (line.contains("tunnels")) " valves " else " valve "
+            val tokens = line.split(separator)[1].split(", ")
             for (token in tokens) {
                 tunnels[name]!!.add(token)
             }
