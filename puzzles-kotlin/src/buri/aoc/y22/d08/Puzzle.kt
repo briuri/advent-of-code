@@ -30,8 +30,8 @@ class Puzzle : BasePuzzle() {
         val grid = Grid.fromIntInput(input)
         if (part.isOne()) {
             var count = 0
-            for (y in 0 until grid.height) {
-                for (x in 0 until grid.width) {
+            for (y in grid.yRange) {
+                for (x in grid.xRange) {
                     if (isVisible(grid, x, y)) {
                         count++
                     }
@@ -41,8 +41,8 @@ class Puzzle : BasePuzzle() {
         }
 
         val scores = mutableListOf<Int>()
-        for (y in 0 until grid.height) {
-            for (x in 0 until grid.width) {
+        for (y in grid.yRange) {
+            for (x in grid.xRange) {
                 scores.add(getScore(grid, x, y))
             }
         }
