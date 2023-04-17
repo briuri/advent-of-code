@@ -121,14 +121,19 @@ const val GEODE = 3
  */
 class State(data: String) {
     var minute: Int
+        private set
     var oreRobots: Int
+        private set
     var clayRobots: Int
+        private set
     var obsidianRobots: Int
+        private set
     private var geodeRobots: Int
     private var ore: Int
     private var clay: Int
     private var obsidian: Int
     var geode: Int
+        private set
 
     init {
         val numbers = data.extractInts()

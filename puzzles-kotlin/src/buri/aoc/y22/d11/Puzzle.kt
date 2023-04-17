@@ -56,6 +56,7 @@ class Monkey(data: List<String>) {
     private val falseMonkey = data[5].extractInts().first()
     private val items = ArrayDeque<Long>()
     var inspectCount = 0L
+        private set
 
     init {
         for (item in data[1].extractLongs()) {

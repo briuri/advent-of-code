@@ -87,6 +87,7 @@ class Puzzle : BasePuzzle() {
 class Monkey(part: Part, data: String) {
     val name: String
     var operation: String
+        private set
     private val alphaPattern = "\\p{Alpha}".toRegex()
 
     init {
