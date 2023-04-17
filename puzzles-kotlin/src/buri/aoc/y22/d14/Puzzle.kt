@@ -32,10 +32,8 @@ class Puzzle : BasePuzzle() {
         for (line in input) {
             val points = line.split(" -> ")
             for (i in 0 until points.lastIndex) {
-                val rawStart = points[i].split(",").map { it.toInt() }
-                val start = Point2D(rawStart[0], rawStart[1])
-                val rawEnd = points[i + 1].split(",").map { it.toInt() }
-                val end = Point2D(rawEnd[0], rawEnd[1])
+                val start = Point2D.fromIntInput(points[i])
+                val end = Point2D.fromIntInput(points[i + 1])
                 addRock(grid, start, end)
             }
         }

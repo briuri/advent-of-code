@@ -80,6 +80,16 @@ data class Point2D<T>(val x: T, val y: T) : BaseTuple<T>(), Comparable<Point2D<T
     override fun toString(): String {
         return "$x,$y"
     }
+
+    companion object {
+        /**
+         * Builds a point from a string of comma-separated Ints.
+         */
+        fun fromIntInput(data: String): Point2D<Int> {
+            val numbers = data.split(",").map { it.toInt() }
+            return Point2D(numbers[0], numbers[1])
+        }
+    }
 }
 
 /**

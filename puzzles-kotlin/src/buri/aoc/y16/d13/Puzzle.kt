@@ -31,7 +31,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val magicNumber = input[0].toInt()
         val start = Point2D(1, 1)
-        val end = Point2D(input[1].split(",")[0].toInt(), input[1].split(",")[1].toInt())
+        val end = Point2D.fromIntInput(input[1])
 
         // Use a pathfinder that uses the magicNumber to determine which spots are open.
         val pathfinder = Pathfinder<Point2D<Int>> { current ->
