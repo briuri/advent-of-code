@@ -9,6 +9,8 @@ import buri.aoc.common.position.Direction.*
  */
 data class MutablePosition(var coords: Point2D<Int>, var facing: Direction = NORTH) {
 
+    constructor(x: Int, y: Int, facing: Direction) : this(Point2D(x, y), facing)
+
     /**
      * Adjusts facing and moves in that direction.
      */
