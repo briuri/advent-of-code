@@ -2,11 +2,11 @@
 
 This project contains my Advent of Code solutions. 
 
-I've solved every puzzle from 2015-2022 in Java and Kotlin (2018-2022 were done in real-time during the midnight competitions).
+I've solved every puzzle from 2015-2022 in Java and Kotlin (2018-2022 were done in real-time during the midnight competitions with Java).
 
 The top-level of the project can be imported as an IntelliJ IDEA project. Solutions are found under 
 `puzzles-<language>/src/` with a package naming convention of `buri.aoc.y<yy>.d<dd>`. Each Day can be run from a JUnit 
-test harness, colocated in the day's `Puzzle` class (this avoids the context-switching cost of using a `TestCase` file
+test harness, colocated in the day's `Puzzle` class (this avoids the mental context-switching cost of using a `TestCase` file
 under `/src/test/` when competing).
 
 ## Test Suite Run Time
