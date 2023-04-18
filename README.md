@@ -25,7 +25,7 @@ under `/src/test/` when competing).
 
 ## Leaderboard Visualization
 
-In addition to puzzle solutions, this project also contains a simple visualization (under `viz-java/src`) of the 
+In addition to puzzle solutions, this project also contains a simple visualization (under `viz-kotlin/src`) of the 
 private leaderboard JSON that can show the data as a median-based [Rankings page](http://aoc.urizone.net).
 
 ## License
