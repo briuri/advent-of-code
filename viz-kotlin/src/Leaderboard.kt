@@ -130,7 +130,7 @@ class Leaderboard : BaseLeaderboard() {
     private fun maskName(name: String): String {
         val masked = StringBuilder(name)
         val index = masked.indexOf(" ")
-        val maskPoint = 3
+        val maskPoint = 4
         if (index != -1 && index + maskPoint < masked.length) {
             val truncate = index + maskPoint
             val length = masked.length
