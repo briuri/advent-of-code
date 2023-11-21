@@ -111,15 +111,14 @@ class Leaderboard : BaseLeaderboard() {
      * Creates some instructions to get ready for a new season.
      */
     private fun insertInstructions() {
-//		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"174\" title=\"Advent of Code 2022\"/>\n");
+		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"147\" title=\"Advent of Code 2023\"/>\n");
         page.append("<div class=\"instructions\">\n")
 //      page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
-        page.append("\t<h2>See you after hours on November 30, 2023!</h2>\n");
+        page.append("\t<h2>It's here!</h2>\n");
 //		page.append("\t<h2>Late to the party?</h2>\n");
 		page.append("\t<ol>\n");
-        page.append("\t\t<li>Company-wide instructions for joining this year's competition will come out on Friday, November 24.</li>\n");
-//		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> (Commercial login).</li>\n");
-//		page.append("\t\t<li>Join the <a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Advent of Code Teams channel</a> (Commercial login) to chat with other puzzle solvers.</li>\n");
+		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login).</li>\n");
+		page.append("\t\t<li>Join the <a href=\"https://gov.teams.microsoft.us/l/channel/19%3agcch%3a7a07cf0485144145b1c838792d9d8a6e%40thread.tacv2/Advent%2520of%2520Code%25202023?groupId=ffacfa2c-2635-4085-bd8a-7c60ffb266d6&tenantId=a01f407a-85cb-4a16-98bb-f28e6384bd28\">Advent of Code Teams channel</a> (Defense login) to chat with other puzzle solvers.</li>\n");
 		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n");
 		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
 		page.append("\t</ol>\n");
