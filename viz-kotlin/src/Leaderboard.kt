@@ -73,7 +73,7 @@ class Leaderboard : BaseLeaderboard() {
         if (year == CURRENT_YEAR) {
             resetPage()
             insertHeader(year, true)
-            insertLatestDay(year, puzzleTimes)
+//2023      insertLatestDay(year, puzzleTimes)
             insertInstructions()
             insertFooter(false)
             writePage("index.html")
@@ -82,11 +82,14 @@ class Leaderboard : BaseLeaderboard() {
         // Create Top X page.
         resetPage()
         insertHeader(year, false)
-        insertTopOverall(year, playerTimes, false)
-        insertTopDivisionsChart(year, playerTimes)
-        insertTotalSolvesChart(year, puzzleTimes)
-        insertTopDaily(year, puzzleTimes, false)
-        insertFooter(true)
+        page.append("<div class=\"instructions\">\n")
+        page.append("See you after hours on November 30, 2023!")
+        page.append("</div>")
+//2023  insertTopOverall(year, playerTimes, false)
+//2023  insertTopDivisionsChart(year, playerTimes)
+//2023  insertTotalSolvesChart(year, puzzleTimes)
+//2023  insertTopDaily(year, puzzleTimes, false)
+//2023  insertFooter(true)
         writePage("$year-top.html")
 
         // Create All Players page.
@@ -106,21 +109,23 @@ class Leaderboard : BaseLeaderboard() {
     private fun insertInstructions() {
 //		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"174\" title=\"Advent of Code 2022\"/>\n");
         page.append("<div class=\"instructions\">\n")
-        page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
+//      page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
+        page.append("\t<h2>See you after hours on November 30, 2023!</h2>\n");
 //		page.append("\t<h2>Late to the party?</h2>\n");
-//		page.append("\t<ol>\n");
+		page.append("\t<ol>\n");
+        page.append("\t\t<li>Company-wide instructions for joining this year's competition will come out on Friday, November 24.</li>\n");
 //		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> (Commercial login).</li>\n");
 //		page.append("\t\t<li>Join the <a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Advent of Code Teams channel</a> (Commercial login) to chat with other puzzle solvers.</li>\n");
-//		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n");
-//		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
-//		page.append("\t</ol>\n");
-//		page.append("\t<h2>Scoring FAQ</h2>");
-//		page.append("\t<ul>\n");
-//		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
-//		page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
-//		page.append("\t\t<li>Last year, 12 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
-//		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
-//		page.append("\t</ul>\n");
+		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n");
+		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n");
+		page.append("\t</ol>\n");
+		page.append("\t<h2>Scoring FAQ</h2>");
+		page.append("\t<ul>\n");
+		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>");
+		page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>");
+		page.append("\t\t<li>Last year, 15 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n");
+		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n");
+		page.append("\t</ul>\n");
         page.append("</div>\n")
     }
 
