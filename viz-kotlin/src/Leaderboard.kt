@@ -82,14 +82,18 @@ class Leaderboard : BaseLeaderboard() {
         // Create Top X page.
         resetPage()
         insertHeader(year, false)
-        page.append("<div class=\"instructions\">\n")
-        page.append("See you after hours on November 30, 2023!")
-        page.append("</div>")
-//2023  insertTopOverall(year, playerTimes, false)
-//2023  insertTopDivisionsChart(year, playerTimes)
-//2023  insertTotalSolvesChart(year, puzzleTimes)
-//2023  insertTopDaily(year, puzzleTimes, false)
-//2023  insertFooter(true)
+        if (year == CURRENT_YEAR) {
+            page.append("<div class=\"instructions\">\n")
+            page.append("See you after hours on November 30, 2023!")
+            page.append("</div>")
+        }
+        else {
+            insertTopOverall(year, playerTimes, false)
+            insertTopDivisionsChart(year, playerTimes)
+            insertTotalSolvesChart(year, puzzleTimes)
+            insertTopDaily(year, puzzleTimes, false)
+            insertFooter(true)
+        }
         writePage("$year-top.html")
 
         // Create All Players page.
