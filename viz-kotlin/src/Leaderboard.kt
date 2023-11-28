@@ -111,8 +111,8 @@ class Leaderboard : BaseLeaderboard() {
      * Creates some instructions to get ready for a new season.
      */
     private fun insertInstructions() {
-		page.append("<img src=\"teaser.jpg\" class=\"teaser\" title=\"Advent of Code 2023\"/>\n");
-        page.append("<div class=\"instructions\">\n")
+		page.append("\t<img src=\"teaser.jpg\" class=\"teaser\" title=\"Advent of Code 2023\"/>\n");
+        page.append("\t<div class=\"instructions\">\n")
 //      page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
         page.append("\t<h2>It's here!</h2>\n");
 //		page.append("\t<h2>Late to the party?</h2>\n");
@@ -167,20 +167,22 @@ class Leaderboard : BaseLeaderboard() {
         page.append("</head>\n\n<body>\n")
         page.append("\t<div class=\"navBar\">\n")
         page.append("\t\t")
-        page.append("<a href=\"index.html\">Latest</a> | ")
-        for (i in YEARS.indices) {
+        page.append("${YEARS[0]}: <a href=\"index.html\">Latest</a> | <a href=\"${YEARS[0]}-top.html\">Rankings</a>")
+        page.append(" | <a href=\"https://adventofcode.com/$year/leaderboard/private/view/105906\">")
+        page.append("Raw Stats&rArr;</a> | ")
+        page.append("<a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Teams&rArr;</a>")
+        page.append("<br />\nArchives: ")
+        for (i in YEARS.indices.drop(1)) {
             page.append("<a href=\"${YEARS[i]}-top.html\">${YEARS[i]}</a>")
             if (i + 1 < YEARS.size) {
                 page.append(" | ")
             }
         }
-        if (year == CURRENT_YEAR) {
-            page.append("<br />\n<a href=\"https://adventofcode.com/$year/leaderboard/private/view/105906\">")
-            page.append("Private Leaderboard&rArr;</a> | ")
-            page.append("<a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Teams&rArr;</a>")
-        }
         page.append("\n\t</div>\n\n")
-        page.append("\t<h1>Advent of Code - Rankings ($year)</h1>\n\n")
+
+        val title = if (isLatestPage) "Latest Puzzle" else "Rankings"
+
+        page.append("\t<h1>Advent of Code - $title ($year)</h1>\n\n")
     }
 
     /**
