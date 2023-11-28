@@ -111,7 +111,7 @@ class Leaderboard : BaseLeaderboard() {
      * Creates some instructions to get ready for a new season.
      */
     private fun insertInstructions() {
-		page.append("<img src=\"teaser.jpg\" width=\"500\" height=\"147\" title=\"Advent of Code 2023\"/>\n");
+		page.append("<img src=\"teaser.jpg\" class=\"teaser\" title=\"Advent of Code 2023\"/>\n");
         page.append("<div class=\"instructions\">\n")
 //      page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
         page.append("\t<h2>It's here!</h2>\n");
