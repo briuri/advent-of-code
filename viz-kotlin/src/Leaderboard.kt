@@ -153,10 +153,12 @@ class Leaderboard : BaseLeaderboard() {
      * Adds the HTML page header
      */
     private fun insertHeader(year: String, isLatestPage: Boolean) {
+        val title = if (isLatestPage) "Latest Puzzle" else "Rankings"
+
         page.append("<html>\n<head>\n")
         page.append("\t<meta charset=\"UTF-8\">\n")
         page.append("\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n")
-        page.append("\t<title>Advent of Code - Rankings ($year)</title>\n\n")
+        page.append("\t<title>Advent of Code - $title ($year)</title>\n\n")
         if (!isLatestPage) {
             page.append("\t<script type=\"text/javascript\" src=\"https://cdn.plot.ly/plotly-1.58.1.min.js\" charset=\"utf-8\"></script>\n")
         }
@@ -179,9 +181,6 @@ class Leaderboard : BaseLeaderboard() {
             }
         }
         page.append("\n\t</div>\n\n")
-
-        val title = if (isLatestPage) "Latest Puzzle" else "Rankings"
-
         page.append("\t<h1>Advent of Code - $title ($year)</h1>\n\n")
     }
 
