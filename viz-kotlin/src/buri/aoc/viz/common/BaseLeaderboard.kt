@@ -119,7 +119,7 @@ abstract class BaseLeaderboard protected constructor() {
                 continue
             }
             // For some reason, "Manuel \"DZ\" Dominguez" doesn't work as a key in the alternateNames map.
-            if ((year == "2022") && name.contains("\"DZ\"")) {
+            if (name.contains("\"DZ\"")) {
                 name = "Manuel Dominguez"
             }
             val puzzleData = member["completion_day_level"] as Map<String, Any>
