@@ -117,7 +117,7 @@ class Leaderboard : BaseLeaderboard() {
         page.append("\t<h2>It's here!</h2>\n")
 //		page.append("\t<h2>Late to the party?</h2>\n")
 		page.append("\t<ol>\n")
-		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login).</li>\n")
+		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login) to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your AoC account.</li>\n")
 		page.append("\t\t<li>Join the <a href=\"https://gov.teams.microsoft.us/l/channel/19%3agcch%3a7a07cf0485144145b1c838792d9d8a6e%40thread.tacv2/Advent%2520of%2520Code%25202023?groupId=ffacfa2c-2635-4085-bd8a-7c60ffb266d6&tenantId=a01f407a-85cb-4a16-98bb-f28e6384bd28\">Advent of Code Teams channel</a> (Defense login) to chat with other puzzle solvers.</li>\n")
 		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
 		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
