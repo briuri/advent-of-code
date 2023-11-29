@@ -154,7 +154,7 @@ class SolveTime(
             // Left-pad time. 2016 had 4-digit hours in All Players report.
             val padSize = hourWidth + 6 - output.length
             for (i in 0 until padSize) {
-                output.insert(0, "&nbsp;")
+                output.insert(0, BaseLeaderboard.SPACE)
             }
             return output.toString()
         }
