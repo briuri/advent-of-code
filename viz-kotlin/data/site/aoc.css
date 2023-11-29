@@ -43,7 +43,7 @@ span.dailyLink, span.rankingsLink {
 	padding: 5px;
 }
 span.dayLabel {
-	color: #666666;
+	color: #555555;
 }
 div.details {
 	display: none;
@@ -81,7 +81,7 @@ h3 {
 	margin-bottom: 0px;
 }
 span.ineligible {
-	color: #888888;
+	color: #999999;
 }
 div.instructions {
 	float: left;

@@ -84,7 +84,7 @@ class Leaderboard : BaseLeaderboard() {
         insertHeader(year, false)
         if (year == CURRENT_YEAR) {
             page.append("<div class=\"instructions\">\n")
-            page.append("See you after hours on November 30, 2023!")
+            page.append("Rankings will appear within 15 minutes of the first puzzle's release. See you after hours on November 30, 2023!")
             page.append("</div>")
         }
         else {
@@ -202,27 +202,35 @@ class Leaderboard : BaseLeaderboard() {
         page.append(readLastModified(year))
         page.append("\t<p>${company.rules}</p>\n")
         val linkText = if (showAll) "Top" else "All"
+
+        // Show Top/All toggle.
         page.append("<a href=\"$year-${linkText.lowercase()}.html\">")
         page.append("<span class=\"overallLink\">Show $linkText Players</span></a>\n")
         page.append("\t<div class=\"clear\"></div>\n\n<div class=\"overall\">\n")
         page.append("<ol>\n")
+
+        // Show each player's complete record.
         var isNextTie = false
         var tieCount = 0
         val isStandardWidth = !(year == "2016" && showAll)
-        val summaryMargin = if (isStandardWidth) 12 else 13
+        val summaryMargin = if (isStandardWidth) 18 else 19
         for (i in 0 until numOverall) {
             val player = playerTimes[i]
             val isIneligible = company.ineligible.contains(player.name)
             val timeClass = if (isIneligible) "ineligible" else "bestTime"
+            val hoverText = if (isIneligible) "Not eligible for prizes" else "Show/hide all times"
+
+            // Show total stars.
+            val starMargin = if (player.stars < 10) SPACE else ""
+            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\">")
+            page.append(starMargin).append(player.stars).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
 
             // Show tiebreaker time.
-            val overallTime = SolveTime.formatTime(player.tiebreakerTime, isStandardWidth)
-            val hoverText = if (isIneligible) "Not eligible for prizes" else "Show/hide all times"
-            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\">")
+            val tiebreakerTime = SolveTime.formatTime(player.tiebreakerTime, isStandardWidth)
             page.append("<span class=\"$timeClass bestTimeLink\" id=\"bestTime$i\" ")
-            page.append("title=\"$hoverText\">$overallTime</span>$SPACE$SPACE")
+            page.append("title=\"$hoverText\">$tiebreakerTime</span>$SPACE$SPACE")
 
-            // Show player name and division.
+            // Show player name and division/portfolio.
             if (isIneligible) {
                 page.append("<span class=\"ineligible\" title=\"Not eligible for prizes\">")
             }
@@ -235,11 +243,10 @@ class Leaderboard : BaseLeaderboard() {
             }
             page.append("<br />\n\t\t")
 
-            // Show summary of medals and global records
+            // On next line, show summary of medals global records
             for (j in 0 until summaryMargin) {
                 page.append(SPACE)
             }
-            page.append(player.stars).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
             if (player.hasMedals()) {
                 page.append("${player.first}<span class=\"emoji\" title=\"1st Place\">&#x1F947;</span> ")
                 page.append("${player.second}<span class=\"emoji\" title=\"2nd Place\">&#x1F948;</span> ")
@@ -254,31 +261,30 @@ class Leaderboard : BaseLeaderboard() {
             page.append("\n\t\t<div class=\"details\" id=\"details$i\">\n")
             val totalTimes = player.times.size
             for (j in 0 until totalTimes) {
-                page.append("\t\t\t")
-                val leftPadding = "$SPACE$SPACE$SPACE"
-                val dayPadding = if (player.times[j].day < 10) SPACE else ""
-                val dayLabel = "$leftPadding<span class=\"dayLabel\">Day $dayPadding${player.times[j].day}</span>"
+                val dayPadding = if (player.times[j].day < 10) "0" else ""
+                page.append("\t\t\t<span class=\"dayLabel\">d$dayPadding${player.times[j].day}</span>")
+                page.append(SPACE).append(SPACE)
                 val time = SolveTime.formatTime(player.times[j].time, isStandardWidth)
                 // 2017+ use median time, so add descriptive text next to the key times.
                 if (year != "2016") {
                     // Averaged median
                     if (totalTimes % 2 == 0 && j == totalTimes / 2 - 1) {
-                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
-                        page.append("${SPACE}average is")
+                        page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
+                        page.append(SPACE).append("&#x2190; average is")
                     } else if (totalTimes % 2 == 0 && j == totalTimes / 2) {
-                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
-                        page.append("${SPACE}${SPACE}${SPACE}current median")
+                        page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
+                        page.append(SPACE).append("&#x2190; current median")
                     } else if (j == totalTimes / 2) {
-                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
-                        page.append("${SPACE}current median")
+                        page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
+                        page.append(SPACE).append("current median")
                     } else if (j == 12) {
-                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
+                        page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
                         page.append("${SPACE}13th fastest median")
                     } else {
-                        page.append(time).append(dayLabel)
+                        page.append(time)
                     }
                 } else {
-                    page.append(time).append(dayLabel)
+                    page.append(time)
                 }
                 page.append("<br />\n")
             }
