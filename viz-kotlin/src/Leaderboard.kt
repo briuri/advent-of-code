@@ -220,7 +220,7 @@ class Leaderboard : BaseLeaderboard() {
             val hoverText = if (isIneligible) "Not eligible for prizes" else "Show/hide all times"
             page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\">")
             page.append("<span class=\"$timeClass bestTimeLink\" id=\"bestTime$i\" ")
-            page.append("title=\"$hoverText\">$overallTime</span>&nbsp;&nbsp;")
+            page.append("title=\"$hoverText\">$overallTime</span>$SPACE$SPACE")
 
             // Show player name and division.
             if (isIneligible) {
@@ -237,7 +237,7 @@ class Leaderboard : BaseLeaderboard() {
 
             // Show summary of medals and global records
             for (j in 0 until summaryMargin) {
-                page.append("&nbsp;")
+                page.append("$SPACE")
             }
             page.append(player.stars).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
             if (player.hasMedals()) {
@@ -255,24 +255,30 @@ class Leaderboard : BaseLeaderboard() {
             val totalTimes = player.times.size
             for (j in 0 until totalTimes) {
                 page.append("\t\t\t")
-                val time = SolveTime.formatTime(player.times[j], isStandardWidth)
+                val leftPadding = "$SPACE$SPACE$SPACE"
+                val dayPadding = if (player.times[j].day < 10) "$SPACE" else ""
+                val dayLabel = "$leftPadding<span class=\"dayLabel\">Day $dayPadding${player.times[j].day}</span>"
+                val time = SolveTime.formatTime(player.times[j].time, isStandardWidth)
                 // 2017+ use median time, so add descriptive text next to the key times.
                 if (year != "2016") {
                     // Averaged median
                     if (totalTimes % 2 == 0 && j == totalTimes / 2 - 1) {
-                        page.append("<span class=\"bestTime\">$time</span>")
-                        page.append("&nbsp;&nbsp;average is")
+                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
+                        page.append("${SPACE}average is")
+                    } else if (totalTimes % 2 == 0 && j == totalTimes / 2) {
+                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
+                        page.append("${SPACE}${SPACE}${SPACE}current median")
                     } else if (j == totalTimes / 2) {
-                        page.append("<span class=\"bestTime\">$time</span>")
-                        page.append("&nbsp;&nbsp;current median")
+                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
+                        page.append("${SPACE}current median")
                     } else if (j == 12) {
-                        page.append("<span class=\"bestTime\">$time</span>")
-                        page.append("&nbsp;&nbsp;13th fastest median")
+                        page.append("<span class=\"bestTime\">$time</span>").append(dayLabel)
+                        page.append("${SPACE}13th fastest median")
                     } else {
-                        page.append(time)
+                        page.append(time).append(dayLabel)
                     }
                 } else {
-                    page.append(time)
+                    page.append(time).append(dayLabel)
                 }
                 page.append("<br />\n")
             }
@@ -478,7 +484,7 @@ class Leaderboard : BaseLeaderboard() {
                 val mostRecent = places[places.size - 1]
                 val time = SolveTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)
                 val alert = "\t(${puzzleTimes.stars} stars) - Day ${i + 1}: ${places.size}." +
-                        time.replace("&nbsp;", " ") + " ${mostRecent.name}\n"
+                        time.replace("$SPACE", " ") + " ${mostRecent.name}\n"
                 println(alert)
             }
             places.addAll(puzzleTimes.getTimes(TimeType.ONE)[i])
@@ -515,7 +521,7 @@ class Leaderboard : BaseLeaderboard() {
             // Show total time and split times
             page.append("<span class=\"dS\">")
             insertSplitTime(record.getTime(TimeType.ONE), bestPart1)
-            page.append("&nbsp;")
+            page.append("$SPACE")
             insertSplitTime(record.getTime(TimeType.TWO), bestPart2)
             page.append("</span>")
             val totalTime: Long? = record.getTime(TimeType.TOTAL)
@@ -523,12 +529,12 @@ class Leaderboard : BaseLeaderboard() {
             page.append("</span>")
 
             // Show global indicator and player name
-            page.append("&nbsp;")
+            page.append("$SPACE")
             if (puzzle.globalNames.contains(record.name)) {
                 page.append("<a href=\"https://adventofcode.com/$year/leaderboard/day/$day\">")
                 page.append("<span class=\"global\" title=\"Top 100 on daily Global Leaderboard\">*</span></a>")
             } else {
-                page.append("&nbsp;")
+                page.append("$SPACE")
             }
             page.append(maskName(record.name))
             val nextTime = if (place + 1 < places.size) places[place + 1].getTime(TimeType.TOTAL) else null

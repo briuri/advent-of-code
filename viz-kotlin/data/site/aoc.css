@@ -42,6 +42,9 @@ span.dailyLink, span.rankingsLink {
 	background-color: #1f1f43;
 	padding: 5px;
 }
+span.dayLabel {
+	color: #666666;
+}
 div.details {
 	display: none;
 	margin-bottom: 10px;

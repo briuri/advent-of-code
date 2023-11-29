@@ -167,16 +167,17 @@ abstract class BaseLeaderboard protected constructor() {
     protected fun getPlayerTimes(year: String, puzzleTimes: PuzzleTimes): List<PlayerTimes> {
         val company = companies[year]!!
         // Create an interim map of players to all of their puzzle times.
-        val rawPuzzleTimes = mutableMapOf<String, MutableList<Long>>()
+        val rawPuzzleTimes = mutableMapOf<String, MutableList<TiebreakerTime>>()
         for (i in puzzleTimes.getTimes(TimeType.TOTAL).indices) {
+            val day = i + 1
             // Skip y18d06, since it was not included in AoC or our calculations.
-            if (!(year == "2018" && i + 1 == 6)) {
+            if (!(year == "2018" && day == 6)) {
                 val singleDay = puzzleTimes.getTimes(TimeType.TOTAL)[i]
                 for (time in singleDay) {
                     rawPuzzleTimes.putIfAbsent(time.name, mutableListOf())
                     val totalTime = time.getTime(TimeType.TOTAL)
                     if (totalTime != null) {
-                        rawPuzzleTimes[time.name]!!.add(totalTime)
+                        rawPuzzleTimes[time.name]!!.add(TiebreakerTime(day, totalTime))
                     }
                 }
             }
@@ -274,5 +275,8 @@ abstract class BaseLeaderboard protected constructor() {
 
         // Date format for 2016 - 2017 leaderboards (before Unix timestamps).
         private val LEGACY_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+
+        // HTML Space
+        const val SPACE = "&nbsp;"
     }
 }

@@ -251,11 +251,8 @@ class PuzzleTimes {
 
 /**
  * Data class for all of a player's times.
- *
- * In 2016, the total time was used as a tiebreaker.
- * In 2017 and beyond, the median time is a tiebreaker.
  */
-class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<Long>, useMedian: Boolean) :
+class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<TiebreakerTime>, useMedian: Boolean) :
     Comparable<PlayerTimes> {
 
     // Total stars earned by this player.
@@ -304,20 +301,20 @@ class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<Lo
         /**
          * Calculates the sum of the given times.
          */
-        private fun calculateTotalTime(times: List<Long>): Long = times.sum()
+        private fun calculateTotalTime(times: List<TiebreakerTime>): Long = times.sumOf { it.time }
 
         /**
          * Calculates the median of the given times.
          */
-        private fun calculateMedianTime(times: List<Long>): Long {
+        private fun calculateMedianTime(times: List<TiebreakerTime>): Long {
             // Odd number of times, so median is middle time.
             if (times.size % 2 == 1) {
-                return times[times.size / 2]
+                return times[times.size / 2].time
             }
 
             // Otherwise, take the average of 2 middle times.
-            val low = times[times.size / 2 - 1]
-            val high = times[times.size / 2]
+            val low = times[times.size / 2 - 1].time
+            val high = times[times.size / 2].time
             var median = (high + low) / 2
 
             // Round up 0.5 seconds in average.
@@ -327,4 +324,18 @@ class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<Lo
             return median
         }
     }
+}
+
+/**
+ * Data class for a single tiebreaker time on one day.
+ *
+ * In 2016, the total time was used as a tiebreaker.
+ * In 2017 and beyond, the median time is a tiebreaker.
+ */
+class TiebreakerTime(val day: Int, val time: Long) : Comparable<TiebreakerTime> {
+
+    /**
+     * Sort on tiebreaker time.
+     */
+    override fun compareTo(other: TiebreakerTime): Int = time.compareTo(other.time)
 }
