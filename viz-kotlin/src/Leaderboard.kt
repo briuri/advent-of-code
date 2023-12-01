@@ -3,7 +3,7 @@ import org.junit.Test
 import java.util.*
 
 /**
- * Alternate visualization of our private leaderboard showing the Fastest Times for each puzzle. Generated
+ * Alternate visualization of our private leaderboard showing the Rankings for each puzzle. Generated
  * from the API JSON.
  *
  * NOTE: Inactive accounts are purged yearly from our leaderboard to avoid the 200-player cap. Redownloading
@@ -13,7 +13,7 @@ import java.util.*
  */
 
 /**
- * Generates the Fastest Times pages on a schedule, for use when I'm not around to do manual updates.
+ * Generates the Rankings pages on a schedule, for use when I'm not around to do manual updates.
  */
 fun main() {
     val minutes = 15
@@ -52,7 +52,7 @@ fun main() {
 
 class Leaderboard : BaseLeaderboard() {
     /**
-     * Generate the Fastest Times pages via a JUnit test in IDEA.
+     * Generate the Rankings pages via a JUnit test in IDEA.
      */
     @Test
     fun generatePages() {
@@ -107,7 +107,6 @@ class Leaderboard : BaseLeaderboard() {
 		page.append("\t<img src=\"teaser.jpg\" class=\"teaser\" title=\"Advent of Code 2023\"/>\n")
         page.append("\t<div class=\"instructions\">\n")
 //      page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
-//        page.append("\t<h2>It's here!</h2>\n")
 		page.append("\t<h2>Late to the party?</h2>\n")
 		page.append("\t<ol>\n")
 		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login) to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your AoC account.</li>\n")
