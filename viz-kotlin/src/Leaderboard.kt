@@ -162,7 +162,7 @@ class Leaderboard : BaseLeaderboard() {
         page.append("\t<div class=\"navBar\">\n")
         page.append("\t\t")
         page.append("${YEARS[0]}: <a href=\"index.html\">Latest</a> | <a href=\"${YEARS[0]}-top.html\">Rankings</a>")
-        page.append(" | <a href=\"https://adventofcode.com/$year/leaderboard/private/view/105906\">")
+        page.append(" | <a href=\"https://adventofcode.com/${YEARS[0]}/leaderboard/private/view/105906\">")
         page.append("Raw Stats&rArr;</a> | ")
         page.append("<a href=\"https://teams.microsoft.com/l/team/19%3a3iu5nRqsxOjUvC7ZdfaCGw0xlHEUrqu8zvVdmRhG7hw1%40thread.tacv2/conversations?groupId=590beb17-d466-40bd-8631-22f023f9ae69&tenantId=0ee6c63b-4eab-4748-b74a-d1dc22fc1a24\">Teams&rArr;</a>")
         page.append("<br />\n\t\tArchives: ")
