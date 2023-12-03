@@ -76,7 +76,7 @@ enum class Direction(val icon: Char) {
      */
     companion object {
         infix fun from(value: Char): Direction {
-            return values().first { it.icon == value }
+            return entries.first { it.icon == value }
         }
     }
 }
