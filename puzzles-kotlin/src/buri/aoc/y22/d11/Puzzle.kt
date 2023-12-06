@@ -1,9 +1,6 @@
 package buri.aoc.y22.d11
 
-import buri.aoc.common.BasePuzzle
-import buri.aoc.common.Part
-import buri.aoc.common.extractInts
-import buri.aoc.common.extractLongs
+import buri.aoc.common.*
 import org.junit.Test
 
 /**
@@ -32,7 +29,7 @@ class Puzzle : BasePuzzle() {
         for (chunk in input.chunked(7)) {
             monkeys.add(Monkey(chunk))
         }
-        val gcd = monkeys.map { it.testDivisor }.reduce { acc, i -> acc * i }
+        val gcd = monkeys.map { it.testDivisor }.product()
 
         val rounds = if (part.isOne()) 20 else 10_000
         for (round in 1..rounds) {

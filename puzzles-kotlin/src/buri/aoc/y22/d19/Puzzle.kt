@@ -3,6 +3,7 @@ package buri.aoc.y22.d19
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import buri.aoc.common.product
 import org.junit.Test
 
 /**
@@ -106,7 +107,7 @@ class Puzzle : BasePuzzle() {
         return if (part.isOne()) {
             maxGeodes.map { it.key * it.value }.sum()
         } else {
-            maxGeodes.values.reduce { acc, i -> acc * i }
+            maxGeodes.values.product()
         }
     }
 }

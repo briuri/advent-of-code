@@ -3,6 +3,7 @@ package buri.aoc.y20.d16
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import buri.aoc.common.product
 import org.junit.Test
 
 /**
@@ -67,7 +68,7 @@ class Puzzle : BasePuzzle() {
                 }
             }
         }
-        return departureFields.reduce { acc, i -> acc * i }
+        return departureFields.product()
     }
 }
 

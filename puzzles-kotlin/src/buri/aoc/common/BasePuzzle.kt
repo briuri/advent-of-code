@@ -161,3 +161,8 @@ fun String.extractInts(allowNegative: Boolean = true): List<Int> {
  * Extension function for building Java BigIntegers
  */
 fun Long.toBigInt(): BigInteger = BigInteger.valueOf(this)
+
+/**
+ * Extension function for calculating the product of a collection
+ */
+fun Collection<Number>.product(): Long = this.map { it.toLong() }.reduce { acc, i -> acc * i }

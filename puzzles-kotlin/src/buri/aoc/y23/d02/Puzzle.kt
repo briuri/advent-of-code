@@ -3,6 +3,7 @@ package buri.aoc.y23.d02
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import buri.aoc.common.product
 import org.junit.Test
 
 /**
@@ -36,7 +37,7 @@ class Puzzle : BasePuzzle() {
      * In part 1: Returns the id of the game if it is valid, or 0 if not.
      * In part 2: Returns the product of the number of cubes needed.
      */
-    private fun getNumber(part: Part, line: String): Int {
+    private fun getNumber(part: Part, line: String): Long {
         val needed = mutableMapOf("red" to 0, "green" to 0, "blue" to 0)
         val gameData = line.split(": ")[1].replace(";", ",")
         for (cubeType in gameData.split(", ")) {
@@ -48,9 +49,9 @@ class Puzzle : BasePuzzle() {
             return if (needed.any { it.value > maxColors[it.key]!! }) {
                 0
             } else {
-                line.extractInts()[0]
+                line.extractInts()[0].toLong()
             }
         }
-        return needed.values.reduce { acc, i -> acc * i }
+        return needed.values.product()
     }
 }

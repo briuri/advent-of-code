@@ -2,6 +2,7 @@ package buri.aoc.y16.d10
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.product
 import org.junit.Test
 
 /**
@@ -60,7 +61,7 @@ class Puzzle : BasePuzzle() {
                     bot.chips.clear()
                 }
                 if (part.isTwo() && outputs.size == 3) {
-                    return outputs.reduce { acc, i -> acc * i }
+                    return outputs.product()
                 }
             }
         }

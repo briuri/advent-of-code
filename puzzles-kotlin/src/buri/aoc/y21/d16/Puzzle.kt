@@ -2,6 +2,7 @@ package buri.aoc.y21.d16
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.product
 import org.junit.Test
 
 /**
@@ -85,7 +86,7 @@ class Packet(private val data: String, start: Int) {
             0 -> subpackets.sumOf { it.evaluate() }
             // Product
             1 -> {
-                subpackets.map { it.evaluate() }.reduce { acc, i -> acc * i }
+                subpackets.map { it.evaluate() }.product()
             }
             // Min
             2 -> subpackets.minOf { it.evaluate() }
