@@ -14,11 +14,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Base functionality for loading data to build the leaderboard. Rendering is in the inheriting class.
+ * Base functionality for loading data to build the Rankings Page. Rendering is in the inheriting class.
  *
  * @author Brian Uri!
  */
-abstract class BaseLeaderboard protected constructor() {
+abstract class BaseRankingsPage protected constructor() {
     // Page-writing buffer
     protected val page = StringBuilder()
 

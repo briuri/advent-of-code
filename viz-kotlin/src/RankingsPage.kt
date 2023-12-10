@@ -6,8 +6,8 @@ import java.util.*
  * Alternate visualization of our private leaderboard showing the Rankings for each puzzle. Generated
  * from the API JSON.
  *
- * NOTE: Inactive accounts are purged yearly from our leaderboard to avoid the 200-player cap. Redownloading
- * JSON from older years and regenerating their pages will result in missing scores.
+ * NOTE: Inactive accounts are purged yearly from our private leaderboard to avoid the 200-player cap.
+ * Redownloading JSON from older years and regenerating their pages will result in missing scores.
  *
  * @author Brian Uri!
  */
@@ -21,15 +21,15 @@ fun main() {
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-get-json.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-put-s3.bat"
-    val leaderboard = Leaderboard()
+    val rankingsPage = RankingsPage()
 
     for (i in 0 until reps) {
         if (i > 0) {
             // Wait for next iteration.
             Thread.sleep(minutes.toLong() * 60 * 1000)
         }
-        val date = BaseLeaderboard.MODIFIED_DATE_FORMAT.format(Date())
-        println("$date Leaderboard Auto-Update #${i + 1} of $reps")
+        val date = BaseRankingsPage.MODIFIED_DATE_FORMAT.format(Date())
+        println("$date Rankings Page Auto-Update #${i + 1} of $reps")
         // Script uses curl to pass session cookie and copy JSON to /data/viz/json.
         val jsonDowload = Runtime.getRuntime().exec("$execPrefix $downloadScript")
         jsonDowload.waitFor()
@@ -39,7 +39,7 @@ fun main() {
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
-            leaderboard.generatePages()
+            rankingsPage.generatePages()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -50,7 +50,7 @@ fun main() {
     }
 }
 
-class Leaderboard : BaseLeaderboard() {
+class RankingsPage : BaseRankingsPage() {
     /**
      * Generate the Rankings pages via a JUnit test in IDEA.
      */
