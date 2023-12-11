@@ -35,7 +35,7 @@ fun main() {
         jsonDowload.waitFor()
 
         // Add extra time (waitFor is insufficient).
-        Thread.sleep(2 * 1000)
+        Thread.sleep(3 * 1000)
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
