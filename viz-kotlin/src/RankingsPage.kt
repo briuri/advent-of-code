@@ -35,7 +35,7 @@ fun main() {
         jsonDowload.waitFor()
 
         // Add extra time (waitFor is insufficient).
-        Thread.sleep(3 * 1000)
+        Thread.sleep(2 * 1000)
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
@@ -65,6 +65,10 @@ class RankingsPage : BaseRankingsPage() {
      * Generates the page for a specific year
      */
     private fun visualizeYear(year: String) {
+        // Always clear current year cache before generating.
+        if (year == CURRENT_YEAR) {
+            readTimeData(year)
+        }
         val puzzleTimes = puzzleTimes[year]!!
         val playerTimes = playerTimes[year]!!
 

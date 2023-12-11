@@ -38,9 +38,16 @@ abstract class BaseRankingsPage protected constructor() {
         readPuzzleMetadata()
         readCompanyMetadata()
         for (year in YEARS) {
-            puzzleTimes[year] = getSolveTimes(year, readLeaderboards(year))
-            playerTimes[year] = getPlayerTimes(year, puzzleTimes[year]!!)
+            readTimeData(year)
         }
+    }
+
+    /**
+     * Loads all time data from the leaderboard JSON.
+     */
+    fun readTimeData(year: String) {
+        puzzleTimes[year] = getSolveTimes(year, readLeaderboards(year))
+        playerTimes[year] = getPlayerTimes(year, puzzleTimes[year]!!)
     }
 
     /**
