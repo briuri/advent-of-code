@@ -28,9 +28,19 @@ abstract class BaseRankingsPage protected constructor() {
     // Metadata about players and divisions, grouped by year
     protected val companies = mutableMapOf<String, Company>()
 
+    // Yearly solve times for all puzzles in the year
+    protected val puzzleTimes = mutableMapOf<String, PuzzleTimes>()
+
+    // Yearly solve times grouped by player rather than puzzle
+    protected val playerTimes = mutableMapOf<String, List<PlayerTimes>>()
+
     init {
         readPuzzleMetadata()
         readCompanyMetadata()
+        for (year in YEARS) {
+            puzzleTimes[year] = getSolveTimes(year, readLeaderboards(year))
+            playerTimes[year] = getPlayerTimes(year, puzzleTimes[year]!!)
+        }
     }
 
     /**
@@ -82,7 +92,7 @@ abstract class BaseRankingsPage protected constructor() {
     /**
      * Reads the raw leaderboard data from the AoC leaderboard JSON files.
      */
-    protected fun readLeaderboards(year: String): Map<String, Any> {
+    private fun readLeaderboards(year: String): Map<String, Any> {
         val mapper = ObjectMapper()
         try {
             val typeRef = object : TypeReference<MutableMap<String, Any>>() {}
@@ -109,7 +119,7 @@ abstract class BaseRankingsPage protected constructor() {
      * Loads puzzle completion times from the leaderboard JSON.
      */
     @Suppress("UNCHECKED_CAST")
-    protected fun getSolveTimes(year: String, leaderboardJson: Map<String, Any>): PuzzleTimes {
+    private fun getSolveTimes(year: String, leaderboardJson: Map<String, Any>): PuzzleTimes {
         val company = companies[year]!!
         val puzzleTimes = PuzzleTimes()
         for (key in leaderboardJson.keys) {
@@ -164,7 +174,7 @@ abstract class BaseRankingsPage protected constructor() {
      *
      * NOTE: This does not handle any player who has not yet completed Part 2 of any puzzle.
      */
-    protected fun getPlayerTimes(year: String, puzzleTimes: PuzzleTimes): List<PlayerTimes> {
+    private fun getPlayerTimes(year: String, puzzleTimes: PuzzleTimes): List<PlayerTimes> {
         val company = companies[year]!!
         // Create an interim map of players to all of their puzzle times.
         val rawPuzzleTimes = mutableMapOf<String, MutableList<TiebreakerTime>>()

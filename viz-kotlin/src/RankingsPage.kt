@@ -65,9 +65,8 @@ class RankingsPage : BaseRankingsPage() {
      * Generates the page for a specific year
      */
     private fun visualizeYear(year: String) {
-        val leaderboardJson = readLeaderboards(year)
-        val puzzleTimes = getSolveTimes(year, leaderboardJson)
-        val playerTimes = getPlayerTimes(year, puzzleTimes)
+        val puzzleTimes = puzzleTimes[year]!!
+        val playerTimes = playerTimes[year]!!
 
         // Create the Latest page.
         if (year == CURRENT_YEAR) {
@@ -107,20 +106,20 @@ class RankingsPage : BaseRankingsPage() {
 //		page.append("\t<img src=\"teaser.jpg\" class=\"teaser\" title=\"Advent of Code 2023\"/>\n")
         page.append("\t<div class=\"instructions\">\n")
 //      page.append("<p>The 2022 competition is over. See you after hours on November 30, 2023!</p>")
-		page.append("\t<h2>Late to the party?</h2>\n")
-		page.append("\t<ol>\n")
-		page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login) to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your AoC account.</li>\n")
-		page.append("\t\t<li>Join the <a href=\"https://gov.teams.microsoft.us/l/channel/19%3agcch%3a7a07cf0485144145b1c838792d9d8a6e%40thread.tacv2/Advent%2520of%2520Code%25202023?groupId=ffacfa2c-2635-4085-bd8a-7c60ffb266d6&tenantId=a01f407a-85cb-4a16-98bb-f28e6384bd28\">Advent of Code Teams channel</a> (Defense login) to chat with other puzzle solvers.</li>\n")
+        page.append("\t<h2>Late to the party?</h2>\n")
+        page.append("\t<ol>\n")
+        page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login) to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your AoC account.</li>\n")
+        page.append("\t\t<li>Join the <a href=\"https://gov.teams.microsoft.us/l/channel/19%3agcch%3a7a07cf0485144145b1c838792d9d8a6e%40thread.tacv2/Advent%2520of%2520Code%25202023?groupId=ffacfa2c-2635-4085-bd8a-7c60ffb266d6&tenantId=a01f407a-85cb-4a16-98bb-f28e6384bd28\">Advent of Code Teams channel</a> (Defense login) to chat with other puzzle solvers.</li>\n")
 //		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
 //		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
-		page.append("\t</ol>\n")
-		page.append("\t<h2>Scoring FAQ</h2>")
-		page.append("\t<ul>\n")
-		page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>")
-		page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>")
-		page.append("\t\t<li>Last year, 15 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n")
-		page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n")
-		page.append("\t</ul>\n")
+        page.append("\t</ol>\n")
+        page.append("\t<h2>Scoring FAQ</h2>")
+        page.append("\t<ul>\n")
+        page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>")
+        page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>")
+        page.append("\t\t<li>Last year, 15 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n")
+        page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n")
+        page.append("\t</ul>\n")
         page.append("</div>\n")
     }
 
@@ -214,7 +213,8 @@ class RankingsPage : BaseRankingsPage() {
             // Show total stars.
             val starMargin = if (player.stars < 10) SPACE else ""
             page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\">")
-            page.append(starMargin).append(player.stars).append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
+            page.append(starMargin).append(player.stars)
+                .append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
 
             // Show tiebreaker time.
             val tiebreakerTime = SolveTime.formatTime(player.tiebreakerTime, isStandardWidth)
