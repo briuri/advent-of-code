@@ -309,7 +309,7 @@ class RankingsPage : BaseRankingsPage() {
             return
         }
         val counts = mutableMapOf<String, Int>()
-        for (division in company.allDivisions.sorted()) {
+        for (division in company.allDivisions) {
             counts[division] = 0
         }
         for (i in 0 until numOverall) {
