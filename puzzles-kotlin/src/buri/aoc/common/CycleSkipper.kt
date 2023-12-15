@@ -1,7 +1,7 @@
 package buri.aoc.common
 
 /**
- * Utiltiy class for locating cycles in a step-based process.
+ * Utility class for locating cycles in a step-based process.
  *
  * The keyStrategy is used to generate a state key at each step.
  * The stepStrategy executes some arbitrary code at each step.
