@@ -29,7 +29,7 @@ fun main() {
             Thread.sleep(minutes.toLong() * 60 * 1000)
         }
         val date = BaseRankingsPage.MODIFIED_DATE_FORMAT.format(Date())
-        println("$date Rankings Page Auto-Update #${i + 1} of $reps")
+        println("$date Rankings Update #${i + 1} of $reps")
         // Script uses curl to pass session cookie and copy JSON to /data/viz/json.
         val jsonDowload = Runtime.getRuntime().exec("$execPrefix $downloadScript")
         jsonDowload.waitFor()
@@ -274,7 +274,7 @@ class RankingsPage : BaseRankingsPage() {
                         page.append(SPACE).append("current median")
                     } else if (j == 12) {
                         page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
-                        page.append("${SPACE}13th fastest median")
+                        page.append("${SPACE}13th fastest")
                     } else {
                         page.append(time)
                     }
@@ -484,7 +484,7 @@ class RankingsPage : BaseRankingsPage() {
                 // Show console message for most recent total solve on most recent day, and total number of stars.
                 val mostRecent = places[places.size - 1]
                 val time = SolveTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)
-                val alert = "\t(${puzzleTimes.stars} stars) - Day ${i + 1}: ${places.size}." +
+                val alert = "  (${puzzleTimes.stars}*) - Day ${i + 1}: ${places.size}." +
                         time.replace(SPACE, " ") + " ${mostRecent.name}\n"
                 println(alert)
             }
