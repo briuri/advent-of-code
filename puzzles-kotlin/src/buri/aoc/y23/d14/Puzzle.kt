@@ -53,6 +53,7 @@ class Puzzle : BasePuzzle() {
     private fun Grid<Char>.tilt() {
         // Filter comes back in reading order.
         for (point in filter { it == 'O' }) {
+            // Seek ahead to the next tile containing a . value.
             var nextUp = point.y - 1
             while (nextUp >= 0 && get(point.x, nextUp) == '.') {
                 nextUp--
