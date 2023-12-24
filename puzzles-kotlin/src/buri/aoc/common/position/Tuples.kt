@@ -38,13 +38,13 @@ abstract class BaseTuple<T> {
     /**
      * Gets absolute value of difference of two generics that are Ints or Longs.
      */
-    protected fun <T> abs(a: T, b: T): Int {
+    protected fun <T> abs(a: T, b: T): Long {
         return if (a is Int && b is Int) {
-            (a - b).absoluteValue
+            (a - b).absoluteValue.toLong()
         } else if (a is Long && b is Long) {
-            (a - b).absoluteValue.toInt()
+            (a - b).absoluteValue
         } else {
-            0
+            0L
         }
     }
 }
@@ -61,7 +61,7 @@ data class Point2D<T>(val x: T, val y: T) : BaseTuple<T>(), Comparable<Point2D<T
     /**
      * Returns the Manhattan distance to another point.
      */
-    fun getManhattanDistance(that: Point2D<T>): Int {
+    fun getManhattanDistance(that: Point2D<T>): Long {
         return (abs(x, that.x) + abs(y, that.y))
     }
 
@@ -150,7 +150,7 @@ data class Point3D<T>(val x: T, val y: T, val z: T) : BaseTuple<T>(), Comparable
     /**
      * Returns the Manhattan distance to another point.
      */
-    fun getManhattanDistance(that: Point3D<T>): Int {
+    fun getManhattanDistance(that: Point3D<T>): Long {
         return (abs(x, that.x) + abs(y, that.y) + abs(z, that.z))
     }
 
@@ -216,7 +216,7 @@ data class Point4D<T>(val x: T, val y: T, val z: T, val t: T) : BaseTuple<T>(), 
     /**
      * Returns the Manhattan distance to another point.
      */
-    fun getManhattanDistance(that: Point4D<T>): Int {
+    fun getManhattanDistance(that: Point4D<T>): Long {
         return (abs(x, that.x) + abs(y, that.y) + abs(z, that.z) + abs(t, that.t))
     }
 

@@ -3,6 +3,7 @@ package buri.aoc.y22.d15
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import buri.aoc.common.extractLongs
 import buri.aoc.common.position.Bounds2D
 import buri.aoc.common.position.Point2D
 import org.junit.Test
@@ -33,14 +34,16 @@ class Puzzle : BasePuzzle() {
         sensors.addAll(input.map { Sensor(it) })
         val maxMD = sensors.maxOfOrNull { it.md }!!
 
-        val beacons = mutableSetOf<Point2D<Int>>()
+        val beacons = mutableSetOf<Point2D<Long>>()
         beacons.addAll(sensors.map { it.beacon })
 
         if (part.isOne()) {
             var count = 0
-            val y = if (input.size < 20) 10 else 2_000_000
-            val bounds = Bounds2D(sensors.map { it.position }.toSet())
-            for (x in bounds.x.first - maxMD..bounds.x.last + maxMD) {
+            val y = if (input.size < 20) 10L else 2_000_000L
+            val positions = sensors.map { it.position }.toSet()
+            val minX = positions.minOf { it.x }
+            val maxX = positions.maxOf { it.x }
+            for (x in minX - maxMD..maxX + maxMD) {
                 val point = Point2D(x, y)
                 if (point !in beacons && sensors.any { it.inRange(point) }) {
                     count++
@@ -61,11 +64,11 @@ class Puzzle : BasePuzzle() {
     /**
      * Checks the ring just outside the MD for a sensor.
      */
-    private fun testRing(sensors: List<Sensor>, beacons: Set<Point2D<Int>>, sensor: Sensor): Point2D<Int>? {
+    private fun testRing(sensors: List<Sensor>, beacons: Set<Point2D<Long>>, sensor: Sensor): Point2D<Long>? {
         val ringDistance = sensor.md + 1
-        var x: Int
-        var y: Int
-        val tests = mutableSetOf<Point2D<Int>>()
+        var x: Long
+        var y: Long
+        val tests = mutableSetOf<Point2D<Long>>()
         for (i in 0 until ringDistance) {
             // UL
             x = sensor.position.x - ringDistance + i
@@ -104,16 +107,16 @@ class Puzzle : BasePuzzle() {
     /**
      * Bounds the points in Part 2.
      */
-    private fun isInBounds(x: Int, y: Int): Boolean = (x in 0..4_000_000 && y in 0..4_000_000)
+    private fun isInBounds(x: Long, y: Long): Boolean = (x in 0L..4_000_000L && y in 0L..4_000_000L)
 }
 
 class Sensor(data: String) {
-    val position: Point2D<Int>
-    val beacon: Point2D<Int>
-    val md: Int
+    val position: Point2D<Long>
+    val beacon: Point2D<Long>
+    val md: Long
 
     init {
-        val numbers = data.extractInts()
+        val numbers = data.extractLongs()
         position = Point2D(numbers[0], numbers[1])
         beacon = Point2D(numbers[2], numbers[3])
         md = position.getManhattanDistance(beacon)
@@ -122,5 +125,5 @@ class Sensor(data: String) {
     /**
      * Returns true if the point is in range of this sensor.
      */
-    fun inRange(point: Point2D<Int>): Boolean = position.getManhattanDistance(point) <= md
+    fun inRange(point: Point2D<Long>): Boolean = position.getManhattanDistance(point) <= md
 }

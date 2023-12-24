@@ -27,7 +27,7 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val origin = Point3D(0, 0, 0)
         var point = origin
-        var maxDistance = 0
+        var maxDistance = 0L
         for (direction in input[0].split(",")) {
             // https://www.redblobgames.com/grids/hexagons/#coordinates-cube
             point = when (direction) {

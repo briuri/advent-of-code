@@ -66,7 +66,7 @@ class Puzzle : BasePuzzle() {
             return uniqueBeacons.size
         }
 
-        var maxDistance = 0
+        var maxDistance = 0L
         for (scanner1 in scanners) {
             for (scanner2 in scanners.filter { it != scanner1 }) {
                 val distance = scanner1.fixedPoint!!.getManhattanDistance(scanner2.fixedPoint!!)

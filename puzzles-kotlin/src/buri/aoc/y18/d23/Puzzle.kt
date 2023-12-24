@@ -51,7 +51,7 @@ class Puzzle : BasePuzzle() {
         val fullZoomResizeRatio = if (bots.size < 20) 1 else 10000
 
         var bestOverallBotsInRange = 0
-        var bestOverallMD = Int.MAX_VALUE
+        var bestOverallMD = Long.MAX_VALUE
         var repeats = 0
         // Zoom in the sample area until the max converges.
         while (true) {

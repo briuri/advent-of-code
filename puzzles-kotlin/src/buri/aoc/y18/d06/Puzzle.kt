@@ -36,7 +36,7 @@ class Puzzle : BasePuzzle() {
         val bounds = Bounds2D(points)
 
         val regionSizes = mutableMapOf<Point2D<Int>, Int>()
-        val distanceSums = mutableMapOf<Point2D<Int>, Int>()
+        val distanceSums = mutableMapOf<Point2D<Int>, Long>()
         for (y in bounds.y) {
             for (x in bounds.x) {
                 if (part.isOne()) {
@@ -64,7 +64,7 @@ class Puzzle : BasePuzzle() {
      * Returns the closest point to a target, or null if there are multiple.
      */
     private fun getClosest(points: Set<Point2D<Int>>, target: Point2D<Int>): Point2D<Int>? {
-        val mds = mutableMapOf<Int, MutableList<Point2D<Int>>>()
+        val mds = mutableMapOf<Long, MutableList<Point2D<Int>>>()
         for (point in points) {
             val md = point.getManhattanDistance(target)
             mds.putIfAbsent(md, mutableListOf())
