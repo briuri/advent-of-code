@@ -2,7 +2,8 @@
 
 This project contains my Advent of Code solutions. 
 
-I've solved every puzzle from 2015-2022 in Java and Kotlin (2018-2022 were done in real-time during the midnight competitions with Java).
+I've solved every puzzle from 2015-2022 in both Java and Kotlin and 2023 in Kotlin. I also participated in 
+real-time during the midnight competitions (2018 - 2022 in Java and 2023 in Kotlin).
 
 The top-level of the project can be imported as an IntelliJ IDEA project. Solutions are found under 
 `puzzles-<language>/src/` with a package naming convention of `buri.aoc.y<yy>.d<dd>`. Each Day can be run from a JUnit 
@@ -21,7 +22,8 @@ under `/src/test/` when competing).
 | **2020**  | 00:25     | 00:20     |
 | **2021**  | 01:40     | 00:50     |
 | **2022**  | 00:50     | 01:00     |
-| **Total** | **05:30** | **03:40** |
+ | **2023** | --:--     | 01:15     |
+| **Total** | **05:30** | **04:55** |
 
 ## Leaderboard Visualization
 
