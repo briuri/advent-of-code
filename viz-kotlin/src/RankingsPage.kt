@@ -216,7 +216,7 @@ class RankingsPage : BaseRankingsPage() {
 
             // Show total stars.
             val starMargin = if (player.stars < 10) SPACE else ""
-            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\">")
+            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\" value=\"${i - tieCount + 1}\">")
             page.append(starMargin).append(player.stars)
                 .append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
 
@@ -508,6 +508,7 @@ class RankingsPage : BaseRankingsPage() {
         page.append("<h3><a href=\"https://adventofcode.com/$year/day/$day\">${puzzle.title}</a></h3>\n")
         page.append("\t<ol>\n")
         var isNextTie = false
+        var tieCount = 0
         val maxPlaces = if (showAll) places.size else company.maxPlaces.coerceAtMost(places.size)
         val bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE)
         val bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO)
@@ -516,7 +517,7 @@ class RankingsPage : BaseRankingsPage() {
             if (isNextTie) {
                 page.append("\t\t")
             } else {
-                page.append("\t\t<li value=\"${place + 1}\">")
+                page.append("\t\t<li value=\"${place - tieCount + 1}\">")
             }
 
             // Show total time and split times
@@ -540,6 +541,9 @@ class RankingsPage : BaseRankingsPage() {
             page.append(maskName(record.name))
             val nextTime = if (place + 1 < places.size) places[place + 1].getTime(TimeType.TOTAL) else null
             isNextTie = (totalTime != null) && (totalTime == nextTime)
+            if (isNextTie) {
+                tieCount++
+            }
             page.append(if (isNextTie) "<br />\n" else "</li>\n")
         }
         // Pad incomplete lists so each Day is the same height for floating DIVs.
