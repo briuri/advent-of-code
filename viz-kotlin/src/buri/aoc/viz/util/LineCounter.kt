@@ -1,3 +1,5 @@
+package buri.aoc.viz.util
+
 import java.io.File
 
 /**
