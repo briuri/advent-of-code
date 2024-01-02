@@ -14,12 +14,12 @@ fun main() {
 
     println("Java Solutions:")
     for (year in 15..22) {
-        val loc = countLines("$javaPrefix\\y$year", year)
+        val loc = countLines("$javaPrefix\\y$year")
         println("20$year\t$loc")
     }
     println("Kotlin Solutions:")
     for (year in 15..23) {
-        val loc = countLines("$kotlinPrefix\\y$year", year)
+        val loc = countLines("$kotlinPrefix\\y$year")
         println("20$year\t$loc")
     }
 }
@@ -27,12 +27,12 @@ fun main() {
 /**
  * Counts the lines of code in a particular path for the given years
  */
-fun countLines(prefix: String, year: Int): Int {
+fun countLines(prefix: String): Int {
     var loc = 0
     for (day in 1..25) {
         val paddedDay = if (day < 10) "0$day" else "$day"
         val dirPath = "$prefix\\d$paddedDay"
-        for (file in File("$dirPath").listFiles()) {
+        for (file in File(dirPath).listFiles()!!) {
             val lines = file.readLines()
             val count = lines.filter { it != "" }.size
             loc += count
