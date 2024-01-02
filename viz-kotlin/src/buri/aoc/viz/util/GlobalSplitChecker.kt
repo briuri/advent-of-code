@@ -77,4 +77,4 @@ private fun loadTimes(lines: List<String>): Map<String, Long> {
 /**
  * Formats a millisecond time as a display string.
  */
-private fun formatTime(time: Long) = SolveTime.Companion.formatTime(time, true).replace(SPACE, "")
+private fun formatTime(time: Long) = SolveTime.Companion.formatTime(time, true, false)

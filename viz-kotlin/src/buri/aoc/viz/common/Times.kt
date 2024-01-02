@@ -113,15 +113,15 @@ class SolveTime(
          * Converts milliseconds into a string timestamp.
          * Standard timestamps allow 3 digits for the hour. 2016 sometimes had 4-digit hours.
          */
-        fun formatTime(time: Long?, isStandardWidth: Boolean): String {
+        fun formatTime(time: Long?, isStandardWidth: Boolean, isHTML: Boolean = true): String {
             val width = if (isStandardWidth) 3 else 4
-            return formatTime(time, width)
+            return formatTime(time, width, isHTML)
         }
 
         /**
          * Converts milliseconds into a string timestamp.
          */
-        private fun formatTime(rawTime: Long?, hourWidth: Int): String {
+        private fun formatTime(rawTime: Long?, hourWidth: Int, isHTML: Boolean): String {
             val output = StringBuilder()
             if (rawTime != null) {
                 var time = rawTime
@@ -154,7 +154,7 @@ class SolveTime(
             // Left-pad time. 2016 had 4-digit hours in All Players report.
             val padSize = hourWidth + 6 - output.length
             for (i in 0 until padSize) {
-                output.insert(0, BaseRankingsPage.SPACE)
+                output.insert(0, if (isHTML) BaseRankingsPage.SPACE else " ")
             }
             return output.toString()
         }
