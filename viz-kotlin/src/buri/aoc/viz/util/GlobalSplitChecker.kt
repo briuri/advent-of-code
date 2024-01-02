@@ -1,5 +1,6 @@
 package buri.aoc.viz.util
 
+import buri.aoc.viz.common.BaseRankingsPage
 import buri.aoc.viz.common.BaseRankingsPage.Companion.SPACE
 import buri.aoc.viz.common.SolveTime
 import java.io.File
@@ -37,24 +38,16 @@ fun main() {
         part2Times[key] = totalTimes[key]!! - part1Times[key]!!
     }
 
+    val divider = "+-------------------------+--------------------------------+"
     println("Year 20$year Day $day Global Leadboard")
-    println("Type\t\t\tPlayers\tFastest\t\tAverage\t\tSlowest")
-    println("--------------------------------------------------------")
+    println(divider)
+    println("|  Type          Players  |  Fastest   Average   Slowest   |")
+    println(divider)
+    printTimes("Part 1 Split  ", part1Times)
+    printTimes("Part 2 Split  ", part2Times)
+    printTimes("Part 1+2 Total", totalTimes)
+    println(divider)
 
-    print("Part 1 Split\t${part1Times.size}\t\t")
-    print("${formatTime(part1Times.values.min())}\t")
-    print("${formatTime(part1Times.values.average().toLong())}\t")
-    print("${formatTime(part1Times.values.max())}\n")
-
-    print("Part 2 Split\t${part2Keys.size}\t\t")
-    print("${formatTime(part2Times.values.min())}\t")
-    print("${formatTime(part2Times.values.average().toLong())}\t")
-    print("${formatTime(part2Times.values.max())}\n")
-
-    print("Part 1+2 Total\t${totalTimes.size}\t\t")
-    print("${formatTime(totalTimes.values.min())}\t")
-    print("${formatTime(totalTimes.values.average().toLong())}\t")
-    print("${formatTime(totalTimes.values.max())}\n")
 }
 
 /**
@@ -75,6 +68,24 @@ private fun loadTimes(lines: List<String>): Map<String, Long> {
 }
 
 /**
+ * Outputs the times in a map.
+ */
+private fun printTimes(title: String, times: Map<String, Long>) {
+    print("|  $title    ${leftPad(times.size.toString(), 3)}  | ")
+    print("${formatTime(times.values.min())} ")
+    print("${formatTime(times.values.average().toLong())} ")
+    println("${formatTime(times.values.max())}  |")
+}
+
+/**
  * Formats a millisecond time as a display string.
  */
 private fun formatTime(time: Long) = SolveTime.Companion.formatTime(time, true, false)
+
+/**
+ * Left pads a value.
+ */
+private fun leftPad(value: String, width: Int): String {
+    val padSize = width - value.length
+    return (" ".repeat(padSize) + value)
+}
