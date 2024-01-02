@@ -1,7 +1,5 @@
 package buri.aoc.viz.util
 
-import buri.aoc.viz.common.BaseRankingsPage
-import buri.aoc.viz.common.BaseRankingsPage.Companion.SPACE
 import buri.aoc.viz.common.SolveTime
 import java.io.File
 
@@ -71,7 +69,7 @@ private fun loadTimes(lines: List<String>): Map<String, Long> {
  * Outputs the times in a map.
  */
 private fun printTimes(title: String, times: Map<String, Long>) {
-    print("|  $title    ${leftPad(times.size.toString(), 3)}  | ")
+    print("|  $title    ${leftPad(times.size.toString())}  | ")
     print("${formatTime(times.values.min())} ")
     print("${formatTime(times.values.average().toLong())} ")
     println("${formatTime(times.values.max())}  |")
@@ -80,12 +78,9 @@ private fun printTimes(title: String, times: Map<String, Long>) {
 /**
  * Formats a millisecond time as a display string.
  */
-private fun formatTime(time: Long) = SolveTime.Companion.formatTime(time, true, false)
+private fun formatTime(time: Long) = SolveTime.formatTime(time, isStandardWidth = true, isHTML = false)
 
 /**
- * Left pads a value.
+ * Left pads a player value.
  */
-private fun leftPad(value: String, width: Int): String {
-    val padSize = width - value.length
-    return (" ".repeat(padSize) + value)
-}
+private fun leftPad(value: String) = " ".repeat(3 - value.length) + value
