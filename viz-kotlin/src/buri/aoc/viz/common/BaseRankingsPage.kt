@@ -284,11 +284,14 @@ abstract class BaseRankingsPage protected constructor() {
         // Invisible text used to reduce search engine discoverability.
         const val ANTI_INDEX = "<span class=\"ai\">AoC</span>"
 
+        // Base directory for the viz.
+        private const val BASE_FOLDER = "viz-kotlin"
+
         // Folder containing JSON data files.
-        private const val JSON_FOLDER = "data/json/"
+        private const val JSON_FOLDER = "$BASE_FOLDER/data/json/"
 
         // Folder where pages are saved.
-        private const val OUTPUT_FOLDER = "data/site/"
+        private const val OUTPUT_FOLDER = "$BASE_FOLDER/data/site/"
 
         // Date format for 2016 - 2017 leaderboards (before Unix timestamps).
         private val LEGACY_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
