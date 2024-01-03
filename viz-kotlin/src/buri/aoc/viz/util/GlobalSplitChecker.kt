@@ -14,7 +14,7 @@ fun main() {
     val day = "01"
 
     val firstHundredToken = "First hundred users"
-    val pathPrefix = "C:\\workspace\\advent-of-code\\viz-kotlin\\data\\global"
+    val pathPrefix = "C:\\workspace\\advent-of-code\\viz-kotlin\\data\\cache\\global"
     val lines = File("$pathPrefix\\y${year}d$day.htm").readLines()
 
     val part1Start = lines.indexOfLast { it.contains(firstHundredToken) }
