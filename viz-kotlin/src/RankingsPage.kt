@@ -205,7 +205,6 @@ class RankingsPage : BaseRankingsPage() {
 
         // Show each player's complete record.
         var isNextTie = false
-        var tieCount = 0
         val isStandardWidth = !(year == "2016" && showAll)
         val summaryMargin = if (isStandardWidth) 18 else 19
         for (i in 0 until numOverall) {
@@ -285,15 +284,12 @@ class RankingsPage : BaseRankingsPage() {
             }
             page.append("\t\t</div>\n")
             isNextTie = (i + 1 < numOverall) && (player.tiebreakerTime == playerTimes[i + 1].tiebreakerTime)
-            if (isNextTie) {
-                tieCount++
-            }
             page.append(if (isNextTie) "\t<br />\n" else "\t</li>\n")
 
             // Break overall scores into two columns for > Top 10.
             if (numOverall > 10 && i == (numOverall + 1) / 2 - 1) {
                 page.append("</ol>\n</div>\n<div class=\"overall\">\n")
-                page.append("<ol start=\"${i + 2 - tieCount}\">\n")
+                page.append("<ol>\n")
             }
         }
         page.append("</ol></div>\n<div class=\"clear\"></div>\n")
@@ -508,7 +504,6 @@ class RankingsPage : BaseRankingsPage() {
         page.append("<h3><a href=\"https://adventofcode.com/$year/day/$day\">${puzzle.title}</a></h3>\n")
         page.append("\t<ol>\n")
         var isNextTie = false
-        var tieCount = 0
         val maxPlaces = if (showAll) places.size else company.maxPlaces.coerceAtMost(places.size)
         val bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE)
         val bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO)
@@ -541,9 +536,6 @@ class RankingsPage : BaseRankingsPage() {
             page.append(maskName(record.name))
             val nextTime = if (place + 1 < places.size) places[place + 1].getTime(TimeType.TOTAL) else null
             isNextTie = (totalTime != null) && (totalTime == nextTime)
-            if (isNextTie) {
-                tieCount++
-            }
             page.append(if (isNextTie) "<br />\n" else "</li>\n")
         }
         // Pad incomplete lists so each Day is the same height for floating DIVs.
