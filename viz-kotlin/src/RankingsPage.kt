@@ -216,7 +216,7 @@ class RankingsPage : BaseRankingsPage() {
 
             // Show total stars.
             val starMargin = if (player.stars < 10) SPACE else ""
-            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\" value=\"${i - tieCount + 1}\">")
+            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\" value=\"${i + 1}\">")
             page.append(starMargin).append(player.stars)
                 .append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
 
@@ -517,7 +517,7 @@ class RankingsPage : BaseRankingsPage() {
             if (isNextTie) {
                 page.append("\t\t")
             } else {
-                page.append("\t\t<li value=\"${place - tieCount + 1}\">")
+                page.append("\t\t<li value=\"${place + 1}\">")
             }
 
             // Show total time and split times
