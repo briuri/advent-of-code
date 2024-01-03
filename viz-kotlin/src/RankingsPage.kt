@@ -39,6 +39,7 @@ fun main() {
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
+            rankingsPage.backupJson()
             rankingsPage.generatePages()
         } catch (e: Exception) {
             e.printStackTrace()

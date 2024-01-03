@@ -97,6 +97,19 @@ abstract class BaseRankingsPage protected constructor() {
     }
 
     /**
+     * Preserves a copy of the leaderboard JSON. If the JSON is downloaded often within an hour, only the first copy
+     * is preserved.
+     */
+    fun backupJson() {
+        val file = File("$JSON_FOLDER$CURRENT_YEAR.json")
+        val date = BACKUP_DATE_FORMAT.format(Date(file.lastModified()))
+        val backupFile = File("$BACKUP_FOLDER$date.json")
+        if (!backupFile.exists()) {
+            file.copyTo(backupFile, false)
+        }
+    }
+
+    /**
      * Reads the raw leaderboard data from the AoC leaderboard JSON files.
      */
     private fun readLeaderboards(year: String): Map<String, Any> {
@@ -281,8 +294,11 @@ abstract class BaseRankingsPage protected constructor() {
         // Date format for the last update dates.
         val MODIFIED_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-        // Invisible text used to reduce search engine discoverability.
-        const val ANTI_INDEX = "<span class=\"ai\">AoC</span>"
+        // Date format for backup leaderboard JSON files.
+        val BACKUP_DATE_FORMAT = SimpleDateFormat("yyMMdd-HH")
+
+        // Date format for 2016 - 2017 leaderboards (before Unix timestamps).
+        private val LEGACY_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
 
         // Base directory for the viz.
         private const val BASE_FOLDER = "viz-kotlin"
@@ -293,8 +309,11 @@ abstract class BaseRankingsPage protected constructor() {
         // Folder where pages are saved.
         private const val OUTPUT_FOLDER = "$BASE_FOLDER/data/site/"
 
-        // Date format for 2016 - 2017 leaderboards (before Unix timestamps).
-        private val LEGACY_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+        // Folder where leaderboard backups are preserved.
+        private const val BACKUP_FOLDER = "$BASE_FOLDER/data/cache/leaderboard/"
+
+        // Invisible text used to reduce search engine discoverability.
+        const val ANTI_INDEX = "<span class=\"ai\">AoC</span>"
 
         // HTML Space
         const val SPACE = "&nbsp;"
