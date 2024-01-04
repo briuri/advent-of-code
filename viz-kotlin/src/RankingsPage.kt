@@ -19,8 +19,8 @@ fun main() {
     val minutes = 15
     val reps = 96
     val execPrefix = "cmd /c start /min"
-    val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-get-json.bat"
-    val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-put-s3.bat"
+    val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
+    val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
     val rankingsPage = RankingsPage()
 
     for (i in 0 until reps) {
