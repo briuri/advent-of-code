@@ -9,7 +9,7 @@ import java.io.File
  * @author Brian Uri!
  */
 fun main() {
-    // aoc-get-global.bat script grabs the desired leaderboard from the web.
+    // aoc-getGlobal.bat script grabs the desired leaderboard from the web.
     val year = "23"
     val day = "01"
 

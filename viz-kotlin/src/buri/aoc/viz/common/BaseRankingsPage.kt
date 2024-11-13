@@ -286,10 +286,10 @@ abstract class BaseRankingsPage protected constructor() {
 
     companion object {
         // Current year
-        const val CURRENT_YEAR = "2023"
+        const val CURRENT_YEAR = "2024"
 
         // Known puzzle years
-        val YEARS = arrayOf("2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016")
+        val YEARS = arrayOf("2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016")
 
         // Date format for the last update dates.
         val MODIFIED_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
