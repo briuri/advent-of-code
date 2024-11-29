@@ -77,7 +77,7 @@ class RankingsPage : BaseRankingsPage() {
         if (year == CURRENT_YEAR) {
             resetPage()
             insertHeader(year, true)
-//            insertLatestDay(year, puzzleTimes)                                                               UNCOMMENT
+            insertLatestDay(year, puzzleTimes)
             insertInstructions()
             insertFooter(false)
             writePage("index.html")
@@ -86,15 +86,12 @@ class RankingsPage : BaseRankingsPage() {
         // Create Top X page.
         resetPage()
         insertHeader(year, false)
-        if (year == CURRENT_YEAR) {                                                                         // REMOVE
-            page.append("<p>The 2024 competition is coming. See you after hours on November 30, 2024!</p>") // REMOVE
-        }                                                                                                   // REMOVE
-        else {                                                                                              // REMOVE
-            insertTopOverall(year, playerTimes, false)
+        insertTopOverall(year, playerTimes, false)
+        if (year != CURRENT_YEAR) {
             insertTopDivisionsChart(year, playerTimes)
-            insertTotalSolvesChart(year, puzzleTimes)
-            insertTopDaily(year, puzzleTimes, false)
-        }                                                                                                   // REMOVE
+        }
+        insertTotalSolvesChart(year, puzzleTimes)
+        insertTopDaily(year, puzzleTimes, false)
         insertFooter(true)
         writePage("$year-top.html")
 
@@ -113,16 +110,13 @@ class RankingsPage : BaseRankingsPage() {
      * Creates some instructions to get ready for a new season.
      */
     private fun insertInstructions() {
-//		page.append("\t<img src=\"teaser.jpg\" class=\"teaser\" title=\"Advent of Code 2023\"/>\n")
         page.append("\t<div class=\"instructions\">\n")
-        page.append("<p>The 2024 competition is coming. See you after hours on November 30, 2024!</p>")
-//        page.append("\t<h2>Late to the party?</h2>\n")
-//        page.append("\t<ol>\n")
-//        page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/kb_view.do?sysparm_article=KB0016011\">Portal Page</a> (Commercial login) to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your AoC account.</li>\n")
-//        page.append("\t\t<li>Join the <a href=\"https://gov.teams.microsoft.us/l/channel/19%3agcch%3a7a07cf0485144145b1c838792d9d8a6e%40thread.tacv2/Advent%2520of%2520Code%25202023?groupId=ffacfa2c-2635-4085-bd8a-7c60ffb266d6&tenantId=a01f407a-85cb-4a16-98bb-f28e6384bd28\">Advent of Code Teams channel</a> (Defense login) to chat with other puzzle solvers.</li>\n")
-//		  page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
-// 		  page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
-//        page.append("\t</ol>\n")
+        page.append("\t<h2>The 2024 competition is here!</h2>\n")
+        page.append("\t<ol>\n")
+        page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your company EID.</li>\n")
+		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
+ 		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
+        page.append("\t</ol>\n")
         page.append("\t<h2>Scoring FAQ</h2>")
         page.append("\t<ul>\n")
         page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>")
