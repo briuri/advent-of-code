@@ -114,7 +114,7 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<h2>The 2024 competition is here!</h2>\n")
         page.append("\t<ol>\n")
         page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your company EID.</li>\n")
-		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
+//		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
  		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
         page.append("\t</ol>\n")
         page.append("\t<h2>Scoring FAQ</h2>")
