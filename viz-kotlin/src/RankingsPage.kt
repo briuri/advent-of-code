@@ -213,7 +213,7 @@ class RankingsPage : BaseRankingsPage() {
             val hoverText = if (isIneligible) "Not eligible for prizes" else "Show/hide all times"
 
             // Show total stars.
-            val starMargin = if (player.stars < 10) "$SPACE$SPACE$SPACE" else ""
+            val starMargin = if (player.stars < 10) "$SPACE$SPACE$SPACE" else "$SPACE$SPACE"
             page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\" value=\"${i + 1}\">")
             page.append(starMargin).append(player.stars)
                 .append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
