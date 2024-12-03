@@ -332,7 +332,7 @@ class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<Ti
  * In 2016, the total time was used as a tiebreaker.
  * In 2017 and beyond, the median time is a tiebreaker.
  */
-class TiebreakerTime(val day: Int, val time: Long) : Comparable<TiebreakerTime> {
+class TiebreakerTime(val day: Int, val time: Long, val isTotal: Boolean) : Comparable<TiebreakerTime> {
 
     /**
      * Sort on tiebreaker time.

@@ -191,8 +191,6 @@ abstract class BaseRankingsPage protected constructor() {
 
     /**
      * Groups puzzle completion times by name for median/total calculations.
-     *
-     * NOTE: This does not handle any player who has not yet completed Part 2 of any puzzle.
      */
     private fun getPlayerTimes(year: String, puzzleTimes: PuzzleTimes): List<PlayerTimes> {
         val company = companies[year]!!
@@ -202,12 +200,18 @@ abstract class BaseRankingsPage protected constructor() {
             val day = i + 1
             // Skip y18d06, since it was not included in AoC or our calculations.
             if (!(year == "2018" && day == 6)) {
-                val singleDay = puzzleTimes.getTimes(TimeType.TOTAL)[i]
-                for (time in singleDay) {
+                for (time in puzzleTimes.getTimes(TimeType.TOTAL)[i]) {
                     rawPuzzleTimes.putIfAbsent(time.name, mutableListOf())
                     val totalTime = time.getTime(TimeType.TOTAL)
                     if (totalTime != null) {
-                        rawPuzzleTimes[time.name]!!.add(TiebreakerTime(day, totalTime))
+                        rawPuzzleTimes[time.name]!!.add(TiebreakerTime(day, totalTime, true))
+                    }
+                }
+                for (time in puzzleTimes.getTimes(TimeType.ONE)[i]) {
+                    rawPuzzleTimes.putIfAbsent(time.name, mutableListOf())
+                    val partialTime = time.getTime(TimeType.ONE)
+                    if (partialTime != null) {
+                        rawPuzzleTimes[time.name]!!.add(TiebreakerTime(day, partialTime, false))
                     }
                 }
             }

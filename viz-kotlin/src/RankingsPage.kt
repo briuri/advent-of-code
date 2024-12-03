@@ -213,7 +213,7 @@ class RankingsPage : BaseRankingsPage() {
             val hoverText = if (isIneligible) "Not eligible for prizes" else "Show/hide all times"
 
             // Show total stars.
-            val starMargin = if (player.stars < 10) SPACE else ""
+            val starMargin = if (player.stars < 10) "$SPACE$SPACE$SPACE" else ""
             page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\" value=\"${i + 1}\">")
             page.append(starMargin).append(player.stars)
                 .append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
@@ -255,7 +255,8 @@ class RankingsPage : BaseRankingsPage() {
             val totalTimes = player.times.size
             for (j in 0 until totalTimes) {
                 val dayPadding = if (player.times[j].day < 10) "0" else ""
-                page.append("\t\t\t<span class=\"dayLabel\">d$dayPadding${player.times[j].day}</span>")
+                val dayPartial = if (player.times[j].isTotal) "$SPACE$SPACE" else "&#189;$SPACE"
+                page.append("\t\t\t<span class=\"dayLabel\">${dayPartial}d$dayPadding${player.times[j].day}</span>")
                 page.append(SPACE).append(SPACE)
                 val time = SolveTime.formatTime(player.times[j].time, isStandardWidth)
                 // 2017+ use median time, so add descriptive text next to the key times.
