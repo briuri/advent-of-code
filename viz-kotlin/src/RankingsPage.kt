@@ -138,6 +138,10 @@ class RankingsPage : BaseRankingsPage() {
             val truncate = index + maskPoint
             val length = masked.length
             masked.delete(truncate, length)
+            // Handle multiword last names with spaces at the truncate point (e.g., "de Salvo")
+            if (masked.endsWith(' ')) {
+                masked.deleteAt(masked.lastIndex)
+            }
             masked.append(".")
         }
         masked.insert(1, ANTI_INDEX)
