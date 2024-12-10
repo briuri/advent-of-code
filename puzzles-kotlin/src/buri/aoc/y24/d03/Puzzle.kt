@@ -35,16 +35,16 @@ class Puzzle : BasePuzzle() {
 
         val products = mutableListOf<Long>()
         var isOn = true
-        var openIndex = instructions.getNext(0, part)
+        var openIndex = instructions.getNext(part, 0)
         while (openIndex in instructions.indices) {
-            if (instructions.substring(openIndex).startsWith(doToken)) {
+            if (instructions.drop(openIndex).startsWith(doToken)) {
                 isOn = true
-                openIndex = instructions.getNext(openIndex + doToken.length, part)
+                openIndex = instructions.getNext(part, openIndex + doToken.length)
                 continue
             }
-            if (instructions.substring(openIndex).startsWith(dontToken)) {
+            if (instructions.drop(openIndex).startsWith(dontToken)) {
                 isOn = false
-                openIndex = instructions.getNext(openIndex + dontToken.length, part)
+                openIndex = instructions.getNext(part, openIndex + dontToken.length)
                 continue
             }
             val mul = instructions.substring(openIndex..instructions.indexOf(")", openIndex))
@@ -52,7 +52,7 @@ class Puzzle : BasePuzzle() {
             if (isOn && factors.size == 2 && factors.all { it.toIntOrNull() != null }) {
                 products.add(factors.map { it.toInt() }.product())
             }
-            openIndex = instructions.getNext(openIndex + mulToken.length, part)
+            openIndex = instructions.getNext(part, openIndex + mulToken.length)
         }
         return products.sum()
     }
@@ -60,7 +60,7 @@ class Puzzle : BasePuzzle() {
     /**
      * Returns the position of the next instruction: mul(, do(), don't()
      */
-    private fun String.getNext(currentIndex: Int, part: Part): Int {
+    private fun String.getNext(part: Part, currentIndex: Int): Int {
         val mulIndex = this.indexOf(mulToken, currentIndex)
         val doIndex = this.indexOf(doToken, currentIndex)
         val dontIndex = this.indexOf(dontToken, currentIndex)

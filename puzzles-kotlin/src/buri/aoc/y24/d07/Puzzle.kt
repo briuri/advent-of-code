@@ -31,7 +31,7 @@ class Puzzle : BasePuzzle() {
         for (line in input) {
             val numbers = line.extractLongs()
             val out = numbers[0]
-            if (out in getPossibleAnswers(numbers.drop(1), part)) {
+            if (out in getPossibleAnswers(part, numbers.drop(1))) {
                 sum += out
             }
         }
@@ -42,13 +42,13 @@ class Puzzle : BasePuzzle() {
      * Recursively tries all possibilities using available operands. Works backwards from end so left-to-right
      * precedence is enforced.
      */
-    private fun getPossibleAnswers(values: List<Long>, part: Part): List<Long> {
+    private fun getPossibleAnswers(part: Part, values: List<Long>): List<Long> {
         if (values.size == 1) {
             return values
         }
         val answers = mutableListOf<Long>()
         val last = values.last()
-        for (value in getPossibleAnswers(values.dropLast(1), part)) {
+        for (value in getPossibleAnswers(part, values.dropLast(1))) {
             answers.add(value + last)
             answers.add(value * last)
             if (part.isTwo()) {

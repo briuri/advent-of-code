@@ -27,19 +27,6 @@ class Puzzle : BasePuzzle() {
     }
 
     /**
-     * Attempts to move until the guard reaches the edge or hits an obstruction.
-     */
-    private fun MutablePosition.moveOrTurn(grid: Grid<Char>) {
-        val nextPos = MutablePosition(this.coords, this.facing)
-        nextPos.move()
-        if (!grid.isInBounds(nextPos.coords) || grid[nextPos.coords] != '#') {
-            this.move()
-        } else {
-            this.turnRight()
-        }
-    }
-
-    /**
      * Executes a part of the puzzle using the specified input file.
      */
     override fun run(part: Part, input: List<String>): Number {
@@ -65,6 +52,19 @@ class Puzzle : BasePuzzle() {
             }
         }
         return blocks
+    }
+
+    /**
+     * Attempts to move until the guard reaches the edge or hits an obstruction.
+     */
+    private fun MutablePosition.moveOrTurn(grid: Grid<Char>) {
+        val nextPos = MutablePosition(this.coords, this.facing)
+        nextPos.move()
+        if (!grid.isInBounds(nextPos.coords) || grid[nextPos.coords] != '#') {
+            this.move()
+        } else {
+            this.turnRight()
+        }
     }
 
     /**

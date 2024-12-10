@@ -29,10 +29,8 @@ class Puzzle : BasePuzzle() {
     override fun run(part: Part, input: List<String>): Number {
         val beforeRules = mutableMapOf<Int, MutableList<Int>>()
         val afterRules = mutableMapOf<Int, MutableList<Int>>()
-        for (line in input) {
-            if (line.isEmpty()) {
-                break
-            }
+        val spaceIndex = input.indexOf("")
+        for (line in input.subList(0, spaceIndex)) {
             val tokens = line.extractInts()
             beforeRules.putIfAbsent(tokens[0], mutableListOf())
             afterRules.putIfAbsent(tokens[1], mutableListOf())
@@ -41,7 +39,7 @@ class Puzzle : BasePuzzle() {
         }
 
         var middlePages = 0
-        for (update in input.drop(input.indexOf("") + 1)) {
+        for (update in input.drop(spaceIndex + 1)) {
             val pages = update.extractInts()
             val sortedPages = pages.getCorrection(beforeRules, afterRules)
             // In Part One, only include pages already in the right order.
@@ -57,7 +55,7 @@ class Puzzle : BasePuzzle() {
     }
 
     /**
-     * Sorts the pages into the right order.
+     * Sorts the pages into the right order by moving the first incorrect page one position back.
      */
     private fun List<Int>.getCorrection(beforeRules: Map<Int, List<Int>>, afterRules: Map<Int, List<Int>>): List<Int> {
         for (i in 0..<this.lastIndex) {

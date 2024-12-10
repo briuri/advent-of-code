@@ -34,8 +34,7 @@ class Puzzle : BasePuzzle() {
             val word = "XMAS"
             val searches = mutableListOf<String>()
             for (xSpot in grid.filter { it == 'X' }) {
-                // Clockwise from NW to W
-                searches.add(grid.getSearchesFrom(xSpot, Point2D(-1, -1), word.length))
+                // Clockwise from N to NW
                 searches.add(grid.getSearchesFrom(xSpot, Point2D(0, -1), word.length))
                 searches.add(grid.getSearchesFrom(xSpot, Point2D(1, -1), word.length))
                 searches.add(grid.getSearchesFrom(xSpot, Point2D(1, 0), word.length))
@@ -43,6 +42,7 @@ class Puzzle : BasePuzzle() {
                 searches.add(grid.getSearchesFrom(xSpot, Point2D(0, 1), word.length))
                 searches.add(grid.getSearchesFrom(xSpot, Point2D(-1, 1), word.length))
                 searches.add(grid.getSearchesFrom(xSpot, Point2D(-1, 0), word.length))
+                searches.add(grid.getSearchesFrom(xSpot, Point2D(-1, -1), word.length))
             }
             return searches.filter { it == word }.size
         }
