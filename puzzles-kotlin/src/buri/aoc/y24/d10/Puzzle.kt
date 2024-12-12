@@ -33,9 +33,8 @@ class Puzzle : BasePuzzle() {
         for (start in grid.filter { it == 0 }) {
             val frontier = ArrayDeque<Point2D<Int>>()
             frontier.add(start)
-            var current: Point2D<Int>?
             while (frontier.isNotEmpty()) {
-                current = frontier.removeFirst()
+                val current = frontier.removeFirst()
 
                 // Reached the end
                 if (grid[current] == 9) {
