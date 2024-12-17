@@ -72,6 +72,18 @@ enum class Direction(val icon: Char) {
     NORTH('^'), EAST('>'), SOUTH('v'), WEST('<');
 
     /**
+     * Returns this direction as a numerical slope
+     */
+    fun asSlope(): Point2D<Int> {
+        return when (this) {
+            WEST -> Point2D(-1, 0)
+            EAST -> Point2D(1, 0)
+            NORTH -> Point2D(0, -1)
+            else -> Point2D(0, 1)
+        }
+    }
+
+    /**
      * Returns a direction matching the given icon.
      */
     companion object {
