@@ -18,7 +18,7 @@ fun main() {
         println("20$year\t$loc")
     }
     println("Kotlin Solutions:")
-    for (year in 15..23) {
+    for (year in 15..24) {
         val loc = countLines("$kotlinPrefix\\y$year")
         println("20$year\t$loc")
     }
