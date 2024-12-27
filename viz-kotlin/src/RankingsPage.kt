@@ -449,7 +449,9 @@ class RankingsPage : BaseRankingsPage() {
         insertSplitToggle()
         page.append("\t<div class=\"clear\"></div>\n\n")
         for (i in Puzzle.TOTAL_PUZZLES - 1 downTo 0) {
-            val places = puzzleTimes.getTimes(TimeType.TOTAL)[i]
+            val places = mutableListOf<SolveTime>()
+            places.addAll(puzzleTimes.getTimes(TimeType.TOTAL)[i])
+            places.addAll(puzzleTimes.getTimes(TimeType.ONE)[i])
             if (places.isNotEmpty()) {
                 insertDay(year, i + 1, places, showAll)
             }
