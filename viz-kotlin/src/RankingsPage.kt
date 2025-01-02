@@ -17,7 +17,7 @@ import java.util.*
  */
 fun main() {
     val minutes = 15
-    val reps = 96
+    val reps = 0
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
@@ -111,7 +111,7 @@ class RankingsPage : BaseRankingsPage() {
      */
     private fun insertInstructions() {
         page.append("\t<div class=\"instructions\">\n")
-//        page.append("\t<h2>The 2024 competition is here!</h2>\n")
+        page.append("\t<h2>The 2024 competition is over. See you next year!</h2>\n")
 //        page.append("\t<ol>\n")
 //        page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your company EID.</li>\n")
 //		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
@@ -121,7 +121,7 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<ul>\n")
         page.append("\t\t<li>Your daily time to complete each two-part puzzle (worth 2 stars) is measured as \"time since the puzzle unlocked at midnight Eastern\".</li>")
         page.append("\t\t<li>The winner in the company competition will have the most stars by <span class=\"bestTime\">11:59 PM on December 31</span>.</li>")
-        page.append("\t\t<li>Last year, 14 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n")
+        page.append("\t\t<li>Last year, 13 people earned all 50 stars. Ties are broken by the <i>lowest median daily time</i> (in other words, your 13th fastest daily time out of 25 if you finish every puzzle).</li>\n")
         page.append("\t\t<li>Use this page to track everyone's progress since the official private leaderboard uses a different scoring system.</li>\n")
         page.append("\t</ul>\n")
         page.append("</div>\n")
