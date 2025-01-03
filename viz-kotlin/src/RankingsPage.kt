@@ -91,7 +91,7 @@ class RankingsPage : BaseRankingsPage() {
             insertTopDivisionsChart(year, playerTimes)
         }
         insertTotalSolvesChart(year, puzzleTimes)
-        insertTopDaily(year, puzzleTimes, false)
+        insertTopDaily(year, puzzleTimes)
         insertFooter(true)
         writePage("$year-top.html")
 
@@ -99,9 +99,6 @@ class RankingsPage : BaseRankingsPage() {
         resetPage()
         insertHeader(year, false)
         insertTopOverall(year, playerTimes, true)
-        if (year == CURRENT_YEAR) {
-            insertTopDaily(year, puzzleTimes, true)
-        }
         insertFooter(true)
         writePage("$year-all.html")
     }
@@ -114,8 +111,8 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<h2>The 2024 competition is over. See you next year!</h2>\n")
 //        page.append("\t<ol>\n")
 //        page.append("\t\t<li>Follow the instructions on the <a href=\"https://accenturefederal.servicenowservices.com/help?id=kb_article_view&sys_kb_id=b80e20a31b0fd11030c920efe54bcb3d\">Portal Page</a> to do three important tasks: create an AoC account, join our private leaderboard, and report your unique account ID so it can be linked to your company EID.</li>\n")
-//		page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
-// 		page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
+//		  page.append("\t\t<li>The first puzzle unlocks at midnight Eastern on Dec. 1. This is the night of Nov. 30, <i>not</i> the night of Dec. 1!</li>\n")
+// 		  page.append("\t\t<li>Advent of Code is still fun if you don't want to be up at midnight. Do the puzzles later to flex your problem-solving skills or learn a new language!</li>\n")
 //        page.append("\t</ol>\n")
         page.append("\t<h2>Scoring FAQ</h2>")
         page.append("\t<ul>\n")
@@ -438,12 +435,8 @@ class RankingsPage : BaseRankingsPage() {
     /**
      * Adds the Top X Daily for each puzzle.
      */
-    private fun insertTopDaily(year: String, puzzleTimes: PuzzleTimes, showAll: Boolean) {
-        if (showAll) {
-            page.append("\t<h2>All Players Daily</h2>\n")
-        } else {
-            page.append("\n\t<h2>Top ${companies[year]!!.maxPlaces} Daily</h2>\n")
-        }
+    private fun insertTopDaily(year: String, puzzleTimes: PuzzleTimes) {
+        page.append("\n\t<h2>Top ${companies[year]!!.maxPlaces} Daily</h2>\n")
         page.append(readLastModified(year))
         page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n")
         insertSplitToggle()
@@ -453,7 +446,7 @@ class RankingsPage : BaseRankingsPage() {
             places.addAll(puzzleTimes.getTimes(TimeType.TOTAL)[i])
             places.addAll(puzzleTimes.getTimes(TimeType.ONE)[i])
             if (places.isNotEmpty()) {
-                insertDay(year, i + 1, places, showAll)
+                insertDay(year, i + 1, places, false)
             }
         }
         page.append("<div class=\"clear\"></div>\n\n")
@@ -509,16 +502,16 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<a name=\"day$day\"></a>")
         page.append("<h3><a href=\"https://adventofcode.com/$year/day/$day\">${puzzle.title}</a></h3>\n")
         page.append("\t<ol>\n")
-        var isNextTie = false
         val maxPlaces = if (showAll) places.size else company.maxPlaces.coerceAtMost(places.size)
         val bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE)
         val bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO)
+        val ranks = getRanks(year, places, false)
         for (place in 0 until maxPlaces) {
             val record = places[place]
-            if (isNextTie) {
-                page.append("\t\t")
+            if (ranks[place] == 0) {
+                page.append("\t\t<li class=\"hidden\">")
             } else {
-                page.append("\t\t<li value=\"${place + 1}\">")
+                page.append("\t\t<li value=\"${ranks[place]}\">")
             }
 
             // Show total time and split times
@@ -540,9 +533,7 @@ class RankingsPage : BaseRankingsPage() {
                 page.append(SPACE)
             }
             page.append(maskName(record.name))
-            val nextTime = if (place + 1 < places.size) places[place + 1].getTime(TimeType.TOTAL) else null
-            isNextTie = (totalTime != null) && (totalTime == nextTime)
-            page.append(if (isNextTie) "<br />\n" else "</li>\n")
+            page.append("</li>\n")
         }
         // Pad incomplete lists so each Day is the same height for floating DIVs.
         if (!showAll) {
@@ -576,5 +567,32 @@ class RankingsPage : BaseRankingsPage() {
         }
         page.append("<div class=\"clear disclaimer\">This rankings page is a volunteer project that is not endorsed or supported by our company.</div>")
         page.append("</body>\n</html>")
+    }
+
+    /**
+     * Calculates the ranks of each solve time, starting with 1 and going up. Ineligible players and ties have a rank of 0.
+     */
+    private fun getRanks(year: String, times: List<SolveTime>, skipIneligible: Boolean): List<Int> {
+        val company = companies[year]!!
+        val ranks = mutableListOf<Int>()
+        var currentRank = 1
+        for (i in times.indices) {
+//            if (skipIneligible && times[i].name in company.ineligible) {
+//                ranks.add(0)
+//                continue
+//            }
+            if (i > 0) {
+                val previousTime = times[i - 1].getTime(TimeType.TOTAL)
+                val currentTime = times[i].getTime(TimeType.TOTAL)
+                if (previousTime != null && currentTime != null && previousTime == currentTime) {
+                    ranks.add(0)
+                    currentRank++
+                    continue
+                }
+            }
+            ranks.add(currentRank)
+            currentRank++
+        }
+        return ranks
     }
 }

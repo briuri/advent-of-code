@@ -76,6 +76,9 @@ h3 {
 	color: #eeeeee;
 	margin-bottom: 0px;
 }
+li.hidden {
+	list-style-type: none;
+}
 span.ineligible {
 	color: #999999;
 }
