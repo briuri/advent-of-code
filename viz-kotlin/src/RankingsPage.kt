@@ -588,7 +588,7 @@ class RankingsPage : BaseRankingsPage() {
                 val previousTime = times[i - 1]
                 val currentTime = times[i]
                 if (previousTime != null && currentTime != null) {
-                    if (previousTime == currentTime && ineligibles.isNotEmpty() && !ineligibles[i - 1]) {
+                    if (previousTime == currentTime && (ineligibles.isEmpty() || !ineligibles[i - 1])) {
                         ranks.add(0)
                         currentRank++
                         continue
