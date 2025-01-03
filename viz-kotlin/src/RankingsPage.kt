@@ -206,9 +206,10 @@ class RankingsPage : BaseRankingsPage() {
         // Show each player's complete record.
         val ranks =
             getRanks(year, playerTimes.map { it.tiebreakerTime }, playerTimes.map { it.name in company.ineligible })
+        val ineligibleCount = playerTimes.subList(0, numOverall).count { it.name in company.ineligible }
         val isStandardWidth = !(year == "2016" && showAll)
         val summaryMargin = if (isStandardWidth) 18 else 19
-        for (i in 0 until numOverall) {
+        for (i in 0 until playerTimes.size.coerceAtMost(numOverall + ineligibleCount)) {
             val player = playerTimes[i]
             val isIneligible = company.ineligible.contains(player.name)
             val timeClass = if (isIneligible) "ineligible" else "bestTime"
