@@ -204,7 +204,8 @@ class RankingsPage : BaseRankingsPage() {
         page.append("<ol>\n")
 
         // Show each player's complete record.
-        val ranks = getRanks(year, playerTimes.map { it.tiebreakerTime }, false)
+        val ranks =
+            getRanks(year, playerTimes.map { it.tiebreakerTime }, playerTimes.map { it.name in company.ineligible })
         val isStandardWidth = !(year == "2016" && showAll)
         val summaryMargin = if (isStandardWidth) 18 else 19
         for (i in 0 until numOverall) {
@@ -508,7 +509,7 @@ class RankingsPage : BaseRankingsPage() {
         val maxPlaces = if (showAll) places.size else company.maxPlaces.coerceAtMost(places.size)
         val bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE)
         val bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO)
-        val ranks = getRanks(year, places.map { it.getTime(TimeType.TOTAL) }, false)
+        val ranks = getRanks(year, places.map { it.getTime(TimeType.TOTAL) })
         for (i in 0 until maxPlaces) {
             val record = places[i]
             if (ranks[i] == 0) {
@@ -575,22 +576,23 @@ class RankingsPage : BaseRankingsPage() {
     /**
      * Calculates the ranks of each solve time, starting with 1 and going up. Ineligible players and ties have a rank of 0.
      */
-    private fun getRanks(year: String, times: List<Long?>, skipIneligible: Boolean): List<Int> {
-        val company = companies[year]!!
+    private fun getRanks(year: String, times: List<Long?>, ineligibles: List<Boolean> = listOf()): List<Int> {
         val ranks = mutableListOf<Int>()
         var currentRank = 1
         for (i in times.indices) {
-//            if (skipIneligible && times[i].name in company.ineligible) {
-//                ranks.add(0)
-//                continue
-//            }
+            if (ineligibles.isNotEmpty() && ineligibles[i]) {
+                ranks.add(0)
+                continue
+            }
             if (i > 0) {
                 val previousTime = times[i - 1]
                 val currentTime = times[i]
-                if (previousTime != null && currentTime != null && previousTime == currentTime) {
-                    ranks.add(0)
-                    currentRank++
-                    continue
+                if (previousTime != null && currentTime != null) {
+                    if (previousTime == currentTime && ineligibles.isNotEmpty() && !ineligibles[i - 1]) {
+                        ranks.add(0)
+                        currentRank++
+                        continue
+                    }
                 }
             }
             ranks.add(currentRank)
