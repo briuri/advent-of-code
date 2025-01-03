@@ -505,7 +505,7 @@ class RankingsPage : BaseRankingsPage() {
         val maxPlaces = if (showAll) places.size else company.maxPlaces.coerceAtMost(places.size)
         val bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE)
         val bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO)
-        val ranks = getRanks(year, places, false)
+        val ranks = getRanks(year, places.map { it.getTime(TimeType.TOTAL) }, false)
         for (place in 0 until maxPlaces) {
             val record = places[place]
             if (ranks[place] == 0) {
@@ -572,7 +572,7 @@ class RankingsPage : BaseRankingsPage() {
     /**
      * Calculates the ranks of each solve time, starting with 1 and going up. Ineligible players and ties have a rank of 0.
      */
-    private fun getRanks(year: String, times: List<SolveTime>, skipIneligible: Boolean): List<Int> {
+    private fun getRanks(year: String, times: List<Long?>, skipIneligible: Boolean): List<Int> {
         val company = companies[year]!!
         val ranks = mutableListOf<Int>()
         var currentRank = 1
@@ -582,8 +582,8 @@ class RankingsPage : BaseRankingsPage() {
 //                continue
 //            }
             if (i > 0) {
-                val previousTime = times[i - 1].getTime(TimeType.TOTAL)
-                val currentTime = times[i].getTime(TimeType.TOTAL)
+                val previousTime = times[i - 1]
+                val currentTime = times[i]
                 if (previousTime != null && currentTime != null && previousTime == currentTime) {
                     ranks.add(0)
                     currentRank++
