@@ -306,7 +306,8 @@ class RankingsPage : BaseRankingsPage() {
      */
     private fun insertTopDivisionsChart(year: String, playerTimes: List<PlayerTimes>) {
         val company = companies[year]!!
-        val numOverall = company.maxPlaces.coerceAtMost(playerTimes.size)
+        val eligiblePlayers = playerTimes.filter { it.name !in company.ineligible }
+        val numOverall = company.maxPlaces.coerceAtMost(eligiblePlayers.size)
         if (numOverall == 0 || company.allDivisions.isEmpty()) {
             return
         }
@@ -315,7 +316,7 @@ class RankingsPage : BaseRankingsPage() {
             counts[division] = 0
         }
         for (i in 0 until numOverall) {
-            val division = company.getDivisionFor(playerTimes[i].name, false)
+            val division = company.getDivisionFor(eligiblePlayers[i].name, false)
             if (division.isNotEmpty()) {
                 counts[division] = counts[division]!! + 1
             }
