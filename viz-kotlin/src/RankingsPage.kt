@@ -204,7 +204,7 @@ class RankingsPage : BaseRankingsPage() {
         page.append("<ol>\n")
 
         // Show each player's complete record.
-        var isNextTie = false
+        val ranks = getRanks(year, playerTimes.map { it.tiebreakerTime }, false)
         val isStandardWidth = !(year == "2016" && showAll)
         val summaryMargin = if (isStandardWidth) 18 else 19
         for (i in 0 until numOverall) {
@@ -215,7 +215,11 @@ class RankingsPage : BaseRankingsPage() {
 
             // Show total stars.
             val starMargin = if (player.stars < 10) "$SPACE$SPACE$SPACE" else "$SPACE$SPACE"
-            page.append(if (isNextTie) "\t" else "\t<li class=\"overallRecord\" value=\"${i + 1}\">")
+            if (ranks[i] == 0) {
+                page.append("\t<li class=\"overallRecord noRank\">")
+            } else {
+                page.append("\t<li class=\"overallRecord\" value=\"${ranks[i]}\">")
+            }
             page.append(starMargin).append(player.stars)
                 .append("<span class=\"emoji\" title=\"Stars\">&#x2B50;</span> ")
 
@@ -284,8 +288,7 @@ class RankingsPage : BaseRankingsPage() {
                 page.append("<br />\n")
             }
             page.append("\t\t</div>\n")
-            isNextTie = (i + 1 < numOverall) && (player.tiebreakerTime == playerTimes[i + 1].tiebreakerTime)
-            page.append(if (isNextTie) "\t<br />\n" else "\t</li>\n")
+            page.append("\t</li>\n")
 
             // Break overall scores into two columns for > Top 10.
             if (numOverall > 10 && i == (numOverall + 1) / 2 - 1) {
@@ -506,12 +509,12 @@ class RankingsPage : BaseRankingsPage() {
         val bestPart1 = getFastestSplitTime(places, maxPlaces, TimeType.ONE)
         val bestPart2 = getFastestSplitTime(places, maxPlaces, TimeType.TWO)
         val ranks = getRanks(year, places.map { it.getTime(TimeType.TOTAL) }, false)
-        for (place in 0 until maxPlaces) {
-            val record = places[place]
-            if (ranks[place] == 0) {
-                page.append("\t\t<li class=\"hidden\">")
+        for (i in 0 until maxPlaces) {
+            val record = places[i]
+            if (ranks[i] == 0) {
+                page.append("\t\t<li class=\"noRank\">")
             } else {
-                page.append("\t\t<li value=\"${ranks[place]}\">")
+                page.append("\t\t<li value=\"${ranks[i]}\">")
             }
 
             // Show total time and split times
