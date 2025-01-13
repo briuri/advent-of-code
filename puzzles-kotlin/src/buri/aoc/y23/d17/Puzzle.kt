@@ -7,7 +7,6 @@ import buri.aoc.common.position.Grid
 import buri.aoc.common.position.MutablePosition
 import buri.aoc.common.position.Point2D
 import org.junit.Test
-import java.lang.Exception
 
 /**
  * Entry point for a daily puzzle

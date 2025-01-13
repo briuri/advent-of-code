@@ -105,9 +105,11 @@ class Computer(private val instructions: List<String>, private val debug: Boolea
                 addMemory(param.asAddress())
                 memory[param.asAddress()] = value
             }
+
             1 -> {
                 throw IllegalArgumentException("Cannot store a value in a value.")
             }
+
             else -> {
                 val address = rb + param.asAddress()
                 addMemory(address)
@@ -157,13 +159,16 @@ class Computer(private val instructions: List<String>, private val debug: Boolea
                         set(params[0], inputs.removeFirst())
                     }
                 }
+
                 OUT -> outputs.add(params[0].resolve())
                 JIT -> if (params[0].resolve() != 0L) {
                     ip = params[1].resolve().toInt()
                 }
+
                 JIF -> if (params[0].resolve() == 0L) {
                     ip = params[1].resolve().toInt()
                 }
+
                 LT -> set(params[2], if (params[0].resolve() < params[1].resolve()) 1 else 0)
                 EQ -> set(params[2], if (params[0].resolve() == params[1].resolve()) 1 else 0)
                 RBO -> rb += params[0].resolve().toInt()
@@ -198,20 +203,25 @@ class Computer(private val instructions: List<String>, private val debug: Boolea
                     val op = if (opcode == ADD) "+" else "*"
                     output.append("$p2 = $p0 $op $p1 ► $p0Resolved $op $p1Resolved")
                 }
+
                 IN -> {
                     output.append("$p0 = ${inputs[0]}")
                 }
+
                 OUT -> {
                     output.append("out = $p0 ► out = $p0Resolved")
                 }
+
                 JIT, JIF -> {
                     val op = if (opcode == JIT) "!=" else "=="
                     output.append("if ($p0 $op 0) ip = $p1 ► if ($p0Resolved $op 0) ip = $p1Resolved")
                 }
+
                 LT, EQ -> {
                     val op = if (opcode == LT) "<" else "=="
                     output.append("$p2 = if ($p0 $op $p1) 1 else 0 ► if ($p0Resolved $op $p1Resolved) 1 else 0")
                 }
+
                 RBO -> {
                     output.append("rb += $p0 ► $p0Resolved")
                 }
@@ -232,9 +242,11 @@ class Computer(private val instructions: List<String>, private val debug: Boolea
                         "[$param.value]"
                     }
                 }
+
                 1 -> {
                     "$param"
                 }
+
                 else -> {
                     if (resolveAddress) {
                         "${param.resolve()}"

@@ -54,14 +54,17 @@ class Puzzle : BasePuzzle() {
                     output.append("1")
                     remaining -= 1
                 }
+
                 2L -> {
                     output.append("2")
                     remaining -= 2
                 }
+
                 3L -> {
                     output.append("=")
                     remaining += 2
                 }
+
                 4L -> {
                     output.append("-")
                     remaining += 1

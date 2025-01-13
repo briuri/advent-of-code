@@ -127,18 +127,21 @@ class Blizzards(val maxMinutes: Int, val xBounds: IntRange, val yBounds: IntRang
                         nextY = yBounds.last
                     }
                 }
+
                 SOUTH -> {
                     nextY += 1
                     if (nextY !in yBounds) {
                         nextY = yBounds.first
                     }
                 }
+
                 WEST -> {
                     nextX -= 1
                     if (nextX !in xBounds) {
                         nextX = xBounds.last
                     }
                 }
+
                 EAST -> {
                     nextX += 1
                     if (nextX !in xBounds) {

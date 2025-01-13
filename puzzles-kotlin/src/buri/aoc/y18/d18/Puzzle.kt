@@ -42,9 +42,11 @@ class Puzzle : BasePuzzle() {
                         '.' -> if (neighbors['|']!! >= 3) {
                             newGrid[x, y] = '|'
                         }
+
                         '|' -> if (neighbors['#']!! >= 3) {
                             newGrid[x, y] = '#'
                         }
+
                         '#' -> if (neighbors['|']!! == 0 || neighbors['#']!! == 0) {
                             newGrid[x, y] = '.'
                         }

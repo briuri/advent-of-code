@@ -37,17 +37,21 @@ class Puzzle : BasePuzzle() {
                     registers.divide(tokens[1], 2)
                     pointer++
                 }
+
                 "tpl" -> {
                     registers.multiply(tokens[1], 3)
                     pointer++
                 }
+
                 "inc" -> {
                     registers.add(tokens[1], 1)
                     pointer++
                 }
+
                 "jmp" -> {
                     pointer += tokens[1].toInt()
                 }
+
                 "jie" -> {
                     pointer += if (registers[tokens[1].dropLast(1)] % 2 == 0L) {
                         tokens[2].toInt()
@@ -55,6 +59,7 @@ class Puzzle : BasePuzzle() {
                         1
                     }
                 }
+
                 "jio" -> {
                     pointer += if (registers[tokens[1].dropLast(1)] == 1L) {
                         tokens[2].toInt()

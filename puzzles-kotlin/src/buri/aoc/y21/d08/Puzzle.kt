@@ -117,6 +117,7 @@ class Digit(data: List<String>) {
                     '5'
                 }
             }
+
             else -> {
                 if (segment('c') in code && segment('e') in code) {
                     '0'

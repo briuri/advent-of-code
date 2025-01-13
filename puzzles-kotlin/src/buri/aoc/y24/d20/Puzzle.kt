@@ -6,7 +6,6 @@ import buri.aoc.common.Pathfinder
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
 import org.junit.Test
-import java.util.Date
 
 /**
  * Entry point for a daily puzzle
@@ -78,7 +77,10 @@ class Puzzle : BasePuzzle() {
      * Builds a path from start to end with the cameFrom map. Switched from a list of points to a map to reduce runtime
      * (previously called list.indexOf four times for each pair of points).
      */
-    private fun Map<Point2D<Int>, Point2D<Int>?>.getPathAsMap(start: Point2D<Int>, end: Point2D<Int>): Map<Point2D<Int>, Int> {
+    private fun Map<Point2D<Int>, Point2D<Int>?>.getPathAsMap(
+        start: Point2D<Int>,
+        end: Point2D<Int>
+    ): Map<Point2D<Int>, Int> {
         val path = mutableListOf<Point2D<Int>>()
         var current = end
         while (true) {

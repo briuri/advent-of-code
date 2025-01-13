@@ -73,8 +73,7 @@ class Puzzle : BasePuzzle() {
                 files.addFirst(File(file.id, space.index, file.length))
                 if (space.length - file.length > 0) {
                     spaces[spaces.indexOf(space)] = Space(space.index + file.length, space.length - file.length)
-                }
-                else {
+                } else {
                     spaces.remove(space)
                 }
             } else {
@@ -94,4 +93,5 @@ data class File(val id: Int, val index: Int, val length: Int) {
         return sum
     }
 }
+
 data class Space(val index: Int, val length: Int)

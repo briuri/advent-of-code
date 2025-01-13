@@ -81,21 +81,25 @@ class Map(width: Int, height: Int) : Grid<Char>(width, height, '#') {
                     set(x, y - 2, '.')
                     y -= 2
                 }
+
                 'S' -> {
                     set(x, y + 1, 'D')
                     set(x, y + 2, '.')
                     y += 2
                 }
+
                 'W' -> {
                     set(x - 1, y, 'D')
                     set(x - 2, y, '.')
                     x -= 2
                 }
+
                 'E' -> {
                     set(x + 1, y, 'D')
                     set(x + 2, y, '.')
                     x += 2
                 }
+
                 '(' -> {
                     val endIndex = getClosingIndex(path, i + 1)
                     for (choice in getChoices(path.substring(i + 1, endIndex))) {
@@ -103,6 +107,7 @@ class Map(width: Int, height: Int) : Grid<Char>(width, height, '#') {
                     }
                     break
                 }
+
                 ')' -> break
             }
             i++

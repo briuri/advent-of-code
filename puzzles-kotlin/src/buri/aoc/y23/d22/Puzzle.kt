@@ -5,7 +5,6 @@ import buri.aoc.common.Part
 import buri.aoc.common.position.Bounds3D
 import buri.aoc.common.position.Point3D
 import org.junit.Test
-import java.util.*
 import kotlin.math.absoluteValue
 
 /**
@@ -52,8 +51,7 @@ class Puzzle : BasePuzzle() {
                 if (fallen.isAboveGround() && otherBricks.none { it.overlapsWith(fallen) }) {
                     fallenIndexes.add(index)
                     current = fallen
-                }
-                else {
+                } else {
                     break
                 }
             }

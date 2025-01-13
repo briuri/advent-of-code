@@ -63,10 +63,12 @@ class Puzzle : BasePuzzle() {
                     grid[next] = '#'
                     continue
                 }
+
                 1L -> {
                     grid[next] = '.'
                     explore(computer, grid, next)
                 }
+
                 2L -> {
                     grid[next] = 'X'
                 }

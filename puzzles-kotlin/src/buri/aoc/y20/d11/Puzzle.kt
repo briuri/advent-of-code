@@ -43,6 +43,7 @@ class Puzzle : BasePuzzle() {
                         'L' -> if (occupiedNeighbors == 0) {
                             newGrid[point] = '#'
                         }
+
                         '#' -> if (occupiedNeighbors >= limit) {
                             newGrid[point] = 'L'
                         }

@@ -40,12 +40,15 @@ class Puzzle : BasePuzzle() {
                 '<' -> {
                     activeSanta.copy(x = activeSanta.x - 1)
                 }
+
                 '>' -> {
                     activeSanta.copy(x = activeSanta.x + 1)
                 }
+
                 '^' -> {
                     activeSanta.copy(y = activeSanta.y - 1)
                 }
+
                 else -> {   // v
                     activeSanta.copy(y = activeSanta.y + 1)
                 }

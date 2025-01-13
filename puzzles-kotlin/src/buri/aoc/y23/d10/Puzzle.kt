@@ -7,8 +7,6 @@ import buri.aoc.common.countSteps
 import buri.aoc.common.position.Grid
 import buri.aoc.common.position.Point2D
 import org.junit.Test
-import java.util.*
-import kotlin.time.measureTime
 
 /**
  * Entry point for a daily puzzle
@@ -153,12 +151,14 @@ class Puzzle : BasePuzzle() {
             val nextValue = get(x + 1, y)
             // Base case for pipes that need a connection in the middle of them.
             if (pipes.containsAll(listOf(Point2D(x, y), Point2D(x + 1, y)))
-                && currentValue in validPipesLeft && nextValue in validPipesRight) {
+                && currentValue in validPipesLeft && nextValue in validPipesRight
+            ) {
                 return true
             }
             // Special case for Start-adjacent squares
             if (currentValue == 'S' && nextValue in validPipesRight
-                || currentValue in validPipesLeft && nextValue == 'S') {
+                || currentValue in validPipesLeft && nextValue == 'S'
+            ) {
                 return true
             }
         }
@@ -174,12 +174,14 @@ class Puzzle : BasePuzzle() {
             val nextValue = get(x, y + 1)
             // Base case for pipes that need a connection in the middle of them.
             if (pipes.containsAll(listOf(Point2D(x, y), Point2D(x, y + 1)))
-                && currentValue in validPipesAbove && nextValue in validPipesBelow) {
+                && currentValue in validPipesAbove && nextValue in validPipesBelow
+            ) {
                 return true
             }
             // Special case for Start-adjacent squares
             if (currentValue == 'S' && nextValue in validPipesBelow
-                || currentValue in validPipesAbove && nextValue == 'S') {
+                || currentValue in validPipesAbove && nextValue == 'S'
+            ) {
                 return true
             }
         }

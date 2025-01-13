@@ -39,6 +39,7 @@ class Puzzle : BasePuzzle() {
                         depth += (aim * amount)
                     }
                 }
+
                 "down" -> {
                     if (part.isOne()) {
                         depth += amount
@@ -46,6 +47,7 @@ class Puzzle : BasePuzzle() {
                         aim += amount
                     }
                 }
+
                 "up" -> {
                     if (part.isOne()) {
                         depth -= amount

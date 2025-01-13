@@ -50,7 +50,8 @@ class Puzzle : BasePuzzle() {
         var maxStrength = strength
         for (component in components.filter { it.fits(neededPort) }) {
             val otherPort = if (component.portA != neededPort) component.portA else component.portB
-            val nextStrength = getStrength(sizeToStrength,
+            val nextStrength = getStrength(
+                sizeToStrength,
                 length + 1, strength + component.strength,
                 otherPort, components.filter { it != component })
             maxStrength = maxStrength.coerceAtLeast(nextStrength)

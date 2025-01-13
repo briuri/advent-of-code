@@ -66,9 +66,11 @@ class Puzzle : BasePuzzle() {
                     "S" -> {
                         myArmor = if (duration > 1) spell.meEffect else 0
                     }
+
                     "P" -> {
                         bossHp -= spell.bossEffect
                     }
+
                     "R" -> {
                         myMana += spell.meEffect
                     }
@@ -109,6 +111,7 @@ class Puzzle : BasePuzzle() {
                             bossHp -= spell.bossEffect
                             myHp += spell.meEffect
                         }
+
                         "S", "P", "R" -> {
                             activeEffects[spellName] = spell.duration
                         }

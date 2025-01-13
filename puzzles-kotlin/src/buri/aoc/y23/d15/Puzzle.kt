@@ -56,6 +56,7 @@ class Puzzle : BasePuzzle() {
                     0 -> {
                         lenses.remove(lens)
                     }
+
                     else -> {
                         if (lens != null) {
                             lenses[lenses.indexOf(lens)] = token

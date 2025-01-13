@@ -3,7 +3,6 @@ package buri.aoc.y23.d25
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import org.junit.Test
-import java.lang.Exception
 
 /**
  * Entry point for a daily puzzle

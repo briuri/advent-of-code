@@ -146,6 +146,7 @@ class Factory(private val pattern: String) {
                 shape.add(Point2D(4, height))
                 shape.add(Point2D(5, height))
             }
+
             1 -> { // Cross
                 shape.add(Point2D(3, height))
                 shape.add(Point2D(2, 1 + height))
@@ -153,6 +154,7 @@ class Factory(private val pattern: String) {
                 shape.add(Point2D(4, 1 + height))
                 shape.add(Point2D(3, 2 + height))
             }
+
             2 -> { // Backwards L
                 shape.add(Point2D(2, height))
                 shape.add(Point2D(3, height))
@@ -160,12 +162,14 @@ class Factory(private val pattern: String) {
                 shape.add(Point2D(4, 1 + height))
                 shape.add(Point2D(4, 2 + height))
             }
+
             3 -> { // I
                 shape.add(Point2D(2, height))
                 shape.add(Point2D(2, 1 + height))
                 shape.add(Point2D(2, 2 + height))
                 shape.add(Point2D(2, 3 + height))
             }
+
             else -> { // Square
                 shape.add(Point2D(2, height))
                 shape.add(Point2D(3, height))

@@ -2,7 +2,7 @@ package buri.aoc.y23.d18
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
-import buri.aoc.common.position.*
+import buri.aoc.common.position.Point2D
 import org.junit.Test
 import kotlin.math.absoluteValue
 
@@ -42,9 +42,11 @@ class Puzzle : BasePuzzle() {
                 '0', 'R' -> {
                     Point2D(previous.x + length, previous.y)
                 }
+
                 '1', 'D' -> {
                     Point2D(previous.x, previous.y + length)
                 }
+
                 '2', 'L' -> {
                     Point2D(previous.x - length, previous.y)
                 }

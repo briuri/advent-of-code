@@ -59,13 +59,16 @@ class Puzzle : BasePuzzle() {
                         grid[virus.coords] = State.WEAK.icon
                     }
                 }
+
                 State.WEAK.icon -> {
                     grid[virus.coords] = State.INFECTED.icon
                     count++
                 }
+
                 State.INFECTED.icon -> {
                     grid[virus.coords] = if (part.isOne()) State.CLEAN.icon else State.FLAGGED.icon
                 }
+
                 State.FLAGGED.icon -> grid[virus.coords] = State.CLEAN.icon
             }
             virus.move()

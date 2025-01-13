@@ -197,16 +197,19 @@ class Tile(val id: Long, var grid: Grid<Char>) {
                     connects = connects && (grid[x, 0] == permutation[x, permutation.height - 1])
                 }
             }
+
             SOUTH -> {
                 for (x in grid.xRange) {
                     connects = connects && (grid[x, grid.height - 1] == permutation[x, 0])
                 }
             }
+
             WEST -> {
                 for (y in grid.yRange) {
                     connects = connects && (grid[0, y] == permutation[grid.width - 1, y])
                 }
             }
+
             EAST -> {
                 for (y in grid.yRange) {
                     connects = connects && (grid[grid.width - 1, y] == permutation[0, y])

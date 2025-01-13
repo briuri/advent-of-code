@@ -51,22 +51,27 @@ class Puzzle : BasePuzzle() {
                         y -= 1
                         z += 1
                     }
+
                     "se" -> {
                         x += 1
                         y -= 1
                     }
+
                     "sw" -> {
                         x += 1
                         z -= 1
                     }
+
                     "w" -> {
                         y += 1
                         z -= 1
                     }
+
                     "nw" -> {
                         x -= 1
                         y += 1
                     }
+
                     "ne" -> {
                         x -= 1
                         z += 1

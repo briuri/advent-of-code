@@ -61,12 +61,14 @@ class Puzzle : BasePuzzle() {
                             // else go straight
                         }
                     }
+
                     '/' -> {
                         when (cart.facing) {
                             NORTH, SOUTH -> cart.turnRight()
                             WEST, EAST -> cart.turnLeft()
                         }
                     }
+
                     '\\' -> {
                         when (cart.facing) {
                             NORTH, SOUTH -> cart.turnLeft()

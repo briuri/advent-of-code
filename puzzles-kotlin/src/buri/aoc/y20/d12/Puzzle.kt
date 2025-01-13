@@ -62,15 +62,19 @@ class Puzzle : BasePuzzle() {
                 'N' -> {
                     coords = coords.copy(y = coords.y - amount)
                 }
+
                 'S' -> {
                     coords = coords.copy(y = coords.y + amount)
                 }
+
                 'W' -> {
                     coords = coords.copy(x = coords.x - amount)
                 }
+
                 'E' -> {
                     coords = coords.copy(x = coords.x + amount)
                 }
+
                 'R' -> {
                     when (amount) {
                         90 -> turnRight()
@@ -78,6 +82,7 @@ class Puzzle : BasePuzzle() {
                         270 -> turnLeft()
                     }
                 }
+
                 'F' -> {
                     repeat(amount) {
                         move()
@@ -96,15 +101,19 @@ class Puzzle : BasePuzzle() {
                 'N' -> {
                     coords = coords.copy(y = coords.y - amount)
                 }
+
                 'S' -> {
                     coords = coords.copy(y = coords.y + amount)
                 }
+
                 'W' -> {
                     coords = coords.copy(x = coords.x - amount)
                 }
+
                 'E' -> {
                     coords = coords.copy(x = coords.x + amount)
                 }
+
                 'R' -> {
                     when (amount) {
                         // 3,1 -> -1, 3
@@ -115,6 +124,7 @@ class Puzzle : BasePuzzle() {
                         270 -> coords = Point2D(coords.y, coords.x * -1)
                     }
                 }
+
                 'F' -> {
                     repeat(amount) {
                         ship.coords = Point2D(ship.coords.x + coords.x, ship.coords.y + coords.y)

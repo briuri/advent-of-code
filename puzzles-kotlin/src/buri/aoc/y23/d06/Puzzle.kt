@@ -1,6 +1,9 @@
 package buri.aoc.y23.d06
 
-import buri.aoc.common.*
+import buri.aoc.common.BasePuzzle
+import buri.aoc.common.Part
+import buri.aoc.common.extractLongs
+import buri.aoc.common.product
 import org.junit.Test
 
 /**

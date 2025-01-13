@@ -50,6 +50,7 @@ class Puzzle : BasePuzzle() {
                             paddleX = x
                             '='
                         }
+
                         else -> {
                             ballX = x
                             'o'
