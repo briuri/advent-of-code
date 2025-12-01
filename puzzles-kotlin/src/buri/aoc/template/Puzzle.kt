@@ -2,6 +2,13 @@ package buri.aoc.template
 
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
+import buri.aoc.common.Pathfinder
+import buri.aoc.common.position.Direction
+import buri.aoc.common.position.Grid
+import buri.aoc.common.position.MutablePosition
+import buri.aoc.common.position.Point2D
+import buri.aoc.common.position.Point3D
+import buri.aoc.common.position.Point4D
 import org.junit.Test
 
 /**
