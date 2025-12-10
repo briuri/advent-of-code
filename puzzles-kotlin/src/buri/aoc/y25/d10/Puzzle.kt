@@ -3,6 +3,10 @@ package buri.aoc.y25.d10
 import buri.aoc.common.BasePuzzle
 import buri.aoc.common.Part
 import buri.aoc.common.extractInts
+import com.microsoft.z3.Context
+import com.microsoft.z3.IntExpr
+import com.microsoft.z3.IntNum
+import com.microsoft.z3.Status
 import org.junit.Test
 
 /**
@@ -20,9 +24,7 @@ class Puzzle : BasePuzzle() {
     @Test
     fun runPart2() {
         assertRun(33, 1)
-        // Did Part 2 in Python with Z3 (naive solution below).
-        // Still fighting the Java Z3 syntax to get the solution ported to Kotlin...
-//        assertRun(20617, 0, true)
+        assertRun(20617, 0, true)
     }
 
     /**
@@ -99,45 +101,76 @@ data class Machine(val endLights: String, val rawButtons: String, val rawJolts: 
         return builder.toString()
     }
 
-    fun getBestJolts(): Int {
-        val frontier = mutableListOf<JoltState>()
-        frontier.add(JoltState(startJolts, 0))
+    fun getBestJolts(): Int = Context().use { ctx ->
+        val solver = ctx.mkOptimize()
+        val solverButtons = Array(buttons.size) { i -> ctx.mkIntConst("button#$i") }
+        for (button in solverButtons) {
+            // Constraint: each button > 0
+            solver.Add(ctx.mkGe(button, ctx.mkInt(0)))
+        }
 
-        val best = mutableMapOf<String, Int>()
-        while (frontier.isNotEmpty()) {
-            val current = frontier.removeFirst()
-            if (current.key !in best || best[current.key]!! > current.steps) {
-
-                best[current.key] = current.steps
-                for (button in buttons) {
-                    val next = toggleJolts(current.jolts, button)
-                    var inBounds = true
-                    for (i in next.indices) {
-                        if (next[i] > endJolts[i]) {
-                            inBounds = false
-                            break
-                        }
-                    }
-                    if (inBounds) {
-                        frontier.add(JoltState(next, current.steps + 1))
-                    }
+        endJolts.forEachIndexed { counter, targetValue ->
+            val buttonsThatIncrement = mutableListOf<IntExpr>()
+            for ((index, counters) in buttons.withIndex()) {
+                if (counter in counters) {
+                    buttonsThatIncrement.add(solverButtons[index])
                 }
             }
+            val target = ctx.mkInt(targetValue)
+            val sumOfPresses = ctx.mkAdd(*buttonsThatIncrement.toTypedArray()) as IntExpr
+            solver.Add(ctx.mkEq(sumOfPresses, target))
         }
-        return best[endJolts.toString()]!!
+
+        val presses = ctx.mkIntConst("presses")
+        solver.Add(ctx.mkEq(presses, ctx.mkAdd(*solverButtons)))
+        solver.MkMinimize(presses)
+        if (solver.Check() == Status.SATISFIABLE) {
+            val evaluatedResult = solver.model.evaluate(presses, false) as IntNum
+            return evaluatedResult.int
+        }
+        throw Exception("Could not solve.")
     }
 
-    fun toggleJolts(current: List<Int>, button: List<Int>): List<Int> {
-        val list = mutableListOf<Int>()
-        list.addAll(current)
-        for (toggle in button) {
-            list[toggle] = list[toggle] + 1
-        }
-        return list
-    }
+//      NAIVE SOLUTION for Part 2
+
+//    fun getBestJolts(): Int {
+//        val frontier = mutableListOf<JoltState>()
+//        frontier.add(JoltState(startJolts, 0))
+//
+//        val best = mutableMapOf<String, Int>()
+//        while (frontier.isNotEmpty()) {
+//            val current = frontier.removeFirst()
+//            if (current.key !in best || best[current.key]!! > current.steps) {
+//
+//                best[current.key] = current.steps
+//                for (button in buttons) {
+//                    val next = toggleJolts(current.jolts, button)
+//                    var inBounds = true
+//                    for (i in next.indices) {
+//                        if (next[i] > endJolts[i]) {
+//                            inBounds = false
+//                            break
+//                        }
+//                    }
+//                    if (inBounds) {
+//                        frontier.add(JoltState(next, current.steps + 1))
+//                    }
+//                }
+//            }
+//        }
+//        return best[endJolts.toString()]!!
+//    }
+//
+//    fun toggleJolts(current: List<Int>, button: List<Int>): List<Int> {
+//        val list = mutableListOf<Int>()
+//        list.addAll(current)
+//        for (toggle in button) {
+//            list[toggle] = list[toggle] + 1
+//        }
+//        return list
+//    }
 }
-
+//data class JoltState(val jolts: List<Int>, val steps: Int) {
+//    val key = jolts.toString()
+//}
 data class LightState(val lights: String, val steps: Int)
-data class JoltState(val jolts: List<Int>, val steps: Int) {
-    val key = jolts.toString()
-}
