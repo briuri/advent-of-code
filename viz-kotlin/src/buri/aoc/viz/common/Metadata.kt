@@ -94,6 +94,8 @@ class Puzzle(puzzleNode: ObjectNode) {
 
     companion object {
         // Total number of puzzles each year.
-        const val TOTAL_PUZZLES = 25
+        fun getTotalPuzzles(year: String): Int {
+            return if (year == "2025") { 12 } else 25
+        }
     }
 }

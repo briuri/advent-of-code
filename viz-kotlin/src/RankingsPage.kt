@@ -16,7 +16,7 @@ import java.util.*
  * Generates the Rankings pages on a schedule, for use when I'm not around to do manual updates.
  */
 fun main() {
-    val minutes = 15
+    val minutes = 30
     val reps = 96
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
@@ -375,34 +375,34 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<div id=\"chartParticipation\"></div>\n")
         page.append("\t<script type=\"text/javascript\">\n")
         page.append("\t\tvar xValues = [")
-        for (i in 0 until Puzzle.TOTAL_PUZZLES) {
+        for (i in 0 until Puzzle.getTotalPuzzles(year)) {
             page.append(i + 1)
-            if (i + 1 < Puzzle.TOTAL_PUZZLES) {
+            if (i + 1 < Puzzle.getTotalPuzzles(year)) {
                 page.append(",")
             }
         }
         page.append("];\n")
         page.append("\t\tvar yPart1 = [")
-        for (i in 0 until Puzzle.TOTAL_PUZZLES) {
+        for (i in 0 until Puzzle.getTotalPuzzles(year)) {
             page.append(puzzleTimes.getCount(TimeType.ONE, i))
-            if (i + 1 < Puzzle.TOTAL_PUZZLES) {
+            if (i + 1 < Puzzle.getTotalPuzzles(year)) {
                 page.append(",")
             }
         }
         page.append("];\n")
         page.append("\t\tvar yPart2 = [")
-        for (i in 0 until Puzzle.TOTAL_PUZZLES) {
+        for (i in 0 until Puzzle.getTotalPuzzles(year)) {
             val split = puzzleTimes.getCount(TimeType.TOTAL, i) - puzzleTimes.getCount(TimeType.ONE, i)
             page.append(split)
-            if (i + 1 < Puzzle.TOTAL_PUZZLES) {
+            if (i + 1 < Puzzle.getTotalPuzzles(year)) {
                 page.append(",")
             }
         }
         page.append("];\n")
         page.append("\t\tvar yTotal = [")
-        for (i in 0 until Puzzle.TOTAL_PUZZLES) {
+        for (i in 0 until Puzzle.getTotalPuzzles(year)) {
             page.append(puzzleTimes.getCount(TimeType.TOTAL, i))
-            if (i + 1 < Puzzle.TOTAL_PUZZLES) {
+            if (i + 1 < Puzzle.getTotalPuzzles(year)) {
                 page.append(",")
             }
         }
@@ -447,7 +447,7 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n")
         insertSplitToggle()
         page.append("\t<div class=\"clear\"></div>\n\n")
-        for (i in Puzzle.TOTAL_PUZZLES - 1 downTo 0) {
+        for (i in Puzzle.getTotalPuzzles(year) - 1 downTo 0) {
             val places = mutableListOf<SolveTime>()
             places.addAll(puzzleTimes.getTimes(TimeType.TOTAL)[i])
             places.addAll(puzzleTimes.getTimes(TimeType.ONE)[i])
@@ -478,7 +478,7 @@ class RankingsPage : BaseRankingsPage() {
         page.append("\t<h2>Latest Puzzle</h2>\n")
         page.append(readLastModified(year))
         insertSplitToggle()
-        for (i in Puzzle.TOTAL_PUZZLES - 1 downTo 0) {
+        for (i in Puzzle.getTotalPuzzles(year) - 1 downTo 0) {
             val places = mutableListOf<SolveTime>()
             places.addAll(puzzleTimes.getTimes(TimeType.TOTAL)[i])
             if (places.isNotEmpty()) {

@@ -141,7 +141,7 @@ abstract class BaseRankingsPage protected constructor() {
     @Suppress("UNCHECKED_CAST")
     private fun getSolveTimes(year: String, leaderboardJson: Map<String, Any>): PuzzleTimes {
         val company = companies[year]!!
-        val puzzleTimes = PuzzleTimes()
+        val puzzleTimes = PuzzleTimes(year)
         for (key in leaderboardJson.keys) {
             val member = leaderboardJson[key] as Map<String, Any>
             var name = member["name"] as String?

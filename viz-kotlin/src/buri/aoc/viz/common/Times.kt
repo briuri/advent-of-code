@@ -173,7 +173,7 @@ class SolveTime(
 /**
  * Data class for all puzzle times in a competition year. Handles calculations for stars and orphan Part One records.
  */
-class PuzzleTimes {
+class PuzzleTimes(val year: String) {
 
     // Part 1 solve times for each puzzle (list index + 1 is the puzzle's Day)
     private val part1Times = mutableListOf<MutableList<SolveTime>>()
@@ -189,7 +189,7 @@ class PuzzleTimes {
      * Constructor
      */
     init {
-        for (i in 0 until Puzzle.TOTAL_PUZZLES) {
+        for (i in 0 until Puzzle.getTotalPuzzles(year)) {
             getTimes(ONE).add(mutableListOf())
             getTimes(TOTAL).add(mutableListOf())
         }
@@ -213,7 +213,7 @@ class PuzzleTimes {
      * Sorts each list of puzzle records.
      */
     fun sort() {
-        for (day in 0 until Puzzle.TOTAL_PUZZLES) {
+        for (day in 0 until Puzzle.getTotalPuzzles(year)) {
             getTimes(ONE)[day].sort()
             getTimes(TOTAL)[day].sort()
         }
