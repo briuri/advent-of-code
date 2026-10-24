@@ -207,7 +207,7 @@ class RankingsPage : BaseRankingsPage() {
         val ranks =
             getRanks(year, playerTimes.map { it.tiebreakerTime }, playerTimes.map { it.name in company.ineligible })
         val ineligibleCount = playerTimes.subList(0, numOverall).count { it.name in company.ineligible }
-        val isStandardWidth = !(year == "2016" && showAll)
+        val isStandardWidth = !(company.scoring != ScoringType.MEDIAN && showAll)
         val summaryMargin = if (isStandardWidth) 18 else 19
         for (i in 0 until playerTimes.size.coerceAtMost(numOverall + ineligibleCount)) {
             val player = playerTimes[i]
@@ -266,8 +266,8 @@ class RankingsPage : BaseRankingsPage() {
                 page.append("\t\t\t<span class=\"dayLabel\">${dayPartial}d$dayPadding${player.times[j].day}</span>")
                 page.append(SPACE).append(SPACE)
                 val time = SolveTime.formatTime(player.times[j].time, isStandardWidth)
-                // 2017+ use median time, so add descriptive text next to the key times.
-                if (year != "2016") {
+                // 2017-2025 use median time, so add descriptive text next to the key times.
+                if (company.scoring == ScoringType.MEDIAN) {
                     // Averaged median
                     if (totalTimes % 2 == 0 && j == totalTimes / 2 - 1) {
                         page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
