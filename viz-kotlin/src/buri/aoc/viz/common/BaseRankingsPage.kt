@@ -78,7 +78,9 @@ abstract class BaseRankingsPage protected constructor() {
         }
         for (year in years) {
             val placesShown = json["places"][year].asInt()
-            val scoring = ScoringType.fromId(json["scoring"][year].asText())!!
+            val scoringType = ScoringType.from(json["scoring"][year]["type"].asText())
+            val scoringDrop = json["scoring"][year]["drop"].asInt()
+            val scoring = Scoring(scoringType, scoringDrop)
             val instructions = json["instructions"].asText()
             val scoringFAQ = json["scoringFAQ"].asText()
             val rules = json["rules"][year].asText()

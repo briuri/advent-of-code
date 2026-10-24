@@ -199,7 +199,7 @@ class RankingsPage : BaseRankingsPage() {
         val ranks =
             getRanks(year, playerTimes.map { it.tiebreakerTime }, playerTimes.map { it.name in company.ineligible })
         val ineligibleCount = playerTimes.subList(0, numOverall).count { it.name in company.ineligible }
-        val isStandardWidth = !(company.scoring != ScoringType.MEDIAN && showAll)
+        val isStandardWidth = !(company.scoring.type != ScoringType.MEDIAN && showAll)
         val summaryMargin = if (isStandardWidth) 18 else 19
         for (i in 0 until playerTimes.size.coerceAtMost(numOverall + ineligibleCount)) {
             val player = playerTimes[i]
@@ -259,7 +259,7 @@ class RankingsPage : BaseRankingsPage() {
                 page.append(SPACE).append(SPACE)
                 val time = SolveTime.formatTime(player.times[j].time, isStandardWidth)
                 // 2017-2025 use median time, so add descriptive text next to the key times.
-                if (company.scoring == ScoringType.MEDIAN) {
+                if (company.scoring.type == ScoringType.MEDIAN) {
                     // Averaged median
                     if (totalTimes % 2 == 0 && j == totalTimes / 2 - 1) {
                         page.append("<span class=\"bestTime\">$time</span>").append(SPACE)
@@ -276,9 +276,11 @@ class RankingsPage : BaseRankingsPage() {
                     } else {
                         page.append(time)
                     }
-                } else if (company.scoring == ScoringType.SUM_ALL_DROP_SLOWEST && totalTimes > 1 && j + 1 == totalTimes) {
+                }
+                // 2026 use sum time and drop some arbitrary number of slowest times
+                else if (company.scoring.isDropped(j, totalTimes)) {
                     page.append("<span class=\"worstTime\">$time</span>").append(SPACE)
-                    page.append("${SPACE}<span class=\"worstTime\">not counted</span>")
+                    page.append("${SPACE}<span class=\"worstTime\">dropped</span>")
                 } 
                 else {
                     page.append(time)

@@ -254,33 +254,37 @@ class PuzzleTimes(val year: String) {
  */
 enum class ScoringType(val id: String) {
     MEDIAN("median"),
-    SUM_ALL("sumAll"),
-    SUM_ALL_DROP_SLOWEST("sumAllDropSlowest");
-
+    SUM("sum");
+    
     companion object {
         private val map: Map<String, ScoringType> = entries.associateBy { it.id }
 
-        // Function to get the enum constant by string ID
-        fun fromId(id: String): ScoringType? {
-            return map[id]
+        fun from(id: String): ScoringType {
+            return map[id]!!
         }
+    }
+}
+class Scoring(val type: ScoringType, val drop: Int = 0) {
+    
+    // Checks if a time is dropped from calculation
+    fun isDropped(timeIndex: Int, totalTimes: Int): Boolean {
+        return (type == ScoringType.SUM && (totalTimes - timeIndex) <= drop)
     }
 }
 
 /**
  * Data class for all of a player's times.
  */
-class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<TiebreakerTime>, scoring: ScoringType) :
+class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<TiebreakerTime>, scoring: Scoring) :
     Comparable<PlayerTimes> {
 
     // Total stars earned by this player.
     val stars = puzzleTimes.getStars(name)
 
     // Time to use in the event of star ties.
-    val tiebreakerTime: Long = when (scoring) {
+    val tiebreakerTime: Long = when (scoring.type) {
         ScoringType.MEDIAN -> calculateMedianTime(times)
-        ScoringType.SUM_ALL -> calculateTotalTime(times)
-        else -> calculateTotalTime(times.dropLast(1))            
+        else -> calculateTotalTime(times.dropLast(scoring.drop)) 
     }
 
     // How many first-place medals this player has.
