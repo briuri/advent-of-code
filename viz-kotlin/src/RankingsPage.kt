@@ -21,7 +21,7 @@ fun main() {
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
-    val rankingsPage = RankingsPage()
+    val rankingsPage = RankingsPage("company.json")
 
     for (i in 0 until reps) {
         if (i > 0) {
@@ -51,17 +51,28 @@ fun main() {
     }
 }
 
-class RankingsPage : BaseRankingsPage() {
-    /**
-     * Generate the Rankings pages via a JUnit test in IDEA.
-     */
+/**
+ * Generate the Rankings pages (without download/upload) via a JUnit test in IDEA.
+ */
+class RankingsPageTest() {
     @Test
+    fun generatePages() {
+        val rankingsPage = RankingsPage("company.json")
+        rankingsPage.generatePages()
+    }
+}
+
+class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) {
+
+    /**
+     * Generate the Rankings pages but do not download / upload any data.
+     */
     fun generatePages() {
         for (year in years) {
             visualizeYear(year)
         }
     }
-
+    
     /**
      * Generates the page for a specific year
      */

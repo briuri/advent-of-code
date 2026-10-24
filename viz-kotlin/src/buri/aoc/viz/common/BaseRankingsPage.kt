@@ -18,7 +18,7 @@ import java.util.*
  *
  * @author Brian Uri!
  */
-abstract class BaseRankingsPage protected constructor() {
+abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     // Page-writing buffer
     protected val page = StringBuilder()
 
@@ -38,7 +38,7 @@ abstract class BaseRankingsPage protected constructor() {
     protected val playerTimes = mutableMapOf<String, List<PlayerTimes>>()
 
     init {
-        readCompanyMetadata()
+        readCompanyMetadata(companyMetadata)
         readPuzzleMetadata()
         for (year in years) {
             readTimeData(year)
@@ -71,8 +71,8 @@ abstract class BaseRankingsPage protected constructor() {
     /**
      * Reads ancillary player and division data from the JSON file (not included in version control).
      */
-    private fun readCompanyMetadata() {
-        val json = readJson("company.json")!!
+    private fun readCompanyMetadata(companyMetadata: String) {
+        val json = readJson(companyMetadata)!!
         for (year in json["years"]) {
             years.add(year.asText())
         }
