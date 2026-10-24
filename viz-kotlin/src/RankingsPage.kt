@@ -181,11 +181,13 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
         page.append("${years[0]}: <a href=\"index.html\">Latest</a> | <a href=\"${years[0]}-top.html\">Rankings</a>")
         page.append(" | <a href=\"https://adventofcode.com/${years[0]}/leaderboard/private/view/${company.leaderboard}\">")
         page.append("Raw Stats&rArr;</a>")
-        page.append("<br />\n\t\tArchives: ")
-        for (i in years.indices.drop(1)) {
-            page.append("<a href=\"${years[i]}-top.html\">${years[i]}</a>")
-            if (i + 1 < years.size) {
-                page.append(" | ")
+        if (years.drop(1).isNotEmpty()) {
+            page.append("<br />\n\t\tArchives: ")
+            for (i in years.indices.drop(1)) {
+                page.append("<a href=\"${years[i]}-top.html\">${years[i]}</a>")
+                if (i + 1 < years.size) {
+                    page.append(" | ")
+                }
             }
         }
         page.append("\n\t</div>\n\n")
