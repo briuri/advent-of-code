@@ -284,7 +284,11 @@ class RankingsPage : BaseRankingsPage() {
                     } else {
                         page.append(time)
                     }
-                } else {
+                } else if (company.scoring == ScoringType.SUM_ALL_DROP_SLOWEST && totalTimes > 1 && j + 1 == totalTimes) {
+                    page.append("<span class=\"worstTime\">$time</span>").append(SPACE)
+                    page.append("${SPACE}<span class=\"worstTime\">not counted</span>")
+                } 
+                else {
                     page.append(time)
                 }
                 page.append("<br />\n")
