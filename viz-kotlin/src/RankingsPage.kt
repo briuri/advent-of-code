@@ -21,7 +21,7 @@ fun main() {
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
-    val rankingsPage = RankingsPage("company-dancer.json")
+    val rankingsPage = RankingsPage("company-dasher.json")
 
     for (i in 0 until reps) {
         if (i > 0) {
@@ -39,7 +39,7 @@ fun main() {
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
-            rankingsPage.backupJson("dancer")
+            rankingsPage.backupJson("dasher")
             rankingsPage.generatePages()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -57,7 +57,7 @@ fun main() {
 class RankingsPageTest {
     @Test
     fun generatePages() {
-        val rankingsPage = RankingsPage("company-dancer.json")
+        val rankingsPage = RankingsPage("company-dasher.json")
         rankingsPage.generatePages()
     }
 }
@@ -154,6 +154,7 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
      * Adds the HTML page header
      */
     private fun insertHeader(year: String, isLatestPage: Boolean) {
+        val company = companies[year]!!        
         val title = if (isLatestPage) "Latest Puzzle" else "Rankings"
 
         page.append("<html>\n<head>\n")
@@ -171,7 +172,7 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
         page.append("\t<div class=\"navBar\">\n")
         page.append("\t\t")
         page.append("${years[0]}: <a href=\"index.html\">Latest</a> | <a href=\"${years[0]}-top.html\">Rankings</a>")
-        page.append(" | <a href=\"https://adventofcode.com/${years[0]}/leaderboard/private/view/105906\">")
+        page.append(" | <a href=\"https://adventofcode.com/${years[0]}/leaderboard/private/view/${company.leaderboard}\">")
         page.append("Raw Stats&rArr;</a>")
         page.append("<br />\n\t\tArchives: ")
         for (i in years.indices.drop(1)) {
