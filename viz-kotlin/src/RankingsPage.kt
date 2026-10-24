@@ -21,7 +21,7 @@ fun main() {
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
-    val rankingsPage = RankingsPage("company.json")
+    val rankingsPage = RankingsPage("company-b.json")
 
     for (i in 0 until reps) {
         if (i > 0) {
@@ -39,7 +39,7 @@ fun main() {
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
-            rankingsPage.backupJson()
+            rankingsPage.backupJson("b")
             rankingsPage.generatePages()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -54,10 +54,10 @@ fun main() {
 /**
  * Generate the Rankings pages (without download/upload) via a JUnit test in IDEA.
  */
-class RankingsPageTest() {
+class RankingsPageTest {
     @Test
     fun generatePages() {
-        val rankingsPage = RankingsPage("company.json")
+        val rankingsPage = RankingsPage("company-b.json")
         rankingsPage.generatePages()
     }
 }
@@ -77,6 +77,8 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
      * Generates the page for a specific year
      */
     private fun visualizeYear(year: String) {
+        val company = companies[year]!!
+        
         // Always clear current year cache before generating.
         if (year == CURRENT_YEAR) {
             readTimeData(year)
@@ -91,7 +93,7 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
             insertLatestDay(year, puzzleTimes)
             insertInstructions(year)
             insertFooter(false)
-            writePage("index.html")
+            writePage(company.id, "index.html")
         }
 
         // Create Top X page.
@@ -104,14 +106,14 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
         insertTotalSolvesChart(year, puzzleTimes)
         insertTopDaily(year, puzzleTimes)
         insertFooter(true)
-        writePage("$year-top.html")
+        writePage(company.id, "$year-top.html")
 
         // Create All Players page.
         resetPage()
         insertHeader(year, false)
         insertTopOverall(year, playerTimes, true)
         insertFooter(true)
-        writePage("$year-all.html")
+        writePage(company.id, "$year-all.html")
     }
 
     /**
@@ -196,7 +198,7 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
         } else {
             page.append("\t<h2>Top $numOverall Overall</h2>\n")
         }
-        page.append(readLastModified(year))
+        page.append(readLastModified(company.id, year))
         page.append("\t<p>${company.rules}</p>\n")
         val linkText = if (showAll) "Top" else "All"
 
@@ -334,7 +336,7 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
         // Calculate max for chart height.
         val max = counts.values.max()
         page.append("\n\t<a name=\"division\"></a><h2>Top $numOverall Overall by ${company.divisionLabel}</h2>\n")
-        page.append(readLastModified(year))
+        page.append(readLastModified(company.id, year))
         page.append("\t<div id=\"chartDivisions\"></div>\n")
         page.append("\t<script type=\"text/javascript\">\n")
         page.append("\t\tvar xValues = [")
@@ -379,8 +381,9 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
      * Adds the Total Solves chart.
      */
     private fun insertTotalSolvesChart(year: String, puzzleTimes: PuzzleTimes) {
+        val company = companies[year]!!
         page.append("\n\t<a name=\"total\"></a><h2>Total Solves by Day (${puzzleTimes.stars} stars)</h2>\n")
-        page.append(readLastModified(year))
+        page.append(readLastModified(company.id, year))
         page.append("\t<div id=\"chartParticipation\"></div>\n")
         page.append("\t<script type=\"text/javascript\">\n")
         page.append("\t\tvar xValues = [")
@@ -451,8 +454,9 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
      * Adds the Top X Daily for each puzzle.
      */
     private fun insertTopDaily(year: String, puzzleTimes: PuzzleTimes) {
-        page.append("\n\t<h2>Top ${companies[year]!!.maxPlaces} Daily</h2>\n")
-        page.append(readLastModified(year))
+        val company = companies[year]!!        
+        page.append("\n\t<h2>Top ${company.maxPlaces} Daily</h2>\n")
+        page.append(readLastModified(company.id, year))
         page.append("\t<p>Rank is based on time to complete both puzzle parts after midnight release.</p>\n")
         insertSplitToggle()
         page.append("\t<div class=\"clear\"></div>\n\n")
@@ -481,11 +485,12 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
      * Adds a fast-loading dashboard showing just the most recent puzzle.
      */
     private fun insertLatestDay(year: String, puzzleTimes: PuzzleTimes) {
+        val company = companies[year]!!
         page.append("<div class=\"daily\">\n")
         page.append("<span class=\"rankingsLink\">")
         page.append("<a href=\"$CURRENT_YEAR-top.html\">See Overall Rankings</a></span>")
         page.append("\t<h2>Latest Puzzle</h2>\n")
-        page.append(readLastModified(year))
+        page.append(readLastModified(company.id, year))
         insertSplitToggle()
         for (i in Puzzle.getTotalPuzzles(year) - 1 downTo 0) {
             val places = mutableListOf<SolveTime>()

@@ -12,6 +12,7 @@ import java.nio.file.Paths
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.set
 
 /**
  * Base functionality for loading data to build the Rankings Page. Rendering is in the inheriting class.
@@ -49,7 +50,8 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
      * Loads all time data from the leaderboard JSON.
      */
     fun readTimeData(year: String) {
-        puzzleTimes[year] = getSolveTimes(year, readLeaderboards(year))
+        val company = companies[year]!!
+        puzzleTimes[year] = getSolveTimes(year, readLeaderboards(company.id, year))
         playerTimes[year] = getPlayerTimes(year, puzzleTimes[year]!!)
     }
 
@@ -73,6 +75,7 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
      */
     private fun readCompanyMetadata(companyMetadata: String) {
         val json = readJson(companyMetadata)!!
+        val id = json["id"].asText()
         for (year in json["years"]) {
             years.add(year.asText())
         }
@@ -99,8 +102,8 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
                 allDivisions.add(divisionJson[i].asText())
             }
             
-            val company = Company(placesShown, scoring, instructions, scoringFAQ, rules, exclusions, 
-                divisionLabel, allDivisions)
+            val company = Company(id, placesShown, scoring, instructions, scoringFAQ, rules, 
+                exclusions, divisionLabel, allDivisions)
             for (i in 0 until playerJson.size()) {
                 company.addPlayer((playerJson[i] as ObjectNode))
             }
@@ -112,8 +115,8 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
      * Preserves a copy of the leaderboard JSON. If the JSON is downloaded often within an hour, only the first copy
      * is preserved.
      */
-    fun backupJson() {
-        val file = File("$JSON_FOLDER$CURRENT_YEAR.json")
+    fun backupJson(id: String) {
+        val file = File("$JSON_FOLDER/$id/$CURRENT_YEAR.json")
         val date = BACKUP_DATE_FORMAT.format(Date(file.lastModified()))
         val backupFile = File("$BACKUP_FOLDER$date.json")
         if (!backupFile.exists()) {
@@ -124,11 +127,11 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     /**
      * Reads the raw leaderboard data from the AoC leaderboard JSON files.
      */
-    private fun readLeaderboards(year: String): Map<String, Any> {
+    private fun readLeaderboards(id: String, year: String): Map<String, Any> {
         val mapper = ObjectMapper()
         try {
             val typeRef = object : TypeReference<MutableMap<String, Any>>() {}
-            val json = readJson("$year.json")!!
+            val json = readJson("$id/$year.json")!!
             val leaderboardJson = mapper.readValue(json["members"].toString(), typeRef)
 
             // Merge in overflow leaderboard, if available.
@@ -251,9 +254,9 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     /**
      * Saves the page to the filesystem.
      */
-    protected fun writePage(filename: String) {
+    protected fun writePage(id: String, filename: String) {
         try {
-            Files.write(Paths.get(OUTPUT_FOLDER + filename), page.toString().toByteArray())
+            Files.write(Paths.get("$OUTPUT_FOLDER$id/$filename"), page.toString().toByteArray())
         } catch (e: IOException) {
             throw IllegalArgumentException("Invalid output file.", e)
         }
@@ -262,10 +265,10 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     /**
      * Reads the last modified date on the (first) leaderboard file.
      */
-    protected fun readLastModified(year: String): String {
+    protected fun readLastModified(id: String, year: String): String {
         val output = StringBuilder()
         if (year == CURRENT_YEAR) {
-            val file = File("$JSON_FOLDER$year.json")
+            val file = File("$JSON_FOLDER/$id/$year.json")
             val date = MODIFIED_DATE_FORMAT.format(Date(file.lastModified()))
             output.append("\t<p class=\"tiny\">(as of $date)</p>\n")
         }
