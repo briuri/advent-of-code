@@ -22,6 +22,9 @@ abstract class BaseRankingsPage protected constructor() {
     // Page-writing buffer
     protected val page = StringBuilder()
 
+    // List of years that this company held a competition
+    protected val years = mutableListOf<String>()
+    
     // Metadata about puzzles, grouped by year
     protected val allPuzzles = mutableMapOf<String, List<Puzzle>>()
 
@@ -35,9 +38,9 @@ abstract class BaseRankingsPage protected constructor() {
     protected val playerTimes = mutableMapOf<String, List<PlayerTimes>>()
 
     init {
-        readPuzzleMetadata()
         readCompanyMetadata()
-        for (year in YEARS) {
+        readPuzzleMetadata()
+        for (year in years) {
             readTimeData(year)
         }
     }
@@ -55,7 +58,7 @@ abstract class BaseRankingsPage protected constructor() {
      */
     private fun readPuzzleMetadata() {
         val json = readJson("puzzles.json")!!
-        for (year in YEARS) {
+        for (year in years) {
             val puzzles = mutableListOf<Puzzle>()
             val puzzleJson = json[year] as ArrayNode
             for (i in 0 until puzzleJson.size()) {
@@ -70,7 +73,10 @@ abstract class BaseRankingsPage protected constructor() {
      */
     private fun readCompanyMetadata() {
         val json = readJson("company.json")!!
-        for (year in YEARS) {
+        for (year in json["years"]) {
+            years.add(year.asText())
+        }
+        for (year in years) {
             val divisionLabel = json["divisionLabel"][year].asText()
             val allDivisions = mutableListOf<String>()
             val divisionJson = json["divisions"][year] as ArrayNode
@@ -291,9 +297,6 @@ abstract class BaseRankingsPage protected constructor() {
     companion object {
         // Current year
         const val CURRENT_YEAR = "2025"
-
-        // Known puzzle years
-        val YEARS = arrayOf("2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016")
 
         // Date format for the last update dates.
         val MODIFIED_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")

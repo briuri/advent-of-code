@@ -57,7 +57,7 @@ class RankingsPage : BaseRankingsPage() {
      */
     @Test
     fun generatePages() {
-        for (year in YEARS) {
+        for (year in years) {
             visualizeYear(year)
         }
     }
@@ -165,13 +165,13 @@ class RankingsPage : BaseRankingsPage() {
         page.append("</head>\n\n<body>\n")
         page.append("\t<div class=\"navBar\">\n")
         page.append("\t\t")
-        page.append("${YEARS[0]}: <a href=\"index.html\">Latest</a> | <a href=\"${YEARS[0]}-top.html\">Rankings</a>")
-        page.append(" | <a href=\"https://adventofcode.com/${YEARS[0]}/leaderboard/private/view/105906\">")
+        page.append("${years[0]}: <a href=\"index.html\">Latest</a> | <a href=\"${years[0]}-top.html\">Rankings</a>")
+        page.append(" | <a href=\"https://adventofcode.com/${years[0]}/leaderboard/private/view/105906\">")
         page.append("Raw Stats&rArr;</a>")
         page.append("<br />\n\t\tArchives: ")
-        for (i in YEARS.indices.drop(1)) {
-            page.append("<a href=\"${YEARS[i]}-top.html\">${YEARS[i]}</a>")
-            if (i + 1 < YEARS.size) {
+        for (i in years.indices.drop(1)) {
+            page.append("<a href=\"${years[i]}-top.html\">${years[i]}</a>")
+            if (i + 1 < years.size) {
                 page.append(" | ")
             }
         }
