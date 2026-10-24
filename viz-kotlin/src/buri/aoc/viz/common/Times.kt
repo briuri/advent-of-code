@@ -250,32 +250,47 @@ class PuzzleTimes(val year: String) {
 }
 
 /**
+ * Enumeration of scoring systems.
+ */
+enum class ScoringType(val id: String) {
+    MEDIAN("median"),
+    SUM_ALL("sumAll"),
+    SUM_ALL_DROP_SLOWEST("sumAllDropSlowest");
+
+    companion object {
+        private val map: Map<String, ScoringType> = entries.associateBy { it.id }
+
+        // Function to get the enum constant by string ID
+        fun fromId(id: String): ScoringType? {
+            return map[id]
+        }
+    }
+}
+
+/**
  * Data class for all of a player's times.
  */
-class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<TiebreakerTime>, useMedian: Boolean) :
+class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<TiebreakerTime>, scoring: ScoringType) :
     Comparable<PlayerTimes> {
 
     // Total stars earned by this player.
     val stars = puzzleTimes.getStars(name)
 
     // Time to use in the event of star ties.
-    val tiebreakerTime: Long
+    val tiebreakerTime: Long = when (scoring) {
+        ScoringType.MEDIAN -> calculateMedianTime(times)
+        ScoringType.SUM_ALL -> calculateTotalTime(times)
+        else -> calculateTotalTime(times.dropLast(1))            
+    }
 
     // How many first-place medals this player has.
-    val first: Int
+    val first: Int = puzzleTimes.getTimes(TOTAL).count { it.size >= 1 && it[0].name == name }
 
     // How many second-place medals this player has.
-    val second: Int
+    val second: Int = puzzleTimes.getTimes(TOTAL).count { it.size >= 2 && it[1].name == name }
 
     // How many third-place medals this player has.
-    val third: Int
-
-    init {
-        tiebreakerTime = if (useMedian) calculateMedianTime(times) else calculateTotalTime(times)
-        first = puzzleTimes.getTimes(TOTAL).count { it.size >= 1 && it[0].name == name }
-        second = puzzleTimes.getTimes(TOTAL).count { it.size >= 2 && it[1].name == name }
-        third = puzzleTimes.getTimes(TOTAL).count { it.size >= 3 && it[2].name == name }
-    }
+    val third: Int = puzzleTimes.getTimes(TOTAL).count { it.size >= 3 && it[2].name == name }
 
     /**
      * Sort on number of stars, then tiebreaker time.
@@ -328,9 +343,6 @@ class PlayerTimes(puzzleTimes: PuzzleTimes, val name: String, val times: List<Ti
 
 /**
  * Data class for a single tiebreaker time on one day.
- *
- * In 2016, the total time was used as a tiebreaker.
- * In 2017 and beyond, the median time is a tiebreaker.
  */
 class TiebreakerTime(val day: Int, val time: Long, val isTotal: Boolean) : Comparable<TiebreakerTime> {
 

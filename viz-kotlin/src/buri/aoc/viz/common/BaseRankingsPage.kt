@@ -90,9 +90,10 @@ abstract class BaseRankingsPage protected constructor() {
             for (i in 0 until exclusionsNode.size()) {
                 exclusions.add(exclusionsNode[i].asText())
             }
+            val scoring = ScoringType.fromId(json["scoring"][year].asText())!!
             val rules = json["rules"][year].asText()
 
-            val company = Company(divisionLabel, allDivisions, placesShown, exclusions, rules)
+            val company = Company(divisionLabel, allDivisions, placesShown, exclusions, scoring, rules)
 
             val playerJson = json["players"][year] as ArrayNode
             for (i in 0 until playerJson.size()) {
@@ -226,10 +227,10 @@ abstract class BaseRankingsPage protected constructor() {
             times.sort()
         }
 
-        val useMedian = (year != "2016")
         val playerTimes = mutableListOf<PlayerTimes>()
         for (name in rawPuzzleTimes.keys) {
-            playerTimes.add(PlayerTimes(puzzleTimes, company.getNicknameFor(name), rawPuzzleTimes[name]!!, useMedian))
+            playerTimes.add(PlayerTimes(puzzleTimes, company.getNicknameFor(name), 
+                rawPuzzleTimes[name]!!, company.scoring))
         }
         playerTimes.sort()
         return playerTimes

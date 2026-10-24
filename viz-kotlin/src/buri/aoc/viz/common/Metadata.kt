@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
  */
 class Company(
     val divisionLabel: String, val allDivisions: List<String>,
-    val maxPlaces: Int, val exclusions: List<String>, val rules: String
+    val maxPlaces: Int, val exclusions: List<String>, val scoring: ScoringType, val rules: String
 ) {
 
     // Player names (which might be a username) mapped to their nicknames.
