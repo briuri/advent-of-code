@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
  * Ancillary player and division data in a single year.
  */
 class Company(
-    val id: String,
+    val id: String, val leaderboard: String,
     val maxPlaces: Int, val scoring: Scoring, val instructions: String, val scoringFAQ: String, val rules: String,
     val exclusions: List<String>, val divisionLabel: String, val allDivisions: List<String>
 ) {

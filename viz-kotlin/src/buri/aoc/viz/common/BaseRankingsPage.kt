@@ -76,6 +76,7 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     private fun readCompanyMetadata(companyMetadata: String) {
         val json = readJson(companyMetadata)!!
         val id = json["id"].asText()
+        val leaderboard =json["leaderboard"].asText() 
         for (year in json["years"]) {
             years.add(year.asText())
         }
@@ -102,7 +103,7 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
                 allDivisions.add(divisionJson[i].asText())
             }
             
-            val company = Company(id, placesShown, scoring, instructions, scoringFAQ, rules, 
+            val company = Company(id, leaderboard, placesShown, scoring, instructions, scoringFAQ, rules, 
                 exclusions, divisionLabel, allDivisions)
             for (i in 0 until playerJson.size()) {
                 company.addPlayer((playerJson[i] as ObjectNode))
