@@ -21,7 +21,7 @@ fun main() {
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
-    val rankingsPage = RankingsPage("company-b.json")
+    val rankingsPage = RankingsPage("company-dancer.json")
 
     for (i in 0 until reps) {
         if (i > 0) {
@@ -39,7 +39,7 @@ fun main() {
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
-            rankingsPage.backupJson("b")
+            rankingsPage.backupJson("dancer")
             rankingsPage.generatePages()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -57,7 +57,7 @@ fun main() {
 class RankingsPageTest {
     @Test
     fun generatePages() {
-        val rankingsPage = RankingsPage("company-b.json")
+        val rankingsPage = RankingsPage("company-dancer.json")
         rankingsPage.generatePages()
     }
 }
