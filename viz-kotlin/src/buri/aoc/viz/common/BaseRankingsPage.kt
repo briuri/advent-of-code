@@ -77,25 +77,28 @@ abstract class BaseRankingsPage protected constructor() {
             years.add(year.asText())
         }
         for (year in years) {
+            val placesShown = json["places"][year].asInt()
+            val scoring = ScoringType.fromId(json["scoring"][year].asText())!!
+            val instructions = json["instructions"].asText()
+            val scoringFAQ = json["scoringFAQ"].asText()
+            val rules = json["rules"][year].asText()
+
+            val exclusions = mutableListOf<String>()
+            val exclusionsNode = json["exclusions"][year] as ArrayNode
+            for (i in 0 until exclusionsNode.size()) {
+                exclusions.add(exclusionsNode[i].asText())
+            }
+            val playerJson = json["players"][year] as ArrayNode
+            
             val divisionLabel = json["divisionLabel"][year].asText()
             val allDivisions = mutableListOf<String>()
             val divisionJson = json["divisions"][year] as ArrayNode
             for (i in 0 until divisionJson.size()) {
                 allDivisions.add(divisionJson[i].asText())
             }
-
-            val placesShown = json["places"][year].asInt()
-            val exclusions = mutableListOf<String>()
-            val exclusionsNode = json["exclusions"][year] as ArrayNode
-            for (i in 0 until exclusionsNode.size()) {
-                exclusions.add(exclusionsNode[i].asText())
-            }
-            val scoring = ScoringType.fromId(json["scoring"][year].asText())!!
-            val rules = json["rules"][year].asText()
-
-            val company = Company(divisionLabel, allDivisions, placesShown, exclusions, scoring, rules)
-
-            val playerJson = json["players"][year] as ArrayNode
+            
+            val company = Company(placesShown, scoring, instructions, scoringFAQ, rules, exclusions, 
+                divisionLabel, allDivisions)
             for (i in 0 until playerJson.size()) {
                 company.addPlayer((playerJson[i] as ObjectNode))
             }

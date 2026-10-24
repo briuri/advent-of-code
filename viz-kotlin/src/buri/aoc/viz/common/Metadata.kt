@@ -12,8 +12,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode
  * Ancillary player and division data in a single year.
  */
 class Company(
-    val divisionLabel: String, val allDivisions: List<String>,
-    val maxPlaces: Int, val exclusions: List<String>, val scoring: ScoringType, val rules: String
+    val maxPlaces: Int, val scoring: ScoringType, val instructions: String, val scoringFAQ: String,
+    val rules: String, val exclusions: List<String>, 
+    val divisionLabel: String, val allDivisions: List<String>
 ) {
 
     // Player names (which might be a username) mapped to their nicknames.
