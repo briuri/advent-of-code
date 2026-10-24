@@ -16,13 +16,16 @@ import java.util.*
  * Generates the Rankings pages on a schedule, for use when I'm not around to do manual updates.
  */
 fun main() {
-    val minutes = 30
+    val minutes = 15
     val reps = 96
     val execPrefix = "cmd /c start /min"
     val downloadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-getJson.bat"
     val uploadScript = "C:\\workspace\\aws-stage\\scripts\\aoc-putViz.bat"
-    val rankingsPage = RankingsPage("company-dasher.json")
-
+    val rankingsPages = mutableMapOf<String, RankingsPage>()
+    for (id in BaseRankingsPage.IDS) {
+        rankingsPages[id] = RankingsPage("company-$id.json") 
+    }
+            
     for (i in 0 until reps) {
         if (i > 0) {
             // Wait for next iteration.
@@ -39,8 +42,10 @@ fun main() {
 
         // Suppress exceptions to ignore occasional download / parsing errors. Just try again next time.
         try {
-            rankingsPage.backupJson("dasher")
-            rankingsPage.generatePages()
+            rankingsPages.forEach { (id, page) -> 
+                page.backupJson(id)
+                page.generatePages()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -57,8 +62,10 @@ fun main() {
 class RankingsPageTest {
     @Test
     fun generatePages() {
-        val rankingsPage = RankingsPage("company-dasher.json")
-        rankingsPage.generatePages()
+        for (id in BaseRankingsPage.IDS) {
+            val rankingsPage = RankingsPage("company-$id.json")
+            rankingsPage.generatePages()
+        }
     }
 }
 
@@ -500,8 +507,8 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
                 // Show console message for most recent total solve on most recent day, and total number of stars.
                 val mostRecent = places[places.size - 1]
                 val time = SolveTime.formatTime(mostRecent.getTime(TimeType.TOTAL), true)
-                val alert = "  (${puzzleTimes.stars}*) - Day ${i + 1}: ${places.size}." +
-                        time.replace(SPACE, " ") + " ${mostRecent.name}\n"
+                val alert = "  (${company.id} ${puzzleTimes.stars}*) - Day ${i + 1}: ${places.size}." +
+                        time.replace(SPACE, " ") + " ${mostRecent.name}"
                 println(alert)
             }
             places.addAll(puzzleTimes.getTimes(TimeType.ONE)[i])

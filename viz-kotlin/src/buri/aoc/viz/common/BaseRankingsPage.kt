@@ -305,6 +305,9 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     }
 
     companion object {
+        // Companies with competitions
+        val IDS = listOf("dasher", "dancer")
+        
         // Current year
         const val CURRENT_YEAR = "2025"
 
