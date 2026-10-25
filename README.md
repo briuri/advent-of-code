@@ -30,7 +30,7 @@ under `/src/test/` when competing).
 ## Leaderboard Visualization
 
 In addition to puzzle solutions, this project also contains a simple visualization (under `viz-kotlin/src`) of the 
-private leaderboard JSON that can show the data as a median-based [Rankings page](http://aoc.urizone.net).
+private leaderboard JSON that can show the data as a median or sum-based [Rankings page](http://dancer.adventofcode.top).
 
 ## License
 
