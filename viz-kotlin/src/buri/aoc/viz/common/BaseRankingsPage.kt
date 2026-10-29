@@ -309,7 +309,7 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
         val IDS = listOf("dasher", "dancer")
         
         // Current year
-        const val CURRENT_YEAR = "2025"
+        const val CURRENT_YEAR = "2026"
 
         // Date format for the last update dates.
         val MODIFIED_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
