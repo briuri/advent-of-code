@@ -119,7 +119,7 @@ abstract class BaseRankingsPage protected constructor(companyMetadata: String) {
     fun backupJson(id: String) {
         val file = File("$JSON_FOLDER/$id/$CURRENT_YEAR.json")
         val date = BACKUP_DATE_FORMAT.format(Date(file.lastModified()))
-        val backupFile = File("$BACKUP_FOLDER$/$id/date.json")
+        val backupFile = File("$BACKUP_FOLDER/$id/date.json")
         if (!backupFile.exists()) {
             file.copyTo(backupFile, false)
         }
