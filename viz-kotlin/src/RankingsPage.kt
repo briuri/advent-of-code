@@ -130,8 +130,8 @@ class RankingsPage(companyMetadata: String) : BaseRankingsPage(companyMetadata) 
         val company = companies[year]!!
         
         page.append("\t<div class=\"instructions\">\n")
-        page.append("\t<h2>The 2026 competition is just around the corner!</h2>\n")
-//        page.append(company.instructions)
+//        page.append("\t<h2>The 2026 competition is just around the corner!</h2>\n")
+        page.append(company.instructions)
         page.append(company.scoringFAQ)
         page.append("</div>\n")
     }
